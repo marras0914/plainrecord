@@ -307,25 +307,60 @@ function renderProv(): void {
   const cross = act.filter((i) => i.valence !== null && Math.abs(i.valence) < DATA.rulePartisanThreshold).length;
   const cats = new Set(act.map((i) => i.category)).size;
   el('hdr-eyebrow').textContent = `PlainRecord · Texas House ${DATA.session} · ${ALL_ITEMS.length} real recorded votes`;
+  // "Cross-cutting" and "provenance" are terms of art. The reader gets the plain
+  // word; the precise term stays in SCORING.md where it belongs.
   const tiles: [string, string, string][] = [
-    ['Votes in this set', String(act.length), mode === 'short' ? 'the seven headline bills' : `one per bill, ${cats} subject areas`],
-    ['From the Journal', `${jrn}/${act.length}`, 'member votes taken from the official House Journal'],
-    ['Cross-cutting', `${Math.round((100 * cross) / act.length)}%`,
-      cross / act.length < 0.15 ? 'almost all of these split the parties' : 'votes where the caucuses did not split'],
-    ['Chosen by', mode === 'short' ? 'hand' : DATA.ruleVersion,
-      mode === 'short' ? 'seven headline bills, each with its reason shown' : `published rule, max ${DATA.rulePerCategory} per category`],
+    ['Questions', String(act.length),
+      mode === 'short' ? 'the seven biggest fights of the session' : `one per bill, across ${cats} subjects`],
+    ['Straight from the record', `${jrn} of ${act.length}`,
+      'taken from the official House Journal, not a summary'],
+    ['Both parties agreed', `${Math.round((100 * cross) / act.length)}%`,
+      cross / act.length < 0.15
+        ? 'nearly all of these were party-line fights'
+        : 'these votes were not a party fight at all'],
+    ['Picked by', mode === 'short' ? 'hand' : 'a written rule',
+      mode === 'short'
+        ? 'each one shows why it was chosen'
+        : `${DATA.ruleVersion}, max ${DATA.rulePerCategory} per subject`],
   ];
   el('prov').innerHTML = tiles
     .map(([k, v, t]) => `<div><dt>${k}</dt><dd>${v}<small>${t}</small></dd></div>`)
     .join('');
 
+  // Plain language, short sentences, no jargon a reader has to decode. The earlier
+  // version said things like "stratified across 20 subject areas" and "strongly
+  // party-coded" — accurate, and unreadable. The facts are unchanged; only the
+  // words are simpler. Numbers still come from the data, never hardcoded.
   el('method').innerHTML =
-    `<b>The full set.</b> Every eligible House record vote in ${DATA.session}, reduced to one vote per bill, then stratified across 20 subject areas taken from the Texas Legislative Reference Library index and capped at ${DATA.rulePerCategory} per area by published rule <code>${DATA.ruleVersion}</code>. ${Math.round(DATA.ruleReserve * 100)}% of each area's slots are held for votes where the two parties did <em>not</em> divide. That reserve matters: rank votes only by how close they were and you get nothing but party-line fights, every answer lands at one end, and purple becomes impossible before anyone answers anything.<br><br>` +
-    `<b>The seven.</b> Picked by hand from the bills the Lieutenant Governor designated priorities or the Governor vetoed — an outside, published list, not our judgement of what matters. Each one shows its reason. Six of the seven are strongly party-coded, which is what headline fights are.<br><br>` +
-    `<b>Sources.</b> Question text is the official bill caption, word for word. Member votes come from the House Journal wherever a record vote could be matched (<span class="src">journal</span>), otherwise from a scrape (<span class="src">scrape</span>); the table shows which, per vote. Nothing here is paraphrased or scored by opinion.<br><br>` +
+    `<b>Where the questions come from.</b> These are real votes the Texas House took. ` +
+    `We use one vote per bill, so no bill is asked about twice. ` +
+    `Then we sort the bills into 20 subject areas — the same list the state's own ` +
+    `library uses — and take at most ${DATA.rulePerCategory} from each area.<br><br>` +
+
+    `<b>Why some questions are not close fights.</b> About ${Math.round(DATA.ruleReserve * 100)} out of every 100 ` +
+    `spots are saved for votes where Republicans and Democrats <em>agreed</em>. ` +
+    `We do that on purpose. If we only picked the big fights, every answer you gave ` +
+    `would land at one end or the other, and nobody could ever come out purple. ` +
+    `The rule we follow is written down and named <code>${DATA.ruleVersion}</code>, ` +
+    `so you can check we did not change it to get a nicer answer.<br><br>` +
+
+    `<b>The seven big ones.</b> We picked these by hand, but not by our own opinion. ` +
+    `Each one is a bill the Lieutenant Governor called a top priority, or a bill the ` +
+    `Governor vetoed. Those are their published lists, not ours. Each question shows ` +
+    `why it made the list. Six of the seven split the two parties sharply — that is ` +
+    `what a headline fight is.<br><br>` +
+
+    `<b>Where the words come from.</b> Every question is the bill's official summary, ` +
+    `copied word for word. We did not rewrite it to sound better or worse. ` +
+    `How each member voted comes from the official House Journal where we could match ` +
+    `it (<span class="src">journal</span>), and otherwise from a scrape ` +
+    `(<span class="src">scrape</span>). The table tells you which, for every vote.<br><br>` +
+
     // A page that asks you to trust its numbers has to hand them over. This is the
     // exact file the page itself runs on — not a summary of it.
-    `<b>Check it yourself.</b> Every vote, tally and valence behind this page is in one file: <a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>. That is the same data this page loaded, not an export of it.`;
+    `<b>Check it yourself.</b> Every vote, count and score behind this page sits in ` +
+    `one file: <a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>. ` +
+    `That is the exact file this page loaded, not a copy we made for show.`;
 }
 
 function renderStats(p: PartisanProfile): void {

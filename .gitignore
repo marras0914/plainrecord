@@ -41,3 +41,5 @@ share/
 
 # Local scratch notes, not part of the project. Kept on disk, out of history.
 /vikki goodwin.txt
+
+.vercel

@@ -193,10 +193,26 @@ try {
   const fullMeta = await page.$eval('.q-meta .eyebrow', (e) => e.textContent.trim());
   const total = /^1 of (\d+) /.exec(fullMeta)?.[1];
   check('full mode offers the whole item set', Number(total) > 7, fullMeta);
-  const prov = await page.$$eval('.prov dd', (ds) => ds.map((d) => d.childNodes[0].textContent.trim()));
-  check('provenance rescopes to the full set', prov[0] === total, `${prov.join(' | ')} vs ${total} items`);
-  check('provenance reports journal-sourced coverage', /^\d+\/\d+$/.test(prov[1]), prov[1]);
-  check('provenance names the selection rule version', /^sel-\d{4}-\d{2}-\d{2}/.test(prov[3]), prov[3]);
+  // Read the headline value and its caption separately: the caption carries the
+  // rule version now that the value says "a written rule" in plain language.
+  const prov = await page.$$eval('.prov dd', (ds) =>
+    ds.map((d) => ({
+      value: d.childNodes[0].textContent.trim(),
+      caption: d.querySelector('small')?.textContent.trim() ?? '',
+    })),
+  );
+  const provText = prov.map((p) => `${p.value} (${p.caption})`).join(' | ');
+  check('provenance rescopes to the full set', prov[0].value === total, `${provText} vs ${total} items`);
+  // Format-agnostic: assert that a journal count out of the total is reported at
+  // all, not the exact punctuation between the two numbers.
+  check('provenance reports journal-sourced coverage',
+    /^\d+\D+\d+$/.test(prov[1].value) && prov[1].value.includes(total), prov[1].value);
+  // The version must appear SOMEWHERE in that tile — value or caption. Pinning it
+  // to the value broke the moment the value became plain English, even though the
+  // page was still naming the rule.
+  check('provenance names the selection rule version',
+    /sel-\d{4}-\d{2}-\d{2}/.test(prov[3].value + ' ' + prov[3].caption),
+    `${prov[3].value} / ${prov[3].caption}`);
 
   for (let i = 0; i < 6; i++) {
     await page.click('[data-answer="1"]');
