@@ -261,6 +261,26 @@ try {
   // attaches wherever a veto or priority designation names the same bill.
   await page.click('[data-answer="-1"]');
   await page.waitForTimeout(350);
+  const cmpClosed = await page.$eval('details.cmp', (d) => !d.open);
+  check('the comparators start collapsed so the three races lead', cmpClosed);
+  const cmpSummary = await page.$eval('details.cmp > summary', (e) =>
+    e.textContent.replace(/\s+/g, ' ').trim());
+  check('the disclosure says what is inside it',
+    /six other House members/i.test(cmpSummary) && /three from each party/i.test(cmpSummary),
+    cmpSummary);
+  await page.click('details.cmp > summary');
+  await page.waitForTimeout(200);
+
+  // The candidate rows must name the RACE, not just the person — that is what
+  // makes these three read as the subject rather than three names among nine.
+  const candTags = await page.$$eval('.cand-revs:not(.rep-revs) .cand-rev .cr-name small',
+    (ss) => ss.map((x) => x.textContent.replace(/\s+/g, ' ').trim()));
+  check('each candidate row names the office and the opponent',
+    candTags.length === 3 &&
+      candTags.some((t) => /Governor/.test(t) && /Abbott/.test(t)) &&
+      candTags.some((t) => /U\.S\. Senate/.test(t) && /Paxton/.test(t)),
+    candTags.join(' | '));
+
   // Three House Republicans, in the same vote tier as the candidates. These are
   // the only genuinely comparable Republican signal — the opponents cast no House
   // votes — so the reveal must show them voting on this exact bill.
@@ -300,9 +320,12 @@ try {
   // And the candidates' own provenance must be stated, because it is NOT a rule.
   // A choice presented without comment reads as a measurement.
   const method = await page.$eval('#method', (e) => e.textContent.replace(/\s+/g, ' ').trim());
-  check('the page admits the candidates are not picked by a rule',
-    /not picked by any rule/i.test(method) && /a choice, not a measurement/i.test(method),
+  check('the page names the three races it is about',
+    /Governor/.test(method) && /Lieutenant Governor/.test(method) && /U\.S\. Senate/.test(method),
     /Who is on this page[^.]*\./.exec(method)?.[0] ?? method.slice(0, 80));
+  // Scope is editorial and must say so — but as a statement, not an apology.
+  check('and says choosing them was editorial, not a measurement',
+    /editorial decision, not a measurement/i.test(method), 'stated');
 
   const psLabels = await page.$$eval('.ps-label', (ls) => ls.map((l) => l.textContent.trim()));
   check('the reveal shows BOTH caucuses, not just the candidates',

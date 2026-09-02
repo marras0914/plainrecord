@@ -92,6 +92,8 @@ let answers: AnswerMap = {};
 let cursor = 0;
 let tableOpen = false;
 let receiptOpen = false;
+// Comparators stay closed until asked for; the three races come first.
+let comparatorsOpen = false;
 
 const activeItems = (): QuizItem[] => (mode === 'short' ? HEADLINE_ITEMS : ALL_ITEMS);
 let adapted: Adapted = adapt(activeItems());
@@ -415,10 +417,14 @@ function renderReadout(p: PartisanProfile): void {
 function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
   const rows = CANDIDATES.map((cand) => {
     const cast = item.votes[cand.id];
+    // The office and the opponent were already in the payload and never shown.
+    // Putting them on the row is what makes these three read as THE RACES this
+    // page is about, rather than three names among nine.
+    const tag = `<small>${esc(cand.office)} · ${esc(cand.running)}</small>`;
 
     if (cast !== 1 && cast !== -1) {
       return (
-        `<li class="cand-rev cr-none"><span class="cr-name">${esc(cand.name)}</span>` +
+        `<li class="cand-rev cr-none"><span class="cr-name">${esc(cand.name)}${tag}</span>` +
         `<span class="cr-vote">no vote recorded</span>` +
         `<span class="cr-match">—</span></li>`
       );
@@ -426,7 +432,7 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
     const same = cast === yourAnswer;
     return (
       `<li class="cand-rev ${same ? 'cr-same' : 'cr-diff'}">` +
-      `<span class="cr-name">${esc(cand.name)}</span>` +
+      `<span class="cr-name">${esc(cand.name)}${tag}</span>` +
       `<span class="cr-vote">voted ${cast === 1 ? 'Yea' : 'Nay'}</span>` +
       `<span class="cr-match">${same ? 'same as you' : 'opposite to you'}</span></li>`
     );
@@ -503,17 +509,22 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
 
   return (
     `<div class="reveal cand-reveal">` +
-    `<div class="outc-cat">How they actually voted on ${esc(item.billId)}</div>` +
+    `<div class="outc-cat">The three races — how they voted on ${esc(item.billId)}</div>` +
     `<ul class="cand-revs">${rows}</ul>` +
     `<div class="cand-rev-sum">${summary} You said ` +
     `<b>${yourAnswer === 1 ? 'Yea' : 'Nay'}</b>.</div>` +
+    // Collapsed by default. The six comparators exist so the page is not one-sided,
+    // but on screen at all times they buried the three races the page is actually
+    // about. Balance has to be available, not dominant.
     (repRows
-      ? repRows +
+      ? `<details class="cmp"${comparatorsOpen ? ' open' : ''}>` +
+        `<summary>Compare with six other House members <span>three from each party, ` +
+        `picked by rule</span></summary>` +
+        repRows +
         `<div class="rep-note">None of these six is on the ballot. From each caucus: ` +
         `the most party-line member, the median, and the one who most often broke ` +
         `ranks — the same rule on both sides, recomputed every build, so the ` +
-        `comparison is not a pick of names. The three candidates above are a ` +
-        `different thing: they are the subject of this page, not a measurement.</div>`
+        `comparison is not a pick of names.</div></details>`
       : '') +
     `<div class="ps-head">How each party voted on it</div>` +
     split +
@@ -627,6 +638,11 @@ function renderQuestion(): void {
     });
   });
   el('receipt-btn').addEventListener('click', () => { receiptOpen = !receiptOpen; render(); });
+  // <details> keeps its own state, but the card is re-rendered on every answer, so
+  // the choice has to be remembered or it snaps shut mid-quiz.
+  document.querySelectorAll<HTMLDetailsElement>('details.cmp').forEach((d) => {
+    d.addEventListener('toggle', () => { comparatorsOpen = d.open; });
+  });
 }
 
 function renderCands(): void {

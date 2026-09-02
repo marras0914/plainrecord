@@ -139,6 +139,22 @@
                  color:var(--muted); margin-bottom:3px; }
   .q-plain small { display:block; margin-top:5px; font-size:11.5px; color:var(--muted); }
   .cr-name small { display:block; font-weight:400; font-size:10.5px; color:var(--muted); }
+  /* Comparators are a disclosure, not a section: available in one click, never
+     competing with the three races above it. */
+  .cmp { margin-top:12px; border-top:1px solid var(--hair); padding-top:9px; }
+  .cmp > summary { cursor:pointer; font-size:12.5px; color:var(--ink-2);
+                   list-style:none; display:flex; flex-wrap:wrap; gap:7px;
+                   align-items:baseline; }
+  .cmp > summary::-webkit-details-marker { display:none; }
+  .cmp > summary::before { content:"+"; font-family:"IBM Plex Mono",ui-monospace,monospace;
+                           color:var(--muted); width:1ch; }
+  .cmp[open] > summary::before { content:"−"; }
+  .cmp > summary span { font-family:"IBM Plex Mono",ui-monospace,monospace;
+                        font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase;
+                        color:var(--muted); }
+  .cmp > summary:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+  .cmp .ps-head:first-of-type { margin-top:10px; }
+
   .rep-note { margin-top:7px; font-size:11.5px; line-height:1.5; color:var(--muted); }
 
   .ps-head { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:9.5px;

@@ -149,11 +149,14 @@ const COMPARATOR_RULE =
  * exist.
  */
 const CANDIDATE_PROVENANCE =
-  'The three candidates are not picked by any rule. They are the subject of this ' +
-  'project: sitting Texas House Democrats running for statewide office ' +
-  'in 2026. That is a choice, not a measurement, and it is why the same rule now ' +
-  'runs on both caucuses — so the Republicans on this page are not the only ones ' +
-  'who arrived by a stated method.';
+  'This page is about three specific races: Governor, Lieutenant Governor and ' +
+  'U.S. Senate. All three Democratic candidates sit in the Texas House, which is ' +
+  'the reason the comparison works at all — they voted on the same bills you are ' +
+  'being asked about, so their records can be checked against yours vote for vote. ' +
+  'Choosing those three races is an editorial decision, not a measurement, and the ' +
+  'six other members below each question are picked by rule from both parties so ' +
+  'the page is not left showing one side of the chamber.';
+
 const COMPARATOR_MIN_VOTES = 55;
 
 function main() {
