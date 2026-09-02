@@ -7,9 +7,21 @@ dist/
 # tx_bills_89R.json is 35 MB and tx_reconcile_89R.json is 16 MB, against a 53 KB
 # quiz payload. Only public/data/quiz_89R.json is committed, because only it ships.
 #
-# The leading slash is load-bearing: a bare `data/` matches at ANY depth, which
-# would also swallow public/data/ and un-commit the one file the site needs.
-/data/
+# Two details are load-bearing here:
+#   - the leading slash: a bare `data/` matches at ANY depth, which would also
+#     swallow public/data/ and un-commit the one file the site needs;
+#   - `/data/*` and not `/data/`: git does not descend into an excluded
+#     DIRECTORY, so a `!` exception below it never gets a chance to match.
+#     Excluding the contents keeps the directory itself visible.
+/data/*
+
+# ...except the veto evidence. It is 117 KB, it is derived from a public Legislative
+# Reference Library page, and it is the only input to the assertions that encode
+# the SB 3 finding (a Patrick priority bill vetoed by Abbott — a documented
+# intra-Republican split). Without it committed, `npm test` is red on a fresh
+# clone, which makes the whole suite untrustworthy to anyone who did not build
+# the 51 MB of bulk inputs first.
+!/data/tx_evidence_vetoes.json
 
 # Belt and braces: these used to live in the ship dir before the WORK_DIR split,
 # so a stale script or an old checkout can still drop them there.

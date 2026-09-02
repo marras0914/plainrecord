@@ -219,10 +219,21 @@ if (!existsSync(vetoPath)) {
 // ---------------------------------------------------------------------------
 console.log('\n=== collisions: opposite positions on an identical bill ===\n');
 
-{
-  const vetoes: Evidence[] = existsSync(vetoPath)
-    ? JSON.parse(readFileSync(vetoPath, 'utf8'))
-    : [];
+if (!existsSync(vetoPath)) {
+  // Say SKIP, not PASS and not FAIL. These checks assert a specific real-world
+  // finding (SB 3) that only the veto records can support, so without them the
+  // right answer is "not checked" — reporting a pass would be a lie, and
+  // reporting a failure blames the reader for a file they were never given.
+  for (const label of [
+    'SB 3 (89R) collision found: Patrick priority vs Abbott veto',
+    'the SB 3 collision is between two Republicans',
+    'line-item vetoes never create a collision',
+    'no collision mixes in a stance',
+  ]) {
+    console.log(`  [SKIP] ${label}  — needs ${vetoPath}; run npm run data:vetoes`);
+  }
+} else {
+  const vetoes: Evidence[] = JSON.parse(readFileSync(vetoPath, 'utf8'));
   const collisions = findCollisions([...vetoes, ...PRIORITY_BILLS, ...STANCES]);
   const name = (id: string) => CANDIDATES.find((x) => x.id === id)?.name ?? id;
   for (const c of collisions) {

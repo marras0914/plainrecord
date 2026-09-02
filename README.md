@@ -28,9 +28,13 @@ than shipping.
 The site is fully static — no server, no API, no database at runtime.
 
 ```
-public/data/quiz_89R.json   53 KB   the entire quiz payload. SHIPPED.
-data/*.json                 51 MB   build inputs (roll calls, reconciliation,
-                                    roster, vetoes). GITIGNORED, never shipped.
+public/data/quiz_89R.json        53 KB   the entire quiz payload. SHIPPED.
+data/tx_evidence_vetoes.json    117 KB   279 Abbott vetoes, 84R-89R, each with
+                                         its LRL source URL. COMMITTED but not
+                                         shipped — npm test needs it.
+data/tx_bills_89R.json           35 MB   \
+data/tx_reconcile_89R.json       16 MB    > bulk build inputs. GITIGNORED.
+data/tx_roster_89R.json, ...            /
 ```
 
 `scripts/paths.ts` is the single source of truth for that split (`WORK_DIR` vs

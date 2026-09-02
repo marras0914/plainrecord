@@ -1,0 +1,2799 @@
+[
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 305",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=305",
+    "topic": "Relating to the time period for conducting pretrial hearings after a criminal defendant has been restored to competency."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 353",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=353",
+    "topic": "Relating to creating the criminal offense of trespass on or near school or day-care center property."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 413",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=413",
+    "topic": "Relating to the release of certain defendants detained in jail pending trial."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 449",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=449",
+    "topic": "Relating to the unlawful production or distribution of sexually explicit images using deep fake technology."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "line_item_veto",
+    "position": -1,
+    "billId": "HB 500",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=500",
+    "topic": "Relating to making supplemental appropriations and reductions in appropriations and giving direction and adjustment authority regarding appropriations.",
+    "note": "line-item veto of an appropriations bill; not a bill position"
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 705",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=705",
+    "topic": "Relating to the Cosmetology Licensure Compact; authorizing fees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1690",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=1690",
+    "topic": "Relating to an application for a permit for the transfer of groundwater out of a groundwater conservation district."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2243",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=2243",
+    "topic": "Relating to the creation of the Texas Commission on Teacher Job Satisfaction and Retention."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2520",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=2520",
+    "topic": "Relating to the open meetings law."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3120",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=3120",
+    "topic": "Relating to certain duties of the owner or operator of a residential child detention facility."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4530",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=4530",
+    "topic": "Relating to water rights placed in the Texas Water Trust and the Texas Water Bank."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4885",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=4885",
+    "topic": "Relating to the disclosure of confidential juvenile records to a managed assigned counsel program."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 5671",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=HB&BillNumberDetail=5671",
+    "topic": "Relating to the election of directors for and the authority to issue bonds of the Johnson County Special Utility District."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "line_item_veto",
+    "position": -1,
+    "billId": "SB 1",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=1",
+    "topic": "General Appropriations Bill.",
+    "note": "line-item veto of an appropriations bill; not a bill position"
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 3",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=3",
+    "topic": "Relating to the regulation of consumable hemp products and the hemp-derived cannabinoids contained in those products; requiring a registration; imposing fees; creating criminal offenses; providing an administrative penalty."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 268",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=268",
+    "topic": "Relating to the procedure for certain complaints against health care practitioners."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 378",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=378",
+    "topic": "Relating to certain prohibited practices by a barber or cosmetologist."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 614",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=614",
+    "topic": "Relating to the authority of the Texas Forensic Science Commission to review and refer certain cases to the office of capital and forensic writs."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 648",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=648",
+    "topic": "Relating to recording requirements for certain instruments concerning real property."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 974",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=974",
+    "topic": "Relating to the eligibility of a person employed by a school district as a teacher to serve on the appraisal review board of an appraisal district; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1032",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=1032",
+    "topic": "Relating to the eligibility of postsecondary educational institutions to participate in the governor's university research initiative."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1253",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=1253",
+    "topic": "Relating to impact and production fees for certain water projects and to the regulation of certain wells; authorizing a fee."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1278",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=1278",
+    "topic": "Relating to an affirmative defense to prosecution for victims of certain offenses."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1838",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=1838",
+    "topic": "Relating to the appointment of attorneys ad litem and the compensation of certain attorneys ad litem in suits affecting the parent-child relationship filed by a governmental entity."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1937",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=1937",
+    "topic": "Relating to the testing of evidence containing biological materials in capital cases."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2111",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=2111",
+    "topic": "Relating to legal representation of indigent persons in this state and to proceedings before a magistrate including the appointment of counsel for an indigent defendant."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2501",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=2501",
+    "topic": "Relating to selection of an attorney by an indigent parent as attorney ad litem for the parent in certain suits affecting the parent-child relationship."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2878",
+    "session": "89R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=89-0&BillTypeDetail=SB&BillNumberDetail=2878",
+    "topic": "Relating to the operation and administration of and practices and procedures related to proceedings in the judicial branch of state government, including court security, court documents and arrest warrants, document delivery, juvenile boards, and youth diversion, and to public office candidate eligibility; increasing a criminal penalty; authorizing fees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "line_item_veto",
+    "position": -1,
+    "billId": "HB 1",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=1",
+    "topic": "General Appropriations Bill. Line item veto.",
+    "note": "line-item veto of an appropriations bill; not a bill position"
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 181",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=181",
+    "topic": "Relating to the establishment of the sickle cell disease registry."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 279",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=279",
+    "topic": "Relating to the prosecution and punishment of the offense of trafficking of persons."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 558",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=558",
+    "topic": "Relating to prohibiting certain limitations on the operation of certain organizations that benefit veterans during a declared state of disaster."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 729",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=729",
+    "topic": "Relating to the statewide intellectual and developmental disability coordinating council."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1466",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=1466",
+    "topic": "Relating to the regulation of certain continuing education programs."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2138",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=2138",
+    "topic": "Relating to the sale of charitable raffle tickets by certain nonprofit wildlife conservation associations."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2416",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=2416",
+    "topic": "Relating to creation of the gulf coast protection account to be administered by the General Land Office."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2629",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=2629",
+    "topic": "Relating to the reporting of direct campaign expenditures by certain persons and political committees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2879",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=2879",
+    "topic": "Relating to venue in certain actions involving a contract for an improvement to real property."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2956",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=2956",
+    "topic": "Relating to municipal annexation of an area adjacent to contiguous or connecting railroad rights-of-way."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3159",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=3159",
+    "topic": "Relating to the use of an accessible absentee mail system by certain voters."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3436",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=3436",
+    "topic": "Relating to the authority of the Texas Military Department to negotiate the release of a reversionary interest and certain other interests of the state in certain property in Palo Pinto County owned by the Palo Pinto County Livestock Association."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4106",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=4106",
+    "topic": "Relating to the procedure for resolving certain customer complaints before the Public Utility Commission of Texas."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4128",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=4128",
+    "topic": "Relating to associate judges for guardianship proceedings and protective services proceedings in certain courts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4158",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=4158",
+    "topic": "Relating to the determination and reporting of the number of residence homesteads of elderly or disabled persons that are subject to the limitation on the total amount of ad valorem taxes that may be imposed on the properties by school districts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4219",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=4219",
+    "topic": "Relating to the maximum rate or amount of interest of certain consumer loans."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4759",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=4759",
+    "topic": "Relating to an attack by a dangerous dog; increasing criminal penalties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4779",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=4779",
+    "topic": "Relating to the prosecution of the criminal offense of organized retail theft."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 5332",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=5332",
+    "topic": "Relating to the creation of the Montgomery County Municipal Utility District No. 229; granting a limited power of eminent domain; providing authority to issue bonds; providing authority to impose fees and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 5358",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=5358",
+    "topic": "Relating to the creation of the Ranger Ridge Municipal Utility District of Palo Pinto County; granting a limited power of eminent domain; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 5360",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=5360",
+    "topic": "Relating to the creation of the Deer Creek Ranch Municipal Utility District No. 1; granting a limited power of eminent domain; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 5366",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=HB&BillNumberDetail=5366",
+    "topic": "Relating to the creation of the Grimes County Municipal Utility District No. 3; granting a limited power of eminent domain; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 200",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=200",
+    "topic": "Relating to the period for which an applicant for admission as an undergraduate student to a public institution of higher education is entitled to an academic fresh start."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 247",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=247",
+    "topic": "Relating to specialty license plates issued for honorary consuls."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 261",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=261",
+    "topic": "Relating to titling and registration of assembled trailers."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 267",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=267",
+    "topic": "Relating to law enforcement agency accreditation, including a grant program to assist agencies in becoming accredited."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 315",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=315",
+    "topic": "Relating to the definition of telephone call for purposes of regulating telephone solicitations."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 335",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=335",
+    "topic": "Relating to meetings of the Family and Protective Services Council broadcast over the Internet."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 348",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=348",
+    "topic": "Relating to the prohibition on posting on the Internet information held by an appraisal district regarding certain residential property."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 361",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=361",
+    "topic": "Relating to the eligibility of a person employed by a school district as a teacher to serve on the appraisal review board of an appraisal district."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 467",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=467",
+    "topic": "Relating to increasing the criminal penalty for the offense of criminal mischief involving impairment of a motor fuel pump."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 485",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=485",
+    "topic": "Relating to designating the second Saturday in October as Hospice and Palliative Care Day."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 498",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=498",
+    "topic": "Relating to the operation of statewide technology centers."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 526",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=526",
+    "topic": "Relating to requiring prior approval by the Texas Higher Education Coordinating Board to offer a degree or certificate program to certain persons who are incarcerated or subject to involuntary civil commitment."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 796",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=796",
+    "topic": "Relating to arbitration provisions in surplus lines insurance contracts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 813",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=813",
+    "topic": "Relating to providing notice to a state representative and senator of certain administrative actions of the Texas Commission on Environmental Quality."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 987",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=987",
+    "topic": "Relating to the reporting of certain information regarding the payment of state money to certain vendors and counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1051",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1051",
+    "topic": "Relating to a uniform coordination of benefits questionnaire for health benefit plans."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1080",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1080",
+    "topic": "Relating to a mitigation program and fees for the Lost Pines Groundwater Conservation District."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1367",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1367",
+    "topic": "Relating to the confidentiality of certain information for employees of a county courthouse or the Office of Court Administration of the Texas Judicial System and the employees' family members."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1393",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1393",
+    "topic": "Relating to eligibility for coverage by the Fair Access to Insurance Requirements Plan in certain areas."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1399",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1399",
+    "topic": "Relating to the renewal and review of standard permits for certain concrete plants."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1404",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1404",
+    "topic": "Relating to the creation of a work group to study the benefits of coal-to-nuclear electric generating facility conversion."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1431",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1431",
+    "topic": "Relating to the confidentiality of certain information for a current or former administrative law judge for the State Office of Administrative Hearings."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1439",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1439",
+    "topic": "Relating to the ad valorem taxation of tangible personal property held or used for the production of income by related business entities."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1467",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1467",
+    "topic": "Relating to the disclosure of certain medical information by electronic means."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1568",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1568",
+    "topic": "Relating to the persons authorized or appointed to exercise the power of sale under the terms of a contract lien on real property."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1614",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1614",
+    "topic": "Relating to the computation of the cost of goods sold by television and radio broadcasters for purposes of the franchise tax."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1615",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1615",
+    "topic": "Relating to the cosmetology licensure compact."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1668",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1668",
+    "topic": "Relating to property owners' associations, including condominium owners' associations."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1712",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1712",
+    "topic": "Relating to the purchase, sale, or lease of real property on behalf of a limited partnership or a limited liability company."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1916",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1916",
+    "topic": "Relating to publication of public improvement district service plans and assessments on certain public Internet websites."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1979",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1979",
+    "topic": "Relating to an annual study by the Texas A&M University Texas Real Estate Research Center of the purchase and sale of single-family homes by certain institutional buyers."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1998",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=1998",
+    "topic": "Relating to the calculation of certain ad valorem tax rates."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2010",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2010",
+    "topic": "Relating to reporting by the market monitor of potential manipulation of the wholesale electric market."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2016",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2016",
+    "topic": "Relating to the licensing and regulation of dietitians."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2035",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2035",
+    "topic": "Relating to the issuance of certain anticipation notes and certificates of obligation."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2052",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2052",
+    "topic": "Relating to permit fees for groundwater wells imposed by the Southeast Texas Groundwater Conservation District."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2192",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2192",
+    "topic": "Relating to the notice and petition for the creation of a municipal utility district in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2248",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2248",
+    "topic": "Relating to guardianships for persons who are incapacitated; changing a fee."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2260",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2260",
+    "topic": "Relating to management review of certain investigations conducted by the Department of Family and Protective Services."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2269",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2269",
+    "topic": "Relating to discontinuing group self-insurance coverage and dissolving the Texas self-insurance group guaranty fund and trust fund under the Texas Workers' Compensation Act."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2275",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2275",
+    "topic": "Relating to the authority of the Supreme Court of Texas to adopt certain rules."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2277",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2277",
+    "topic": "Relating to special appointments in suits affecting the parent-child relationship."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2292",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2292",
+    "topic": "Relating to bond requirements for certain judges."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2379",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2379",
+    "topic": "Relating to aquifer storage and recovery projects that transect a portion of the Edwards Aquifer."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2399",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2399",
+    "topic": "Relating to the authority of the Public Utility Commission of Texas to regulate Voice over Internet Protocol services."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2453",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2453",
+    "topic": "Relating to certain regulations adopted by governmental entities for the building products, materials, or methods used in the construction of residential or commercial buildings."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2474",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2474",
+    "topic": "Relating to civil and administrative penalties assessed for violations of statutes or rules governing chemical dependency treatment facilities."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2493",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2493",
+    "topic": "Relating to repairs made pursuant to a tenant's notice of intent to repair and the refund of a tenant's security deposit."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2597",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2597",
+    "topic": "Relating to the creation of the Montgomery County Municipal Utility District No. 237; granting a limited power of eminent domain; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2598",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2598",
+    "topic": "Relating to the creation of the Honey Creek Improvement District No. 1; providing authority to issue bonds; providing authority to impose assessments and fees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2604",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2604",
+    "topic": "Relating to the creation of the Harris County Municipal Utility District No. 589; granting a limited power of eminent domain; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2605",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2605",
+    "topic": "Relating to the creation of the Knob Creek Municipal Utility District of Bell County; granting a limited power of eminent domain; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2613",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2613",
+    "topic": "Relating to the creation of the Tabor Ranch Municipal Management District; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes; granting a limited power of eminent domain."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2616",
+    "session": "88R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=88-0&BillTypeDetail=SB&BillNumberDetail=2616",
+    "topic": "Relating to the creation of the Travis County Municipal Utility District No. 27; granting a limited power of eminent domain; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 686",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=686",
+    "topic": "Relating to the release on parole of certain inmates convicted of an offense committed when younger than 18 years of age; changing parole eligibility."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 787",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=787",
+    "topic": "Relating to conditions of community supervision prohibiting contact with certain persons."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1193",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=1193",
+    "topic": "Relating to the jurisdiction of a juvenile court over certain persons and to the sealing and nondisclosure of certain juvenile records."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1240",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=1240",
+    "topic": "Relating to the offense of failure to comply with an order from a fire marshal and the authority of certain county employees to issue citations for certain violations; changing a criminal penalty."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1477",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=1477",
+    "topic": "Relating to performance and payment bonds for public work contracts on public property leased to a nongovernmental entity."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1544",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=1544",
+    "topic": "Relating to the eligibility of land to continue to be appraised for ad valorem tax purposes as qualified open-space land if the land is temporarily used for sand mining operations; authorizing a fee."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2448",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=2448",
+    "topic": "Relating to the verification of the incarceration of an accused person in a criminal case for the purpose of discharging a surety's liability on a bail bond."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2667",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=2667",
+    "topic": "Relating to universal service fund assistance to high cost rural areas and the uniform charge that funds the universal service fund."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2803",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=2803",
+    "topic": "Relating to a commercial landlord's or tenant's remedies regarding certain unlawful activities in a multiunit commercial property."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3135",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=3135",
+    "topic": "Relating to the powers and duties, authority to issue bonds, and authority to impose a tax of the SH130 Municipal Management District No. 1."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3207",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=3207",
+    "topic": "Relating to preventing the loss of benefits by certain retirees of the Teacher Retirement System of Texas who resume service during a declared disaster."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4218",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=HB&BillNumberDetail=4218",
+    "topic": "Relating to a cause of action for the bad faith washout of an overriding royalty interest in an oil and gas lease."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "line_item_veto",
+    "position": -1,
+    "billId": "SB 1",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=1",
+    "topic": "General Appropriations Bill. Line item veto.",
+    "note": "line-item veto of an appropriations bill; not a bill position"
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 36",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=36",
+    "topic": "Relating to creation of a higher education task force focused on mental health services and the offense of hazing."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 237",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=237",
+    "topic": "Relating to the issuance of a citation for a criminal trespass offense punishable as a Class B misdemeanor."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 281",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=281",
+    "topic": "Relating to the use of hypnotically induced testimony in a criminal trial."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 474",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=474",
+    "topic": "Relating to the unlawful restraint of a dog; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 813",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=813",
+    "topic": "Relating to the insurance premium tax credit for the certified rehabilitation of certified historic structures."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1109",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=1109",
+    "topic": "Relating to requiring public schools to provide instruction and materials and adopt policies relating to the prevention of child abuse, family violence, and dating violence."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1458",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=1458",
+    "topic": "Relating to standardized forms and materials for the issuance of protective orders, magistrate's orders for emergency protection, and temporary ex parte orders."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1772",
+    "session": "87R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=87-0&BillTypeDetail=SB&BillNumberDetail=1772",
+    "topic": "Relating to the establishment of the Texas Pollinator-Smart program for solar energy sites."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 51",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=51",
+    "topic": "Relating to the creation and promulgation of certain standard forms for statewide use in criminal actions."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 70",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=70",
+    "topic": "Relating to a strategic plan goal by the Department of Agriculture to prevent crop diseases in this state."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 93",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=93",
+    "topic": "Relating to the inclusion of a magistrate's name on certain signed orders."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 109",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=109",
+    "topic": "Relating to the operation of open-enrollment charter schools on Memorial Day."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 345",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=345",
+    "topic": "Relating to the automatic issuance of a personal identification certificate to a person 60 years of age or older whose driver's license has been surrendered or revoked."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 389",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=389",
+    "topic": "Relating to the regulation of game rooms in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 448",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=448",
+    "topic": "Relating to the creation of an offense for failing to secure certain children in a rear-facing child passenger safety seat system."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 455",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=455",
+    "topic": "Relating to policies on the recess period in public schools."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 463",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=463",
+    "topic": "Relating to reciprocity agreements between certain air ambulance companies operating a subscription program."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 651",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=651",
+    "topic": "Relating to the creation and operations of health care provider participation programs in counties not served by a hospital district or a public hospital."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 929",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=929",
+    "topic": "Relating to the duties of a magistrate to inform an arrested person of consequences of a plea of guilty or nolo contendere."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 994",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=994",
+    "topic": "Relating to appeals to justice courts of certain ad valorem tax determinations."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1031",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1031",
+    "topic": "Relating to the regulation of game rooms in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1053",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1053",
+    "topic": "Relating to the disposition of real property interests by the Willacy County Navigation District."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1059",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1059",
+    "topic": "Relating to a biennial report on stormwater infrastructure in this state."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1099",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1099",
+    "topic": "Relating to peace officers commissioned by the State Board of Veterinary Medical Examiners."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1120",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1120",
+    "topic": "Relating to the powers of certain county assistance districts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1168",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1168",
+    "topic": "Relating to the offense of possessing a weapon in a secured area of an airport."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1174",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1174",
+    "topic": "Relating to the authority of certain county assistance districts to provide a grant or loan."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1215",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1215",
+    "topic": "Relating to the allocation of low income housing tax credits."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1404",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1404",
+    "topic": "Relating to the regulation of game rooms in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1476",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1476",
+    "topic": "Relating to the regulation of game rooms in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1742",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1742",
+    "topic": "Relating to the mediation of the settlement of certain health benefit claims involving balance billing by out-of-network laboratories."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1771",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1771",
+    "topic": "Relating to a prohibition on prosecuting or referring to juvenile court certain persons for certain conduct constituting the offense of prostitution and to the provision of services to those persons."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1806",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=1806",
+    "topic": "Relating to the use of water withdrawn from the Edwards Aquifer by certain entities."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2111",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=2111",
+    "topic": "Relating to the period for which a school district's participation in certain tax increment financing reinvestment zones may be taken into account in determining the total taxable value of property in the school district."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2112",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=2112",
+    "topic": "Relating to salvage motor vehicles, including flood vehicles, and nonrepairable motor vehicles."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2348",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=2348",
+    "topic": "Relating to the prohibition of certain employment discrimination regarding an employee who is a volunteer emergency responder."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2475",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=2475",
+    "topic": "Relating to the indigent status of a person for purposes of the driver responsibility program."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2481",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=2481",
+    "topic": "Relating to the creation and administration of certain specialty court programs; authorizing fees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2856",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=2856",
+    "topic": "Relating to restrictions under disaster remediation contracts; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3022",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3022",
+    "topic": "Relating to emergency warning systems operated by municipalities and counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3078",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3078",
+    "topic": "Relating to the review of clemency applications from certain persons who were victims of human trafficking or family violence."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3082",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3082",
+    "topic": "Relating to investigating and prosecuting the criminal offense of operating an unmanned aircraft over or near certain facilities."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3195",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3195",
+    "topic": "Relating to juveniles committed to the Texas Juvenile Justice Department and the transition of students from alternative education programs to regular classrooms."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3252",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3252",
+    "topic": "Relating to the posting of certain notices in a primary election."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3490",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3490",
+    "topic": "Relating to the prosecution and punishment of the criminal offense of harassment; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3511",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3511",
+    "topic": "Relating to the creation of the Commission on Texas Workforce of the Future."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3648",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3648",
+    "topic": "Relating to the powers and duties of the office of independent ombudsman for the Texas Juvenile Justice Department."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3910",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=3910",
+    "topic": "Relating to the establishment of one or more supplemental county civil service commissions in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4703",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HB&BillNumberDetail=4703",
+    "topic": "Relating to the creation of the Harris County Improvement District No. 28; providing authority to issue bonds; providing authority to impose assessments, fees, and taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 124",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=124",
+    "topic": "Relating to the authority of a county to require electronic bids or proposals for competitive bidding."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 390",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=390",
+    "topic": "Relating to the creation of the Northeast Houston Redevelopment District; providing authority to issue bonds; providing authority to impose assessments or fees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 467",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=467",
+    "topic": "Relating to the procedures of the State Commission on Judicial Conduct."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 511",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=511",
+    "topic": "Relating to the installation of unsafe motor vehicle tires; providing a civil penalty."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 536",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=536",
+    "topic": "Relating to associate judges for guardianship proceedings and protective services proceedings in certain courts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 550",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=550",
+    "topic": "Relating to the eligibility of certain criminal defendants for an order of nondisclosure of criminal history record information."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 667",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=667",
+    "topic": "Relating to probate and guardianship matters and certain procedures for persons who are incapacitated or have a mental illness."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 746",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=746",
+    "topic": "Relating to certain procedures associated with voter approval of municipal annexation."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 815",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=815",
+    "topic": "Relating to the creation and preservation of certain records of criminal proceedings."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1319",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=1319",
+    "topic": "Relating to certain taxes and to an annual report submitted to the comptroller concerning those taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1575",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=1575",
+    "topic": "Relating to governmental immunity for and adjudication of claims arising from a local governmental entity's disaster recovery contract."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1793",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=1793",
+    "topic": "Relating to purchasing and contracting by governmental entities; authorizing fees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1804",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=1804",
+    "topic": "Relating to the entry into the Texas Crime Information Center of certain information regarding conditions of bond imposed in criminal cases involving family violence."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1861",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=1861",
+    "topic": "Relating to certain public facilities financed, owned, and operated by a public facility corporation."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 2456",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=SB&BillNumberDetail=2456",
+    "topic": "Relating to the powers and duties of the Karis Municipal Management District of Tarrant County; changing the territory of the district; providing a civil penalty; providing authority to issue bonds."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HCR 86",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HCR&BillNumberDetail=86",
+    "topic": "Designating the Bowie knife as the official state knife of Texas."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HCR 133",
+    "session": "86R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=86-0&BillTypeDetail=HCR&BillNumberDetail=133",
+    "topic": "Directing the Texas Higher Education Coordinating Board to conduct a study on the creation of a divinity program at Texas Southern University."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 61",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=61",
+    "topic": "Relating to consideration under the public school accountability system of performance on assessment instruments by certain students formerly receiving special education services and to the placement and use of video cameras in certain self-contained classrooms or other settings providing special education services."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 298",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=298",
+    "topic": "Relating to a parent's right to view the body of a deceased child before an autopsy is performed."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 462",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=462",
+    "topic": "Relating to the provision of notice of proposed rules by state agencies."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 572",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=572",
+    "topic": "Relating to the disposal of pesticides."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 961",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=961",
+    "topic": "Relating to the election of junior college district trustees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1166",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1166",
+    "topic": "Relating to liability of certain electric utilities that allow certain uses of land that the electric utility owns, occupies, or leases."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1284",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1284",
+    "topic": "Relating to the licensing and regulation of a journeyman lineman."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1342",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1342",
+    "topic": "Relating to child sexual abuse prevention training for public school students."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1406",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1406",
+    "topic": "Relating to the authority of the asset management division of the General Land Office to sell real property to a federally recognized Indian tribe."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1426",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1426",
+    "topic": "Relating to the issuance of a certificate of relief from collateral consequences to certain persons placed on community supervision, including deferred adjudication community supervision, for certain criminal offenses."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1433",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1433",
+    "topic": "Relating to the statute of limitations applicable to the collection of a contribution, a penalty, or interest under the Texas Unemployment Compensation Act."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1500",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1500",
+    "topic": "Relating to the public school accountability system."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1586",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1586",
+    "topic": "Relating to the services that require a structural pest control license; changing the applicability of an occupational license."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1764",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1764",
+    "topic": "Relating to the operation of metropolitan rapid transit authorities."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1859",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=1859",
+    "topic": "Relating to certain rental-purchase agreements."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2182",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2182",
+    "topic": "Relating to the authority of a county assistance district to impose a sales and use tax."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2334",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2334",
+    "topic": "Relating to the imposition of a criminal penalty for the violation of a rule adopted or order issued under the Flood Control and Insurance Act in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2377",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2377",
+    "topic": "Relating to the development of brackish groundwater."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2378",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2378",
+    "topic": "Relating to extensions of an expired permit for the transfer of groundwater from a groundwater conservation district."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2410",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2410",
+    "topic": "Relating to the authority to conduct a runoff primary election by mail in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2463",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2463",
+    "topic": "Relating to requiring state agencies to develop written succession plans."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2475",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2475",
+    "topic": "Relating to the sales and use tax exemption for certain amusement services."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2774",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2774",
+    "topic": "Relating to the installation of unsafe motor vehicle tires; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2783",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2783",
+    "topic": "Relating to the assessment of litigation costs and attorney fees in certain lawsuits under the public information law."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2792",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2792",
+    "topic": "Relating to housing authorities established by municipalities and counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2798",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2798",
+    "topic": "Relating to the authority of a county to implement a pilot program to reuse wastewater at county facilities."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2943",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=2943",
+    "topic": "Relating to the use of money in the state water pollution control revolving fund."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3025",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=3025",
+    "topic": "Relating to open, uncovered, abandoned, or deteriorated wells."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3055",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=3055",
+    "topic": "Relating to the restrictions on political activities for a county elections administrator."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3281",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=3281",
+    "topic": "Relating to the eligibility of certain municipalities to establish homestead preservation districts and reinvestment zones."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3987",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=3987",
+    "topic": "Relating to the authority of the Texas Water Development Board to use the state participation account of the water development fund to provide financial assistance for the development of certain facilities."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4310",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=4310",
+    "topic": "Relating to the temporary board of and financing of certain facilities and improvements by the LaSalle Municipal Utility District No. 1; providing authority to impose an assessment."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4311",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=4311",
+    "topic": "Relating to the temporary board of and financing of certain facilities and improvements by the LaSalle Municipal Utility District No. 2; providing authority to impose an assessment."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4312",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=4312",
+    "topic": "Relating to the temporary board of and financing of certain facilities and improvements by the LaSalle Municipal Utility District No. 3; providing authority to impose an assessment."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4313",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=4313",
+    "topic": "Relating to the temporary board of and financing of certain facilities and improvements by the LaSalle Municipal Utility District No. 4; providing authority to impose an assessment."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4314",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=HB&BillNumberDetail=4314",
+    "topic": "Relating to the temporary board of and financing of certain facilities and improvements by the LaSalle Municipal Utility District No. 5; providing authority to impose an assessment."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "line_item_veto",
+    "position": -1,
+    "billId": "SB 1",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=1",
+    "topic": "General Appropriations Bill. Line item veto.",
+    "note": "line-item veto of an appropriations bill; not a bill position"
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 196",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=196",
+    "topic": "Relating to a notification requirement if a public school, including an open-enrollment charter school, does not have a nurse, school counselor, or librarian assigned to the school during all instructional hours."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 570",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=570",
+    "topic": "Relating to the regulation of the retention, storage, transportation, disposal, processing, and reuse of used or scrap tires; providing a civil penalty; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 667",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=667",
+    "topic": "Relating to establishing a guardianship compliance program."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 670",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=670",
+    "topic": "Relating to the appointment of the commissioners of the health and human services agencies by the governor."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 744",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=744",
+    "topic": "Relating to a tree planting credit to offset tree mitigation fees imposed by a municipality."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 790",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=790",
+    "topic": "Relating to the continuation of the women's health advisory committee."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 813",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=813",
+    "topic": "Relating to recovery of damages, attorney's fees, and costs related to frivolous regulatory actions by state agencies."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 830",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=830",
+    "topic": "Relating to the provision of accounting statements by mortgage servicers for certain loans secured by a lien on residential real property."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1215",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=1215",
+    "topic": "Relating to the creation of a joint interim committee to study issues related to construction contracts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1444",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=1444",
+    "topic": "Relating to de novo hearings in child protection cases."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1525",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=1525",
+    "topic": "Relating to studies by the Texas Water Development Board of water needs and availability in this state."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1743",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=1743",
+    "topic": "Relating to transferring the Office for the Prevention of Developmental Disabilities to The University of Texas at Austin and renaming the office the Office for Healthy Children."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1912",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=1912",
+    "topic": "Relating to certain notice requirements and filing requirements in court proceedings involving persons with mental illness and representation of proposed patients in proceedings for court-ordered mental health services."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1992",
+    "session": "85R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=85-0&BillTypeDetail=SB&BillNumberDetail=1992",
+    "topic": "Relating to the allocation of housing tax credits to developments within proximate geographical areas."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "line_item_veto",
+    "position": -1,
+    "billId": "HB 1",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=1",
+    "topic": "General Appropriations Bill. Line item veto.",
+    "note": "line-item veto of an appropriations bill; not a bill position"
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "line_item_veto",
+    "position": -1,
+    "billId": "HB 2",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2",
+    "topic": "Relating to making supplemental appropriations and giving direction and adjustment authority regarding appropriations. Line item veto.",
+    "note": "line-item veto of an appropriations bill; not a bill position"
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 184",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=184",
+    "topic": "Relating to the allocation of costs and attorney's fees incurred by a Court of Inquiry."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 225",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=225",
+    "topic": "Relating to the prescription, administration, and possession of certain opioid antagonists for the treatment of a suspected overdose and a defense to prosecution for certain offenses involving controlled substances and other prohibited drugs, substances, or paraphernalia for defendants seeking assistance for a suspected overdose."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 499",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=499",
+    "topic": "Relating to the public transportation advisory committee."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 973",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=973",
+    "topic": "Relating to the compensation and per diem compensation of emergency services commissioners in certain counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1015",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=1015",
+    "topic": "Relating to notice provided to a court regarding certain defendants placed on state jail felony community supervision."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1119",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=1119",
+    "topic": "Relating to a study assessing the statewide need for the replacement of mile markers on certain highways."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1363",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=1363",
+    "topic": "Relating to the prosecution of and punishment for the offense of prostitution; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1628",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=1628",
+    "topic": "Relating to authorizing a credit union or other financial institution to conduct savings promotion raffles."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1633",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=1633",
+    "topic": "Relating to application and notification requirements for a permit to drill an oil or gas well in or near an easement held by the Texas Department of Transportation."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 1855",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=1855",
+    "topic": "Relating to training, continuing education, and weapons proficiency standards for correctional officers employed by the Texas Department of Criminal Justice."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2068",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2068",
+    "topic": "Relating to automatic employee participation in and administration of a deferred compensation plan provided by certain hospital districts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2084",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2084",
+    "topic": "Relating to transparency in the rate-setting processes for the Medicaid managed care and child health plan programs."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2100",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2100",
+    "topic": "Relating to the creation of the East Houston Management District; providing authority to issue bonds; providing authority to impose assessments, fees, or taxes."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2282",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2282",
+    "topic": "Relating to the procedures for protests and appeals of certain ad valorem tax determinations."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2381",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2381",
+    "topic": "Relating to the appointment and duties of election officers."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2466",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2466",
+    "topic": "Relating to the creation of a safety reimbursement program for employers participating in the workers' compensation system."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2647",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2647",
+    "topic": "Relating to a limitation on the authority to curtail groundwater production from wells used for power generation or mining."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2775",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2775",
+    "topic": "Relating to a petition filed in connection with an application for a place on the ballot."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2788",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2788",
+    "topic": "Relating to the authority of a retail public water utility to require an operator of a correctional facility to comply with water conservation measures."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2826",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2826",
+    "topic": "Relating to the eligibility of certain property located in multiple school districts for a limitation on appraised value for school district maintenance and operations ad valorem tax purposes under the Texas Economic Development Act."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 2830",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=2830",
+    "topic": "Relating to the duty of a county to refund an amount of $2 or less paid to the county clerk or district clerk."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3043",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3043",
+    "topic": "Relating to the licensing and regulation of a journeyman lineman."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3060",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3060",
+    "topic": "Relating to functions of a municipal building and standards commission panel."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3184",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3184",
+    "topic": "Relating to the establishment, operation, and funding of victim-offender mediation programs; authorizing fees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3193",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3193",
+    "topic": "Relating to consideration of location of an offeror's principal place of business in awarding certain municipal contracts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3291",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3291",
+    "topic": "Relating to transactions involving oil, gas, or condensate; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3390",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3390",
+    "topic": "Relating to a written agreement concerning a projectile discharged from a firearm that travels across a property line; amending a provision subject to a criminal penalty."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3511",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3511",
+    "topic": "Relating to the contents of financial statements filed by certain persons; adding a provision subject to criminal penalties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3579",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3579",
+    "topic": "Relating to certain criminal history record information; authorizing a fee."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 3736",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=3736",
+    "topic": "Relating to conflicts of interest by members of state agency governing boards and governing officers; creating a criminal offense."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4025",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=4025",
+    "topic": "Relating to funding to counties for transportation infrastructure projects located in areas of the state affected by increased oil and gas production, including money from county energy transportation reinvestment zones."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HB 4103",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HB&BillNumberDetail=4103",
+    "topic": "Relating to oaths and affirmations of certain judges of municipal courts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 130",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=130",
+    "topic": "Relating to the eligibility of criminal defendants for an order of nondisclosure; authorizing a fee."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 313",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=313",
+    "topic": "Relating to the essential knowledge and skills of the required public school curriculum, the administration of and reports relating to assessment instruments administered to public school students, the instructional materials allotment, and proclamations for the production of instructional materials."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 359",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=359",
+    "topic": "Relating to the authority of a peace officer to apprehend a person for emergency detention and the authority of certain facilities and physicians to temporarily detain a person with mental illness."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 408",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=408",
+    "topic": "Relating to consideration of a bidder's principal place of business in awarding certain county contracts."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 496",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=496",
+    "topic": "Relating to Foundation School Program funding for certain students."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1032",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=1032",
+    "topic": "Relating to authority for certain state employees to work flexible hours and to work from home or other authorized alternative work sites."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1034",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=1034",
+    "topic": "Relating to voting by mail, including the cancellation of an application for a ballot to be voted by mail."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1408",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=1408",
+    "topic": "Relating to the establishment of a matching grant program for community development in certain municipalities and counties."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "SB 1655",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=SB&BillNumberDetail=1655",
+    "topic": "Relating to Texas Higher Education Coordinating Board fees for the administration of certificates of authorization and certificates of authority issued to certain postsecondary educational institutions; authorizing fees."
+  },
+  {
+    "personId": "tx-gov-abbott-greg",
+    "kind": "veto",
+    "position": -1,
+    "billId": "HCR 84",
+    "session": "84R",
+    "date": null,
+    "sourceUrl": "https://lrl.texas.gov/legis/billsearch/BillDetails.cfm?&legSession=84-0&BillTypeDetail=HCR&BillNumberDetail=84",
+    "topic": "Commending mental health professionals on the occasion of National Mental Health Month."
+  }
+]
