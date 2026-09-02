@@ -118,13 +118,20 @@ registration stays put.
    (Squarespace points these at its own site by default — leaving them means
    intermittent resolution to the wrong host), then add:
 
-   | Host  | Type  | Value                  |
-   |-------|-------|------------------------|
-   | `@`   | A     | `76.76.21.21`          |
-   | `www` | CNAME | `cname.vercel-dns.com` |
+   | Host  | Type | Value          |
+   |-------|------|----------------|
+   | `@`   | A    | `76.76.21.21`  |
+   | `www` | A    | `76.76.21.21`  |
 
-   Confirm both against what the Vercel dashboard prints — those are its current
-   published targets, and Vercel does change them.
+   Both are A records. Vercel used to hand out `CNAME www -> cname.vercel-dns.com`
+   and much of the internet still says so; what it actually printed for this
+   project was an A record for `www` as well. Take the values from
+   `vercel domains inspect rightnleft.com`, not from memory or from a blog post.
+
+   **Do not** take the "change your nameservers to `ns1/ns2.vercel-dns.com`"
+   option unless you have checked the domain's MX records first. That moves *all*
+   DNS off Squarespace, email included, and any mail on the domain stops.
+   The two A records leave everything else where it is.
 4. Back in Vercel, wait for **Valid Configuration**. TLS is issued automatically
    once DNS resolves.
 
