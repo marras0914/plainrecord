@@ -387,6 +387,68 @@ function renderReadout(p: PartisanProfile): void {
     `<div class="readout-caveat mono">${p.n} of ${activeItems().length} answered</div>`;
 }
 
+/**
+ * How the three candidates voted on the bill the reader just answered.
+ *
+ * This is the payoff of a blind quiz: you commit to a position with no party cue,
+ * and only then find out who stood where. It renders for the PREVIOUS question,
+ * never the current one — the same rule the outcome reveal follows, and for the
+ * same reason. Showing "Talarico voted Nay" above an unanswered question would
+ * turn a blind quiz into a cue-following exercise.
+ *
+ * Three things it must not do:
+ *   - Treat an absence as a disagreement. A missing position means no recorded
+ *     vote (Talarico has 57 of 67), which is a fact about the record and not a
+ *     position. It reads "no vote recorded" and is counted as neither.
+ *   - Invent the reason for an absence. Excused, absent, paired, presiding, or
+ *     simply not voting are different things and the payload does not carry which.
+ *   - Imply the candidate agreed with the reader's reasoning. Two people can vote
+ *     the same way on a bill for opposite reasons, so the wording is "voted the
+ *     same way as you", not "agrees with you".
+ */
+function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
+  const rows = CANDIDATES.map((cand) => {
+    const cast = item.votes[cand.id];
+
+    if (cast !== 1 && cast !== -1) {
+      return (
+        `<li class="cand-rev cr-none"><span class="cr-name">${esc(cand.name)}</span>` +
+        `<span class="cr-vote">no vote recorded</span>` +
+        `<span class="cr-match">—</span></li>`
+      );
+    }
+    const same = cast === yourAnswer;
+    return (
+      `<li class="cand-rev ${same ? 'cr-same' : 'cr-diff'}">` +
+      `<span class="cr-name">${esc(cand.name)}</span>` +
+      `<span class="cr-vote">voted ${cast === 1 ? 'Yea' : 'Nay'}</span>` +
+      `<span class="cr-match">${same ? 'same as you' : 'opposite to you'}</span></li>`
+    );
+  }).join('');
+
+  const counted = CANDIDATES.filter((c) => {
+    const v = item.votes[c.id];
+    return v === 1 || v === -1;
+  });
+  const agreed = counted.filter((c) => item.votes[c.id] === yourAnswer).length;
+  const missing = CANDIDATES.length - counted.length;
+
+  const summary = counted.length === 0
+    ? 'None of the three has a recorded vote on this bill.'
+    : `${agreed} of ${counted.length} voted the same way you did` +
+      (missing
+        ? `, and ${missing === 1 ? 'one has' : `${missing} have`} no recorded vote.`
+        : '.');
+
+  return (
+    `<div class="reveal cand-reveal">` +
+    `<div class="outc-cat">How they actually voted on ${esc(item.billId)}</div>` +
+    `<ul class="cand-revs">${rows}</ul>` +
+    `<div class="cand-rev-sum">${summary} You said ` +
+    `<b>${yourAnswer === 1 ? 'Yea' : 'Nay'}</b>.</div></div>`
+  );
+}
+
 function renderQuestion(): void {
   const c = el('q-card');
   if (cursor >= queue.length) {
@@ -419,6 +481,7 @@ function renderQuestion(): void {
     `<dt>Democrats voting Yea</dt><dd>${it.dYea === null ? '—' : pct(it.dYea)}</dd>` +
     `<dt>valence</dt><dd>${it.valence === null ? '—' : fmt(it.valence)}</dd>` +
     `<dt>source</dt><dd>${it.src}${it.rec ? ` · RV ${it.rec}` : ''}</dd></dl></div>` +
+    (prevAnswered ? candidateReveal(prev!, answers[prev!.id] as 1 | -1) : '') +
     (prevOut
       ? `<div class="reveal"><div class="outc-cat">Where Texas stands on ${esc(prevOut.category.toLowerCase())}</div>` +
         `<b>${esc(prevOut.value)}</b> — ${esc(prevOut.comparison)}` +

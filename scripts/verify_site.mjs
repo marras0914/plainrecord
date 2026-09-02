@@ -166,6 +166,77 @@ try {
   // Showing a state ranking before the vote would steer the answer, which is the
   // one thing a blind quiz cannot do.
   check('outcomes hidden before any answer', await page.$eval('#outcome-card', (e) => e.hidden));
+  check('no candidate reveal before any answer', (await page.$$('.cand-reveal')).length === 0);
+
+  // --- the candidate reveal -------------------------------------------------
+  // The payoff of a blind quiz: commit with no party cue, then see who stood
+  // where. Q1 is SB 2 and all three candidates voted Nay, so answering Nay is a
+  // known 3-of-3 and pins both the vote text and the agreement wording.
+  await page.click('[data-answer="-1"]');
+  await page.waitForTimeout(350);
+  check('candidate reveal appears after answering', (await page.$$('.cand-reveal')).length === 1);
+  check('the reveal names the bill just answered',
+    /SB 2/.test(await page.$eval('.cand-reveal .outc-cat', (e) => e.textContent)),
+    await page.$eval('.cand-reveal .outc-cat', (e) => e.textContent.trim()));
+  const revRows = await page.$$eval('.cand-rev', (rs) =>
+    rs.map((r) => ({
+      cls: r.className,
+      vote: r.querySelector('.cr-vote').textContent.trim(),
+      match: r.querySelector('.cr-match').textContent.trim(),
+    })),
+  );
+  check('one row per candidate', revRows.length === 3, `${revRows.length} rows`);
+  check('all three voted Nay on SB 2 and are marked as matching',
+    revRows.every((r) => /Nay/.test(r.vote) && /same as you/.test(r.match)),
+    revRows.map((r) => `${r.vote}/${r.match}`).join(' | '));
+  const revSum = await page.$eval('.cand-rev-sum', (e) => e.textContent.replace(/\s+/g, ' ').trim());
+  check('the summary counts 3 of 3 and echoes your own answer',
+    /3 of 3/.test(revSum) && /You said Nay/.test(revSum), revSum);
+
+  // Answer the opposite way on Q2 so the disagreement branch is exercised too —
+  // a reveal that can only render agreement proves nothing.
+  await page.click('[data-answer="1"]');
+  await page.waitForTimeout(350);
+  const diffRows = await page.$$eval('.cand-rev', (rs) => rs.map((r) => r.className + '|' +
+    r.querySelector('.cr-match').textContent.trim()));
+  check('a disagreement renders as its own state, not as a match',
+    diffRows.some((r) => /cr-diff/.test(r) && /opposite to you/.test(r)) ||
+    diffRows.every((r) => /cr-none/.test(r)),
+    diffRows.join(' ; '));
+
+  // An absence is a fact about the record, not a position. It must never be
+  // counted as disagreement, and it must not enter the denominator.
+  await page.click('[data-preset="reset"]');
+  await page.waitForTimeout(200);
+  await page.click('#mode-full');
+  await page.waitForTimeout(400);
+  let absence = null;
+  for (let i = 0; i < 40 && !absence; i++) {
+    await page.click('[data-answer="1"]');
+    await page.waitForTimeout(60);
+    const none = await page.$$eval('.cand-rev.cr-none', (rs) =>
+      rs.map((r) => r.querySelector('.cr-vote').textContent.trim() + '|' +
+        r.querySelector('.cr-match').textContent.trim()));
+    if (none.length) {
+      absence = { rows: none, sum: await page.$eval('.cand-rev-sum', (e) => e.textContent.replace(/\s+/g, ' ').trim()) };
+    }
+  }
+  if (!absence) {
+    check('an absence renders as "no vote recorded"', false, 'none encountered in 40 answers');
+  } else {
+    check('an absence renders as "no vote recorded"',
+      absence.rows.every((r) => /no vote recorded/.test(r)), absence.rows.join(' ; '));
+    check('an absence is never called a disagreement',
+      absence.rows.every((r) => !/opposite to you/.test(r)), absence.rows.join(' ; '));
+    check('the summary excludes absences from the denominator and pluralises',
+      /\d+ of \d+ voted/.test(absence.sum) && /(one has|\d+ have) no recorded vote/.test(absence.sum),
+      absence.sum);
+  }
+
+  await page.click('[data-preset="reset"]');
+  await page.waitForTimeout(200);
+  await page.click('#mode-short');
+  await page.waitForTimeout(350);
 
   for (const [name, want] of Object.entries(EXPECT)) {
     await page.click(`[data-preset="${name}"]`);
