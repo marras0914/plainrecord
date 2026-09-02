@@ -49,6 +49,8 @@ export interface QuizItem {
   headline?: boolean;
   label?: string;
   why?: string;
+  /** Plain-language gloss WRITTEN BY THIS PROJECT — only the seven headline bills. */
+  plain?: string;
   statements?: {
     member: string;
     shownAs: VoteCast;
@@ -78,6 +80,18 @@ export interface OpponentAct {
 }
 
 /** Who the candidates run against, and why none of them can be scored. */
+/** A House Republican shown for comparison, chosen by measured rule. */
+export interface Comparator {
+  id: string;
+  name: string;
+  party: string;
+  role: string;
+  voted: number;
+  withCaucus: number;
+  crossover: number;
+  crossedOf: string;
+}
+
 export interface Opponent {
   name: string;
   office: string;
@@ -132,6 +146,9 @@ export interface QuizPayload {
   omissions: { category: string; why: string }[];
   candidates: QuizCandidate[];
   opponents: Opponent[];
+  comparators: Comparator[];
+  comparatorRule: string;
+  plainLanguageNote: string;
   items: QuizItem[];
 }
 
@@ -139,6 +156,7 @@ export const DATA = payload as unknown as QuizPayload;
 export const ALL_ITEMS: QuizItem[] = DATA.items;
 export const HEADLINE_ITEMS: QuizItem[] = ALL_ITEMS.filter((i) => i.headline);
 export const OPPONENTS: Opponent[] = DATA.opponents ?? [];
+export const COMPARATORS: Comparator[] = DATA.comparators ?? [];
 export const CANDIDATES: QuizCandidate[] = DATA.candidates;
 
 // ---------------------------------------------------------------------------

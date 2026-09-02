@@ -163,6 +163,21 @@ try {
   check('the reason for the pick is shown',
     /marquee fight/i.test(await page.$eval('.headline-why', (e) => e.textContent.trim())));
 
+  // --- the plain-language gloss ---------------------------------------------
+  // The one field on the page written by us rather than copied from the record.
+  // In a blind quiz the wording IS the question, so the reader must be able to
+  // see which words are the state's and which are ours — the official caption
+  // has to remain present, and the gloss has to be labelled.
+  const plain = await page.$eval('.q-plain', (e) => e.textContent.replace(/\s+/g, ' ').trim());
+  check('SB 2 carries a plain-language description',
+    /education savings|state-funded accounts/i.test(plain), plain.slice(0, 70));
+  check('the gloss is labelled as ours, not the official text',
+    /In plain terms/i.test(plain) && /not the official text/i.test(plain), plain.slice(-60));
+  check('the official caption is still shown above it',
+    /Relating to the establishment of an education savings account program/i.test(
+      await page.$eval('.q-caption', (e) => e.textContent),
+    ));
+
   // Showing a state ranking before the vote would steer the answer, which is the
   // one thing a blind quiz cannot do.
   check('outcomes hidden before any answer', await page.$eval('#outcome-card', (e) => e.hidden));
@@ -178,7 +193,9 @@ try {
   check('the reveal names the bill just answered',
     /SB 2/.test(await page.$eval('.cand-reveal .outc-cat', (e) => e.textContent)),
     await page.$eval('.cand-reveal .outc-cat', (e) => e.textContent.trim()));
-  const revRows = await page.$$eval('.cand-rev', (rs) =>
+  // Scoped to the candidates' own list: a second .cand-revs now holds the
+  // Republican comparators, and an unscoped selector counted all six rows.
+  const revRows = await page.$$eval('.cand-revs:not(.rep-revs) .cand-rev', (rs) =>
     rs.map((r) => ({
       cls: r.className,
       vote: r.querySelector('.cr-vote').textContent.trim(),
@@ -197,7 +214,7 @@ try {
   // a reveal that can only render agreement proves nothing.
   await page.click('[data-answer="1"]');
   await page.waitForTimeout(350);
-  const diffRows = await page.$$eval('.cand-rev', (rs) => rs.map((r) => r.className + '|' +
+  const diffRows = await page.$$eval('.cand-revs:not(.rep-revs) .cand-rev', (rs) => rs.map((r) => r.className + '|' +
     r.querySelector('.cr-match').textContent.trim()));
   check('a disagreement renders as its own state, not as a match',
     diffRows.some((r) => /cr-diff/.test(r) && /opposite to you/.test(r)) ||
@@ -214,7 +231,7 @@ try {
   for (let i = 0; i < 40 && !absence; i++) {
     await page.click('[data-answer="1"]');
     await page.waitForTimeout(60);
-    const none = await page.$$eval('.cand-rev.cr-none', (rs) =>
+    const none = await page.$$eval('.cand-revs:not(.rep-revs) .cand-rev.cr-none', (rs) =>
       rs.map((r) => r.querySelector('.cr-vote').textContent.trim() + '|' +
         r.querySelector('.cr-match').textContent.trim()));
     if (none.length) {
@@ -244,6 +261,28 @@ try {
   // attaches wherever a veto or priority designation names the same bill.
   await page.click('[data-answer="-1"]');
   await page.waitForTimeout(350);
+  // Three House Republicans, in the same vote tier as the candidates. These are
+  // the only genuinely comparable Republican signal — the opponents cast no House
+  // votes — so the reveal must show them voting on this exact bill.
+  const repRows = await page.$$eval('.rep-revs .cand-rev', (rs) =>
+    rs.map((r) => ({
+      name: r.querySelector('.cr-name').textContent.replace(/\s+/g, ' ').trim(),
+      vote: r.querySelector('.cr-vote').textContent.trim(),
+    })),
+  );
+  check('three Republicans are shown for comparison', repRows.length === 3,
+    repRows.map((r) => r.name.replace(/\s+/g, ' ')).join(' | '));
+  check('each Republican is labelled with the rule that selected him',
+    repRows.every((r) => /most party-line|median Republican|most crossover/.test(r.name)),
+    repRows.map((r) => r.name.split('R ·')[1]?.trim()).join(' | '));
+  check('the Republicans have real recorded votes on this bill',
+    repRows.every((r) => /voted (Yea|Nay)/.test(r.vote)), repRows.map((r) => r.vote).join(' | '));
+  const repNote = await page.$eval('.rep-note', (e) => e.textContent.replace(/\s+/g, ' ').trim());
+  // They are not candidates, and the selection must read as a rule rather than a
+  // choice of names — otherwise the page is smuggling in a judgement of who counts.
+  check('the page says they are not on the ballot and were picked by rule',
+    /not on the ballot/i.test(repNote) && /by rule/i.test(repNote), repNote.slice(0, 80));
+
   const psLabels = await page.$$eval('.ps-label', (ls) => ls.map((l) => l.textContent.trim()));
   check('the reveal shows BOTH caucuses, not just the candidates',
     psLabels.includes('Republicans') && psLabels.includes('Democrats'), psLabels.join(', '));

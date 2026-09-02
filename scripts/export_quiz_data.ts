@@ -47,21 +47,50 @@ import { actsBySession, normBill, OPPONENTS } from './opponent_acts';
  * you cross lines needs the votes where the caucuses agreed, which is what the
  * full set is for. That is a finding, not a flaw, and the page says so.
  */
-const HEADLINE_SET: { billId: string; label: string; why: string }[] = [
+/**
+ * `plain` — a plain-language gloss of what the bill DOES.
+ *
+ * This is the one thing on the page that is written by this project rather than
+ * copied from the record, and it is the most dangerous field in the whole payload.
+ * In a blind quiz the wording IS the question: "lets parents use public money for
+ * private school" and "gives parents a choice of school" describe the same bill
+ * and pull answers in opposite directions. So three rules constrain every line:
+ *
+ *   1. Describe the MECHANISM, not the effect. What changes, and for whom. Never
+ *      whether that is good, who benefits, or what it will lead to.
+ *   2. No evaluative adjectives, and no word either campaign uses as a slogan.
+ *   3. Nothing that is not in the caption or the bill's own operative text. If a
+ *      gloss needs a fact from outside the record, it does not get written.
+ *
+ * They are labelled on screen as ours, sit BELOW the official caption rather than
+ * replacing it, and are written only for these seven. The other 60 items show the
+ * caption alone: writing 60 more glosses from captions I have not read against the
+ * bill text would be inventing meaning, and a confident wrong summary is worse for
+ * a reader than a dense accurate one. That gap is deliberate and is stated in the
+ * payload, not hidden.
+ */
+const HEADLINE_SET: { billId: string; label: string; why: string; plain: string }[] = [
   { billId: 'SB 2',  label: 'School vouchers',
-    why: 'The marquee fight of the session: public money for private school tuition. Lt. Gov. priority bill.' },
+    why: 'The marquee fight of the session: public money for private school tuition. Lt. Gov. priority bill.',
+    plain: 'Creates state-funded accounts that families can spend on private school tuition and other approved school costs. The money comes out of the state budget.' },
   { billId: 'SB 8',  label: 'Immigration enforcement',
-    why: 'Requires local law enforcement to assist federal deportation efforts. Lt. Gov. priority bill.' },
+    why: 'Requires local law enforcement to assist federal deportation efforts. Lt. Gov. priority bill.',
+    plain: 'Requires sheriffs to sign agreements letting their deputies carry out federal immigration enforcement, and creates state grants to pay for doing it.' },
   { billId: 'SB 10', label: 'Ten Commandments in classrooms',
-    why: 'Requires the Ten Commandments displayed in public schools. Lt. Gov. priority bill.' },
+    why: 'Requires the Ten Commandments displayed in public schools. Lt. Gov. priority bill.',
+    plain: 'Requires every public school classroom in Texas to display a copy of the Ten Commandments.' },
   { billId: 'SB 3',  label: 'THC ban',
-    why: 'Lt. Gov. priority bill that the Governor then VETOED — a documented split between two Republican leaders on one bill.' },
+    why: 'Lt. Gov. priority bill that the Governor then VETOED — a documented split between two Republican leaders on one bill.',
+    plain: 'Bans hemp products containing THC — the ones sold in smoke shops and convenience stores — and adds licences, fees and criminal penalties for selling them.' },
   { billId: 'SB 14', label: 'Regulatory review ("Texas DOGE")',
-    why: 'Creates a state office to review regulations. Lt. Gov. priority bill.' },
+    why: 'Creates a state office to review regulations. Lt. Gov. priority bill.',
+    plain: 'Sets up a new state office to review the rules that agencies write, and tells judges to stop treating an agency’s own reading of the law as the correct one.' },
   { billId: 'SB 6',  label: 'Electric grid and large power users',
-    why: 'Grid reliability rules for large loads such as data centres. Lt. Gov. priority bill.' },
+    why: 'Grid reliability rules for large loads such as data centres. Lt. Gov. priority bill.',
+    plain: 'Sets the rules for how very large electricity users, such as data centres, connect to the Texas grid and how much of the cost of serving them they pay.' },
   { billId: 'SB 5',  label: 'Dementia research institute',
-    why: 'Creates a state dementia research institute. Included deliberately as the least party-coded of the headline bills — without it the short set would be entirely party-line.' },
+    why: 'Creates a state dementia research institute. Included deliberately as the least party-coded of the headline bills — without it the short set would be entirely party-line.',
+    plain: 'Creates a state institute that funds dementia prevention and research.' },
 ];
 
 const CANDIDATES = [
@@ -69,6 +98,36 @@ const CANDIDATES = [
   { name: 'Gina Hinojosa', office: 'Governor', running: 'vs Greg Abbott (R)' },
   { name: 'James Talarico', office: 'U.S. Senate', running: 'vs Ken Paxton (R)' },
 ];
+
+/**
+ * Republican comparators.
+ *
+ * The three candidates are all Democrats, which left the page showing one side of
+ * the chamber. Their opponents cannot fix that — none of them votes in the House
+ * (see scripts/opponent_acts.ts) — but the House's own Republicans can: they voted
+ * on the exact same bills, so they are directly comparable in the same tier.
+ *
+ * WHICH Republicans is the whole problem. Picking recognisable names would put my
+ * judgement of who matters into a tool whose entire premise is that it contains no
+ * such judgement. So the RULE picks them and the data decides who satisfies it:
+ * the most party-line Republican, the median Republican, and the Republican who
+ * most often broke from his caucus. That spans the range of the caucus rather than
+ * characterising it, and it is recomputed on every export — if the membership or
+ * the votes change, the three change with them.
+ *
+ * Definitions, so the numbers are checkable:
+ *   with-caucus  share of this member's votes that matched the Republican
+ *                majority on the same item
+ *   crossover    of the items where the two caucus majorities DISAGREED, the
+ *                share where this member voted with the Democratic majority
+ *
+ * A member needs votes on at least 55 of the selected items to be eligible, so a
+ * near-absent member cannot top either end on a handful of votes.
+ */
+const COMPARATOR_RULE =
+  'The most party-line Republican, the median Republican, and the Republican who ' +
+  'most often broke from his caucus — chosen by measured rule, not by name.';
+const COMPARATOR_MIN_VOTES = 55;
 
 function main() {
   const argv = process.argv.slice(2);
@@ -92,8 +151,10 @@ function main() {
   const pT = loadTable(peopleCsv);
   const pid = col(pT, ['id']);
   const pname = col(pT, ['name']);
-  const pparty = col(pT, ['party']);
-  const pchamber = optionalCol(pT, ['chamber']);
+  const pparty = col(pT, ['party', 'current_party']);
+  // Same alias trap as backfill_journal.ts: without 'current_chamber' the
+  // House-only filter below quietly accepts Senate members.
+  const pchamber = optionalCol(pT, ['chamber', 'current_chamber']);
   const roster: PartyRoster = {};
   const nameToId = new Map<string, string>();
   const idToName = new Map<string, string>();
@@ -157,14 +218,14 @@ function main() {
 
   // Force the headline bills in even where the mechanical rule did not pick
   // them, and mark them so the page can offer a seven-question view.
-  const headlineIds = new Map<string, { label: string; why: string }>();
+  const headlineIds = new Map<string, { label: string; why: string; plain: string }>();
   const selectedIds = new Set(sel.selected.map((i) => i.id));
   const missingHeadline: string[] = [];
   for (const h of HEADLINE_SET) {
     const cands = categorized.filter((i) => i.billId === h.billId && pWeights.has(i.id));
     if (cands.length === 0) { missingHeadline.push(h.billId); continue; }
     const best = cands.reduce((a, b) => (discrimination(b) > discrimination(a) ? b : a));
-    headlineIds.set(best.id, { label: h.label, why: h.why });
+    headlineIds.set(best.id, { label: h.label, why: h.why, plain: h.plain });
     if (!selectedIds.has(best.id)) { sel.selected.push(best); selectedIds.add(best.id); }
   }
   if (missingHeadline.length) {
@@ -181,6 +242,73 @@ function main() {
   // be scored like votes, both live in scripts/opponent_acts.ts so the exporter
   // and augment_acts.ts cannot drift apart.
   const actsByBill = actsBySession(session);
+
+  // ---------------------------------------------------------------------------
+  // Republican comparators, chosen by COMPARATOR_RULE (see the note above)
+  // ---------------------------------------------------------------------------
+  const houseOnly = (id: string) => houseIds.has(id);
+  const caucusMajority = new Map<string, { r: 1 | -1 | null; d: 1 | -1 | null }>();
+  for (const it of sel.selected) {
+    let ry = 0, rn = 0, dy = 0, dn = 0;
+    for (const [pid, v] of Object.entries(it.votes)) {
+      if (!houseOnly(pid)) continue;
+      const p = roster[pid];
+      if (p === 'R') { if (v === 1) ry++; else if (v === -1) rn++; }
+      else if (p === 'D') { if (v === 1) dy++; else if (v === -1) dn++; }
+    }
+    caucusMajority.set(it.id, {
+      r: ry === rn ? null : ry > rn ? 1 : -1,
+      d: dy === dn ? null : dy > dn ? 1 : -1,
+    });
+  }
+
+  const repStats = Object.keys(roster)
+    .filter((id) => houseOnly(id) && roster[id] === 'R')
+    .map((id) => {
+      let n = 0, withCaucus = 0, split = 0, crossed = 0;
+      for (const it of sel.selected) {
+        const v = it.votes[id];
+        if (v !== 1 && v !== -1) continue;
+        const m = caucusMajority.get(it.id)!;
+        if (m.r === null) continue;
+        n++;
+        if (v === m.r) withCaucus++;
+        if (m.d !== null && m.d !== m.r) { split++; if (v === m.d) crossed++; }
+      }
+      return { id, n, withCaucus: n ? withCaucus / n : 0, split, crossed,
+               crossover: split ? crossed / split : 0 };
+    })
+    .filter((s) => s.n >= COMPARATOR_MIN_VOTES);
+
+  if (repStats.length < 3) {
+    throw new Error(
+      `only ${repStats.length} Republicans clear ${COMPARATOR_MIN_VOTES} votes — ` +
+        'cannot pick comparators by rule, and picking them by hand is exactly what ' +
+        'COMPARATOR_RULE exists to prevent.',
+    );
+  }
+  const byLoyalty = [...repStats].sort((a, b) => b.withCaucus - a.withCaucus || b.n - a.n);
+  const byCrossover = [...repStats].sort((a, b) => b.crossover - a.crossover || b.n - a.n);
+  const picked = [
+    { role: 'most party-line', ...byLoyalty[0] },
+    { role: 'median Republican', ...byLoyalty[Math.floor(byLoyalty.length / 2)] },
+    { role: 'most crossover', ...byCrossover[0] },
+  ];
+  // The ends of a distribution can collide with its middle in a small caucus; a
+  // duplicated row would misrepresent the spread as narrower than it is.
+  const seen = new Set<string>();
+  const comparators = picked.filter((p) => !seen.has(p.id) && seen.add(p.id));
+
+  const comparatorOut = comparators.map((c) => ({
+    id: c.id,
+    name: idToName.get(c.id) ?? c.id,
+    party: 'R',
+    role: c.role,
+    voted: c.n,
+    withCaucus: +c.withCaucus.toFixed(3),
+    crossover: +c.crossover.toFixed(3),
+    crossedOf: `${c.crossed}/${c.split}`,
+  }));
 
   let itemsWithActs = 0;
 
@@ -212,6 +340,18 @@ function main() {
     // must not imply an absence of data is an absence of positions — exactly why
     // none of them can be scored against the reader the way a legislator can.
     opponents: OPPONENTS,
+    // Republican members of the SAME chamber who voted on the SAME bills — the
+    // only genuinely comparable Republican signal available, since none of the
+    // three opponents casts a House vote. Chosen by rule; see COMPARATOR_RULE.
+    comparatorRule: COMPARATOR_RULE,
+    comparators: comparatorOut,
+    // Stated, not hidden: only the seven headline bills carry a plain-language
+    // gloss. See the note on HEADLINE_SET for why the other 60 show the official
+    // caption alone rather than a summary written from a caption.
+    plainLanguageNote:
+      'The short description under a bill is written by us, not copied from the ' +
+      'record, and only the seven headline bills have one. Every other question ' +
+      'shows the official caption on its own.',
     candidates: candIds.map((c) => ({
       id: c.id,
       name: c.name,
@@ -234,7 +374,7 @@ function main() {
       return {
         id: it.id,
         billId: it.billId,
-        ...(hl ? { headline: true, label: hl.label, why: hl.why } : {}),
+        ...(hl ? { headline: true, label: hl.label, why: hl.why, plain: hl.plain } : {}),
         category: it.category,
         caption: (captions.get(it.billId) ?? '').replace(/\s+/g, ' ').trim(),
         yeas: it.yeas,
@@ -248,7 +388,10 @@ function main() {
         src: it.voteSource ?? 'scrape',
         rec: it.journalRecord ?? null,
         votes: Object.fromEntries(
-          candIds.map((c) => [c.id, (it.votes[c.id] ?? null) as VoteCast]),
+          [...candIds.map((c) => c.id), ...comparators.map((c) => c.id)].map((id) => [
+            id,
+            (it.votes[id] ?? null) as VoteCast,
+          ]),
         ),
         ...(statements.length ? { statements } : {}),
         ...(() => {
@@ -280,6 +423,9 @@ function main() {
     for (const h of hs) console.log(`     ${h.billId.padEnd(7)} |v|=${Math.abs(h.valence ?? 0).toFixed(2)}  ${(h as {label?:string}).label}`);
   }
   console.log(`  items with an opponent action  ${itemsWithActs}/${out.items.length}`);
+  console.log('  Republican comparators (by rule):');
+  for (const c of comparatorOut)
+    console.log(`    ${c.name.padEnd(24)} ${c.role.padEnd(18)} voted ${c.voted}  with-caucus ${(c.withCaucus * 100).toFixed(1)}%  crossed ${c.crossedOf}`);
   console.log(`  cross-cutting share    ${(sel.crossCuttingShare * 100).toFixed(1)}%`);
   console.log(`  journal-sourced        ${out.provenance.selectedJournalSourced}/${out.items.length} selected`);
   console.log(`  items with a caption   ${out.items.filter((i) => i.caption).length}`);

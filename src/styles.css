@@ -130,6 +130,17 @@
                   color:var(--ink-2); }
   .cand-rev-sum b { color:var(--ink); }
 
+  /* Ours, not the record's. Set apart with a rule and a tag rather than a colour,
+     so it reads as an annotation on the caption instead of a replacement for it. */
+  .q-plain { margin-top:10px; padding:9px 0 0 12px; border-left:2px solid var(--rule);
+             font-size:14px; color:var(--ink); }
+  .q-plain-tag { display:block; font-family:"IBM Plex Mono",ui-monospace,monospace;
+                 font-size:9.5px; letter-spacing:0.11em; text-transform:uppercase;
+                 color:var(--muted); margin-bottom:3px; }
+  .q-plain small { display:block; margin-top:5px; font-size:11.5px; color:var(--muted); }
+  .cr-name small { display:block; font-weight:400; font-size:10.5px; color:var(--muted); }
+  .rep-note { margin-top:7px; font-size:11.5px; line-height:1.5; color:var(--muted); }
+
   .ps-head { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:9.5px;
              letter-spacing:0.11em; text-transform:uppercase; color:var(--muted);
              margin:13px 0 6px; }

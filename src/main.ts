@@ -11,6 +11,7 @@ import {
   ALL_ITEMS,
   HEADLINE_ITEMS,
   CANDIDATES,
+  COMPARATORS,
   adapt,
   profileOf,
   describe,
@@ -440,6 +441,29 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
         ? `, and ${missing === 1 ? 'one has' : `${missing} have`} no recorded vote.`
         : '.');
 
+  // The Republican comparators, in the SAME tier as the candidates above: House
+  // members who voted on this exact bill. They are the only genuinely comparable
+  // Republican signal, since none of the three opponents casts a House vote.
+  // Grouped separately and labelled with the role that selected them, so nobody
+  // mistakes them for people on the ballot.
+  const repRows = COMPARATORS.map((c) => {
+    const cast = item.votes[c.id];
+    if (cast !== 1 && cast !== -1) {
+      return (
+        `<li class="cand-rev cr-none"><span class="cr-name">${esc(c.name)}` +
+        `<small>R · ${esc(c.role)}</small></span>` +
+        `<span class="cr-vote">no vote recorded</span><span class="cr-match">—</span></li>`
+      );
+    }
+    const same = cast === yourAnswer;
+    return (
+      `<li class="cand-rev ${same ? 'cr-same' : 'cr-diff'}">` +
+      `<span class="cr-name">${esc(c.name)}<small>R · ${esc(c.role)}</small></span>` +
+      `<span class="cr-vote">voted ${cast === 1 ? 'Yea' : 'Nay'}</span>` +
+      `<span class="cr-match">${same ? 'same as you' : 'opposite to you'}</span></li>`
+    );
+  }).join('');
+
   // How the two caucuses split on this same roll call. This is the part that keeps
   // the reveal from reading as a panel of three Democrats: it is symmetric by
   // construction, sits in the same vote tier, and exists on EVERY question rather
@@ -462,6 +486,13 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
     `<ul class="cand-revs">${rows}</ul>` +
     `<div class="cand-rev-sum">${summary} You said ` +
     `<b>${yourAnswer === 1 ? 'Yea' : 'Nay'}</b>.</div>` +
+    (repRows
+      ? `<div class="ps-head">Three Republicans, for comparison</div>` +
+        `<ul class="cand-revs rep-revs">${repRows}</ul>` +
+        `<div class="rep-note">Not on the ballot. Picked by rule from the ` +
+        `House's own Republicans — the most party-line, the median, and the one who ` +
+        `most often broke ranks — so the comparison is not a pick of names.</div>`
+      : '') +
     `<div class="ps-head">How each party voted on it</div>` +
     split +
     opponentReveal(item, yourAnswer) +
@@ -538,6 +569,13 @@ function renderQuestion(): void {
     `<div class="eyebrow">blind — party not shown</div></div>` +
     `<div class="q-caption">${esc(it.caption)}</div>` +
     `<div class="q-sub">Official bill caption. The House voted ${it.yeas} yes, ${it.nays} no.</div>` +
+    // Ours, not the record's — so it is labelled, and it sits BELOW the official
+    // caption instead of replacing it. In a blind quiz the wording is the
+    // question, so the reader has to be able to see which words are whose.
+    (it.plain
+      ? `<div class="q-plain"><span class="q-plain-tag">In plain terms</span>${esc(it.plain)}` +
+        `<small>Our summary, not the official text. The caption above is the official wording.</small></div>`
+      : '') +
     (it.why ? `<div class="headline-why"><b>Why this one:</b> ${esc(it.why)}</div>` : '') +
     `<div class="q-actions"><button data-answer="1">Yea</button><button data-answer="-1">Nay</button>` +
     `<button class="ghost" data-answer="0">Skip</button>` +

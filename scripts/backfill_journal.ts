@@ -288,7 +288,15 @@ function main() {
   const pT = loadTable(peopleCsv);
   const idc = col(pT, ['id', 'person_id']);
   const namec = col(pT, ['name']);
-  const chc = (() => { try { return col(pT, ['chamber']); } catch { return ''; } })();
+  // 'current_chamber' is not a nicety — it is the column name in the real Open
+  // States people export, and accepting only 'chamber' silently disabled the
+  // House-only filter below. With hasChamber false, membership fell back to
+  // roll size and the name index kept SENATORS in the pool, so bare surnames
+  // in a HOUSE journal resolved to them: Cook, Flores, Johnson and King each
+  // picked up ~4,000 House votes that belong to House members of the same
+  // surname, putting 4 phantom voters on every item and skewing every
+  // party-share the site computes. A missing alias, not a missing filter.
+  const chc = (() => { try { return col(pT, ['chamber', 'current_chamber']); } catch { return ''; } })();
   const vic = (() => { try { return col(pT, ['voted_in_session']); } catch { return ''; } })();
   const roster = pT.rows.map((r) => ({
     id: r[idc],

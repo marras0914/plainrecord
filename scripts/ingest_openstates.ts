@@ -159,6 +159,13 @@ export interface OpenStatesIngest {
   reviewFlags: { itemId: string; billId: string; personId: string }[];
   categories: CategoryAssignment | null;
   stats: Record<string, number>;
+  /**
+   * People dropped from a roll call because they sit in the OTHER chamber —
+   * upstream cross-chamber mis-resolutions this pipeline corrected. Named rather
+   * than merely counted: a silent correction to someone else's data is still a
+   * change to the record, and it has to be inspectable.
+   */
+  crossChamberVoters: string[];
 }
 
 export interface OpenStatesOptions {
@@ -214,6 +221,64 @@ export function ingestOpenStates(
     let bucket = votesByEvent.get(ev);
     if (!bucket) { bucket = {}; votesByEvent.set(ev, bucket); }
     bucket[who] = decodeOption(r[pvOption]);
+  }
+
+  // ---- CHAMBER GUARD: drop voters who are not in the voting chamber ----------
+  //
+  // Open States' own data mis-resolves bare surnames ACROSS chambers. On House
+  // roll calls it attributes `voter_name="Flores"` to Pete Flores (Senate, SD-24)
+  // rather than Lulu Flores (House, HD-51), and does the same for Cook, King and
+  // Johnson — each of which is a surname held by both a House and a Senate member.
+  // In 89R that put 12,890 Senate positions inside House items: four phantom
+  // voters on every single roll call.
+  //
+  // The tallies stay correct, because they come from the published vote counts,
+  // so nothing looks wrong on the surface. What breaks is every PARTY share
+  // computed from the voter list — which is exactly what valence, and therefore
+  // the whole blue-red axis, is built on.
+  //
+  // The chamber of a vote event is inferred from the event itself rather than
+  // from an organizations file: a Texas House roll call carries ~150 House
+  // members, so whichever chamber holds a large majority of the resolved voters
+  // IS the voting chamber, and anyone from the other chamber is a mis-resolution.
+  // Requiring a decisive majority means a genuinely mixed or unrecognisable event
+  // is left completely alone rather than half-purged on a guess.
+  let crossChamberDropped = 0;
+  const crossChamberNames = new Map<string, number>();
+  if (opts.peopleCsv && existsSync(opts.peopleCsv)) {
+    const cT = loadTable(opts.peopleCsv);
+    const cId = col(cT, ['id', 'person_id', 'ocd_person_id']);
+    const cCh = optionalCol(cT, ['chamber', 'current_chamber']);
+    const cNm = optionalCol(cT, ['name']);
+    if (cCh) {
+      const chamberOf = new Map<string, string>();
+      const nameOf = new Map<string, string>();
+      for (const r of cT.rows) {
+        if (!r[cId]) continue;
+        chamberOf.set(r[cId], r[cCh]);
+        if (cNm) nameOf.set(r[cId], r[cNm]);
+      }
+      for (const [, bucket] of votesByEvent) {
+        const tally = new Map<string, number>();
+        for (const id of Object.keys(bucket)) {
+          const ch = chamberOf.get(id);
+          if (ch) tally.set(ch, (tally.get(ch) ?? 0) + 1);
+        }
+        const known = [...tally.values()].reduce((a, b) => a + b, 0);
+        if (known < 20) continue; // too small to infer a chamber from
+        const [top, topN] = [...tally.entries()].sort((a, b) => b[1] - a[1])[0];
+        if (topN / known < 0.8) continue; // not decisive — leave the event untouched
+        for (const id of Object.keys(bucket)) {
+          const ch = chamberOf.get(id);
+          if (ch && ch !== top) {
+            delete bucket[id];
+            crossChamberDropped++;
+            const nm = nameOf.get(id) ?? id;
+            crossChamberNames.set(nm, (crossChamberNames.get(nm) ?? 0) + 1);
+          }
+        }
+      }
+    }
   }
 
   // ---- tallies: VoteCount rows are (option, value) pairs, not columns ----
@@ -347,11 +412,18 @@ export function ingestOpenStates(
     rosterIsCurrentParty,
     reviewFlags,
     categories,
+    crossChamberVoters: [...crossChamberNames.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, n]) => `${name} (${n})`),
     stats: {
       billsInExport: billsT.rows.length,
       voteEventsInExport: votesT.rows.length,
       eventsWithNoRecordedVotes: noVotes,
       unresolvedVoterRows: unresolved,
+      // Upstream cross-chamber mis-resolutions corrected. A non-zero value here is
+      // a correction applied to Open States' data, not a fault in ours, and it is
+      // recorded so the correction is visible rather than silent.
+      crossChamberDropped,
       proceduralDropped: procedural,
       secondReadingsSuperseded: substantiveItems.length - items.length,
       itemsEmitted: items.length,
@@ -404,6 +476,20 @@ function main() {
 
   console.log(`\nsession ${session}  (source: Open States, categories ${CATEGORY_MAP_VERSION})`);
   for (const [k, v] of Object.entries(res.stats)) console.log(`  ${k.padEnd(26)} ${v}`);
+
+  // Say this loudly. It is a correction to upstream data, and the whole project
+  // rests on corrections being visible rather than convenient.
+  if (res.crossChamberVoters.length) {
+    console.log(
+      [
+        '',
+        `  CROSS-CHAMBER MIS-RESOLUTIONS CORRECTED (${res.stats.crossChamberDropped} positions)`,
+        '  Open States attributed these people to roll calls in the other chamber,',
+        '  which inflates every party share computed from the voter list:',
+      ].join('\n'),
+    );
+    for (const v of res.crossChamberVoters) console.log(`    ${v}`);
+  }
 
   if (res.categories) {
     const c = res.categories;
