@@ -55,6 +55,37 @@ export interface QuizItem {
     claimed: VoteCast;
     text: string;
   }[];
+  /**
+   * Recorded actions on THIS bill by people who cast no vote on it — a veto, or a
+   * priority designation. Present on 8 of 67 items (all seven headline bills, plus
+   * one), because that is where the two published lists actually overlap the quiz.
+   *
+   * These are the `act` tier, not the `vote` tier. Both source lists are one-sided
+   * by construction, so an act may state where someone stood on a bill and may
+   * never be aggregated into an agreement rate. The page keeps them out of the
+   * vote tally and says on screen why.
+   */
+  acts?: OpponentAct[];
+}
+
+/** One recorded action on a specific bill by a non-legislator. */
+export interface OpponentAct {
+  who: string;
+  office: string;
+  kind: string;
+  position: 1 | -1;
+  sourceUrl: string;
+}
+
+/** Who the candidates run against, and why none of them can be scored. */
+export interface Opponent {
+  name: string;
+  office: string;
+  party: string;
+  opposing: string;
+  whyNoVotes: string;
+  evidence: string;
+  oneSided: string;
 }
 
 export interface QuizCandidate {
@@ -100,12 +131,14 @@ export interface QuizPayload {
   causalNote: string;
   omissions: { category: string; why: string }[];
   candidates: QuizCandidate[];
+  opponents: Opponent[];
   items: QuizItem[];
 }
 
 export const DATA = payload as unknown as QuizPayload;
 export const ALL_ITEMS: QuizItem[] = DATA.items;
 export const HEADLINE_ITEMS: QuizItem[] = ALL_ITEMS.filter((i) => i.headline);
+export const OPPONENTS: Opponent[] = DATA.opponents ?? [];
 export const CANDIDATES: QuizCandidate[] = DATA.candidates;
 
 // ---------------------------------------------------------------------------

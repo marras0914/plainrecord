@@ -24,6 +24,7 @@ import { selectItems, DEFAULT_RULE } from '../selection';
 import { loadTable, col, optionalCol } from './csv_util';
 import { WORK_DIR, SHIP_DIR } from './paths';
 import { OUTCOMES, INCUMBENTS, CAUSAL_NOTE, DELIBERATE_OMISSIONS } from '../outcomes';
+import { actsBySession, normBill, OPPONENTS } from './opponent_acts';
 
 /**
  * The seven-question "headline issues" set.
@@ -176,6 +177,13 @@ function main() {
     return { ...c, id };
   });
 
+  // Opponent actions on the same bill. The join, and the reason these can never
+  // be scored like votes, both live in scripts/opponent_acts.ts so the exporter
+  // and augment_acts.ts cannot drift apart.
+  const actsByBill = actsBySession(session);
+
+  let itemsWithActs = 0;
+
   const out = {
     session,
     generated: 'static build',
@@ -200,6 +208,10 @@ function main() {
     incumbents: INCUMBENTS,
     causalNote: CAUSAL_NOTE,
     omissions: DELIBERATE_OMISSIONS,
+    // Who the three are running against, and — stated plainly, because the page
+    // must not imply an absence of data is an absence of positions — exactly why
+    // none of them can be scored against the reader the way a legislator can.
+    opponents: OPPONENTS,
     candidates: candIds.map((c) => ({
       id: c.id,
       name: c.name,
@@ -239,6 +251,12 @@ function main() {
           candIds.map((c) => [c.id, (it.votes[c.id] ?? null) as VoteCast]),
         ),
         ...(statements.length ? { statements } : {}),
+        ...(() => {
+          const found = actsByBill.get(normBill(it.billId)) ?? [];
+          if (!found.length) return {};
+          itemsWithActs++;
+          return { acts: found };
+        })(),
       };
     }),
   };
@@ -261,6 +279,7 @@ function main() {
     console.log(`  headline cross-cutting ${cross}/${hs.length}`);
     for (const h of hs) console.log(`     ${h.billId.padEnd(7)} |v|=${Math.abs(h.valence ?? 0).toFixed(2)}  ${(h as {label?:string}).label}`);
   }
+  console.log(`  items with an opponent action  ${itemsWithActs}/${out.items.length}`);
   console.log(`  cross-cutting share    ${(sel.crossCuttingShare * 100).toFixed(1)}%`);
   console.log(`  journal-sourced        ${out.provenance.selectedJournalSourced}/${out.items.length} selected`);
   console.log(`  items with a caption   ${out.items.filter((i) => i.caption).length}`);

@@ -130,6 +130,61 @@
                   color:var(--ink-2); }
   .cand-rev-sum b { color:var(--ink); }
 
+  .ps-head { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:9.5px;
+             letter-spacing:0.11em; text-transform:uppercase; color:var(--muted);
+             margin:13px 0 6px; }
+
+  /* --- the party split -----------------------------------------------------
+     THIS is the answer to "it leans too hard": three Democrats plus two
+     Republican non-voters is still lopsided, but the caucus split is symmetric by
+     construction and exists on every single question. The two bars are the only
+     place the partisan ramp is used inside the reveal, and here it is correct —
+     the bars ARE the parties, so the colour is the label, not a verdict on the
+     reader.
+     ------------------------------------------------------------------------- */
+  .party-split { display:flex; flex-direction:column; gap:4px; }
+  .ps-row { display:grid; grid-template-columns:5.5rem 1fr 4.5rem; gap:9px; align-items:center; }
+  .ps-label { font-size:12px; color:var(--ink-2); }
+  .ps-bar { height:8px; background:var(--band); position:relative; overflow:hidden; }
+  .ps-bar i { position:absolute; inset:0 auto 0 0; display:block; }
+  .ps-row:nth-child(1) .ps-bar i { background:var(--pole-red); }
+  .ps-row:nth-child(2) .ps-bar i { background:var(--pole-blue); }
+  .ps-num { font-size:11.5px; color:var(--ink-2); text-align:right;
+            font-variant-numeric:tabular-nums; }
+
+  /* --- opponent actions ----------------------------------------------------
+     Visually subordinate to the votes above, because it IS weaker evidence: a
+     recorded action by someone who never voted on the bill. The dashed rule says
+     "different kind of thing" without needing the reader to have read the note.
+     ------------------------------------------------------------------------- */
+  .opp-block { margin-top:4px; }
+  .opp-rows { list-style:none; margin:0; padding:0; display:flex;
+              flex-direction:column; gap:5px; }
+  .opp-row { display:grid; grid-template-columns:1fr auto auto auto; gap:10px;
+             align-items:baseline; padding:5px 0 5px 9px;
+             border-left:2px dashed var(--rule); }
+  .opp-row.op-same { border-left-color:var(--ink-2); }
+  .opp-name { font-weight:500; color:var(--ink); display:flex; flex-direction:column; }
+  .opp-name small { font-weight:400; font-size:10.5px; color:var(--muted); }
+  .opp-act { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px;
+             color:var(--ink-2); white-space:nowrap; }
+  .opp-side { font-size:11.5px; color:var(--muted); white-space:nowrap; }
+  .op-same .opp-side { color:var(--ink-2); font-weight:500; }
+  .opp-src { font-size:10.5px; color:var(--muted); }
+  .opp-note { margin-top:8px; font-size:11.5px; line-height:1.5; color:var(--muted); }
+
+  @media (max-width:520px) {
+    .ps-row { grid-template-columns:4.7rem 1fr 4rem; gap:7px; }
+    /* The act text is monospace and long; sharing a row with the verdict
+       overflowed below 420px and put the PAGE into a horizontal scroll at 320px.
+       Each part gets its own line instead. */
+    .opp-row { grid-template-columns:1fr auto; row-gap:2px; }
+    .opp-name { grid-column:1 / -1; }
+    .opp-act { grid-column:1 / -1; }
+    .opp-side { grid-column:1; }
+    .opp-src { grid-column:2; text-align:right; }
+  }
+
   @media (max-width:520px) {
     /* Three columns will not fit. Put the name on its own line, then the vote and
        the verdict TOGETHER on the second — not the verdict alone on a third line,

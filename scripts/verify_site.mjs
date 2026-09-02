@@ -238,6 +238,79 @@ try {
   await page.click('#mode-short');
   await page.waitForTimeout(350);
 
+  // --- balance: both parties, and the opponents ------------------------------
+  // Three Democrats alone made the reveal read as a panel. The caucus split is
+  // symmetric by construction and present on every question; the opponent block
+  // attaches wherever a veto or priority designation names the same bill.
+  await page.click('[data-answer="-1"]');
+  await page.waitForTimeout(350);
+  const psLabels = await page.$$eval('.ps-label', (ls) => ls.map((l) => l.textContent.trim()));
+  check('the reveal shows BOTH caucuses, not just the candidates',
+    psLabels.includes('Republicans') && psLabels.includes('Democrats'), psLabels.join(', '));
+  const psNums = await page.$$eval('.ps-num', (ns) => ns.map((n) => n.textContent.trim()));
+  check('each caucus shows its own Yea share',
+    psNums.length === 2 && psNums.every((n) => /^\d+% Yea$/.test(n)), psNums.join(' / '));
+
+  // Walk the seven to SB 3 — the one bill carrying BOTH a Patrick priority
+  // designation and an Abbott veto, which is the intra-Republican split the
+  // evidence model exists to surface.
+  let sb3 = null;
+  for (let i = 0; i < 8 && !sb3; i++) {
+    const meta = await page.$eval('.q-meta .eyebrow', (e) => e.textContent);
+    await page.click('[data-answer="-1"]');
+    await page.waitForTimeout(160);
+    if (/SB 3 /.test(meta)) {
+      sb3 = await page.$$eval('.opp-row', (rs) =>
+        rs.map((r) => ({
+          who: r.querySelector('.opp-name').textContent.trim(),
+          act: r.querySelector('.opp-act').textContent.trim(),
+          side: r.querySelector('.opp-side').textContent.trim(),
+          src: r.querySelector('.opp-src')?.getAttribute('href') ?? null,
+        })),
+      );
+    }
+  }
+  if (!sb3) {
+    check('SB 3 reveals both Republican leaders', false, 'never reached SB 3');
+  } else {
+    check('SB 3 shows both Patrick and Abbott', sb3.length === 2,
+      sb3.map((r) => r.who.split('Lieutenant')[0].split('Governor')[0]).join(' | '));
+    check('Patrick made it a priority, Abbott vetoed it',
+      sb3.some((r) => /Patrick/.test(r.who) && /priority/.test(r.act)) &&
+      sb3.some((r) => /Abbott/.test(r.who) && /vetoed/.test(r.act)),
+      sb3.map((r) => r.act).join(' | '));
+    // The whole point: two Republicans landed on opposite sides of one bill, so
+    // one must read as agreeing with a Nay and the other as opposing it.
+    check('the two Republicans are shown on OPPOSITE sides of the same bill',
+      new Set(sb3.map((r) => r.side)).size === 2, sb3.map((r) => r.side).join(' | '));
+    check('every opponent action links to its source',
+      sb3.every((r) => /^https?:\/\//.test(r.src ?? '')), sb3.map((r) => r.src).join(' | '));
+    const note = await page.$eval('.opp-note', (e) => e.textContent.replace(/\s+/g, ' ').trim());
+    // A one-sided list can state a side on a named bill and can never be turned
+    // into an agreement rate. The page has to say that where it shows the acts.
+    check('the one-sidedness caveat is on screen with the acts',
+      /not votes/i.test(note) && /not counted above/i.test(note) && /never a percentage/i.test(note),
+      note.slice(0, 90));
+  }
+
+  // The page body must never scroll sideways, and the opponent rows are the
+  // widest thing in the reveal — they overflowed below 420px before this check.
+  for (const w of [320, 390]) {
+    await page.setViewportSize({ width: w, height: 1200 });
+    await page.waitForTimeout(250);
+    const r = await page.evaluate(() => ({
+      body: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+      rows: [...document.querySelectorAll('.opp-row,.ps-row,.cand-rev')]
+        .filter((e) => e.scrollWidth > e.clientWidth + 1).length,
+    }));
+    check(`no horizontal overflow at ${w}px`, !r.body && r.rows === 0,
+      `body=${r.body} overflowing-rows=${r.rows}`);
+  }
+  await page.setViewportSize({ width: 1180, height: 1000 });
+  await page.waitForTimeout(200);
+  await page.click('[data-preset="reset"]');
+  await page.waitForTimeout(250);
+
   for (const [name, want] of Object.entries(EXPECT)) {
     await page.click(`[data-preset="${name}"]`);
     await page.waitForTimeout(300);

@@ -440,12 +440,79 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
         ? `, and ${missing === 1 ? 'one has' : `${missing} have`} no recorded vote.`
         : '.');
 
+  // How the two caucuses split on this same roll call. This is the part that keeps
+  // the reveal from reading as a panel of three Democrats: it is symmetric by
+  // construction, sits in the same vote tier, and exists on EVERY question rather
+  // than the 8 where an opponent action happens to attach.
+  const split =
+    item.rYea === null || item.dYea === null
+      ? ''
+      : `<div class="party-split">` +
+        `<div class="ps-row"><span class="ps-label">Republicans</span>` +
+        `<span class="ps-bar"><i style="width:${Math.round(item.rYea * 100)}%"></i></span>` +
+        `<span class="ps-num num">${pct(item.rYea)} Yea</span></div>` +
+        `<div class="ps-row"><span class="ps-label">Democrats</span>` +
+        `<span class="ps-bar"><i style="width:${Math.round(item.dYea * 100)}%"></i></span>` +
+        `<span class="ps-num num">${pct(item.dYea)} Yea</span></div>` +
+        `</div>`;
+
   return (
     `<div class="reveal cand-reveal">` +
     `<div class="outc-cat">How they actually voted on ${esc(item.billId)}</div>` +
     `<ul class="cand-revs">${rows}</ul>` +
     `<div class="cand-rev-sum">${summary} You said ` +
-    `<b>${yourAnswer === 1 ? 'Yea' : 'Nay'}</b>.</div></div>`
+    `<b>${yourAnswer === 1 ? 'Yea' : 'Nay'}</b>.</div>` +
+    `<div class="ps-head">How each party voted on it</div>` +
+    split +
+    opponentReveal(item, yourAnswer) +
+    `</div>`
+  );
+}
+
+/**
+ * What the candidates' opponents did on this same bill.
+ *
+ * Every one of them is a non-legislator, so none casts a vote here: Abbott has
+ * never served in a legislature, Paxton's last vote was in 2015 before any of the
+ * three took office, and Patrick presides over the Senate rather than voting in
+ * the House. Leaving them out entirely, though, makes the page look like a panel
+ * of three Democrats — so where there IS a recorded action on the exact bill just
+ * answered, it is shown.
+ *
+ * The one rule that cannot bend: this is the `act` tier and it never joins the
+ * vote tally above. Patrick's list contains only bills he wanted passed and
+ * Abbott's contains only bills he killed, so counting "you agreed with Patrick on
+ * 6 of 7" would be measuring the shape of his press release, not his positions.
+ * Direction on a single named bill is a fact; a rate over a one-sided list is not.
+ */
+function opponentReveal(item: QuizItem, yourAnswer: 1 | -1): string {
+  const acts = item.acts ?? [];
+  if (!acts.length) return '';
+
+  const rows = acts
+    .map((a) => {
+      // Kept short on purpose: 'named it a priority bill' in a monospace face
+      // overflowed its row below 420px and pushed the whole page into a
+      // horizontal scroll at 320px.
+      const verb = a.kind === 'veto' ? 'vetoed it' : 'made it a priority';
+      const same = a.position === yourAnswer;
+      return (
+        `<li class="opp-row ${same ? 'op-same' : 'op-diff'}">` +
+        `<span class="opp-name">${esc(a.who)}<small>${esc(a.office)}</small></span>` +
+        `<span class="opp-act">${verb}</span>` +
+        `<span class="opp-side">${same ? 'same side as you' : 'opposite side to you'}</span>` +
+        `<a class="opp-src" href="${esc(a.sourceUrl)}" target="_blank" rel="noopener">source</a></li>`
+      );
+    })
+    .join('');
+
+  return (
+    `<div class="opp-block"><div class="ps-head">What their opponents did on this bill</div>` +
+    `<ul class="opp-rows">${rows}</ul>` +
+    `<div class="opp-note">Not votes — neither of them votes in the House, so these ` +
+    `are not counted above. And each list runs one way only: a governor vetoes just ` +
+    `the bills he opposes, a priority list names just the bills its author wants ` +
+    `passed. That is why you see a side on this bill and never a percentage.</div></div>`
   );
 }
 

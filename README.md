@@ -196,6 +196,7 @@ npm run data:ingest      # Open States bulk -> data/tx_bills_89R.json + roster
 npm run data:reconcile   # cross-check against the House Journal
 npm run data:backfill    # recover member votes the bulk export dropped
 npm run data:export      # -> public/data/quiz_89R.json   (the only shipped file)
+npm run data:acts        # add opponent actions to an already-built payload
 npm run data:report      # coverage + provenance summary
 ```
 
@@ -211,7 +212,10 @@ record. Read it before touching an ingest.
 - **Stances are never scored.** A campaign platform is `tier: stance` and is
   displayed as text. `assertComparable()` throws on a cross-tier comparison.
 - **One-sided records can't become agreement scores.** A veto list is all
-  opposition; `Coverage.oneSided` refuses to turn it into a match percentage.
+  opposition; `Coverage.oneSided` refuses to turn it into a match percentage. The
+  page shows Patrick's and Abbott's action on a *named bill* and never a rate over
+  their lists — a priority list contains only bills its author wanted passed, so a
+  percentage over it would measure the press release, not the positions.
 - **Absence is not a position.** Texas governors let bills become law unsigned,
   so the lack of a veto is never read as support.
 - **No causal claims.** Outcome indicators show a ranking, a recorded act, and a
