@@ -1,0 +1,7 @@
+# PlainRecord — rightnleft.com
+# The quiz payload is deliberately crawlable and CORS-open: the whole point is
+# that anyone can check the roll calls behind every question.
+User-agent: *
+Allow: /
+
+Sitemap: https://rightnleft.com/sitemap.xml

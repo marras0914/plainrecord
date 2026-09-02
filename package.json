@@ -1,0 +1,30 @@
+{
+  "name": "plainrecord",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "How Texas legislators actually voted, and where the state stands because of it.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "build:artifact": "npm run build && node scripts/build_artifact.mjs",
+    "preview": "vite preview --port 4173",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --no-warnings scripts/run_tests.mjs",
+    "data:vetoes": "tsx scripts/fetch_vetoes.ts data",
+    "data:ingest": "tsx scripts/ingest_openstates.ts",
+    "data:reconcile": "tsx scripts/reconcile.ts",
+    "data:backfill": "tsx scripts/backfill_journal.ts",
+    "data:export": "tsx scripts/export_quiz_data.ts",
+    "data:report": "tsx scripts/report_session.ts",
+    "verify": "node scripts/verify_site.mjs",
+    "verify:headers": "node scripts/verify_site.mjs --with-headers"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "playwright": "1.49.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.7"
+  }
+}

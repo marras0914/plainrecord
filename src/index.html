@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Purple Strip — PlainRecord</title>
+  <meta name="description" content="A blind quiz on real Texas House votes. Answer without knowing which party took which side, then see where you land and where Texas actually stands.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="./styles.css">
+  <meta property="og:title" content="The Purple Strip">
+  <meta property="og:description" content="How Texas legislators actually voted, and where the state stands because of it.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rightnleft.com/">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://rightnleft.com/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='13' fill='%237d5ba6'/></svg>">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow" id="hdr-eyebrow"></div>
+    <h1>The Purple Strip</h1>
+    <div class="blurb">
+      <p><b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from
+      2025 and hid who voted which way. Now you vote.</p>
+      <p>For each one we count how many Republicans said yes, and how many Democrats
+      said yes. Mostly Republicans? We colour it <span class="sw-r">red</span>.
+      Mostly Democrats? <span class="sw-b">Blue</span>. Both parties agreed?
+      <span class="sw-g">Grey</span> — that vote doesn't tell us much about sides.</p>
+      <p>Every answer you give becomes one dot. Dots on the left mean you agreed with
+      Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots
+      land on both sides, you don't fit neatly in one party.</b> That's the purple part.</p>
+      <p>Then we show you <b>what these areas actually look like in Texas today</b> —
+      school funding, health coverage, and so on — with the source for every number.</p>
+      <p class="blurb-fine">Nobody's opinion decides the colours. They come from the actual
+      vote counts, and you can check them on every question. The outcome numbers are
+      real too, but a state ranking has many causes — we show you the numbers and the
+      votes, and leave the connecting to you.</p>
+    </div>
+  </header>
+
+  <div class="modebar">
+    <div>
+      <div class="eyebrow">How many votes</div>
+      <div id="mode-desc" class="mode-desc"></div>
+    </div>
+    <div class="modebtns">
+      <button id="mode-short" class="ghost">7 big issues</button>
+      <button id="mode-full" class="ghost">All <span id="full-count"></span> votes</button>
+    </div>
+  </div>
+
+  <dl class="prov" id="prov"></dl>
+
+  <section class="card">
+    <div class="card-head">
+      <div class="eyebrow">Your answers, one mark each</div>
+      <button class="ghost" id="table-toggle" aria-expanded="false">Show table</button>
+    </div>
+    <svg id="strip" viewBox="0 0 860 300" role="img" aria-labelledby="strip-title">
+      <title id="strip-title">Each answered vote plotted on a blue-to-red partisan axis, with the three candidates' own records below</title>
+    </svg>
+    <div class="legend">
+      <div class="legend-item"><span class="ramp" aria-hidden="true"></span>
+        <span>Democratic-coded ← position → Republican-coded</span></div>
+      <div class="legend-item">
+        <svg width="13" height="13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" fill="var(--muted)"></circle></svg>
+        <span>your answer</span></div>
+      <div class="legend-item">
+        <svg width="13" height="13" aria-hidden="true"><path d="M6.5 1.5 L11.5 6.5 L6.5 11.5 L1.5 6.5 Z" fill="var(--ink-2)"></path></svg>
+        <span>candidate's record on the same votes</span></div>
+    </div>
+    <div id="table-panel" hidden>
+      <div class="table-wrap"><table id="table"></table></div>
+    </div>
+  </section>
+
+  <section class="card" id="q-card"></section>
+  <section class="stats" id="stats"></section>
+  <section class="card"><div class="readout" id="readout"></div></section>
+
+  <section>
+    <div class="card-head" style="margin-bottom:10px">
+      <div class="eyebrow">The three candidates, scored against your answers</div>
+    </div>
+    <div class="cands" id="cands"></div>
+    <p class="footnote" style="margin-top:12px" id="cand-note"></p>
+  </section>
+
+  <section id="outcome-card" hidden>
+    <div class="card-head" style="margin-bottom:10px">
+      <div class="eyebrow">What these areas look like now</div>
+    </div>
+    <div class="outc" id="outcomes"></div>
+    <div class="causal" id="causal"></div>
+    <div class="inc" id="incumbents"></div>
+  <div class="omit" id="omissions"></div>
+  </section>
+
+  <section class="card" id="stmt-card" hidden></section>
+
+  <section>
+    <div class="eyebrow" style="margin-bottom:8px">Try a profile</div>
+    <div class="q-actions" style="margin-top:0">
+      <button class="ghost" data-preset="mixed">Cross-pressured voter</button>
+      <button class="ghost" data-preset="muted">Low-signal votes only</button>
+      <button class="ghost" data-preset="consistent">Consistent partisan</button>
+      <button class="ghost" data-preset="reset">Clear</button>
+    </div>
+    <p class="footnote" style="margin-top:12px">
+      The first two produce almost the same <code>net lean</code> — a single blended
+      swatch would render both as the same purple. They are opposite findings, so the
+      readout separates them on <code>partisan load</code>.
+    </p>
+  </section>
+
+  <section>
+    <div class="eyebrow" style="margin-bottom:8px">How this is built</div>
+    <p class="footnote" id="method"></p>
+  </section>
+</div>
+
+<div id="tip" role="tooltip" aria-hidden="true"></div>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

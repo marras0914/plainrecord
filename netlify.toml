@@ -1,0 +1,40 @@
+# PlainRecord — Netlify deploy. Equivalent to vercel.json; pick one host, not both.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# The page loads nothing from anywhere except Google Fonts. Say so, so a future
+# third-party script (an analytics snippet, an embed) fails loudly in the console
+# instead of quietly shipping a tracker on a civic-data site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), interest-cohort=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains"
+
+# Vite fingerprints these filenames, so they can never go stale.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The quiz payload is the thing people should be able to take and check. CORS-open
+# on purpose: an open receipt that can't be fetched isn't a receipt.
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

@@ -1,0 +1,19 @@
+# Store everything with LF in the repo regardless of the checkout platform. This
+# project is authored on Windows but the data pipeline is line-oriented — the
+# Journal parser matches on line structure — so a CRLF round-trip through a commit
+# is a correctness risk, not just diff noise.
+* text=auto eol=lf
+
+# Never touched: binary and pre-formatted data.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.pgdump binary
+
+# The shipped quiz payload is machine-generated and 53 KB on one line. Marking it
+# as diffable-but-not-merged keeps a regenerated payload from producing a conflict
+# nobody can resolve by hand.
+public/data/quiz_89R.json -merge linguist-generated
+
+# Keep the lockfile out of review diffs; it is generated, not authored.
+package-lock.json linguist-generated

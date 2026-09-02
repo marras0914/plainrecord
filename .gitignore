@@ -1,0 +1,31 @@
+node_modules/
+dist/
+.vercel/
+.DS_Store
+
+# Working data (scripts/paths.ts WORK_DIR). Build inputs, not deliverables:
+# tx_bills_89R.json is 35 MB and tx_reconcile_89R.json is 16 MB, against a 53 KB
+# quiz payload. Only public/data/quiz_89R.json is committed, because only it ships.
+#
+# The leading slash is load-bearing: a bare `data/` matches at ANY depth, which
+# would also swallow public/data/ and un-commit the one file the site needs.
+/data/
+
+# Belt and braces: these used to live in the ship dir before the WORK_DIR split,
+# so a stale script or an old checkout can still drop them there.
+public/data/tx_bills_*.json
+public/data/tx_reconcile_*.json
+public/data/tx_roster_*.json
+public/data/tx_review_*.json
+public/data/tx_evidence_*.json
+public/data/tx_flips_*.json
+
+# Raw sources: LegiScan archives, Open States extracts, Journal PDFs and text.
+raw/
+journals/
+
+# Single-file share build, generated from dist/ by scripts/build_artifact.mjs
+share/
+
+# Local scratch notes, not part of the project. Kept on disk, out of history.
+/vikki goodwin.txt
