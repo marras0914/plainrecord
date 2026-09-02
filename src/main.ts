@@ -345,6 +345,11 @@ function renderProv(): void {
     `The rule we follow is written down and named <code>${DATA.ruleVersion}</code>, ` +
     `so you can check we did not change it to get a nicer answer.<br><br>` +
 
+    // Said on the page, not only in a comment: the comparators arrive by a stated
+    // rule and the candidates do not, and a choice presented without comment
+    // reads as a measurement.
+    `<b>Who is on this page.</b> ${esc(DATA.candidateProvenance)}<br><br>` +
+
     `<b>The seven big ones.</b> We picked these by hand, but not by our own opinion. ` +
     `Each one is a bill the Lieutenant Governor called a top priority, or a bill the ` +
     `Governor vetoed. Those are their published lists, not ours. Each question shows ` +
@@ -446,23 +451,39 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
   // Republican signal, since none of the three opponents casts a House vote.
   // Grouped separately and labelled with the role that selected them, so nobody
   // mistakes them for people on the ballot.
-  const repRows = COMPARATORS.map((c) => {
-    const cast = item.votes[c.id];
-    if (cast !== 1 && cast !== -1) {
-      return (
-        `<li class="cand-rev cr-none"><span class="cr-name">${esc(c.name)}` +
-        `<small>R · ${esc(c.role)}</small></span>` +
-        `<span class="cr-vote">no vote recorded</span><span class="cr-match">—</span></li>`
-      );
-    }
-    const same = cast === yourAnswer;
-    return (
-      `<li class="cand-rev ${same ? 'cr-same' : 'cr-diff'}">` +
-      `<span class="cr-name">${esc(c.name)}<small>R · ${esc(c.role)}</small></span>` +
-      `<span class="cr-vote">voted ${cast === 1 ? 'Yea' : 'Nay'}</span>` +
-      `<span class="cr-match">${same ? 'same as you' : 'opposite to you'}</span></li>`
-    );
-  }).join('');
+  const comparatorRows = (party: string) =>
+    COMPARATORS.filter((c) => c.party === party)
+      .map((c) => {
+        const cast = item.votes[c.id];
+        const tag = `<small>${esc(c.party)} · ${esc(c.role)}</small>`;
+        if (cast !== 1 && cast !== -1) {
+          return (
+            `<li class="cand-rev cr-none"><span class="cr-name">${esc(c.name)}${tag}</span>` +
+            `<span class="cr-vote">no vote recorded</span><span class="cr-match">—</span></li>`
+          );
+        }
+        const same = cast === yourAnswer;
+        return (
+          `<li class="cand-rev ${same ? 'cr-same' : 'cr-diff'}">` +
+          `<span class="cr-name">${esc(c.name)}${tag}</span>` +
+          `<span class="cr-vote">voted ${cast === 1 ? 'Yea' : 'Nay'}</span>` +
+          `<span class="cr-match">${same ? 'same as you' : 'opposite to you'}</span></li>`
+        );
+      })
+      .join('');
+
+  // Same rule, both caucuses. Running it on Republicans only — while the three
+  // Democrats above were named individuals — was a double standard however well
+  // argued: either the rule governs who appears or it does not.
+  const repRows = ([['R', 'Three Republicans, picked by rule'],
+                    ['D', 'Three Democrats, picked by the same rule']] as const)
+    .map(([party, head]) => {
+      const rows = comparatorRows(party);
+      return rows
+        ? `<div class="ps-head">${head}</div><ul class="cand-revs rep-revs">${rows}</ul>`
+        : '';
+    })
+    .join('');
 
   // How the two caucuses split on this same roll call. This is the part that keeps
   // the reveal from reading as a panel of three Democrats: it is symmetric by
@@ -487,11 +508,12 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
     `<div class="cand-rev-sum">${summary} You said ` +
     `<b>${yourAnswer === 1 ? 'Yea' : 'Nay'}</b>.</div>` +
     (repRows
-      ? `<div class="ps-head">Three Republicans, for comparison</div>` +
-        `<ul class="cand-revs rep-revs">${repRows}</ul>` +
-        `<div class="rep-note">Not on the ballot. Picked by rule from the ` +
-        `House's own Republicans — the most party-line, the median, and the one who ` +
-        `most often broke ranks — so the comparison is not a pick of names.</div>`
+      ? repRows +
+        `<div class="rep-note">None of these six is on the ballot. From each caucus: ` +
+        `the most party-line member, the median, and the one who most often broke ` +
+        `ranks — the same rule on both sides, recomputed every build, so the ` +
+        `comparison is not a pick of names. The three candidates above are a ` +
+        `different thing: they are the subject of this page, not a measurement.</div>`
       : '') +
     `<div class="ps-head">How each party voted on it</div>` +
     split +

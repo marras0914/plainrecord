@@ -265,23 +265,44 @@ try {
   // the only genuinely comparable Republican signal — the opponents cast no House
   // votes — so the reveal must show them voting on this exact bill.
   const repRows = await page.$$eval('.rep-revs .cand-rev', (rs) =>
-    rs.map((r) => ({
-      name: r.querySelector('.cr-name').textContent.replace(/\s+/g, ' ').trim(),
-      vote: r.querySelector('.cr-vote').textContent.trim(),
-    })),
+    rs.map((r) => {
+      const tag = r.querySelector('.cr-name small');
+      return {
+        // The party/role tag is its own element; reading it directly avoids
+        // depending on how textContent concatenates "DeAyala" and "R ·".
+        party: (tag?.textContent ?? '').split('·')[0].trim(),
+        role: (tag?.textContent ?? '').split('·')[1]?.trim() ?? '',
+        vote: r.querySelector('.cr-vote').textContent.trim(),
+      };
+    }),
   );
-  check('three Republicans are shown for comparison', repRows.length === 3,
-    repRows.map((r) => r.name.replace(/\s+/g, ' ')).join(' | '));
-  check('each Republican is labelled with the rule that selected him',
-    repRows.every((r) => /most party-line|median Republican|most crossover/.test(r.name)),
-    repRows.map((r) => r.name.split('R ·')[1]?.trim()).join(' | '));
-  check('the Republicans have real recorded votes on this bill',
-    repRows.every((r) => /voted (Yea|Nay)/.test(r.vote)), repRows.map((r) => r.vote).join(' | '));
+  // The rule must run on BOTH caucuses. Applying it to Republicans only, while the
+  // three Democrats above are named individuals, is a double standard however it
+  // is argued — so this asserts the symmetry, not just the presence of Republicans.
+  const rRows = repRows.filter((r) => r.party === 'R');
+  const dRows = repRows.filter((r) => r.party === 'D');
+  check('the comparator rule runs on both caucuses, three from each',
+    rRows.length === 3 && dRows.length === 3,
+    `${rRows.length} R, ${dRows.length} D`);
+  check('the same three roles are used for each caucus', (() => {
+    // "median Republican" / "median Democrat" differ only by the party word, so
+    // normalise it away before comparing the two role sets.
+    const roles = (rs) => rs.map((r) => r.role.replace(/^median .*/, 'median')).sort().join(',');
+    return roles(rRows) === roles(dRows) && roles(rRows) === 'median,most crossover,most party-line';
+  })(), `R: ${rRows.map((r) => r.role).join(' / ')}  D: ${dRows.map((r) => r.role).join(' / ')}`);
+  check('every comparator has a real recorded vote on this bill',
+    repRows.every((r) => /voted (Yea|Nay)|no vote recorded/.test(r.vote)),
+    repRows.map((r) => r.vote).join(' | '));
   const repNote = await page.$eval('.rep-note', (e) => e.textContent.replace(/\s+/g, ' ').trim());
-  // They are not candidates, and the selection must read as a rule rather than a
-  // choice of names — otherwise the page is smuggling in a judgement of who counts.
-  check('the page says they are not on the ballot and were picked by rule',
-    /not on the ballot/i.test(repNote) && /by rule/i.test(repNote), repNote.slice(0, 80));
+  check('the page says none of them is on the ballot and names the shared rule',
+    /is on the ballot/i.test(repNote) && /same rule on both sides/i.test(repNote),
+    repNote.slice(0, 90));
+  // And the candidates' own provenance must be stated, because it is NOT a rule.
+  // A choice presented without comment reads as a measurement.
+  const method = await page.$eval('#method', (e) => e.textContent.replace(/\s+/g, ' ').trim());
+  check('the page admits the candidates are not picked by a rule',
+    /not picked by any rule/i.test(method) && /a choice, not a measurement/i.test(method),
+    /Who is on this page[^.]*\./.exec(method)?.[0] ?? method.slice(0, 80));
 
   const psLabels = await page.$$eval('.ps-label', (ls) => ls.map((l) => l.textContent.trim()));
   check('the reveal shows BOTH caucuses, not just the candidates',

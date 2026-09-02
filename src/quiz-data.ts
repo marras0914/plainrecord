@@ -148,6 +148,7 @@ export interface QuizPayload {
   opponents: Opponent[];
   comparators: Comparator[];
   comparatorRule: string;
+  candidateProvenance: string;
   plainLanguageNote: string;
   items: QuizItem[];
 }

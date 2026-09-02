@@ -100,33 +100,60 @@ const CANDIDATES = [
 ];
 
 /**
- * Republican comparators.
+ * Comparators — three members from EACH caucus, by the same rule.
  *
  * The three candidates are all Democrats, which left the page showing one side of
  * the chamber. Their opponents cannot fix that — none of them votes in the House
- * (see scripts/opponent_acts.ts) — but the House's own Republicans can: they voted
- * on the exact same bills, so they are directly comparable in the same tier.
+ * (see scripts/opponent_acts.ts) — but the House's own members can: they voted on
+ * the exact same bills, so they are directly comparable in the same tier.
  *
- * WHICH Republicans is the whole problem. Picking recognisable names would put my
- * judgement of who matters into a tool whose entire premise is that it contains no
- * such judgement. So the RULE picks them and the data decides who satisfies it:
- * the most party-line Republican, the median Republican, and the Republican who
- * most often broke from his caucus. That spans the range of the caucus rather than
- * characterising it, and it is recomputed on every export — if the membership or
- * the votes change, the three change with them.
+ * WHICH members is the whole problem, and the first version of this got the answer
+ * half right. It picked Republicans by measured rule, on the argument that naming
+ * recognisable Republicans would inject a judgement of who matters into a tool
+ * whose premise is that it contains none — while the three Democrats on the same
+ * page were named individuals. That argument, applied to one side only, is just a
+ * double standard with a rationale attached. Either the rule governs who appears
+ * or it does not.
+ *
+ * So it governs both. The same three roles are computed for each caucus: the most
+ * party-line member, the median member, and the member who most often broke ranks.
+ * The candidates remain as the page's SUBJECT, which is what a reader came for,
+ * but they are no longer the only Democrats shown and no longer sit beside a
+ * rule-picked Republican set with no equivalent of their own. Where they came from
+ * is now stated on the page too — see CANDIDATE_PROVENANCE — because their being
+ * there is a choice, and a choice presented without comment reads as a measurement.
  *
  * Definitions, so the numbers are checkable:
- *   with-caucus  share of this member's votes that matched the Republican
+ *   with-caucus  share of this member's votes that matched their OWN caucus
  *                majority on the same item
  *   crossover    of the items where the two caucus majorities DISAGREED, the
- *                share where this member voted with the Democratic majority
+ *                share where this member voted with the other caucus
  *
  * A member needs votes on at least 55 of the selected items to be eligible, so a
  * near-absent member cannot top either end on a handful of votes.
  */
 const COMPARATOR_RULE =
-  'The most party-line Republican, the median Republican, and the Republican who ' +
-  'most often broke from his caucus — chosen by measured rule, not by name.';
+  'From each caucus: the most party-line member, the median member, and the member ' +
+  'who most often broke ranks. The same rule on both sides, recomputed every build.';
+
+/**
+ * How the three candidates got onto this page — stated, because it is NOT a
+ * measured rule and the reader is entitled to know that.
+ *
+ * The comparators are picked by COMPARATOR_RULE and say so on screen. The three
+ * candidates are named individuals, and for a while the page showed them beside a
+ * rule-picked Republican set without ever admitting the difference. That held one
+ * side of the aisle to a stricter standard than the other. The honest fix is two
+ * things: run the rule on BOTH caucuses (it now does), and say plainly where the
+ * three came from instead of letting their presence imply a rule that does not
+ * exist.
+ */
+const CANDIDATE_PROVENANCE =
+  'The three candidates are not picked by any rule. They are the subject of this ' +
+  'project: sitting Texas House Democrats running for statewide office ' +
+  'in 2026. That is a choice, not a measurement, and it is why the same rule now ' +
+  'runs on both caucuses — so the Republicans on this page are not the only ones ' +
+  'who arrived by a stated method.';
 const COMPARATOR_MIN_VOTES = 55;
 
 function main() {
@@ -262,53 +289,75 @@ function main() {
     });
   }
 
-  const repStats = Object.keys(roster)
-    .filter((id) => houseOnly(id) && roster[id] === 'R')
-    .map((id) => {
-      let n = 0, withCaucus = 0, split = 0, crossed = 0;
-      for (const it of sel.selected) {
-        const v = it.votes[id];
-        if (v !== 1 && v !== -1) continue;
-        const m = caucusMajority.get(it.id)!;
-        if (m.r === null) continue;
-        n++;
-        if (v === m.r) withCaucus++;
-        if (m.d !== null && m.d !== m.r) { split++; if (v === m.d) crossed++; }
-      }
-      return { id, n, withCaucus: n ? withCaucus / n : 0, split, crossed,
-               crossover: split ? crossed / split : 0 };
-    })
-    .filter((s) => s.n >= COMPARATOR_MIN_VOTES);
+  /**
+   * Apply the rule to a caucus. Deliberately parameterised over party rather than
+   * written once for Republicans: the first version of this only picked
+   * Republicans by rule while the three Democrats were named individuals, which
+   * held one side to a stricter standard than the other. Whatever the rule is, it
+   * has to be the same rule on both sides of the aisle.
+   */
+  const comparatorsFor = (party: 'R' | 'D') => {
+    const own = (m: { r: 1 | -1 | null; d: 1 | -1 | null }) => (party === 'R' ? m.r : m.d);
+    const other = (m: { r: 1 | -1 | null; d: 1 | -1 | null }) => (party === 'R' ? m.d : m.r);
+    const label = party === 'R' ? 'Republican' : 'Democrat';
 
-  if (repStats.length < 3) {
-    throw new Error(
-      `only ${repStats.length} Republicans clear ${COMPARATOR_MIN_VOTES} votes — ` +
-        'cannot pick comparators by rule, and picking them by hand is exactly what ' +
-        'COMPARATOR_RULE exists to prevent.',
-    );
-  }
-  const byLoyalty = [...repStats].sort((a, b) => b.withCaucus - a.withCaucus || b.n - a.n);
-  const byCrossover = [...repStats].sort((a, b) => b.crossover - a.crossover || b.n - a.n);
-  const picked = [
-    { role: 'most party-line', ...byLoyalty[0] },
-    { role: 'median Republican', ...byLoyalty[Math.floor(byLoyalty.length / 2)] },
-    { role: 'most crossover', ...byCrossover[0] },
-  ];
-  // The ends of a distribution can collide with its middle in a small caucus; a
-  // duplicated row would misrepresent the spread as narrower than it is.
-  const seen = new Set<string>();
-  const comparators = picked.filter((p) => !seen.has(p.id) && seen.add(p.id));
+    const stats = Object.keys(roster)
+      .filter((id) => houseOnly(id) && roster[id] === party)
+      .map((id) => {
+        let n = 0, withCaucus = 0, split = 0, crossed = 0;
+        for (const it of sel.selected) {
+          const v = it.votes[id];
+          if (v !== 1 && v !== -1) continue;
+          const m = caucusMajority.get(it.id)!;
+          const mine = own(m);
+          if (mine === null) continue;
+          n++;
+          if (v === mine) withCaucus++;
+          const theirs = other(m);
+          if (theirs !== null && theirs !== mine) { split++; if (v === theirs) crossed++; }
+        }
+        return { id, n, withCaucus: n ? withCaucus / n : 0, split, crossed,
+                 crossover: split ? crossed / split : 0 };
+      })
+      .filter((st) => st.n >= COMPARATOR_MIN_VOTES);
 
-  const comparatorOut = comparators.map((c) => ({
-    id: c.id,
-    name: idToName.get(c.id) ?? c.id,
-    party: 'R',
-    role: c.role,
-    voted: c.n,
-    withCaucus: +c.withCaucus.toFixed(3),
-    crossover: +c.crossover.toFixed(3),
-    crossedOf: `${c.crossed}/${c.split}`,
-  }));
+    if (stats.length < 3) {
+      throw new Error(
+        `only ${stats.length} ${label}s clear ${COMPARATOR_MIN_VOTES} votes — cannot ` +
+          'pick comparators by rule, and picking them by hand is exactly what ' +
+          'COMPARATOR_RULE exists to prevent.',
+      );
+    }
+    const byLoyalty = [...stats].sort((a, b) => b.withCaucus - a.withCaucus || b.n - a.n);
+    const byCrossover = [...stats].sort((a, b) => b.crossover - a.crossover || b.n - a.n);
+    const picked = [
+      { role: 'most party-line', ...byLoyalty[0] },
+      { role: `median ${label}`, ...byLoyalty[Math.floor(byLoyalty.length / 2)] },
+      { role: 'most crossover', ...byCrossover[0] },
+    ];
+    // The ends of a distribution can collide with its middle in a small caucus; a
+    // duplicated row would misrepresent the spread as narrower than it is.
+    const seen = new Set<string>();
+    return picked
+      .filter((c) => !seen.has(c.id) && seen.add(c.id))
+      .map((c) => ({
+        id: c.id,
+        name: idToName.get(c.id) ?? c.id,
+        party,
+        role: c.role,
+        voted: c.n,
+        withCaucus: +c.withCaucus.toFixed(3),
+        crossover: +c.crossover.toFixed(3),
+        crossedOf: `${c.crossed}/${c.split}`,
+      }));
+  };
+
+  // Both caucuses, same rule. The three candidates stay on the page as its
+  // SUBJECT — that is what the reader came for — but they are no longer the only
+  // Democrats shown, and they no longer sit beside a rule-picked Republican set
+  // with no equivalent of their own.
+  const comparatorOut = [...comparatorsFor('R'), ...comparatorsFor('D')];
+  const comparators = comparatorOut;
 
   let itemsWithActs = 0;
 
@@ -344,6 +393,7 @@ function main() {
     // only genuinely comparable Republican signal available, since none of the
     // three opponents casts a House vote. Chosen by rule; see COMPARATOR_RULE.
     comparatorRule: COMPARATOR_RULE,
+    candidateProvenance: CANDIDATE_PROVENANCE,
     comparators: comparatorOut,
     // Stated, not hidden: only the seven headline bills carry a plain-language
     // gloss. See the note on HEADLINE_SET for why the other 60 show the official
@@ -423,7 +473,7 @@ function main() {
     for (const h of hs) console.log(`     ${h.billId.padEnd(7)} |v|=${Math.abs(h.valence ?? 0).toFixed(2)}  ${(h as {label?:string}).label}`);
   }
   console.log(`  items with an opponent action  ${itemsWithActs}/${out.items.length}`);
-  console.log('  Republican comparators (by rule):');
+  console.log('  comparators, same rule both caucuses:');
   for (const c of comparatorOut)
     console.log(`    ${c.name.padEnd(24)} ${c.role.padEnd(18)} voted ${c.voted}  with-caucus ${(c.withCaucus * 100).toFixed(1)}%  crossed ${c.crossedOf}`);
   console.log(`  cross-cutting share    ${(sel.crossCuttingShare * 100).toFixed(1)}%`);
