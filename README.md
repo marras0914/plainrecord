@@ -143,13 +143,20 @@ nameservers to Netlify DNS and skip the records entirely.
 ### Checking it took
 
 ```bash
-nslookup rightnleft.com
-curl -sI https://rightnleft.com | head -1
+npm run dns:check                                  # rightnleft.com
+node scripts/check_domain.mjs --domain other.com   # anything else
 ```
 
+Do not judge this by a status code. While the domain still points at Squarespace's
+parking page, `curl -o /dev/null -w '%{http_code}' https://rightnleft.com` returns
+**200** — valid TLS, no errors, and completely wrong, because it is someone else's
+"Coming Soon" page. `dns:check` reports *who* is answering: the resolved A records,
+the `Server` header, the `x-vercel-id`, our own CSP, and the page title compared
+against the known-good origin.
+
 Propagation is usually minutes, but Squarespace's TTL can hold the old answer for
-up to 48 hours. If the old Squarespace page still appears, that is cached DNS, not
-a failed deploy — verify with `nslookup` before changing anything.
+up to 48 hours. A stale parked page is cached DNS, not a failed deploy — confirm
+with `dns:check` before changing anything.
 
 ## Verifying a build
 

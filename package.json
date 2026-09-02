@@ -18,7 +18,8 @@
     "data:export": "tsx scripts/export_quiz_data.ts",
     "data:report": "tsx scripts/report_session.ts",
     "verify": "node scripts/verify_site.mjs",
-    "verify:headers": "node scripts/verify_site.mjs --with-headers"
+    "verify:headers": "node scripts/verify_site.mjs --with-headers",
+    "dns:check": "node scripts/check_domain.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
