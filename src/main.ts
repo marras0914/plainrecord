@@ -12,6 +12,7 @@ import {
   HEADLINE_ITEMS,
   CANDIDATES,
   COMPARATORS,
+  OPPONENTS,
   adapt,
   profileOf,
   describe,
@@ -660,6 +661,101 @@ function renderCands(): void {
     `. A vote they missed is dropped for them alone, not counted against them.`;
 }
 
+/**
+ * The incumbency objection, answered where it arises.
+ *
+ * Every name this page can put a number on is a sitting House member, because a
+ * score needs both people to have voted on the same bills and only legislators
+ * have. That is a real structural asymmetry, not an appearance problem, and the
+ * honest move is to state it before the reader notices it — a page that looks
+ * like it is hiding this loses the argument regardless of the arithmetic.
+ *
+ * Everything here is read off the payload: the reasons come from each opponent's
+ * own `whyNoVotes`, the refusal to compute a rate comes from `oneSided`, and the
+ * comparator counts are recomputed from COMPARATORS. Nothing is typed in, so the
+ * card cannot end up describing a build it is not part of.
+ */
+function renderBias(): void {
+  const reps = COMPARATORS.filter((c) => c.party === 'R').length;
+  const dems = COMPARATORS.filter((c) => c.party === 'D').length;
+  const coverage = COMPARATORS.map((c) => c.voted);
+  const lo = Math.min(...coverage);
+  const hi = Math.max(...coverage);
+  const withActs = ALL_ITEMS.filter((i) => (i.acts ?? []).length).length;
+
+  // One opponent's `oneSided` sentence, not all three: they make the same point
+  // and stacking them reads as protesting too much.
+  //
+  // It has to carry the NAME with it. The payload sentence is written to sit
+  // beside a named opponent and opens "Every bill on that list is one he wanted
+  // passed" — lifted out on its own, that "he" has no antecedent and the reader
+  // cannot tell whose list is being described.
+  const oneSidedOf = OPPONENTS.find((o) => o.oneSided);
+
+  // Counts of people are spelled out, the way the rest of the page does it
+  // ("All three sat in the same chamber"). Data figures — 67 questions, 8 acts,
+  // 56–64 of 67 — stay as numerals, because those are measurements and the
+  // reader is meant to be able to check them.
+  const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
+    'eight', 'nine', 'ten'];
+  const word = (k: number) => WORDS[k] ?? String(k);
+
+  // Only the first character, never the whole string: these payload fields are
+  // multi-sentence, and .toLowerCase() on one of them flattens the capital that
+  // starts its second sentence.
+  const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
+
+  el('bias-card').innerHTML =
+    `<div class="eyebrow">Doesn't this favour the people who have voting records?</div>` +
+
+    `<div class="blurb" style="margin-top:12px">` +
+
+    `<p><b>It would, if we scored anyone else. So we don't.</b> A score here needs ` +
+    `one thing — the same bills, voted on by both of you. Only members of the Texas ` +
+    `House have that. All ${word(CANDIDATES.length)} candidates above sit in the Texas ` +
+    `House. Every one of the people they are running against does not:</p>` +
+
+    `<ul class="bias-why">` +
+    OPPONENTS.map((o) =>
+      `<li><span class="bias-who">${esc(o.name)}<small>${esc(o.office)}</small></span>` +
+      `<span class="bias-reason">${esc(o.whyNoVotes)}</span></li>`).join('') +
+    `</ul>` +
+
+    `<p>So they get no number at all — not a low one, not an estimate. Any score we ` +
+    `printed for them would be votes we made up.</p>` +
+
+    `<p><b>What stops this being a page about ${word(CANDIDATES.length)} Democrats.</b> ` +
+    `Under every one of the ${ALL_ITEMS.length} questions we also show ` +
+    `${word(reps + dems)} sitting House members — ${word(reps)} Republicans and ` +
+    // The payload sentence is used verbatim and as its own sentence. It already
+    // reads "From each caucus: … The same rule on both sides, recomputed every
+    // build." — so it needs no lead-in, and lowercasing it (an earlier draft did)
+    // breaks the capital on its second sentence.
+    `${word(dems)} Democrats. ${esc(DATA.comparatorRule)} ` +
+    `They voted on the same bills you are answering (${lo}–${hi} of ${ALL_ITEMS.length}), ` +
+    `so they are scored the way the candidates are, on every question rather than a ` +
+    `chosen few. If the Republican records land close to the Democratic ones on your ` +
+    `answers, that is the finding, not a thumb on the scale.</p>` +
+
+    `<p><b>Where an opponent does leave a mark.</b> On ${withActs} of the ` +
+    `${ALL_ITEMS.length} there is a recorded action on the exact bill — a veto, or a ` +
+    `bill named a must-pass priority. We show it under that question and we never add ` +
+    `it to a tally. ` +
+    (oneSidedOf
+      ? `${esc(oneSidedOf.name)} is the clearest case — ${esc(lowerFirst(oneSidedOf.oneSided))}`
+      : '') +
+    `</p>` +
+
+    // Hand over the attack surface rather than asking to be trusted. The rule is
+    // the only place a thumb could go, so it is named and the file is linked.
+    `<p class="blurb-fine">One rule picks all ${word(reps + dems)} of those names, and ` +
+    `it cannot be tuned question by question. So if you think it is doing work it ` +
+    `shouldn't, the rule is the thing to argue with — and every vote behind it is in ` +
+    `<a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>.</p>` +
+
+    `</div>`;
+}
+
 function renderOutcomes(): void {
   const answered = new Set(
     activeItems().filter((i) => answers[i.id] === 1 || answers[i.id] === -1).map((i) => i.category),
@@ -787,6 +883,7 @@ function render(): void {
   renderReadout(p);
   renderQuestion();
   renderCands();
+  renderBias();
   renderOutcomes();
   renderStatements();
   renderTable(p);

@@ -376,6 +376,53 @@ try {
       note.slice(0, 90));
   }
 
+  // ---------------------------------------------------------------------------
+  // The incumbency card
+  //
+  // This is the page's answer to "you only scored the people who have voting
+  // records", and it is the first thing a reporter asks. It has to be present
+  // and complete on load — not revealed, not collapsed — so it is checked the
+  // same way the receipts are.
+  // ---------------------------------------------------------------------------
+
+  {
+    const bias = await page.$('#bias-card');
+    check('the incumbency card is on the page', Boolean(bias));
+
+    if (bias) {
+      const txt = (await bias.innerText()).replace(/\s+/g, ' ');
+
+      // Every opponent must be named WITH a reason. Naming two of three would
+      // read as picking the convenient ones.
+      const names = ['Dan Patrick', 'Greg Abbott', 'Ken Paxton'];
+      const missing = names.filter((n) => !txt.includes(n));
+      check('every opponent is named with why they have no votes',
+        missing.length === 0, missing.length ? `missing ${missing.join(', ')}` : names.join(', '));
+
+      // The refusal has to be explicit. "We don't score them" is the claim;
+      // an absence of a score is not self-explanatory to a suspicious reader.
+      check('it says plainly that opponents get no score',
+        /no number at all/i.test(txt) && /made up/i.test(txt));
+
+      // Both caucuses, stated on the card itself.
+      check('it states the comparators come from both parties',
+        /Republicans and/i.test(txt) && /Democrats/i.test(txt) && /same rule on both sides/i.test(txt));
+
+      // The failure this card exists to prevent: an earlier draft lowercased a
+      // two-sentence payload string and shipped "broke ranks. the same rule".
+      check('the comparator rule keeps its sentence case',
+        /\. The same rule on both sides/.test(txt),
+        /\. the same rule/.test(txt) ? 'lowercased mid-string' : '');
+
+      // A pronoun with no antecedent: the payload sentence opens "Every bill on
+      // that list is one he wanted passed" and needs its owner named first.
+      check('the one-sided-list caveat names whose list it is',
+        /(Patrick|Abbott|Paxton) is the clearest case/.test(txt));
+
+      check('it hands over the payload to argue with', /quiz_\w+\.json/.test(txt));
+    }
+  }
+
   // The page body must never scroll sideways, and the opponent rows are the
   // widest thing in the reveal — they overflowed below 420px before this check.
   for (const w of [320, 390]) {

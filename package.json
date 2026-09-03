@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "build:artifact": "npm run build && node scripts/build_artifact.mjs",
+    "build:og": "node scripts/build_og.mjs",
     "preview": "vite preview --port 4173",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --no-warnings scripts/run_tests.mjs",

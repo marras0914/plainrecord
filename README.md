@@ -103,6 +103,31 @@ The shareable copy lives at
 until shared from that page). Republish to **that URL** rather than creating a
 new one, or the link you have already handed out goes stale.
 
+### The share card
+
+```bash
+npm run build:og           # scripts/og.template.html -> public/og.png  (1200x630, ~61 KB)
+```
+
+`public/og.png` is committed, and **not** wired into `npm run build` on purpose:
+the card is rendered by headless Chromium and pulls IBM Plex from Google Fonts,
+so putting it in the build path would make every Vercel deploy depend on
+Playwright browsers and on a font CDN. It only needs re-running when the payload
+numbers change — after `npm run data:export`.
+
+Every figure on the card is read out of `public/data/quiz_89R.json` at build
+time, never typed into the template, because a share card is the most
+screenshotted surface here and a stale number on it outlives any correction made
+on the page. The script fails rather than warns on the two mistakes that are
+invisible in review: a missing webfont (Chromium silently falls back to
+system-ui) and an off-spec canvas (anything but 1.91:1 gets re-cropped by
+Facebook and LinkedIn).
+
+The dots are spread evenly across the whole axis, poles included. That is a
+constraint, not a placeholder — a scatter bunched at the centre would be the card
+asserting "Texas is purple" before the reader has answered anything, which is the
+one conclusion this project does not hand out for free.
+
 ## Pointing rightnleft.com at it
 
 The domain is **registered at Squarespace**. You are moving DNS only; the

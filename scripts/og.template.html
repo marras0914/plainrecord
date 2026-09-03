@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Purple Strip — share card</title>
+<!--
+  PlainRecord — the Open Graph card, rendered to public/og.png by
+  scripts/build_og.mjs.
+
+  This is a source file, not an asset. The PNG is the artifact; edit this and
+  re-run `npm run build:og`.
+
+  Two rules constrain what may appear here:
+
+  1. Every number is real, taken from public/data/quiz_89R.json at build time
+     and injected below — never typed in by hand. A share card is the most
+     screenshotted surface the project has, so a stale figure here outlives any
+     correction made on the page itself.
+
+  2. The strip must not flatter. The dots are spread evenly across the whole
+     axis, poles included, because the card advertises the INSTRUMENT and not a
+     finding. Clustering them in the middle would assert "Texas is purple",
+     which is exactly the claim the project refuses to make for free.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  /* Tokens copied from src/styles.css :root — the light palette only. A share
+     card has no viewer theme to respond to; it is a fixed image. */
+  :root {
+    --page:#f9f9f7; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --hair:#e1e0d9; --rule:#c3c2b7;
+    --pole-blue:#2a78d6; --pole-red:#e34948; --neutral-mark:#898781;
+    --purple:#7d5ba6;   /* the favicon colour — the only place purple is stated */
+  }
+  * { box-sizing:border-box; margin:0; }
+  html,body { width:1200px; height:630px; }
+  body {
+    background:var(--page); color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex; flex-direction:column;
+    padding:58px 64px 46px;
+  }
+  .mono { font-family:"IBM Plex Mono", ui-monospace, monospace; }
+
+  .eyebrow {
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:19px; font-weight:500; letter-spacing:0.155em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  h1 {
+    font-size:94px; font-weight:600; letter-spacing:-0.028em;
+    line-height:1.0; margin-top:22px;
+  }
+  .deck {
+    font-size:31px; line-height:1.42; color:var(--ink-2);
+    margin-top:22px; max-width:26ch;
+  }
+  .deck b { color:var(--ink); font-weight:600; }
+
+  .strip-wrap { margin-top:auto; }
+  #strip { display:block; width:1072px; height:150px; }
+  #strip text {
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:17px; font-weight:500; letter-spacing:0.1em;
+  }
+
+  footer {
+    margin-top:26px; padding-top:20px; border-top:1px solid var(--rule);
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:18px; color:var(--muted); letter-spacing:0.045em;
+  }
+  footer .site { color:var(--ink); font-weight:600; letter-spacing:0.02em; }
+</style>
+</head>
+<body>
+
+  <div class="eyebrow" id="eyebrow">TEXAS HOUSE · 89TH LEGISLATURE</div>
+
+  <h1>The Purple&nbsp;Strip</h1>
+
+  <p class="deck">A blind quiz on <b id="deck-n">67 real votes</b>.
+     Party labels stay hidden until after you answer.</p>
+
+  <div class="strip-wrap">
+    <svg id="strip" viewBox="0 0 1072 150" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="axis" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0"    stop-color="#2a78d6"/>
+          <stop offset="0.5"  stop-color="#898781"/>
+          <stop offset="1"    stop-color="#e34948"/>
+        </linearGradient>
+      </defs>
+
+      <!-- dots injected by scripts/build_og.mjs -->
+      <g id="dots"></g>
+
+      <!-- the axis: the site's own blue → grey → red gradient -->
+      <rect x="0" y="104" width="1072" height="7" rx="3.5" fill="url(#axis)"/>
+
+      <!-- centre tick -->
+      <rect x="535" y="96" width="2" height="23" fill="#c3c2b7"/>
+
+      <text x="0"    y="142" fill="#2a78d6" text-anchor="start">AGREED WITH DEMOCRATS</text>
+      <text x="536"  y="142" fill="#898781" text-anchor="middle">BOTH PARTIES</text>
+      <text x="1072" y="142" fill="#e34948" text-anchor="end">AGREED WITH REPUBLICANS</text>
+    </svg>
+  </div>
+
+  <footer>
+    <div class="site">rightnleft.com</div>
+    <div id="prov">3,546 roll calls · 992 eligible · 67 asked</div>
+  </footer>
+
+</body>
+</html>
