@@ -174,7 +174,22 @@ export type CopyKey =
   | "method.check.body"
   | "readout.answered"
   | "bias.clearestCase"
-  | "bias.authorLinkText";
+  | "bias.authorLinkText"
+  | "q.counter"
+  | "q.valenceRow"
+  | "outc.rankAria"
+  | "rev.voted"
+  | "rev.sameAsYou"
+  | "rev.oppositeToYou"
+  | "rev.youSaidVote"
+  | "rev.reps"
+  | "rev.dems"
+  | "rev.yeaShare"
+  | "tip.youAnswered"
+  | "tip.rYea"
+  | "tip.dYea"
+  | "tip.position"
+  | "tip.chamber";
 
 export type Locale = 'en' | 'es';
 
@@ -345,6 +360,21 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "readout.answered": "{n} of {total} answered",
     "bias.clearestCase": "{name} is the clearest case — {why}",
     "bias.authorLinkText": "who made this and what I have at stake",
+    "q.counter": "{i} of {n}",
+    "q.valenceRow": "valence",
+    "outc.rankAria": "{value} — {comparison}",
+    "rev.voted": "voted {vote}",
+    "rev.sameAsYou": "same as you",
+    "rev.oppositeToYou": "opposite to you",
+    "rev.youSaidVote": "You said <b>{vote}</b>.",
+    "rev.reps": "Republicans",
+    "rev.dems": "Democrats",
+    "rev.yeaShare": "{pct} Yea",
+    "tip.youAnswered": "You answered",
+    "tip.rYea": "R voted Yea",
+    "tip.dYea": "D voted Yea",
+    "tip.position": "your position",
+    "tip.chamber": "chamber",
   },
   es: {
     "verdict.fewMarks.headline": "Responda unas cuantas más y podremos decirle algo",
@@ -512,6 +542,21 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "readout.answered": "{n} de {total} respondidas",
     "bias.clearestCase": "{name} es el caso más claro: {why}",
     "bias.authorLinkText": "quién hizo esto y qué tengo en juego",
+    "q.counter": "{i} de {n}",
+    "q.valenceRow": "valencia",
+    "outc.rankAria": "{value}: {comparison}",
+    "rev.voted": "votó {vote}",
+    "rev.sameAsYou": "igual que usted",
+    "rev.oppositeToYou": "al contrario que usted",
+    "rev.youSaidVote": "Usted dijo <b>{vote}</b>.",
+    "rev.reps": "Republicanos",
+    "rev.dems": "Demócratas",
+    "rev.yeaShare": "{pct} a favor",
+    "tip.youAnswered": "Usted respondió",
+    "tip.rYea": "R a favor",
+    "tip.dYea": "D a favor",
+    "tip.position": "su posición",
+    "tip.chamber": "cámara",
   },
 };
 

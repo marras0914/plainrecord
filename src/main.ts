@@ -75,11 +75,11 @@ function markColor(coord: number): string {
   if (hit) return hit;
   const pole = hexToOklab(coord < 0 ? cssVar('--pole-blue') : cssVar('--pole-red'));
   const neut = hexToOklab(cssVar('--neutral-mark'));
-  const t = Math.min(1, Math.abs(coord));
+  const mix = Math.min(1, Math.abs(coord));
   const out = oklabToHex(
-    neut[0] + (pole[0] - neut[0]) * t,
-    neut[1] + (pole[1] - neut[1]) * t,
-    neut[2] + (pole[2] - neut[2]) * t,
+    neut[0] + (pole[0] - neut[0]) * mix,
+    neut[1] + (pole[1] - neut[1]) * mix,
+    neut[2] + (pole[2] - neut[2]) * mix,
   );
   ramp[key] = out;
   return out;
@@ -190,16 +190,16 @@ function renderStrip(p: PartisanProfile): void {
   svg.appendChild(sv('text', {
     x: xScale(0), y: P.dotTop - 7, 'text-anchor': 'middle', 'font-size': 10,
     'letter-spacing': '0.1em', fill: muted,
-  }, 'NO PARTISAN CONTENT'));
+  }, t('strip.noContent')));
 
   svg.appendChild(sv('line', { x1: P.x0, y1: P.axisY, x2: P.x1, y2: P.axisY, stroke: rule, 'stroke-width': 1 }));
-  for (const t of P.narrow ? [-1, 0, 1] : [-1, -0.5, 0, 0.5, 1]) {
-    const x = xScale(t);
+  for (const tick of P.narrow ? [-1, 0, 1] : [-1, -0.5, 0, 0.5, 1]) {
+    const x = xScale(tick);
     svg.appendChild(sv('line', { x1: x, y1: P.axisY, x2: x, y2: P.axisY + 5, stroke: rule, 'stroke-width': 1 }));
     svg.appendChild(sv('text', {
       x, y: P.axisY + 18, 'text-anchor': 'middle', 'font-size': 10.5, fill: muted,
       'font-variant-numeric': 'tabular-nums',
-    }, t === 0 ? '0' : (t > 0 ? '+' : '−') + Math.abs(t)));
+    }, tick === 0 ? '0' : (tick > 0 ? '+' : '−') + Math.abs(tick)));
   }
   svg.appendChild(sv('text', {
     x: P.x0, y: P.axisY + 34, 'text-anchor': 'start', 'font-size': 10,
@@ -213,7 +213,7 @@ function renderStrip(p: PartisanProfile): void {
   if (p.n === 0) {
     svg.appendChild(sv('text', {
       x: (P.x0 + P.x1) / 2, y: P.axisY - 52, 'text-anchor': 'middle', 'font-size': 12.5, fill: muted,
-    }, 'Answer a vote to place the first mark.'));
+    }, t('strip.empty')));
   }
 
   // Beeswarm: deterministic lane packing upward from the axis.
@@ -257,7 +257,7 @@ function renderStrip(p: PartisanProfile): void {
     svg.appendChild(sv('text', {
       x: P.x1, y: P.candY0 - 16, 'text-anchor': 'end', 'font-size': 10,
       'letter-spacing': '0.1em', fill: muted,
-    }, 'CANDIDATE RECORDS ON THE SAME VOTES'));
+    }, t('strip.candidateRecords')));
   }
   CANDIDATES.forEach((c, i) => {
     const y = P.candY0 + i * P.candStep;
@@ -277,20 +277,23 @@ function renderStrip(p: PartisanProfile): void {
 }
 
 function showTip(ev: Event, m: Mark): void {
-  const t = el('tip');
+  // Named `tip`, not `t` — `t` is the copy lookup at module scope now, and a
+  // local of the same name silently turns every t('key') in the function into a
+  // call on a DOM element.
+  const tip = el('tip');
   const i = m.item;
-  t.innerHTML =
+  tip.innerHTML =
     `<div class="tip-t">${esc(i.billId)} · ${esc(i.category)}</div>` +
-    `<div style="color:var(--ink-2)">You answered <strong>${m.answer === 1 ? 'Yea' : 'Nay'}</strong></div>` +
-    `<dl><dt>R voted Yea</dt><dd>${i.rYea === null ? '—' : pct(i.rYea)}</dd>` +
-    `<dt>D voted Yea</dt><dd>${i.dYea === null ? '—' : pct(i.dYea)}</dd>` +
-    `<dt>valence</dt><dd>${i.valence === null ? '—' : fmt(i.valence)}</dd>` +
-    `<dt>your position</dt><dd>${fmt(m.coordinate)}</dd>` +
-    `<dt>chamber</dt><dd>${i.yeas}–${i.nays}</dd></dl>`;
+    `<div style="color:var(--ink-2)">${esc(t('tip.youAnswered'))} <strong>${esc(t(m.answer === 1 ? 'vote.yea' : 'vote.nay'))}</strong></div>` +
+    `<dl><dt>${esc(t('tip.rYea'))}</dt><dd>${i.rYea === null ? '—' : pct(i.rYea)}</dd>` +
+    `<dt>${esc(t('tip.dYea'))}</dt><dd>${i.dYea === null ? '—' : pct(i.dYea)}</dd>` +
+    `<dt>${esc(t('q.valenceRow'))}</dt><dd>${i.valence === null ? '—' : fmt(i.valence)}</dd>` +
+    `<dt>${esc(t('tip.position'))}</dt><dd>${fmt(m.coordinate)}</dd>` +
+    `<dt>${esc(t('tip.chamber'))}</dt><dd>${i.yeas}–${i.nays}</dd></dl>`;
   const box = (ev.currentTarget as Element).getBoundingClientRect();
-  t.style.opacity = '1';
-  t.style.left = `${Math.max(8, Math.min(window.innerWidth - t.offsetWidth - 8, box.left + box.width / 2 - t.offsetWidth / 2))}px`;
-  t.style.top = `${Math.max(8, box.top - t.offsetHeight - 8)}px`;
+  tip.style.opacity = '1';
+  tip.style.left = `${Math.max(8, Math.min(window.innerWidth - tip.offsetWidth - 8, box.left + box.width / 2 - tip.offsetWidth / 2))}px`;
+  tip.style.top = `${Math.max(8, box.top - tip.offsetHeight - 8)}px`;
 }
 const hideTip = () => { el('tip').style.opacity = '0'; };
 
@@ -333,7 +336,8 @@ function renderProv(): void {
         : t('prov.picked.ruleHint', { rule: DATA.ruleVersion, perCat: DATA.rulePerCategory })],
   ];
   el('prov').innerHTML = tiles
-    .map(([k, v, t]) => `<div><dt>${k}</dt><dd>${v}<small>${t}</small></dd></div>`)
+    .map(([label, value, hint]) =>
+      `<div><dt>${label}</dt><dd>${value}<small>${hint}</small></dd></div>`)
     .join('');
 
   // Plain language, short sentences, no jargon a reader has to decode. The earlier
@@ -438,7 +442,7 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
     if (cast !== 1 && cast !== -1) {
       return (
         `<li class="cand-rev cr-none"><span class="cr-name">${esc(cand.name)}${tag}</span>` +
-        `<span class="cr-vote">no vote recorded</span>` +
+        `<span class="cr-vote">${esc(t('vote.none'))}</span>` +
         `<span class="cr-match">—</span></li>`
       );
     }
@@ -446,8 +450,8 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
     return (
       `<li class="cand-rev ${same ? 'cr-same' : 'cr-diff'}">` +
       `<span class="cr-name">${esc(cand.name)}${tag}</span>` +
-      `<span class="cr-vote">voted ${cast === 1 ? 'Yea' : 'Nay'}</span>` +
-      `<span class="cr-match">${same ? 'same as you' : 'opposite to you'}</span></li>`
+      `<span class="cr-vote">${esc(t('rev.voted', { vote: t(cast === 1 ? 'vote.yea' : 'vote.nay') }))}</span>` +
+      `<span class="cr-match">${esc(t(same ? 'rev.sameAsYou' : 'rev.oppositeToYou'))}</span></li>`
     );
   }).join('');
 
@@ -459,10 +463,10 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
   const missing = CANDIDATES.length - counted.length;
 
   const summary = counted.length === 0
-    ? 'None of the three has a recorded vote on this bill.'
-    : `${agreed} of ${counted.length} voted the same way you did` +
+    ? t('rev.noneVoted')
+    : t('rev.agreedCount', { agreed, counted: counted.length }) +
       (missing
-        ? `, and ${missing === 1 ? 'one has' : `${missing} have`} no recorded vote.`
+        ? (missing === 1 ? t('rev.missingOne') : t('rev.missingMany', { n: missing }))
         : '.');
 
   // The Republican comparators, in the SAME tier as the candidates above: House
@@ -478,15 +482,15 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
         if (cast !== 1 && cast !== -1) {
           return (
             `<li class="cand-rev cr-none"><span class="cr-name">${esc(c.name)}${tag}</span>` +
-            `<span class="cr-vote">no vote recorded</span><span class="cr-match">—</span></li>`
+            `<span class="cr-vote">${esc(t('vote.none'))}</span><span class="cr-match">—</span></li>`
           );
         }
         const same = cast === yourAnswer;
         return (
           `<li class="cand-rev ${same ? 'cr-same' : 'cr-diff'}">` +
           `<span class="cr-name">${esc(c.name)}${tag}</span>` +
-          `<span class="cr-vote">voted ${cast === 1 ? 'Yea' : 'Nay'}</span>` +
-          `<span class="cr-match">${same ? 'same as you' : 'opposite to you'}</span></li>`
+          `<span class="cr-vote">${esc(t('rev.voted', { vote: t(cast === 1 ? 'vote.yea' : 'vote.nay') }))}</span>` +
+          `<span class="cr-match">${esc(t(same ? 'rev.sameAsYou' : 'rev.oppositeToYou'))}</span></li>`
         );
       })
       .join('');
@@ -494,8 +498,8 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
   // Same rule, both caucuses. Running it on Republicans only — while the three
   // Democrats above were named individuals — was a double standard however well
   // argued: either the rule governs who appears or it does not.
-  const repRows = ([['R', 'Three Republicans, picked by rule'],
-                    ['D', 'Three Democrats, picked by the same rule']] as const)
+  const repRows = ([['R', t('rev.repsHead')],
+                    ['D', t('rev.demsHead')]] as const)
     .map(([party, head]) => {
       const rows = comparatorRows(party);
       return rows
@@ -512,34 +516,34 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
     item.rYea === null || item.dYea === null
       ? ''
       : `<div class="party-split">` +
-        `<div class="ps-row"><span class="ps-label">Republicans</span>` +
+        `<div class="ps-row"><span class="ps-label">${esc(t('rev.reps'))}</span>` +
         `<span class="ps-bar"><i style="width:${Math.round(item.rYea * 100)}%"></i></span>` +
-        `<span class="ps-num num">${pct(item.rYea)} Yea</span></div>` +
-        `<div class="ps-row"><span class="ps-label">Democrats</span>` +
+        `<span class="ps-num num">${esc(t('rev.yeaShare', { pct: pct(item.rYea) }))}</span></div>` +
+        `<div class="ps-row"><span class="ps-label">${esc(t('rev.dems'))}</span>` +
         `<span class="ps-bar"><i style="width:${Math.round(item.dYea * 100)}%"></i></span>` +
-        `<span class="ps-num num">${pct(item.dYea)} Yea</span></div>` +
+        `<span class="ps-num num">${esc(t('rev.yeaShare', { pct: pct(item.dYea) }))}</span></div>` +
         `</div>`;
 
   return (
     `<div class="reveal cand-reveal">` +
-    `<div class="outc-cat">The three races — how they voted on ${esc(item.billId)}</div>` +
+    `<div class="outc-cat">${esc(t('rev.threeRaces', { bill: item.billId }))}</div>` +
     `<ul class="cand-revs">${rows}</ul>` +
-    `<div class="cand-rev-sum">${summary} You said ` +
-    `<b>${yourAnswer === 1 ? 'Yea' : 'Nay'}</b>.</div>` +
+    `<div class="cand-rev-sum">${summary} ` +
+    `${t('rev.youSaidVote', { vote: esc(t(yourAnswer === 1 ? 'vote.yea' : 'vote.nay')) })}</div>` +
     // Collapsed by default. The six comparators exist so the page is not one-sided,
     // but on screen at all times they buried the three races the page is actually
     // about. Balance has to be available, not dominant.
     (repRows
       ? `<details class="cmp"${comparatorsOpen ? ' open' : ''}>` +
-        `<summary>Compare with six other House members <span>three from each party, ` +
-        `picked by rule</span></summary>` +
+        `<summary>${esc(t('rev.compareSummary'))} <span>` +
+        `${esc(t('rev.compareHint'))}</span></summary>` +
         repRows +
-        `<div class="rep-note">None of these six is on the ballot. From each caucus: ` +
-        `the most party-line member, the median, and the one who most often broke ` +
-        `ranks — the same rule on both sides, recomputed every build, so the ` +
-        `comparison is not a pick of names.</div></details>`
+        `<div class="rep-note">${esc(t('rev.compareNote'))}` +
+        `` +
+        `` +
+        `</div></details>`
       : '') +
-    `<div class="ps-head">How each party voted on it</div>` +
+    `<div class="ps-head">${esc(t('rev.partyVote'))}</div>` +
     split +
     opponentReveal(item, yourAnswer) +
     `</div>`
@@ -571,25 +575,25 @@ function opponentReveal(item: QuizItem, yourAnswer: 1 | -1): string {
       // Kept short on purpose: 'named it a priority bill' in a monospace face
       // overflowed its row below 420px and pushed the whole page into a
       // horizontal scroll at 320px.
-      const verb = a.kind === 'veto' ? 'vetoed it' : 'made it a priority';
+      const verb = t(a.kind === 'veto' ? 'rev.oppVetoed' : 'rev.oppPriority');
       const same = a.position === yourAnswer;
       return (
         `<li class="opp-row ${same ? 'op-same' : 'op-diff'}">` +
         `<span class="opp-name">${esc(a.who)}<small>${esc(a.office)}</small></span>` +
         `<span class="opp-act">${verb}</span>` +
-        `<span class="opp-side">${same ? 'same side as you' : 'opposite side to you'}</span>` +
-        `<a class="opp-src" href="${esc(a.sourceUrl)}" target="_blank" rel="noopener">source</a></li>`
+        `<span class="opp-side">${esc(t(same ? 'rev.sameSide' : 'rev.oppositeSide'))}</span>` +
+        `<a class="opp-src" href="${esc(a.sourceUrl)}" target="_blank" rel="noopener">${esc(t('rev.source'))}</a></li>`
       );
     })
     .join('');
 
   return (
-    `<div class="opp-block"><div class="ps-head">What their opponents did on this bill</div>` +
+    `<div class="opp-block"><div class="ps-head">${esc(t('rev.oppHead'))}</div>` +
     `<ul class="opp-rows">${rows}</ul>` +
-    `<div class="opp-note">Not votes — neither of them votes in the House, so these ` +
-    `are not counted above. And each list runs one way only: a governor vetoes just ` +
-    `the bills he opposes, a priority list names just the bills its author wants ` +
-    `passed. That is why you see a side on this bill and never a percentage.</div></div>`
+    `<div class="opp-note">${esc(t('rev.oppNote'))}` +
+    `` +
+    `` +
+    `</div></div>`
   );
 }
 
@@ -597,9 +601,10 @@ function renderQuestion(): void {
   const c = el('q-card');
   if (cursor >= queue.length) {
     c.innerHTML =
-      `<div class="eyebrow">Done</div><div class="q-caption">All ${queue.length} votes answered or skipped.</div>` +
-      `<div class="q-sub">The strip above holds every answer with measurable partisan content.</div>` +
-      `<div class="q-actions"><button data-preset="reset">Start over</button></div>`;
+      `<div class="eyebrow">${esc(t('q.doneEyebrow'))}</div>` +
+      `<div class="q-caption">${esc(t('q.doneCaption', { n: queue.length }))}</div>` +
+      `<div class="q-sub">${esc(t('q.doneSub'))}</div>` +
+      `<div class="q-actions"><button data-preset="reset">${esc(t('q.startOver'))}</button></div>`;
     bindPresets();
     return;
   }
@@ -611,30 +616,45 @@ function renderQuestion(): void {
   const prevOut = prevAnswered ? DATA.outcomes.find((o) => o.category === prev!.category) : undefined;
 
   c.innerHTML =
-    `<div class="q-meta"><div class="eyebrow">${cursor + 1} of ${queue.length} · ${esc(it.billId)} · ${esc(it.label || it.category)}</div>` +
-    `<div class="eyebrow">blind — party not shown</div></div>` +
-    `<div class="q-caption">${esc(it.caption)}</div>` +
-    `<div class="q-sub">Official bill caption. The House voted ${it.yeas} yes, ${it.nays} no.</div>` +
+    `<div class="q-meta"><div class="eyebrow">` +
+    `${esc(t('q.counter', { i: cursor + 1, n: queue.length }))} · ${esc(it.billId)} · ` +
+    `${esc(it.label || it.category)}</div>` +
+    `<div class="eyebrow">${esc(t('q.blind'))}</div></div>` +
+    // The caption is the official record, copied word for word, and is NEVER
+    // translated. On the Spanish page it stays English and carries lang="en" so
+    // a screen reader switches voice for it — see official_text_rule in
+    // i18n/copy.json. A Spanish rendering ships beside it, not instead of it.
+    `<div class="q-caption" lang="en">${esc(it.caption)}</div>` +
+    `<div class="q-sub">${esc(t('q.caption', { yeas: it.yeas, nays: it.nays }))}</div>` +
     // Ours, not the record's — so it is labelled, and it sits BELOW the official
     // caption instead of replacing it. In a blind quiz the wording is the
     // question, so the reader has to be able to see which words are whose.
     (it.plain
-      ? `<div class="q-plain"><span class="q-plain-tag">In plain terms</span>${esc(it.plain)}` +
-        `<small>Our summary, not the official text. The caption above is the official wording.</small></div>`
+      ? `<div class="q-plain"><span class="q-plain-tag">${esc(t('q.plainTag'))}</span>${esc(it.plain)}` +
+        `<small>${esc(t('q.plainNote'))}</small></div>`
       : '') +
-    (it.why ? `<div class="headline-why"><b>Why this one:</b> ${esc(it.why)}</div>` : '') +
-    `<div class="q-actions"><button data-answer="1">Yea</button><button data-answer="-1">Nay</button>` +
-    `<button class="ghost" data-answer="0">Skip</button>` +
-    `<button class="ghost" id="receipt-btn">${receiptOpen ? 'Hide' : 'Show'} the receipt</button></div>` +
-    `<div class="receipt${receiptOpen ? ' on' : ''}"><strong>How this vote is coloured.</strong> ` +
-    `Valence is the Republican Yea share minus the Democratic Yea share — measured, not judged.` +
-    `<dl><dt>Republicans voting Yea</dt><dd>${it.rYea === null ? '—' : pct(it.rYea)}</dd>` +
-    `<dt>Democrats voting Yea</dt><dd>${it.dYea === null ? '—' : pct(it.dYea)}</dd>` +
-    `<dt>valence</dt><dd>${it.valence === null ? '—' : fmt(it.valence)}</dd>` +
-    `<dt>source</dt><dd>${it.src}${it.rec ? ` · RV ${it.rec}` : ''}</dd></dl></div>` +
+    (it.why
+      ? `<div class="headline-why"><b>${esc(t('q.whyThis'))}</b> ${esc(it.why)}</div>`
+      : '') +
+    `<div class="q-actions">` +
+    `<button data-answer="1">${esc(t('vote.yea'))}</button>` +
+    `<button data-answer="-1">${esc(t('vote.nay'))}</button>` +
+    `<button class="ghost" data-answer="0">${esc(t('q.skip'))}</button>` +
+    `<button class="ghost" id="receipt-btn">` +
+    `${esc(t(receiptOpen ? 'q.hideReceipt' : 'q.showReceipt'))}</button></div>` +
+    `<div class="receipt${receiptOpen ? ' on' : ''}">` +
+    `<strong>${esc(t('q.receiptHead'))}</strong> ${esc(t('q.receiptBody'))}` +
+    `<dl><dt>${esc(t('q.rYea'))}</dt><dd>${it.rYea === null ? '—' : pct(it.rYea)}</dd>` +
+    `<dt>${esc(t('q.dYea'))}</dt><dd>${it.dYea === null ? '—' : pct(it.dYea)}</dd>` +
+    `<dt>${esc(t('q.valenceRow'))}</dt><dd>${it.valence === null ? '—' : fmt(it.valence)}</dd>` +
+    // `it.src` is the literal token the table column shows ("journal"/"scrape"),
+    // so it stays untranslated: method.words.body names those exact words.
+    `<dt>${esc(t('rev.source'))}</dt><dd>${it.src}${it.rec ? ` · RV ${it.rec}` : ''}</dd>` +
+    `</dl></div>` +
     (prevAnswered ? candidateReveal(prev!, answers[prev!.id] as 1 | -1) : '') +
     (prevOut
-      ? `<div class="reveal"><div class="outc-cat">Where Texas stands on ${esc(prevOut.category.toLowerCase())}</div>` +
+      ? `<div class="reveal"><div class="outc-cat">` +
+        `${esc(t('rev.outcomeHead', { category: prevOut.category.toLowerCase() }))}</div>` +
         `<b>${esc(prevOut.value)}</b> — ${esc(prevOut.comparison)}` +
         (prevOut.rank ? ` <span class="outc-rank st-${prevOut.standing}">${esc(prevOut.rank)}</span>` : '') +
         `<div class="outc-src">${esc(prevOut.sourceName)} · ${esc(prevOut.year)}</div></div>`
@@ -791,7 +811,7 @@ function renderOutcomes(): void {
     `<div class="outc-cav">${esc(o.caveat)}</div></div>`).join('');
   el('causal').textContent = DATA.causalNote;
   el('omissions').innerHTML = DATA.omissions.length
-    ? 'Deliberately left blank: ' + DATA.omissions.map((o) => `<b>${esc(o.category)}</b> — ${esc(o.why)}`).join(' ')
+    ? t('outc.leftBlank') + ' ' + DATA.omissions.map((o) => `<b>${esc(o.category)}</b> — ${esc(o.why)}`).join(' ')
     : '';
   el('incumbents').innerHTML = DATA.incumbents.map((i) =>
     `<div style="margin-bottom:9px"><b>${esc(i.name)}</b> has been ${esc(i.office)} since ${esc(i.since)}, covering ${esc(i.sessions)}.` +
@@ -813,26 +833,31 @@ function renderStatements(): void {
 }
 
 function renderTable(p: PartisanProfile): void {
-  const t = el('table');
+  const tbl = el('table');
   if (p.n === 0) {
-    t.innerHTML = '<tbody><tr><td style="color:var(--muted);padding:20px 0">Nothing answered yet.</td></tr></tbody>';
+    tbl.innerHTML =
+      `<tbody><tr><td style="color:var(--muted);padding:20px 0">` +
+      `${esc(t('table.empty'))}</td></tr></tbody>`;
     return;
   }
   const byId = new Map(activeItems().map((i) => [i.id, i]));
   const rows = [...p.marks].sort((a, b) => a.coordinate - b.coordinate).map((m) => {
     const i = byId.get(m.itemId)!;
     return `<tr><td><span class="swatch" style="background:${markColor(m.coordinate)}"></span>${esc(i.billId)}</td>` +
-      `<td>${esc(i.caption)}</td><td>${esc(i.category)}</td><td class="num">${m.answer === 1 ? 'Yea' : 'Nay'}</td>` +
+      `<td>${esc(i.caption)}</td><td>${esc(i.category)}</td><td class="num">${esc(t(m.answer === 1 ? 'vote.yea' : 'vote.nay'))}</td>` +
       `<td class="num">${i.rYea === null ? '—' : pct(i.rYea)}</td>` +
       `<td class="num">${i.dYea === null ? '—' : pct(i.dYea)}</td>` +
       `<td class="num">${i.valence === null ? '—' : fmt(i.valence)}</td>` +
       `<td class="num">${fmt(m.coordinate)}</td>` +
       `<td class="src">${i.src}${i.rec ? ` ${i.rec}` : ''}</td></tr>`;
   }).join('');
-  t.innerHTML =
-    '<thead><tr><th>Bill</th><th>Caption</th><th>Category</th><th class="num">You</th>' +
-    '<th class="num">R Yea</th><th class="num">D Yea</th><th class="num">Valence</th>' +
-    '<th class="num">Position</th><th>Source</th></tr></thead><tbody>' + rows + '</tbody>';
+  tbl.innerHTML =
+    `<thead><tr><th>${esc(t('table.bill'))}</th><th>${esc(t('table.caption'))}</th>` +
+    `<th>${esc(t('table.category'))}</th><th class="num">${esc(t('table.you'))}</th>` +
+    `<th class="num">${esc(t('table.rYea'))}</th><th class="num">${esc(t('table.dYea'))}</th>` +
+    `<th class="num">${esc(t('table.valence'))}</th>` +
+    `<th class="num">${esc(t('table.position'))}</th><th>${esc(t('table.source'))}</th>` +
+    `</tr></thead><tbody>` + rows + `</tbody>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -908,7 +933,7 @@ function render(): void {
 el('table-toggle').addEventListener('click', () => {
   tableOpen = !tableOpen;
   el('table-panel').hidden = !tableOpen;
-  el('table-toggle').textContent = tableOpen ? 'Hide table' : 'Show table';
+  el('table-toggle').textContent = t(tableOpen ? 'ui.hideTable' : 'ui.showTable');
   el('table-toggle').setAttribute('aria-expanded', String(tableOpen));
 });
 el('mode-short').addEventListener('click', () => setMode('short'));

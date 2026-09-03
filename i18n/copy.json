@@ -1290,5 +1290,122 @@
     "where": "Link text inside bias.fine, pointing at #author-card.",
     "vars": [],
     "status": "ok"
+  },
+  "q.counter": {
+    "en": "{i} of {n}",
+    "es": "{i} de {n}",
+    "where": "Question counter in the eyebrow.",
+    "vars": [
+      "i",
+      "n"
+    ],
+    "status": "ok"
+  },
+  "q.valenceRow": {
+    "en": "valence",
+    "es": "valencia",
+    "where": "Receipt row label.",
+    "vars": [],
+    "status": "ok"
+  },
+  "outc.rankAria": {
+    "en": "{value} — {comparison}",
+    "es": "{value}: {comparison}",
+    "where": "Outcome reveal line.",
+    "vars": [
+      "value",
+      "comparison"
+    ],
+    "status": "ok"
+  },
+  "rev.voted": {
+    "en": "voted {vote}",
+    "es": "votó {vote}",
+    "where": "Candidate reveal row.",
+    "vars": [
+      "vote"
+    ],
+    "status": "ok"
+  },
+  "rev.sameAsYou": {
+    "en": "same as you",
+    "es": "igual que usted",
+    "where": "Candidate reveal verdict.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rev.oppositeToYou": {
+    "en": "opposite to you",
+    "es": "al contrario que usted",
+    "where": "Candidate reveal verdict.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rev.youSaidVote": {
+    "en": "You said <b>{vote}</b>.",
+    "es": "Usted dijo <b>{vote}</b>.",
+    "where": "Reveal summary tail.",
+    "vars": [
+      "vote"
+    ],
+    "status": "ok"
+  },
+  "rev.reps": {
+    "en": "Republicans",
+    "es": "Republicanos",
+    "where": "Party split row label.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rev.dems": {
+    "en": "Democrats",
+    "es": "Demócratas",
+    "where": "Party split row label.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rev.yeaShare": {
+    "en": "{pct} Yea",
+    "es": "{pct} a favor",
+    "where": "Party split figure.",
+    "vars": [
+      "pct"
+    ],
+    "status": "ok"
+  },
+  "tip.youAnswered": {
+    "en": "You answered",
+    "es": "Usted respondió",
+    "where": "Dot tooltip.",
+    "vars": [],
+    "status": "ok"
+  },
+  "tip.rYea": {
+    "en": "R voted Yea",
+    "es": "R a favor",
+    "where": "Dot tooltip row.",
+    "vars": [],
+    "status": "ok"
+  },
+  "tip.dYea": {
+    "en": "D voted Yea",
+    "es": "D a favor",
+    "where": "Dot tooltip row.",
+    "vars": [],
+    "status": "ok"
+  },
+  "tip.position": {
+    "en": "your position",
+    "es": "su posición",
+    "where": "Dot tooltip row.",
+    "vars": [],
+    "status": "ok"
+  },
+  "tip.chamber": {
+    "en": "chamber",
+    "es": "cámara",
+    "where": "Dot tooltip row.",
+    "vars": [],
+    "status": "ok"
   }
 }
