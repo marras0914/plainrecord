@@ -25,6 +25,7 @@ import {
 import type { PartisanProfile } from '../valence';
 import { PROFILE_BANDS } from '../valence';
 import { renderVerdict } from './verdict';
+import { t, word } from './i18n';
 
 /**
  * Where the raw quiz payload lives. Relative on the deployed site so it works the
@@ -301,9 +302,10 @@ function renderMode(): void {
   el('full-count').textContent = String(ALL_ITEMS.length);
   el('mode-short').setAttribute('aria-pressed', String(mode === 'short'));
   el('mode-full').setAttribute('aria-pressed', String(mode === 'full'));
-  el('mode-desc').innerHTML = mode === 'short'
-    ? `Seven of the session's biggest fights — the bills the Lieutenant Governor made priorities or the Governor vetoed. <b>Six of the seven split cleanly along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all ${ALL_ITEMS.length} to find where you cross over.`
-    : `All ${ALL_ITEMS.length} votes: one per bill, spread across 20 subject areas, including the ones where Republicans and Democrats agreed. Those are the votes that can show you crossing party lines.`;
+  el('mode-desc').innerHTML = t(
+    mode === 'short' ? 'mode.shortDesc' : 'mode.fullDesc',
+    { n: ALL_ITEMS.length },
+  );
 }
 
 function renderProv(): void {
@@ -311,22 +313,24 @@ function renderProv(): void {
   const jrn = act.filter((i) => i.src === 'journal').length;
   const cross = act.filter((i) => i.valence !== null && Math.abs(i.valence) < DATA.rulePartisanThreshold).length;
   const cats = new Set(act.map((i) => i.category)).size;
-  el('hdr-eyebrow').textContent = `PlainRecord · Texas House ${DATA.session} · ${ALL_ITEMS.length} real recorded votes`;
+  el('hdr-eyebrow').textContent =
+    t('hdr.eyebrow', { session: DATA.session, n: ALL_ITEMS.length });
   // "Cross-cutting" and "provenance" are terms of art. The reader gets the plain
   // word; the precise term stays in SCORING.md where it belongs.
   const tiles: [string, string, string][] = [
-    ['Questions', String(act.length),
-      mode === 'short' ? 'the seven biggest fights of the session' : `one per bill, across ${cats} subjects`],
-    ['Straight from the record', `${jrn} of ${act.length}`,
-      'taken from the official House Journal, not a summary'],
-    ['Both parties agreed', `${Math.round((100 * cross) / act.length)}%`,
+    [t('prov.questions.label'), String(act.length),
+      mode === 'short' ? t('prov.questions.short') : t('prov.questions.full', { cats })],
+    [t('prov.record.label'), `${jrn} of ${act.length}`,
+      t('prov.record.hint')],
+    [t('prov.agreed.label'), `${Math.round((100 * cross) / act.length)}%`,
       cross / act.length < 0.15
-        ? 'nearly all of these were party-line fights'
-        : 'these votes were not a party fight at all'],
-    ['Picked by', mode === 'short' ? 'hand' : 'a written rule',
+        ? t('prov.agreed.mostlyParty')
+        : t('prov.agreed.notAFight')],
+    [t('prov.picked.label'),
+      mode === 'short' ? t('prov.picked.hand') : t('prov.picked.rule'),
       mode === 'short'
-        ? 'each one shows why it was chosen'
-        : `${DATA.ruleVersion}, max ${DATA.rulePerCategory} per subject`],
+        ? t('prov.picked.handHint')
+        : t('prov.picked.ruleHint', { rule: DATA.ruleVersion, perCat: DATA.rulePerCategory })],
   ];
   el('prov').innerHTML = tiles
     .map(([k, v, t]) => `<div><dt>${k}</dt><dd>${v}<small>${t}</small></dd></div>`)
@@ -336,53 +340,56 @@ function renderProv(): void {
   // version said things like "stratified across 20 subject areas" and "strongly
   // party-coded" — accurate, and unreadable. The facts are unchanged; only the
   // words are simpler. Numbers still come from the data, never hardcoded.
-  el('method').innerHTML =
-    `<b>Where the questions come from.</b> These are real votes the Texas House took. ` +
-    `We use one vote per bill, so no bill is asked about twice. ` +
-    `Then we sort the bills into 20 subject areas — the same list the state's own ` +
-    `library uses — and take at most ${DATA.rulePerCategory} from each area.<br><br>` +
+  // Each paragraph is a lead and a body, assembled here rather than carried as
+  // one string with a <b> in it — a translator should not have to preserve
+  // markup to move a sentence.
+  const para = (lead: string, body: string) => `<b>${lead}</b> ${body}`;
+  const payloadLink =
+    `<a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>`;
 
-    `<b>Why some questions are not close fights.</b> About ${Math.round(DATA.ruleReserve * 100)} out of every 100 ` +
-    `spots are saved for votes where Republicans and Democrats <em>agreed</em>. ` +
-    `We do that on purpose. If we only picked the big fights, every answer you gave ` +
-    `would land at one end or the other, and nobody could ever come out purple. ` +
-    `The rule we follow is written down and named <code>${DATA.ruleVersion}</code>, ` +
-    `so you can check we did not change it to get a nicer answer.<br><br>` +
+  el('method').innerHTML = [
+    para(t('method.where.lead'), t('method.where.body', { perCat: DATA.rulePerCategory })),
+
+    para(t('method.notFights.lead'), t('method.notFights.body', {
+      reserve: Math.round(DATA.ruleReserve * 100),
+      rule: `<code>${esc(DATA.ruleVersion)}</code>`,
+    })),
 
     // Said on the page, not only in a comment: the comparators arrive by a stated
     // rule and the candidates do not, and a choice presented without comment
     // reads as a measurement.
-    `<b>Who is on this page.</b> ${esc(DATA.candidateProvenance)}<br><br>` +
+    //
+    // The body is payload prose and is still English — it belongs to the
+    // quiz_89R.es.json sidecar, which is pass two. On the Spanish page the lead
+    // is Spanish and this sentence is not, which is worse than either; that is
+    // why the Spanish build is gated on the sidecar landing.
+    para(t('method.who.lead'), esc(DATA.candidateProvenance)),
 
-    `<b>The seven big ones.</b> We picked these by hand, but not by our own opinion. ` +
-    `Each one is a bill the Lieutenant Governor called a top priority, or a bill the ` +
-    `Governor vetoed. Those are their published lists, not ours. Each question shows ` +
-    `why it made the list. Six of the seven split the two parties sharply — that is ` +
-    `what a headline fight is.<br><br>` +
-
-    `<b>Where the words come from.</b> Every question is the bill's official summary, ` +
-    `copied word for word. We did not rewrite it to sound better or worse. ` +
-    `How each member voted comes from the official House Journal where we could match ` +
-    `it (<span class="src">journal</span>), and otherwise from a scrape ` +
-    `(<span class="src">scrape</span>). The table tells you which, for every vote.<br><br>` +
+    para(t('method.seven.lead'), t('method.seven.body')),
+    para(t('method.words.lead'), t('method.words.body')),
 
     // A page that asks you to trust its numbers has to hand them over. This is the
     // exact file the page itself runs on — not a summary of it.
-    `<b>Check it yourself.</b> Every vote, count and score behind this page sits in ` +
-    `one file: <a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>. ` +
-    `That is the exact file this page loaded, not a copy we made for show.`;
+    para(t('method.check.lead'), t('method.check.body', { link: payloadLink })),
+  ].join('<br><br>');
 }
 
 function renderStats(p: PartisanProfile): void {
+  const leanNote = !p.n
+    ? t('stats.lean.empty')
+    : p.netLean < -PROFILE_BANDS.mildLean
+      ? t('stats.lean.towardD')
+      : p.netLean > PROFILE_BANDS.mildLean
+        ? t('stats.lean.towardR')
+        : t('stats.lean.middle');
+
   const tiles: [string, string, string][] = [
-    ['Which way you lean', p.n ? fmt(p.netLean) : '—',
-      p.n ? (p.netLean < -0.15 ? 'toward Democrats' : p.netLean > 0.15 ? 'toward Republicans' : 'right down the middle') : 'answer a few votes'],
-    ['How often you cross', p.n ? pct(p.crossoverShare) : '—',
-      'of your answers land on the opposite side from your overall lean'],
-    ['How partisan these votes were', p.n ? p.partisanLoad.toFixed(2) : '—',
+    [t('stats.lean.label'), p.n ? fmt(p.netLean) : '—', leanNote],
+    [t('stats.cross.label'), p.n ? pct(p.crossoverShare) : '—', t('stats.cross.hint')],
+    [t('stats.load.label'), p.n ? p.partisanLoad.toFixed(2) : '—',
       p.n && p.partisanLoad < PROFILE_BANDS.weakLoad
-        ? 'very low — these votes barely split the parties'
-        : '1.00 would mean every party member voted with their side'],
+        ? t('stats.load.low')
+        : t('stats.load.hint')],
   ];
   el('stats').innerHTML = tiles
     .map(([l, v, n]) => `<div class="stat"><div class="stat-label">${l}</div><div class="stat-val num">${v}</div><div class="stat-note">${n}</div></div>`)
@@ -397,7 +404,8 @@ function renderReadout(p: PartisanProfile): void {
   el('readout').innerHTML =
     `<div class="readout-head">${esc(d.headline)}</div>` +
     `<div class="readout-caveat">${esc(d.caveat)}</div>` +
-    `<div class="readout-caveat mono">${p.n} of ${activeItems().length} answered</div>`;
+    `<div class="readout-caveat mono">` +
+    `${esc(t('readout.answered', { n: p.n, total: activeItems().length }))}</div>`;
 }
 
 /**
@@ -696,28 +704,25 @@ function renderBias(): void {
   // cannot tell whose list is being described.
   const oneSidedOf = OPPONENTS.find((o) => o.oneSided);
 
-  // Counts of people are spelled out, the way the rest of the page does it
-  // ("All three sat in the same chamber"). Data figures — 67 questions, 8 acts,
-  // 56–64 of 67 — stay as numerals, because those are measurements and the
-  // reader is meant to be able to check them.
-  const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
-    'eight', 'nine', 'ten'];
-  const word = (k: number) => WORDS[k] ?? String(k);
-
   // Only the first character, never the whole string: these payload fields are
   // multi-sentence, and .toLowerCase() on one of them flattens the capital that
   // starts its second sentence.
   const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 
+  // Counts of people are spelled out, the way the rest of the page does it
+  // ("All three sat in the same chamber"). Data figures — 67 questions, 8 acts,
+  // 56–64 of 67 — stay as numerals, because those are measurements and the
+  // reader is meant to be able to check them. `word` comes from ./i18n now and
+  // carries a Spanish numeral list; the local copy here only knew English.
+  const payloadLink =
+    `<a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>`;
+
   el('bias-card').innerHTML =
-    `<div class="eyebrow">Doesn't this favour the people who have voting records?</div>` +
+    `<div class="eyebrow">${esc(t('bias.heading'))}</div>` +
 
     `<div class="blurb" style="margin-top:12px">` +
 
-    `<p><b>It would, if we scored anyone else. So we don't.</b> A score here needs ` +
-    `one thing — the same bills, voted on by both of you. Only members of the Texas ` +
-    `House have that. All ${word(CANDIDATES.length)} candidates above sit in the Texas ` +
-    `House. Every one of the people they are running against does not:</p>` +
+    `<p>${t('bias.p1', { n: word(CANDIDATES.length) })}</p>` +
 
     `<ul class="bias-why">` +
     OPPONENTS.map((o) =>
@@ -725,42 +730,43 @@ function renderBias(): void {
       `<span class="bias-reason">${esc(o.whyNoVotes)}</span></li>`).join('') +
     `</ul>` +
 
-    `<p>So they get no number at all — not a low one, not an estimate. Any score we ` +
-    `printed for them would be votes we made up.</p>` +
+    `<p>${t('bias.p2')}</p>` +
 
-    `<p><b>What stops this being a page about ${word(CANDIDATES.length)} Democrats.</b> ` +
-    `Under every one of the ${ALL_ITEMS.length} questions we also show ` +
-    `${word(reps + dems)} sitting House members — ${word(reps)} Republicans and ` +
-    // The payload sentence is used verbatim and as its own sentence. It already
-    // reads "From each caucus: … The same rule on both sides, recomputed every
-    // build." — so it needs no lead-in, and lowercasing it (an earlier draft did)
-    // breaks the capital on its second sentence.
-    `${word(dems)} Democrats. ${esc(DATA.comparatorRule)} ` +
-    `They voted on the same bills you are answering (${lo}–${hi} of ${ALL_ITEMS.length}), ` +
-    `so they are scored the way the candidates are, on every question rather than a ` +
-    `chosen few. If the Republican records land close to the Democratic ones on your ` +
-    `answers, that is the finding, not a thumb on the scale.</p>` +
+    // The payload's comparatorRule is used verbatim and as its own sentence. It
+    // already reads "From each caucus: … The same rule on both sides, recomputed
+    // every build." — so it needs no lead-in, and lowercasing it (an earlier
+    // draft did) breaks the capital on its second sentence. It is still English
+    // on the Spanish page: payload prose is pass two.
+    `<p>${t('bias.p3', {
+      n: word(CANDIDATES.length),
+      items: ALL_ITEMS.length,
+      total: word(reps + dems),
+      reps: word(reps),
+      dems: word(dems),
+    })} ${esc(DATA.comparatorRule)} ${t('bias.p3b', {
+      lo, hi, items: ALL_ITEMS.length,
+    })}</p>` +
 
-    `<p><b>Where an opponent does leave a mark.</b> On ${withActs} of the ` +
-    `${ALL_ITEMS.length} there is a recorded action on the exact bill — a veto, or a ` +
-    `bill named a must-pass priority. We show it under that question and we never add ` +
-    `it to a tally. ` +
+    `<p>${t('bias.p4', { acts: withActs, items: ALL_ITEMS.length })}` +
     (oneSidedOf
-      ? `${esc(oneSidedOf.name)} is the clearest case — ${esc(lowerFirst(oneSidedOf.oneSided))}`
+      ? ' ' + t('bias.clearestCase', {
+        name: esc(oneSidedOf.name),
+        why: esc(lowerFirst(oneSidedOf.oneSided)),
+      })
       : '') +
     `</p>` +
 
     // Hand over the attack surface rather than asking to be trusted. The rule is
     // the only place a thumb could go, so it is named and the file is linked.
-    `<p class="blurb-fine">One rule picks all ${word(reps + dems)} of those names, and ` +
-    `it cannot be tuned question by question. So if you think it is doing work it ` +
-    `shouldn't, the rule is the thing to argue with — and every vote behind it is in ` +
-    `<a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>. ` +
+    //
     // "Is the instrument fair" and "who built it" are the same question asked
     // twice, so the answer to the second is one click from the first rather than
     // something the reader has to go hunting for at the bottom of the page.
-    `The other half of this answer is ` +
-    `<a href="#author-card">who made this and what I have at stake</a>.</p>` +
+    `<p class="blurb-fine">${t('bias.fine', {
+      total: word(reps + dems),
+      payload: payloadLink,
+      authorLink: `<a href="#author-card">${esc(t('bias.authorLinkText'))}</a>`,
+    })}</p>` +
 
     `</div>`;
 }

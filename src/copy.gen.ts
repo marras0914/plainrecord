@@ -73,7 +73,108 @@ export type CopyKey =
   | "party.D"
   | "party.R"
   | "verdict.mildLean.headline"
-  | "verdict.mildLean.caveat";
+  | "verdict.mildLean.caveat"
+  | "hdr.eyebrow"
+  | "prov.questions.label"
+  | "prov.questions.short"
+  | "prov.questions.full"
+  | "prov.record.label"
+  | "prov.record.hint"
+  | "prov.agreed.label"
+  | "prov.agreed.mostlyParty"
+  | "prov.agreed.notAFight"
+  | "prov.picked.label"
+  | "prov.picked.hand"
+  | "prov.picked.rule"
+  | "prov.picked.handHint"
+  | "prov.picked.ruleHint"
+  | "stats.lean.label"
+  | "stats.lean.towardD"
+  | "stats.lean.towardR"
+  | "stats.lean.middle"
+  | "stats.lean.empty"
+  | "stats.cross.label"
+  | "stats.cross.hint"
+  | "stats.load.label"
+  | "stats.load.low"
+  | "stats.load.hint"
+  | "strip.noContent"
+  | "strip.empty"
+  | "strip.candidateRecords"
+  | "strip.dotLabel"
+  | "strip.title"
+  | "strip.legendYours"
+  | "strip.legendCands"
+  | "vote.yea"
+  | "vote.nay"
+  | "vote.none"
+  | "q.blind"
+  | "q.caption"
+  | "q.plainTag"
+  | "q.plainNote"
+  | "q.whyThis"
+  | "q.skip"
+  | "q.showReceipt"
+  | "q.hideReceipt"
+  | "q.receiptHead"
+  | "q.receiptBody"
+  | "q.rYea"
+  | "q.dYea"
+  | "q.doneEyebrow"
+  | "q.doneCaption"
+  | "q.doneSub"
+  | "q.startOver"
+  | "rev.threeRaces"
+  | "rev.noneVoted"
+  | "rev.agreedCount"
+  | "rev.missingOne"
+  | "rev.missingMany"
+  | "rev.youSaid"
+  | "rev.partyVote"
+  | "rev.compareSummary"
+  | "rev.compareHint"
+  | "rev.repsHead"
+  | "rev.demsHead"
+  | "rev.compareNote"
+  | "rev.oppHead"
+  | "rev.oppVetoed"
+  | "rev.oppPriority"
+  | "rev.oppNote"
+  | "rev.outcomeHead"
+  | "rev.sameSide"
+  | "rev.oppositeSide"
+  | "rev.source"
+  | "outc.leftBlank"
+  | "outc.incumbent"
+  | "table.empty"
+  | "table.bill"
+  | "table.caption"
+  | "table.category"
+  | "table.you"
+  | "table.rYea"
+  | "table.dYea"
+  | "table.valence"
+  | "table.position"
+  | "table.source"
+  | "sec.howMany"
+  | "sec.yourAnswers"
+  | "sec.netLean"
+  | "sec.candidates"
+  | "sec.outcomes"
+  | "method.where.lead"
+  | "method.where.body"
+  | "method.notFights.lead"
+  | "method.notFights.body"
+  | "method.who.lead"
+  | "method.seven.lead"
+  | "method.seven.body"
+  | "method.words.lead"
+  | "method.words.body"
+  | "method.check.lead"
+  | "method.check.body"
+  | "readout.answered"
+  | "bias.clearestCase"
+  | "bias.authorLinkText";
 
 export type Locale = 'en' | 'es';
 
@@ -111,7 +212,7 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "bias.p3": "What stops this being a page about {n} Democrats. Under every one of the {items} questions we also show {total} sitting House members — {reps} Republicans and {dems} Democrats.",
     "bias.p3b": "They voted on the same bills you are answering ({lo}–{hi} of {items}), so they are scored the way the candidates are, on every question rather than a chosen few. If the Republican records land close to the Democratic ones on your answers, that is the finding, not a thumb on the scale.",
     "bias.p4": "Where an opponent does leave a mark. On {acts} of the {items} there is a recorded action on the exact bill — a veto, or a bill named a must-pass priority. We show it under that question and we never add it to a tally.",
-    "bias.fine": "One rule picks all {total} of those names, and it cannot be tuned question by question. So if you think it is doing work it shouldn't, the rule is the thing to argue with — and every vote behind it is in {payload}. The other half of this answer is who made this and what I have at stake.",
+    "bias.fine": "One rule picks all {total} of those names, and it cannot be tuned question by question. So if you think it is doing work it shouldn't, the rule is the thing to argue with — and every vote behind it is in {payload}. The other half of this answer is {authorLink}.",
     "author.heading": "Who made this, who paid for it, and what I have at stake",
     "author.built": "I'm Marco Arras, and I built this on my own time. Nobody paid for it — no campaign, no party, no PAC, no organisation. There was no budget. The cost was evenings.",
     "author.donation": "I donate to the Democratic Party. You should know that before you read anything else here, and it is the reason this page is built the way it is rather than a footnote to it. I have a side. So the rule that picks the comparison members runs identically on both caucuses, a third of the questions are reserved for votes where the two parties agreed, the selection rule is named and published, and every vote, count and score sits in one file you can download and check. None of that asks you to trust me. That is the whole point of it.",
@@ -121,8 +222,8 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "author.contact": "If something here is wrong, tell me: {email}. Corrections get made, and noted on the page.",
     "mode.short": "7 big issues",
     "mode.full": "All {n} votes",
-    "mode.shortDesc": "Seven of the session's biggest fights — the bills the Lieutenant Governor named a top priority, or the Governor vetoed. Each one shows why it was chosen.",
-    "mode.fullDesc": "All {n} votes: one per bill, spread across 20 subject areas by a written rule, with a third of the slots reserved for votes where both parties agreed.",
+    "mode.shortDesc": "Seven of the session's biggest fights — the bills the Lieutenant Governor made priorities or the Governor vetoed. <b>Six of the seven split cleanly along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all {n} to find where you cross over.",
+    "mode.fullDesc": "All {n} votes: one per bill, spread across 20 subject areas, including the ones where Republicans and Democrats agreed. Those are the votes that can show you crossing party lines.",
     "cand.note": "All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together — where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
     "stmt.heading": "Statements of vote",
     "stmt.note": "A Texas member may file a statement saying the Journal recorded them wrongly. The recorded vote is the official act and is what is scored here; the statement is shown beside it, never applied in its place.",
@@ -143,6 +244,107 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "party.R": "Republicans",
     "verdict.mildLean.headline": "You lean toward {party}",
     "verdict.mildLean.caveat": "More of your answers matched that party than the other one.",
+    "hdr.eyebrow": "PlainRecord · Texas House {session} · {n} real recorded votes",
+    "prov.questions.label": "Questions",
+    "prov.questions.short": "the seven biggest fights of the session",
+    "prov.questions.full": "one per bill, across {cats} subjects",
+    "prov.record.label": "Straight from the record",
+    "prov.record.hint": "taken from the official House Journal, not a summary",
+    "prov.agreed.label": "Both parties agreed",
+    "prov.agreed.mostlyParty": "nearly all of these were party-line fights",
+    "prov.agreed.notAFight": "these votes were not a party fight at all",
+    "prov.picked.label": "Picked by",
+    "prov.picked.hand": "hand",
+    "prov.picked.rule": "a written rule",
+    "prov.picked.handHint": "each one shows why it was chosen",
+    "prov.picked.ruleHint": "{rule}, max {perCat} per subject",
+    "stats.lean.label": "Which way you lean",
+    "stats.lean.towardD": "toward Democrats",
+    "stats.lean.towardR": "toward Republicans",
+    "stats.lean.middle": "right down the middle",
+    "stats.lean.empty": "answer a few votes",
+    "stats.cross.label": "How often you cross",
+    "stats.cross.hint": "of your answers land on the opposite side from your overall lean",
+    "stats.load.label": "How partisan these votes were",
+    "stats.load.low": "very low — these votes barely split the parties",
+    "stats.load.hint": "1.00 would mean every party member voted with their side",
+    "strip.noContent": "NO PARTISAN CONTENT",
+    "strip.empty": "Answer a vote to place the first mark.",
+    "strip.candidateRecords": "CANDIDATE RECORDS ON THE SAME VOTES",
+    "strip.dotLabel": "{bill} {category}, you answered {answer}, position {pos}",
+    "strip.title": "Each answered vote plotted on a blue-to-red partisan axis, with the three candidates' own records below",
+    "strip.legendYours": "your answer",
+    "strip.legendCands": "candidate's record on the same votes",
+    "vote.yea": "Yea",
+    "vote.nay": "Nay",
+    "vote.none": "no vote recorded",
+    "q.blind": "blind — party not shown",
+    "q.caption": "Official bill caption. The House voted {yeas} yes, {nays} no.",
+    "q.plainTag": "In plain terms",
+    "q.plainNote": "Our summary, not the official text. The caption above is the official wording.",
+    "q.whyThis": "Why this one:",
+    "q.skip": "Skip",
+    "q.showReceipt": "Show the receipt",
+    "q.hideReceipt": "Hide the receipt",
+    "q.receiptHead": "How this vote is coloured.",
+    "q.receiptBody": "Valence is the Republican Yea share minus the Democratic Yea share — measured, not judged.",
+    "q.rYea": "Republicans voting Yea",
+    "q.dYea": "Democrats voting Yea",
+    "q.doneEyebrow": "Done",
+    "q.doneCaption": "All {n} votes answered or skipped.",
+    "q.doneSub": "The strip above holds every answer with measurable partisan content.",
+    "q.startOver": "Start over",
+    "rev.threeRaces": "The three races — how they voted on {bill}",
+    "rev.noneVoted": "None of the three has a recorded vote on this bill.",
+    "rev.agreedCount": "{agreed} of {counted} voted the same way you did",
+    "rev.missingOne": ", and one has no recorded vote.",
+    "rev.missingMany": ", and {n} have no recorded vote.",
+    "rev.youSaid": "You said",
+    "rev.partyVote": "How each party voted on it",
+    "rev.compareSummary": "Compare with six other House members",
+    "rev.compareHint": "three from each party, picked by rule",
+    "rev.repsHead": "Three Republicans, picked by rule",
+    "rev.demsHead": "Three Democrats, picked by the same rule",
+    "rev.compareNote": "None of these six is on the ballot. From each caucus: the most party-line member, the median, and the one who most often broke ranks — the same rule on both sides, recomputed every build, so the comparison is not a pick of names.",
+    "rev.oppHead": "What their opponents did on this bill",
+    "rev.oppVetoed": "vetoed it",
+    "rev.oppPriority": "made it a priority",
+    "rev.oppNote": "Not votes — neither of them votes in the House, so these are not counted above. And each list runs one way only: a governor vetoes just the bills he opposes, a priority list names just the bills its author wants passed. That is why you see a side on this bill and never a percentage.",
+    "rev.outcomeHead": "Where Texas stands on {category}",
+    "rev.sameSide": "same side as you",
+    "rev.oppositeSide": "opposite side to you",
+    "rev.source": "source",
+    "outc.leftBlank": "Deliberately left blank:",
+    "outc.incumbent": "{name} has been {office} since {since}, covering {sessions}.",
+    "table.empty": "Nothing answered yet.",
+    "table.bill": "Bill",
+    "table.caption": "Caption",
+    "table.category": "Category",
+    "table.you": "You",
+    "table.rYea": "R Yea",
+    "table.dYea": "D Yea",
+    "table.valence": "Valence",
+    "table.position": "Position",
+    "table.source": "Source",
+    "sec.howMany": "How many votes",
+    "sec.yourAnswers": "Your answers, one mark each",
+    "sec.netLean": "net lean",
+    "sec.candidates": "The three candidates, scored against your answers",
+    "sec.outcomes": "What these areas look like now",
+    "method.where.lead": "Where the questions come from.",
+    "method.where.body": "These are real votes the Texas House took. We use one vote per bill, so no bill is asked about twice. Then we sort the bills into 20 subject areas — the same list the state's own library uses — and take at most {perCat} from each area.",
+    "method.notFights.lead": "Why some questions are not close fights.",
+    "method.notFights.body": "About {reserve} out of every 100 spots are saved for votes where Republicans and Democrats <em>agreed</em>. We do that on purpose. If we only picked the big fights, every answer you gave would land at one end or the other, and nobody could ever come out purple. The rule we follow is written down and named {rule}, so you can check we did not change it to get a nicer answer.",
+    "method.who.lead": "Who is on this page.",
+    "method.seven.lead": "The seven big ones.",
+    "method.seven.body": "We picked these by hand, but not by our own opinion. Each one is a bill the Lieutenant Governor called a top priority, or a bill the Governor vetoed. Those are their published lists, not ours. Each question shows why it made the list. Six of the seven split the two parties sharply — that is what a headline fight is.",
+    "method.words.lead": "Where the words come from.",
+    "method.words.body": "Every question is the bill's official summary, copied word for word. We did not rewrite it to sound better or worse. How each member voted comes from the official House Journal where we could match it (<span class=\"src\">journal</span>), and otherwise from a scrape (<span class=\"src\">scrape</span>). The table tells you which, for every vote.",
+    "method.check.lead": "Check it yourself.",
+    "method.check.body": "Every vote, count and score behind this page sits in one file: {link}. That is the exact file this page loaded, not a copy we made for show.",
+    "readout.answered": "{n} of {total} answered",
+    "bias.clearestCase": "{name} is the clearest case — {why}",
+    "bias.authorLinkText": "who made this and what I have at stake",
   },
   es: {
     "verdict.fewMarks.headline": "Responda unas cuantas más y podremos decirle algo",
@@ -177,7 +379,7 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "bias.p3": "Lo que evita que esta sea una página sobre {n} demócratas. Debajo de cada una de las {items} preguntas mostramos también a {total} miembros en funciones de la Cámara: {reps} republicanos y {dems} demócratas.",
     "bias.p3b": "Votaron los mismos proyectos que usted está respondiendo ({lo}-{hi} de {items}), así que se califican igual que los candidatos, en cada pregunta y no en unas pocas escogidas. Si los historiales republicanos quedan cerca de los demócratas según sus respuestas, ese es el hallazgo, no un pulgar en la balanza.",
     "bias.p4": "Donde un oponente sí deja huella. En {acts} de las {items} hay una acción registrada sobre ese mismo proyecto: un veto, o un proyecto declarado prioridad obligada. La mostramos debajo de esa pregunta y nunca la sumamos a un conteo.",
-    "bias.fine": "Una sola regla escoge los {total} nombres, y no se puede ajustar pregunta por pregunta. Así que si cree que está haciendo un trabajo que no debería, la regla es lo que hay que discutir, y cada voto detrás de ella está en {payload}. La otra mitad de esta respuesta es quién hizo esto y qué tengo en juego.",
+    "bias.fine": "Una sola regla escoge los {total} nombres, y no se puede ajustar pregunta por pregunta. Así que si cree que está haciendo un trabajo que no debería, la regla es lo que hay que discutir, y cada voto detrás de ella está en {payload}. La otra mitad de esta respuesta es {authorLink}.",
     "author.heading": "Quién hizo esto, quién lo pagó y qué tengo en juego",
     "author.built": "Soy Marco Arras y hice esto en mi propio tiempo. Nadie lo pagó: ninguna campaña, ningún partido, ningún PAC, ninguna organización. No hubo presupuesto. El costo fueron mis noches.",
     "author.donation": "Yo dono al Partido Demócrata. Debería saberlo antes de leer cualquier otra cosa aquí, y es la razón por la que esta página está construida como está, no una nota al pie. Tengo un lado. Por eso la regla que escoge a los miembros de comparación funciona igual en las dos bancadas, un tercio de las preguntas se reserva para votos en los que los dos partidos estuvieron de acuerdo, la regla de selección tiene nombre y está publicada, y cada voto, conteo y calificación está en un archivo que usted puede descargar y verificar. Nada de eso le pide que confíe en mí. Ese es exactamente el punto.",
@@ -187,8 +389,8 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "author.contact": "Si algo aquí está mal, dígamelo: {email}. Las correcciones se hacen y se anotan en la página.",
     "mode.short": "7 temas grandes",
     "mode.full": "Los {n} votos",
-    "mode.shortDesc": "Siete de las peleas más grandes de la sesión: los proyectos que el Vicegobernador declaró prioridad, o que el Gobernador vetó. Cada uno muestra por qué fue escogido.",
-    "mode.fullDesc": "Los {n} votos: uno por proyecto, repartidos en 20 áreas temáticas por una regla escrita, con un tercio de los lugares reservado para votos en los que los dos partidos estuvieron de acuerdo.",
+    "mode.shortDesc": "Siete de las peleas más grandes de la sesión: los proyectos que el Vicegobernador hizo prioridades o que el Gobernador vetó. <b>Seis de las siete dividieron limpiamente por línea partidista</b>, así que esta versión casi solo puede decirle hacia qué partido se inclina. Cambie a los {n} votos para encontrar dónde cruza.",
+    "mode.fullDesc": "Los {n} votos: uno por proyecto, repartidos en 20 materias, incluidos aquellos en los que republicanos y demócratas estuvieron de acuerdo. Esos son los votos que pueden mostrarle cruzando líneas partidistas.",
     "cand.note": "Los tres estuvieron en la misma cámara y compiten por cargos distintos, así que estas son tres lecturas separadas, no una clasificación. Votaron juntos en la mayoría de los proyectos de línea partidista, así que espere que las cifras queden cerca; donde se separan es la parte interesante. Cobertura sobre estos {items} votos: {coverage}. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
     "stmt.heading": "Declaraciones de voto",
     "stmt.note": "Un miembro de Texas puede presentar una declaración diciendo que el Diario lo registró mal. El voto registrado es el acto oficial y es lo que se califica aquí; la declaración se muestra al lado, nunca se aplica en su lugar.",
@@ -209,6 +411,107 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "party.R": "los republicanos",
     "verdict.mildLean.headline": "Se inclina hacia {party}",
     "verdict.mildLean.caveat": "Más de sus respuestas coincidieron con ese partido que con el otro.",
+    "hdr.eyebrow": "PlainRecord · Cámara de Texas {session} · {n} votos reales registrados",
+    "prov.questions.label": "Preguntas",
+    "prov.questions.short": "las siete peleas más grandes de la sesión",
+    "prov.questions.full": "uno por proyecto, en {cats} materias",
+    "prov.record.label": "Directo del registro",
+    "prov.record.hint": "tomado del Diario oficial de la Cámara, no de un resumen",
+    "prov.agreed.label": "Los dos partidos de acuerdo",
+    "prov.agreed.mostlyParty": "casi todas fueron peleas de línea partidista",
+    "prov.agreed.notAFight": "estos votos no fueron para nada una pelea entre partidos",
+    "prov.picked.label": "Escogidas por",
+    "prov.picked.hand": "mano",
+    "prov.picked.rule": "una regla escrita",
+    "prov.picked.handHint": "cada una muestra por qué fue escogida",
+    "prov.picked.ruleHint": "{rule}, máximo {perCat} por materia",
+    "stats.lean.label": "Hacia dónde se inclina",
+    "stats.lean.towardD": "hacia los demócratas",
+    "stats.lean.towardR": "hacia los republicanos",
+    "stats.lean.middle": "exactamente por la mitad",
+    "stats.lean.empty": "responda algunos votos",
+    "stats.cross.label": "Con qué frecuencia cruza",
+    "stats.cross.hint": "de sus respuestas caen del lado opuesto a su inclinación general",
+    "stats.load.label": "Qué tan partidistas fueron estos votos",
+    "stats.load.low": "muy baja: estos votos apenas dividieron a los partidos",
+    "stats.load.hint": "1.00 significaría que cada miembro votó con su bando",
+    "strip.noContent": "SIN CONTENIDO PARTIDISTA",
+    "strip.empty": "Responda un voto para colocar la primera marca.",
+    "strip.candidateRecords": "HISTORIAL DE LOS CANDIDATOS EN LOS MISMOS VOTOS",
+    "strip.dotLabel": "{bill} {category}, usted respondió {answer}, posición {pos}",
+    "strip.title": "Cada voto respondido trazado en un eje partidista de azul a rojo, con el historial de los tres candidatos debajo",
+    "strip.legendYours": "su respuesta",
+    "strip.legendCands": "historial del candidato en los mismos votos",
+    "vote.yea": "A favor",
+    "vote.nay": "En contra",
+    "vote.none": "sin voto registrado",
+    "q.blind": "a ciegas: no se muestra el partido",
+    "q.caption": "Título oficial del proyecto. La Cámara votó {yeas} a favor y {nays} en contra.",
+    "q.plainTag": "En términos simples",
+    "q.plainNote": "Nuestro resumen, no el texto oficial. El título de arriba es la redacción oficial.",
+    "q.whyThis": "Por qué esta:",
+    "q.skip": "Omitir",
+    "q.showReceipt": "Ver el comprobante",
+    "q.hideReceipt": "Ocultar el comprobante",
+    "q.receiptHead": "Cómo se colorea este voto.",
+    "q.receiptBody": "La valencia es el porcentaje republicano a favor menos el porcentaje demócrata a favor: medida, no juzgada.",
+    "q.rYea": "Republicanos que votaron a favor",
+    "q.dYea": "Demócratas que votaron a favor",
+    "q.doneEyebrow": "Listo",
+    "q.doneCaption": "Los {n} votos fueron respondidos u omitidos.",
+    "q.doneSub": "La franja de arriba contiene cada respuesta con contenido partidista medible.",
+    "q.startOver": "Empezar de nuevo",
+    "rev.threeRaces": "Las tres contiendas: cómo votaron en {bill}",
+    "rev.noneVoted": "Ninguno de los tres tiene voto registrado en este proyecto.",
+    "rev.agreedCount": "{agreed} de {counted} votaron igual que usted",
+    "rev.missingOne": ", y uno no tiene voto registrado.",
+    "rev.missingMany": ", y {n} no tienen voto registrado.",
+    "rev.youSaid": "Usted dijo",
+    "rev.partyVote": "Cómo votó cada partido",
+    "rev.compareSummary": "Compare con otros seis miembros de la Cámara",
+    "rev.compareHint": "tres de cada partido, escogidos por regla",
+    "rev.repsHead": "Tres republicanos, escogidos por regla",
+    "rev.demsHead": "Tres demócratas, escogidos por la misma regla",
+    "rev.compareNote": "Ninguno de estos seis está en la boleta. De cada bancada: el miembro más de línea partidista, el mediano y el que más veces rompió filas; la misma regla en los dos lados, recalculada en cada compilación, para que la comparación no sea una selección de nombres.",
+    "rev.oppHead": "Qué hicieron sus oponentes con este proyecto",
+    "rev.oppVetoed": "lo vetó",
+    "rev.oppPriority": "lo hizo prioridad",
+    "rev.oppNote": "No son votos: ninguno de ellos vota en la Cámara, así que no se cuentan arriba. Y cada lista corre en un solo sentido: un gobernador veta solo los proyectos que rechaza, y una lista de prioridades nombra solo los proyectos que su autor quiere aprobar. Por eso ve una postura en este proyecto y nunca un porcentaje.",
+    "rev.outcomeHead": "Cómo está Texas en {category}",
+    "rev.sameSide": "del mismo lado que usted",
+    "rev.oppositeSide": "del lado opuesto al suyo",
+    "rev.source": "fuente",
+    "outc.leftBlank": "Dejado en blanco a propósito:",
+    "outc.incumbent": "{name} ha sido {office} desde {since}, abarcando {sessions}.",
+    "table.empty": "Nada respondido todavía.",
+    "table.bill": "Proyecto",
+    "table.caption": "Título",
+    "table.category": "Materia",
+    "table.you": "Usted",
+    "table.rYea": "R a favor",
+    "table.dYea": "D a favor",
+    "table.valence": "Valencia",
+    "table.position": "Posición",
+    "table.source": "Fuente",
+    "sec.howMany": "Cuántos votos",
+    "sec.yourAnswers": "Sus respuestas, una marca cada una",
+    "sec.netLean": "inclinación neta",
+    "sec.candidates": "Los tres candidatos, calificados según sus respuestas",
+    "sec.outcomes": "Cómo están estas áreas ahora",
+    "method.where.lead": "De dónde vienen las preguntas.",
+    "method.where.body": "Son votos reales que emitió la Cámara de Texas. Usamos un voto por proyecto, así que ningún proyecto se pregunta dos veces. Después clasificamos los proyectos en 20 materias, la misma lista que usa la biblioteca legislativa del estado, y tomamos como máximo {perCat} de cada materia.",
+    "method.notFights.lead": "Por qué algunas preguntas no son peleas cerradas.",
+    "method.notFights.body": "Cerca de {reserve} de cada 100 lugares se reservan para votos en los que republicanos y demócratas <em>estuvieron de acuerdo</em>. Lo hacemos a propósito. Si solo escogiéramos las peleas grandes, cada respuesta que diera caería en un extremo o en el otro, y nadie podría salir morado. La regla que seguimos está escrita y se llama {rule}, así que puede comprobar que no la cambiamos para obtener una respuesta más agradable.",
+    "method.who.lead": "Quién aparece en esta página.",
+    "method.seven.lead": "Las siete grandes.",
+    "method.seven.body": "Las escogimos a mano, pero no según nuestra propia opinión. Cada una es un proyecto que el Vicegobernador declaró prioridad, o que el Gobernador vetó. Esas son sus listas publicadas, no las nuestras. Cada pregunta muestra por qué entró en la lista. Seis de las siete dividieron a los dos partidos con claridad, y eso es lo que hace una pelea de portada.",
+    "method.words.lead": "De dónde vienen las palabras.",
+    "method.words.body": "Cada pregunta es el resumen oficial del proyecto, copiado palabra por palabra. No lo reescribimos para que suene mejor ni peor. Cómo votó cada miembro viene del Diario oficial de la Cámara donde pudimos hacer la correspondencia (<span class=\"src\">journal</span>), y en los demás casos de una extracción automática (<span class=\"src\">scrape</span>). La tabla le dice cuál, en cada voto.",
+    "method.check.lead": "Compruébelo usted mismo.",
+    "method.check.body": "Cada voto, conteo y calificación detrás de esta página está en un solo archivo: {link}. Es el archivo exacto que cargó esta página, no una copia hecha para aparentar.",
+    "readout.answered": "{n} de {total} respondidas",
+    "bias.clearestCase": "{name} es el caso más claro: {why}",
+    "bias.authorLinkText": "quién hizo esto y qué tengo en juego",
   },
 };
 
