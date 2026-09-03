@@ -136,7 +136,9 @@ registration stays put.
 ### Vercel
 
 1. Vercel → project → **Settings → Domains → Add** → `rightnleft.com`.
-   Add `www.rightnleft.com` too and let Vercel redirect one to the other.
+   Add `www.rightnleft.com` too, but leave its **Redirect to** field alone —
+   the `www` → apex redirect lives in `vercel.json`, not in the dashboard.
+   See [The www redirect](#the-www-redirect).
 2. Vercel shows the target records. Squarespace → **Domains →
    rightnleft.com → DNS → DNS Settings**.
 3. Delete the Squarespace parking/default records for `@` and `www`
@@ -159,6 +161,63 @@ registration stays put.
    The two A records leave everything else where it is.
 4. Back in Vercel, wait for **Valid Configuration**. TLS is issued automatically
    once DNS resolves.
+
+### The www redirect
+
+Both hostnames resolve to Vercel and both serve the site, so without a redirect
+the same page answers on two URLs and every share splits its canonical address.
+The rule is in `vercel.json`:
+
+```json
+"redirects": [
+  {
+    "source": "/(.*)",
+    "has": [{ "type": "host", "value": "www.rightnleft.com" }],
+    "destination": "https://rightnleft.com/$1",
+    "permanent": true
+  }
+]
+```
+
+It is here rather than in **Settings → Domains → www → Redirect to** on purpose.
+The dashboard field was set three times and never took effect — the edge kept
+returning `404` from the static router on `www`, with no `Location` header at
+all, while the dashboard appeared to show the redirect. In `vercel.json` the rule
+is in git, is reviewable, ships atomically with the deploy that needs it, and
+cannot silently revert to a state nobody can read back. The CLI cannot inspect
+the dashboard field (`vercel domains inspect` and `vercel project inspect` both
+omit it), which is what made the failure so expensive to diagnose.
+
+**`source` is `/(.*)` and not `/:path*`.** This is the whole ballgame. `:path*`
+compiles to `^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?$`, whose leading slash sits
+*inside* the optional group — so it needs at least one path segment and does not
+match `/`. The homepage, the most-shared URL on the site, would have fallen
+through and gone on answering `200` on `www` while every sub-path redirected
+correctly. `/(.*)` compiles to `^(?:/(.*))$` and matches `/` with an empty
+capture.
+
+Verify the compiled route rather than the source, because the source looks right
+in both cases:
+
+```bash
+npx vercel build --yes
+node -e 'console.log(JSON.stringify(require("./.vercel/output/config.json").routes.filter(r=>JSON.stringify(r).includes("www.")),null,2))'
+```
+
+Trailing-slash and `.html` URLs on `www` take two hops: `cleanUrls`/
+`trailingSlash` normalise first and stay on `www`, then this rule moves to the
+apex. The final destination is correct either way.
+
+Once deployed, test it on a path that has never existed:
+
+```bash
+curl -sI "https://www.rightnleft.com/zz-$RANDOM" | head -1     # want: 308
+```
+
+Do **not** test `https://www.rightnleft.com/`. The homepage is a cache `HIT` with
+an `Age` in the thousands, and a query string will not bust it — Vercel drops
+query params from the cache key for static files, so `?cb=123` returns the same
+stale `200` and reads as a failed redirect.
 
 ### Netlify
 
