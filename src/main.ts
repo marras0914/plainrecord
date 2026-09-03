@@ -24,6 +24,7 @@ import {
 } from './quiz-data';
 import type { PartisanProfile } from '../valence';
 import { PROFILE_BANDS } from '../valence';
+import { inject } from '@vercel/analytics';
 import { renderVerdict } from './verdict';
 import { t, word } from './i18n';
 import * as pes from './payload-i18n';
@@ -935,7 +936,28 @@ function setMode(m: Mode, doRender = true): void {
   answers = {};
   cursor = 0;
   adapted = adapt(activeItems());
-  queue = buildQueue();
+  /**
+ * Page-view counting, and nothing else.
+ *
+ * inject() is used rather than the two script tags the docs give for plain HTML,
+ * because the first of those is INLINE and this page's CSP is `script-src 'self'`
+ * with no unsafe-inline — it would be blocked, loudly, which is exactly what that
+ * policy is for. Imported here it ships inside the bundle, and the script it then
+ * loads is same-origin (/_vercel/insights/), so the CSP needs no widening at all.
+ *
+ * What it sends: a page view, a referrer, a coarse device and country. No cookie,
+ * and the visitor hash resets daily so nobody can be followed across days or
+ * across sites.
+ *
+ * What it does NOT send: the answers. Custom events are the only mechanism that
+ * could carry one and they are not available on this plan — but the real guard is
+ * that verify_site.mjs answers five questions and fails if anything beyond fonts
+ * and the page-view beacon leaves the browser. The claim is on the page, so it has
+ * to be enforced rather than intended.
+ */
+inject();
+
+queue = buildQueue();
   if (doRender) render();
 }
 

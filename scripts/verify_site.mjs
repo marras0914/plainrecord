@@ -160,6 +160,25 @@ page.on('console', (m) => {
   if (m.type() === 'error') errs.push('CONSOLE ' + m.text());
 });
 
+// Did the analytics script get requested, and did it resolve?
+//
+// /_vercel/insights/ exists only after Web Analytics is enabled in the Vercel
+// dashboard, and the local static server here cannot provide it at all. So a 404
+// on that path is EXPECTED offline and is reported rather than failed — but the
+// request itself is asserted, because a missing request means inject() never ran
+// and the page is counting nothing while the authorship card says it counts
+// visits. Suppressing the noise without checking the cause is how that sentence
+// would quietly become false.
+const insights = { requested: false, status: null };
+page.on('request', (r) => {
+  if (/\/_vercel\/insights\//.test(r.url())) insights.requested = true;
+});
+page.on('response', (r) => {
+  if (/\/_vercel\/insights\//.test(r.url())) insights.status = r.status();
+});
+const isInsights404 = (e) =>
+  /404/.test(e) && /Failed to load resource/.test(e) && insights.status === 404;
+
 try {
   await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
   await page.waitForTimeout(600);
@@ -566,7 +585,103 @@ try {
   check('table view exposes the receipts',
     ['R Yea', 'D Yea', 'Valence', 'Source'].every((c) => cols.includes(c)), cols.join(','));
 
-  check('no console errors', errs.length === 0, errs.join(' | '));
+  check('analytics script was requested', insights.requested,
+    insights.requested ? `/_vercel/insights/ -> ${insights.status}` : 'inject() never ran');
+  if (insights.status === 404) {
+    console.log('  [ -- ] Web Analytics not enabled yet' +
+      '  — /_vercel/insights/ 404s until it is switched on in the Vercel dashboard');
+  }
+
+  const realErrs = errs.filter((e) => !isInsights404(e));
+  check('no console errors', realErrs.length === 0, realErrs.join(' | '));
+
+  // ---------------------------------------------------------------------------
+  // The answers never leave the browser
+  //
+  // This is the page's strongest privacy claim and the only one a reader cannot
+  // verify for themselves: they can read the payload, check a roll call and
+  // recompute a score, but they cannot prove their answers were not sent
+  // somewhere. So the build proves it instead.
+  //
+  // It asserts the ABSENCE of a request, which is a check that passes trivially
+  // if it is written carelessly — if the clicks silently fail to register, no
+  // request happens and the check goes green while testing nothing. So it
+  // asserts the answers were actually recorded first, and only then that the
+  // network stayed silent.
+  //
+  // Two destinations are allowed and everything else is a failure: Google Fonts,
+  // the single third party the CSP admits, and the page-view beacon at
+  // /_vercel/insights/. The beacon is why this check INSPECTS requests rather
+  // than merely counting them — an allowlist by path would let a future custom
+  // event smuggle an answer out through a permitted URL. So every request in the
+  // window, allowed or not, is searched for anything that looks like an answer:
+  // an item id, a bill number, a candidate id, or the words the code uses for
+  // the answer map.
+  // ---------------------------------------------------------------------------
+
+  {
+    const payload = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+    // Needles drawn from the real data, so this cannot pass by testing nothing.
+    const NEEDLES = [
+      ...payload.items.slice(0, 8).map((i) => i.id),
+      ...payload.items.slice(0, 8).map((i) => i.billId.replace(' ', '')),
+      ...payload.candidates.map((c) => c.id),
+      'netLean', 'crossover', 'partisanLoad', 'answers',
+    ].filter(Boolean);
+
+    const FONT_HOSTS = /^https:\/\/fonts\.(googleapis|gstatic)\.com\//;
+    const BEACON = /\/_vercel\/insights\//;
+    const seen = [];
+    const carrying = [];
+    const record = (r) => {
+      const u = r.url();
+      if (u.startsWith('data:') || u.startsWith('blob:')) return;
+
+      // Inspect first, allow second. A permitted destination is still checked.
+      let body = '';
+      try { body = r.postData() ?? ''; } catch { body = ''; }
+      const haystack = `${u} ${body}`;
+      const hit = NEEDLES.find((n) => haystack.includes(n));
+      if (hit) carrying.push(`${r.method()} ${u.slice(0, 60)} carries "${hit}"`);
+
+      if (FONT_HOSTS.test(u) || BEACON.test(u)) return;
+      seen.push(`${r.method()} ${u}`);
+    };
+
+    // Start from a clean page so load-time asset requests are not counted.
+    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(400);
+    const before = await page.$eval('.readout-caveat.mono', (e) => e.textContent.trim());
+
+    page.on('request', record);
+    let answered = 0;
+    for (let i = 0; i < 5; i++) {
+      const btn = await page.$('#q-card button[data-answer="1"]');
+      if (!btn) break;
+      await btn.click();
+      await page.waitForTimeout(150);
+      answered++;
+    }
+    await page.waitForTimeout(700);
+    page.off('request', record);
+
+    const after = await page.$eval('.readout-caveat.mono', (e) => e.textContent.trim());
+
+    // The guard against a vacuous pass: the clicks must have done something.
+    check('answering actually registers', answered === 5 && after !== before,
+      `${answered} answered · readout "${before}" -> "${after}"`);
+
+    check('answering sends nothing beyond fonts and the page-view beacon',
+      seen.length === 0,
+      seen.length ? `UNEXPECTED ${seen.length}: ${seen.slice(0, 3).join(' | ')}` : `${answered} answers`);
+
+    // The one the page's own claim rests on. Checked against every request in
+    // the window including the permitted ones, so a custom event that put an
+    // answer into an allowed URL would still fail.
+    check('no request carries an answer, a bill or a candidate',
+      carrying.length === 0,
+      carrying.length ? carrying.slice(0, 2).join(' | ') : `${NEEDLES.length} needles searched`);
+  }
 
   // ---------------------------------------------------------------------------
   // The Spanish page

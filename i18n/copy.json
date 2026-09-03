@@ -1559,5 +1559,20 @@
     ],
     "note": "Added after a data reporter was pitched the open payload. The page showed 30% (20/67) while the file said 31.7% (19/60) and nothing on either surface said why. Deliberately does NOT quote the denominator as a number: the page cannot reliably derive it (items.length - headlineCount only works when no headline bill was already rule-selected), and crossCuttingOf is absent from the committed payload.",
     "status": "ok"
+  },
+  "privacy.lead": {
+    "en": "What this page counts, and what it does not.",
+    "es": "Qué cuenta esta página y qué no.",
+    "where": "Privacy paragraph lead, in the authorship card.",
+    "vars": [],
+    "status": "ok"
+  },
+  "privacy.body": {
+    "en": "It counts visits — how many people came and which link sent them — using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser: there is no server to send them to, and the page makes no network request while you answer. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out.",
+    "es": "Cuenta visitas —cuántas personas entraron y qué enlace las trajo— con la analítica de Vercel, que no usa cookies y no puede seguirle a otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador: no hay ningún servidor al que enviarlas, y la página no hace ninguna petición de red mientras usted responde. Eso no es una promesa, se comprueba en cada compilación: la prueba responde cinco preguntas y falla si sale un solo byte.",
+    "where": "Privacy paragraph body, in the authorship card, before the contact line.",
+    "vars": [],
+    "note": "The last sentence is the load-bearing one and must stay true. verify_site.mjs answers five questions and asserts nothing but fonts and the page-view beacon goes out. If that check is ever removed or weakened, this sentence becomes a lie and has to be reworded first.",
+    "status": "ok"
   }
 }

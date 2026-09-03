@@ -208,7 +208,9 @@ export type CopyKey =
   | "og.prov"
   | "og.imageAlt"
   | "method.denominator.lead"
-  | "method.denominator.body";
+  | "method.denominator.body"
+  | "privacy.lead"
+  | "privacy.body";
 
 export type Locale = 'en' | 'es';
 
@@ -413,6 +415,8 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "og.imageAlt": "The Purple Strip — a blind quiz on {n} real Texas House votes. A blue-to-red axis labelled \"agreed with Democrats\" and \"agreed with Republicans\", with {dots} purple dots spread across its whole width.",
     "method.denominator.lead": "Two cross-cutting figures, and why.",
     "method.denominator.body": "The percentage in the tiles above counts all {items} questions. The <code>crossCuttingShare</code> field in the data file is measured over the rule-selected votes only, so it is a slightly different number. That is deliberate: it exists to check the <em>rule</em>, and the seven headline bills were picked by hand rather than by the rule — six of them split the parties sharply, so counting them would make the rule look more one-sided than it is. Both numbers are honest and neither is the other one rounded.",
+    "privacy.lead": "What this page counts, and what it does not.",
+    "privacy.body": "It counts visits — how many people came and which link sent them — using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser: there is no server to send them to, and the page makes no network request while you answer. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out.",
   },
   es: {
     "verdict.fewMarks.headline": "Responda unas cuantas más y podremos decirle algo",
@@ -614,6 +618,8 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "og.imageAlt": "La Franja Morada — un cuestionario a ciegas sobre {n} votos reales de la Cámara de Texas. Un eje de azul a rojo rotulado \"coincidió con los demócratas\" y \"coincidió con los republicanos\", con {dots} puntos morados repartidos por todo su ancho.",
     "method.denominator.lead": "Dos cifras de votos sin división partidista, y por qué.",
     "method.denominator.body": "El porcentaje de los recuadros de arriba cuenta las {items} preguntas. El campo <code>crossCuttingShare</code> del archivo de datos se mide solo sobre los votos escogidos por la regla, así que es una cifra ligeramente distinta. Eso es a propósito: existe para comprobar la <em>regla</em>, y los siete proyectos principales los escogimos a mano y no por regla; seis de ellos dividieron a los partidos con claridad, así que contarlos haría parecer la regla más sesgada de lo que es. Las dos cifras son honestas y ninguna es la otra redondeada.",
+    "privacy.lead": "Qué cuenta esta página y qué no.",
+    "privacy.body": "Cuenta visitas —cuántas personas entraron y qué enlace las trajo— con la analítica de Vercel, que no usa cookies y no puede seguirle a otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador: no hay ningún servidor al que enviarlas, y la página no hace ninguna petición de red mientras usted responde. Eso no es una promesa, se comprueba en cada compilación: la prueba responde cinco preguntas y falla si sale un solo byte.",
   },
 };
 
