@@ -15,7 +15,8 @@ import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import type { VoteItem } from '../scoring';
 import { WORK_DIR } from './paths';
-import { isEligible, discrimination, DEFAULT_OPTIONS, scoreLegislator, describeScore } from '../scoring';
+import { isEligible, discrimination, DEFAULT_OPTIONS, scoreLegislator, scoreBand } from '../scoring';
+import { renderVerdict, renderScoreBand } from '../src/verdict';
 import type { Answer } from '../scoring';
 import { computeValences, profileWeights, buildProfile, describeProfile } from '../valence';
 import type { PartyRoster } from '../valence';
@@ -216,8 +217,9 @@ console.log(`\n7. WORKED PROFILE  (answering Yea to every selected item)`);
   const p = buildProfile(sel.selected, answers, valences, pw);
   const d = describeProfile(p);
   console.log(`   n=${p.n}  netLean=${f(p.netLean)}  crossover=${f(p.crossoverShare)}  load=${f(p.partisanLoad)}`);
-  console.log(`   "${d.headline}"`);
-  if (d.caveat) console.log(`   caveat: ${d.caveat}`);
+  const rv = renderVerdict(d);
+  console.log(`   [${d.verdict}${d.side ? '/' + d.side : ''}] "${rv.headline}"`);
+  console.log(`   caveat: ${rv.caveat}`);
   if (nameToId.size) {
     const sw = new Map<string, number>();
     for (const it of sel.selected) sw.set(it.id, discrimination(it));
@@ -225,7 +227,7 @@ console.log(`\n7. WORKED PROFILE  (answering Yea to every selected item)`);
       const id = nameToId.get(nm);
       if (!id) continue;
       const r = scoreLegislator(id, sel.selected, answers, sw);
-      console.log(`   ${nm.padEnd(16)} adjusted=${f(r.adjustedScore)}  n=${String(r.n).padStart(3)}  "${describeScore(r.adjustedScore)}"`);
+      console.log(`   ${nm.padEnd(16)} adjusted=${f(r.adjustedScore)}  n=${String(r.n).padStart(3)}  "${renderScoreBand(scoreBand(r.adjustedScore))}"`);
     }
   }
 }

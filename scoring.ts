@@ -422,11 +422,33 @@ export function scoreAll(
  * more than an average member would," and negative values are real. Label it
  * accordingly in ResultsSummary or users will read 0 as "never agreed."
  */
-export function describeScore(score: number): string {
-  if (score >= 0.75) return 'Votes with you almost always';
-  if (score >= 0.4) return 'Votes with you more often than not';
-  if (score >= 0.15) return 'Leans toward your positions';
-  if (score > -0.15) return 'No clearer than chance either way';
-  if (score > -0.5) return 'Leans against your positions';
-  return 'Votes against you almost always';
+/**
+ * The six bands an alignment score falls into.
+ *
+ * `chance` is the load-bearing one: it means "we cannot tell", not "moderate".
+ * A reader who takes it as centrism has been misled, so it is named for the
+ * absence of evidence rather than for a position.
+ */
+export type ScoreBand =
+  | 'almostAlways'
+  | 'moreOften'
+  | 'leansToward'
+  | 'chance'
+  | 'leansAgainst'
+  | 'againstAlways';
+
+/**
+ * Which band a score falls into. Returns a band, not a sentence.
+ *
+ * This replaced `describeScore`, which returned English prose from inside the
+ * scoring module. The wording is in i18n/copy.json and is applied by
+ * src/verdict.ts; see the note on ProfileDescription in valence.ts for why.
+ */
+export function scoreBand(score: number): ScoreBand {
+  if (score >= 0.75) return 'almostAlways';
+  if (score >= 0.4) return 'moreOften';
+  if (score >= 0.15) return 'leansToward';
+  if (score > -0.15) return 'chance';
+  if (score > -0.5) return 'leansAgainst';
+  return 'againstAlways';
 }

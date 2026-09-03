@@ -24,6 +24,7 @@ import {
 } from './quiz-data';
 import type { PartisanProfile } from '../valence';
 import { PROFILE_BANDS } from '../valence';
+import { renderVerdict } from './verdict';
 
 /**
  * Where the raw quiz payload lives. Relative on the deployed site so it works the
@@ -389,10 +390,13 @@ function renderStats(p: PartisanProfile): void {
 }
 
 function renderReadout(p: PartisanProfile): void {
-  const d = describe(p);
+  // renderVerdict always returns a caveat, so the old conditional is gone: all
+  // seven readings carry something that qualifies them, and the one that did not
+  // would have been a reading the page states without any hedge at all.
+  const d = renderVerdict(describe(p));
   el('readout').innerHTML =
     `<div class="readout-head">${esc(d.headline)}</div>` +
-    (d.caveat ? `<div class="readout-caveat">${esc(d.caveat)}</div>` : '') +
+    `<div class="readout-caveat">${esc(d.caveat)}</div>` +
     `<div class="readout-caveat mono">${p.n} of ${activeItems().length} answered</div>`;
 }
 

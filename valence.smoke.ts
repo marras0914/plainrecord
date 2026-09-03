@@ -13,7 +13,8 @@
  */
 
 import type { VoteItem, VoteCast, Answer } from './scoring';
-import { computeWeights, scoreLegislator, DEFAULT_OPTIONS, describeScore } from './scoring';
+import { computeWeights, scoreLegislator, DEFAULT_OPTIONS, scoreBand } from './scoring';
+import { renderVerdict, renderScoreBand } from './src/verdict';
 import {
   computeValences,
   buildProfile,
@@ -213,8 +214,9 @@ function report(name: string, p: PartisanProfile) {
     `  n=${p.n}  netLean=${f(p.netLean)}  crossover=${f(p.crossoverShare)}  ` +
       `load=${f(p.partisanLoad)}  colorless=${p.colorlessCount}`,
   );
-  console.log(`  "${d.headline}"`);
-  if (d.caveat) console.log(`  caveat: ${d.caveat}`);
+  const r = renderVerdict(d);
+  console.log(`  [${d.verdict}${d.side ? '/' + d.side : ''}] "${r.headline}"`);
+  console.log(`  caveat: ${r.caveat}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -305,11 +307,16 @@ check(
   mixed.crossoverShare > 0.35,
   `${f(mixed.crossoverShare)}`,
 );
+// Asserted on the VERDICT, not the wording. This check exists to prove the
+// estimator can tell mixed from muted; comparing rendered sentences also made it
+// depend on the copy, so rewording a headline broke it for no reason.
 check(
-  'the two get DIFFERENT headlines',
-  describeProfile(mixed).headline !== describeProfile(muted).headline,
+  'the two get DIFFERENT verdicts',
+  describeProfile(mixed).verdict !== describeProfile(muted).verdict,
+  `${describeProfile(mixed).verdict} vs ${describeProfile(muted).verdict}`,
 );
-check('MUTED reading is flagged as weak', describeProfile(muted).caveat !== null);
+check('MUTED reading is flagged as weak', describeProfile(muted).verdict === 'weakLoad',
+  describeProfile(muted).verdict);
 check(
   'CONSISTENT reads as a clear lean, not purple',
   Math.abs(consistent.netLean) > 0.8 && consistent.crossoverShare < 0.05,
@@ -339,7 +346,7 @@ const plScores = CANDIDATES.map(([id, name]) => {
   const r = scoreLegislator(id, items, plOnly, weights);
   console.log(
     `    ${name.padEnd(9)} score=${f(r.score)}  adjusted=${f(r.adjustedScore)}  n=${r.n}  ` +
-      `"${describeScore(r.adjustedScore)}"`,
+      `"${renderScoreBand(scoreBand(r.adjustedScore))}"`,
   );
   return r.adjustedScore;
 });
@@ -352,7 +359,7 @@ const intraScores = CANDIDATES.map(([id, name]) => {
   const r = scoreLegislator(id, items, intraAnswers, weights);
   console.log(
     `    ${name.padEnd(9)} score=${f(r.score)}  adjusted=${f(r.adjustedScore)}  n=${r.n}  ` +
-      `"${describeScore(r.adjustedScore)}"`,
+      `"${renderScoreBand(scoreBand(r.adjustedScore))}"`,
   );
   return r.adjustedScore;
 });

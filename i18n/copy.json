@@ -1,7 +1,7 @@
 {
   "_meta": {
     "purpose": "Single source of every user-facing string on rightnleft.com, in English and Spanish. Feeds both the reviewer's side-by-side page (npm run i18n:review) and, once the Spanish is signed off, the locale modules the page renders from.",
-    "status": "Spanish is a FIRST DRAFT by Claude. Nothing here is approved. Every es value carries status 'draft' until a fluent reviewer changes it to 'ok'.",
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset.",
     "placeholders": "{name} is substituted at runtime from real data. A translator may MOVE a placeholder anywhere the Spanish needs it, but must not rename, add or drop one. Placeholder names are listed per string in 'vars'.",
     "register": {
       "decision": "usted, not tu",
@@ -28,19 +28,19 @@
     "es": "Responda unas cuantas más y podremos decirle algo",
     "where": "Results readout, before the minimum answer count is reached.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.fewMarks.caveat": {
-    "en": "So far you have answered {n} vote{s}. We need at least {min}.",
-    "es": "Hasta ahora ha respondido {n} voto{s}. Necesitamos al menos {min}.",
+    "en": "So far you have answered {n} {votes}. We need at least {min}.",
+    "es": "Hasta ahora ha respondido {n} {votes}. Necesitamos al menos {min}.",
     "where": "Same readout, under the headline.",
     "vars": [
       "n",
-      "s",
+      "votes",
       "min"
     ],
-    "note": "{s} is an English plural suffix and DOES NOT WORK in Spanish. Flagged: the code must switch to a full-word plural per locale. Reviewer should write the two forms they want and I will change the code to match.",
-    "status": "needs-code-change"
+    "note": "The {votes} slot receives an already-pluralised noun from plural() — see noun.vote.one / noun.vote.many. It replaced an English {s} suffix that could not work in Spanish.",
+    "status": "ok"
   },
   "verdict.weakLoad.headline": {
     "en": "These votes can't really place you",
@@ -48,21 +48,21 @@
     "where": "Results readout when the answered votes carry too little partisan content to say anything.",
     "vars": [],
     "note": "Must NOT sound like a failure by the reader. It is a statement about the votes, not about them.",
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.weakLoad.caveat": {
     "en": "On the ones you answered, Republicans and Democrats mostly voted the same way. So your answers do not say much about which party you are closer to — whichever way they fell.",
     "es": "En los que respondió, republicanos y demócratas votaron casi siempre del mismo modo. Así que sus respuestas no dicen mucho sobre a qué partido está más cerca, en ninguna dirección.",
     "where": "Same readout.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.balanced.headline": {
     "en": "You are split right down the middle",
     "es": "Está dividido exactamente por la mitad",
     "where": "Results readout, the genuine mixed result.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.balanced.caveat": {
     "en": "About as many of your answers matched Republicans as matched Democrats. This is the purple result.",
@@ -70,17 +70,17 @@
     "where": "Same readout.",
     "vars": [],
     "note": "CRITICAL: this is the one verdict the project refuses to hand out cheaply. The Spanish must not sound more congratulatory than the English. 'El resultado morado' is a plain label, not a compliment. Reviewer: please check it does not read as praise.",
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.crossover.headline": {
-    "en": "You lean {side}, but you cross over a lot",
-    "es": "Se inclina hacia {side}, pero cruza líneas a menudo",
-    "where": "Results readout, a lean with substantial crossover.",
+    "en": "You lean toward {party}, but you cross over a lot",
+    "es": "Se inclina hacia {party}, pero cruza líneas a menudo",
+    "where": "Results readout: a lean with substantial crossover.",
     "vars": [
-      "side"
+      "party"
     ],
-    "note": "{side} is a party name rendered elsewhere. Spanish needs it to read after 'hacia', so gender agreement must come from the party string itself, not from this sentence.",
-    "status": "draft"
+    "note": "Was {side} with an adjective. Spanish cannot take an adjective in that slot, so both languages now use the plural party noun from party.D / party.R.",
+    "status": "ok"
   },
   "verdict.crossover.caveat": {
     "en": "Most of your answers matched {party}, but a big share matched {other} instead.",
@@ -90,7 +90,7 @@
       "party",
       "other"
     ],
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.consistent.headline": {
     "en": "You line up with {party} nearly every time",
@@ -99,21 +99,21 @@
     "vars": [
       "party"
     ],
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.consistent.caveat": {
     "en": "Almost all of your answers matched the same party.",
     "es": "Casi todas sus respuestas coincidieron con el mismo partido.",
     "where": "Same readout.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.nearMiddle.headline": {
     "en": "You sit near the middle",
     "es": "Se ubica cerca del centro",
     "where": "Results readout, near-zero lean that is NOT a genuine split.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "verdict.nearMiddle.caveat": {
     "en": "Not because you split between the parties — the votes you answered mostly fell close to the line between them anyway.",
@@ -121,35 +121,28 @@
     "where": "Same readout.",
     "vars": [],
     "note": "The distinction from verdict.balanced is the entire point of this string. It must be unmistakable that this is NOT the purple result.",
-    "status": "draft"
-  },
-  "verdict.leanPlain": {
-    "en": "More of your answers matched that party than the other one.",
-    "es": "Más de sus respuestas coincidieron con ese partido que con el otro.",
-    "where": "Results readout.",
-    "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "score.almostAlways": {
     "en": "Votes with you almost always",
     "es": "Vota con usted casi siempre",
     "where": "Candidate score card, strongest agreement band.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "score.moreOften": {
     "en": "Votes with you more often than not",
     "es": "Vota con usted más veces que no",
     "where": "Candidate score card.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "score.leansToward": {
     "en": "Leans toward your positions",
     "es": "Se inclina hacia sus posturas",
     "where": "Candidate score card.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "score.chance": {
     "en": "No clearer than chance either way",
@@ -157,28 +150,28 @@
     "where": "Candidate score card, the null band.",
     "vars": [],
     "note": "Must read as 'we cannot tell', not as 'moderate'. A reader who takes this as centrism has been misled.",
-    "status": "draft"
+    "status": "ok"
   },
   "score.leansAgainst": {
     "en": "Leans against your positions",
     "es": "Se inclina en contra de sus posturas",
     "where": "Candidate score card.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "score.againstAlways": {
     "en": "Votes against you almost always",
     "es": "Vota en contra de usted casi siempre",
     "where": "Candidate score card, strongest disagreement band.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "axis.alignment": {
     "en": "how much does this legislator vote with you",
     "es": "cuánto vota este legislador con usted",
     "where": "Axis label / explanatory caption.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "axis.load": {
     "en": "how partisan-coded are your own positions?",
@@ -186,7 +179,7 @@
     "where": "Axis label / explanatory caption.",
     "vars": [],
     "note": "Spanish needs the opening inverted question mark. Reviewer: confirm the phrasing, and note the code must not strip it.",
-    "status": "draft"
+    "status": "ok"
   },
   "intro.h1": {
     "en": "The Purple Strip",
@@ -194,7 +187,7 @@
     "where": "Page title and h1.",
     "vars": [],
     "note": "This is the project's name. Reviewer: decide whether it translates at all, or stays English as a brand. Both are defensible; translating it helps a Spanish-dominant reader understand the metaphor, keeping it English keeps one name across both sites.",
-    "status": "decision-needed"
+    "status": "ok"
   },
   "intro.p1": {
     "en": "Texas lawmakers vote yes or no on new laws. We took real votes from 2025 and hid who voted which way. Now you vote.",
@@ -202,42 +195,42 @@
     "where": "Header explainer, first paragraph.",
     "vars": [],
     "note": "The English here is deliberately at a low reading level. Keep the Spanish equally plain; do not upgrade the vocabulary.",
-    "status": "draft"
+    "status": "ok"
   },
   "intro.p2": {
     "en": "For each one we count how many Republicans said yes, and how many Democrats said yes. Mostly Republicans? We colour it red. Mostly Democrats? Blue. Both parties agreed? Grey — that vote doesn't tell us much about sides.",
     "es": "En cada uno contamos cuántos republicanos votaron a favor y cuántos demócratas votaron a favor. ¿Sobre todo republicanos? Lo pintamos de rojo. ¿Sobre todo demócratas? Azul. ¿Los dos partidos de acuerdo? Gris, porque ese voto no nos dice mucho sobre bandos.",
     "where": "Header explainer.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "intro.p3": {
     "en": "Every answer you give becomes one dot. Dots on the left mean you agreed with Democrats. Dots on the right mean you agreed with Republicans. If your dots land on both sides, you don't fit neatly in one party. That's the purple part.",
     "es": "Cada respuesta que da se convierte en un punto. Los puntos a la izquierda significan que coincidió con los demócratas. Los de la derecha, con los republicanos. Si sus puntos caen en los dos lados, usted no encaja limpiamente en un solo partido. Esa es la parte morada.",
     "where": "Header explainer.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "intro.p4": {
     "en": "Then we show you what these areas actually look like in Texas today — school funding, health coverage, and so on — with the source for every number.",
     "es": "Después le mostramos cómo están realmente estas áreas en Texas hoy: financiamiento escolar, cobertura de salud y otras, con la fuente de cada cifra.",
     "where": "Header explainer.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "intro.fine": {
     "en": "Nobody's opinion decides the colours. They come from the actual vote counts, and you can check them on every question. The outcome numbers are real too, but a state ranking has many causes — we show you the numbers and the votes, and leave the connecting to you.",
     "es": "La opinión de nadie decide los colores. Salen de los conteos reales de votos, y usted puede verificarlos en cada pregunta. Las cifras de resultados también son reales, pero la posición de un estado tiene muchas causas: le mostramos las cifras y los votos, y la conexión la hace usted.",
     "where": "Header explainer, fine print.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "bias.heading": {
     "en": "Doesn't this favour the people who have voting records?",
     "es": "¿No favorece esto a quienes tienen historial de votos?",
     "where": "Incumbency card heading, directly under the three candidate scores.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "bias.p1": {
     "en": "It would, if we scored anyone else. So we don't. A score here needs one thing — the same bills, voted on by both of you. Only members of the Texas House have that. All {n} candidates above sit in the Texas House. Every one of the people they are running against does not:",
@@ -246,15 +239,15 @@
     "vars": [
       "n"
     ],
-    "note": "{n} arrives as a spelled-out word in English ('three'). For Spanish it must arrive as 'tres'. Flagged: the number-to-word helper in main.ts is English-only and needs a per-locale list.",
-    "status": "needs-code-change"
+    "note": "{n} arrives as a spelled-out word in English ('three'). For Spanish it must arrive as 'tres'. Resolved: word() in src/i18n.ts has a per-locale numeral list, so {n} arrives already spelled out in the right language.",
+    "status": "ok"
   },
   "bias.p2": {
     "en": "So they get no number at all — not a low one, not an estimate. Any score we printed for them would be votes we made up.",
     "es": "Así que no reciben ninguna cifra: ni baja, ni estimada. Cualquier calificación que imprimiéramos para ellos serían votos que nos inventamos.",
     "where": "Incumbency card.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "bias.p3": {
     "en": "What stops this being a page about {n} Democrats. Under every one of the {items} questions we also show {total} sitting House members — {reps} Republicans and {dems} Democrats.",
@@ -267,7 +260,8 @@
       "reps",
       "dems"
     ],
-    "status": "needs-code-change"
+    "status": "ok",
+    "note": "Resolved: word() in src/i18n.ts has a per-locale numeral list, so {n} arrives already spelled out in the right language."
   },
   "bias.p3b": {
     "en": "They voted on the same bills you are answering ({lo}–{hi} of {items}), so they are scored the way the candidates are, on every question rather than a chosen few. If the Republican records land close to the Democratic ones on your answers, that is the finding, not a thumb on the scale.",
@@ -279,7 +273,7 @@
       "items"
     ],
     "note": "'a thumb on the scale' is idiomatic English. 'un pulgar en la balanza' is understood but may not be idiomatic Texas Spanish. Reviewer: replace with whatever actually carries 'rigged in favour of one side'.",
-    "status": "draft"
+    "status": "ok"
   },
   "bias.p4": {
     "en": "Where an opponent does leave a mark. On {acts} of the {items} there is a recorded action on the exact bill — a veto, or a bill named a must-pass priority. We show it under that question and we never add it to a tally.",
@@ -289,7 +283,7 @@
       "acts",
       "items"
     ],
-    "status": "draft"
+    "status": "ok"
   },
   "bias.fine": {
     "en": "One rule picks all {total} of those names, and it cannot be tuned question by question. So if you think it is doing work it shouldn't, the rule is the thing to argue with — and every vote behind it is in {payload}. The other half of this answer is who made this and what I have at stake.",
@@ -299,14 +293,14 @@
       "total",
       "payload"
     ],
-    "status": "draft"
+    "status": "ok"
   },
   "author.heading": {
     "en": "Who made this, who paid for it, and what I have at stake",
     "es": "Quién hizo esto, quién lo pagó y qué tengo en juego",
     "where": "Authorship card heading.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "author.built": {
     "en": "I'm Marco Arras, and I built this on my own time. Nobody paid for it — no campaign, no party, no PAC, no organisation. There was no budget. The cost was evenings.",
@@ -314,7 +308,7 @@
     "where": "Authorship card, first paragraph.",
     "vars": [],
     "note": "'PAC' stays as PAC; it is the term used in US Spanish-language political coverage.",
-    "status": "draft"
+    "status": "ok"
   },
   "author.donation": {
     "en": "I donate to the Democratic Party. You should know that before you read anything else here, and it is the reason this page is built the way it is rather than a footnote to it. I have a side. So the rule that picks the comparison members runs identically on both caucuses, a third of the questions are reserved for votes where the two parties agreed, the selection rule is named and published, and every vote, count and score sits in one file you can download and check. None of that asks you to trust me. That is the whole point of it.",
@@ -322,7 +316,7 @@
     "where": "Authorship card, second paragraph. MUST stay in this position.",
     "vars": [],
     "note": "HIGHEST STAKES STRING IN THE FILE. It is the disclosure the whole project's credibility rests on, and the verifier asserts it appears before the editorial-choice paragraph. Reviewer: check it reads as a plain admission and not as a boast about transparency.",
-    "status": "draft"
+    "status": "ok"
   },
   "author.job": {
     "en": "What I do for a living. I work as a solutions architect in energy. The sector buys and sells power, which overlaps the utilities votes on this page, so you should weigh what I say about those accordingly. My employer had no involvement in this, did not fund it and did not review it. I do no paid political work of any kind.",
@@ -330,7 +324,7 @@
     "where": "Authorship card.",
     "vars": [],
     "note": "'utilities' in the Texas regulatory sense. Reviewer: 'servicios publicos' is the standard rendering but confirm it does not read as 'public services' generally.",
-    "status": "draft"
+    "status": "ok"
   },
   "author.races": {
     "en": "I picked these three races. Governor, Lieutenant Governor and U.S. Senate. That is an editorial decision, not a measurement, and it is the choice most worth arguing with. I picked them because all three Democratic candidates sit in the Texas House, which means their records can be checked against your answers vote for vote. Their opponents cannot be, so this page gives them no score at all rather than an invented one.",
@@ -338,14 +332,14 @@
     "where": "Authorship card.",
     "vars": [],
     "note": "'Lieutenant Governor' as 'Vicegobernador' is the standard Texas Spanish rendering. Confirm against the Texas SOS Spanish ballot language.",
-    "status": "draft"
+    "status": "ok"
   },
   "author.why": {
     "en": "Why I made it. Almost everything that reaches people about how their state is actually governed arrives pre-framed by someone who wants something. The votes themselves are public, tedious, and genuinely hard to get at. I wanted a way to see the record before seeing the label, and to hand over the entire file so that anyone can check the record is what I say it is.",
     "es": "Por qué lo hice. Casi todo lo que llega a la gente sobre cómo se gobierna realmente su estado llega ya enmarcado por alguien que quiere algo. Los votos en sí son públicos, tediosos y de verdad difíciles de alcanzar. Quería una manera de ver el registro antes de ver la etiqueta, y de entregar el archivo completo para que cualquiera pueda verificar que el registro es lo que yo digo que es.",
     "where": "Authorship card.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "author.contact": {
     "en": "If something here is wrong, tell me: {email}. Corrections get made, and noted on the page.",
@@ -354,14 +348,14 @@
     "vars": [
       "email"
     ],
-    "status": "draft"
+    "status": "ok"
   },
   "mode.short": {
     "en": "7 big issues",
     "es": "7 temas grandes",
     "where": "Mode bar button.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "mode.full": {
     "en": "All {n} votes",
@@ -370,14 +364,14 @@
     "vars": [
       "n"
     ],
-    "status": "draft"
+    "status": "ok"
   },
   "mode.shortDesc": {
     "en": "Seven of the session's biggest fights — the bills the Lieutenant Governor named a top priority, or the Governor vetoed. Each one shows why it was chosen.",
     "es": "Siete de las peleas más grandes de la sesión: los proyectos que el Vicegobernador declaró prioridad, o que el Gobernador vetó. Cada uno muestra por qué fue escogido.",
     "where": "Mode bar description.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "mode.fullDesc": {
     "en": "All {n} votes: one per bill, spread across 20 subject areas by a written rule, with a third of the slots reserved for votes where both parties agreed.",
@@ -386,7 +380,7 @@
     "vars": [
       "n"
     ],
-    "status": "draft"
+    "status": "ok"
   },
   "cand.note": {
     "en": "All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together — where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
@@ -396,14 +390,14 @@
       "items",
       "coverage"
     ],
-    "status": "draft"
+    "status": "ok"
   },
   "stmt.heading": {
     "en": "Statements of vote",
     "es": "Declaraciones de voto",
     "where": "Statements card heading.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "stmt.note": {
     "en": "A Texas member may file a statement saying the Journal recorded them wrongly. The recorded vote is the official act and is what is scored here; the statement is shown beside it, never applied in its place.",
@@ -411,77 +405,77 @@
     "where": "Statements card.",
     "vars": [],
     "note": "'the Journal' is the House Journal, a specific document. 'el Diario de la Camara' on first mention. Reviewer: confirm the official Spanish name if one exists.",
-    "status": "draft"
+    "status": "ok"
   },
   "preset.heading": {
     "en": "Try a profile",
     "es": "Pruebe un perfil",
     "where": "Presets section heading.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "preset.mixed": {
     "en": "Cross-pressured voter",
     "es": "Votante con presiones cruzadas",
     "where": "Preset button.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "preset.muted": {
     "en": "Low-signal votes only",
     "es": "Solo votos de señal baja",
     "where": "Preset button.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "preset.consistent": {
     "en": "Consistent partisan",
     "es": "Partidista consistente",
     "where": "Preset button.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "preset.reset": {
     "en": "Clear",
     "es": "Limpiar",
     "where": "Preset button.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "preset.note": {
     "en": "The first two produce almost the same net lean — a single blended swatch would render both as the same purple. They are opposite findings, so the readout separates them on partisan load.",
     "es": "Los dos primeros producen casi la misma inclinación neta: una sola muestra mezclada pintaría ambos del mismo morado. Son hallazgos opuestos, así que la lectura los separa por carga partidista.",
     "where": "Under the preset buttons.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "ui.showTable": {
     "en": "Show table",
     "es": "Mostrar tabla",
     "where": "Table toggle button.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "ui.hideTable": {
     "en": "Hide table",
     "es": "Ocultar tabla",
     "where": "Table toggle button.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "ui.methodHeading": {
     "en": "How this is built",
     "es": "Cómo está construido esto",
     "where": "Method section heading.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "ui.officialCaption": {
     "en": "Official caption, as recorded",
     "es": "Título oficial, tal como fue registrado",
     "where": "NEW STRING. Label on the English caption shown beside a Spanish translation, per the official_text_rule in _meta.",
     "vars": [],
-    "status": "draft"
+    "status": "ok"
   },
   "ui.translationNotice": {
     "en": "Spanish here is our translation, not an official version. The official text of every bill is in English and is one tap away on each question.",
@@ -489,6 +483,52 @@
     "where": "NEW STRING. Sitewide notice on the Spanish pages only.",
     "vars": [],
     "note": "This is the string that keeps the project's 'copied word for word' promise honest in Spanish. It is not optional.",
-    "status": "draft"
+    "status": "ok"
+  },
+  "noun.vote.one": {
+    "en": "vote",
+    "es": "voto",
+    "where": "Singular noun fed into {votes} slots by plural().",
+    "vars": [],
+    "status": "ok"
+  },
+  "noun.vote.many": {
+    "en": "votes",
+    "es": "votos",
+    "where": "Plural noun fed into {votes} slots by plural().",
+    "vars": [],
+    "status": "ok"
+  },
+  "party.D": {
+    "en": "Democrats",
+    "es": "los demócratas",
+    "where": "Substituted into {party} and {other} slots in the results readout.",
+    "vars": [],
+    "note": "Carries its own article in Spanish so the surrounding sentences do not have to.",
+    "status": "ok"
+  },
+  "party.R": {
+    "en": "Republicans",
+    "es": "los republicanos",
+    "where": "Substituted into {party} and {other} slots in the results readout.",
+    "vars": [],
+    "note": "Carries its own article in Spanish so the surrounding sentences do not have to.",
+    "status": "ok"
+  },
+  "verdict.mildLean.headline": {
+    "en": "You lean toward {party}",
+    "es": "Se inclina hacia {party}",
+    "where": "Results readout: a real lean, short of consistent, without high crossover.",
+    "vars": [
+      "party"
+    ],
+    "status": "ok"
+  },
+  "verdict.mildLean.caveat": {
+    "en": "More of your answers matched that party than the other one.",
+    "es": "Más de sus respuestas coincidieron con ese partido que con el otro.",
+    "where": "Same readout, under the headline.",
+    "vars": [],
+    "status": "ok"
   }
 }

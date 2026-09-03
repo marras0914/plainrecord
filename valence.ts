@@ -320,25 +320,61 @@ export const PROFILE_BANDS = {
   mildLean: 0.15,
 };
 
+/**
+ * Which of the seven readings a profile gets.
+ *
+ * `balanced` and `nearMiddle` both sit at ~zero lean and are OPPOSITE findings:
+ * one is a voter genuinely pulled both ways, the other is a set of votes that
+ * never split the parties in the first place. Collapsing them is the
+ * flattering-purple failure, which is why this is an enum of seven and not a
+ * number.
+ */
+export type ProfileVerdict =
+  | 'fewMarks'
+  | 'weakLoad'
+  | 'balanced'
+  | 'crossover'
+  | 'consistent'
+  | 'mildLean'
+  | 'nearMiddle';
+
+/** Which side a directional verdict points at. Null when it has no direction. */
+export type LeanSide = 'D' | 'R';
+
+/**
+ * A profile's reading, as data rather than as a sentence.
+ *
+ * This used to return English prose — a headline and a caveat, with the party
+ * names ("Democratic", "Republicans") built here. That put user-facing copy
+ * inside the estimator, which had two costs beyond the obvious one:
+ *
+ *   - The site could not be translated without either duplicating the copy or
+ *     teaching this module about locales. It should know about neither.
+ *   - verify_site.mjs asserted on the exact wording, so rewording a sentence
+ *     broke the test suite. The tests now assert on `verdict`, which is what
+ *     they were always trying to check.
+ *
+ * The words live in i18n/copy.json and are applied by src/verdict.ts.
+ */
 export interface ProfileDescription {
-  headline: string;
-  /** Non-null when the reading should not be trusted at face value. Render it. */
-  caveat: string | null;
+  verdict: ProfileVerdict;
+  side: LeanSide | null;
+  /** Answered-mark count. The fewMarks reading quotes it. */
+  n: number;
+  /** The floor fewMarks quotes, so a caller need not import PROFILE_BANDS. */
+  minMarks: number;
 }
 
 /**
- * Plain-English account of a profile. Note that the mixed and muted cases get
- * DIFFERENT text off the same netLean — which is the entire reason the profile
- * carries three numbers instead of one color.
+ * Read a profile. Note that the mixed and muted cases get DIFFERENT verdicts off
+ * the same netLean — which is the entire reason the profile carries three
+ * numbers instead of one colour.
  */
 export function describeProfile(p: PartisanProfile): ProfileDescription {
+  const base = { n: p.n, minMarks: PROFILE_BANDS.minMarks };
+
   if (p.n < PROFILE_BANDS.minMarks) {
-    return {
-      headline: 'Answer a few more and we can tell you something',
-      caveat:
-        `So far you have answered ${p.n} vote${p.n === 1 ? '' : 's'}. ` +
-        `We need at least ${PROFILE_BANDS.minMarks}.`,
-    };
+    return { ...base, verdict: 'fewMarks', side: null };
   }
 
   // The load gate comes FIRST, and it is not optional.
@@ -349,52 +385,27 @@ export function describeProfile(p: PartisanProfile): ProfileDescription {
   // therefore cannot tell mixed from muted — only partisanLoad can. Reporting a
   // split before checking load is exactly the flattering-purple failure.
   if (p.partisanLoad < PROFILE_BANDS.weakLoad) {
-    return {
-      headline: "These votes can't really place you",
-      caveat:
-        'On the ones you answered, Republicans and Democrats mostly voted the same way. ' +
-        'So your answers do not say much about which party you are closer to — whichever ' +
-        'way they fell.',
-    };
+    return { ...base, verdict: 'weakLoad', side: null };
   }
 
   const lean = Math.abs(p.netLean);
-  const side = p.netLean < 0 ? 'Democratic' : 'Republican';
-  const party = p.netLean < 0 ? 'Democrats' : 'Republicans';
-  const other = p.netLean < 0 ? 'Republicans' : 'Democrats';
+  const side: LeanSide = p.netLean < 0 ? 'D' : 'R';
 
   // Past the gate, real mass on both sides is a real finding: a cross-pressured
   // voter, not an absence of measurement.
   if (p.crossoverShare >= PROFILE_BANDS.highCrossover) {
-    return {
-      headline:
-        lean < PROFILE_BANDS.mildLean
-          ? 'You are split right down the middle'
-          : `You lean ${side}, but you cross over a lot`,
-      caveat:
-        lean < PROFILE_BANDS.mildLean
-          ? 'About as many of your answers matched Republicans as matched Democrats. ' +
-            'This is the purple result.'
-          : `Most of your answers matched ${party}, but a big share matched ${other} instead.`,
-    };
+    return lean < PROFILE_BANDS.mildLean
+      // No side: a genuine even split does not point anywhere, and handing back
+      // a direction here would let a caller render "you lean X" on the one
+      // reading that specifically says you do not.
+      ? { ...base, verdict: 'balanced', side: null }
+      : { ...base, verdict: 'crossover', side };
   }
 
-  if (lean >= PROFILE_BANDS.strongLean) {
-    return {
-      headline: `You line up with ${party} nearly every time`,
-      caveat: 'Almost all of your answers matched the same party.',
-    };
-  }
-  if (lean >= PROFILE_BANDS.mildLean) {
-    return {
-      headline: `You lean ${side}`,
-      caveat: 'More of your answers matched that party than the other one.',
-    };
-  }
-  return {
-    headline: 'You sit near the middle',
-    caveat:
-      'Not because you split between the parties — the votes you answered mostly ' +
-      'fell close to the line between them anyway.',
-  };
+  if (lean >= PROFILE_BANDS.strongLean) return { ...base, verdict: 'consistent', side };
+  if (lean >= PROFILE_BANDS.mildLean) return { ...base, verdict: 'mildLean', side };
+
+  // Near zero, but NOT the balanced reading: these votes mostly had no partisan
+  // side to land on, so there was nothing to be split between.
+  return { ...base, verdict: 'nearMiddle', side: null };
 }

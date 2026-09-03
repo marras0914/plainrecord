@@ -13,7 +13,8 @@ import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { ingestOpenStates } from './ingest_openstates';
-import { computeWeights, scoreLegislator, DEFAULT_OPTIONS, describeScore } from '../scoring';
+import { computeWeights, scoreLegislator, DEFAULT_OPTIONS, scoreBand } from '../scoring';
+import { renderVerdict, renderScoreBand } from '../src/verdict';
 import type { Answer } from '../scoring';
 import { computeValences, profileWeights, buildProfile, describeProfile } from '../valence';
 import type { PartyRoster } from '../valence';
@@ -198,13 +199,14 @@ for (const item of ing.items) {
 const profile = buildProfile(ing.items, answers, valences, pWeights);
 const desc = describeProfile(profile);
 console.log(`  n=${profile.n}  netLean=${f(profile.netLean)}  crossover=${f(profile.crossoverShare)}  load=${f(profile.partisanLoad)}`);
-console.log(`  "${desc.headline}"`);
+console.log(`  [${desc.verdict}${desc.side ? '/' + desc.side : ''}] "${renderVerdict(desc).headline}"`);
 check('consistent D voter reads as a clear Democratic lean',
   profile.netLean < -0.8 && profile.crossoverShare < 0.05);
-// describeProfile's copy is plain-language, so assert on the party word rather
-// than the adjective: "You line up with Democrats nearly every time".
-check('headline names the Democratic side',
-  /Democrat/i.test(desc.headline), desc.headline);
+// The side is data now, so this asserts on it directly. It used to regex the
+// rendered sentence for /Democrat/, which passed for the wrong reason on any
+// copy that happened to name both parties — as several of the readings do.
+check('the reading points at the Democratic side',
+  desc.side === 'D', `verdict=${desc.verdict} side=${desc.side}`);
 
 // ---------------------------------------------------------------------------
 // 4. The three candidates, through the real estimator
@@ -214,7 +216,7 @@ console.log('\n=== 4. candidates ===\n');
 const CANDS: [string, string][] = [[GOODWIN, 'Goodwin'], [HINOJOSA, 'Hinojosa'], [TALARICO, 'Talarico']];
 const plScores = CANDS.map(([id, name]) => {
   const r = scoreLegislator(id, ing.items, answers, sWeights);
-  console.log(`  ${name.padEnd(9)} adjusted=${f(r.adjustedScore)}  n=${r.n}  "${describeScore(r.adjustedScore)}"`);
+  console.log(`  ${name.padEnd(9)} adjusted=${f(r.adjustedScore)}  n=${r.n}  "${renderScoreBand(scoreBand(r.adjustedScore))}"`);
   return r.adjustedScore;
 });
 const plSpread = Math.max(...plScores) - Math.min(...plScores);

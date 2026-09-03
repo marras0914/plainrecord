@@ -18,7 +18,8 @@
  */
 
 import type { VoteItem, Answer, LegislatorId, VoteCast } from '../scoring';
-import { scoreLegislator, describeScore } from '../scoring';
+import { scoreLegislator, scoreBand } from '../scoring';
+import { renderScoreBand } from './verdict';
 import { buildProfile, describeProfile } from '../valence';
 import type { ItemValence, PartisanProfile } from '../valence';
 import payload from '../public/data/quiz_89R.json';
@@ -259,7 +260,7 @@ export function scoreOf(a: Adapted, candidateId: LegislatorId, answers: AnswerMa
     score: r.score,
     adjusted: r.adjustedScore,
     n: r.n,
-    phrase: describeScore(r.adjustedScore),
+    phrase: renderScoreBand(scoreBand(r.adjustedScore)),
   };
 }
 
