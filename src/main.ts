@@ -936,28 +936,7 @@ function setMode(m: Mode, doRender = true): void {
   answers = {};
   cursor = 0;
   adapted = adapt(activeItems());
-  /**
- * Page-view counting, and nothing else.
- *
- * inject() is used rather than the two script tags the docs give for plain HTML,
- * because the first of those is INLINE and this page's CSP is `script-src 'self'`
- * with no unsafe-inline — it would be blocked, loudly, which is exactly what that
- * policy is for. Imported here it ships inside the bundle, and the script it then
- * loads is same-origin (/_vercel/insights/), so the CSP needs no widening at all.
- *
- * What it sends: a page view, a referrer, a coarse device and country. No cookie,
- * and the visitor hash resets daily so nobody can be followed across days or
- * across sites.
- *
- * What it does NOT send: the answers. Custom events are the only mechanism that
- * could carry one and they are not available on this plan — but the real guard is
- * that verify_site.mjs answers five questions and fails if anything beyond fonts
- * and the page-view beacon leaves the browser. The claim is on the page, so it has
- * to be enforced rather than intended.
- */
-inject();
-
-queue = buildQueue();
+  queue = buildQueue();
   if (doRender) render();
 }
 
@@ -998,3 +977,32 @@ window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (
 
 queue = buildQueue();
 render();
+
+/**
+ * Page-view counting, and nothing else.
+ *
+ * MODULE TOP LEVEL, and that placement is the whole point. An earlier version put
+ * this inside setMode(), so it only ran when somebody switched between the
+ * seven-issue and all-67 views — the page counted nothing on a plain visit. It
+ * survived review because verify_site.mjs clicks the mode button during its run,
+ * so the "analytics script was requested" check passed on a request that a real
+ * visitor would never have triggered.
+ *
+ * inject() is used rather than the two script tags the docs give for plain HTML,
+ * because the first of those is INLINE and this page's CSP is `script-src 'self'`
+ * with no unsafe-inline — it would be blocked, loudly, which is what that policy
+ * is for. Imported here it ships inside the bundle, and the script it loads is
+ * same-origin (/_vercel/insights/), so the CSP needs no widening at all.
+ *
+ * What it sends: a page view, a referrer, a coarse device and country. No cookie,
+ * and the visitor hash resets daily, so nobody can be followed across days or
+ * across sites.
+ *
+ * What it does NOT send: the answers. Custom events are the only mechanism that
+ * could carry one and they are not on this plan — but the real guard is that
+ * verify_site.mjs answers five questions and fails if anything beyond fonts and
+ * the page-view beacon leaves the browser, and separately that no request carries
+ * an item id, a bill number or a candidate id. The claim is on the page, so it is
+ * enforced rather than intended.
+ */
+inject();

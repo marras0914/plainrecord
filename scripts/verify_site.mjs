@@ -183,6 +183,13 @@ try {
   await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
   await page.waitForTimeout(600);
 
+  // Snapshot taken HERE, before a single click. The previous version asserted
+  // insights.requested at the END of the run, by which point the mode button had
+  // been clicked — and the analytics call was sitting inside setMode(), so the
+  // check passed on a request no ordinary visitor would ever have caused. A
+  // load-time claim has to be measured at load time.
+  const insightsOnLoad = { requested: insights.requested, status: insights.status };
+
   console.log('');
   const meta = await page.$eval('.q-meta .eyebrow', (e) => e.textContent.trim());
   check('boots in 7-issue mode', /^1 of 7 /.test(meta), meta);
@@ -585,9 +592,12 @@ try {
   check('table view exposes the receipts',
     ['R Yea', 'D Yea', 'Valence', 'Source'].every((c) => cols.includes(c)), cols.join(','));
 
-  check('analytics script was requested', insights.requested,
-    insights.requested ? `/_vercel/insights/ -> ${insights.status}` : 'inject() never ran');
-  if (insights.status === 404) {
+  check('analytics script is requested ON LOAD, with no interaction',
+    insightsOnLoad.requested,
+    insightsOnLoad.requested
+      ? `/_vercel/insights/ -> ${insightsOnLoad.status ?? insights.status}`
+      : 'not requested on a plain page load — inject() is not at module top level');
+  if ((insightsOnLoad.status ?? insights.status) === 404) {
     console.log('  [ -- ] Web Analytics not enabled yet' +
       '  — /_vercel/insights/ 404s until it is switched on in the Vercel dashboard');
   }
@@ -703,6 +713,19 @@ try {
   const esErrs = [];
   esPage.on('pageerror', (e) => esErrs.push('PAGEERROR ' + e.message));
   esPage.on('console', (m) => { if (m.type() === 'error') esErrs.push('CONSOLE ' + m.text()); });
+
+  // The Spanish page loads the same bundle, so it makes the same insights request
+  // and gets the same 404 until Web Analytics is switched on. It needs its own
+  // tracker: the English one is bound to a different page object, and reusing it
+  // would have filtered the Spanish 404 on the strength of an English response.
+  const esInsights = { requested: false, status: null };
+  const ES_INSIGHTS = /\/_vercel\/insights\//;
+  esPage.on('request', (r) => {
+    if (ES_INSIGHTS.test(r.url())) esInsights.requested = true;
+  });
+  esPage.on('response', (r) => {
+    if (ES_INSIGHTS.test(r.url())) esInsights.status = r.status();
+  });
 
   const esRes = await esPage.goto(esUrl, { waitUntil: 'networkidle' });
   await esPage.waitForTimeout(400);
@@ -820,7 +843,11 @@ try {
     check('es: no English chrome left on the page', leaks.length === 0,
       leaks.length ? `LEAKED: ${leaks.join(' | ')}` : `${esBody.length} chars checked`);
 
-    check('es: no console errors', esErrs.length === 0, esErrs.join(' | '));
+    check('es: analytics script is requested on load', esInsights.requested,
+      `/_vercel/insights/ -> ${esInsights.status}`);
+    const esReal = esErrs.filter((e) =>
+      !(/404/.test(e) && /Failed to load resource/.test(e) && esInsights.status === 404));
+    check('es: no console errors', esReal.length === 0, esReal.join(' | '));
   }
   await esPage.close();
 } finally {
