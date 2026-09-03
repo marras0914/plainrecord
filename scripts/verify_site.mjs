@@ -420,6 +420,59 @@ try {
         /(Patrick|Abbott|Paxton) is the clearest case/.test(txt));
 
       check('it hands over the payload to argue with', /quiz_\w+\.json/.test(txt));
+      check('it points at the authorship disclosure',
+        Boolean(await bias.$('a[href="#author-card"]')));
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // The authorship disclosure
+  //
+  // Static HTML, so it must be present without JS having rendered anything.
+  // Every claim checked here is one that costs the project everything if it is
+  // ever quietly dropped: the funding statement, the employer-overlap
+  // disclosure, and above all the donation disclosure, which is public record
+  // at the FEC and the Texas Ethics Commission and will be found whether or not
+  // the page says it. Found undisclosed, it ends the project. So it is treated
+  // as load-bearing content and not as copy.
+  // ---------------------------------------------------------------------------
+
+  {
+    const author = await page.$('#author-card');
+    check('the authorship card is on the page', Boolean(author));
+
+    if (author) {
+      const txt = (await author.innerText()).replace(/\s+/g, ' ');
+
+      check('it names the author', /Marco Arras/.test(txt));
+
+      check('it discloses the party donation',
+        /donate to the Democratic Party/i.test(txt));
+
+      // Position matters as much as presence: buried, it is the undisclosed
+      // case with extra steps. It must land before the method defence it
+      // motivates and before the editorial-choice paragraph.
+      const iDonation = txt.search(/donate to the Democratic Party/i);
+      const iRaces = txt.search(/I picked these three races/i);
+      check('the donation is disclosed before the editorial-choice defence',
+        iDonation > -1 && iRaces > -1 && iDonation < iRaces,
+        `donation at ${iDonation}, races at ${iRaces}`);
+
+      check('it states nobody funded it',
+        /Nobody paid for it/i.test(txt) && /no PAC/i.test(txt));
+
+      check('it discloses the employment overlap',
+        /energy/i.test(txt) && /utilities votes/i.test(txt) &&
+        /no involvement/i.test(txt));
+
+      check('it disclaims paid political work',
+        /no paid political work/i.test(txt));
+
+      check('it owns the three-race choice as editorial',
+        /editorial decision, not a measurement/i.test(txt));
+
+      check('it gives a working contact for corrections',
+        Boolean(await author.$('a[href^="mailto:"]')));
     }
   }
 

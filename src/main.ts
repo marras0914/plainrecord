@@ -751,7 +751,12 @@ function renderBias(): void {
     `<p class="blurb-fine">One rule picks all ${word(reps + dems)} of those names, and ` +
     `it cannot be tuned question by question. So if you think it is doing work it ` +
     `shouldn't, the rule is the thing to argue with — and every vote behind it is in ` +
-    `<a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>.</p>` +
+    `<a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>. ` +
+    // "Is the instrument fair" and "who built it" are the same question asked
+    // twice, so the answer to the second is one click from the first rather than
+    // something the reader has to go hunting for at the bottom of the page.
+    `The other half of this answer is ` +
+    `<a href="#author-card">who made this and what I have at stake</a>.</p>` +
 
     `</div>`;
 }
