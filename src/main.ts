@@ -377,6 +377,17 @@ function renderProv(): void {
       esc(pes.prose('candidateProvenance', DATA.candidateProvenance))),
 
     para(t('method.seven.lead'), t('method.seven.body')),
+
+    // Sits next to the rule paragraphs because it is about the rule. A reader
+    // who downloads the payload and recomputes the cross-cutting share gets a
+    // different figure from the tile above — both correct, over different
+    // denominators — and until this paragraph existed nothing on either surface
+    // said so. The tile counts all items; the file's field counts the
+    // rule-selected ones, because it is a diagnostic on the rule.
+    para(t('method.denominator.lead'), t('method.denominator.body', {
+      items: ALL_ITEMS.length,
+    })),
+
     para(t('method.words.lead'), t('method.words.body')),
 
     // A page that asks you to trust its numbers has to hand them over. This is the

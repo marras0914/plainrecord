@@ -1542,5 +1542,22 @@
       "dots"
     ],
     "status": "ok"
+  },
+  "method.denominator.lead": {
+    "en": "Two cross-cutting figures, and why.",
+    "es": "Dos cifras de votos sin división partidista, y por qué.",
+    "where": "Method paragraph lead.",
+    "vars": [],
+    "status": "ok"
+  },
+  "method.denominator.body": {
+    "en": "The percentage in the tiles above counts all {items} questions. The <code>crossCuttingShare</code> field in the data file is measured over the rule-selected votes only, so it is a slightly different number. That is deliberate: it exists to check the <em>rule</em>, and the seven headline bills were picked by hand rather than by the rule — six of them split the parties sharply, so counting them would make the rule look more one-sided than it is. Both numbers are honest and neither is the other one rounded.",
+    "es": "El porcentaje de los recuadros de arriba cuenta las {items} preguntas. El campo <code>crossCuttingShare</code> del archivo de datos se mide solo sobre los votos escogidos por la regla, así que es una cifra ligeramente distinta. Eso es a propósito: existe para comprobar la <em>regla</em>, y los siete proyectos principales los escogimos a mano y no por regla; seis de ellos dividieron a los partidos con claridad, así que contarlos haría parecer la regla más sesgada de lo que es. Las dos cifras son honestas y ninguna es la otra redondeada.",
+    "where": "Method paragraph body. Exists because a reader who downloads the payload and recomputes gets a different figure from the one on screen.",
+    "vars": [
+      "items"
+    ],
+    "note": "Added after a data reporter was pitched the open payload. The page showed 30% (20/67) while the file said 31.7% (19/60) and nothing on either surface said why. Deliberately does NOT quote the denominator as a number: the page cannot reliably derive it (items.length - headlineCount only works when no headline bill was already rule-selected), and crossCuttingOf is absent from the committed payload.",
+    "status": "ok"
   }
 }
