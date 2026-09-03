@@ -1482,5 +1482,65 @@
     "where": "Strip axis label, right pole, narrow viewport.",
     "vars": [],
     "status": "ok"
+  },
+  "og.eyebrow": {
+    "en": "TEXAS HOUSE · {session} LEGISLATURE",
+    "es": "CÁMARA DE TEXAS · LEGISLATURA {session}",
+    "where": "Share card eyebrow. {session} arrives already ordinal-formatted per locale (\"89TH\" / \"89.ª\").",
+    "vars": [
+      "session"
+    ],
+    "status": "ok"
+  },
+  "og.deck": {
+    "en": "A blind quiz on <b>{n} real votes</b>. Party labels stay hidden until after you answer.",
+    "es": "Un cuestionario a ciegas sobre <b>{n} votos reales</b>. Las etiquetas de partido quedan ocultas hasta después de responder.",
+    "where": "Share card deck.",
+    "vars": [
+      "n"
+    ],
+    "status": "ok"
+  },
+  "og.axisD": {
+    "en": "AGREED WITH DEMOCRATS",
+    "es": "COINCIDIÓ CON LOS DEMÓCRATAS",
+    "where": "Share card axis label, left pole.",
+    "vars": [],
+    "status": "ok"
+  },
+  "og.axisMid": {
+    "en": "BOTH PARTIES",
+    "es": "LOS DOS PARTIDOS",
+    "where": "Share card axis label, centre.",
+    "vars": [],
+    "status": "ok"
+  },
+  "og.axisR": {
+    "en": "AGREED WITH REPUBLICANS",
+    "es": "COINCIDIÓ CON LOS REPUBLICANOS",
+    "where": "Share card axis label, right pole.",
+    "vars": [],
+    "status": "ok"
+  },
+  "og.prov": {
+    "en": "{rollcalls} roll calls · {eligible} eligible · {asked} asked",
+    "es": "{rollcalls} votaciones nominales · {eligible} elegibles · {asked} preguntadas",
+    "where": "Share card footer provenance.",
+    "vars": [
+      "rollcalls",
+      "eligible",
+      "asked"
+    ],
+    "status": "ok"
+  },
+  "og.imageAlt": {
+    "en": "The Purple Strip — a blind quiz on {n} real Texas House votes. A blue-to-red axis labelled \"agreed with Democrats\" and \"agreed with Republicans\", with {dots} purple dots spread across its whole width.",
+    "es": "La Franja Morada — un cuestionario a ciegas sobre {n} votos reales de la Cámara de Texas. Un eje de azul a rojo rotulado \"coincidió con los demócratas\" y \"coincidió con los republicanos\", con {dots} puntos morados repartidos por todo su ancho.",
+    "where": "og:image:alt and twitter:image:alt.",
+    "vars": [
+      "n",
+      "dots"
+    ],
+    "status": "ok"
   }
 }

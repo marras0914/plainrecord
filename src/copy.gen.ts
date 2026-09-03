@@ -199,7 +199,14 @@ export type CopyKey =
   | "strip.poleD"
   | "strip.poleR"
   | "strip.poleDShort"
-  | "strip.poleRShort";
+  | "strip.poleRShort"
+  | "og.eyebrow"
+  | "og.deck"
+  | "og.axisD"
+  | "og.axisMid"
+  | "og.axisR"
+  | "og.prov"
+  | "og.imageAlt";
 
 export type Locale = 'en' | 'es';
 
@@ -395,6 +402,13 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "strip.poleR": "REPUBLICAN-CODED",
     "strip.poleDShort": "DEM-CODED",
     "strip.poleRShort": "REP-CODED",
+    "og.eyebrow": "TEXAS HOUSE · {session} LEGISLATURE",
+    "og.deck": "A blind quiz on <b>{n} real votes</b>. Party labels stay hidden until after you answer.",
+    "og.axisD": "AGREED WITH DEMOCRATS",
+    "og.axisMid": "BOTH PARTIES",
+    "og.axisR": "AGREED WITH REPUBLICANS",
+    "og.prov": "{rollcalls} roll calls · {eligible} eligible · {asked} asked",
+    "og.imageAlt": "The Purple Strip — a blind quiz on {n} real Texas House votes. A blue-to-red axis labelled \"agreed with Democrats\" and \"agreed with Republicans\", with {dots} purple dots spread across its whole width.",
   },
   es: {
     "verdict.fewMarks.headline": "Responda unas cuantas más y podremos decirle algo",
@@ -587,6 +601,13 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "strip.poleR": "CODIFICADO REPUBLICANO",
     "strip.poleDShort": "CÓD. DEMÓCRATA",
     "strip.poleRShort": "CÓD. REPUBLICANO",
+    "og.eyebrow": "CÁMARA DE TEXAS · LEGISLATURA {session}",
+    "og.deck": "Un cuestionario a ciegas sobre <b>{n} votos reales</b>. Las etiquetas de partido quedan ocultas hasta después de responder.",
+    "og.axisD": "COINCIDIÓ CON LOS DEMÓCRATAS",
+    "og.axisMid": "LOS DOS PARTIDOS",
+    "og.axisR": "COINCIDIÓ CON LOS REPUBLICANOS",
+    "og.prov": "{rollcalls} votaciones nominales · {eligible} elegibles · {asked} preguntadas",
+    "og.imageAlt": "La Franja Morada — un cuestionario a ciegas sobre {n} votos reales de la Cámara de Texas. Un eje de azul a rojo rotulado \"coincidió con los demócratas\" y \"coincidió con los republicanos\", con {dots} puntos morados repartidos por todo su ancho.",
   },
 };
 

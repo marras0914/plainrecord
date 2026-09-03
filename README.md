@@ -106,7 +106,10 @@ new one, or the link you have already handed out goes stale.
 ### The share card
 
 ```bash
-npm run build:og           # scripts/og.template.html -> public/og.png  (1200x630, ~61 KB)
+npm run build:og                      # both cards
+node scripts/build_og.mjs --locale es # just the Spanish one
+#   -> public/og.png     1200x630, ~61 KB  (English)
+#   -> public/og.es.png  1200x630, ~74 KB  (Spanish)
 ```
 
 `public/og.png` is committed, and **not** wired into `npm run build` on purpose:
@@ -122,6 +125,18 @@ on the page. The script fails rather than warns on the two mistakes that are
 invisible in review: a missing webfont (Chromium silently falls back to
 system-ui) and an off-spec canvas (anything but 1.91:1 gets re-cropped by
 Facebook and LinkedIn).
+
+Both cards are rendered from one template, with every word from `i18n/copy.json`
+and every figure from the payload. The Spanish page points `og:image` at
+`og.es.png`: a rendered image cannot have a translated caption, and a Spanish
+`og:title` over a picture reading "The Purple Strip" is a half-translation that
+is invisible on the page and only shows up when somebody shares the link.
+
+**The axis labels are measured, not eyeballed.** All three sit at fixed x
+positions on a 1072px axis, and "COINCIDIÓ CON LOS REPUBLICANOS" is 30
+characters where "AGREED WITH REPUBLICANS" is 23. The script asserts the
+rendered boxes do not touch — English clears by 215/191px, Spanish by 108/84px,
+and nothing in the copy file would have shown that.
 
 The dots are spread evenly across the whole axis, poles included. That is a
 constraint, not a placeholder — a scatter bunched at the centre would be the card

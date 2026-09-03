@@ -85,11 +85,30 @@ const emitSpanish = unapproved.length === 0 && (haveSidecar || force);
 
 const missingKeys = new Set();
 
+/**
+ * Values shared by every substituted string.
+ *
+ * Only two keys need them — the share-card alt text quotes the question count
+ * and the dot count — but passing the set unconditionally means a copy edit that
+ * introduces {n} into a slot that did not have it needs no change here.
+ */
+const payload = JSON.parse(
+  await readFile(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'),
+);
+const VARS = {
+  n: payload.items.length,
+  dots: payload.items.filter(
+    (i) => Math.abs(i.valence) >= payload.rulePartisanThreshold,
+  ).length,
+};
+
 /** The copy value for `key` in `locale`, or null with the key recorded. */
 function value(key, locale) {
   const e = entries[key];
   if (!e) { missingKeys.add(key); return null; }
-  return e[locale] ?? e.en;
+  const template = e[locale] ?? e.en;
+  return template.replace(/\{(\w+)\}/g, (whole, name) =>
+    (VARS[name] === undefined ? whole : String(VARS[name])));
 }
 
 /**
@@ -115,12 +134,18 @@ function localise(html, locale) {
   );
 
   // <meta ... data-i18n-content="key" ... content="...">
+  //
+  // `\scontent=` and NOT `\bcontent=`. \b matches at the hyphen boundary inside
+  // `data-i18n-content="`, so the naive version rewrote the KEY attribute and
+  // left the real content untouched — invisibly on the English page, where the
+  // value it wrote happened to be the English text anyway. Requiring whitespace
+  // makes it match only a standalone attribute.
   out = out.replace(
     /(<meta\b[^>]*\bdata-i18n-content="([^"]+)"[^>]*>)/g,
     (whole, tag, key) => {
       const v = value(key, locale);
       if (v === null) return whole;
-      return tag.replace(/\bcontent="[^"]*"/, `content="${v.replace(/"/g, '&quot;')}"`);
+      return tag.replace(/\scontent="[^"]*"/, ` content="${v.replace(/"/g, '&quot;')}"`);
     },
   );
 
@@ -140,6 +165,17 @@ function head(html, locale) {
     .replace(/<html lang="[^"]*">/, `<html lang="${locale}">`)
     .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${selfUrl}">`)
     .replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${selfUrl}">`);
+
+  // The share card is a rendered image, so it has one per locale rather than one
+  // with a translated caption. Without this the Spanish page's og:title reads
+  // "La Franja Morada" over a picture that says "The Purple Strip", which is
+  // the specific kind of half-translation this whole build is set up to refuse.
+  if (locale === 'es') {
+    const card = `${SITE}/og.es.png`;
+    out = out
+      .replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${card}">`)
+      .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${card}">`);
+  }
 
   // hreflang, both directions plus x-default. Search engines need each page to
   // point at every version INCLUDING itself, or the pair is ignored.
@@ -205,6 +241,16 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
     : resolve(DIST, 'index.html');
   if (locale === 'es') await mkdir(resolve(DIST, 'es'), { recursive: true });
   await writeFile(target, html, 'utf8');
+
+  // A key never contains a space. If one does, a substitution wrote a SENTENCE
+  // into the key attribute instead of into content — which is exactly what
+  // `\bcontent=` did, and it was invisible on the English page because the
+  // sentence it misplaced was the English one.
+  const clobbered = [...html.matchAll(/data-i18n(?:-content)?="([^"]+)"/g)]
+    .map((m) => m[1])
+    .filter((k) => /\s/.test(k));
+  say(clobbered.length === 0, `${locale}: no key attribute was overwritten`,
+    clobbered.length ? `clobbered: "${clobbered[0].slice(0, 48)}…"` : '');
 
   const left = [...html.matchAll(/data-i18n(?:-content)?="([^"]+)"/g)].length;
   say(true, `wrote ${locale === 'es' ? 'dist/es/index.html' : 'dist/index.html'}`,

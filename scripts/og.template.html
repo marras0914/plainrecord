@@ -80,10 +80,9 @@
 
   <div class="eyebrow" id="eyebrow">TEXAS HOUSE · 89TH LEGISLATURE</div>
 
-  <h1>The Purple&nbsp;Strip</h1>
+  <h1 id="title">The Purple&nbsp;Strip</h1>
 
-  <p class="deck">A blind quiz on <b id="deck-n">67 real votes</b>.
-     Party labels stay hidden until after you answer.</p>
+  <p class="deck" id="deck">A blind quiz on <b>67 real votes</b>. Party labels stay hidden until after you answer.</p>
 
   <div class="strip-wrap">
     <svg id="strip" viewBox="0 0 1072 150" xmlns="http://www.w3.org/2000/svg">
@@ -104,9 +103,9 @@
       <!-- centre tick -->
       <rect x="535" y="96" width="2" height="23" fill="#c3c2b7"/>
 
-      <text x="0"    y="142" fill="#2a78d6" text-anchor="start">AGREED WITH DEMOCRATS</text>
-      <text x="536"  y="142" fill="#898781" text-anchor="middle">BOTH PARTIES</text>
-      <text x="1072" y="142" fill="#e34948" text-anchor="end">AGREED WITH REPUBLICANS</text>
+      <text id="axis-d" x="0"    y="142" fill="#2a78d6" text-anchor="start">AGREED WITH DEMOCRATS</text>
+      <text id="axis-mid" x="536"  y="142" fill="#898781" text-anchor="middle">BOTH PARTIES</text>
+      <text id="axis-r" x="1072" y="142" fill="#e34948" text-anchor="end">AGREED WITH REPUBLICANS</text>
     </svg>
   </div>
 

@@ -620,6 +620,24 @@ try {
     check('es: says its Spanish is unofficial',
       /traducci[oó]n nuestra/i.test(await esPage.$eval('.xl-note', (e) => e.textContent)));
 
+    // The share card is a rendered image, so it needs its own per locale. A
+    // Spanish og:title over a picture reading "The Purple Strip" is the
+    // half-translation this build exists to refuse, and it is invisible on the
+    // page itself — it only shows up when somebody shares the link.
+    const meta = async (sel) => esPage.$eval(sel, (e) => e.getAttribute('content'));
+    check('es: og:image is the Spanish card',
+      /\/og\.es\.png$/.test(await meta('meta[property="og:image"]')),
+      await meta('meta[property="og:image"]'));
+    check('es: twitter:image is the Spanish card',
+      /\/og\.es\.png$/.test(await meta('meta[name="twitter:image"]')));
+    check('es: og:title is Spanish',
+      /Franja Morada/.test(await meta('meta[property="og:title"]')),
+      await meta('meta[property="og:title"]'));
+    check('es: og:image:alt is Spanish',
+      /Franja Morada/.test(await meta('meta[property="og:image:alt"]')));
+    check('es: meta description is Spanish',
+      /cuestionario a ciegas/i.test(await meta('meta[name="description"]')));
+
     // The record stays the record. A translated caption is not the caption, and
     // the lang attribute is what makes a screen reader switch voice for it.
     const cap = await esPage.$eval('.q-caption', (e) => ({ text: e.textContent.trim(), lang: e.lang }));
