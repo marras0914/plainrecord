@@ -1,0 +1,270 @@
+{
+  "_meta": {
+    "purpose": "Spanish for the prose the PAYLOAD carries, as opposed to the site chrome in i18n/copy.json. Loaded only by the /es/ page, so the English payload stays byte-identical and quiz_89R.json remains 'the exact file this page loaded'.",
+    "session": "89R",
+    "status": "Reviewed and approved by Marco Arras (fluent), 3 September 2026.",
+    "keys": "Outcomes are keyed by their English label, opponents and incumbents by name, items by billId, omissions and categories by their English string. All of those are unique in the payload. scripts/check_sidecar.mjs fails if the payload contains a translatable string this file does not cover, or if this file names something the payload no longer has.",
+    "captions": "The 67 official bill captions are DELIBERATELY ABSENT and the `captions` object is empty. They are copied verbatim from the record and the page promises exactly that, so a Spanish rendering is not the caption — it is a paraphrase by an interested party on the one page whose value is that it does not paraphrase. On /es/ they render in English, carrying lang=\"en\" so a screen reader switches voice, with page.translationNotice saying why. Adding Spanish aid renderings later is an enhancement; replacing the English is not an option.",
+    "figures": "Every number, currency amount, percentage, date and bill identifier is carried across unchanged. Source names are proper nouns and stay in English — a reader chasing a citation needs the name the publisher uses."
+  },
+
+  "comparatorRule": "De cada bancada: el miembro más de línea partidista, el miembro mediano y el que más veces rompió filas. La misma regla en los dos lados, recalculada en cada compilación.",
+
+  "candidateProvenance": "Esta página trata de tres contiendas específicas: Gobernador, Vicegobernador y Senado de Estados Unidos. Los tres candidatos demócratas están en la Cámara de Representantes de Texas, que es la razón por la que la comparación funciona: votaron los mismos proyectos de ley sobre los que se le pregunta, así que sus historiales pueden compararse con el suyo voto por voto. Escoger esas tres contiendas es una decisión editorial, no una medición, y los otros seis miembros que aparecen debajo de cada pregunta se eligen por regla de los dos partidos, para que la página no muestre solo un lado de la cámara.",
+
+  "causalNote": "Estas cifras son la situación de Texas, según las fuentes citadas. No son prueba de que un voto, un proyecto de ley o un funcionario en particular las haya causado: las clasificaciones se mueven también por el crecimiento de la población, el valor de las propiedades locales, las reglas federales y la economía, no solo por la ley estatal. Lo que está en el registro es el resultado, el voto y quién ocupaba el cargo. La línea entre ellos la traza usted.",
+
+  "plainLanguageNote": "La descripción corta debajo de un proyecto de ley la escribimos nosotros, no está copiada del registro, y solo los siete proyectos principales tienen una. Todas las demás preguntas muestran únicamente el título oficial.",
+
+  "categories": {
+    "Abortion": "Aborto",
+    "Arts, Culture & Tourism": "Arte, cultura y turismo",
+    "Business & Labor": "Empresas y trabajo",
+    "Courts & Civil Law": "Tribunales y derecho civil",
+    "Criminal Justice": "Justicia penal",
+    "Education": "Educación",
+    "Elections & Voting": "Elecciones y voto",
+    "Energy & Environment": "Energía y medio ambiente",
+    "Families & Children": "Familias y niñez",
+    "Guns": "Armas de fuego",
+    "Health & Human Services": "Salud y servicios humanos",
+    "Housing": "Vivienda",
+    "Immigration": "Inmigración",
+    "Military & Veterans": "Militares y veteranos",
+    "Public Safety": "Seguridad pública",
+    "Religion & Civil Liberties": "Religión y libertades civiles",
+    "State & Local Government": "Gobierno estatal y local",
+    "Taxes & Spending": "Impuestos y gasto",
+    "Technology & Privacy": "Tecnología y privacidad",
+    "Transportation": "Transporte"
+  },
+
+  "omissions": {
+    "Transportation": "Las cifras publicadas de muertes en carretera en Texas para 2024 no coinciden entre sí (1,997 frente a 4,150) y no pudimos conciliarlas con una fuente primaria.",
+    "Religion & Civil Liberties": "Aquí no existe ninguna medida de resultado que no sea, en sí misma, un juicio de valor."
+  },
+
+  "opponents": {
+    "Dan Patrick": {
+      "office": "Vicegobernador",
+      "whyNoVotes": "Preside el Senado en lugar de votar en la Cámara, así que no emite ningún voto sobre estos proyectos de ley.",
+      "evidence": "designaciones de proyectos prioritarios: los que declaró públicamente de aprobación obligada",
+      "oneSided": "Cada proyecto de esa lista es uno que él quería que se aprobara, así que puede mostrar en qué lado estuvo en un proyecto, pero nunca con qué frecuencia coincidiría con usted."
+    },
+    "Greg Abbott": {
+      "office": "Gobernador",
+      "whyNoVotes": "Nunca ha servido en una legislatura, así que no tiene ningún historial de votación nominal.",
+      "evidence": "vetos: proyectos que anuló después de que fueron aprobados",
+      "oneSided": "Un gobernador solo veta los proyectos a los que se opone, y dejar que un proyecto se convierta en ley sin firmarlo no es respaldo, así que esto nunca puede leerse como coincidencia."
+    },
+    "Ken Paxton": {
+      "office": "Fiscal General",
+      "whyNoVotes": "Su último voto legislativo fue en 2015, antes de que cualquiera de los tres asumiera el cargo: no hay ninguna sesión que compartan.",
+      "evidence": "nada que se vincule a estos proyectos de ley",
+      "oneSided": "Nada de su historial puede unirse a un proyecto de este cuestionario, así que no aparece en ninguna pregunta."
+    }
+  },
+
+  "incumbents": {
+    "Greg Abbott": {
+      "office": "Gobernador",
+      "since": "enero de 2015",
+      "sessions": "las Legislaturas 84.ª a 89.ª",
+      "acts": [
+        "Firmó o vetó cada proyecto de ley que llegó a su escritorio en ese tiempo.",
+        "Vetó 279 proyectos a lo largo de esas seis sesiones ordinarias, 28 de ellos en la 89.ª.",
+        "Vetó el SB 3, la prohibición del THC, que era el tercer proyecto prioritario del Vicegobernador.",
+        "En 2026 ordenó a la PUC y a ERCOT actuar sobre cómo se reparten los costos de los centros de datos, y congeló nuevos proyectos de centros de datos a la espera de una auditoría estatal."
+      ]
+    },
+    "Ken Paxton": {
+      "office": "Fiscal General",
+      "since": "enero de 2015",
+      "sessions": "las Legislaturas 84.ª a 89.ª",
+      "acts": [
+        "Creó un equipo de aplicación de la ley de privacidad en 2024 y recuperó $1.375 mil millones de Google y $1.4 mil millones de Meta por los datos de los texanos.",
+        "No tiene historial de votación nominal que coincida con los tres candidatos de la Cámara: su último voto legislativo fue en 2015, antes de que cualquiera de ellos asumiera el cargo.",
+        "Fue destituido por la Cámara de Texas en 2023 y absuelto por el Senado."
+      ]
+    },
+    "Dan Patrick": {
+      "office": "Vicegobernador",
+      "since": "enero de 2015",
+      "sessions": "las Legislaturas 84.ª a 89.ª",
+      "acts": [
+        "Preside el Senado, asigna proyectos a los comités y controla el calendario.",
+        "Publicó una lista numerada de proyectos prioritarios en cada sesión: 25 proyectos en la 89.ª.",
+        "No emite voto salvo para desempatar, así que no tiene historial de votación nominal que calificar."
+      ]
+    }
+  },
+
+  "outcomes": {
+    "Per-student school funding": {
+      "label": "Financiamiento escolar por estudiante",
+      "value": "$13,189 por estudiante",
+      "comparison": "$5,664 por debajo del promedio nacional de $18,853",
+      "rank": "47.º de 50 estados",
+      "caveat": "Otras fuentes ubican a Texas entre el 42.º y el 47.º según el año fiscal y según se cuenten o no la construcción y las pensiones. Las cifras por estudiante también se mueven por el crecimiento de la matrícula y el valor de las propiedades locales, no solo por las asignaciones estatales."
+    },
+    "Adults without health insurance": {
+      "label": "Adultos sin seguro médico",
+      "value": "21.6% de los adultos",
+      "comparison": "aproximadamente el doble de la tasa nacional de 11.3%",
+      "rank": "la más alta del país",
+      "caveat": "Se debe en gran medida a que Texas no amplió Medicaid, lo cual es una decisión de la legislatura y del gobernador, pero también a la proporción de trabajo agrícola y por cuenta propia del estado, y a las reglas federales de subsidios que fija el Congreso."
+    },
+    "Children without health insurance": {
+      "label": "Niños sin seguro médico",
+      "value": "13.6% de los niños, cerca de 1.1 millones",
+      "comparison": "más del doble de la tasa nacional de 6.0%; casi una cuarta parte de todos los niños sin seguro de Estados Unidos",
+      "rank": "la más alta del país",
+      "caveat": "Subió desde 10.9% en 2022, un aumento de 29%. El papeleo de inscripción tras el fin de la cobertura de la pandemia explica parte del alza; las reglas de elegibilidad fijadas en Austin explican otra parte."
+    },
+    "Infant deaths after the 2021 six-week ban": {
+      "label": "Muertes infantiles tras la prohibición de las seis semanas de 2021",
+      "value": "las muertes infantiles subieron 12.9% al año siguiente",
+      "comparison": "frente a un alza de 1.8% en el resto de Estados Unidos",
+      "rank": null,
+      "caveat": "Es una comparación de series de tiempo de un solo estado, no un hallazgo aleatorizado. Los autores atribuyen buena parte del alza a anomalías congénitas diagnosticadas demasiado tarde para actuar bajo la prohibición. Esto se refiere a la ley de 2021 (SB 8 de la 87.ª), no a ningún proyecto de este cuestionario."
+    },
+    "What households pay for electricity": {
+      "label": "Lo que pagan los hogares por la electricidad",
+      "value": "16.11¢ por kWh, un alza de cerca de 40% desde 2020",
+      "comparison": "desde 11.50¢ en 2020; las tarifas entregadas van de 14 a 19¢ en 2026, y algunas facturas mensuales han llegado a $600–$800",
+      "rank": null,
+      "caveat": "Este aumento es en gran parte anterior a la expansión de los centros de datos. Los precios del gas natural, la construcción de transmisión, el crecimiento de la población y el clima extremo mueven todos las tarifas minoristas. Tómelo como lo que le ha pasado a las facturas, no como un efecto de los centros de datos."
+    },
+    "What data centres are forecast to draw": {
+      "label": "Lo que se pronostica que consumirán los centros de datos",
+      "value": "≈78 GW de demanda de centros de datos proyectada para 2030",
+      "comparison": "frente a un máximo histórico de la red de 85.5 GW para todo Texas (agosto de 2023). El propio pronóstico de ERCOT en 2024 para ese mismo año era de 29.6 GW: desde entonces se ha más que duplicado.",
+      "rank": null,
+      "caveat": "Es un pronóstico construido a partir de solicitudes de interconexión, no de capacidad construida: los desarrolladores solicitan mucho más de lo que terminan, y ERCOT ha revisado esta cifra fuertemente al alza dos veces. Quién paga la transmisión que hace falta es la pregunta viva, y es de lo que tratan el SB 6 y las acciones de la PUC de 2026."
+    },
+    "Spending on Operation Lone Star": {
+      "label": "Gasto en la Operación Lone Star",
+      "value": "$11 mil millones desde 2021",
+      "comparison": "el gasto en seguridad fronteriza pasó de $800 millones en 2018–19 a $6.6 mil millones en 2024–25; las asignaciones propuestas llevarían el total acumulado a cerca de $18 mil millones",
+      "rank": null,
+      "caveat": "Marcado como neutral a propósito. Ha financiado cerca de 45 millas de barrera construida por el estado, más de 100 millas de alambre de cuchillas y el traslado en autobús de más de 119,000 personas a otras ciudades. Si ese dinero está bien gastado es la discusión, no un hecho que esta página pueda resolver. Abbott ha pedido al gobierno federal que lo reembolse."
+    },
+    "Voter turnout": {
+      "label": "Participación electoral",
+      "value": "56.6% de los votantes elegibles en 2024",
+      "comparison": "por detrás de todos los estados excepto Hawái, Oklahoma, Arkansas y Virginia Occidental",
+      "rank": "5.ª más baja de 50 estados",
+      "caveat": "La clasificación depende del denominador: medida contra los ciudadanos en edad de votar en lugar de los votantes elegibles, las estimaciones del Censo ubican a Texas en el 2.º lugar más bajo, con 57.9%. La participación también sigue qué tan competitivo se cree que es un estado, no solo la ley de registro."
+    },
+    "Incarceration rate": {
+      "label": "Tasa de encarcelamiento",
+      "value": "751 por cada 100,000 personas",
+      "comparison": "contando prisiones, cárceles, detención migratoria e instalaciones juveniles; Misisipi es la más alta y Massachusetts la más baja, con 96 por cada 100,000 en prisión",
+      "rank": "6.ª más alta de 50 estados",
+      "caveat": "Bajó 18% en la última década, así que la tendencia va en dirección contraria al nivel. Las tasas varían mucho según qué tipos de instalación cuente cada fuente."
+    },
+    "Job growth": {
+      "label": "Crecimiento del empleo",
+      "value": "132,500 empleos añadidos en 2025, más que cualquier otro estado",
+      "comparison": "el PIB real creció 4.8% en 2024, por encima de la tasa nacional; con $2.9 billones, Texas sería por sí solo la 8.ª economía más grande del mundo",
+      "rank": "1.º de 50 estados en empleos añadidos",
+      "caveat": "El primer lugar es en empleos absolutos, lo cual refleja en parte ser el segundo estado más poblado. Por TASA de crecimiento, Misuri lideró 2025 con +1.7%. Los conteos de empleo tampoco dicen nada sobre el sueldo: Texas no tiene salario mínimo estatal por encima del federal de $7.25."
+    },
+    "Property tax burden": {
+      "label": "Carga del impuesto a la propiedad",
+      "value": "tasa efectiva de 1.245%, con una factura mediana de $4,108",
+      "comparison": "frente a una tasa promedio nacional de 0.888% y una factura mediana nacional de $3,211, y las casas de Texas valen menos en promedio ($313,200 frente a $360,600)",
+      "rank": "9.ª más alta de 50 estados",
+      "caveat": "Este es el intercambio directo por no tener impuesto estatal sobre la renta: las escuelas, ciudades y condados se financian con impuestos locales a la propiedad. Si ese es el mejor trato depende de sus ingresos y de si usted es propietario. Las tasas también varían mucho por condado."
+    },
+    "Renters spending too much on rent": {
+      "label": "Inquilinos que gastan demasiado en renta",
+      "value": "47.7% de los inquilinos tienen carga de costo",
+      "comparison": "de 4.1 millones de hogares inquilinos; 23.6% tienen carga severa y pagan más de la mitad de sus ingresos en renta. La renta mediana subió 9.1% descontando la inflación, mientras el ingreso mediano por hogar subió 3.1%, a $78,476.",
+      "rank": null,
+      "caveat": "La carga está concentrada: cerca del 90% de los inquilinos que ganan menos de $30,000 tienen carga de costo, frente a una proporción mucho menor entre quienes ganan más, así que un promedio estatal subestima lo duro que cae abajo. Las rentas también las fijan los mercados locales y la oferta de suelo, no solo la ley estatal."
+    },
+    "How much housing is being built": {
+      "label": "Cuánta vivienda se está construyendo",
+      "value": "74,350 nuevos permisos residenciales en 2025, más que cualquier estado",
+      "comparison": "Houston quedó 1.ª y Dallas 2.ª entre todas las ciudades de Estados Unidos en permisos nuevos, con San Antonio 8.ª y Austin 9.ª",
+      "rank": "1.º de 50 estados",
+      "caveat": "El volumen de permisos cayó cerca de 9% respecto al año anterior. El primer lugar es un conteo absoluto, que refleja en parte el tamaño y el crecimiento de la población. Note la tensión con la cifra anterior: liderar el país en construcción no ha impedido que la asequibilidad empeore aquí más rápido que a nivel nacional."
+    },
+    "Texans without a broadband connection": {
+      "label": "Texanos sin conexión de banda ancha",
+      "value": "más de 9 millones de personas",
+      "comparison": "ya sea porque la infraestructura no les llega o porque no están suscritos; cuatro de las cinco ciudades menos conectadas del país están en Texas",
+      "rank": null,
+      "caveat": "La cifra de 9 millones combina dos problemas distintos —no hay servicio disponible, y hay servicio disponible pero inasequible— que necesitan soluciones diferentes. La clasificación de ciudades menos conectadas viene de un análisis de 2019 y puede haber cambiado."
+    },
+    "Data privacy enforcement": {
+      "label": "Aplicación de la ley de privacidad de datos",
+      "value": "$1.375 mil millones recuperados de Google",
+      "comparison": "la mayor recuperación estatal en materia de privacidad contra Google lograda por cualquier fiscal general, más $1.4 mil millones de Meta por datos de reconocimiento facial en 2024",
+      "rank": "la mayor del país",
+      "caveat": "Obtenida por el Fiscal General Ken Paxton, que es candidato en una de las tres contiendas de esta página. El tamaño de un acuerdo no es lo mismo que el beneficio para el consumidor: cuánto llega a los texanos, frente a lo que va al tesoro estatal y a los abogados externos, es una pregunta aparte que esta cifra no responde."
+    },
+    "Who pays for a lawyer when you cannot afford one": {
+      "label": "Quién paga un abogado cuando usted no puede pagarlo",
+      "value": "el estado cubre cerca del 13% del costo",
+      "comparison": "los condados pagan el resto. En 2013 los condados gastaron $189.7 millones frente a $27.4 millones del estado: 14 centavos del estado por cada dólar del condado.",
+      "rank": null,
+      "caveat": "Marcado como neutral porque describe quién soporta un costo, no una clasificación; si el estado o el condado deben financiar el derecho a un abogado es la discusión. Note las fechas: la proporción de 13% es del año fiscal 2020 y la comparación en dólares es de 2013, así que ambas pueden haber cambiado. El 13% son subvenciones estatales que compensan el gasto de los condados, no una proporción del costo total del sistema."
+    },
+    "Exonerations": {
+      "label": "Exoneraciones",
+      "value": "más de 470 desde 1989, más que cualquier estado",
+      "comparison": "26 solo en 2024, por delante de Illinois con 20. Texas también ha exonerado a 18 personas del corredor de la muerte, solo por detrás de Florida.",
+      "rank": "1.º de 50 estados",
+      "caveat": "Se lee de dos maneras opuestas y la cifra no puede decirle cuál: puede significar más condenas injustas, o mejor maquinaria para detectarlas. Aquí las dos son parcialmente ciertas. 17 de las 26 exoneraciones de 2024 se remontan a la conducta indebida de un solo agente antinarcóticos de Houston. Texas también ha ejecutado a más personas que cualquier estado desde 1976."
+    },
+    "Firearm death rate": {
+      "label": "Tasa de muertes por arma de fuego",
+      "value": "13.9 muertes por cada 100,000 personas",
+      "comparison": "frente a 28.0 en Misisipi (la más alta) y 3.7 en Hawái (la más baja)",
+      "rank": "26.º de 50 estados",
+      "caveat": "Texas tiene el mayor número absoluto de muertes por arma de fuego de cualquier estado, lo cual refleja sobre todo ser el segundo más poblado. Por habitante se ubica en la mitad de los estados."
+    }
+  },
+
+  "items": {
+    "SB 2": {
+      "label": "Vales escolares",
+      "why": "La pelea estelar de la sesión: dinero público para matrícula de escuelas privadas. Proyecto prioritario del Vicegobernador.",
+      "plain": "Crea cuentas financiadas por el estado que las familias pueden gastar en matrícula de escuelas privadas y otros costos escolares aprobados. El dinero sale del presupuesto estatal."
+    },
+    "SB 8": {
+      "label": "Aplicación de la ley migratoria",
+      "why": "Obliga a las fuerzas del orden locales a colaborar con los esfuerzos federales de deportación. Proyecto prioritario del Vicegobernador.",
+      "plain": "Obliga a los sheriffs a firmar acuerdos que permiten a sus agentes ejecutar la ley migratoria federal, y crea subvenciones estatales para pagarlo."
+    },
+    "SB 10": {
+      "label": "Los Diez Mandamientos en las aulas",
+      "why": "Obliga a exhibir los Diez Mandamientos en las escuelas públicas. Proyecto prioritario del Vicegobernador.",
+      "plain": "Obliga a cada aula de escuela pública de Texas a exhibir una copia de los Diez Mandamientos."
+    },
+    "SB 3": {
+      "label": "Prohibición del THC",
+      "why": "Proyecto prioritario del Vicegobernador que el Gobernador luego VETÓ: una división documentada entre dos líderes republicanos sobre un mismo proyecto.",
+      "plain": "Prohíbe los productos de cáñamo que contienen THC —los que se venden en tiendas de humo y tiendas de conveniencia— y añade licencias, cuotas y sanciones penales por venderlos."
+    },
+    "SB 14": {
+      "label": "Revisión regulatoria (\"Texas DOGE\")",
+      "why": "Crea una oficina estatal para revisar regulaciones. Proyecto prioritario del Vicegobernador.",
+      "plain": "Crea una nueva oficina estatal para revisar las reglas que escriben las agencias, y ordena a los jueces dejar de tratar la interpretación que una agencia hace de la ley como la correcta."
+    },
+    "SB 6": {
+      "label": "Red eléctrica y grandes consumidores",
+      "why": "Reglas de confiabilidad de la red para grandes cargas, como los centros de datos. Proyecto prioritario del Vicegobernador.",
+      "plain": "Fija las reglas de cómo los consumidores de electricidad muy grandes, como los centros de datos, se conectan a la red de Texas y cuánto pagan del costo de servirles."
+    },
+    "SB 5": {
+      "label": "Instituto de investigación sobre demencia",
+      "why": "Crea un instituto estatal de investigación sobre la demencia. Incluido deliberadamente como el menos partidista de los proyectos principales: sin él, el conjunto corto sería enteramente de línea partidista.",
+      "plain": "Crea un instituto estatal que financia la prevención y la investigación de la demencia."
+    }
+  },
+
+  "captions": {}
+}

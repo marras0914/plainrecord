@@ -128,6 +128,65 @@ constraint, not a placeholder — a scatter bunched at the centre would be the c
 asserting "Texas is purple" before the reader has answered anything, which is the
 one conclusion this project does not hand out for free.
 
+## Spanish
+
+```bash
+npm run i18n:review        # copy.json -> i18n/review.html, the reviewer's sheet
+npm run i18n:gen           # copy.json -> src/copy.gen.ts (typed keys)
+npm run i18n:check         # structure, staleness, and sidecar coverage
+npm run i18n:sidecar       # just the payload sidecar
+```
+
+English is `/`, Spanish is `/es`. Both are static HTML emitted from one
+template by `scripts/build_locales.mjs`, which runs as part of `npm run build`.
+
+**Copy lives in two places, split by what owns it.** `i18n/copy.json` holds the
+site's own words — 190 keys, both locales, with per-string context and the
+placeholder contract. `public/data/quiz_89R.es.json` holds the prose the
+*payload* carries: outcome labels and caveats, the comparator rule, why each
+headline bill was chosen, an opponent's reason for having no votes. That split
+exists because the second set is keyed by item and cannot live in a flat table,
+and because keeping it out of `quiz_89R.json` leaves the English payload
+byte-identical — the page promises it is "the exact file this page loaded".
+
+### The official captions stay in English
+
+All 67 of them, on both pages, carrying `lang="en"` so a screen reader switches
+voice. The page promises every question is the bill's official summary copied
+word for word, and a Spanish translation of an official English caption **is not
+the official caption** — it is a paraphrase by an interested party, on the one
+page whose value is that it does not paraphrase. `captions` in the sidecar is
+asserted empty by `npm run i18n:sidecar`. The Spanish page says so on screen.
+
+### What is checked, and why each check exists
+
+| Check | Catches |
+|---|---|
+| placeholder sets | a translator renaming or dropping `{n}`, which renders a literal brace to a reader. Position is free — Spanish word order moves them |
+| diacritics | the first draft had none at all; `campana` is a bell, `senal` is not a word |
+| `copy.gen.ts` staleness | editing copy.json and shipping yesterday's wording |
+| sidecar coverage, both ways | payload prose with no Spanish, and Spanish for a label the payload no longer has |
+| figures carried across | `$13,189` surviving translation unchanged — the one error a reader cannot detect |
+| English-chrome leak on `/es` | a render path that was missed |
+| the leak phrases themselves | the leak test going vacuous. `innerText` applies CSS `text-transform`, so six of nine phrases were absent from the *English* page too until the comparison was made case-insensitive |
+
+### Gates
+
+`build_locales.mjs` will not emit `/es` unless every string is approved and the
+sidecar exists. Spanish headings over English payload sentences read as machine
+output on a site whose whole argument is that it is careful, so half-translated
+is treated as worse than English-only. `--force` overrides it for local review.
+
+A missing sidecar is reported but does **not** fail the build: it blocks Spanish,
+it does not make the English page wrong.
+
+### Known follow-ups
+
+Both locales ship in one bundle (129 → 164 KB), so English readers download the
+Spanish strings and vice versa. Per-locale chunks are worth doing now that the
+route exists. Spanish *aid* renderings for the 67 captions — shown beside the
+English record, never instead of it — are an enhancement nobody is blocked on.
+
 ## Pointing rightnleft.com at it
 
 The domain is **registered at Squarespace**. You are moving DNS only; the

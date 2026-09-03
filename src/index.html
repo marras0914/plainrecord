@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>The Purple Strip — PlainRecord</title>
-  <meta name="description" content="A blind quiz on real Texas House votes. Answer without knowing which party took which side, then see where you land and where Texas actually stands.">
+  <title data-i18n="page.title">The Purple Strip — PlainRecord</title>
+  <meta name="description" data-i18n-content="page.description" content="A blind quiz on real Texas House votes. Answer without knowing which party took which side, then see where you land and where Texas actually stands.">
   <meta name="color-scheme" content="light dark">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,20 +38,20 @@
 <div class="wrap">
   <header>
     <div class="eyebrow" id="hdr-eyebrow"></div>
-    <h1>The Purple Strip</h1>
+    <h1 data-i18n="intro.h1">The Purple Strip</h1>
     <div class="blurb">
-      <p><b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from
+      <p data-i18n="intro.p1"><b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from
       2025 and hid who voted which way. Now you vote.</p>
-      <p>For each one we count how many Republicans said yes, and how many Democrats
+      <p data-i18n="intro.p2">For each one we count how many Republicans said yes, and how many Democrats
       said yes. Mostly Republicans? We colour it <span class="sw-r">red</span>.
       Mostly Democrats? <span class="sw-b">Blue</span>. Both parties agreed?
       <span class="sw-g">Grey</span> — that vote doesn't tell us much about sides.</p>
-      <p>Every answer you give becomes one dot. Dots on the left mean you agreed with
+      <p data-i18n="intro.p3">Every answer you give becomes one dot. Dots on the left mean you agreed with
       Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots
       land on both sides, you don't fit neatly in one party.</b> That's the purple part.</p>
-      <p>Then we show you <b>what these areas actually look like in Texas today</b> —
+      <p data-i18n="intro.p4">Then we show you <b>what these areas actually look like in Texas today</b> —
       school funding, health coverage, and so on — with the source for every number.</p>
-      <p class="blurb-fine">Nobody's opinion decides the colours. They come from the actual
+      <p data-i18n="intro.fine" class="blurb-fine">Nobody's opinion decides the colours. They come from the actual
       vote counts, and you can check them on every question. The outcome numbers are
       real too, but a state ranking has many causes — we show you the numbers and the
       votes, and leave the connecting to you.</p>
@@ -60,12 +60,12 @@
 
   <div class="modebar">
     <div>
-      <div class="eyebrow">How many votes</div>
+      <div data-i18n="sec.howMany" class="eyebrow">How many votes</div>
       <div id="mode-desc" class="mode-desc"></div>
     </div>
     <div class="modebtns">
-      <button id="mode-short" class="ghost">7 big issues</button>
-      <button id="mode-full" class="ghost">All <span id="full-count"></span> votes</button>
+      <button data-i18n="mode.short" id="mode-short" class="ghost">7 big issues</button>
+      <button id="mode-full" class="ghost"></button>
     </div>
   </div>
 
@@ -73,21 +73,21 @@
 
   <section class="card">
     <div class="card-head">
-      <div class="eyebrow">Your answers, one mark each</div>
-      <button class="ghost" id="table-toggle" aria-expanded="false">Show table</button>
+      <div data-i18n="sec.yourAnswers" class="eyebrow">Your answers, one mark each</div>
+      <button data-i18n="ui.showTable" class="ghost" id="table-toggle" aria-expanded="false">Show table</button>
     </div>
     <svg id="strip" viewBox="0 0 860 300" role="img" aria-labelledby="strip-title">
-      <title id="strip-title">Each answered vote plotted on a blue-to-red partisan axis, with the three candidates' own records below</title>
+      <title id="strip-title" data-i18n="strip.title">Each answered vote plotted on a blue-to-red partisan axis, with the three candidates' own records below</title>
     </svg>
     <div class="legend">
       <div class="legend-item"><span class="ramp" aria-hidden="true"></span>
-        <span>Democratic-coded ← position → Republican-coded</span></div>
+        <span data-i18n="strip.legendRamp">Democratic-coded ← position → Republican-coded</span></div>
       <div class="legend-item">
         <svg width="13" height="13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" fill="var(--muted)"></circle></svg>
-        <span>your answer</span></div>
+        <span data-i18n="strip.legendYours">your answer</span></div>
       <div class="legend-item">
         <svg width="13" height="13" aria-hidden="true"><path d="M6.5 1.5 L11.5 6.5 L6.5 11.5 L1.5 6.5 Z" fill="var(--ink-2)"></path></svg>
-        <span>candidate's record on the same votes</span></div>
+        <span data-i18n="strip.legendCands">candidate's record on the same votes</span></div>
     </div>
     <div id="table-panel" hidden>
       <div class="table-wrap"><table id="table"></table></div>
@@ -100,7 +100,7 @@
 
   <section>
     <div class="card-head" style="margin-bottom:10px">
-      <div class="eyebrow">The three candidates, scored against your answers</div>
+      <div data-i18n="sec.candidates" class="eyebrow">The three candidates, scored against your answers</div>
     </div>
     <div class="cands" id="cands"></div>
     <p class="footnote" style="margin-top:12px" id="cand-note"></p>
@@ -123,7 +123,7 @@
 
   <section id="outcome-card" hidden>
     <div class="card-head" style="margin-bottom:10px">
-      <div class="eyebrow">What these areas look like now</div>
+      <div data-i18n="sec.outcomes" class="eyebrow">What these areas look like now</div>
     </div>
     <div class="outc" id="outcomes"></div>
     <div class="causal" id="causal"></div>
@@ -134,22 +134,18 @@
   <section class="card" id="stmt-card" hidden></section>
 
   <section>
-    <div class="eyebrow" style="margin-bottom:8px">Try a profile</div>
+    <div data-i18n="preset.heading" class="eyebrow" style="margin-bottom:8px">Try a profile</div>
     <div class="q-actions" style="margin-top:0">
-      <button class="ghost" data-preset="mixed">Cross-pressured voter</button>
-      <button class="ghost" data-preset="muted">Low-signal votes only</button>
-      <button class="ghost" data-preset="consistent">Consistent partisan</button>
-      <button class="ghost" data-preset="reset">Clear</button>
+      <button data-i18n="preset.mixed" class="ghost" data-preset="mixed">Cross-pressured voter</button>
+      <button data-i18n="preset.muted" class="ghost" data-preset="muted">Low-signal votes only</button>
+      <button data-i18n="preset.consistent" class="ghost" data-preset="consistent">Consistent partisan</button>
+      <button data-i18n="preset.reset" class="ghost" data-preset="reset">Clear</button>
     </div>
-    <p class="footnote" style="margin-top:12px">
-      The first two produce almost the same <code>net lean</code> — a single blended
-      swatch would render both as the same purple. They are opposite findings, so the
-      readout separates them on <code>partisan load</code>.
-    </p>
+    <p class="footnote" style="margin-top:12px" data-i18n="preset.note">The first two produce almost the same <code>net lean</code> — a single blended swatch would render both as the same purple. They are opposite findings, so the readout separates them on <code>partisan load</code>.</p>
   </section>
 
   <section>
-    <div class="eyebrow" style="margin-bottom:8px">How this is built</div>
+    <div data-i18n="ui.methodHeading" class="eyebrow" style="margin-bottom:8px">How this is built</div>
     <p class="footnote" id="method"></p>
   </section>
 
@@ -169,13 +165,13 @@
     state with extra steps.
   -->
   <section class="card" id="author-card">
-    <div class="eyebrow">Who made this, who paid for it, and what I have at stake</div>
+    <div data-i18n="author.heading" class="eyebrow">Who made this, who paid for it, and what I have at stake</div>
     <div class="blurb" style="margin-top:12px">
-      <p><b>I'm Marco Arras, and I built this on my own time.</b> Nobody paid for
+      <p data-i18n="author.built"><b>I'm Marco Arras, and I built this on my own time.</b> Nobody paid for
       it — no campaign, no party, no PAC, no organisation. There was no budget.
       The cost was evenings.</p>
 
-      <p><b>I donate to the Democratic Party.</b> You should know that before you
+      <p data-i18n="author.donation"><b>I donate to the Democratic Party.</b> You should know that before you
       read anything else here, and it is the reason this page is built the way it
       is rather than a footnote to it. I have a side. So the rule that picks the
       comparison members runs identically on both caucuses, a third of the
@@ -184,27 +180,27 @@
       in one file you can download and check. None of that asks you to trust me.
       That is the whole point of it.</p>
 
-      <p><b>What I do for a living.</b> I work as a solutions architect in energy.
+      <p data-i18n="author.job"><b>What I do for a living.</b> I work as a solutions architect in energy.
       The sector buys and sells power, which overlaps the utilities votes on this
       page, so you should weigh what I say about those accordingly. My employer
       had no involvement in this, did not fund it and did not review it. I do no
       paid political work of any kind.</p>
 
-      <p><b>I picked these three races.</b> Governor, Lieutenant Governor and
+      <p data-i18n="author.races"><b>I picked these three races.</b> Governor, Lieutenant Governor and
       U.S. Senate. That is an editorial decision, not a measurement, and it is
       the choice most worth arguing with. I picked them because all three
       Democratic candidates sit in the Texas House, which means their records can
       be checked against your answers vote for vote. Their opponents cannot be,
       so this page gives them no score at all rather than an invented one.</p>
 
-      <p><b>Why I made it.</b> Almost everything that reaches people about how
+      <p data-i18n="author.why"><b>Why I made it.</b> Almost everything that reaches people about how
       their state is actually governed arrives pre-framed by someone who wants
       something. The votes themselves are public, tedious, and genuinely hard to
       get at. I wanted a way to see the record before seeing the label, and to
       hand over the entire file so that anyone can check the record is what I say
       it is.</p>
 
-      <p class="blurb-fine">If something here is wrong, tell me:
+      <p data-i18n="author.contact" class="blurb-fine">If something here is wrong, tell me:
       <a href="mailto:arras.marco@gmail.com">arras.marco@gmail.com</a>.
       Corrections get made, and noted on the page.</p>
     </div>

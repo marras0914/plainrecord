@@ -332,3 +332,21 @@
     .prov { grid-template-columns:repeat(2,1fr); }
     h1 { font-size:22px; }
   }
+
+  /* Language switch and the unofficial-translation notice.
+     The switch names the OTHER language in that other language, because the
+     person who needs it cannot read the one they are looking at. */
+  .langswitch { margin-bottom:10px; }
+  .langswitch a { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px;
+                  letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-2);
+                  text-decoration:none; border:1px solid var(--rule);
+                  padding:3px 9px; display:inline-block; }
+  .langswitch a:hover { color:var(--ink); border-color:var(--ink-2); }
+  .langswitch a:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+
+  /* Says on the Spanish page that its Spanish is ours, not official. Not
+     decorative: it is what keeps the "copied word for word" promise honest in a
+     second language. */
+  .xl-note { margin:0 0 14px; padding:9px 11px; border-left:2px solid var(--warn);
+             background:var(--band); font-size:13px; line-height:1.5;
+             color:var(--ink-2); max-width:66ch; }

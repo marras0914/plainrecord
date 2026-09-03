@@ -78,7 +78,15 @@ if (withHeaders) {
   server = createServer((req, res) => {
     const path = decodeURIComponent(req.url.split('?')[0]);
     let file = join(dist, path);
-    // Static-host behaviour: unknown paths fall through to the SPA entry point.
+    // A directory serves ITS OWN index.html, the way a static host does. Falling
+    // straight through to dist/index.html would serve the English page for /es/
+    // and every Spanish assertion below would pass against English content —
+    // the harness would confirm a build it had never actually loaded.
+    if (existsSync(file) && statSync(file).isDirectory()) {
+      const nested = join(file, 'index.html');
+      if (existsSync(nested)) file = nested;
+    }
+    // Unknown paths fall through to the entry point, as a static host does.
     if (!existsSync(file) || statSync(file).isDirectory()) file = join(dist, 'index.html');
     const served = '/' + file.slice(dist.length + 1).split(sep).join('/');
     for (const r of rules) {
@@ -559,6 +567,119 @@ try {
     ['R Yea', 'D Yea', 'Valence', 'Source'].every((c) => cols.includes(c)), cols.join(','));
 
   check('no console errors', errs.length === 0, errs.join(' | '));
+
+  // ---------------------------------------------------------------------------
+  // The Spanish page
+  //
+  // Only runs if the build emitted one — scripts/build_locales.mjs holds /es/
+  // back until every string is approved and the payload sidecar exists, and a
+  // verifier that failed when Spanish was deliberately withheld would be
+  // reporting the gate as a defect.
+  //
+  // The check that matters most here is the LAST one. A half-translated page is
+  // the failure mode this whole effort has to avoid: Spanish headings over
+  // English sentences reads as machine output, on a site whose entire argument
+  // is that it is careful. So the English phrases that would leak are named and
+  // asserted absent, rather than trusting that the wiring caught them all.
+  // ---------------------------------------------------------------------------
+
+  const esUrl = new URL('es/', URL_UNDER_TEST).href;
+  const esPage = await (await browser.newContext({ viewport: { width: 1180, height: 1000 } })).newPage();
+  const esErrs = [];
+  esPage.on('pageerror', (e) => esErrs.push('PAGEERROR ' + e.message));
+  esPage.on('console', (m) => { if (m.type() === 'error') esErrs.push('CONSOLE ' + m.text()); });
+
+  const esRes = await esPage.goto(esUrl, { waitUntil: 'networkidle' });
+  await esPage.waitForTimeout(400);
+  const esLang = await esPage.$eval('html', (e) => e.lang);
+
+  if (esRes?.status() !== 200 || esLang !== 'es') {
+    console.log(`\n  [ -- ] Spanish page not built — skipping (lang="${esLang}")\n`);
+  } else {
+    console.log('');
+    check('es: document is lang="es"', esLang === 'es');
+    check('es: title is Spanish', /Franja Morada/.test(await esPage.title()), await esPage.title());
+    // No trailing slash: vercel.json sets trailingSlash:false, so /es/ 308s to
+    // /es and a canonical with the slash would name a URL that redirects.
+    const esCanonical = await esPage.$eval('link[rel=canonical]', (e) => e.getAttribute('href'));
+    check('es: canonical is /es with no trailing slash',
+      esCanonical === 'https://rightnleft.com/es', esCanonical);
+    const esAlt = await esPage.$$eval('link[rel=alternate]',
+      (ls) => ls.map((l) => l.getAttribute('href')));
+    check('es: no hreflang names a URL that would redirect',
+      !esAlt.some((h) => /\/es\/$/.test(h)), esAlt.join(' '));
+
+    const alts = await esPage.$$eval('link[rel=alternate]', (ls) => ls.map((l) => l.hreflang));
+    check('es: hreflang names en, es and x-default',
+      ['en', 'es', 'x-default'].every((h) => alts.includes(h)), alts.join(', '));
+
+    const sw = await esPage.$eval('.langswitch a', (e) => ({ text: e.textContent.trim(), href: e.getAttribute('href') }));
+    check('es: language switch offers English and links to /',
+      /english/i.test(sw.text) && sw.href === '/', `"${sw.text}" -> ${sw.href}`);
+
+    check('es: says its Spanish is unofficial',
+      /traducci[oó]n nuestra/i.test(await esPage.$eval('.xl-note', (e) => e.textContent)));
+
+    // The record stays the record. A translated caption is not the caption, and
+    // the lang attribute is what makes a screen reader switch voice for it.
+    const cap = await esPage.$eval('.q-caption', (e) => ({ text: e.textContent.trim(), lang: e.lang }));
+    check('es: official caption is still English', /^Relating to/i.test(cap.text), cap.text.slice(0, 56));
+    check('es: official caption carries lang="en"', cap.lang === 'en', cap.lang || '(unset)');
+
+    // The disclosure, in Spanish, still ahead of the editorial-choice defence.
+    const author = (await esPage.$eval('#author-card', (e) => e.innerText)).replace(/\s+/g, ' ');
+    check('es: donation disclosed', /dono al Partido Dem[oó]crata/i.test(author));
+    check('es: donation still precedes the editorial-choice defence',
+      author.search(/dono al Partido/i) < author.search(/escog[ií] estas tres/i));
+
+    // Payload prose came through the sidecar, not the English payload.
+    const bias = (await esPage.$eval('#bias-card', (e) => e.innerText)).replace(/\s+/g, ' ');
+    check('es: payload comparator rule is Spanish',
+      /De cada bancada/i.test(bias), bias.slice(0, 70));
+
+    // The leak test. Each of these is a sentence the page renders somewhere; if
+    // one shows up on /es/, a render path was missed.
+    //
+    // CASE-INSENSITIVE, and that is the whole reason this works. innerText
+    // applies CSS text-transform, so every .eyebrow, .prov dt and .stat-label
+    // comes back UPPERCASED — six of these nine phrases were absent from the
+    // ENGLISH page too when this compared exact case, which made them pass for
+    // the wrong reason. Asserted against the English page below so the check
+    // cannot go vacuous again if the copy is reworded.
+    const bodyOf = async (pg) =>
+      (await pg.$eval('body', (e) => e.innerText)).replace(/\s+/g, ' ').toLowerCase();
+    // Every phrase here must render in BOTH modes and on every question, since
+    // the page has been switched to full mode by the checks above. An earlier
+    // list included "the seven biggest fights" (7-issue mode only) and "in plain
+    // terms" (headline bills only), which the meta-check below flagged as
+    // vacuous — the reason it exists.
+    const PHRASES = [
+      "doesn't this favour", 'who made this, who paid',
+      'texas lawmakers vote yes or no', 'from each caucus',
+      'official bill caption', 'straight from the record',
+      'which way you lean', 'how this is built',
+      'of your answers land on the opposite side',
+      // Both of these leaked past an earlier version of this list and were only
+      // caught by looking at a screenshot: a bare "of" hardcoded between two
+      // numbers in a provenance tile, and the SVG axis labels on the strip.
+      // Neither is a sentence, which is exactly why a prose-shaped leak list
+      // missed them.
+      'democratic-coded', 'republican-coded',
+    ];
+    const enBody = await bodyOf(page);
+    const notOnEnglish = PHRASES.filter((p) => !enBody.includes(p));
+    check('es: the leak phrases are all really on the English page',
+      notOnEnglish.length === 0,
+      notOnEnglish.length ? `vacuous checks: ${notOnEnglish.join(' | ')}` : `${PHRASES.length} phrases`);
+
+    const esBody = await bodyOf(esPage);
+    const leaks = PHRASES.filter((p) => esBody.includes(p));
+    check('es: no English chrome left on the page', leaks.length === 0,
+      leaks.length ? `LEAKED: ${leaks.join(' | ')}` : `${esBody.length} chars checked`);
+
+    check('es: no console errors', esErrs.length === 0, esErrs.join(' | '));
+  }
+  await esPage.close();
 } finally {
   await browser.close();
   if (server) await new Promise((r) => server.close(r));

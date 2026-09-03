@@ -26,6 +26,7 @@ import type { PartisanProfile } from '../valence';
 import { PROFILE_BANDS } from '../valence';
 import { renderVerdict } from './verdict';
 import { t, word } from './i18n';
+import * as pes from './payload-i18n';
 
 /**
  * Where the raw quiz payload lives. Relative on the deployed site so it works the
@@ -204,11 +205,11 @@ function renderStrip(p: PartisanProfile): void {
   svg.appendChild(sv('text', {
     x: P.x0, y: P.axisY + 34, 'text-anchor': 'start', 'font-size': 10,
     'letter-spacing': '0.1em', fill: muted,
-  }, P.narrow ? 'DEM-CODED' : 'DEMOCRATIC-CODED'));
+  }, t(P.narrow ? 'strip.poleDShort' : 'strip.poleD')));
   svg.appendChild(sv('text', {
     x: P.x1, y: P.axisY + 34, 'text-anchor': 'end', 'font-size': 10,
     'letter-spacing': '0.1em', fill: muted,
-  }, P.narrow ? 'REP-CODED' : 'REPUBLICAN-CODED'));
+  }, t(P.narrow ? 'strip.poleRShort' : 'strip.poleR')));
 
   if (p.n === 0) {
     svg.appendChild(sv('text', {
@@ -283,7 +284,7 @@ function showTip(ev: Event, m: Mark): void {
   const tip = el('tip');
   const i = m.item;
   tip.innerHTML =
-    `<div class="tip-t">${esc(i.billId)} · ${esc(i.category)}</div>` +
+    `<div class="tip-t">${esc(i.billId)} · ${esc(pes.categoryName(i.category))}</div>` +
     `<div style="color:var(--ink-2)">${esc(t('tip.youAnswered'))} <strong>${esc(t(m.answer === 1 ? 'vote.yea' : 'vote.nay'))}</strong></div>` +
     `<dl><dt>${esc(t('tip.rYea'))}</dt><dd>${i.rYea === null ? '—' : pct(i.rYea)}</dd>` +
     `<dt>${esc(t('tip.dYea'))}</dt><dd>${i.dYea === null ? '—' : pct(i.dYea)}</dd>` +
@@ -302,7 +303,12 @@ const hideTip = () => { el('tip').style.opacity = '0'; };
 // ---------------------------------------------------------------------------
 
 function renderMode(): void {
-  el('full-count').textContent = String(ALL_ITEMS.length);
+  // Was `All <span id="full-count"></span> votes` with only the number filled
+  // in, which put two English words in the markup that no locale could reach.
+  // The whole label is one string now, so Spanish can put the count wherever it
+  // needs to.
+  el('mode-full').textContent = t('mode.full', { n: ALL_ITEMS.length });
+  el('mode-short').textContent = t('mode.short');
   el('mode-short').setAttribute('aria-pressed', String(mode === 'short'));
   el('mode-full').setAttribute('aria-pressed', String(mode === 'full'));
   el('mode-desc').innerHTML = t(
@@ -323,7 +329,7 @@ function renderProv(): void {
   const tiles: [string, string, string][] = [
     [t('prov.questions.label'), String(act.length),
       mode === 'short' ? t('prov.questions.short') : t('prov.questions.full', { cats })],
-    [t('prov.record.label'), `${jrn} of ${act.length}`,
+    [t('prov.record.label'), t('prov.record.value', { n: jrn, total: act.length }),
       t('prov.record.hint')],
     [t('prov.agreed.label'), `${Math.round((100 * cross) / act.length)}%`,
       cross / act.length < 0.15
@@ -367,7 +373,8 @@ function renderProv(): void {
     // quiz_89R.es.json sidecar, which is pass two. On the Spanish page the lead
     // is Spanish and this sentence is not, which is worse than either; that is
     // why the Spanish build is gated on the sidecar landing.
-    para(t('method.who.lead'), esc(DATA.candidateProvenance)),
+    para(t('method.who.lead'),
+      esc(pes.prose('candidateProvenance', DATA.candidateProvenance))),
 
     para(t('method.seven.lead'), t('method.seven.body')),
     para(t('method.words.lead'), t('method.words.body')),
@@ -608,17 +615,23 @@ function renderQuestion(): void {
     bindPresets();
     return;
   }
-  const it = queue[cursor];
+  // Prose only — the official caption is untouched by pes.itemProse.
+  const it = pes.itemProse(queue[cursor]);
   const prev = cursor > 0 ? queue[cursor - 1] : null;
   // Outcomes reveal only AFTER an answer. Showing "Texas ranks 47th" beside an
   // education question would tell the reader how to vote.
   const prevAnswered = prev && (answers[prev.id] === 1 || answers[prev.id] === -1);
-  const prevOut = prevAnswered ? DATA.outcomes.find((o) => o.category === prev!.category) : undefined;
+  const prevOut = prevAnswered
+    ? (() => {
+      const found = DATA.outcomes.find((o) => o.category === prev!.category);
+      return found ? pes.outcome(found) : undefined;
+    })()
+    : undefined;
 
   c.innerHTML =
     `<div class="q-meta"><div class="eyebrow">` +
     `${esc(t('q.counter', { i: cursor + 1, n: queue.length }))} · ${esc(it.billId)} · ` +
-    `${esc(it.label || it.category)}</div>` +
+    `${esc(it.label || pes.categoryName(it.category))}</div>` +
     `<div class="eyebrow">${esc(t('q.blind'))}</div></div>` +
     // The caption is the official record, copied word for word, and is NEVER
     // translated. On the Spanish page it stays English and carries lang="en" so
@@ -654,7 +667,7 @@ function renderQuestion(): void {
     (prevAnswered ? candidateReveal(prev!, answers[prev!.id] as 1 | -1) : '') +
     (prevOut
       ? `<div class="reveal"><div class="outc-cat">` +
-        `${esc(t('rev.outcomeHead', { category: prevOut.category.toLowerCase() }))}</div>` +
+        `${esc(t('rev.outcomeHead', { category: pes.categoryName(prevOut.category).toLowerCase() }))}</div>` +
         `<b>${esc(prevOut.value)}</b> — ${esc(prevOut.comparison)}` +
         (prevOut.rank ? ` <span class="outc-rank st-${prevOut.standing}">${esc(prevOut.rank)}</span>` : '') +
         `<div class="outc-src">${esc(prevOut.sourceName)} · ${esc(prevOut.year)}</div></div>`
@@ -722,7 +735,7 @@ function renderBias(): void {
   // beside a named opponent and opens "Every bill on that list is one he wanted
   // passed" — lifted out on its own, that "he" has no antecedent and the reader
   // cannot tell whose list is being described.
-  const oneSidedOf = OPPONENTS.find((o) => o.oneSided);
+  const oneSidedOf = OPPONENTS.map(pes.opponent).find((o) => o.oneSided);
 
   // Only the first character, never the whole string: these payload fields are
   // multi-sentence, and .toLowerCase() on one of them flattens the capital that
@@ -745,7 +758,7 @@ function renderBias(): void {
     `<p>${t('bias.p1', { n: word(CANDIDATES.length) })}</p>` +
 
     `<ul class="bias-why">` +
-    OPPONENTS.map((o) =>
+    OPPONENTS.map(pes.opponent).map((o) =>
       `<li><span class="bias-who">${esc(o.name)}<small>${esc(o.office)}</small></span>` +
       `<span class="bias-reason">${esc(o.whyNoVotes)}</span></li>`).join('') +
     `</ul>` +
@@ -763,7 +776,7 @@ function renderBias(): void {
       total: word(reps + dems),
       reps: word(reps),
       dems: word(dems),
-    })} ${esc(DATA.comparatorRule)} ${t('bias.p3b', {
+    })} ${esc(pes.prose('comparatorRule', DATA.comparatorRule))} ${t('bias.p3b', {
       lo, hi, items: ALL_ITEMS.length,
     })}</p>` +
 
@@ -795,12 +808,12 @@ function renderOutcomes(): void {
   const answered = new Set(
     activeItems().filter((i) => answers[i.id] === 1 || answers[i.id] === -1).map((i) => i.category),
   );
-  const shown = DATA.outcomes.filter((o) => answered.has(o.category));
+  const shown = DATA.outcomes.filter((o) => answered.has(o.category)).map(pes.outcome);
   const card = el('outcome-card');
   if (!shown.length) { card.hidden = true; return; }
   card.hidden = false;
   el('outcomes').innerHTML = shown.map((o) =>
-    `<div class="outc-row"><div class="outc-cat">${esc(o.category)} · ${esc(o.label)}</div>` +
+    `<div class="outc-row"><div class="outc-cat">${esc(pes.categoryName(o.category))} · ${esc(o.label)}</div>` +
     `<div class="outc-val">${esc(o.value)}</div>` +
     `<div class="outc-cmp">${esc(o.comparison)}</div>` +
     // No rank means no badge: a coloured chip would imply a ranking this measure
@@ -809,11 +822,12 @@ function renderOutcomes(): void {
     `<div class="outc-src">${esc(o.sourceName)} · ${esc(o.year)} · ` +
     `<a href="${esc(o.sourceUrl)}" target="_blank" rel="noopener">source</a></div>` +
     `<div class="outc-cav">${esc(o.caveat)}</div></div>`).join('');
-  el('causal').textContent = DATA.causalNote;
+  el('causal').textContent = pes.prose('causalNote', DATA.causalNote);
   el('omissions').innerHTML = DATA.omissions.length
-    ? t('outc.leftBlank') + ' ' + DATA.omissions.map((o) => `<b>${esc(o.category)}</b> — ${esc(o.why)}`).join(' ')
+    ? t('outc.leftBlank') + ' ' + DATA.omissions.map((o) =>
+        `<b>${esc(pes.categoryName(o.category))}</b> — ${esc(pes.omissionWhy(o.category, o.why))}`).join(' ')
     : '';
-  el('incumbents').innerHTML = DATA.incumbents.map((i) =>
+  el('incumbents').innerHTML = DATA.incumbents.map(pes.incumbent).map((i) =>
     `<div style="margin-bottom:9px"><b>${esc(i.name)}</b> has been ${esc(i.office)} since ${esc(i.since)}, covering ${esc(i.sessions)}.` +
     `<ul>${i.acts.map((a) => `<li>${esc(a)}</li>`).join('')}</ul></div>`).join('');
 }
@@ -844,7 +858,7 @@ function renderTable(p: PartisanProfile): void {
   const rows = [...p.marks].sort((a, b) => a.coordinate - b.coordinate).map((m) => {
     const i = byId.get(m.itemId)!;
     return `<tr><td><span class="swatch" style="background:${markColor(m.coordinate)}"></span>${esc(i.billId)}</td>` +
-      `<td>${esc(i.caption)}</td><td>${esc(i.category)}</td><td class="num">${esc(t(m.answer === 1 ? 'vote.yea' : 'vote.nay'))}</td>` +
+      `<td lang="en">${esc(i.caption)}</td><td>${esc(pes.categoryName(i.category))}</td><td class="num">${esc(t(m.answer === 1 ? 'vote.yea' : 'vote.nay'))}</td>` +
       `<td class="num">${i.rYea === null ? '—' : pct(i.rYea)}</td>` +
       `<td class="num">${i.dYea === null ? '—' : pct(i.dYea)}</td>` +
       `<td class="num">${i.valence === null ? '—' : fmt(i.valence)}</td>` +

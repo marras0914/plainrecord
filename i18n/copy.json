@@ -21,7 +21,8 @@
       "covered": "Site chrome: the estimator verdicts, the header and explainer, the mode bar, provenance tiles, the incumbency card, the authorship note, the method section, candidate and statement notes, presets.",
       "pass_two": "Payload text is NOT here yet: the 67 official bill captions (~1315 words, and they need the bilingual treatment below), the outcome indicators and caveats (~1806 words), and our seven plain-language blurbs (~291 words). Those are keyed by item id and belong in a sidecar, public/data/quiz_89R.es.json, so the English payload stays byte-identical and the 'this is the exact file the page loaded' promise survives."
     },
-    "official_text_rule": "The 67 bill captions are copied verbatim from the record and the page says so. A Spanish translation of an official English caption IS NOT the official caption. So Spanish captions ship as a clearly-labelled aid with the official English one tap away and marked as the record, exactly as plainLanguageNote already distinguishes our gloss from the record. Never replace, never present a translation as the caption."
+    "official_text_rule": "The 67 bill captions are copied verbatim from the record and the page says so. A Spanish translation of an official English caption IS NOT the official caption. So Spanish captions ship as a clearly-labelled aid with the official English one tap away and marked as the record, exactly as plainLanguageNote already distinguishes our gloss from the record. Never replace, never present a translation as the caption.",
+    "markup": "Copy values may contain INLINE presentational markup — <b>, <em>, <code>, <a>, and the <span class=\"sw-r|sw-b|sw-g\"> colour swatches — because those wrap specific words and move with them when a sentence is reordered. They may NOT contain structural markup (<p>, <div>, <ul>, <br>): the code owns the shape of the page, the copy owns the words. The method paragraphs are the one exception to the inline rule, split into <name>.lead and <name>.body, because there the bold run is a whole sentence rather than a phrase inside one."
   },
   "verdict.fewMarks.headline": {
     "en": "Answer a few more and we can tell you something",
@@ -190,30 +191,30 @@
     "status": "ok"
   },
   "intro.p1": {
-    "en": "Texas lawmakers vote yes or no on new laws. We took real votes from 2025 and hid who voted which way. Now you vote.",
-    "es": "Los legisladores de Texas votan a favor o en contra de nuevas leyes. Tomamos votos reales de 2025 y ocultamos quién votó de qué manera. Ahora vota usted.",
+    "en": "<b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from 2025 and hid who voted which way. Now you vote.",
+    "es": "<b>Los legisladores de Texas votan a favor o en contra de nuevas leyes.</b> Tomamos votos reales de 2025 y ocultamos quién votó de qué manera. Ahora vota usted.",
     "where": "Header explainer, first paragraph.",
     "vars": [],
     "note": "The English here is deliberately at a low reading level. Keep the Spanish equally plain; do not upgrade the vocabulary.",
     "status": "ok"
   },
   "intro.p2": {
-    "en": "For each one we count how many Republicans said yes, and how many Democrats said yes. Mostly Republicans? We colour it red. Mostly Democrats? Blue. Both parties agreed? Grey — that vote doesn't tell us much about sides.",
-    "es": "En cada uno contamos cuántos republicanos votaron a favor y cuántos demócratas votaron a favor. ¿Sobre todo republicanos? Lo pintamos de rojo. ¿Sobre todo demócratas? Azul. ¿Los dos partidos de acuerdo? Gris, porque ese voto no nos dice mucho sobre bandos.",
+    "en": "For each one we count how many Republicans said yes, and how many Democrats said yes. Mostly Republicans? We colour it <span class=\"sw-r\">red</span>. Mostly Democrats? <span class=\"sw-b\">Blue</span>. Both parties agreed? <span class=\"sw-g\">Grey</span> — that vote doesn't tell us much about sides.",
+    "es": "En cada uno contamos cuántos republicanos votaron a favor y cuántos demócratas votaron a favor. ¿Sobre todo republicanos? Lo pintamos de <span class=\"sw-r\">rojo</span>. ¿Sobre todo demócratas? <span class=\"sw-b\">Azul</span>. ¿Los dos partidos de acuerdo? <span class=\"sw-g\">Gris</span>, porque ese voto no nos dice mucho sobre bandos.",
     "where": "Header explainer.",
     "vars": [],
     "status": "ok"
   },
   "intro.p3": {
-    "en": "Every answer you give becomes one dot. Dots on the left mean you agreed with Democrats. Dots on the right mean you agreed with Republicans. If your dots land on both sides, you don't fit neatly in one party. That's the purple part.",
-    "es": "Cada respuesta que da se convierte en un punto. Los puntos a la izquierda significan que coincidió con los demócratas. Los de la derecha, con los republicanos. Si sus puntos caen en los dos lados, usted no encaja limpiamente en un solo partido. Esa es la parte morada.",
+    "en": "Every answer you give becomes one dot. Dots on the left mean you agreed with Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots land on both sides, you don't fit neatly in one party.</b> That's the purple part.",
+    "es": "Cada respuesta que da se convierte en un punto. Los puntos a la izquierda significan que coincidió con los demócratas. Los de la derecha, con los republicanos. <b>Si sus puntos caen en los dos lados, usted no encaja limpiamente en un solo partido.</b> Esa es la parte morada.",
     "where": "Header explainer.",
     "vars": [],
     "status": "ok"
   },
   "intro.p4": {
-    "en": "Then we show you what these areas actually look like in Texas today — school funding, health coverage, and so on — with the source for every number.",
-    "es": "Después le mostramos cómo están realmente estas áreas en Texas hoy: financiamiento escolar, cobertura de salud y otras, con la fuente de cada cifra.",
+    "en": "Then we show you <b>what these areas actually look like in Texas today</b> — school funding, health coverage, and so on — with the source for every number.",
+    "es": "Después le mostramos <b>cómo están realmente estas áreas en Texas hoy</b>: financiamiento escolar, cobertura de salud y otras, con la fuente de cada cifra.",
     "where": "Header explainer.",
     "vars": [],
     "status": "ok"
@@ -304,51 +305,49 @@
     "status": "ok"
   },
   "author.built": {
-    "en": "I'm Marco Arras, and I built this on my own time. Nobody paid for it — no campaign, no party, no PAC, no organisation. There was no budget. The cost was evenings.",
-    "es": "Soy Marco Arras y hice esto en mi propio tiempo. Nadie lo pagó: ninguna campaña, ningún partido, ningún PAC, ninguna organización. No hubo presupuesto. El costo fueron mis noches.",
+    "en": "<b>I'm Marco Arras, and I built this on my own time.</b> Nobody paid for it — no campaign, no party, no PAC, no organisation. There was no budget. The cost was evenings.",
+    "es": "<b>Soy Marco Arras y hice esto en mi propio tiempo.</b> Nadie lo pagó: ninguna campaña, ningún partido, ningún PAC, ninguna organización. No hubo presupuesto. El costo fueron mis noches.",
     "where": "Authorship card, first paragraph.",
     "vars": [],
     "note": "'PAC' stays as PAC; it is the term used in US Spanish-language political coverage.",
     "status": "ok"
   },
   "author.donation": {
-    "en": "I donate to the Democratic Party. You should know that before you read anything else here, and it is the reason this page is built the way it is rather than a footnote to it. I have a side. So the rule that picks the comparison members runs identically on both caucuses, a third of the questions are reserved for votes where the two parties agreed, the selection rule is named and published, and every vote, count and score sits in one file you can download and check. None of that asks you to trust me. That is the whole point of it.",
-    "es": "Yo dono al Partido Demócrata. Debería saberlo antes de leer cualquier otra cosa aquí, y es la razón por la que esta página está construida como está, no una nota al pie. Tengo un lado. Por eso la regla que escoge a los miembros de comparación funciona igual en las dos bancadas, un tercio de las preguntas se reserva para votos en los que los dos partidos estuvieron de acuerdo, la regla de selección tiene nombre y está publicada, y cada voto, conteo y calificación está en un archivo que usted puede descargar y verificar. Nada de eso le pide que confíe en mí. Ese es exactamente el punto.",
+    "en": "<b>I donate to the Democratic Party.</b> You should know that before you read anything else here, and it is the reason this page is built the way it is rather than a footnote to it. I have a side. So the rule that picks the comparison members runs identically on both caucuses, a third of the questions are reserved for votes where the two parties <em>agreed</em>, the selection rule is named and published, and every vote, count and score sits in one file you can download and check. None of that asks you to trust me. That is the whole point of it.",
+    "es": "<b>Yo dono al Partido Demócrata.</b> Debería saberlo antes de leer cualquier otra cosa aquí, y es la razón por la que esta página está construida como está, no una nota al pie. Tengo un lado. Por eso la regla que escoge a los miembros de comparación funciona igual en las dos bancadas, un tercio de las preguntas se reserva para votos en los que los dos partidos <em>estuvieron de acuerdo</em>, la regla de selección tiene nombre y está publicada, y cada voto, conteo y calificación está en un archivo que usted puede descargar y verificar. Nada de eso le pide que confíe en mí. Ese es exactamente el punto.",
     "where": "Authorship card, second paragraph. MUST stay in this position.",
     "vars": [],
     "note": "HIGHEST STAKES STRING IN THE FILE. It is the disclosure the whole project's credibility rests on, and the verifier asserts it appears before the editorial-choice paragraph. Reviewer: check it reads as a plain admission and not as a boast about transparency.",
     "status": "ok"
   },
   "author.job": {
-    "en": "What I do for a living. I work as a solutions architect in energy. The sector buys and sells power, which overlaps the utilities votes on this page, so you should weigh what I say about those accordingly. My employer had no involvement in this, did not fund it and did not review it. I do no paid political work of any kind.",
-    "es": "A qué me dedico. Trabajo como arquitecto de soluciones en el sector energético. El sector compra y vende energía, lo cual se cruza con los votos sobre servicios públicos de esta página, así que debería ponderar en consecuencia lo que yo diga sobre esos. Mi empleador no tuvo participación en esto, no lo financió y no lo revisó. No hago ningún tipo de trabajo político remunerado.",
+    "en": "<b>What I do for a living.</b> I work as a solutions architect in energy. The sector buys and sells power, which overlaps the utilities votes on this page, so you should weigh what I say about those accordingly. My employer had no involvement in this, did not fund it and did not review it. I do no paid political work of any kind.",
+    "es": "<b>A qué me dedico.</b> Trabajo como arquitecto de soluciones en el sector energético. El sector compra y vende energía, lo cual se cruza con los votos sobre servicios públicos de esta página, así que debería ponderar en consecuencia lo que yo diga sobre esos. Mi empleador no tuvo participación en esto, no lo financió y no lo revisó. No hago ningún tipo de trabajo político remunerado.",
     "where": "Authorship card.",
     "vars": [],
     "note": "'utilities' in the Texas regulatory sense. Reviewer: 'servicios publicos' is the standard rendering but confirm it does not read as 'public services' generally.",
     "status": "ok"
   },
   "author.races": {
-    "en": "I picked these three races. Governor, Lieutenant Governor and U.S. Senate. That is an editorial decision, not a measurement, and it is the choice most worth arguing with. I picked them because all three Democratic candidates sit in the Texas House, which means their records can be checked against your answers vote for vote. Their opponents cannot be, so this page gives them no score at all rather than an invented one.",
-    "es": "Yo escogí estas tres contiendas. Gobernador, Vicegobernador y Senado de Estados Unidos. Esa es una decisión editorial, no una medición, y es la elección que más vale la pena discutir. Las escogí porque los tres candidatos demócratas están en la Cámara de Texas, lo que significa que sus historiales se pueden comparar con sus respuestas voto por voto. Los de sus oponentes no, así que esta página no les da ninguna calificación en lugar de darles una inventada.",
+    "en": "<b>I picked these three races.</b> Governor, Lieutenant Governor and U.S. Senate. That is an editorial decision, not a measurement, and it is the choice most worth arguing with. I picked them because all three Democratic candidates sit in the Texas House, which means their records can be checked against your answers vote for vote. Their opponents cannot be, so this page gives them no score at all rather than an invented one.",
+    "es": "<b>Yo escogí estas tres contiendas.</b> Gobernador, Vicegobernador y Senado de Estados Unidos. Esa es una decisión editorial, no una medición, y es la elección que más vale la pena discutir. Las escogí porque los tres candidatos demócratas están en la Cámara de Texas, lo que significa que sus historiales se pueden comparar con sus respuestas voto por voto. Los de sus oponentes no, así que esta página no les da ninguna calificación en lugar de darles una inventada.",
     "where": "Authorship card.",
     "vars": [],
     "note": "'Lieutenant Governor' as 'Vicegobernador' is the standard Texas Spanish rendering. Confirm against the Texas SOS Spanish ballot language.",
     "status": "ok"
   },
   "author.why": {
-    "en": "Why I made it. Almost everything that reaches people about how their state is actually governed arrives pre-framed by someone who wants something. The votes themselves are public, tedious, and genuinely hard to get at. I wanted a way to see the record before seeing the label, and to hand over the entire file so that anyone can check the record is what I say it is.",
-    "es": "Por qué lo hice. Casi todo lo que llega a la gente sobre cómo se gobierna realmente su estado llega ya enmarcado por alguien que quiere algo. Los votos en sí son públicos, tediosos y de verdad difíciles de alcanzar. Quería una manera de ver el registro antes de ver la etiqueta, y de entregar el archivo completo para que cualquiera pueda verificar que el registro es lo que yo digo que es.",
+    "en": "<b>Why I made it.</b> Almost everything that reaches people about how their state is actually governed arrives pre-framed by someone who wants something. The votes themselves are public, tedious, and genuinely hard to get at. I wanted a way to see the record before seeing the label, and to hand over the entire file so that anyone can check the record is what I say it is.",
+    "es": "<b>Por qué lo hice.</b> Casi todo lo que llega a la gente sobre cómo se gobierna realmente su estado llega ya enmarcado por alguien que quiere algo. Los votos en sí son públicos, tediosos y de verdad difíciles de alcanzar. Quería una manera de ver el registro antes de ver la etiqueta, y de entregar el archivo completo para que cualquiera pueda verificar que el registro es lo que yo digo que es.",
     "where": "Authorship card.",
     "vars": [],
     "status": "ok"
   },
   "author.contact": {
-    "en": "If something here is wrong, tell me: {email}. Corrections get made, and noted on the page.",
-    "es": "Si algo aquí está mal, dígamelo: {email}. Las correcciones se hacen y se anotan en la página.",
+    "en": "If something here is wrong, tell me: <a href=\"mailto:arras.marco@gmail.com\">arras.marco@gmail.com</a>. Corrections get made, and noted on the page.",
+    "es": "Si algo aquí está mal, dígamelo: <a href=\"mailto:arras.marco@gmail.com\">arras.marco@gmail.com</a>. Las correcciones se hacen y se anotan en la página.",
     "where": "Authorship card, fine print.",
-    "vars": [
-      "email"
-    ],
+    "vars": [],
     "status": "ok"
   },
   "mode.short": {
@@ -448,8 +447,8 @@
     "status": "ok"
   },
   "preset.note": {
-    "en": "The first two produce almost the same net lean — a single blended swatch would render both as the same purple. They are opposite findings, so the readout separates them on partisan load.",
-    "es": "Los dos primeros producen casi la misma inclinación neta: una sola muestra mezclada pintaría ambos del mismo morado. Son hallazgos opuestos, así que la lectura los separa por carga partidista.",
+    "en": "The first two produce almost the same <code>net lean</code> — a single blended swatch would render both as the same purple. They are opposite findings, so the readout separates them on <code>partisan load</code>.",
+    "es": "Los dos primeros producen casi la misma <code>inclinación neta</code>: una sola muestra mezclada pintaría ambos del mismo morado. Son hallazgos opuestos, así que la lectura los separa por <code>carga partidista</code>.",
     "where": "Under the preset buttons.",
     "vars": [],
     "status": "ok"
@@ -1405,6 +1404,82 @@
     "en": "chamber",
     "es": "cámara",
     "where": "Dot tooltip row.",
+    "vars": [],
+    "status": "ok"
+  },
+  "page.title": {
+    "en": "The Purple Strip — PlainRecord",
+    "es": "La Franja Morada — PlainRecord",
+    "where": "Document <title> and the browser tab.",
+    "vars": [],
+    "status": "ok"
+  },
+  "page.description": {
+    "en": "A blind quiz on real Texas House votes. Answer without knowing which party took which side, then see where you land and where Texas actually stands.",
+    "es": "Un cuestionario a ciegas sobre votos reales de la Cámara de Texas. Responda sin saber qué partido tomó qué lado, y después vea dónde queda usted y cómo está Texas en realidad.",
+    "where": "meta description and og:description.",
+    "vars": [],
+    "status": "ok"
+  },
+  "page.langSwitch": {
+    "en": "En español",
+    "es": "In English",
+    "where": "Language switch link. Each locale names the OTHER language, in that other language, because the person who needs it cannot read the current one.",
+    "vars": [],
+    "note": "Deliberately reversed: the English page says \"En español\" and the Spanish page says \"In English\".",
+    "status": "ok"
+  },
+  "page.translationNotice": {
+    "en": "This page is in English. The Spanish version is our translation, not an official one.",
+    "es": "Esta página es una traducción nuestra, no una versión oficial. El texto oficial de cada proyecto de ley está en inglés.",
+    "where": "Shown on the Spanish page only.",
+    "vars": [],
+    "note": "The English value is never rendered — the notice exists to disclose that Spanish is unofficial, which is only true of the Spanish page. Kept in both locales so the key set stays symmetric and the parity check stays meaningful.",
+    "status": "ok"
+  },
+  "strip.legendRamp": {
+    "en": "Democratic-coded ← position → Republican-coded",
+    "es": "Codificado demócrata ← posición → codificado republicano",
+    "where": "Strip legend, under the colour ramp.",
+    "vars": [],
+    "status": "ok"
+  },
+  "prov.record.value": {
+    "en": "{n} of {total}",
+    "es": "{n} de {total}",
+    "where": "Provenance tile value.",
+    "vars": [
+      "n",
+      "total"
+    ],
+    "note": "The bare \"of\" was hardcoded in main.ts and rendered \"6 of 7\" on the Spanish page.",
+    "status": "ok"
+  },
+  "strip.poleD": {
+    "en": "DEMOCRATIC-CODED",
+    "es": "CODIFICADO DEMÓCRATA",
+    "where": "Strip axis label, left pole.",
+    "vars": [],
+    "status": "ok"
+  },
+  "strip.poleR": {
+    "en": "REPUBLICAN-CODED",
+    "es": "CODIFICADO REPUBLICANO",
+    "where": "Strip axis label, right pole.",
+    "vars": [],
+    "status": "ok"
+  },
+  "strip.poleDShort": {
+    "en": "DEM-CODED",
+    "es": "CÓD. DEMÓCRATA",
+    "where": "Strip axis label, left pole, narrow viewport.",
+    "vars": [],
+    "status": "ok"
+  },
+  "strip.poleRShort": {
+    "en": "REP-CODED",
+    "es": "CÓD. REPUBLICANO",
+    "where": "Strip axis label, right pole, narrow viewport.",
     "vars": [],
     "status": "ok"
   }

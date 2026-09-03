@@ -189,7 +189,17 @@ export type CopyKey =
   | "tip.rYea"
   | "tip.dYea"
   | "tip.position"
-  | "tip.chamber";
+  | "tip.chamber"
+  | "page.title"
+  | "page.description"
+  | "page.langSwitch"
+  | "page.translationNotice"
+  | "strip.legendRamp"
+  | "prov.record.value"
+  | "strip.poleD"
+  | "strip.poleR"
+  | "strip.poleDShort"
+  | "strip.poleRShort";
 
 export type Locale = 'en' | 'es';
 
@@ -216,10 +226,10 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "axis.alignment": "how much does this legislator vote with you",
     "axis.load": "how partisan-coded are your own positions?",
     "intro.h1": "The Purple Strip",
-    "intro.p1": "Texas lawmakers vote yes or no on new laws. We took real votes from 2025 and hid who voted which way. Now you vote.",
-    "intro.p2": "For each one we count how many Republicans said yes, and how many Democrats said yes. Mostly Republicans? We colour it red. Mostly Democrats? Blue. Both parties agreed? Grey — that vote doesn't tell us much about sides.",
-    "intro.p3": "Every answer you give becomes one dot. Dots on the left mean you agreed with Democrats. Dots on the right mean you agreed with Republicans. If your dots land on both sides, you don't fit neatly in one party. That's the purple part.",
-    "intro.p4": "Then we show you what these areas actually look like in Texas today — school funding, health coverage, and so on — with the source for every number.",
+    "intro.p1": "<b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from 2025 and hid who voted which way. Now you vote.",
+    "intro.p2": "For each one we count how many Republicans said yes, and how many Democrats said yes. Mostly Republicans? We colour it <span class=\"sw-r\">red</span>. Mostly Democrats? <span class=\"sw-b\">Blue</span>. Both parties agreed? <span class=\"sw-g\">Grey</span> — that vote doesn't tell us much about sides.",
+    "intro.p3": "Every answer you give becomes one dot. Dots on the left mean you agreed with Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots land on both sides, you don't fit neatly in one party.</b> That's the purple part.",
+    "intro.p4": "Then we show you <b>what these areas actually look like in Texas today</b> — school funding, health coverage, and so on — with the source for every number.",
     "intro.fine": "Nobody's opinion decides the colours. They come from the actual vote counts, and you can check them on every question. The outcome numbers are real too, but a state ranking has many causes — we show you the numbers and the votes, and leave the connecting to you.",
     "bias.heading": "Doesn't this favour the people who have voting records?",
     "bias.p1": "It would, if we scored anyone else. So we don't. A score here needs one thing — the same bills, voted on by both of you. Only members of the Texas House have that. All {n} candidates above sit in the Texas House. Every one of the people they are running against does not:",
@@ -229,12 +239,12 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "bias.p4": "Where an opponent does leave a mark. On {acts} of the {items} there is a recorded action on the exact bill — a veto, or a bill named a must-pass priority. We show it under that question and we never add it to a tally.",
     "bias.fine": "One rule picks all {total} of those names, and it cannot be tuned question by question. So if you think it is doing work it shouldn't, the rule is the thing to argue with — and every vote behind it is in {payload}. The other half of this answer is {authorLink}.",
     "author.heading": "Who made this, who paid for it, and what I have at stake",
-    "author.built": "I'm Marco Arras, and I built this on my own time. Nobody paid for it — no campaign, no party, no PAC, no organisation. There was no budget. The cost was evenings.",
-    "author.donation": "I donate to the Democratic Party. You should know that before you read anything else here, and it is the reason this page is built the way it is rather than a footnote to it. I have a side. So the rule that picks the comparison members runs identically on both caucuses, a third of the questions are reserved for votes where the two parties agreed, the selection rule is named and published, and every vote, count and score sits in one file you can download and check. None of that asks you to trust me. That is the whole point of it.",
-    "author.job": "What I do for a living. I work as a solutions architect in energy. The sector buys and sells power, which overlaps the utilities votes on this page, so you should weigh what I say about those accordingly. My employer had no involvement in this, did not fund it and did not review it. I do no paid political work of any kind.",
-    "author.races": "I picked these three races. Governor, Lieutenant Governor and U.S. Senate. That is an editorial decision, not a measurement, and it is the choice most worth arguing with. I picked them because all three Democratic candidates sit in the Texas House, which means their records can be checked against your answers vote for vote. Their opponents cannot be, so this page gives them no score at all rather than an invented one.",
-    "author.why": "Why I made it. Almost everything that reaches people about how their state is actually governed arrives pre-framed by someone who wants something. The votes themselves are public, tedious, and genuinely hard to get at. I wanted a way to see the record before seeing the label, and to hand over the entire file so that anyone can check the record is what I say it is.",
-    "author.contact": "If something here is wrong, tell me: {email}. Corrections get made, and noted on the page.",
+    "author.built": "<b>I'm Marco Arras, and I built this on my own time.</b> Nobody paid for it — no campaign, no party, no PAC, no organisation. There was no budget. The cost was evenings.",
+    "author.donation": "<b>I donate to the Democratic Party.</b> You should know that before you read anything else here, and it is the reason this page is built the way it is rather than a footnote to it. I have a side. So the rule that picks the comparison members runs identically on both caucuses, a third of the questions are reserved for votes where the two parties <em>agreed</em>, the selection rule is named and published, and every vote, count and score sits in one file you can download and check. None of that asks you to trust me. That is the whole point of it.",
+    "author.job": "<b>What I do for a living.</b> I work as a solutions architect in energy. The sector buys and sells power, which overlaps the utilities votes on this page, so you should weigh what I say about those accordingly. My employer had no involvement in this, did not fund it and did not review it. I do no paid political work of any kind.",
+    "author.races": "<b>I picked these three races.</b> Governor, Lieutenant Governor and U.S. Senate. That is an editorial decision, not a measurement, and it is the choice most worth arguing with. I picked them because all three Democratic candidates sit in the Texas House, which means their records can be checked against your answers vote for vote. Their opponents cannot be, so this page gives them no score at all rather than an invented one.",
+    "author.why": "<b>Why I made it.</b> Almost everything that reaches people about how their state is actually governed arrives pre-framed by someone who wants something. The votes themselves are public, tedious, and genuinely hard to get at. I wanted a way to see the record before seeing the label, and to hand over the entire file so that anyone can check the record is what I say it is.",
+    "author.contact": "If something here is wrong, tell me: <a href=\"mailto:arras.marco@gmail.com\">arras.marco@gmail.com</a>. Corrections get made, and noted on the page.",
     "mode.short": "7 big issues",
     "mode.full": "All {n} votes",
     "mode.shortDesc": "Seven of the session's biggest fights — the bills the Lieutenant Governor made priorities or the Governor vetoed. <b>Six of the seven split cleanly along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all {n} to find where you cross over.",
@@ -247,7 +257,7 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "preset.muted": "Low-signal votes only",
     "preset.consistent": "Consistent partisan",
     "preset.reset": "Clear",
-    "preset.note": "The first two produce almost the same net lean — a single blended swatch would render both as the same purple. They are opposite findings, so the readout separates them on partisan load.",
+    "preset.note": "The first two produce almost the same <code>net lean</code> — a single blended swatch would render both as the same purple. They are opposite findings, so the readout separates them on <code>partisan load</code>.",
     "ui.showTable": "Show table",
     "ui.hideTable": "Hide table",
     "ui.methodHeading": "How this is built",
@@ -375,6 +385,16 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "tip.dYea": "D voted Yea",
     "tip.position": "your position",
     "tip.chamber": "chamber",
+    "page.title": "The Purple Strip — PlainRecord",
+    "page.description": "A blind quiz on real Texas House votes. Answer without knowing which party took which side, then see where you land and where Texas actually stands.",
+    "page.langSwitch": "En español",
+    "page.translationNotice": "This page is in English. The Spanish version is our translation, not an official one.",
+    "strip.legendRamp": "Democratic-coded ← position → Republican-coded",
+    "prov.record.value": "{n} of {total}",
+    "strip.poleD": "DEMOCRATIC-CODED",
+    "strip.poleR": "REPUBLICAN-CODED",
+    "strip.poleDShort": "DEM-CODED",
+    "strip.poleRShort": "REP-CODED",
   },
   es: {
     "verdict.fewMarks.headline": "Responda unas cuantas más y podremos decirle algo",
@@ -398,10 +418,10 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "axis.alignment": "cuánto vota este legislador con usted",
     "axis.load": "¿qué tan partidistas son sus propias posturas?",
     "intro.h1": "La Franja Morada",
-    "intro.p1": "Los legisladores de Texas votan a favor o en contra de nuevas leyes. Tomamos votos reales de 2025 y ocultamos quién votó de qué manera. Ahora vota usted.",
-    "intro.p2": "En cada uno contamos cuántos republicanos votaron a favor y cuántos demócratas votaron a favor. ¿Sobre todo republicanos? Lo pintamos de rojo. ¿Sobre todo demócratas? Azul. ¿Los dos partidos de acuerdo? Gris, porque ese voto no nos dice mucho sobre bandos.",
-    "intro.p3": "Cada respuesta que da se convierte en un punto. Los puntos a la izquierda significan que coincidió con los demócratas. Los de la derecha, con los republicanos. Si sus puntos caen en los dos lados, usted no encaja limpiamente en un solo partido. Esa es la parte morada.",
-    "intro.p4": "Después le mostramos cómo están realmente estas áreas en Texas hoy: financiamiento escolar, cobertura de salud y otras, con la fuente de cada cifra.",
+    "intro.p1": "<b>Los legisladores de Texas votan a favor o en contra de nuevas leyes.</b> Tomamos votos reales de 2025 y ocultamos quién votó de qué manera. Ahora vota usted.",
+    "intro.p2": "En cada uno contamos cuántos republicanos votaron a favor y cuántos demócratas votaron a favor. ¿Sobre todo republicanos? Lo pintamos de <span class=\"sw-r\">rojo</span>. ¿Sobre todo demócratas? <span class=\"sw-b\">Azul</span>. ¿Los dos partidos de acuerdo? <span class=\"sw-g\">Gris</span>, porque ese voto no nos dice mucho sobre bandos.",
+    "intro.p3": "Cada respuesta que da se convierte en un punto. Los puntos a la izquierda significan que coincidió con los demócratas. Los de la derecha, con los republicanos. <b>Si sus puntos caen en los dos lados, usted no encaja limpiamente en un solo partido.</b> Esa es la parte morada.",
+    "intro.p4": "Después le mostramos <b>cómo están realmente estas áreas en Texas hoy</b>: financiamiento escolar, cobertura de salud y otras, con la fuente de cada cifra.",
     "intro.fine": "La opinión de nadie decide los colores. Salen de los conteos reales de votos, y usted puede verificarlos en cada pregunta. Las cifras de resultados también son reales, pero la posición de un estado tiene muchas causas: le mostramos las cifras y los votos, y la conexión la hace usted.",
     "bias.heading": "¿No favorece esto a quienes tienen historial de votos?",
     "bias.p1": "Lo haría, si calificáramos a alguien más. Por eso no lo hacemos. Una calificación aquí necesita una sola cosa: los mismos proyectos de ley, votados por ambos. Solo los miembros de la Cámara de Representantes de Texas tienen eso. Los {n} candidatos de arriba están en la Cámara de Texas. Ninguna de las personas contra las que compiten lo está:",
@@ -411,12 +431,12 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "bias.p4": "Donde un oponente sí deja huella. En {acts} de las {items} hay una acción registrada sobre ese mismo proyecto: un veto, o un proyecto declarado prioridad obligada. La mostramos debajo de esa pregunta y nunca la sumamos a un conteo.",
     "bias.fine": "Una sola regla escoge los {total} nombres, y no se puede ajustar pregunta por pregunta. Así que si cree que está haciendo un trabajo que no debería, la regla es lo que hay que discutir, y cada voto detrás de ella está en {payload}. La otra mitad de esta respuesta es {authorLink}.",
     "author.heading": "Quién hizo esto, quién lo pagó y qué tengo en juego",
-    "author.built": "Soy Marco Arras y hice esto en mi propio tiempo. Nadie lo pagó: ninguna campaña, ningún partido, ningún PAC, ninguna organización. No hubo presupuesto. El costo fueron mis noches.",
-    "author.donation": "Yo dono al Partido Demócrata. Debería saberlo antes de leer cualquier otra cosa aquí, y es la razón por la que esta página está construida como está, no una nota al pie. Tengo un lado. Por eso la regla que escoge a los miembros de comparación funciona igual en las dos bancadas, un tercio de las preguntas se reserva para votos en los que los dos partidos estuvieron de acuerdo, la regla de selección tiene nombre y está publicada, y cada voto, conteo y calificación está en un archivo que usted puede descargar y verificar. Nada de eso le pide que confíe en mí. Ese es exactamente el punto.",
-    "author.job": "A qué me dedico. Trabajo como arquitecto de soluciones en el sector energético. El sector compra y vende energía, lo cual se cruza con los votos sobre servicios públicos de esta página, así que debería ponderar en consecuencia lo que yo diga sobre esos. Mi empleador no tuvo participación en esto, no lo financió y no lo revisó. No hago ningún tipo de trabajo político remunerado.",
-    "author.races": "Yo escogí estas tres contiendas. Gobernador, Vicegobernador y Senado de Estados Unidos. Esa es una decisión editorial, no una medición, y es la elección que más vale la pena discutir. Las escogí porque los tres candidatos demócratas están en la Cámara de Texas, lo que significa que sus historiales se pueden comparar con sus respuestas voto por voto. Los de sus oponentes no, así que esta página no les da ninguna calificación en lugar de darles una inventada.",
-    "author.why": "Por qué lo hice. Casi todo lo que llega a la gente sobre cómo se gobierna realmente su estado llega ya enmarcado por alguien que quiere algo. Los votos en sí son públicos, tediosos y de verdad difíciles de alcanzar. Quería una manera de ver el registro antes de ver la etiqueta, y de entregar el archivo completo para que cualquiera pueda verificar que el registro es lo que yo digo que es.",
-    "author.contact": "Si algo aquí está mal, dígamelo: {email}. Las correcciones se hacen y se anotan en la página.",
+    "author.built": "<b>Soy Marco Arras y hice esto en mi propio tiempo.</b> Nadie lo pagó: ninguna campaña, ningún partido, ningún PAC, ninguna organización. No hubo presupuesto. El costo fueron mis noches.",
+    "author.donation": "<b>Yo dono al Partido Demócrata.</b> Debería saberlo antes de leer cualquier otra cosa aquí, y es la razón por la que esta página está construida como está, no una nota al pie. Tengo un lado. Por eso la regla que escoge a los miembros de comparación funciona igual en las dos bancadas, un tercio de las preguntas se reserva para votos en los que los dos partidos <em>estuvieron de acuerdo</em>, la regla de selección tiene nombre y está publicada, y cada voto, conteo y calificación está en un archivo que usted puede descargar y verificar. Nada de eso le pide que confíe en mí. Ese es exactamente el punto.",
+    "author.job": "<b>A qué me dedico.</b> Trabajo como arquitecto de soluciones en el sector energético. El sector compra y vende energía, lo cual se cruza con los votos sobre servicios públicos de esta página, así que debería ponderar en consecuencia lo que yo diga sobre esos. Mi empleador no tuvo participación en esto, no lo financió y no lo revisó. No hago ningún tipo de trabajo político remunerado.",
+    "author.races": "<b>Yo escogí estas tres contiendas.</b> Gobernador, Vicegobernador y Senado de Estados Unidos. Esa es una decisión editorial, no una medición, y es la elección que más vale la pena discutir. Las escogí porque los tres candidatos demócratas están en la Cámara de Texas, lo que significa que sus historiales se pueden comparar con sus respuestas voto por voto. Los de sus oponentes no, así que esta página no les da ninguna calificación en lugar de darles una inventada.",
+    "author.why": "<b>Por qué lo hice.</b> Casi todo lo que llega a la gente sobre cómo se gobierna realmente su estado llega ya enmarcado por alguien que quiere algo. Los votos en sí son públicos, tediosos y de verdad difíciles de alcanzar. Quería una manera de ver el registro antes de ver la etiqueta, y de entregar el archivo completo para que cualquiera pueda verificar que el registro es lo que yo digo que es.",
+    "author.contact": "Si algo aquí está mal, dígamelo: <a href=\"mailto:arras.marco@gmail.com\">arras.marco@gmail.com</a>. Las correcciones se hacen y se anotan en la página.",
     "mode.short": "7 temas grandes",
     "mode.full": "Los {n} votos",
     "mode.shortDesc": "Siete de las peleas más grandes de la sesión: los proyectos que el Vicegobernador hizo prioridades o que el Gobernador vetó. <b>Seis de las siete dividieron limpiamente por línea partidista</b>, así que esta versión casi solo puede decirle hacia qué partido se inclina. Cambie a los {n} votos para encontrar dónde cruza.",
@@ -429,7 +449,7 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "preset.muted": "Solo votos de señal baja",
     "preset.consistent": "Partidista consistente",
     "preset.reset": "Limpiar",
-    "preset.note": "Los dos primeros producen casi la misma inclinación neta: una sola muestra mezclada pintaría ambos del mismo morado. Son hallazgos opuestos, así que la lectura los separa por carga partidista.",
+    "preset.note": "Los dos primeros producen casi la misma <code>inclinación neta</code>: una sola muestra mezclada pintaría ambos del mismo morado. Son hallazgos opuestos, así que la lectura los separa por <code>carga partidista</code>.",
     "ui.showTable": "Mostrar tabla",
     "ui.hideTable": "Ocultar tabla",
     "ui.methodHeading": "Cómo está construido esto",
@@ -557,6 +577,16 @@ export const COPY: Record<Locale, Record<CopyKey, string>> = {
     "tip.dYea": "D a favor",
     "tip.position": "su posición",
     "tip.chamber": "cámara",
+    "page.title": "La Franja Morada — PlainRecord",
+    "page.description": "Un cuestionario a ciegas sobre votos reales de la Cámara de Texas. Responda sin saber qué partido tomó qué lado, y después vea dónde queda usted y cómo está Texas en realidad.",
+    "page.langSwitch": "In English",
+    "page.translationNotice": "Esta página es una traducción nuestra, no una versión oficial. El texto oficial de cada proyecto de ley está en inglés.",
+    "strip.legendRamp": "Codificado demócrata ← posición → codificado republicano",
+    "prov.record.value": "{n} de {total}",
+    "strip.poleD": "CODIFICADO DEMÓCRATA",
+    "strip.poleR": "CODIFICADO REPUBLICANO",
+    "strip.poleDShort": "CÓD. DEMÓCRATA",
+    "strip.poleRShort": "CÓD. REPUBLICANO",
   },
 };
 

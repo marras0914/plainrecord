@@ -6,7 +6,7 @@
   "description": "How Texas legislators actually voted, and where the state stands because of it.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && node scripts/build_locales.mjs",
     "build:artifact": "npm run build && node scripts/build_artifact.mjs",
     "build:og": "node scripts/build_og.mjs",
     "preview": "vite preview --port 4173",
@@ -23,8 +23,10 @@
     "verify:headers": "node scripts/verify_site.mjs --with-headers",
     "dns:check": "node scripts/check_domain.mjs",
     "i18n:review": "node scripts/i18n_review.mjs",
-    "i18n:check": "node scripts/i18n_review.mjs --check && node scripts/i18n_gen.mjs --check",
-    "i18n:gen": "node scripts/i18n_gen.mjs"
+    "i18n:check": "node scripts/i18n_review.mjs --check && node scripts/i18n_gen.mjs --check && node scripts/check_sidecar.mjs",
+    "i18n:gen": "node scripts/i18n_gen.mjs",
+    "build:locales": "node scripts/build_locales.mjs",
+    "i18n:sidecar": "node scripts/check_sidecar.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
