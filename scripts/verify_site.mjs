@@ -617,8 +617,18 @@ try {
     check('es: language switch offers English and links to /',
       /english/i.test(sw.text) && sw.href === '/', `"${sw.text}" -> ${sw.href}`);
 
-    check('es: says its Spanish is unofficial',
-      /traducci[oó]n nuestra/i.test(await esPage.$eval('.xl-note', (e) => e.textContent)));
+    // Present, and NOT above the title. It used to render directly under the
+    // language switch, so on a phone the first thing a Spanish reader saw was a
+    // disclaimer — before the page had said what it was.
+    const note = await esPage.$eval('.xl-note', (e) => e.textContent);
+    check('es: separates our words from the record',
+      /escribimos nosotros/i.test(note) && /se quedan en ingl[eé]s/i.test(note));
+    const noteAboveTitle = await esPage.evaluate(() => {
+      const n = document.querySelector('.xl-note');
+      const h = document.querySelector('h1');
+      return !!(n && h) && (n.compareDocumentPosition(h) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
+    });
+    check('es: the notice does not precede the title', !noteAboveTitle);
 
     // The share card is a rendered image, so it needs its own per locale. A
     // Spanish og:title over a picture reading "The Purple Strip" is the

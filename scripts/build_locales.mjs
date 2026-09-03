@@ -230,11 +230,18 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
   const { out } = head(html, locale);
   html = out;
 
-  // Language switch + notice go inside <header>, before the eyebrow.
-  html = html.replace(
-    /(<header>\s*)/,
-    `$1${langSwitch(locale)}${translationNotice(locale)}\n    `,
-  );
+  // The language switch goes FIRST, before the eyebrow: someone who cannot read
+  // this page needs the way out before anything else.
+  html = html.replace(/(<header>\s*)/, `$1${langSwitch(locale)}\n    `);
+
+  // The translation notice goes LAST inside <header>, after the explainer.
+  //
+  // It used to sit directly under the language switch, which on a phone made a
+  // disclaimer the first thing a Spanish reader saw — above the title, before
+  // the page had said what it was. A caveat is only useful once the reader knows
+  // what it is a caveat about, so it now follows the explainer rather than
+  // preceding everything.
+  html = html.replace(/(\s*<\/header>)/, `\n    ${translationNotice(locale)}$1`);
 
   const target = locale === 'es'
     ? resolve(DIST, 'es', 'index.html')

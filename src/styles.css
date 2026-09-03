@@ -344,9 +344,16 @@
   .langswitch a:hover { color:var(--ink); border-color:var(--ink-2); }
   .langswitch a:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
 
-  /* Says on the Spanish page that its Spanish is ours, not official. Not
-     decorative: it is what keeps the "copied word for word" promise honest in a
-     second language. */
-  .xl-note { margin:0 0 14px; padding:9px 11px; border-left:2px solid var(--warn);
-             background:var(--band); font-size:13px; line-height:1.5;
-             color:var(--ink-2); max-width:66ch; }
+  /* Says on the Spanish page which words are ours and which are the record's.
+     Not decorative: it is what keeps the "copied word for word" promise honest
+     in a second language.
+
+     Styled as a footnote, not a warning. It carried an amber left bar and a
+     filled background, which is the vocabulary this page uses for something
+     being WRONG — and the note is not a problem, it is how the thing works.
+     A hairline above it and muted text put it at the same weight as the fine
+     print it sits next to. Measure matches .blurb so the header reads as one
+     column rather than two. */
+  .xl-note { margin:13px 0 0; padding-top:11px; border-top:1px solid var(--hair);
+             font-size:12.5px; line-height:1.55; color:var(--muted);
+             max-width:62ch; }

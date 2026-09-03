@@ -1430,11 +1430,11 @@
     "status": "ok"
   },
   "page.translationNotice": {
-    "en": "This page is in English. The Spanish version is our translation, not an official one.",
-    "es": "Esta página es una traducción nuestra, no una versión oficial. El texto oficial de cada proyecto de ley está en inglés.",
-    "where": "Shown on the Spanish page only.",
+    "en": "Everything we wrote ourselves is in Spanish. The official bill captions stay in English, exactly as they appear in the record — translating them would make them something other than the record.",
+    "es": "Todo lo que escribimos nosotros está en español. Los títulos oficiales de los proyectos de ley se quedan en inglés, tal como constan en el registro: traducirlos los convertiría en otra cosa.",
+    "where": "Shown on the Spanish page only, after the header explainer.",
     "vars": [],
-    "note": "The English value is never rendered — the notice exists to disclose that Spanish is unofficial, which is only true of the Spanish page. Kept in both locales so the key set stays symmetric and the parity check stays meaningful.",
+    "note": "Reworded and MOVED. It used to sit directly under the language switch, which made a disclaimer the first thing a Spanish reader saw on a phone — before the page had said what it was. It also led with what the page is not (\"una traducción nuestra, no una versión oficial\"), which reads apologetic. It now leads with what the reader does get, then the limit, then the reason for the limit. The English value is never rendered; it exists so the key set stays symmetric.",
     "status": "ok"
   },
   "strip.legendRamp": {
