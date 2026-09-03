@@ -21,7 +21,9 @@
     "data:report": "tsx scripts/report_session.ts",
     "verify": "node scripts/verify_site.mjs",
     "verify:headers": "node scripts/verify_site.mjs --with-headers",
-    "dns:check": "node scripts/check_domain.mjs"
+    "dns:check": "node scripts/check_domain.mjs",
+    "i18n:review": "node scripts/i18n_review.mjs",
+    "i18n:check": "node scripts/i18n_review.mjs --check"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
