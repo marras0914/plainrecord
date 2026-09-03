@@ -131,6 +131,19 @@ export interface QuizPayload {
   rulePartisanThreshold: number;
   partisanByConstruction: boolean;
   crossCuttingShare: number;
+  /**
+   * The denominator of `crossCuttingShare` — the count the RULE selected, before
+   * the hand-picked headline bills were appended. Always <= `items.length`, and
+   * deliberately not equal to it: the share is a diagnostic on the selection
+   * rule, so recomputing it over items the rule did not choose would misreport
+   * the rule. See scripts/export_quiz_data.ts.
+   *
+   * OPTIONAL because the committed payload predates the field. It cannot be
+   * regenerated without the LegiScan CSVs, which are not in the repo — so this
+   * is `undefined` until the next `npm run data:export`, and typing it as
+   * required would have the checker vouch for a field that is not there.
+   */
+  crossCuttingOf?: number;
   headlineCount: number;
   provenance: {
     houseItemsTotal: number;

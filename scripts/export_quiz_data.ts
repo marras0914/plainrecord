@@ -246,6 +246,26 @@ function main() {
   const rule = { ...DEFAULT_RULE, maxPerCategory: perCat };
   const sel = selectItems(categorized, valences, rule);
 
+  // How many items the RULE picked, captured before the headline bills are
+  // pushed in below.
+  //
+  // This exists because `sel.crossCuttingShare` is computed inside selectItems()
+  // over `sel.selected`, and the loop underneath then MUTATES that same array by
+  // appending hand-picked headline bills. The share is therefore a ratio over
+  // this count, not over `out.items.length` — and it was previously exported
+  // beside a 67-item array with nothing saying so, while
+  // `provenance.selectedJournalSourced` in the same object is computed after the
+  // push and IS over 67. Two denominators, one payload, no labels.
+  //
+  // Recomputing the share over all 67 would be the wrong repair. It is a
+  // diagnostic on the SELECTION RULE — `partisanByConstruction` trips when it
+  // falls below PARTISAN_BY_CONSTRUCTION_THRESHOLD — and the headline bills are
+  // chosen by hand precisely because they are the big fights, six of the seven
+  // splitting the parties sharply. Folding them in would drag the share down and
+  // report the rule as partisan-by-construction on the strength of items the
+  // rule did not choose. So the number stays, and the denominator ships with it.
+  const ruleSelectedCount = sel.selected.length;
+
   // Force the headline bills in even where the mechanical rule did not pick
   // them, and mark them so the page can offer a seven-question view.
   const headlineIds = new Map<string, { label: string; why: string; plain: string }>();
@@ -374,6 +394,9 @@ function main() {
     partisanByConstruction: sel.partisanByConstruction,
     headlineCount: headlineIds.size,
     crossCuttingShare: sel.crossCuttingShare,
+    // The denominator `crossCuttingShare` is a share OF. Always <= items.length;
+    // the difference is the headline bills the rule had not already picked.
+    crossCuttingOf: ruleSelectedCount,
     provenance: {
       houseItemsTotal: houseItems.length,
       uncategorizedExcluded: uncategorized,
@@ -458,6 +481,30 @@ function main() {
   };
 
   mkdirSync(dirname(outPath), { recursive: true });
+  // Fail before writing, not after shipping. `crossCuttingShare` is computed
+  // inside selectItems() and the headline loop then mutates the array it was
+  // computed over, so the two can silently drift apart — which is exactly what
+  // happened: a share over 60 items was exported beside 67 of them, next to a
+  // `selectedJournalSourced` counted over all 67. If the denominator ever
+  // exceeds the shipped item count, the ratio is describing a set that is not
+  // in the payload and no reader could reconstruct it.
+  if (ruleSelectedCount > out.items.length) {
+    throw new Error(
+      `crossCuttingOf (${ruleSelectedCount}) exceeds items (${out.items.length}) — ` +
+        `the share denominator is not a subset of what ships`,
+    );
+  }
+  {
+    const numerator = out.crossCuttingShare * ruleSelectedCount;
+    if (Math.abs(numerator - Math.round(numerator)) > 1e-6) {
+      throw new Error(
+        `crossCuttingShare (${out.crossCuttingShare}) is not a whole count over ` +
+          `crossCuttingOf (${ruleSelectedCount}) — got ${numerator}, so the ` +
+          `denominator is wrong`,
+      );
+    }
+  }
+
   writeFileSync(outPath, JSON.stringify(out));
 
   const bytes = readFileSync(outPath).length;
@@ -479,7 +526,13 @@ function main() {
   console.log('  comparators, same rule both caucuses:');
   for (const c of comparatorOut)
     console.log(`    ${c.name.padEnd(24)} ${c.role.padEnd(18)} voted ${c.voted}  with-caucus ${(c.withCaucus * 100).toFixed(1)}%  crossed ${c.crossedOf}`);
-  console.log(`  cross-cutting share    ${(sel.crossCuttingShare * 100).toFixed(1)}%`);
+  // Printed WITH its denominator. "31.7%" beside a 67-item payload reads as
+  // 21/67 and is 19/60; the ratio is the only form that cannot be misread.
+  console.log(
+    `  cross-cutting share    ${(sel.crossCuttingShare * 100).toFixed(1)}% ` +
+      `(${Math.round(sel.crossCuttingShare * ruleSelectedCount)}/${ruleSelectedCount} ` +
+      `rule-selected, before ${out.items.length - ruleSelectedCount} headline additions)`,
+  );
   console.log(`  journal-sourced        ${out.provenance.selectedJournalSourced}/${out.items.length} selected`);
   console.log(`  items with a caption   ${out.items.filter((i) => i.caption).length}`);
   console.log(`  candidate statements   ${out.items.filter((i) => (i as { statements?: unknown[] }).statements).length}`);

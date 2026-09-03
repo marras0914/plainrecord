@@ -284,10 +284,40 @@ npm run data:acts        # add opponent actions to an already-built payload
 npm run data:report      # coverage + provenance summary
 ```
 
+`data:export` takes arguments the npm script does not supply — it needs the
+LegiScan people/bills CSVs, which are gitignored and not in the repo:
+
+```bash
+npx tsx scripts/export_quiz_data.ts 89R <bills.csv> <people.csv>
+```
+
 `DATA_PIPELINE.md` documents each stage and the failures that shaped it — the
 5.27% of 89R votes Open States loses to truncated names, the em dash in the
 Journal's member lists, the surname collision that overwrote a real member's
 record. Read it before touching an ingest.
+
+### One re-export is pending
+
+`crossCuttingOf` is emitted by the exporter but is **not in the committed
+payload**, which predates it. It is typed optional for that reason. The next
+`data:export` fills it in; nothing on the page reads it either way.
+
+It exists because `crossCuttingShare` is computed inside `selectItems()` over
+`sel.selected`, and `export_quiz_data.ts` then *mutates that same array* by
+appending the hand-picked headline bills. So the shipped share is `19/60` while
+`items` holds 67 — and `provenance.selectedJournalSourced`, in the same object,
+is counted after the push and is over all 67. Two denominators, one payload,
+nothing labelling either.
+
+Recomputing the share over 67 would be the wrong repair. It is a diagnostic on
+the *selection rule* — `partisanByConstruction` trips below
+`PARTISAN_BY_CONSTRUCTION_THRESHOLD` — and the headline bills are hand-picked
+precisely because they are the big fights, six of the seven splitting the parties
+sharply. Folding them in would drag the share down and report the rule as
+partisan-by-construction on the strength of items the rule never chose. So the
+number stays and the denominator ships beside it, the exporter throws before
+writing if the two drift, and the console line prints the ratio rather than a
+bare percentage.
 
 ## Ground rules this codebase enforces in code, not just in prose
 
