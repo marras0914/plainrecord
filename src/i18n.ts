@@ -17,7 +17,35 @@
  *      Spanish page for a reader who explicitly asked for English.
  */
 
-import { COPY, ES_UNAPPROVED, type CopyKey, type Locale } from './copy.gen';
+import { EN, ES, ES_UNAPPROVED, type CopyKey, type Locale } from './copy.gen';
+
+/** Folded by vite. See the note on EN/ES in copy.gen.ts for why this exists. */
+declare const __BUILD_LOCALE__: Locale;
+
+/**
+ * The build locale, or 'en' when there is no build.
+ *
+ * The `typeof` guard is not defensive padding — this module is imported OUTSIDE
+ * vite by `npm test` and by the CLI report scripts, where the define does not
+ * exist and a bare read is a ReferenceError that crashes the suite before a
+ * single check runs. It cost two crashed suites to learn.
+ *
+ * vite replaces the identifier textually, so in a build this reads
+ * `typeof "en" === 'undefined' ? 'en' : "en"` and folds to a constant — the
+ * guard does not cost the tree-shaking that the split depends on.
+ */
+const BUILD_LOCALE: Locale =
+  typeof __BUILD_LOCALE__ === 'undefined' ? 'en' : __BUILD_LOCALE__;
+
+/**
+ * The copy table for THIS bundle, chosen at build time.
+ *
+ * Selecting on the folded constant rather than on LOCALE is what makes the other
+ * table unreferenced and therefore droppable. LOCALE still decides everything
+ * else — it is read from the URL path at runtime and is what `alternateHref` and
+ * the unapproved-translation helpers use.
+ */
+const TABLE: Record<CopyKey, string> = BUILD_LOCALE === 'es' ? ES : EN;
 
 /** Path prefix that selects Spanish. Also the directory the build emits. */
 export const ES_PREFIX = '/es';
@@ -81,11 +109,14 @@ export function anyUnapproved(): boolean {
  * belongs is the failure a reader cannot report because they cannot see it.
  */
 export function t(key: CopyKey, vars: Record<string, string | number> = {}): string {
-  const table = COPY[LOCALE] ?? COPY.en;
-  // Fall back to English for a key that exists in one locale and not the other.
-  // This cannot happen while copy.gen.ts is generated from a single table, but
-  // it is the difference between a wrong language and no text at all.
-  const template = table[key] ?? COPY.en[key];
+  // No cross-locale fallback, deliberately. There used to be one — `?? EN[key]`
+  // — but the other locale's table is no longer in this bundle to fall back TO,
+  // and it would have been the wrong behaviour anyway: silently showing English
+  // on the Spanish page is the half-translated failure the whole build is set up
+  // to refuse. Both tables are generated from one key list and `npm run
+  // i18n:check` asserts parity, so a missing key is a build error, not a runtime
+  // condition to paper over.
+  const template = TABLE[key];
   if (template === undefined) {
     if (import.meta.env?.DEV) throw new Error(`i18n: no such key "${key}"`);
     return '';

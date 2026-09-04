@@ -197,10 +197,42 @@ it does not make the English page wrong.
 
 ### Known follow-ups
 
-Both locales ship in one bundle (129 → 164 KB), so English readers download the
-Spanish strings and vice versa. Per-locale chunks are worth doing now that the
-route exists. Spanish *aid* renderings for the 67 captions — shown beside the
-English record, never instead of it — are an enhancement nobody is blocked on.
+Spanish *aid* renderings for the 67 captions — shown beside the English record,
+never instead of it — are an enhancement nobody is blocked on.
+
+### One bundle per language
+
+`npm run build` runs vite **twice**, once per locale, and each bundle carries
+only its own strings. Measured:
+
+| | raw | gzip |
+|---|---|---|
+| both languages in one bundle | 170.2 KB | 51.3 KB |
+| English only | 128.8 KB | **36.0 KB** |
+| Spanish only | 152.2 KB | **45.5 KB** |
+
+The Spanish bundle is larger because it carries the 22.5 KB payload sidecar,
+which the English one now drops entirely.
+
+**Two separate exports, not one `{ en, es }` object.** Rollup drops an
+unreferenced top-level const whose initialiser is a pure object literal; it
+cannot drop a *property* of an object that is itself referenced. `copy.gen.ts`
+therefore emits `EN` and `ES` as independent bindings and `src/i18n.ts` picks
+between them on `__BUILD_LOCALE__`, which vite folds. The same trick gates the
+sidecar import in `src/payload-i18n.ts`.
+
+`__BUILD_LOCALE__` is read through a `typeof` guard because `npm test` and the
+CLI report scripts import these modules **outside vite**, where a bare read is a
+ReferenceError — it crashed two suites before the guard went in. vite replaces
+the identifier textually, so the guard folds away and costs no tree-shaking.
+
+The Spanish build goes to a temporary `.locale-es/` because `emptyOutDir` would
+otherwise have it wipe the English one; its assets are then merged into
+`dist/assets/`, which is safe only because filenames are content-hashed. Three
+checks guard the result: that the two pages load *different* bundles, and that
+neither contains a phrase from the other language. A shared bundle would render
+both pages correctly and buy nothing, which is exactly the kind of failure that
+survives review.
 
 ## Pointing rightnleft.com at it
 

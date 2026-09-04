@@ -30,7 +30,8 @@
  *     whose whole argument is that it is careful.
  */
 
-import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, access, readdir, copyFile, rm } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
@@ -218,15 +219,90 @@ function translationNotice(locale) {
   return `<p class="xl-note">${value('page.translationNotice', 'es')}</p>`;
 }
 
+// ---------------------------------------------------------------------------
+// Build each locale separately
+//
+// One bundle carrying both languages sent every English reader the Spanish
+// strings and the 22.5 KB Spanish payload sidecar, and vice versa. Measured:
+// 51.3 KB gzipped for the combined bundle, 35.5 KB for English alone and 45.0 KB
+// for Spanish. So the site is built twice, with BUILD_LOCALE folded by vite so
+// Rollup drops the other language outright.
+//
+// The Spanish build goes somewhere temporary because `emptyOutDir` would
+// otherwise have it wipe the English one, then its assets are merged in.
+// That is safe only because vite content-hashes filenames: two bundles built
+// from different sources can never collide, and if they somehow produced
+// identical content they would be the same file anyway.
+//
+// Spawned rather than driven by npm script chaining because `BUILD_LOCALE=en
+// vite build` is not valid in cmd.exe, which is what npm uses on Windows.
+// ---------------------------------------------------------------------------
+
+const ES_BUILD = resolve(ROOT, '.locale-es');
+
+// vite's own CLI, run by this node. Not `npx vite build` through a shell: that
+// needs shell:true on Windows to find npx.cmd, which node now warns about
+// (DEP0190, unescaped concatenated args) and which puts a shell between us and
+// the exit code for no benefit.
+const VITE_BIN = resolve(ROOT, 'node_modules/vite/bin/vite.js');
+
+function viteBuild(locale, outDir) {
+  const r = spawnSync(process.execPath, [VITE_BIN, 'build'], {
+    cwd: ROOT,
+    env: { ...process.env, BUILD_LOCALE: locale, BUILD_OUTDIR: outDir },
+    encoding: 'utf8',
+  });
+  const out = `${r.stdout ?? ''}${r.stderr ?? ''}`;
+  if (r.status !== 0) {
+    console.error(`\n  vite build (${locale}) failed:\n${out}\n`);
+    process.exit(1);
+  }
+  // vite colourises its size table, so the digits are wrapped in escape codes.
+  const plain = out.replace(/\[[0-9;]*m/g, '');
+  const size = /index-[\w-]+\.js\s+([\d.]+)\s*kB\s*│\s*gzip:\s*([\d.]+)\s*kB/.exec(plain)
+    ?? /index-[\w-]+\.js[^\n]*?([\d.]+)\s*kB[^\n]*?gzip:\s*([\d.]+)\s*kB/.exec(plain);
+  return size ? `${size[1]} kB raw, ${size[2]} kB gzip` : 'built (size not parsed)';
+}
+
+console.log(`  [PASS] built en  — ${viteBuild('en', '../dist')}`);
+if (emitSpanish) {
+  console.log(`  [PASS] built es  — ${viteBuild('es', '../.locale-es')}`);
+  // Merge the Spanish assets in beside the English ones.
+  const from = resolve(ES_BUILD, 'assets');
+  const to = resolve(DIST, 'assets');
+  await mkdir(to, { recursive: true });
+  let copied = 0;
+  for (const f of await readdir(from)) {
+    await copyFile(resolve(from, f), resolve(to, f));
+    copied++;
+  }
+  say(copied > 0, 'Spanish assets merged into dist/assets', `${copied} files`);
+}
+
 const src = await readFile(resolve(DIST, 'index.html'), 'utf8');
+
+// The Spanish page is built FROM THE SPANISH BUILD's html, not from the English
+// one — that is where the Spanish bundle's asset hashes are. Deriving it from
+// dist/index.html would give the Spanish page the English JavaScript, which is
+// the whole bug this change exists to fix, reintroduced one layer up.
+const esSrc = emitSpanish
+  ? await readFile(resolve(ES_BUILD, 'index.html'), 'utf8')
+  : null;
 
 const slots = [...src.matchAll(/data-i18n(?:-content)?="([^"]+)"/g)].map((m) => m[1]);
 say(slots.length > 0, 'dist/index.html carries data-i18n slots', `${slots.length} slots`);
+// Absolute, so /es/ resolves them at the domain root rather than at /es/assets/.
+// They are NOT shared any more — each locale loads its own bundle, asserted
+// below — but both sets live in one directory, which only works because the
+// paths do not depend on the page's own depth.
 say(/src="\/assets\//.test(src) && /href="\/assets\//.test(src),
-  'assets are absolute paths', 'so /es/ can share the bundle');
+  'assets are absolute paths', 'so /es/ resolves them from the root, not /es/assets/');
 
 for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
-  let html = localise(src, locale);
+  // Each locale starts from ITS OWN build's html, so it references its own
+  // bundle. Starting both from `src` would hand the Spanish page the English
+  // JavaScript.
+  let html = localise(locale === 'es' ? esSrc : src, locale);
   const { out } = head(html, locale);
   html = out;
 
@@ -266,6 +342,33 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
 
 say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   missingKeys.size ? [...missingKeys].join(', ') : '');
+
+// The point of the whole two-build arrangement: the pages must NOT share a
+// bundle. If they do, one is carrying the other language and the split bought
+// nothing — and that is invisible from the outside, because both pages would
+// still render correctly.
+if (emitSpanish) {
+  const bundleOf = (html) => (/src="(\/assets\/index-[\w-]+\.js)"/.exec(html) ?? [])[1];
+  const enHtml = await readFile(resolve(DIST, 'index.html'), 'utf8');
+  const esHtml = await readFile(resolve(DIST, 'es', 'index.html'), 'utf8');
+  const a = bundleOf(enHtml);
+  const b = bundleOf(esHtml);
+  say(Boolean(a && b && a !== b), 'the two pages load DIFFERENT bundles',
+    a === b ? `both load ${a} — the locale split did nothing` : `${a} vs ${b}`);
+
+  // And each bundle must actually be missing the other language, which is the
+  // property the split exists to create rather than a proxy for it.
+  if (a && b && a !== b) {
+    const enJs = await readFile(resolve(DIST, a.slice(1)), 'utf8');
+    const esJs = await readFile(resolve(DIST, b.slice(1)), 'utf8');
+    say(!enJs.includes('Franja Morada') && !enJs.includes('bancada'),
+      'the English bundle carries no Spanish', `${(enJs.length / 1024).toFixed(0)} KB raw`);
+    say(!esJs.includes('Purple Strip'),
+      'the Spanish bundle carries no English', `${(esJs.length / 1024).toFixed(0)} KB raw`);
+  }
+
+  await rm(ES_BUILD, { recursive: true, force: true });
+}
 
 if (!emitSpanish) {
   console.log(

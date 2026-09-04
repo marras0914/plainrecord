@@ -47,13 +47,26 @@ ${entries.map(([k]) => `  | ${q(k)}`).join('\n')};
 
 export type Locale = 'en' | 'es';
 
-export const COPY: Record<Locale, Record<CopyKey, string>> = {
-  en: {
-${entries.map(([k, e]) => `    ${q(k)}: ${q(e.en)},`).join('\n')}
-  },
-  es: {
-${entries.map(([k, e]) => `    ${q(k)}: ${q(e.es)},`).join('\n')}
-  },
+/**
+ * TWO SEPARATE BINDINGS, not one \`{ en, es }\` object, and that is the whole
+ * reason this file is shaped the way it is.
+ *
+ * Rollup drops an unreferenced top-level const whose initialiser is a pure
+ * object literal. It cannot drop a PROPERTY of an object that is itself
+ * referenced — so when these two tables lived as \`COPY.en\` and \`COPY.es\`, every
+ * English reader downloaded the Spanish strings and every Spanish reader
+ * downloaded the English ones. Measured: 51.1 KB gzipped with both, 36.2 KB with
+ * one.
+ *
+ * src/i18n.ts picks between them on \`__BUILD_LOCALE__\`, a value vite folds at
+ * build time, so exactly one of these survives into each locale's bundle.
+ */
+export const EN: Record<CopyKey, string> = {
+${entries.map(([k, e]) => `  ${q(k)}: ${q(e.en)},`).join('\n')}
+};
+
+export const ES: Record<CopyKey, string> = {
+${entries.map(([k, e]) => `  ${q(k)}: ${q(e.es)},`).join('\n')}
 };
 
 /**

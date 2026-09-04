@@ -39,24 +39,59 @@ interface Sidecar {
   items: Record<string, { label?: string; why?: string; plain?: string }>;
 }
 
-const ES = es as unknown as Sidecar;
-const spanish = () => LOCALE === 'es';
+/** Folded by vite. See the note on EN/ES in copy.gen.ts. */
+declare const __BUILD_LOCALE__: 'en' | 'es';
+
+/**
+ * Same typeof guard as src/i18n.ts, and for the same reason: this module is
+ * reachable from code that runs outside vite, where a bare read of the define is
+ * a ReferenceError rather than a missing optimisation.
+ */
+const BUILD_LOCALE = typeof __BUILD_LOCALE__ === 'undefined' ? 'en' : __BUILD_LOCALE__;
+
+/**
+ * The sidecar, but only in the Spanish bundle.
+ *
+ * quiz_89R.es.json is 22.5 KB and is inlined by vite as a JS module. Imported
+ * unconditionally it shipped to every English reader, who can never see a word
+ * of it. Gating on the folded constant leaves the import unreferenced in the
+ * English build, so Rollup drops the module outright.
+ *
+ * Typed as possibly null so the accessors below cannot forget the English case —
+ * where `spanish()` is false anyway, but a null-unsafe read would still be a
+ * latent crash if that ever changed.
+ */
+const ES: Sidecar | null =
+  BUILD_LOCALE === 'es' ? (es as unknown as Sidecar) : null;
+
+/**
+ * The sidecar for this page, or null.
+ *
+ * Returns the object rather than a boolean so callers NARROW. A `spanish()`
+ * predicate reads better but TypeScript will not carry its null check across a
+ * function boundary, so every accessor below would need a second, redundant
+ * check — and one of them would eventually be forgotten.
+ */
+const sidecar = (): Sidecar | null => (LOCALE === 'es' ? ES : null);
 
 /** One of the four top-level prose fields. */
 export function prose(
   key: 'comparatorRule' | 'candidateProvenance' | 'causalNote' | 'plainLanguageNote',
   english: string,
 ): string {
-  return spanish() ? ES[key] || english : english;
+  const S = sidecar();
+  return S ? S[key] || english : english;
 }
 
 /** A subject-area name, as shown in the question eyebrow and outcome headings. */
 export function categoryName(category: string): string {
-  return spanish() ? ES.categories[category] || category : category;
+  const S = sidecar();
+  return S ? S.categories[category] || category : category;
 }
 
 export function omissionWhy(category: string, english: string): string {
-  return spanish() ? ES.omissions[category] || english : english;
+  const S = sidecar();
+  return S ? S.omissions[category] || english : english;
 }
 
 /**
@@ -65,8 +100,9 @@ export function omissionWhy(category: string, english: string): string {
  * answer — mutating would translate it once and then translate the translation.
  */
 export function outcome(o: QuizOutcome): QuizOutcome {
-  if (!spanish()) return o;
-  const tr = ES.outcomes[o.label];
+  const S = sidecar();
+  if (!S) return o;
+  const tr = S.outcomes[o.label];
   if (!tr) return o;
   return {
     ...o,
@@ -82,8 +118,9 @@ export function outcome(o: QuizOutcome): QuizOutcome {
 }
 
 export function opponent(o: Opponent): Opponent {
-  if (!spanish()) return o;
-  const tr = ES.opponents[o.name];
+  const S = sidecar();
+  if (!S) return o;
+  const tr = S.opponents[o.name];
   if (!tr) return o;
   return {
     ...o,
@@ -99,8 +136,9 @@ export interface Incumbent {
 }
 
 export function incumbent(i: Incumbent): Incumbent {
-  if (!spanish()) return i;
-  const tr = ES.incumbents[i.name];
+  const S = sidecar();
+  if (!S) return i;
+  const tr = S.incumbents[i.name];
   if (!tr) return i;
   return {
     ...i,
@@ -120,8 +158,9 @@ export function incumbent(i: Incumbent): Incumbent {
  * _meta.captions in public/data/quiz_89R.es.json.
  */
 export function itemProse(it: QuizItem): QuizItem {
-  if (!spanish()) return it;
-  const tr = ES.items[it.billId];
+  const S = sidecar();
+  if (!S) return it;
+  const tr = S.items[it.billId];
   if (!tr) return it;
   return {
     ...it,
