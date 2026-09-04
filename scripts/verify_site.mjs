@@ -627,12 +627,18 @@ try {
       check('the Dataset points at the real payload',
         ds?.distribution?.[0]?.contentUrl?.endsWith('/data/quiz_89R.json'),
         ds?.distribution?.[0]?.contentUrl ?? '(none)');
-      // Asserted ABSENT on purpose. See the note in build_locales.mjs: this
-      // project states no license, so declaring one here would invent a rights
-      // grant. If a license is ever chosen and stated on the page, flip this.
-      check('the Dataset claims no license the project has not granted',
-        ds !== undefined && ds.license === undefined,
-        ds?.license ? `asserts ${ds.license}` : 'no license field');
+      // The structured-data licence must MATCH a licence the project actually
+      // grants. This check was previously the inverse — asserting the field was
+      // absent, because the block declared CC0 before any licence existed. Now
+      // it asserts the pair: the machine-readable claim and the human-readable
+      // one have to move together, or a reuser is told two different things.
+      check('the Dataset declares CC0',
+        ds?.license === 'https://creativecommons.org/publicdomain/zero/1.0/',
+        ds?.license ?? '(none)');
+      const method = await page.$eval('#method', (e) => e.textContent.replace(/\s+/g, ' '));
+      check('the page states the same licence a human can read',
+        /CC0/.test(method) && /MIT/.test(method),
+        /CC0/.test(method) ? 'CC0 + MIT in "How this is built"' : 'not stated on the page');
     }
   }
 

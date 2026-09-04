@@ -1,0 +1,73 @@
+This project is released under two licenses, because it contains two different
+kinds of thing.
+
+--------------------------------------------------------------------------------
+1. THE DATA AND THE PROSE: CC0 1.0 Universal (public domain dedication)
+--------------------------------------------------------------------------------
+
+Applies to:
+  public/data/quiz_89R.json         the shipped quiz payload
+  public/data/quiz_89R.es.json      its Spanish companion
+  i18n/copy.json                    the site's copy, both languages
+  data/tx_evidence_vetoes.json      the veto evidence
+  and any other data file in this repository
+
+Including the parts of those files that are original work rather than public
+record: the plain-language bill descriptions, the why-chosen notes, the outcome
+labels, comparisons and caveats, the causal note, the comparator rule, the
+computed partisan valences, and the published selection rule.
+
+Full text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+Two notes on what this does and does not cover.
+
+The official bill captions were copied verbatim from the Texas House record and
+are not this project's to license. Neither are the roll-call votes or the
+chamber totals: they are facts, and in the United States a compilation of facts
+carries thin to no copyright (Feist v. Rural Telephone Service, 499 U.S. 340).
+They were already free. CC0 is here to remove any doubt about the layer that IS
+original, not to claim the layer that never was.
+
+The outcome figures cite third-party sources by name and URL. CC0 covers this
+project's description of them. It does not and cannot relicense the underlying
+reports.
+
+--------------------------------------------------------------------------------
+2. THE CODE: MIT
+--------------------------------------------------------------------------------
+
+Applies to everything else: the site, the estimator, the ingest and
+reconciliation pipeline, and the build and verification scripts.
+
+Copyright (c) 2026 Marco Arras
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING OUT OF OR IN CONNECTION
+WITH THE SOFTWARE, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+--------------------------------------------------------------------------------
+3. ONE THING NO LICENSE CAN DO
+--------------------------------------------------------------------------------
+
+Every outcome figure on this site ships with a caveat, because most of them need
+one: a state ranking moves on population growth and local property values as
+well as on state law, and one of the figures is a single-state time series rather
+than a randomised finding. CC0 means you may reuse a number without the
+sentence that qualifies it.
+
+Please don't. The caveats are the careful part, and a figure without its caveat
+is worse than no figure.

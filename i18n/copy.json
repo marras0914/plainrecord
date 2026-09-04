@@ -1254,12 +1254,13 @@
     "status": "ok"
   },
   "method.check.body": {
-    "en": "Every vote, count and score behind this page sits in one file: {link}. That is the exact file this page loaded, not a copy we made for show.",
-    "es": "Cada voto, conteo y calificación detrás de esta página está en un solo archivo: {link}. Es el archivo exacto que cargó esta página, no una copia hecha para aparentar.",
+    "en": "Every vote, count and score behind this page sits in one file: {link}. That is the exact file this page loaded, not a copy we made for show. Take it: the data is public domain (CC0) and the code is MIT. If you reuse an outcome figure, please carry its caveat with it.",
+    "es": "Cada voto, conteo y calificación detrás de esta página está en un solo archivo: {link}. Es el archivo exacto que cargó esta página, no una copia hecha para aparentar. Tómelo: los datos son de dominio público (CC0) y el código es MIT. Si reutiliza una cifra de resultados, por favor lleve su advertencia con ella.",
     "where": "Method paragraph body.",
     "vars": [
       "link"
     ],
+    "note": "The licence is stated HERE rather than in a separate section because this is the paragraph that already hands the file over, and a grant of reuse belongs next to the thing being granted. The last sentence is a request, not a condition: CC0 cannot require it, and pretending otherwise would misdescribe the licence.",
     "status": "ok"
   },
   "readout.answered": {

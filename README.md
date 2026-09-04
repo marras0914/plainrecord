@@ -46,6 +46,28 @@ to `SHIP_DIR`.
 The payload is served CORS-open at `/data/quiz_89R.json` on purpose. A civic tool
 that asks you to trust its numbers should let you take them.
 
+## Licence
+
+**Data and prose: CC0.** **Code: MIT.** See [LICENSE](LICENSE).
+
+The split exists because the repo holds two different kinds of thing. CC0 covers
+the payloads, `i18n/copy.json`, and the parts of them that are original work
+rather than public record: the plain-language bill descriptions, the outcome
+caveats, the causal note, the computed valences, the selection rule. MIT covers
+the site, the estimator and the pipeline.
+
+Two things CC0 is *not* doing. The official bill captions were copied verbatim
+from the Texas House record and were never this project's to license, and the
+roll-call votes are facts, which carry thin-to-no copyright in the US anyway
+(*Feist v. Rural Telephone*). CC0 removes doubt about the layer that is original;
+it does not claim the layer that was already free.
+
+And the one thing no licence can do: every outcome figure ships with a caveat
+because most of them need one. CC0 means a figure can be reused without the
+sentence that qualifies it. The LICENSE asks that it isn't, and the page asks
+too — a request, not a condition, because CC0 cannot make it one and saying
+otherwise would misdescribe the licence.
+
 ## Deploying
 
 Two configs are here; **use one, not both**.

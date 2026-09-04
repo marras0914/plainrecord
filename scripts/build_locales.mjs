@@ -233,19 +233,15 @@ function structuredData(locale) {
         ? `${payload.provenance.houseItemsTotal} votaciones nominales de la Cámara de Texas de la sesión 89R, con ${payload.provenance.journalSourced} conciliadas con el Diario oficial de la Cámara y la fuente indicada en cada voto. Incluye los votos individuales de los tres candidatos, las valencias partidistas calculadas y la regla de selección publicada.`
         : `${payload.provenance.houseItemsTotal} Texas House roll-call votes from the 89R session, ${payload.provenance.journalSourced} of them reconciled against the official House Journal with the source recorded per vote. Includes individual member votes for the three candidates, computed partisan valences, and the published selection rule.`,
       url: `${SITE}/`,
-      // NO `license` FIELD, deliberately.
+      // CC0, and now it is actually granted rather than assumed.
       //
-      // An earlier version of this asserted CC0. That is a public,
-      // machine-readable grant of reuse rights, and this project states no
-      // license anywhere — not a LICENSE file, not package.json, not the page.
-      // Publishing one in structured data would be inventing a legal position
-      // on the author's behalf, and it is the kind of claim people rely on.
-      //
-      // Google's Dataset Search recommends a license and will rank a dataset
-      // without one less well, so this is a real cost. It is Marco's to decide:
-      // the underlying roll calls are public record, so CC0 is defensible, but
-      // the categorisation, valences and selection rule are this project's work.
-      // Add `license` here once that decision is made and stated on the page.
+      // An earlier version of this block asserted CC0 before the project had
+      // stated any licence at all, which was inventing a rights grant on the
+      // author's behalf. It is now declared in LICENSE, in package.json, and on
+      // the page itself in both languages, so the machine-readable claim matches
+      // a real one. If the licence ever changes, this field and the page copy
+      // have to move together — the verifier asserts both.
+      license: 'https://creativecommons.org/publicdomain/zero/1.0/',
       isAccessibleForFree: true,
       creator: { '@type': 'Person', name: 'Marco Arras' },
       temporalCoverage: '2025',
