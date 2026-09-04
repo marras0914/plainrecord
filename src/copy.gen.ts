@@ -210,7 +210,8 @@ export type CopyKey =
   | "method.denominator.lead"
   | "method.denominator.body"
   | "privacy.lead"
-  | "privacy.body";
+  | "privacy.body"
+  | "intro.subhead";
 
 export type Locale = 'en' | 'es';
 
@@ -409,7 +410,7 @@ export const EN: Record<CopyKey, string> = {
   "tip.dYea": "D voted Yea",
   "tip.position": "your position",
   "tip.chamber": "chamber",
-  "page.title": "The Purple Strip — PlainRecord",
+  "page.title": "Texas House voting records — Goodwin, Hinojosa, Talarico | The Purple Strip",
   "page.description": "A blind quiz on real Texas House votes. Answer without knowing which party took which side, then see where you land and where Texas actually stands.",
   "page.langSwitch": "En español",
   "page.translationNotice": "Everything we wrote ourselves is in Spanish. The official bill captions stay in English, exactly as they appear in the record — translating them would make them something other than the record.",
@@ -430,6 +431,7 @@ export const EN: Record<CopyKey, string> = {
   "method.denominator.body": "The percentage in the tiles above counts all {items} questions. The <code>crossCuttingShare</code> field in the data file is measured over the rule-selected votes only, so it is a slightly different number. That is deliberate: it exists to check the <em>rule</em>, and the seven headline bills were picked by hand rather than by the rule — six of them split the parties sharply, so counting them would make the rule look more one-sided than it is. Both numbers are honest and neither is the other one rounded.",
   "privacy.lead": "What this page counts, and what it does not.",
   "privacy.body": "It counts visits — how many people came and which link sent them — using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser: there is no server to send them to, and the page makes no network request while you answer. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out.",
+  "intro.subhead": "How Vikki Goodwin, Gina Hinojosa and James Talarico voted in the Texas House, checked against your own answers.",
 };
 
 export const ES: Record<CopyKey, string> = {
@@ -613,7 +615,7 @@ export const ES: Record<CopyKey, string> = {
   "tip.dYea": "D a favor",
   "tip.position": "su posición",
   "tip.chamber": "cámara",
-  "page.title": "La Franja Morada — PlainRecord",
+  "page.title": "Historial de votos de la Cámara de Texas — Goodwin, Hinojosa, Talarico | La Franja Morada",
   "page.description": "Un cuestionario a ciegas sobre votos reales de la Cámara de Texas. Responda sin saber qué partido tomó qué lado, y después vea dónde queda usted y cómo está Texas en realidad.",
   "page.langSwitch": "In English",
   "page.translationNotice": "Todo lo que escribimos nosotros está en español. Los títulos oficiales de los proyectos de ley se quedan en inglés, tal como constan en el registro: traducirlos los convertiría en otra cosa.",
@@ -634,6 +636,7 @@ export const ES: Record<CopyKey, string> = {
   "method.denominator.body": "El porcentaje de los recuadros de arriba cuenta las {items} preguntas. El campo <code>crossCuttingShare</code> del archivo de datos se mide solo sobre los votos escogidos por la regla, así que es una cifra ligeramente distinta. Eso es a propósito: existe para comprobar la <em>regla</em>, y los siete proyectos principales los escogimos a mano y no por regla; seis de ellos dividieron a los partidos con claridad, así que contarlos haría parecer la regla más sesgada de lo que es. Las dos cifras son honestas y ninguna es la otra redondeada.",
   "privacy.lead": "Qué cuenta esta página y qué no.",
   "privacy.body": "Cuenta visitas —cuántas personas entraron y qué enlace las trajo— con la analítica de Vercel, que no usa cookies y no puede seguirle a otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador: no hay ningún servidor al que enviarlas, y la página no hace ninguna petición de red mientras usted responde. Eso no es una promesa, se comprueba en cada compilación: la prueba responde cinco preguntas y falla si sale un solo byte.",
+  "intro.subhead": "Cómo votaron Vikki Goodwin, Gina Hinojosa y James Talarico en la Cámara de Texas, comparado con sus propias respuestas.",
 };
 
 /**

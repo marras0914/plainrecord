@@ -187,11 +187,89 @@ function head(html, locale) {
     `  <meta property="og:locale" content="${locale === 'es' ? 'es_US' : 'en_US'}">\n`;
   out = out.replace(/(\s*<link rel="canonical")/, `\n${alternates}$1`);
 
+  // JSON-LD goes in the head, before </head>, so a crawler has it without
+  // waiting on the body.
+  out = out.replace(/(\s*<\/head>)/, `\n  ${structuredData(locale)}$1`);
+
   // The stylesheet is emitted by vite as an absolute /assets/ path, so the
   // Spanish page at /es/ loads the same CSS and the same bundle. Asserted below
   // rather than assumed, because a relative href would 404 one directory down
   // and the page would render unstyled.
   return { out, selfUrl, altUrl };
+}
+
+/**
+ * schema.org JSON-LD: a WebSite and, more usefully, a Dataset.
+ *
+ * The Dataset block is the point. This project's distinctive asset is not the
+ * quiz — it is 3,546 Texas House roll calls with per-vote Journal provenance,
+ * published CORS-open as one file, which almost nobody does. Declaring it as a
+ * Dataset makes it eligible for Google Dataset Search, which is where a
+ * reporter or researcher actually looks, and where capitol.texas.gov and the
+ * Tribune are not competing for the same query.
+ *
+ * Every figure is read from the payload rather than typed, for the same reason
+ * the share card is: a number stated in structured data outlives any correction
+ * made in prose, and a wrong one here is quoted back by a machine.
+ */
+function structuredData(locale) {
+  const selfUrl = locale === 'es' ? `${SITE}${ES_PREFIX}` : `${SITE}/`;
+  const graph = [
+    {
+      '@type': 'WebSite',
+      '@id': `${SITE}/#website`,
+      url: selfUrl,
+      name: value('intro.h1', locale),
+      description: value('page.description', locale),
+      inLanguage: locale === 'es' ? 'es-US' : 'en-US',
+    },
+    {
+      '@type': 'Dataset',
+      '@id': `${SITE}/#dataset`,
+      name: locale === 'es'
+        ? 'Votaciones nominales de la Cámara de Representantes de Texas, 89.ª Legislatura (89R)'
+        : 'Texas House of Representatives roll-call votes, 89th Legislature (89R)',
+      description: locale === 'es'
+        ? `${payload.provenance.houseItemsTotal} votaciones nominales de la Cámara de Texas de la sesión 89R, con ${payload.provenance.journalSourced} conciliadas con el Diario oficial de la Cámara y la fuente indicada en cada voto. Incluye los votos individuales de los tres candidatos, las valencias partidistas calculadas y la regla de selección publicada.`
+        : `${payload.provenance.houseItemsTotal} Texas House roll-call votes from the 89R session, ${payload.provenance.journalSourced} of them reconciled against the official House Journal with the source recorded per vote. Includes individual member votes for the three candidates, computed partisan valences, and the published selection rule.`,
+      url: `${SITE}/`,
+      // NO `license` FIELD, deliberately.
+      //
+      // An earlier version of this asserted CC0. That is a public,
+      // machine-readable grant of reuse rights, and this project states no
+      // license anywhere — not a LICENSE file, not package.json, not the page.
+      // Publishing one in structured data would be inventing a legal position
+      // on the author's behalf, and it is the kind of claim people rely on.
+      //
+      // Google's Dataset Search recommends a license and will rank a dataset
+      // without one less well, so this is a real cost. It is Marco's to decide:
+      // the underlying roll calls are public record, so CC0 is defensible, but
+      // the categorisation, valences and selection rule are this project's work.
+      // Add `license` here once that decision is made and stated on the page.
+      isAccessibleForFree: true,
+      creator: { '@type': 'Person', name: 'Marco Arras' },
+      temporalCoverage: '2025',
+      spatialCoverage: { '@type': 'Place', name: 'Texas, United States' },
+      keywords: [
+        'Texas Legislature', 'roll call votes', 'Texas House of Representatives',
+        '89th Legislature', 'voting records', 'open data',
+      ],
+      variableMeasured: [
+        'bill identifier', 'chamber yea/nay totals', 'per-member vote',
+        'partisan valence', 'vote source (journal or scrape)',
+      ],
+      distribution: [{
+        '@type': 'DataDownload',
+        encodingFormat: 'application/json',
+        contentUrl: `${SITE}/data/quiz_89R.json`,
+      }],
+    },
+  ];
+  return (
+    '<script type="application/ld+json">' +
+    JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }) +
+    '</script>'
+  );
 }
 
 /** The language switch, injected as the first thing in the header. */
@@ -342,6 +420,43 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
 
 say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   missingKeys.size ? [...missingKeys].join(', ') : '');
+
+// ---------------------------------------------------------------------------
+// sitemap.xml — GENERATED, so it cannot forget a locale
+//
+// The committed public/sitemap.xml listed only "/" and had no hreflang
+// alternates, so nothing pointed a crawler at the Spanish page and the two
+// versions looked unrelated. Hand-maintaining a list of the URLs this script
+// emits is exactly the drift the rest of the build refuses, so it is written
+// from the same `locales` decision that writes the pages.
+// ---------------------------------------------------------------------------
+
+{
+  const urls = emitSpanish
+    ? [{ loc: `${SITE}/`, locale: 'en' }, { loc: `${SITE}${ES_PREFIX}`, locale: 'es' }]
+    : [{ loc: `${SITE}/`, locale: 'en' }];
+
+  const alternates = urls
+    .map((u) => `      <xhtml:link rel="alternate" hreflang="${u.locale}" href="${u.loc}"/>`)
+    .concat(`      <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/"/>`)
+    .join('\n');
+
+  const xml =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n' +
+    '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
+    urls.map((u) =>
+      '  <url>\n' +
+      `    <loc>${u.loc}</loc>\n` +
+      `${alternates}\n` +
+      '    <changefreq>weekly</changefreq>\n' +
+      `    <priority>${u.locale === 'en' ? '1.0' : '0.9'}</priority>\n` +
+      '  </url>').join('\n') + '\n' +
+    '</urlset>\n';
+
+  await writeFile(resolve(DIST, 'sitemap.xml'), xml, 'utf8');
+  say(true, 'wrote dist/sitemap.xml', `${urls.length} url(s), hreflang on each`);
+}
 
 // The point of the whole two-build arrangement: the pages must NOT share a
 // bundle. If they do, one is carrying the other language and the split bought

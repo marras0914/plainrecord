@@ -592,6 +592,50 @@ try {
   check('table view exposes the receipts',
     ['R Yea', 'D Yea', 'Valence', 'Source'].every((c) => cols.includes(c)), cols.join(','));
 
+  // ---------------------------------------------------------------------------
+  // What a crawler sees
+  //
+  // These are asserted because they are invisible to a human reading the page.
+  // The three candidate names appeared NOWHERE in the static html for the first
+  // two days — they render client-side from the payload, so the queries this
+  // page answers best ("James Talarico voting record") had nothing for a
+  // crawler to match. And the title said "The Purple Strip — PlainRecord",
+  // which contains no term anybody searches for.
+  // ---------------------------------------------------------------------------
+
+  {
+    const title = await page.title();
+    check('the title carries searchable terms',
+      /Texas House/i.test(title) && /voting record|Historial de votos/i.test(title), title);
+
+    const staticHtml = await page.evaluate(() => document.documentElement.outerHTML);
+    const names = ['Goodwin', 'Hinojosa', 'Talarico'];
+    const missing = names.filter((n) => !staticHtml.includes(n));
+    check('the candidates are named in the markup', missing.length === 0,
+      missing.length ? `missing ${missing.join(', ')}` : names.join(', '));
+
+    const ld = await page.$$eval('script[type="application/ld+json"]',
+      (els) => els.map((e) => e.textContent));
+    check('structured data is present', ld.length > 0, `${ld.length} block(s)`);
+    if (ld.length) {
+      let graph = [];
+      try { graph = JSON.parse(ld[0])['@graph'] ?? []; } catch { /* reported below */ }
+      const types = graph.map((g) => g['@type']);
+      check('structured data parses and declares a Dataset',
+        types.includes('Dataset'), types.join(' + ') || 'unparseable');
+      const ds = graph.find((g) => g['@type'] === 'Dataset');
+      check('the Dataset points at the real payload',
+        ds?.distribution?.[0]?.contentUrl?.endsWith('/data/quiz_89R.json'),
+        ds?.distribution?.[0]?.contentUrl ?? '(none)');
+      // Asserted ABSENT on purpose. See the note in build_locales.mjs: this
+      // project states no license, so declaring one here would invent a rights
+      // grant. If a license is ever chosen and stated on the page, flip this.
+      check('the Dataset claims no license the project has not granted',
+        ds !== undefined && ds.license === undefined,
+        ds?.license ? `asserts ${ds.license}` : 'no license field');
+    }
+  }
+
   check('analytics script is requested ON LOAD, with no interaction',
     insightsOnLoad.requested,
     insightsOnLoad.requested

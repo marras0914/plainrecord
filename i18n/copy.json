@@ -1408,10 +1408,11 @@
     "status": "ok"
   },
   "page.title": {
-    "en": "The Purple Strip — PlainRecord",
-    "es": "La Franja Morada — PlainRecord",
+    "en": "Texas House voting records — Goodwin, Hinojosa, Talarico | The Purple Strip",
+    "es": "Historial de votos de la Cámara de Texas — Goodwin, Hinojosa, Talarico | La Franja Morada",
     "where": "Document <title> and the browser tab.",
     "vars": [],
+    "note": "Was \"The Purple Strip — PlainRecord\", which contains nothing anyone searches for: no Texas, no voting record, no candidate name. The brand stays in the h1 and og:title; the title element is for search.",
     "status": "ok"
   },
   "page.description": {
@@ -1573,6 +1574,14 @@
     "where": "Privacy paragraph body, in the authorship card, before the contact line.",
     "vars": [],
     "note": "The last sentence is the load-bearing one and must stay true. verify_site.mjs answers five questions and asserts nothing but fonts and the page-view beacon goes out. If that check is ever removed or weakened, this sentence becomes a lie and has to be reworded first.",
+    "status": "ok"
+  },
+  "intro.subhead": {
+    "en": "How Vikki Goodwin, Gina Hinojosa and James Talarico voted in the Texas House, checked against your own answers.",
+    "es": "Cómo votaron Vikki Goodwin, Gina Hinojosa y James Talarico en la Cámara de Texas, comparado con sus propias respuestas.",
+    "where": "Static subhead under the h1, above the explainer.",
+    "vars": [],
+    "note": "Exists because the three names appeared NOWHERE in the static html — they are rendered client-side from the payload, so the queries this page answers best (\"James Talarico voting record\") had nothing for a crawler to match. Kept short and plain to match the deliberately low reading level of the explainer below it; it is a real subhead for a reader, not keyword filler.",
     "status": "ok"
   }
 }
