@@ -357,3 +357,34 @@
   .xl-note { margin:13px 0 0; padding-top:11px; border-top:1px solid var(--hair);
              font-size:12.5px; line-height:1.55; color:var(--muted);
              max-width:62ch; }
+
+  /* --- the district lookup ---------------------------------------------------
+     Deliberately shaped like the candidate cards rather than like a search
+     widget: the number it produces means the same thing, so it should not look
+     like a different kind of claim. */
+  .rep-form { display:flex; flex-wrap:wrap; gap:14px 18px; align-items:flex-end;
+              margin-top:14px; }
+  .rep-field { display:flex; flex-direction:column; gap:4px; }
+  .rep-field label { font-family:"IBM Plex Mono",ui-monospace,monospace;
+                     font-size:9.5px; letter-spacing:0.11em; text-transform:uppercase;
+                     color:var(--muted); }
+  .rep-field input { font-family:inherit; font-size:15px; padding:7px 10px;
+                     border:1px solid var(--rule); background:var(--surface);
+                     color:var(--ink); width:11rem; }
+  .rep-field input:focus-visible { outline:2px solid var(--focus); outline-offset:1px; }
+  #rep-district { width:6rem; font-variant-numeric:tabular-nums; }
+  .rep-help { font-size:12px; color:var(--muted); margin-top:9px; max-width:62ch; }
+  .rep-hits { list-style:none; margin:8px 0 0; padding:0; display:flex;
+              flex-wrap:wrap; gap:6px; }
+  .rep-hits button { font-size:13px; padding:4px 9px; }
+  .rep-out { margin-top:16px; }
+  .rep-note { font-size:12.5px; color:var(--muted); margin-top:8px; line-height:1.5;
+              max-width:64ch; }
+  .rep-thin { color:var(--warn); }
+  .rep-excluded { font-size:12px; color:var(--muted); margin-top:14px;
+                  padding-top:11px; border-top:1px solid var(--hair); max-width:64ch; }
+  @media (max-width:520px) {
+    .rep-field input { width:100%; }
+    .rep-field { flex:1 1 100%; }
+    #rep-district { width:100%; }
+  }

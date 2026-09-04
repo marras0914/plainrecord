@@ -642,6 +642,112 @@ try {
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // The district lookup
+  //
+  // The load-bearing check here is the cross-check: district 47 is Vikki
+  // Goodwin, who is ALSO one of the three candidates, so the same person is
+  // reachable by two code paths. If they disagree the estimator has been
+  // reimplemented somewhere, which is the exact failure src/quiz-data.ts exists
+  // to prevent — and it would be invisible, because both numbers look
+  // plausible on their own.
+  // ---------------------------------------------------------------------------
+
+  {
+    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(400);
+
+    // Nothing fetched before it is asked for. The record is 10.7 KB gzipped and
+    // most visitors never open the panel.
+    const earlyFetch = await page.evaluate(() =>
+      performance.getEntriesByType('resource').some((r) => /members_89R/.test(r.name)));
+    check('rep: the member record is not fetched on load', !earlyFetch);
+
+    await page.click('#mode-full');
+    await page.waitForTimeout(300);
+    for (let i = 0; i < 15; i++) {
+      const btn = await page.$('#q-card button[data-answer="1"]');
+      if (!btn) break;
+      await btn.click();
+      await page.waitForTimeout(70);
+    }
+
+    const input = await page.$('#rep-district');
+    check('rep: the district input appears once answers exist', Boolean(input));
+
+    if (input) {
+      // TYPED, not filled. The first version of the panel rebuilt the whole
+      // card's innerHTML on every input event, which replaced the very input
+      // the reader was typing into: focus was lost after one keystroke and a
+      // three-digit district was impossible to enter. fill() sets the value in
+      // a single action and so passed against that build without noticing.
+      // This types digit by digit and then asserts the element the page is
+      // still focused on is the same one, and that it kept every digit.
+      await input.click();
+      await page.keyboard.type('147', { delay: 60 });
+      await page.waitForTimeout(500);
+      const typed = await page.evaluate(() => {
+        const a = document.activeElement;
+        const d = document.getElementById('rep-district');
+        return { value: d ? d.value : null, focused: a === d, active: a ? a.id || a.tagName : null };
+      });
+      check('rep: typing survives the re-render',
+        typed.value === '147' && typed.focused,
+        `value "${typed.value}", focus on ${typed.active}`);
+
+      await input.fill('47');
+      await page.waitForTimeout(1400);
+
+      const txt = async (sel) => {
+        try { return (await page.$eval(sel, (e) => e.textContent.trim())); } catch { return null; }
+      };
+      const repName = await txt('#rep-card .cand-name');
+      const repScore = await txt('#rep-card .cand-score');
+      const repN = await txt('#rep-card .cand-n');
+      check('rep: district 47 resolves to a named member', Boolean(repName), repName ?? '(none)');
+
+      const cands = await page.$$eval('#cands .cand', (cs) => cs.map((c) => ({
+        name: c.querySelector('.cand-name').textContent.trim(),
+        score: c.querySelector('.cand-score').textContent.trim(),
+        n: c.querySelector('.cand-n').textContent.trim(),
+      })));
+      const twin = cands.find((c) => c.name === repName);
+      check('rep: the same member scores identically by both paths',
+        Boolean(twin) && twin.score === repScore && twin.n === repN,
+        twin
+          ? `candidate card ${twin.score} ${twin.n} vs district ${repScore} ${repN}`
+          : `${repName} is not one of the candidates — cross-check skipped`);
+
+      // Both denominators in one sentence, so they cannot be read as
+      // contradicting each other. An earlier version put "the same 7 votes" in
+      // the lede and "63 of the 67" underneath it.
+      const cov = await txt('#rep-card .rep-note');
+      check('rep: coverage states both scales together',
+        Boolean(cov) && /of the 67/.test(cov) && /overlap what you answered/.test(cov),
+        cov ? cov.slice(0, 74) : '(none)');
+      const lede = await txt('#rep-card .lede');
+      check('rep: the lede quotes no item count',
+        Boolean(lede) && !/\b\d+ votes\b/.test(lede), lede ? lede.slice(-40) : '(none)');
+
+      // A member who cast none of the items must not be filed under a band.
+      await input.fill('83');
+      await page.waitForTimeout(700);
+      const zeroScore = await txt('#rep-card .cand-score');
+      const zeroNote = await txt('#rep-card .rep-note');
+      check('rep: a member with no votes reports an absence, not a score',
+        zeroScore === '—' && /none of the/.test(zeroNote ?? ''),
+        `${zeroScore} · ${(zeroNote ?? '').slice(0, 50)}`);
+
+      await input.fill('999');
+      await page.waitForTimeout(400);
+      const oor = await page.$eval('#rep-card', (e) => e.textContent);
+      check('rep: an out-of-range district is refused', /districts 1 to 150/.test(oor));
+
+      check('rep: it says who it excludes',
+        /not in this lookup/.test(await page.$eval('#rep-card', (e) => e.textContent)));
+    }
+  }
+
   check('analytics script is requested ON LOAD, with no interaction',
     insightsOnLoad.requested,
     insightsOnLoad.requested

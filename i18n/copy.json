@@ -1584,5 +1584,147 @@
     "vars": [],
     "note": "Exists because the three names appeared NOWHERE in the static html — they are rendered client-side from the payload, so the queries this page answers best (\"James Talarico voting record\") had nothing for a crawler to match. Kept short and plain to match the deliberately low reading level of the explainer below it; it is a real subhead for a reader, not keyword filler.",
     "status": "ok"
+  },
+  "rep.heading": {
+    "en": "And how did your own representative vote?",
+    "es": "¿Y cómo votó su propio representante?",
+    "where": "Heading of the district lookup section.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rep.lede": {
+    "en": "The three above are running for other offices. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
+    "es": "Los tres de arriba compiten por otros cargos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
+    "where": "Under the heading.",
+    "vars": [],
+    "note": "Deliberately carries NO item count. It used to interpolate activeItems().length, which contradicted the coverage line beneath it in 7-issue mode.",
+    "status": "ok"
+  },
+  "rep.districtLabel": {
+    "en": "District number",
+    "es": "Número de distrito",
+    "where": "Input label.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rep.districtPlaceholder": {
+    "en": "1 to 150",
+    "es": "1 a 150",
+    "where": "Input placeholder.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rep.nameLabel": {
+    "en": "Or search by name",
+    "es": "O busque por nombre",
+    "where": "Input label.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rep.namePlaceholder": {
+    "en": "start typing a surname",
+    "es": "empiece a escribir un apellido",
+    "where": "Input placeholder.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rep.findDistrict": {
+    "en": "If you do not know your district, it is on your voter registration card, or search your address at {link}.",
+    "es": "Si no sabe su distrito, está en su tarjeta de registro de votante, o busque su domicilio en {link}.",
+    "where": "Help text under the district input. {link} is an anchor to the state lookup.",
+    "vars": [
+      "link"
+    ],
+    "note": "The site does not geocode an address itself: that needs a third-party call and the CSP is connect-src self. Pointing at the state's own tool is honest and costs nothing.",
+    "status": "ok"
+  },
+  "rep.findDistrictLinkText": {
+    "en": "the state's own lookup",
+    "es": "la herramienta del estado",
+    "where": "Link text inside rep.findDistrict.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rep.noSuchDistrict": {
+    "en": "District {d} has no sitting member in this record. 149 of the 150 seats are filled.",
+    "es": "El distrito {d} no tiene miembro en funciones en este registro. 149 de los 150 escaños están ocupados.",
+    "where": "Shown for an empty district.",
+    "vars": [
+      "d"
+    ],
+    "status": "ok"
+  },
+  "rep.outOfRange": {
+    "en": "The Texas House has districts 1 to 150.",
+    "es": "La Cámara de Texas tiene distritos del 1 al 150.",
+    "where": "Shown for a number outside the range.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rep.noVotes": {
+    "en": "{name} cast none of the {items} votes you were asked about, so there is no alignment to report. That is an absence, not a middling result.",
+    "es": "{name} no emitió ninguno de los {items} votos sobre los que se le preguntó, así que no hay coincidencia que informar. Es una ausencia, no un resultado intermedio.",
+    "where": "Shown when the member voted on none of the items.",
+    "vars": [
+      "name",
+      "items"
+    ],
+    "status": "ok"
+  },
+  "rep.answerFirst": {
+    "en": "Answer a few votes first, then come back and look your representative up.",
+    "es": "Responda algunos votos primero y luego vuelva a buscar a su representante.",
+    "where": "Shown before the reader has answered anything.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rep.coverage": {
+    "en": "Their record covers {voted} of the {items} questions in the full set, and {n} of those overlap what you answered. A vote they missed is dropped for them alone, not counted against them.",
+    "es": "Su historial cubre {voted} de las {items} preguntas del conjunto completo, y {n} de esas coinciden con lo que usted respondió. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
+    "where": "Coverage line under a member result.",
+    "vars": [
+      "voted",
+      "items",
+      "n"
+    ],
+    "note": "Holds both denominators together on purpose. Split across two sentences they read as one number contradicting another.",
+    "status": "ok"
+  },
+  "rep.thin": {
+    "en": "Only {n} of your answers overlap their record, so this number is heavily shrunk toward zero and should not be read closely.",
+    "es": "Solo {n} de sus respuestas coinciden con su historial, así que esta cifra está muy contraída hacia cero y no debería leerse de cerca.",
+    "where": "Extra warning when overlap is under 10.",
+    "vars": [
+      "n"
+    ],
+    "status": "ok"
+  },
+  "rep.loadFailed": {
+    "en": "Could not load the member record. The rest of the page is unaffected; the file is at {link} if you want to check it yourself.",
+    "es": "No se pudo cargar el registro de miembros. El resto de la página no se ve afectada; el archivo está en {link} si quiere comprobarlo usted mismo.",
+    "where": "Shown when the fetch fails.",
+    "vars": [
+      "link"
+    ],
+    "status": "ok"
+  },
+  "rep.excluded": {
+    "en": "{n} people voted in this session but are not in this lookup, having left the House since. A district whose seat changed hands will show its current member with a partial record.",
+    "es": "{n} personas votaron en esta sesión pero no están en esta búsqueda, porque dejaron la Cámara desde entonces. Un distrito cuyo escaño cambió de manos mostrará a su miembro actual con un historial parcial.",
+    "where": "Footnote under the lookup.",
+    "vars": [
+      "n"
+    ],
+    "note": "Load-bearing honesty: one of the excluded members cast 3,352 votes, a full session. Without this line a partial record looks like a lazy member rather than a seat that changed hands.",
+    "status": "ok"
+  },
+  "rep.district": {
+    "en": "District {d}",
+    "es": "Distrito {d}",
+    "where": "Member card sub-label.",
+    "vars": [
+      "d"
+    ],
+    "status": "ok"
   }
 }

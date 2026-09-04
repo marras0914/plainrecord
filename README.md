@@ -206,6 +206,7 @@ asserted empty by `npm run i18n:sidecar`. The Spanish page says so on screen.
 | figures carried across | `$13,189` surviving translation unchanged — the one error a reader cannot detect |
 | English-chrome leak on `/es` | a render path that was missed |
 | the leak phrases themselves | the leak test going vacuous. `innerText` applies CSS `text-transform`, so six of nine phrases were absent from the *English* page too until the comparison was made case-insensitive |
+| typed, not filled | the district panel rebuilding its own input on every keystroke. Focus went to `BODY` after one digit, so only districts 1-9 were reachable. Playwright `fill()` sets a value in one action and passed against that build; `keyboard.type()` plus an `activeElement` assertion fails against it |
 
 ### Gates
 
@@ -410,6 +411,7 @@ npm run data:backfill    # recover member votes the bulk export dropped
 npm run data:export      # -> public/data/quiz_89R.json   (the only shipped file)
 npm run data:acts        # add opponent actions to an already-built payload
 npm run data:report      # coverage + provenance summary
+npm run data:members     # -> public/data/members_89R.json  (the district lookup)
 ```
 
 `data:export` takes arguments the npm script does not supply — it needs the
@@ -423,6 +425,36 @@ npx tsx scripts/export_quiz_data.ts 89R <bills.csv> <people.csv>
 5.27% of 89R votes Open States loses to truncated names, the em dash in the
 Journal's member lists, the surname collision that overwrote a real member's
 record. Read it before touching an ingest.
+
+
+### The district lookup
+
+`npm run data:members` builds `public/data/members_89R.json` — every 89R House
+member, their district and party, and how each voted on the same 67 items the
+quiz asks about. 30.4 KB raw, 10.7 KB gzipped, fetched only when a reader types
+in the panel, never on page load.
+
+Votes are stored **positionally**: one character per item, `y` / `n` / `.`,
+aligned to the payload's `itemOrder`. That is what makes the file small enough
+to ship, and also what makes it fragile — a reordered `itemOrder` silently
+reassigns every vote to the wrong bill. So `npm run data:members` refuses to
+write unless the order matches the shipped payload exactly, and
+`scripts/check_members.mjs` re-asserts it on every `i18n:check`.
+
+The check that earns the most trust is the overlap one: the payload already
+carries full roll calls for 9 members, so 603 individual votes can be compared
+between the two files. They agree. And because district 47 is Vikki Goodwin, who
+is also one of the three candidates, `verify_site.mjs` scores her through both
+code paths and asserts the same number comes out — the district panel and the
+candidate cards make the same claim or the build fails.
+
+Four members who cast votes in 89R are **excluded**: they are in the roll calls
+but not in Open States' *current* roster, and the retired roster 403s. The panel
+says so on screen rather than quietly rounding 149 up to 150.
+
+A member with zero of the 67 votes reports an absence, not a band. Without that,
+the estimator files them under "no clearer than chance", which reads as a
+finding about the member instead of missing data.
 
 ### One re-export is pending
 

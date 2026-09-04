@@ -23,11 +23,13 @@
     "verify:headers": "node scripts/verify_site.mjs --with-headers",
     "dns:check": "node scripts/check_domain.mjs",
     "i18n:review": "node scripts/i18n_review.mjs",
-    "i18n:check": "node scripts/i18n_review.mjs --check && node scripts/i18n_gen.mjs --check && node scripts/check_sidecar.mjs",
+    "i18n:check": "node scripts/i18n_review.mjs --check && node scripts/i18n_gen.mjs --check && node scripts/check_sidecar.mjs && node scripts/check_members.mjs",
     "i18n:gen": "node scripts/i18n_gen.mjs",
     "build:locales": "node scripts/build_locales.mjs",
     "i18n:sidecar": "node scripts/check_sidecar.mjs",
-    "stats": "node scripts/stats.mjs"
+    "stats": "node scripts/stats.mjs",
+    "data:members": "node --max-old-space-size=4096 scripts/build_members.mjs",
+    "data:members:check": "node scripts/check_members.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",

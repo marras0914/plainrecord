@@ -211,7 +211,24 @@ export type CopyKey =
   | "method.denominator.body"
   | "privacy.lead"
   | "privacy.body"
-  | "intro.subhead";
+  | "intro.subhead"
+  | "rep.heading"
+  | "rep.lede"
+  | "rep.districtLabel"
+  | "rep.districtPlaceholder"
+  | "rep.nameLabel"
+  | "rep.namePlaceholder"
+  | "rep.findDistrict"
+  | "rep.findDistrictLinkText"
+  | "rep.noSuchDistrict"
+  | "rep.outOfRange"
+  | "rep.noVotes"
+  | "rep.answerFirst"
+  | "rep.coverage"
+  | "rep.thin"
+  | "rep.loadFailed"
+  | "rep.excluded"
+  | "rep.district";
 
 export type Locale = 'en' | 'es';
 
@@ -432,6 +449,23 @@ export const EN: Record<CopyKey, string> = {
   "privacy.lead": "What this page counts, and what it does not.",
   "privacy.body": "It counts visits — how many people came and which link sent them — using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser: there is no server to send them to, and the page makes no network request while you answer. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out.",
   "intro.subhead": "How Vikki Goodwin, Gina Hinojosa and James Talarico voted in the Texas House, checked against your own answers.",
+  "rep.heading": "And how did your own representative vote?",
+  "rep.lede": "The three above are running for other offices. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
+  "rep.districtLabel": "District number",
+  "rep.districtPlaceholder": "1 to 150",
+  "rep.nameLabel": "Or search by name",
+  "rep.namePlaceholder": "start typing a surname",
+  "rep.findDistrict": "If you do not know your district, it is on your voter registration card, or search your address at {link}.",
+  "rep.findDistrictLinkText": "the state's own lookup",
+  "rep.noSuchDistrict": "District {d} has no sitting member in this record. 149 of the 150 seats are filled.",
+  "rep.outOfRange": "The Texas House has districts 1 to 150.",
+  "rep.noVotes": "{name} cast none of the {items} votes you were asked about, so there is no alignment to report. That is an absence, not a middling result.",
+  "rep.answerFirst": "Answer a few votes first, then come back and look your representative up.",
+  "rep.coverage": "Their record covers {voted} of the {items} questions in the full set, and {n} of those overlap what you answered. A vote they missed is dropped for them alone, not counted against them.",
+  "rep.thin": "Only {n} of your answers overlap their record, so this number is heavily shrunk toward zero and should not be read closely.",
+  "rep.loadFailed": "Could not load the member record. The rest of the page is unaffected; the file is at {link} if you want to check it yourself.",
+  "rep.excluded": "{n} people voted in this session but are not in this lookup, having left the House since. A district whose seat changed hands will show its current member with a partial record.",
+  "rep.district": "District {d}",
 };
 
 export const ES: Record<CopyKey, string> = {
@@ -637,6 +671,23 @@ export const ES: Record<CopyKey, string> = {
   "privacy.lead": "Qué cuenta esta página y qué no.",
   "privacy.body": "Cuenta visitas —cuántas personas entraron y qué enlace las trajo— con la analítica de Vercel, que no usa cookies y no puede seguirle a otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador: no hay ningún servidor al que enviarlas, y la página no hace ninguna petición de red mientras usted responde. Eso no es una promesa, se comprueba en cada compilación: la prueba responde cinco preguntas y falla si sale un solo byte.",
   "intro.subhead": "Cómo votaron Vikki Goodwin, Gina Hinojosa y James Talarico en la Cámara de Texas, comparado con sus propias respuestas.",
+  "rep.heading": "¿Y cómo votó su propio representante?",
+  "rep.lede": "Los tres de arriba compiten por otros cargos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
+  "rep.districtLabel": "Número de distrito",
+  "rep.districtPlaceholder": "1 a 150",
+  "rep.nameLabel": "O busque por nombre",
+  "rep.namePlaceholder": "empiece a escribir un apellido",
+  "rep.findDistrict": "Si no sabe su distrito, está en su tarjeta de registro de votante, o busque su domicilio en {link}.",
+  "rep.findDistrictLinkText": "la herramienta del estado",
+  "rep.noSuchDistrict": "El distrito {d} no tiene miembro en funciones en este registro. 149 de los 150 escaños están ocupados.",
+  "rep.outOfRange": "La Cámara de Texas tiene distritos del 1 al 150.",
+  "rep.noVotes": "{name} no emitió ninguno de los {items} votos sobre los que se le preguntó, así que no hay coincidencia que informar. Es una ausencia, no un resultado intermedio.",
+  "rep.answerFirst": "Responda algunos votos primero y luego vuelva a buscar a su representante.",
+  "rep.coverage": "Su historial cubre {voted} de las {items} preguntas del conjunto completo, y {n} de esas coinciden con lo que usted respondió. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
+  "rep.thin": "Solo {n} de sus respuestas coinciden con su historial, así que esta cifra está muy contraída hacia cero y no debería leerse de cerca.",
+  "rep.loadFailed": "No se pudo cargar el registro de miembros. El resto de la página no se ve afectada; el archivo está en {link} si quiere comprobarlo usted mismo.",
+  "rep.excluded": "{n} personas votaron en esta sesión pero no están en esta búsqueda, porque dejaron la Cámara desde entonces. Un distrito cuyo escaño cambió de manos mostrará a su miembro actual con un historial parcial.",
+  "rep.district": "Distrito {d}",
 };
 
 /**

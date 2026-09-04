@@ -28,6 +28,7 @@ import { inject } from '@vercel/analytics';
 import { renderVerdict } from './verdict';
 import { t, word } from './i18n';
 import * as pes from './payload-i18n';
+import * as rep from './members';
 
 /**
  * Where the raw quiz payload lives. Relative on the deployed site so it works the
@@ -99,6 +100,16 @@ let tableOpen = false;
 let receiptOpen = false;
 // Comparators stay closed until asked for; the three races come first.
 let comparatorsOpen = false;
+// The district the reader looked up, and the loaded record. Kept as state so the
+// panel survives a re-render when they answer another question, which is the
+// whole point: the score should move as they answer.
+let repDistrict: number | null = null;
+let repFile: Awaited<ReturnType<typeof rep.loadMembers>> = null;
+let repStatus: 'idle' | 'loading' | 'failed' = 'idle';
+let repQuery = '';
+// Whether the lookup's inputs have been built. The result region re-renders
+// freely; the inputs must not, or typing loses focus.
+let repShell = false;
 
 const activeItems = (): QuizItem[] => (mode === 'short' ? HEADLINE_ITEMS : ALL_ITEMS);
 let adapted: Adapted = adapt(activeItems());
@@ -816,6 +827,169 @@ function renderBias(): void {
     `</div>`;
 }
 
+
+/**
+ * How the reader's own representative voted.
+ *
+ * Placed after the incumbency card because the honest answer to "why only these
+ * three" is what earns the right to then ask about their own member. The score
+ * comes from the same estimator the candidates go through, so the two numbers
+ * are the same claim — verify_site.mjs cross-checks that by looking up district
+ * 47, who is also one of the three candidates, and asserting both paths agree.
+ *
+ * SPLIT IN TWO ON PURPOSE. The first version rebuilt the whole card's innerHTML
+ * on every input event, which replaced the input element the reader was typing
+ * into and dropped focus after the first keystroke. Typing "147" was impossible.
+ * The shell is built once; only the result region re-renders.
+ */
+function renderRep(): void {
+  const c = el('rep-card');
+  const answered = Object.values(answers).filter((v) => v === 1 || v === -1).length;
+
+  const head =
+    `<div class="eyebrow">${esc(t('rep.heading'))}</div>` +
+    `<p class="lede">${esc(t('rep.lede'))}</p>`;
+
+  // Nothing to score against yet. Saying so beats rendering an input that can
+  // only produce a meaningless number.
+  if (answered === 0) {
+    c.innerHTML = head + `<p class="rep-note">${esc(t('rep.answerFirst'))}</p>`;
+    repShell = false;
+    return;
+  }
+
+  if (!repShell) {
+    const stateLookup =
+      `<a href="https://wrm.capitol.texas.gov/home" target="_blank" rel="noopener">` +
+      `${esc(t('rep.findDistrictLinkText'))}</a>`;
+
+    c.innerHTML =
+      head +
+      `<div class="rep-form">` +
+      `<div class="rep-field"><label for="rep-district">${esc(t('rep.districtLabel'))}</label>` +
+      `<input id="rep-district" type="number" min="1" max="150" inputmode="numeric" ` +
+      `placeholder="${esc(t('rep.districtPlaceholder'))}"></div>` +
+      `<div class="rep-field"><label for="rep-name">${esc(t('rep.nameLabel'))}</label>` +
+      `<input id="rep-name" type="search" autocomplete="off" ` +
+      `placeholder="${esc(t('rep.namePlaceholder'))}"></div>` +
+      `</div>` +
+      `<p class="rep-help">${t('rep.findDistrict', { link: stateLookup })}</p>` +
+      `<div id="rep-out"></div>`;
+
+    // Load on first interaction, not on page load: the record is 10.7 KB
+    // gzipped and most visitors will never open this panel.
+    const ensure = async () => {
+      if (repFile || repStatus === 'loading') return;
+      repStatus = 'loading';
+      const f = await rep.loadMembers();
+      repFile = f;
+      repStatus = f ? 'idle' : 'failed';
+      renderRepOut();
+    };
+
+    const d = el<HTMLInputElement>('rep-district');
+    d.addEventListener('input', () => {
+      const v = d.value.trim();
+      repDistrict = v === '' ? null : Number(v);
+      repQuery = '';
+      void ensure();
+      renderRepOut();
+    });
+    const nm = el<HTMLInputElement>('rep-name');
+    nm.addEventListener('input', () => {
+      repQuery = nm.value;
+      void ensure();
+      renderRepOut();
+    });
+
+    repShell = true;
+  }
+
+  renderRepOut();
+}
+
+/**
+ * Only the result region. Never touches the inputs, so focus and caret survive.
+ *
+ * Picking a name from the search sets the district input's value directly rather
+ * than through a re-render, for the same reason.
+ */
+function renderRepOut(): void {
+  const out = document.getElementById('rep-out');
+  if (!out) return;
+  const items = repFile?.itemOrder.length ?? 67;
+  let html = '';
+
+  if (repStatus === 'failed') {
+    const link = `<a href="${rep.MEMBERS_URL}">${rep.MEMBERS_URL}</a>`;
+    html = `<p class="rep-note">${t('rep.loadFailed', { link })}</p>`;
+  } else if (repFile) {
+    if (repQuery.trim().length >= 2) {
+      const hits = rep.searchMembers(repFile, repQuery);
+      if (hits.length) {
+        html += `<ul class="rep-hits">` + hits.map((m) =>
+          `<li><button class="ghost" data-rep-d="${m.d}">${esc(m.n)} ` +
+          `<span class="mono">${esc(t('rep.district', { d: m.d }))}</span></button></li>`).join('') +
+          `</ul>`;
+      }
+    }
+
+    if (repDistrict !== null) {
+      if (!Number.isInteger(repDistrict) || repDistrict < 1 || repDistrict > 150) {
+        html += `<p class="rep-note">${esc(t('rep.outOfRange'))}</p>`;
+      } else {
+        const m = rep.memberForDistrict(repFile, repDistrict);
+        if (!m) {
+          html += `<p class="rep-note">${esc(t('rep.noSuchDistrict', { d: repDistrict }))}</p>`;
+        } else {
+          const r = rep.scoreMember(adapted, repFile, m, answers);
+          const party = m.p === 'D' ? t('party.D') : m.p === 'R' ? t('party.R') : m.p;
+          html +=
+            `<div class="rep-out"><div class="cands"><div class="cand">` +
+            `<div class="cand-name">${esc(m.n)}</div>` +
+            `<div class="cand-office">${esc(t('rep.district', { d: m.d }))} · ${esc(party)}</div>` +
+            `<div class="cand-score num">${r.phrase ? fmt(r.adjusted) : '—'}</div>` +
+            `<div class="cand-phrase">${esc(r.phrase ?? '')}</div>` +
+            `<div class="cand-n">n = ${r.n}</div>` +
+            `</div></div>`;
+          // An absence is not a middling result. Without this the bands would
+          // file a member who cast none of these votes under "no clearer than
+          // chance", which reads as a finding rather than as missing data.
+          if (!r.phrase) {
+            html += `<p class="rep-note">${esc(t('rep.noVotes', { name: m.n, items }))}</p>`;
+          } else {
+            html += `<p class="rep-note">${
+              esc(t('rep.coverage', { voted: m.voted, items, n: r.n }))}</p>`;
+            if (r.n < 10) {
+              html += `<p class="rep-note rep-thin">${esc(t('rep.thin', { n: r.n }))}</p>`;
+            }
+          }
+          html += `</div>`;
+        }
+      }
+    }
+
+    const excluded = repFile.provenance?.unnamedVoters ?? 0;
+    if (excluded) {
+      html += `<p class="rep-excluded">${esc(t('rep.excluded', { n: excluded }))}</p>`;
+    }
+  }
+
+  out.innerHTML = html;
+
+  out.querySelectorAll<HTMLButtonElement>('[data-rep-d]').forEach((b) => {
+    b.addEventListener('click', () => {
+      repDistrict = Number(b.dataset.repD);
+      repQuery = '';
+      const d = document.getElementById('rep-district') as HTMLInputElement | null;
+      if (d) d.value = String(repDistrict);
+      const nm = document.getElementById('rep-name') as HTMLInputElement | null;
+      if (nm) nm.value = '';
+      renderRepOut();
+    });
+  });
+}
+
 function renderOutcomes(): void {
   const answered = new Set(
     activeItems().filter((i) => answers[i.id] === 1 || answers[i.id] === -1).map((i) => i.category),
@@ -950,6 +1124,7 @@ function render(): void {
   renderQuestion();
   renderCands();
   renderBias();
+  renderRep();
   renderOutcomes();
   renderStatements();
   renderTable(p);
