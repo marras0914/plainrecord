@@ -157,3 +157,76 @@ export function scoreMember(
     phrase: r.n > 0 ? renderScoreBand(scoreBand(r.adjustedScore)) : null,
   };
 }
+
+// -----------------------------------------------------------------------------
+// ZIP codes
+//
+// There is no official ZIP-to-Texas-House-district file; scripts/build_zips.mjs
+// derives one through 2020 Census blocks, which nest inside both. See that file
+// for why the join is on blocks and not on polygons.
+//
+// A separate fetch from the member record on purpose: only readers who type a
+// ZIP pay the 12.4 KB, and most arrive knowing their district or their member's
+// name.
+
+/** Same build_artifact.mjs caveat as MEMBERS_URL — it must be made absolute. */
+export const ZIPS_URL = '/data/zips_89R.json';
+
+/**
+ * A ZIP maps either to one district, stored as a bare number, or to several,
+ * stored as [district, percent of ZIP land area] pairs, largest share first.
+ * The bare-number case is 54% of Texas ZIPs and halves the file.
+ */
+export type ZipEntry = number | Array<[number, number]>;
+
+export interface ZipFile {
+  session: string;
+  zips: Record<string, ZipEntry>;
+  provenance?: { zips?: number; zipsSpanningDistricts?: number };
+}
+
+let zipCache: ZipFile | null = null;
+let zipInFlight: Promise<ZipFile | null> | null = null;
+
+/** Load the crosswalk, once. Null on failure; the district box still works. */
+export async function loadZips(): Promise<ZipFile | null> {
+  if (zipCache) return zipCache;
+  if (zipInFlight) return zipInFlight;
+  zipInFlight = (async () => {
+    try {
+      const res = await fetch(ZIPS_URL, { credentials: 'omit' });
+      if (!res.ok) return null;
+      const data = (await res.json()) as ZipFile;
+      if (!data || typeof data.zips !== 'object') return null;
+      zipCache = data;
+      return data;
+    } catch {
+      return null;
+    } finally {
+      zipInFlight = null;
+    }
+  })();
+  return zipInFlight;
+}
+
+export interface ZipDistrict {
+  d: number;
+  /** Percent of the ZIP's land area in this district. 100 when it is the only one. */
+  pct: number;
+}
+
+/**
+ * The districts a ZIP touches, largest share first, or null if the ZIP is not
+ * in the file.
+ *
+ * Returns every district rather than the largest one. A ZIP that spans
+ * districts is a genuine ambiguity — it is decided by the reader's street — and
+ * silently answering with the biggest share would be wrong for up to half the
+ * people in a split ZIP.
+ */
+export function districtsForZip(file: ZipFile, zip: string): ZipDistrict[] | null {
+  const v = file.zips[zip];
+  if (v === undefined) return null;
+  if (typeof v === 'number') return [{ d: v, pct: 100 }];
+  return v.map(([d, pct]) => ({ d, pct }));
+}

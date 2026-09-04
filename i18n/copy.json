@@ -1726,5 +1726,74 @@
       "d"
     ],
     "status": "ok"
+  },
+  "rep.zipLabel": {
+    "en": "Or your ZIP code",
+    "es": "O su código postal",
+    "where": "Label on the ZIP input in the representative panel.",
+    "status": "ok",
+    "vars": []
+  },
+  "rep.zipPlaceholder": {
+    "en": "5 digits",
+    "es": "5 dígitos",
+    "where": "Placeholder in the ZIP input.",
+    "status": "ok",
+    "vars": []
+  },
+  "rep.zipWhole": {
+    "en": "All of {zip} sits in District {d}.",
+    "es": "Todo el código postal {zip} está en el Distrito {d}.",
+    "where": "Shown when a ZIP lies entirely within one district — 54% of Texas ZIPs.",
+    "vars": [
+      "zip",
+      "d"
+    ],
+    "status": "ok"
+  },
+  "rep.zipSpans": {
+    "en": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}.",
+    "es": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta.",
+    "where": "Shown when a ZIP spans two or more districts. {link} is the state lookup anchor.",
+    "vars": [
+      "zip",
+      "n",
+      "link"
+    ],
+    "note": "A split ZIP is a real ambiguity, not a defect in the data. Saying so is better than picking the largest share and hoping.",
+    "status": "ok"
+  },
+  "rep.zipShare": {
+    "en": "{pct}% of this ZIP",
+    "es": "{pct}% de este código postal",
+    "where": "Under each district in the pick list, giving its share of the ZIP.",
+    "vars": [
+      "pct"
+    ],
+    "status": "ok"
+  },
+  "rep.zipShareSmall": {
+    "en": "under 1% of this ZIP",
+    "es": "menos del 1% de este código postal",
+    "where": "Replaces rep.zipShare when a district rounds to 0% of the ZIP.",
+    "note": "Rendering \"0% of this ZIP\" beside a real option reads as a data error. The sliver is kept because dropping it could hide someone’s actual district.",
+    "status": "ok",
+    "vars": []
+  },
+  "rep.zipUnknown": {
+    "en": "{zip} is not a Texas ZIP code in this record.",
+    "es": "{zip} no es un código postal de Texas en este registro.",
+    "where": "Shown for a five-digit ZIP that is not in the crosswalk.",
+    "vars": [
+      "zip"
+    ],
+    "status": "ok"
+  },
+  "rep.zipFailed": {
+    "en": "Could not load the ZIP list. The district number box still works.",
+    "es": "No se pudo cargar la lista de códigos postales. La casilla del número de distrito sigue funcionando.",
+    "where": "Shown when the ZIP crosswalk fails to load.",
+    "status": "ok",
+    "vars": []
   }
 }

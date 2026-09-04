@@ -228,7 +228,15 @@ export type CopyKey =
   | "rep.thin"
   | "rep.loadFailed"
   | "rep.excluded"
-  | "rep.district";
+  | "rep.district"
+  | "rep.zipLabel"
+  | "rep.zipPlaceholder"
+  | "rep.zipWhole"
+  | "rep.zipSpans"
+  | "rep.zipShare"
+  | "rep.zipShareSmall"
+  | "rep.zipUnknown"
+  | "rep.zipFailed";
 
 export type Locale = 'en' | 'es';
 
@@ -466,6 +474,14 @@ export const EN: Record<CopyKey, string> = {
   "rep.loadFailed": "Could not load the member record. The rest of the page is unaffected; the file is at {link} if you want to check it yourself.",
   "rep.excluded": "{n} people voted in this session but are not in this lookup, having left the House since. A district whose seat changed hands will show its current member with a partial record.",
   "rep.district": "District {d}",
+  "rep.zipLabel": "Or your ZIP code",
+  "rep.zipPlaceholder": "5 digits",
+  "rep.zipWhole": "All of {zip} sits in District {d}.",
+  "rep.zipSpans": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}.",
+  "rep.zipShare": "{pct}% of this ZIP",
+  "rep.zipShareSmall": "under 1% of this ZIP",
+  "rep.zipUnknown": "{zip} is not a Texas ZIP code in this record.",
+  "rep.zipFailed": "Could not load the ZIP list. The district number box still works.",
 };
 
 export const ES: Record<CopyKey, string> = {
@@ -688,6 +704,14 @@ export const ES: Record<CopyKey, string> = {
   "rep.loadFailed": "No se pudo cargar el registro de miembros. El resto de la página no se ve afectada; el archivo está en {link} si quiere comprobarlo usted mismo.",
   "rep.excluded": "{n} personas votaron en esta sesión pero no están en esta búsqueda, porque dejaron la Cámara desde entonces. Un distrito cuyo escaño cambió de manos mostrará a su miembro actual con un historial parcial.",
   "rep.district": "Distrito {d}",
+  "rep.zipLabel": "O su código postal",
+  "rep.zipPlaceholder": "5 dígitos",
+  "rep.zipWhole": "Todo el código postal {zip} está en el Distrito {d}.",
+  "rep.zipSpans": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta.",
+  "rep.zipShare": "{pct}% de este código postal",
+  "rep.zipShareSmall": "menos del 1% de este código postal",
+  "rep.zipUnknown": "{zip} no es un código postal de Texas en este registro.",
+  "rep.zipFailed": "No se pudo cargar la lista de códigos postales. La casilla del número de distrito sigue funcionando.",
 };
 
 /**

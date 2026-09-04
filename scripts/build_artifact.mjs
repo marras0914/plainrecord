@@ -32,7 +32,8 @@ import { dirname, resolve, join } from 'node:path';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
-const CANONICAL_PAYLOAD = 'https://rightnleft.com/data/quiz_89R.json';
+const CANONICAL_ORIGIN = 'https://rightnleft.com';
+const CANONICAL_PAYLOAD = `${CANONICAL_ORIGIN}/data/quiz_89R.json`;
 
 if (!existsSync(join(DIST, 'index.html'))) {
   console.error('\n  dist/index.html not found — run `npm run build` first.\n');
@@ -87,10 +88,26 @@ html = html.replace(
   (_m, name) => `<title>${name}</title>`,
 );
 
-// --- the payload link has to be absolute here -------------------------------
+// --- every /data/ link has to be absolute here -------------------------------
+//
+// Was a per-file replace for quiz_89R.json alone, which silently broke when the
+// district lookup added members_89R.json and then zips_89R.json: the artifact
+// has no /data/ directory beside it, so those fetches 404 and the panel does
+// nothing at all. Rewriting by pattern means a future data file is covered
+// without anyone remembering to come back here, and the assertion below fails
+// the build rather than shipping a dead lookup.
 const before = html;
-html = html.replaceAll('"/data/quiz_89R.json"', `"${CANONICAL_PAYLOAD}"`);
+const DATA_LINK = /"\/data\/([A-Za-z0-9_.-]+\.json)"/g;
+html = html.replace(DATA_LINK, (_m, f) => `"${CANONICAL_ORIGIN}/data/${f}"`);
 const payloadRewritten = html !== before;
+
+const stillRelative = [...html.matchAll(/"\/data\/[^"]+"/g)].map((m) => m[0]);
+if (stillRelative.length) {
+  throw new Error(
+    'relative /data/ links left in the artifact, which cannot resolve there: ' +
+    stillRelative.join(', '),
+  );
+}
 
 // --- strip the wrapper the artifact host provides ---------------------------
 // Keep <title> and everything else from <head>; only the scaffolding tags go.

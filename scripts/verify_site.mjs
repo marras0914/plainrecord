@@ -662,6 +662,9 @@ try {
     const earlyFetch = await page.evaluate(() =>
       performance.getEntriesByType('resource').some((r) => /members_89R/.test(r.name)));
     check('rep: the member record is not fetched on load', !earlyFetch);
+    const earlyZips = await page.evaluate(() =>
+      performance.getEntriesByType('resource').some((r) => /zips_89R/.test(r.name)));
+    check('rep: the ZIP crosswalk is not fetched on load', !earlyZips);
 
     await page.click('#mode-full');
     await page.waitForTimeout(300);
@@ -745,6 +748,99 @@ try {
 
       check('rep: it says who it excludes',
         /not in this lookup/.test(await page.$eval('#rep-card', (e) => e.textContent)));
+
+      // ---------------------------------------------------------------------
+      // The ZIP path
+      //
+      // A ZIP is what readers actually know about themselves, and it is also
+      // the input most able to produce a confidently wrong answer: ZIPs and
+      // districts do not nest, so 46% of Texas ZIPs touch more than one
+      // district. The checks below are mostly about refusing to guess.
+
+      const zipBox = await page.$('#rep-zip');
+      check('rep: the ZIP input appears alongside the district one', Boolean(zipBox));
+
+      if (zipBox) {
+        // Same keystroke-survival trap the district box fell into.
+        await zipBox.click();
+        await page.keyboard.type('78730', { delay: 45 });
+        await page.waitForTimeout(1500);
+        const zTyped = await page.evaluate(() => {
+          const a = document.activeElement;
+          const e = document.getElementById('rep-zip');
+          return { value: e ? e.value : null, focused: a === e };
+        });
+        check('rep: typing a ZIP survives the re-render',
+          zTyped.value === '78730' && zTyped.focused,
+          `value "${zTyped.value}", focused ${zTyped.focused}`);
+
+        // 78730 lies wholly in HD-47, and HD-47 is Vikki Goodwin, who is also
+        // one of the three candidates. So this exercises the whole chain —
+        // ZIP to district to member to score — against a number the candidate
+        // card shows independently.
+        const zipName = await txt('#rep-card .cand-name');
+        const zipScore = await txt('#rep-card .cand-score');
+        const whole = await page.$eval('#rep-card', (e) => e.textContent);
+        check('rep: a ZIP inside one district resolves straight to its member',
+          zipName === 'Vikki Goodwin' && /All of 78730 sits in District 47/.test(whole),
+          `${zipName} ${zipScore}`);
+        const twinZip = cands.find((c) => c.name === zipName);
+        check('rep: the ZIP path scores the same as the candidate card',
+          Boolean(twinZip) && twinZip.score === zipScore,
+          twinZip ? `${twinZip.score} vs ${zipScore}` : 'no candidate twin');
+        const boxAfter = await page.$eval('#rep-district', (e) => e.value);
+        check('rep: a resolved ZIP leaves no stale district number in the box',
+          boxAfter === '47', `box shows "${boxAfter}"`);
+
+        // A split ZIP must ASK, not answer. 78704 is 52/48 between HD-49 and
+        // HD-51: picking the larger share would be wrong for nearly half the
+        // people who live there.
+        await zipBox.fill('');
+        await zipBox.click();
+        await page.keyboard.type('78704', { delay: 45 });
+        await page.waitForTimeout(1200);
+        const splitTxt = await page.$eval('#rep-card', (e) => e.textContent);
+        const options = await page.$$eval('#rep-card .rep-split button',
+          (bs) => bs.map((b) => b.textContent.replace(/\s+/g, ' ').trim()));
+        check('rep: a split ZIP offers a choice',
+          options.length === 2 && /split across 2 House districts/.test(splitTxt),
+          options.join('  |  '));
+        const guessed = await txt('#rep-card .cand-name');
+        check('rep: a split ZIP shows NO score until one is picked',
+          guessed === null, guessed ? `it guessed ${guessed}` : 'nothing shown');
+
+        await page.click('#rep-card .rep-split button');
+        await page.waitForTimeout(700);
+        const picked = await txt('#rep-card .cand-name');
+        check('rep: picking from a split ZIP scores that member',
+          picked !== null && /Hinojosa|Flores/.test(picked ?? ''), picked ?? '(none)');
+
+        // 75001 is 100% HD-115 and a rounding-to-nothing sliver of HD-112. The
+        // sliver is kept on purpose, so it must not read as "0% of this ZIP".
+        await zipBox.fill('');
+        await zipBox.click();
+        await page.keyboard.type('75001', { delay: 45 });
+        await page.waitForTimeout(1200);
+        // Compare the share labels EXACTLY, not as substrings of the whole
+        // card. A substring test cannot express this one: "100% of this ZIP"
+        // CONTAINS "0% of this ZIP", so the obvious negative assertion is
+        // wrong rather than merely weak — it passed here for that reason,
+        // against a card that really did render both labels.
+        const shares = await page.$$eval('#rep-card .rep-share',
+          (ns) => ns.map((n) => n.textContent.trim()));
+        check('rep: a sliver district is labelled, not shown as 0%',
+          shares.includes('under 1% of this ZIP') && !shares.includes('0% of this ZIP'),
+          shares.join('  ·  ') || '(no share labels)');
+
+        await zipBox.fill('');
+        await zipBox.click();
+        await page.keyboard.type('90210', { delay: 45 });
+        await page.waitForTimeout(1000);
+        const notTx = await page.$eval('#rep-card', (e) => e.textContent);
+        check('rep: a ZIP outside Texas is refused',
+          /90210 is not a Texas ZIP code/.test(notTx),
+          /not a Texas/.test(notTx) ? 'refused' : notTx.slice(0, 70));
+      }
     }
   }
 

@@ -207,6 +207,7 @@ asserted empty by `npm run i18n:sidecar`. The Spanish page says so on screen.
 | English-chrome leak on `/es` | a render path that was missed |
 | the leak phrases themselves | the leak test going vacuous. `innerText` applies CSS `text-transform`, so six of nine phrases were absent from the *English* page too until the comparison was made case-insensitive |
 | typed, not filled | the district panel rebuilding its own input on every keystroke. Focus went to `BODY` after one digit, so only districts 1-9 were reachable. Playwright `fill()` sets a value in one action and passed against that build; `keyboard.type()` plus an `activeElement` assertion fails against it |
+| exact labels, not substrings | a negative assertion that cannot fail. `!/\b0% of this ZIP/` never matches inside "100% of this ZIP" because there is no word boundary mid-number, so the check passed against a card that rendered both labels. It now compares the share strings exactly |
 
 ### Gates
 
@@ -412,6 +413,7 @@ npm run data:export      # -> public/data/quiz_89R.json   (the only shipped file
 npm run data:acts        # add opponent actions to an already-built payload
 npm run data:report      # coverage + provenance summary
 npm run data:members     # -> public/data/members_89R.json  (the district lookup)
+npm run data:zips        # -> public/data/zips_89R.json     (ZIP -> districts)
 ```
 
 `data:export` takes arguments the npm script does not supply — it needs the
@@ -455,6 +457,51 @@ says so on screen rather than quietly rounding 149 up to 150.
 A member with zero of the 67 votes reports an absence, not a band. Without that,
 the estimator files them under "no clearer than chance", which reads as a
 finding about the member instead of missing data.
+
+### ZIP codes, and why they cannot give one answer
+
+`npm run data:zips` builds `public/data/zips_89R.json` — 1,992 Texas ZIPs mapped
+to the House districts they touch. 38.9 KB raw, 12.4 KB gzipped, fetched only
+when a reader types five digits.
+
+**ZIP codes and House districts do not nest, in either direction.** 54% of Texas
+ZIPs sit inside one district and get a straight answer; the other 46% span two
+to five, because a district boundary runs down a street somewhere in the ZIP. So
+the panel does not pick the largest share and present it as the answer — for a
+ZIP like 78704, split 52/48 between HD-49 and HD-51, that would be wrong for
+nearly half the people who live there. It lists every district the ZIP touches
+with its share and asks the reader to choose, and points at the state's
+address-level lookup for an exact answer.
+
+Nothing official maps a ZIP to a state legislative district. The Census
+publishes ZCTA-to-congressional-district, and district-to-county and
+district-to-tract, but not this pair. It is derived through 2020 Census
+tabulation blocks, which nest inside both a ZCTA and a district — so it is an ID
+join, not a polygon intersection, and cannot produce boundary slivers at all. A
+spatial intersect would report every district whose edge merely grazes a ZIP,
+indistinguishably from real overlap.
+
+Two things guard it, and the weaker one came first:
+
+- **Anchors.** Seven downtown ZIPs whose member is externally known — 78701 is
+  Gina Hinojosa's, 79901 is Vince Perez's, 78205 is Diego Bernal's. Nothing
+  derived from the crosswalk, so it cannot be circular.
+- **The map, pinned by hash.** The anchors turned out to be a poor detector of
+  the thing most likely to go wrong. Rebuilt on the 2020 pre-redistricting
+  assignment file, the crosswalk failed exactly **one** anchor — downtown
+  Dallas, HD-108 instead of HD-114 — even though a third of Texas blocks sit in
+  a different district between the two maps. Redistricting preserves urban
+  cores, which is exactly where the recognisable anchors are. So
+  `check_zips.mjs` pins the sha256 of the district file, which is exact.
+
+There are two plausible Texas SLDL files and only one is right. The 2020 Block
+Assignment File carries the pre-redistricting map; 89R ran on the 2021-enacted
+one, published as the 2022 block equivalency file. (Texas's 2025 mid-decade
+redistricting was **congressional** — the House map is unchanged.) Getting this
+wrong misassigns a third of the state while every structural check still passes,
+which is why it is the hash rather than the anchors that stands guard.
+
+
 
 ### One re-export is pending
 

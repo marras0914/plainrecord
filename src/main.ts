@@ -110,6 +110,17 @@ let repQuery = '';
 // Whether the lookup's inputs have been built. The result region re-renders
 // freely; the inputs must not, or typing loses focus.
 let repShell = false;
+// The ZIP path. Kept separate from repDistrict because a ZIP can be an ANSWER
+// (one district) or a QUESTION (several), and the panel has to say which.
+let repZip = '';
+let repZipFile: Awaited<ReturnType<typeof rep.loadZips>> = null;
+let repZipStatus: 'idle' | 'loading' | 'failed' = 'idle';
+type ZipResult =
+  | { kind: 'none' }
+  | { kind: 'unknown'; zip: string }
+  | { kind: 'whole'; zip: string; d: number }
+  | { kind: 'split'; zip: string; ds: rep.ZipDistrict[] };
+let repZipResult: ZipResult = { kind: 'none' };
 
 const activeItems = (): QuizItem[] => (mode === 'short' ? HEADLINE_ITEMS : ALL_ITEMS);
 let adapted: Adapted = adapt(activeItems());
@@ -869,6 +880,9 @@ function renderRep(): void {
       `<div class="rep-field"><label for="rep-district">${esc(t('rep.districtLabel'))}</label>` +
       `<input id="rep-district" type="number" min="1" max="150" inputmode="numeric" ` +
       `placeholder="${esc(t('rep.districtPlaceholder'))}"></div>` +
+      `<div class="rep-field"><label for="rep-zip">${esc(t('rep.zipLabel'))}</label>` +
+      `<input id="rep-zip" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code" ` +
+      `placeholder="${esc(t('rep.zipPlaceholder'))}"></div>` +
       `<div class="rep-field"><label for="rep-name">${esc(t('rep.nameLabel'))}</label>` +
       `<input id="rep-name" type="search" autocomplete="off" ` +
       `placeholder="${esc(t('rep.namePlaceholder'))}"></div>` +
@@ -887,17 +901,69 @@ function renderRep(): void {
       renderRepOut();
     };
 
+    // The crosswalk is a second file. Only ZIP users fetch it.
+    const ensureZips = async () => {
+      if (repZipFile || repZipStatus === 'loading') return;
+      repZipStatus = 'loading';
+      const f = await rep.loadZips();
+      repZipFile = f;
+      repZipStatus = f ? 'idle' : 'failed';
+    };
+
+    /** Resolve the typed ZIP once both files are in. */
+    const resolveZip = async () => {
+      if (repZip.length !== 5) { repZipResult = { kind: 'none' }; renderRepOut(); return; }
+      await Promise.all([ensure(), ensureZips()]);
+      if (!repZipFile) { renderRepOut(); return; }
+      const ds = rep.districtsForZip(repZipFile, repZip);
+      // Keep the district box in step. Without this it can be left showing a
+      // number the panel is no longer talking about — type 999, then a ZIP, and
+      // the out-of-range warning goes but the 999 stays on screen.
+      const box = document.getElementById('rep-district') as HTMLInputElement | null;
+      if (!ds) {
+        repZipResult = { kind: 'unknown', zip: repZip };
+        repDistrict = null;
+        if (box) box.value = '';
+      } else if (ds.length === 1) {
+        // The common case. Answer it outright rather than making the reader
+        // click a list of one.
+        repZipResult = { kind: 'whole', zip: repZip, d: ds[0].d };
+        repDistrict = ds[0].d;
+        if (box) box.value = String(ds[0].d);
+      } else {
+        // A split ZIP cannot be resolved from a ZIP alone. Say so and let them
+        // pick; guessing the largest share would be wrong for up to half of
+        // the people in the ZIP.
+        repZipResult = { kind: 'split', zip: repZip, ds };
+        repDistrict = null;
+        if (box) box.value = '';
+      }
+      renderRepOut();
+    };
+
+    const z = el<HTMLInputElement>('rep-zip');
+    z.addEventListener('input', () => {
+      const digits = z.value.replace(/\D/g, '').slice(0, 5);
+      if (digits !== z.value) z.value = digits;
+      repZip = digits;
+      repQuery = '';
+      void resolveZip();
+      renderRepOut();
+    });
+
     const d = el<HTMLInputElement>('rep-district');
     d.addEventListener('input', () => {
       const v = d.value.trim();
       repDistrict = v === '' ? null : Number(v);
       repQuery = '';
+      repZipResult = { kind: 'none' };
       void ensure();
       renderRepOut();
     });
     const nm = el<HTMLInputElement>('rep-name');
     nm.addEventListener('input', () => {
       repQuery = nm.value;
+      repZipResult = { kind: 'none' };
       void ensure();
       renderRepOut();
     });
@@ -920,9 +986,38 @@ function renderRepOut(): void {
   const items = repFile?.itemOrder.length ?? 67;
   let html = '';
 
+  // The ZIP verdict comes first: it explains why a district is being shown at
+  // all, or why one cannot be.
+  if (repZipStatus === 'failed') {
+    html += `<p class="rep-note">${esc(t('rep.zipFailed'))}</p>`;
+  } else if (repZipResult.kind === 'unknown') {
+    html += `<p class="rep-note">${esc(t('rep.zipUnknown', { zip: repZipResult.zip }))}</p>`;
+  } else if (repZipResult.kind === 'whole') {
+    html += `<p class="rep-note">${
+      esc(t('rep.zipWhole', { zip: repZipResult.zip, d: repZipResult.d }))}</p>`;
+  } else if (repZipResult.kind === 'split') {
+    const link =
+      `<a href="https://wrm.capitol.texas.gov/home" target="_blank" rel="noopener">` +
+      `${esc(t('rep.findDistrictLinkText'))}</a>`;
+    html += `<p class="rep-note">${t('rep.zipSpans', {
+      zip: repZipResult.zip, n: repZipResult.ds.length, link,
+    })}</p>`;
+    html += `<ul class="rep-hits rep-split">` + repZipResult.ds.map((c) => {
+      const m = repFile ? rep.memberForDistrict(repFile, c.d) : undefined;
+      // A share that rounds to nothing must not render as "0% of this ZIP",
+      // which reads like broken data next to a real option.
+      const share = c.pct >= 1 ? t('rep.zipShare', { pct: c.pct }) : t('rep.zipShareSmall');
+      return `<li><button class="ghost" data-rep-d="${c.d}"${
+        c.d === repDistrict ? ' aria-current="true"' : ''}>` +
+        `${esc(m ? m.n : t('rep.district', { d: c.d }))} ` +
+        `<span class="mono">${esc(t('rep.district', { d: c.d }))}</span> ` +
+        `<span class="rep-share">${esc(share)}</span></button></li>`;
+    }).join('') + `</ul>`;
+  }
+
   if (repStatus === 'failed') {
     const link = `<a href="${rep.MEMBERS_URL}">${rep.MEMBERS_URL}</a>`;
-    html = `<p class="rep-note">${t('rep.loadFailed', { link })}</p>`;
+    html += `<p class="rep-note">${t('rep.loadFailed', { link })}</p>`;
   } else if (repFile) {
     if (repQuery.trim().length >= 2) {
       const hits = rep.searchMembers(repFile, repQuery);
