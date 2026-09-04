@@ -36,7 +36,9 @@
       "source": "/data/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Link", "value": "<https://creativecommons.org/publicdomain/zero/1.0/>; rel=\"license\"" },
+        { "key": "X-License", "value": "CC0-1.0" }
       ]
     },
     {

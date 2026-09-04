@@ -5,17 +5,13 @@
     "status": "Reviewed and approved by Marco Arras (fluent), 3 September 2026.",
     "keys": "Outcomes are keyed by their English label, opponents and incumbents by name, items by billId, omissions and categories by their English string. All of those are unique in the payload. scripts/check_sidecar.mjs fails if the payload contains a translatable string this file does not cover, or if this file names something the payload no longer has.",
     "captions": "The 67 official bill captions are DELIBERATELY ABSENT and the `captions` object is empty. They are copied verbatim from the record and the page promises exactly that, so a Spanish rendering is not the caption — it is a paraphrase by an interested party on the one page whose value is that it does not paraphrase. On /es/ they render in English, carrying lang=\"en\" so a screen reader switches voice, with page.translationNotice saying why. Adding Spanish aid renderings later is an enhancement; replacing the English is not an option.",
-    "figures": "Every number, currency amount, percentage, date and bill identifier is carried across unchanged. Source names are proper nouns and stay in English — a reader chasing a citation needs the name the publisher uses."
+    "figures": "Every number, currency amount, percentage, date and bill identifier is carried across unchanged. Source names are proper nouns and stay in English — a reader chasing a citation needs the name the publisher uses.",
+    "license": "CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Public domain dedication, matching the English payload and the site. The official bill captions are absent from this file precisely because they are the state's record rather than ours to license, so nothing here is encumbered."
   },
-
   "comparatorRule": "De cada bancada: el miembro más de línea partidista, el miembro mediano y el que más veces rompió filas. La misma regla en los dos lados, recalculada en cada compilación.",
-
   "candidateProvenance": "Esta página trata de tres contiendas específicas: Gobernador, Vicegobernador y Senado de Estados Unidos. Los tres candidatos demócratas están en la Cámara de Representantes de Texas, que es la razón por la que la comparación funciona: votaron los mismos proyectos de ley sobre los que se le pregunta, así que sus historiales pueden compararse con el suyo voto por voto. Escoger esas tres contiendas es una decisión editorial, no una medición, y los otros seis miembros que aparecen debajo de cada pregunta se eligen por regla de los dos partidos, para que la página no muestre solo un lado de la cámara.",
-
   "causalNote": "Estas cifras son la situación de Texas, según las fuentes citadas. No son prueba de que un voto, un proyecto de ley o un funcionario en particular las haya causado: las clasificaciones se mueven también por el crecimiento de la población, el valor de las propiedades locales, las reglas federales y la economía, no solo por la ley estatal. Lo que está en el registro es el resultado, el voto y quién ocupaba el cargo. La línea entre ellos la traza usted.",
-
   "plainLanguageNote": "La descripción corta debajo de un proyecto de ley la escribimos nosotros, no está copiada del registro, y solo los siete proyectos principales tienen una. Todas las demás preguntas muestran únicamente el título oficial.",
-
   "categories": {
     "Abortion": "Aborto",
     "Arts, Culture & Tourism": "Arte, cultura y turismo",
@@ -38,12 +34,10 @@
     "Technology & Privacy": "Tecnología y privacidad",
     "Transportation": "Transporte"
   },
-
   "omissions": {
     "Transportation": "Las cifras publicadas de muertes en carretera en Texas para 2024 no coinciden entre sí (1,997 frente a 4,150) y no pudimos conciliarlas con una fuente primaria.",
     "Religion & Civil Liberties": "Aquí no existe ninguna medida de resultado que no sea, en sí misma, un juicio de valor."
   },
-
   "opponents": {
     "Dan Patrick": {
       "office": "Vicegobernador",
@@ -64,7 +58,6 @@
       "oneSided": "Nada de su historial puede unirse a un proyecto de este cuestionario, así que no aparece en ninguna pregunta."
     }
   },
-
   "incumbents": {
     "Greg Abbott": {
       "office": "Gobernador",
@@ -98,7 +91,6 @@
       ]
     }
   },
-
   "outcomes": {
     "Per-student school funding": {
       "label": "Financiamiento escolar por estudiante",
@@ -227,7 +219,6 @@
       "caveat": "Texas tiene el mayor número absoluto de muertes por arma de fuego de cualquier estado, lo cual refleja sobre todo ser el segundo más poblado. Por habitante se ubica en la mitad de los estados."
     }
   },
-
   "items": {
     "SB 2": {
       "label": "Vales escolares",
@@ -265,6 +256,5 @@
       "plain": "Crea un instituto estatal que financia la prevención y la investigación de la demencia."
     }
   },
-
   "captions": {}
 }

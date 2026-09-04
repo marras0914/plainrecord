@@ -387,6 +387,21 @@ function main() {
   const out = {
     session,
     generated: 'static build',
+    // The licence travels WITH the data, because the whole distribution model is
+    // that someone downloads this file on its own. The site states it and the
+    // Dataset JSON-LD declares it, but neither reaches a reader who has only the
+    // JSON — which is exactly the reader this project is handing to journalists
+    // and civic-tech volunteers. A `Link: <...>; rel="license"` header on
+    // /data/* covers that until the next export; this closes it in the file.
+    license: 'CC0-1.0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    licenseNote:
+      'The official bill captions in items[].caption are copied verbatim from ' +
+      "the Texas House record and are not this project's to license. Roll-call " +
+      'votes and chamber totals are facts. CC0 covers the original layer: the ' +
+      'plain-language descriptions, the outcome prose, the computed valences and ' +
+      'the selection rule. Outcome figures cite third-party sources by name and ' +
+      "URL; please carry a figure's caveat with the figure.",
     ruleVersion: rule.version,
     rulePerCategory: rule.maxPerCategory,
     ruleReserve: rule.crossCuttingReserve,
