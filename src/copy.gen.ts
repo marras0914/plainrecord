@@ -163,6 +163,10 @@ export type CopyKey =
   | "rev.compareNote"
   | "rev.oppHead"
   | "rev.oppVetoed"
+  | "rev.oppSigned"
+  | "rev.oppUnsigned"
+  | "rev.oppNoSide"
+  | "rev.oppSignedNote"
   | "rev.oppPriority"
   | "rev.oppNote"
   | "rev.outcomeHead"
@@ -433,6 +437,10 @@ export const EN: Record<CopyKey, string> = {
   "rev.compareNote": "None of these six is on the ballot. From each caucus: the most party-line member, the median, and the one who most often broke ranks — the same rule on both sides, recomputed every build, so the comparison is not a pick of names.",
   "rev.oppHead": "What their opponents did on this bill",
   "rev.oppVetoed": "vetoed it",
+  "rev.oppSigned": "signed it",
+  "rev.oppUnsigned": "let it pass unsigned",
+  "rev.oppNoSide": "took no side",
+  "rev.oppSignedNote": "A governor signs most of what reaches him, so a signature means he did not object — not that he pushed for it.",
   "rev.oppPriority": "made it a priority",
   "rev.oppNote": "Not votes — neither of them votes in the House, so these are not counted above. And each list runs one way only: a governor vetoes just the bills he opposes, a priority list names just the bills its author wants passed. That is why you see a side on this bill and never a percentage.",
   "rev.outcomeHead": "Where Texas stands on {category}",
@@ -688,6 +696,10 @@ export const ES: Record<CopyKey, string> = {
   "rev.compareNote": "Ninguno de estos seis está en la boleta. De cada bancada: el miembro más de línea partidista, el mediano y el que más veces rompió filas; la misma regla en los dos lados, recalculada en cada compilación, para que la comparación no sea una selección de nombres.",
   "rev.oppHead": "Qué hicieron sus oponentes con este proyecto",
   "rev.oppVetoed": "lo vetó",
+  "rev.oppSigned": "lo firmó",
+  "rev.oppUnsigned": "la dejó pasar sin firmar",
+  "rev.oppNoSide": "no tomó postura",
+  "rev.oppSignedNote": "Un gobernador firma la mayoría de lo que le llega, así que una firma significa que no se opuso, no que lo impulsara.",
   "rev.oppPriority": "lo hizo prioridad",
   "rev.oppNote": "No son votos: ninguno de ellos vota en la Cámara, así que no se cuentan arriba. Y cada lista corre en un solo sentido: un gobernador veta solo los proyectos que rechaza, y una lista de prioridades nombra solo los proyectos que su autor quiere aprobar. Por eso ve una postura en este proyecto y nunca un porcentaje.",
   "rev.outcomeHead": "Cómo está Texas en {category}",

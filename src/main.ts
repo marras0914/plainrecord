@@ -705,13 +705,25 @@ function opponentReveal(item: QuizItem, yourAnswer: 1 | -1): string {
       // Kept short on purpose: 'named it a priority bill' in a monospace face
       // overflowed its row below 420px and pushed the whole page into a
       // horizontal scroll at 320px.
-      const verb = t(a.kind === 'veto' ? 'rev.oppVetoed' : 'rev.oppPriority');
-      const same = a.position === yourAnswer;
+      const verb = t(
+        a.kind === 'veto' ? 'rev.oppVetoed'
+          : a.kind === 'signed' ? 'rev.oppSigned'
+            : a.kind === 'became_law_unsigned' ? 'rev.oppUnsigned'
+              : 'rev.oppPriority',
+      );
+      // A bill left to become law unsigned carries no position, and must not be
+      // scored against the reader's answer. Declining to endorse something you
+      // also decline to stop is not support and not opposition; forcing it into
+      // one would invent a stance the record does not contain. Same rule the
+      // candidate reveal follows for a missing vote.
+      const noSide = a.position !== 1 && a.position !== -1;
+      const same = !noSide && a.position === yourAnswer;
+      const cls = noSide ? 'op-none' : same ? 'op-same' : 'op-diff';
       return (
-        `<li class="opp-row ${same ? 'op-same' : 'op-diff'}">` +
+        `<li class="opp-row ${cls}">` +
         `<span class="opp-name">${esc(a.who)}<small>${esc(a.office)}</small></span>` +
         `<span class="opp-act">${verb}</span>` +
-        `<span class="opp-side">${esc(t(same ? 'rev.sameSide' : 'rev.oppositeSide'))}</span>` +
+        `<span class="opp-side">${esc(noSide ? t('rev.oppNoSide') : t(same ? 'rev.sameSide' : 'rev.oppositeSide'))}</span>` +
         `<a class="opp-src" href="${esc(a.sourceUrl)}" target="_blank" rel="noopener">${esc(t('rev.source'))}</a></li>`
       );
     })
@@ -720,6 +732,12 @@ function opponentReveal(item: QuizItem, yourAnswer: 1 | -1): string {
   return (
     `<div class="opp-block"><div class="ps-head">${esc(t('rev.oppHead'))}</div>` +
     `<ul class="opp-rows">${rows}</ul>` +
+    // Weight the weakest of the three, where it appears. A governor signs most
+    // of what reaches him, so an unqualified "signed it" would read as
+    // enthusiasm the record does not support.
+    (acts.some((a) => a.kind === 'signed')
+      ? `<p class="opp-signed-note">${esc(t('rev.oppSignedNote'))}</p>`
+      : '') +
     `<div class="opp-note">${esc(t('rev.oppNote'))}` +
     `` +
     `` +

@@ -283,6 +283,10 @@
   .opp-rows { list-style:none; margin:0; padding:0; display:flex;
               flex-direction:column; gap:5px; }
   .opp-row { display:grid; grid-template-columns:1fr auto auto auto; gap:10px;
+  /* An act with no position: rendered as its own state, never as agreement
+     or disagreement. */
+  .opp-row.op-none .opp-side { color:var(--muted); }
+  .opp-signed-note { font-size:12px; color:var(--muted); line-height:1.5; margin:10px 0 0; }
              align-items:baseline; padding:5px 0 5px 9px;
              border-left:2px dashed var(--rule); }
   .opp-row.op-same { border-left-color:var(--ink-2); }

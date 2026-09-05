@@ -1209,6 +1209,36 @@
     "vars": [],
     "status": "ok"
   },
+  "rev.oppSigned": {
+    "en": "signed it",
+    "es": "lo firmó",
+    "where": "Verb in the opponent row when the Governor signed a bill.",
+    "vars": [],
+    "note": "Kept to two words like the others: this row sits in a three-column grid that overflowed below 420px when a verb ran long.",
+    "status": "ok"
+  },
+  "rev.oppUnsigned": {
+    "en": "let it pass unsigned",
+    "es": "la dejó pasar sin firmar",
+    "where": "Verb when a bill became law without the Governor signing it.",
+    "vars": [],
+    "status": "ok"
+  },
+  "rev.oppNoSide": {
+    "en": "took no side",
+    "es": "no tomó postura",
+    "where": "Replaces the same/opposite column when an act carries no position.",
+    "vars": [],
+    "note": "Declining to sign a bill you also decline to veto is not support and not opposition. Forcing it into for-or-against would invent a position — the same rule the candidate reveal follows for a missing vote.",
+    "status": "ok"
+  },
+  "rev.oppSignedNote": {
+    "en": "A governor signs most of what reaches him, so a signature means he did not object — not that he pushed for it.",
+    "es": "Un gobernador firma la mayoría de lo que le llega, así que una firma significa que no se opuso, no que lo impulsara.",
+    "where": "Caveat under the opponent rows whenever a signature is one of them.",
+    "vars": [],
+    "status": "ok"
+  },
   "rev.oppPriority": {
     "en": "made it a priority",
     "es": "lo hizo prioridad",

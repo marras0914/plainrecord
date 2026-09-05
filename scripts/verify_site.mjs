@@ -494,6 +494,61 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // The Governor's record, both directions
+  //
+  // A reader pointed out that Dan Patrick appeared all over the page as the man
+  // who wanted bills PASSED while Greg Abbott appeared once, as the man who
+  // killed one. Every bill reaching a governor is signed, vetoed, or left to
+  // become law unsigned, so his record can run both ways — but only if the page
+  // refuses to score the third case, which is a refusal to endorse something he
+  // also declined to stop.
+  {
+    await toResult(page, URL_UNDER_TEST);
+    await page.click('#mode-full');
+    await page.waitForTimeout(400);
+
+    const kinds = { signed: null, unsigned: null, vetoed: null };
+    for (let i = 0; i < 70; i++) {
+      if (await page.isVisible('#q-next')) { await page.click('#q-next'); await page.waitForTimeout(35); }
+      if (!(await page.isVisible('#q-card [data-answer="1"]'))) break;
+      await page.click('#q-card [data-answer="1"]');
+      await page.waitForTimeout(90);
+      const rows = await page.$$eval('.opp-row', (rs) => rs.map((r) => ({
+        cls: r.className,
+        act: r.querySelector('.opp-act')?.textContent?.trim() ?? '',
+        side: r.querySelector('.opp-side')?.textContent?.trim() ?? '',
+        note: r.closest('.opp-block')?.querySelector('.opp-signed-note')?.textContent?.trim() ?? null,
+      })));
+      for (const r of rows) {
+        if (/signed it/i.test(r.act) && !kinds.signed) kinds.signed = r;
+        if (/unsigned/i.test(r.act) && !kinds.unsigned) kinds.unsigned = r;
+        if (/vetoed/i.test(r.act) && !kinds.vetoed) kinds.vetoed = r;
+      }
+      if (kinds.signed && kinds.unsigned && kinds.vetoed) break;
+    }
+
+    check('gov: the Governor is shown signing bills, not only killing them',
+      Boolean(kinds.signed), kinds.signed ? `"${kinds.signed.act}" — ${kinds.signed.side}` : 'no signature found');
+    check('gov: a veto still reads as opposition',
+      Boolean(kinds.vetoed) && /opposite/i.test(kinds.vetoed.side),
+      kinds.vetoed ? kinds.vetoed.side : 'no veto found');
+
+    // The one that must not be scored.
+    check('gov: a bill left unsigned takes NO side',
+      Boolean(kinds.unsigned) && /took no side/i.test(kinds.unsigned.side) &&
+        /op-none/.test(kinds.unsigned.cls),
+      kinds.unsigned ? `${kinds.unsigned.side} [${kinds.unsigned.cls}]` : 'none found');
+    check('gov: and is never counted as agreement or disagreement',
+      Boolean(kinds.unsigned) && !/same side|opposite side/i.test(kinds.unsigned.side),
+      kinds.unsigned ? kinds.unsigned.side : 'none found');
+
+    // A signature is the weakest of the three and has to say so where it shows.
+    check('gov: a signature carries the caveat that he signs most of what reaches him',
+      Boolean(kinds.signed?.note) && /signs most of what reaches him/i.test(kinds.signed.note ?? ''),
+      (kinds.signed?.note ?? '(no caveat)').slice(0, 76));
+  }
+
+  // ---------------------------------------------------------------------------
   // The incumbency card
   //
   // This is the page's answer to "you only scored the people who have voting
