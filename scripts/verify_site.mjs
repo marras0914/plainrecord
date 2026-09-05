@@ -313,6 +313,47 @@ try {
   check('the reader\'s own answer is not given the record\'s word for it',
     !/You said Nay/.test(revSum), revSum);
 
+  // Next has to be reachable WITHOUT scrolling.
+  //
+  // Measured on the live site at 390x844 before this was fixed: the reveal
+  // pushes the card to about 1.9 screens and Next landed near 1,400px, so
+  // it was off-screen after 7 of 7 answers and cost 613-676px of scrolling
+  // every single time. It is a fixed bar now. The reveal is the payoff and
+  // is still there to read — reading it is a choice, not a toll on the way
+  // to the next question.
+  const reach = await page.evaluate(() => {
+    const e = document.getElementById('q-next');
+    if (!e) return null;
+    const r = e.getBoundingClientRect();
+    return {
+      inViewport: r.top >= 0 && r.bottom <= window.innerHeight + 1,
+      top: Math.round(r.top),
+      viewport: window.innerHeight,
+    };
+  });
+  check('the way to the next question needs no scrolling',
+    Boolean(reach?.inViewport),
+    reach ? `Next at y=${reach.top} of ${reach.viewport}` : 'no Next button');
+
+  // The bar is FIXED, so content passes behind it as you scroll — that is what
+  // a fixed bar does, and asserting nothing is ever behind it fails by
+  // definition on any scrollable page. The invariant that matters is that the
+  // END of the reveal is reachable: scroll to the bottom and check the last
+  // line is not trapped underneath.
+  const trapped = await page.evaluate(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+    const bar = document.querySelector('.q-next-bar');
+    if (!bar) return null;
+    const r = bar.getBoundingClientRect();
+    return [...document.querySelectorAll('#q-card *')]
+      .filter((n) => n.children.length === 0 && n.textContent.trim())
+      .map((n) => n.getBoundingClientRect())
+      .filter((b) => b.bottom > r.top + 2 && b.top < r.top && b.height < 400).length;
+  });
+  check('scrolled to the end, nothing is trapped behind the bar',
+    trapped === 0, `${trapped ?? '?'} text nodes still underneath`);
+  await page.evaluate(() => window.scrollTo(0, 0));
+
   // The reveal belongs to the question just answered, and holds until Next.
   check('answering holds the card rather than advancing',
     (await page.$$('#q-card [data-answer]')).length === 0 && Boolean(await page.$('#q-next')));

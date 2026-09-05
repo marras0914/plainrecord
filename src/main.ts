@@ -766,6 +766,8 @@ function countAnswered(): number {
 
 function renderQuestion(): void {
   const c = el('q-card');
+  // Room for the fixed bar, added only while it is there.
+  el('quiz-view').classList.toggle('has-next-bar', revealFor === queue[cursor]?.id);
   if (cursor >= queue.length) { view = 'result'; showView(); return; }
 
   const it = pes.itemProse(queue[cursor]);
@@ -816,8 +818,16 @@ function renderQuestion(): void {
       : '') +
     `</div>` +
 
+    // FIXED TO THE BOTTOM, not placed after the reveal.
+    //
+    // Measured on the live site at 390x844: after answering, the reveal —
+    // three candidates, the comparators, what the Governor did — pushes the
+    // card to about 1.9 screens, and Next landed at roughly 1,400px. It was
+    // off-screen after 7 of 7 answers, needing 613-676px of scrolling every
+    // time. The reveal is worth reading, but reading it should be a choice, and
+    // getting to the next question should not cost a scroll.
     (answered
-      ? `<div class="q-actions"><button class="vote next" id="q-next">${
+      ? `<div class="q-next-bar"><button class="vote next" id="q-next">${
         esc(t(last ? 'q.seeResult' : 'q.next'))}</button></div>`
       : '') +
 

@@ -89,6 +89,20 @@
   button.vote:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
   button.vote.next { background:var(--ink); color:var(--page); flex:1 1 100%; }
   .ghost.small { font-size:13px; padding:8px 14px; flex:0 0 auto; }
+  /* The way on to the next question, always within reach.
+
+     Sits over the page rather than after the reveal, because the reveal is
+     the payoff and should be read by choice, not walked through to find a
+     button. Measured before this existed: Next was off-screen after every
+     one of the seven answers, 613-676px down. */
+  .q-next-bar { position:fixed; left:0; right:0; bottom:0; z-index:30;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb, var(--page) 92%, transparent);
+    -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+    border-top:1px solid var(--hair); display:flex; }
+  .q-next-bar .vote.next { flex:1 1 100%; max-width:34rem; margin:0 auto; }
+  /* Without this the last line of the reveal sits behind the bar. */
+  #quiz-view.has-next-bar { padding-bottom:104px; }
   .q-official { margin-top:26px; padding-top:18px; border-top:1px solid var(--hair); }
   .q-reveal { margin-top:26px; padding-top:20px; border-top:1px solid var(--hair); }
   /* The row of things to do with a result. It sits directly under the verdict
