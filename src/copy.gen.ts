@@ -31,6 +31,25 @@ export type CopyKey =
   | "axis.alignment"
   | "axis.load"
   | "intro.h1"
+  | "q.resultNow"
+  | "result.keepGoing"
+  | "start.lede"
+  | "start.begin"
+  | "start.fine"
+  | "start.how"
+  | "start.hide"
+  | "vote.yes"
+  | "vote.no"
+  | "q.next"
+  | "q.seeResult"
+  | "q.showOfficial"
+  | "q.hideOfficial"
+  | "q.officialNote"
+  | "q.askedAs"
+  | "q.youSaid"
+  | "result.restart"
+  | "theme.toDark"
+  | "theme.toLight"
   | "intro.p1"
   | "intro.p2"
   | "intro.p3"
@@ -276,6 +295,25 @@ export const EN: Record<CopyKey, string> = {
   "axis.alignment": "how much does this legislator vote with you",
   "axis.load": "how partisan-coded are your own positions?",
   "intro.h1": "The Purple Strip",
+  "q.resultNow": "See my result so far",
+  "result.keepGoing": "Keep answering — {left} left",
+  "start.lede": "Seven votes your Texas House actually took in 2025. We hid who voted which way. Where do you land?",
+  "start.begin": "Start",
+  "start.fine": "About two minutes · no sign-up · your answers never leave this device",
+  "start.how": "How this works",
+  "start.hide": "Hide",
+  "vote.yes": "Yes",
+  "vote.no": "No",
+  "q.next": "Next",
+  "q.seeResult": "See where you landed",
+  "q.showOfficial": "Official wording",
+  "q.hideOfficial": "Hide official wording",
+  "q.officialNote": "The question above is our plain-language summary. This is the bill's official caption, word for word. The House voted {yeas} yes, {nays} no.",
+  "q.askedAs": "This one has no plain-language version yet, so it is asked in the official wording.",
+  "q.youSaid": "You said {vote}.",
+  "result.restart": "Start over",
+  "theme.toDark": "Dark",
+  "theme.toLight": "Light",
   "intro.p1": "<b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from 2025 and hid who voted which way. Now you vote.",
   "intro.p2": "For each one we count how many Republicans said yes, and how many Democrats said yes. Mostly Republicans? We colour it <span class=\"sw-r\">red</span>. Mostly Democrats? <span class=\"sw-b\">Blue</span>. Both parties agreed? <span class=\"sw-g\">Grey</span> — that vote doesn't tell us much about sides.",
   "intro.p3": "Every answer you give becomes one dot. Dots on the left mean you agreed with Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots land on both sides, you don't fit neatly in one party.</b> That's the purple part.",
@@ -343,9 +381,9 @@ export const EN: Record<CopyKey, string> = {
   "stats.load.label": "How partisan these votes were",
   "stats.load.low": "very low — these votes barely split the parties",
   "stats.load.hint": "1.00 would mean every party member voted with their side",
-  "strip.noContent": "NO PARTISAN CONTENT",
+  "strip.noContent": "no partisan content",
   "strip.empty": "Answer a vote to place the first mark.",
-  "strip.candidateRecords": "CANDIDATE RECORDS ON THE SAME VOTES",
+  "strip.candidateRecords": "Candidate records on the same votes",
   "strip.dotLabel": "{bill} {category}, you answered {answer}, position {pos}",
   "strip.title": "Each answered vote plotted on a blue-to-red partisan axis, with the three candidates' own records below",
   "strip.legendYours": "your answer",
@@ -441,10 +479,10 @@ export const EN: Record<CopyKey, string> = {
   "page.translationNotice": "Everything we wrote ourselves is in Spanish. The official bill captions stay in English, exactly as they appear in the record — translating them would make them something other than the record.",
   "strip.legendRamp": "Democratic-coded ← position → Republican-coded",
   "prov.record.value": "{n} of {total}",
-  "strip.poleD": "DEMOCRATIC-CODED",
-  "strip.poleR": "REPUBLICAN-CODED",
-  "strip.poleDShort": "DEM-CODED",
-  "strip.poleRShort": "REP-CODED",
+  "strip.poleD": "Democratic-coded",
+  "strip.poleR": "Republican-coded",
+  "strip.poleDShort": "Dem-coded",
+  "strip.poleRShort": "Rep-coded",
   "og.eyebrow": "TEXAS HOUSE · {session} LEGISLATURE",
   "og.deck": "A blind quiz on <b>{n} real votes</b>. Party labels stay hidden until after you answer.",
   "og.axisD": "AGREED WITH DEMOCRATS",
@@ -506,6 +544,25 @@ export const ES: Record<CopyKey, string> = {
   "axis.alignment": "cuánto vota este legislador con usted",
   "axis.load": "¿qué tan partidistas son sus propias posturas?",
   "intro.h1": "La Franja Morada",
+  "q.resultNow": "Ver mi resultado hasta ahora",
+  "result.keepGoing": "Seguir respondiendo: quedan {left}",
+  "start.lede": "Siete votos que su Cámara de Texas realmente emitió en 2025. Ocultamos quién votó de qué manera. ¿Dónde se sitúa usted?",
+  "start.begin": "Empezar",
+  "start.fine": "Unos dos minutos · sin registro · sus respuestas nunca salen de este dispositivo",
+  "start.how": "Cómo funciona esto",
+  "start.hide": "Ocultar",
+  "vote.yes": "Sí",
+  "vote.no": "No",
+  "q.next": "Siguiente",
+  "q.seeResult": "Ver dónde se sitúa",
+  "q.showOfficial": "Texto oficial",
+  "q.hideOfficial": "Ocultar texto oficial",
+  "q.officialNote": "La pregunta de arriba es nuestro resumen en lenguaje sencillo. Este es el texto oficial del proyecto de ley, palabra por palabra. La Cámara votó {yeas} a favor, {nays} en contra.",
+  "q.askedAs": "Este todavía no tiene versión en lenguaje sencillo, así que se plantea con el texto oficial.",
+  "q.youSaid": "Usted dijo {vote}.",
+  "result.restart": "Empezar de nuevo",
+  "theme.toDark": "Oscuro",
+  "theme.toLight": "Claro",
   "intro.p1": "<b>Los legisladores de Texas votan a favor o en contra de nuevas leyes.</b> Tomamos votos reales de 2025 y ocultamos quién votó de qué manera. Ahora vota usted.",
   "intro.p2": "En cada uno contamos cuántos republicanos votaron a favor y cuántos demócratas votaron a favor. ¿Sobre todo republicanos? Lo pintamos de <span class=\"sw-r\">rojo</span>. ¿Sobre todo demócratas? <span class=\"sw-b\">Azul</span>. ¿Los dos partidos de acuerdo? <span class=\"sw-g\">Gris</span>, porque ese voto no nos dice mucho sobre bandos.",
   "intro.p3": "Cada respuesta que da se convierte en un punto. Los puntos a la izquierda significan que coincidió con los demócratas. Los de la derecha, con los republicanos. <b>Si sus puntos caen en los dos lados, usted no encaja limpiamente en un solo partido.</b> Esa es la parte morada.",
@@ -573,9 +630,9 @@ export const ES: Record<CopyKey, string> = {
   "stats.load.label": "Qué tan partidistas fueron estos votos",
   "stats.load.low": "muy baja: estos votos apenas dividieron a los partidos",
   "stats.load.hint": "1.00 significaría que cada miembro votó con su bando",
-  "strip.noContent": "SIN CONTENIDO PARTIDISTA",
+  "strip.noContent": "sin contenido partidista",
   "strip.empty": "Responda un voto para colocar la primera marca.",
-  "strip.candidateRecords": "HISTORIAL DE LOS CANDIDATOS EN LOS MISMOS VOTOS",
+  "strip.candidateRecords": "Historial de los candidatos en los mismos votos",
   "strip.dotLabel": "{bill} {category}, usted respondió {answer}, posición {pos}",
   "strip.title": "Cada voto respondido trazado en un eje partidista de azul a rojo, con el historial de los tres candidatos debajo",
   "strip.legendYours": "su respuesta",
@@ -671,10 +728,10 @@ export const ES: Record<CopyKey, string> = {
   "page.translationNotice": "Todo lo que escribimos nosotros está en español. Los títulos oficiales de los proyectos de ley se quedan en inglés, tal como constan en el registro: traducirlos los convertiría en otra cosa.",
   "strip.legendRamp": "Codificado demócrata ← posición → codificado republicano",
   "prov.record.value": "{n} de {total}",
-  "strip.poleD": "CODIFICADO DEMÓCRATA",
-  "strip.poleR": "CODIFICADO REPUBLICANO",
-  "strip.poleDShort": "CÓD. DEMÓCRATA",
-  "strip.poleRShort": "CÓD. REPUBLICANO",
+  "strip.poleD": "de código demócrata",
+  "strip.poleR": "de código republicano",
+  "strip.poleDShort": "cód. demócrata",
+  "strip.poleRShort": "cód. republicano",
   "og.eyebrow": "CÁMARA DE TEXAS · LEGISLATURA {session}",
   "og.deck": "Un cuestionario a ciegas sobre <b>{n} votos reales</b>. Las etiquetas de partido quedan ocultas hasta después de responder.",
   "og.axisD": "COINCIDIÓ CON LOS DEMÓCRATAS",

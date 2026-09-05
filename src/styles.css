@@ -11,22 +11,22 @@
      --------------------------------------------------------------------- */
   :root {
     color-scheme: light;
-    --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e;
-    --muted:#898781; --hair:#e1e0d9; --rule:#c3c2b7;
+    --page:#faf7f1; --surface:#fffdf9; --ink:#1a1714; --ink-2:#57514a;
+    --muted:#8c857b; --hair:#e6ded1; --rule:#cabfae;
     --pole-blue:#2a78d6; --pole-red:#e34948; --neutral-mark:#898781;
     --band:rgba(137,135,129,0.10); --shadow:rgba(11,11,11,0.06); --focus:#2a78d6;
     --good:#0ca30c; --warn:#b8860b;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:where(:not([data-theme="light"])) {
-      color-scheme: dark;
-      --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7;
-      --muted:#898781; --hair:#2c2c2a; --rule:#383835;
-      --pole-blue:#3987e5; --pole-red:#e66767; --neutral-mark:#898781;
-      --band:rgba(137,135,129,0.14); --shadow:rgba(0,0,0,0.4); --focus:#3987e5;
-      --good:#0ca30c; --warn:#d8a531;
-    }
-  }
+  /* NO prefers-color-scheme HERE, ON PURPOSE.
+
+     The page used to follow the OS, which meant anyone whose phone is set to
+     dark — most people — got a black screen full of monospace capitals before
+     they had agreed to anything. Handed to a reader who does not follow
+     politics, that reads as software, not as a thing to play with, and he
+     handed the phone back.
+
+     So dark is opt-in: it applies only when the reader asks for it, and the
+     choice is remembered. Light is the default on every device. */
   :root[data-theme="dark"] {
     color-scheme: dark;
     --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7;
@@ -34,6 +34,70 @@
     --pole-blue:#3987e5; --pole-red:#e66767; --neutral-mark:#898781;
     --band:rgba(137,135,129,0.14); --shadow:rgba(0,0,0,0.4); --focus:#3987e5;
     --good:#0ca30c; --warn:#d8a531;
+  }
+
+
+  /* ---------------------------------------------------------------------
+     The reading face.
+
+     The page used to set every label in uppercase monospace — 27 of them on
+     one screen — which is the typographic signature of a developer tool. A
+     reader who does not follow politics read that as software and stopped.
+     Monospace now appears only where it means "this is a record": the
+     receipts table and the official caption.
+     ------------------------------------------------------------------- */
+  h1, h2, .q-ask, .start-lede, .cand-name, .readout-head {
+    font-family:"Newsreader", Georgia, "Times New Roman", serif;
+    font-weight:500; letter-spacing:-0.006em;
+  }
+
+  /* The opening screen. Everything a reluctant reader needs and nothing
+     they do not: what this is, one button, and the promise that it costs
+     them nothing. */
+  #start-view { padding:8vh 0 6vh; max-width:34rem; }
+  #start-view h1 { font-size:clamp(2.4rem,9vw,3.4rem); line-height:1.06;
+    margin:0 0 18px; text-wrap:balance; }
+  .start-lede { font-size:clamp(1.15rem,4.4vw,1.4rem); line-height:1.45;
+    color:var(--ink-2); margin:0 0 30px; text-wrap:pretty; }
+  .start-actions { margin:0 0 14px; }
+  #start-btn { font-family:inherit; font-size:1.15rem; font-weight:600;
+    padding:16px 44px; border-radius:999px; border:1px solid var(--ink);
+    background:var(--ink); color:var(--page); cursor:pointer;
+    transition:transform .12s ease; }
+  #start-btn:hover { transform:translateY(-1px); }
+  #start-btn:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
+  .start-fine { font-size:12.5px; color:var(--muted); margin:0 0 28px; }
+  .start-how { font-size:13px; }
+  #start-how-panel { margin-top:18px; }
+
+  /* One question, given the room to be the only thing on screen. */
+  #quiz-view { padding:18px 0 40px; }
+  #quiz-view .card { border:none; background:none; padding:0; box-shadow:none; }
+  .q-top { display:flex; justify-content:space-between; align-items:baseline;
+    gap:12px; font-size:12.5px; color:var(--muted); margin-bottom:8px; }
+  .q-cat { text-align:right; }
+  .q-ask { font-size:clamp(1.45rem,5.6vw,2rem); line-height:1.24;
+    margin:22px 0 0; text-wrap:pretty; }
+  .q-why { font-size:14.5px; color:var(--ink-2); line-height:1.5; margin:14px 0 0; }
+  .q-note { font-size:12.5px; color:var(--muted); line-height:1.5; margin:10px 0 0; }
+  .q-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; align-items:center; }
+  button.vote { font-family:inherit; font-size:1.05rem; font-weight:600;
+    padding:15px 0; min-width:8.5rem; flex:1 1 8.5rem; border-radius:999px;
+    border:1.5px solid var(--ink); background:var(--surface); color:var(--ink);
+    cursor:pointer; }
+  button.vote:hover { background:var(--ink); color:var(--page); }
+  button.vote:focus-visible { outline:2px solid var(--focus); outline-offset:3px; }
+  button.vote.next { background:var(--ink); color:var(--page); flex:1 1 100%; }
+  .ghost.small { font-size:13px; padding:8px 14px; flex:0 0 auto; }
+  .q-official { margin-top:26px; padding-top:18px; border-top:1px solid var(--hair); }
+  .q-reveal { margin-top:26px; padding-top:20px; border-top:1px solid var(--hair); }
+  .keep-going { margin-top:16px; font-size:14px; }
+  .q-yousaid { font-size:15px; color:var(--ink-2); margin:0 0 14px; }
+
+  @media (max-width:560px) {
+    #start-view { padding:5vh 0 4vh; }
+    button.vote { flex:1 1 100%; }
+    .ghost.small { flex:1 1 100%; }
   }
 
   * { box-sizing: border-box; }
@@ -44,8 +108,12 @@
   }
   .wrap { max-width:960px; margin:0 auto; padding:28px 22px 80px; display:flex; flex-direction:column; gap:22px; }
 
-  .eyebrow { font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:10.5px; font-weight:500;
-             letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
+  /* Was uppercase IBM Plex Mono with wide tracking, repeated 27 times on a
+     single screen. That is the typographic signature of a developer tool,
+     and it is the thing a reader who does not follow politics reacts to
+     before reading a word. Sentence case, in the interface face. */
+  .eyebrow { font-family:"IBM Plex Sans", system-ui, sans-serif; font-size:12px;
+    font-weight:500; letter-spacing:0; text-transform:none; color:var(--muted); }
   h1 { font-size:26px; font-weight:600; letter-spacing:-0.012em; margin:6px 0 0; text-wrap:balance; }
   .lede { color:var(--ink-2); margin:8px 0 0; max-width:66ch; }
   .mono { font-family:"IBM Plex Mono", ui-monospace, monospace; }
@@ -55,7 +123,7 @@
   .prov { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--hair);
           border:1px solid var(--hair); }
   .prov div { background:var(--surface); padding:11px 13px; }
-  .prov dt { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:9.5px; letter-spacing:0.11em;
+  .prov dt { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; letter-spacing:0.11em;
              text-transform:uppercase; color:var(--muted); margin:0; }
   .prov dd { margin:3px 0 0; font-size:17px; font-weight:600; letter-spacing:-0.01em; }
   .prov small { display:block; font-size:11.5px; color:var(--ink-2); font-weight:400; letter-spacing:0; }
@@ -80,12 +148,12 @@
   .outc { border:1px solid var(--hair); background:var(--surface); }
   .outc-row { padding:14px 16px; border-top:1px solid var(--hair); }
   .outc-row:first-of-type { border-top:0; }
-  .outc-cat { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:9.5px;
-              letter-spacing:0.11em; text-transform:uppercase; color:var(--muted); }
+  .outc-cat { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px;
+              letter-spacing:0; text-transform:none; color:var(--muted); }
   .outc-val { font-size:19px; font-weight:600; letter-spacing:-0.01em; margin-top:3px; }
   .outc-cmp { font-size:13.5px; color:var(--ink-2); margin-top:2px; }
   .outc-rank { display:inline-block; font-family:"IBM Plex Mono",ui-monospace,monospace;
-               font-size:10px; letter-spacing:0.06em; text-transform:uppercase;
+               font-size:10px; letter-spacing:0; text-transform:none;
                border:1px solid currentColor; padding:1px 6px; margin-top:7px; }
   .st-bottom { color:var(--pole-red); }
   .st-middle { color:var(--muted); }
@@ -135,7 +203,7 @@
   .q-plain { margin-top:10px; padding:9px 0 0 12px; border-left:2px solid var(--rule);
              font-size:14px; color:var(--ink); }
   .q-plain-tag { display:block; font-family:"IBM Plex Mono",ui-monospace,monospace;
-                 font-size:9.5px; letter-spacing:0.11em; text-transform:uppercase;
+                 font-size:11.5px; letter-spacing:0; text-transform:none;
                  color:var(--muted); margin-bottom:3px; }
   .q-plain small { display:block; margin-top:5px; font-size:11.5px; color:var(--muted); }
   .cr-name small { display:block; font-weight:400; font-size:10.5px; color:var(--muted); }
@@ -150,15 +218,15 @@
                            color:var(--muted); width:1ch; }
   .cmp[open] > summary::before { content:"−"; }
   .cmp > summary span { font-family:"IBM Plex Mono",ui-monospace,monospace;
-                        font-size:9.5px; letter-spacing:0.09em; text-transform:uppercase;
+                        font-size:11.5px; letter-spacing:0; text-transform:none;
                         color:var(--muted); }
   .cmp > summary:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
   .cmp .ps-head:first-of-type { margin-top:10px; }
 
   .rep-note { margin-top:7px; font-size:11.5px; line-height:1.5; color:var(--muted); }
 
-  .ps-head { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:9.5px;
-             letter-spacing:0.11em; text-transform:uppercase; color:var(--muted);
+  .ps-head { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px;
+             letter-spacing:0; text-transform:none; color:var(--muted);
              margin:13px 0 6px; }
 
   /* --- the party split -----------------------------------------------------
@@ -262,7 +330,7 @@
   .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); }
   .stat { background:var(--surface); padding:15px 16px; }
   .stat-label { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10px; letter-spacing:0.12em;
-                text-transform:uppercase; color:var(--muted); }
+                text-transform:none; color:var(--muted); }
   .stat-val { font-size:30px; font-weight:600; letter-spacing:-0.02em; margin-top:3px; line-height:1.05; }
   .stat-note { font-size:12px; color:var(--ink-2); margin-top:4px; }
 
@@ -294,8 +362,8 @@
   .cands { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); }
   .cand { background:var(--surface); padding:15px 16px; display:flex; flex-direction:column; gap:3px; }
   .cand-name { font-weight:600; font-size:15px; }
-  .cand-office { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:9.5px; letter-spacing:0.1em;
-                 text-transform:uppercase; color:var(--muted); }
+  .cand-office { font-family:inherit; font-size:11.5px; letter-spacing:0.1em;
+                 text-transform:none; color:var(--muted); }
   .cand-score { font-size:26px; font-weight:600; letter-spacing:-0.02em; margin-top:7px; }
   .cand-phrase { font-size:12.5px; color:var(--ink-2); }
   .cand-n { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; color:var(--muted); margin-top:5px; }
@@ -313,8 +381,8 @@
        text-transform:uppercase; color:var(--muted); font-weight:500; }
   td.num,th.num { font-variant-numeric:tabular-nums; font-family:"IBM Plex Mono",ui-monospace,monospace; }
   .swatch { display:inline-block; width:9px; height:9px; vertical-align:-1px; margin-right:6px; }
-  .src { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:9.5px; letter-spacing:0.08em;
-         text-transform:uppercase; color:var(--muted); }
+  .src { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px; letter-spacing:0.08em;
+         text-transform:none; color:var(--muted); }
 
   #tip { position:fixed; pointer-events:none; opacity:0; background:var(--surface);
          border:1px solid var(--rule); box-shadow:0 3px 14px var(--shadow); padding:9px 11px;
@@ -336,9 +404,16 @@
   /* Language switch and the unofficial-translation notice.
      The switch names the OTHER language in that other language, because the
      person who needs it cannot read the one they are looking at. */
-  .langswitch { margin-bottom:10px; }
-  .langswitch a { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px;
-                  letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-2);
+  .topbar { padding-top:14px; }
+  .langswitch { margin-bottom:10px; display:flex; gap:8px; align-items:center; }
+  .themetoggle { font-family:inherit; font-size:12.5px;
+    letter-spacing:0; color:var(--muted);
+    background:none; border:1px solid var(--hair); border-radius:2px;
+    padding:5px 9px; cursor:pointer; }
+  .themetoggle:hover { color:var(--ink); border-color:var(--ink-2); }
+  .themetoggle:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+  .langswitch a { font-family:inherit; font-size:12.5px;
+                  letter-spacing:0; text-transform:none; color:var(--ink-2);
                   text-decoration:none; border:1px solid var(--rule);
                   padding:3px 9px; display:inline-block; }
   .langswitch a:hover { color:var(--ink); border-color:var(--ink-2); }
@@ -366,7 +441,7 @@
               margin-top:14px; }
   .rep-field { display:flex; flex-direction:column; gap:4px; }
   .rep-field label { font-family:"IBM Plex Mono",ui-monospace,monospace;
-                     font-size:9.5px; letter-spacing:0.11em; text-transform:uppercase;
+                     font-size:11.5px; letter-spacing:0; text-transform:none;
                      color:var(--muted); }
   .rep-field input { font-family:inherit; font-size:15px; padding:7px 10px;
                      border:1px solid var(--rule); background:var(--surface);

@@ -190,6 +190,154 @@
     "note": "This is the project's name. Reviewer: decide whether it translates at all, or stays English as a brand. Both are defensible; translating it helps a Spanish-dominant reader understand the metaphor, keeping it English keeps one name across both sites.",
     "status": "ok"
   },
+  "q.resultNow": {
+    "en": "See my result so far",
+    "es": "Ver mi resultado hasta ahora",
+    "where": "On the question card once a few answers exist, so a reader can stop whenever they like.",
+    "vars": [],
+    "note": "The full set is 67 questions. Requiring all of them before showing anything makes the reader work for a result they have already half earned, and there is no honest reason to withhold it — the estimator shrinks toward zero on thin evidence and says so.",
+    "status": "ok"
+  },
+  "result.keepGoing": {
+    "en": "Keep answering — {left} left",
+    "es": "Seguir respondiendo: quedan {left}",
+    "where": "On the result, when questions remain unanswered.",
+    "vars": [
+      "left"
+    ],
+    "status": "ok"
+  },
+  "start.lede": {
+    "en": "Seven votes your Texas House actually took in 2025. We hid who voted which way. Where do you land?",
+    "es": "Siete votos que su Cámara de Texas realmente emitió en 2025. Ocultamos quién votó de qué manera. ¿Dónde se sitúa usted?",
+    "where": "The one line under the title on the opening screen.",
+    "vars": [],
+    "note": "Replaces a subhead plus six paragraphs. A reader who does not follow politics needs to know what is being asked of them, not how the instrument works.",
+    "status": "ok"
+  },
+  "start.begin": {
+    "en": "Start",
+    "es": "Empezar",
+    "where": "The button on the opening screen.",
+    "vars": [],
+    "status": "ok"
+  },
+  "start.fine": {
+    "en": "About two minutes · no sign-up · your answers never leave this device",
+    "es": "Unos dos minutos · sin registro · sus respuestas nunca salen de este dispositivo",
+    "where": "Small print under the Start button.",
+    "vars": [],
+    "note": "The privacy claim is the most persuasive thing on the screen for a reluctant reader, and it is one the build proves rather than promises.",
+    "status": "ok"
+  },
+  "start.how": {
+    "en": "How this works",
+    "es": "Cómo funciona esto",
+    "where": "Discloses the old introduction on the opening screen.",
+    "vars": [],
+    "status": "ok"
+  },
+  "start.hide": {
+    "en": "Hide",
+    "es": "Ocultar",
+    "where": "Closes the \"how this works\" panel.",
+    "vars": [],
+    "status": "ok"
+  },
+  "vote.yes": {
+    "en": "Yes",
+    "es": "Sí",
+    "where": "The reader's own answer button.",
+    "vars": [],
+    "note": "Separate from vote.yea, which is what the RECORD says a legislator did. A legislator votes Yea; a reader says yes.",
+    "status": "ok"
+  },
+  "vote.no": {
+    "en": "No",
+    "es": "No",
+    "where": "The reader's own answer button.",
+    "vars": [],
+    "status": "ok"
+  },
+  "q.next": {
+    "en": "Next",
+    "es": "Siguiente",
+    "where": "Advances from a revealed answer to the next question.",
+    "vars": [],
+    "status": "ok"
+  },
+  "q.seeResult": {
+    "en": "See where you landed",
+    "es": "Ver dónde se sitúa",
+    "where": "Replaces Next on the last question.",
+    "vars": [],
+    "status": "ok"
+  },
+  "q.showOfficial": {
+    "en": "Official wording",
+    "es": "Texto oficial",
+    "where": "Discloses the official bill caption, which used to be the headline.",
+    "vars": [],
+    "note": "The legalese is still one tap away on every question and is still the thing the score is computed from. It is no longer the first thing a reader has to get through.",
+    "status": "ok"
+  },
+  "q.hideOfficial": {
+    "en": "Hide official wording",
+    "es": "Ocultar texto oficial",
+    "where": "Closes the official caption.",
+    "vars": [],
+    "status": "ok"
+  },
+  "q.officialNote": {
+    "en": "The question above is our plain-language summary. This is the bill's official caption, word for word. The House voted {yeas} yes, {nays} no.",
+    "es": "La pregunta de arriba es nuestro resumen en lenguaje sencillo. Este es el texto oficial del proyecto de ley, palabra por palabra. La Cámara votó {yeas} a favor, {nays} en contra.",
+    "where": "Sits with the official caption once disclosed.",
+    "vars": [
+      "yeas",
+      "nays"
+    ],
+    "status": "ok",
+    "note": "Names whose words are whose. The old card labelled the plain version \"In plain terms — our summary, not the official text\" right beside it; now that the plain version IS the question, the contrast has to be made here or it is lost."
+  },
+  "q.askedAs": {
+    "en": "This one has no plain-language version yet, so it is asked in the official wording.",
+    "es": "Este todavía no tiene versión en lenguaje sencillo, así que se plantea con el texto oficial.",
+    "where": "Shown when an item has no plain rewrite — 60 of the 67 do not.",
+    "vars": [],
+    "note": "Only the seven headline bills have been rewritten. The default quiz is those seven, so the default path is fully plain; the all-67 mode is not, and says so rather than pretending.",
+    "status": "ok"
+  },
+  "q.youSaid": {
+    "en": "You said {vote}.",
+    "es": "Usted dijo {vote}.",
+    "where": "Opens the reveal after an answer.",
+    "vars": [
+      "vote"
+    ],
+    "status": "ok"
+  },
+  "result.restart": {
+    "en": "Start over",
+    "es": "Empezar de nuevo",
+    "where": "Returns to the opening screen from the result.",
+    "vars": [],
+    "status": "ok"
+  },
+  "theme.toDark": {
+    "en": "Dark",
+    "es": "Oscuro",
+    "where": "Theme toggle in the header, shown while the page is light.",
+    "vars": [],
+    "note": "Dark is opt-in: following the OS gave a first-time reader a black screen of monospace capitals.",
+    "status": "ok"
+  },
+  "theme.toLight": {
+    "en": "Light",
+    "es": "Claro",
+    "where": "Theme toggle in the header, shown while the page is dark.",
+    "vars": [],
+    "status": "ok"
+  },
   "intro.p1": {
     "en": "<b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from 2025 and hid who voted which way. Now you vote.",
     "es": "<b>Los legisladores de Texas votan a favor o en contra de nuevas leyes.</b> Tomamos votos reales de 2025 y ocultamos quién votó de qué manera. Ahora vota usted.",
@@ -712,11 +860,12 @@
     "status": "ok"
   },
   "strip.noContent": {
-    "en": "NO PARTISAN CONTENT",
-    "es": "SIN CONTENIDO PARTIDISTA",
+    "en": "no partisan content",
+    "es": "sin contenido partidista",
     "where": "Label on the strip band for zero-valence votes.",
     "vars": [],
-    "status": "ok"
+    "status": "ok",
+    "note": "Stored in sentence case: it used to be capitals in the string itself, which read as a system label rather than as a chart axis."
   },
   "strip.empty": {
     "en": "Answer a vote to place the first mark.",
@@ -726,11 +875,12 @@
     "status": "ok"
   },
   "strip.candidateRecords": {
-    "en": "CANDIDATE RECORDS ON THE SAME VOTES",
-    "es": "HISTORIAL DE LOS CANDIDATOS EN LOS MISMOS VOTOS",
+    "en": "Candidate records on the same votes",
+    "es": "Historial de los candidatos en los mismos votos",
     "where": "Strip section label.",
     "vars": [],
-    "status": "ok"
+    "status": "ok",
+    "note": "Stored in sentence case: it used to be capitals in the string itself, which read as a system label rather than as a chart axis."
   },
   "strip.dotLabel": {
     "en": "{bill} {category}, you answered {answer}, position {pos}",
@@ -1458,32 +1608,36 @@
     "status": "ok"
   },
   "strip.poleD": {
-    "en": "DEMOCRATIC-CODED",
-    "es": "CODIFICADO DEMÓCRATA",
+    "en": "Democratic-coded",
+    "es": "de código demócrata",
     "where": "Strip axis label, left pole.",
     "vars": [],
-    "status": "ok"
+    "status": "ok",
+    "note": "Stored in sentence case: it used to be capitals in the string itself, which read as a system label rather than as a chart axis."
   },
   "strip.poleR": {
-    "en": "REPUBLICAN-CODED",
-    "es": "CODIFICADO REPUBLICANO",
+    "en": "Republican-coded",
+    "es": "de código republicano",
     "where": "Strip axis label, right pole.",
     "vars": [],
-    "status": "ok"
+    "status": "ok",
+    "note": "Stored in sentence case: it used to be capitals in the string itself, which read as a system label rather than as a chart axis."
   },
   "strip.poleDShort": {
-    "en": "DEM-CODED",
-    "es": "CÓD. DEMÓCRATA",
+    "en": "Dem-coded",
+    "es": "cód. demócrata",
     "where": "Strip axis label, left pole, narrow viewport.",
     "vars": [],
-    "status": "ok"
+    "status": "ok",
+    "note": "Stored in sentence case: it used to be capitals in the string itself, which read as a system label rather than as a chart axis."
   },
   "strip.poleRShort": {
-    "en": "REP-CODED",
-    "es": "CÓD. REPUBLICANO",
+    "en": "Rep-coded",
+    "es": "cód. republicano",
     "where": "Strip axis label, right pole, narrow viewport.",
     "vars": [],
-    "status": "ok"
+    "status": "ok",
+    "note": "Stored in sentence case: it used to be capitals in the string itself, which read as a system label rather than as a chart axis."
   },
   "og.eyebrow": {
     "en": "TEXAS HOUSE · {session} LEGISLATURE",

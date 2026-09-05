@@ -144,6 +144,40 @@ const EXPECT = {
 // ---------------------------------------------------------------------------
 
 let fails = 0;
+
+// The page opens on a start screen, runs one question at a time, and only shows
+// the result — and the mode switch and the profile presets, which live in it —
+// once the reader has been through the questions. These four helpers are the
+// only way this file should move between those screens.
+const onResult = (pg) => pg.evaluate(() => !document.getElementById('result-view')?.hidden);
+
+/** Load the page fresh and press Start. Replaces clicking the reset preset, */
+/** which is no longer reachable from inside the quiz. */
+async function beginQuiz(pg, url) {
+  await pg.goto(url, { waitUntil: 'networkidle' });
+  await pg.click('#start-btn');
+  await pg.waitForTimeout(200);
+}
+
+/** Answer every remaining question the same way, then land on the result. */
+async function answerAll(pg, v = 1) {
+  for (let i = 0; i < 200; i++) {
+    if (await onResult(pg)) return;
+    if (await pg.isVisible(`#q-card [data-answer="${v}"]`)) {
+      await pg.click(`#q-card [data-answer="${v}"]`);
+      await pg.waitForTimeout(60);
+      continue;
+    }
+    if (await pg.isVisible('#q-next')) { await pg.click('#q-next'); await pg.waitForTimeout(60); continue; }
+    return;
+  }
+}
+
+/** Straight to the result, which is where the presets and the mode switch are. */
+async function toResult(pg, url, v = 1) {
+  await beginQuiz(pg, url);
+  await answerAll(pg, v);
+}
 const check = (label, ok, detail = '') => {
   if (!ok) fails++;
   console.log(`  [${ok ? 'PASS' : 'FAIL'}] ${label}${detail ? '  — ' + detail : ''}`);
@@ -191,26 +225,59 @@ try {
   const insightsOnLoad = { requested: insights.requested, status: insights.status };
 
   console.log('');
-  const meta = await page.$eval('.q-meta .eyebrow', (e) => e.textContent.trim());
-  check('boots in 7-issue mode', /^1 of 7 /.test(meta), meta);
-  check('question 1 is SB 2, school vouchers', /SB 2 · School vouchers/.test(meta), meta);
+  // The opening screen exists and asks for one tap, not a reading.
+  const startWords = await page.$eval('#start-view', (e) =>
+    (e.innerText.trim().match(/\S+/g) ?? []).length);
+  check('the page opens on a start screen with a Start button',
+    Boolean(await page.$('#start-btn')) && !(await page.$eval('#start-view', (e) => e.hidden)));
+  check('the opening screen is short enough to read', startWords < 60, `${startWords} words`);
+  check('no question is on screen before Start is pressed',
+    (await page.$$('#q-card [data-answer]')).length === 0 ||
+    !(await page.isVisible('#q-card [data-answer="1"]')));
+
+  await page.click('#start-btn');
+  await page.waitForTimeout(250);
+
+  const meta = await page.$eval('.q-top', (e) => e.textContent.replace(/\s+/g, ' ').trim());
+  check('boots in 7-issue mode', /^1 of 7/.test(meta), meta);
+  check('question 1 is the school voucher vote', /School vouchers/.test(meta), meta);
   check('the reason for the pick is shown',
-    /marquee fight/i.test(await page.$eval('.headline-why', (e) => e.textContent.trim())));
+    /marquee fight/i.test(await page.$eval('.q-why', (e) => e.textContent.trim())));
 
   // --- the plain-language gloss ---------------------------------------------
   // The one field on the page written by us rather than copied from the record.
   // In a blind quiz the wording IS the question, so the reader must be able to
   // see which words are the state's and which are ours — the official caption
   // has to remain present, and the gloss has to be labelled.
-  const plain = await page.$eval('.q-plain', (e) => e.textContent.replace(/\s+/g, ' ').trim());
-  check('SB 2 carries a plain-language description',
-    /education savings|state-funded accounts/i.test(plain), plain.slice(0, 70));
-  check('the gloss is labelled as ours, not the official text',
-    /In plain terms/i.test(plain) && /not the official text/i.test(plain), plain.slice(-60));
-  check('the official caption is still shown above it',
-    /Relating to the establishment of an education savings account program/i.test(
-      await page.$eval('.q-caption', (e) => e.textContent),
-    ));
+  // The question a reader is asked is now the plain-language one. The official
+  // caption used to be the headline, in bold, up to 42 words of it, with the
+  // readable version fifth on the card.
+  const asked = await page.$eval('.q-ask', (e) => e.textContent.replace(/\s+/g, ' ').trim());
+  check('the question asked is the plain-language one',
+    /state-funded accounts/i.test(asked) && !/^Relating to/i.test(asked), asked.slice(0, 66));
+  check('the official caption is NOT the headline',
+    !(await page.$('.q-ask[lang="en"]')) ||
+      !/Relating to the establishment/i.test(asked));
+
+  // It is still one tap away, and it still says whose words are whose — that
+  // labelling used to sit beside the gloss and would otherwise have been lost
+  // when the gloss became the question.
+  check('the official wording is not on screen until asked for',
+    (await page.$$('.q-caption')).length === 0);
+  await page.click('#official-btn');
+  await page.waitForTimeout(200);
+  const official = await page.$eval('.q-caption', (e) => e.textContent);
+  check('the official caption is one tap away',
+    /Relating to the establishment of an education savings account program/i.test(official),
+    official.replace(/\s+/g, ' ').slice(0, 60));
+  const officialNote = await page.$eval('.q-official .q-note', (e) => e.textContent.replace(/\s+/g, ' '));
+  check('it says which words are ours and which are the record\'s',
+    /our plain-language summary/i.test(officialNote) && /word for word/i.test(officialNote),
+    officialNote.slice(0, 74));
+  check('the official caption is marked as English on both pages',
+    await page.$eval('.q-caption', (e) => e.getAttribute('lang')) === 'en');
+  await page.click('#official-btn');
+  await page.waitForTimeout(150);
 
   // Showing a state ranking before the vote would steer the answer, which is the
   // one thing a blind quiz cannot do.
@@ -242,10 +309,20 @@ try {
     revRows.map((r) => `${r.vote}/${r.match}`).join(' | '));
   const revSum = await page.$eval('.cand-rev-sum', (e) => e.textContent.replace(/\s+/g, ' ').trim());
   check('the summary counts 3 of 3 and echoes your own answer',
-    /3 of 3/.test(revSum) && /You said Nay/.test(revSum), revSum);
+    /3 of 3/.test(revSum) && /You said No/.test(revSum), revSum);
+  check('the reader\'s own answer is not given the record\'s word for it',
+    !/You said Nay/.test(revSum), revSum);
+
+  // The reveal belongs to the question just answered, and holds until Next.
+  check('answering holds the card rather than advancing',
+    (await page.$$('#q-card [data-answer]')).length === 0 && Boolean(await page.$('#q-next')));
+  const stillQ1 = await page.$eval('.q-top', (e) => e.textContent.replace(/\s+/g, ' ').trim());
+  check('the reveal sits under the question it belongs to', /^1 of 7/.test(stillQ1), stillQ1);
 
   // Answer the opposite way on Q2 so the disagreement branch is exercised too —
   // a reveal that can only render agreement proves nothing.
+  await page.click('#q-next');
+  await page.waitForTimeout(200);
   await page.click('[data-answer="1"]');
   await page.waitForTimeout(350);
   const diffRows = await page.$$eval('.cand-revs:not(.rep-revs) .cand-rev', (rs) => rs.map((r) => r.className + '|' +
@@ -257,13 +334,14 @@ try {
 
   // An absence is a fact about the record, not a position. It must never be
   // counted as disagreement, and it must not enter the denominator.
-  await page.click('[data-preset="reset"]');
-  await page.waitForTimeout(200);
+  await toResult(page, URL_UNDER_TEST);
   await page.click('#mode-full');
   await page.waitForTimeout(400);
   let absence = null;
-  for (let i = 0; i < 40 && !absence; i++) {
-    await page.click('[data-answer="1"]');
+  for (let i = 0; i < 80 && !absence; i++) {
+    if (await page.isVisible('#q-next')) { await page.click('#q-next'); await page.waitForTimeout(50); }
+    if (!(await page.isVisible('#q-card [data-answer="1"]'))) break;
+    await page.click('#q-card [data-answer="1"]');
     await page.waitForTimeout(60);
     const none = await page.$$eval('.cand-revs:not(.rep-revs) .cand-rev.cr-none', (rs) =>
       rs.map((r) => r.querySelector('.cr-vote').textContent.trim() + '|' +
@@ -284,10 +362,11 @@ try {
       absence.sum);
   }
 
-  await page.click('[data-preset="reset"]');
-  await page.waitForTimeout(200);
-  await page.click('#mode-short');
-  await page.waitForTimeout(350);
+  // A fresh load IS the seven-issue mode, and lands in the quiz. Clicking
+  // #mode-short from the result does nothing when the mode has not changed —
+  // setMode returns early — which would leave the run stranded on the result
+  // view with no question to answer.
+  await beginQuiz(page, URL_UNDER_TEST);
 
   // --- balance: both parties, and the opponents ------------------------------
   // Three Democrats alone made the reveal read as a panel. The caucus split is
@@ -373,10 +452,14 @@ try {
   // evidence model exists to surface.
   let sb3 = null;
   for (let i = 0; i < 8 && !sb3; i++) {
-    const meta = await page.$eval('.q-meta .eyebrow', (e) => e.textContent);
-    await page.click('[data-answer="-1"]');
-    await page.waitForTimeout(160);
-    if (/SB 3 /.test(meta)) {
+    if (await page.isVisible('#q-next')) { await page.click('#q-next'); await page.waitForTimeout(120); }
+    if (!(await page.isVisible('#q-card [data-answer="-1"]'))) break;
+    await page.click('#q-card [data-answer="-1"]');
+    await page.waitForTimeout(200);
+    // Which bill was that? The reveal names it, and the reveal is now attached
+    // to the question just answered rather than to the one after it.
+    const meta = await page.$eval('.cand-reveal .outc-cat', (e) => e.textContent);
+    if (/SB 3\b/.test(meta)) {
       sb3 = await page.$$eval('.opp-row', (rs) =>
         rs.map((r) => ({
           who: r.querySelector('.opp-name').textContent.trim(),
@@ -525,8 +608,9 @@ try {
   }
   await page.setViewportSize({ width: 1180, height: 1000 });
   await page.waitForTimeout(200);
-  await page.click('[data-preset="reset"]');
-  await page.waitForTimeout(250);
+  // The profile presets are result-view controls, so the run has to be on the
+  // result before it can click one.
+  await toResult(page, URL_UNDER_TEST);
 
   for (const [name, want] of Object.entries(EXPECT)) {
     await page.click(`[data-preset="${name}"]`);
@@ -547,12 +631,12 @@ try {
     }
   }
 
-  await page.click('[data-preset="reset"]');
-  await page.waitForTimeout(200);
+  // Clear now returns to the opening screen; the mode switch is in the result.
+  await toResult(page, URL_UNDER_TEST);
   await page.click('#mode-full');
   await page.waitForTimeout(400);
-  const fullMeta = await page.$eval('.q-meta .eyebrow', (e) => e.textContent.trim());
-  const total = /^1 of (\d+) /.exec(fullMeta)?.[1];
+  const fullMeta = await page.$eval('.q-count', (e) => e.textContent.trim());
+  const total = /^1 of (\d+)$/.exec(fullMeta)?.[1];
   check('full mode offers the whole item set', Number(total) > 7, fullMeta);
   // Read the headline value and its caption separately: the caption carries the
   // rule version now that the value says "a written rule" in plain language.
@@ -576,9 +660,13 @@ try {
     `${prov[3].value} / ${prov[3].caption}`);
 
   for (let i = 0; i < 6; i++) {
-    await page.click('[data-answer="1"]');
+    if (await page.isVisible('#q-next')) { await page.click('#q-next'); await page.waitForTimeout(60); }
+    if (!(await page.isVisible('#q-card [data-answer="1"]'))) break;
+    await page.click('#q-card [data-answer="1"]');
     await page.waitForTimeout(90);
   }
+  // The outcomes live in the result view, which is where a reader ends up.
+  await answerAll(page);
   await page.waitForTimeout(300);
   check('outcomes appear after answering', !(await page.$eval('#outcome-card', (e) => e.hidden)));
   const rows = await page.$$eval('.outc-row', (ds) => ds.length);
@@ -666,14 +754,23 @@ try {
       performance.getEntriesByType('resource').some((r) => /zips_89R/.test(r.name)));
     check('rep: the ZIP crosswalk is not fetched on load', !earlyZips);
 
+    await toResult(page, URL_UNDER_TEST);
     await page.click('#mode-full');
     await page.waitForTimeout(300);
     for (let i = 0; i < 15; i++) {
-      const btn = await page.$('#q-card button[data-answer="1"]');
-      if (!btn) break;
-      await btn.click();
+      if (await page.isVisible('#q-next')) { await page.click('#q-next'); await page.waitForTimeout(50); }
+      if (!(await page.isVisible('#q-card button[data-answer="1"]'))) break;
+      await page.click('#q-card button[data-answer="1"]');
       await page.waitForTimeout(70);
     }
+    // Stop early rather than answering all 67. This is the affordance a reader
+    // needs too: the estimator shrinks a thin answer set toward zero and says
+    // so, which is a better deal than withholding the result until question 67.
+    check('a reader can leave the questions early once a few are answered',
+      await page.isVisible('#q-result-now'));
+    if (await page.isVisible('#q-result-now')) await page.click('#q-result-now');
+    await page.waitForTimeout(300);
+    check('the early exit lands on the result', await onResult(page));
 
     const input = await page.$('#rep-district');
     check('rep: the district input appears once answers exist', Boolean(input));
@@ -910,17 +1007,22 @@ try {
       seen.push(`${r.method()} ${u}`);
     };
 
-    // Start from a clean page so load-time asset requests are not counted.
+    // Start from a clean page so load-time asset requests are not counted,
+    // then press Start: a reload lands on the opening screen, and answering
+    // nothing is exactly how this check goes vacuously green.
     await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
     await page.waitForTimeout(400);
+    await page.click('#start-btn');
+    await page.waitForTimeout(200);
     const before = await page.$eval('.readout-caveat.mono', (e) => e.textContent.trim());
 
     page.on('request', record);
     let answered = 0;
     for (let i = 0; i < 5; i++) {
-      const btn = await page.$('#q-card button[data-answer="1"]');
-      if (!btn) break;
-      await btn.click();
+      // Advance past the reveal: answering holds the card until Next.
+      if (await page.isVisible('#q-next')) { await page.click('#q-next'); await page.waitForTimeout(80); }
+      if (!(await page.isVisible('#q-card button[data-answer="1"]'))) break;
+      await page.click('#q-card button[data-answer="1"]');
       await page.waitForTimeout(150);
       answered++;
     }
@@ -1040,6 +1142,10 @@ try {
 
     // The record stays the record. A translated caption is not the caption, and
     // the lang attribute is what makes a screen reader switch voice for it.
+    await esPage.click('#start-btn');
+    await esPage.waitForTimeout(200);
+    await esPage.click('#official-btn');
+    await esPage.waitForTimeout(200);
     const cap = await esPage.$eval('.q-caption', (e) => ({ text: e.textContent.trim(), lang: e.lang }));
     check('es: official caption is still English', /^Relating to/i.test(cap.text), cap.text.slice(0, 56));
     check('es: official caption carries lang="en"', cap.lang === 'en', cap.lang || '(unset)');
@@ -1064,8 +1170,20 @@ try {
     // ENGLISH page too when this compared exact case, which made them pass for
     // the wrong reason. Asserted against the English page below so the check
     // cannot go vacuous again if the copy is reworded.
-    const bodyOf = async (pg) =>
-      (await pg.$eval('body', (e) => e.innerText)).replace(/\s+/g, ' ').toLowerCase();
+    const bodyOf = async (pg) => {
+      const text = await pg.evaluate(() => {
+        const ids = ['start-view', 'quiz-view', 'result-view', 'start-how-panel', 'table-panel'];
+        const was = ids.map((id) => {
+          const e = document.getElementById(id);
+          return { e, hidden: e ? e.hidden : null };
+        });
+        for (const w of was) if (w.e) w.e.hidden = false;
+        const out = document.body.innerText;
+        for (const w of was) if (w.e && w.hidden !== null) w.e.hidden = w.hidden;
+        return out;
+      });
+      return text.replace(/\s+/g, ' ').toLowerCase();
+    };
     // Every phrase here must render in BOTH modes and on every question, since
     // the page has been switched to full mode by the checks above. An earlier
     // list included "the seven biggest fights" (7-issue mode only) and "in plain
@@ -1074,7 +1192,7 @@ try {
     const PHRASES = [
       "doesn't this favour", 'who made this, who paid',
       'texas lawmakers vote yes or no', 'from each caucus',
-      'official bill caption', 'straight from the record',
+      'official caption, word for word', 'straight from the record',
       'which way you lean', 'how this is built',
       'of your answers land on the opposite side',
       // Both of these leaked past an earlier version of this list and were only
@@ -1084,6 +1202,39 @@ try {
       // missed them.
       'democratic-coded', 'republican-coded',
     ];
+    // Drive both to the result, in full mode, with the disclosures open: that
+    // is the state that actually contains the chrome this test is looking for.
+    // Comparing two start screens would pass by having almost no text at all.
+    const expose = async (pg) => {
+      await pg.click('#start-btn').catch(() => {});
+      await pg.waitForTimeout(150);
+      await pg.click('#official-btn').catch(() => {});
+      await pg.waitForTimeout(100);
+      for (let i = 0; i < 200; i++) {
+        if (!(await pg.evaluate(() => !document.getElementById('result-view')?.hidden))) {
+          if (await pg.isVisible('#q-next')) { await pg.click('#q-next'); await pg.waitForTimeout(40); continue; }
+          if (await pg.isVisible('#q-card [data-answer="1"]')) {
+            await pg.click('#q-card [data-answer="1"]'); await pg.waitForTimeout(40); continue;
+          }
+        }
+        break;
+      }
+      await pg.click('#mode-full').catch(() => {});
+      await pg.waitForTimeout(300);
+      for (let i = 0; i < 200; i++) {
+        if (await pg.evaluate(() => !document.getElementById('result-view')?.hidden)) break;
+        if (await pg.isVisible('#q-next')) { await pg.click('#q-next'); await pg.waitForTimeout(30); continue; }
+        if (await pg.isVisible('#q-card [data-answer="1"]')) {
+          await pg.click('#q-card [data-answer="1"]'); await pg.waitForTimeout(30); continue;
+        }
+        break;
+      }
+      await pg.click('#table-toggle').catch(() => {});
+      await pg.waitForTimeout(200);
+    };
+    await expose(page);
+    await expose(esPage);
+
     const enBody = await bodyOf(page);
     const notOnEnglish = PHRASES.filter((p) => !enBody.includes(p));
     check('es: the leak phrases are all really on the English page',

@@ -97,7 +97,12 @@ let mode: Mode = 'short';
 let answers: AnswerMap = {};
 let cursor = 0;
 let tableOpen = false;
-let receiptOpen = false;
+// Whether the official bill caption is disclosed on the current card. Replaces
+// receiptOpen: the per-question "receipt" (R yea / D yea / valence / source) was
+// the partisan breakdown, and showing it beside an unanswered question tells the
+// reader which way their side voted. It moves to the result, where the table
+// already carries the same numbers for every item.
+let officialOpen = false;
 // Comparators stay closed until asked for; the three races come first.
 let comparatorsOpen = false;
 // The district the reader looked up, and the loaded record. Kept as state so the
@@ -110,6 +115,28 @@ let repQuery = '';
 // Whether the lookup's inputs have been built. The result region re-renders
 // freely; the inputs must not, or typing loses focus.
 let repShell = false;
+
+/**
+ * Which of the three screens is showing.
+ *
+ * The page used to render everything at once: the explainer, the provenance
+ * grid, the mode switch, an empty chart, then the question. That put 311 words
+ * and 2.7 phone screens in front of the first tap, and a reader who does not
+ * follow politics simply stopped. Now the trust apparatus still exists, in full,
+ * but it sits AFTER the thing it is meant to earn trust for.
+ */
+type View = 'start' | 'quiz' | 'result';
+let view: View = 'start';
+
+/**
+ * The item whose answer is currently being revealed.
+ *
+ * Answering no longer advances straight to the next question. The reveal used
+ * to render inside the NEXT card, so the three candidates' votes appeared under
+ * a question they had nothing to do with. Now an answer holds the card, shows
+ * what the three did on the vote just answered, and waits for Next.
+ */
+let revealFor: string | null = null;
 // The ZIP path. Kept separate from repDistrict because a ZIP can be an ANSWER
 // (one district) or a QUESTION (several), and the panel has to say which.
 let repZip = '';
@@ -151,7 +178,11 @@ function buildQueue(): QuizItem[] {
   return out;
 }
 
-const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
+const el = <T extends HTMLElement = HTMLElement>(id: string): T => {
+  const found = document.getElementById(id);
+  if (!found) throw new Error(`no element with id "${id}" — the markup and main.ts disagree`);
+  return found as T;
+};
 // Sign the number, but never sign a zero: a perfectly balanced answer set is a
 // real outcome of the "mixed" pattern, and rendering it "−0.00" reads as a bug.
 const fmt = (v: number, d = 2) => {
@@ -308,7 +339,7 @@ function showTip(ev: Event, m: Mark): void {
   const i = m.item;
   tip.innerHTML =
     `<div class="tip-t">${esc(i.billId)} · ${esc(pes.categoryName(i.category))}</div>` +
-    `<div style="color:var(--ink-2)">${esc(t('tip.youAnswered'))} <strong>${esc(t(m.answer === 1 ? 'vote.yea' : 'vote.nay'))}</strong></div>` +
+    `<div style="color:var(--ink-2)">${esc(t('tip.youAnswered'))} <strong>${esc(t(m.answer === 1 ? 'vote.yes' : 'vote.no'))}</strong></div>` +
     `<dl><dt>${esc(t('tip.rYea'))}</dt><dd>${i.rYea === null ? '—' : pct(i.rYea)}</dd>` +
     `<dt>${esc(t('tip.dYea'))}</dt><dd>${i.dYea === null ? '—' : pct(i.dYea)}</dd>` +
     `<dt>${esc(t('q.valenceRow'))}</dt><dd>${i.valence === null ? '—' : fmt(i.valence)}</dd>` +
@@ -451,6 +482,28 @@ function renderReadout(p: PartisanProfile): void {
     `<div class="readout-caveat">${esc(d.caveat)}</div>` +
     `<div class="readout-caveat mono">` +
     `${esc(t('readout.answered', { n: p.n, total: activeItems().length }))}</div>`;
+
+  // A reader who took the early exit, or who switched to all 67, needs a way
+  // back in. Without it the result is a dead end and the remaining questions
+  // are unreachable.
+  const left = activeItems().length - countAnswered();
+  if (left > 0 && view === 'result') {
+    const b = document.createElement('button');
+    b.className = 'ghost keep-going';
+    b.type = 'button';
+    b.textContent = t('result.keepGoing', { left });
+    b.addEventListener('click', () => {
+      // Resume at the first question with no answer rather than at the top.
+      const next = queue.findIndex((it) => answers[it.id] !== 1 && answers[it.id] !== -1);
+      cursor = next < 0 ? 0 : next;
+      revealFor = null;
+      view = 'quiz';
+      showView();
+      render();
+      window.scrollTo(0, 0);
+    });
+    el('readout').appendChild(b);
+  }
 }
 
 /**
@@ -570,7 +623,7 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
     `<div class="outc-cat">${esc(t('rev.threeRaces', { bill: item.billId }))}</div>` +
     `<ul class="cand-revs">${rows}</ul>` +
     `<div class="cand-rev-sum">${summary} ` +
-    `${t('rev.youSaidVote', { vote: esc(t(yourAnswer === 1 ? 'vote.yea' : 'vote.nay')) })}</div>` +
+    `${t('rev.youSaidVote', { vote: esc(t(yourAnswer === 1 ? 'vote.yes' : 'vote.no')) })}</div>` +
     // Collapsed by default. The six comparators exist so the page is not one-sided,
     // but on screen at all times they buried the three races the page is actually
     // about. Balance has to be available, not dominant.
@@ -638,93 +691,125 @@ function opponentReveal(item: QuizItem, yourAnswer: 1 | -1): string {
   );
 }
 
+/**
+ * One question, filling the screen, in the reader's own language.
+ *
+ * THE ORDER IS THE WHOLE FIX. This card used to open with the bill's official
+ * caption — up to 42 words of "Relating to agreements between certain sheriffs
+ * and the United States Immigration and Customs Enforcement…" — set in bold as
+ * though it were the headline, with the plain-language rewrite fifth, in a
+ * sidebar, under a monospace label. The legalese is the authority but it is not
+ * the question. It is now one tap away and still carries the vote counts.
+ *
+ * Only 7 of the 67 items have a plain rewrite, and those 7 are the default
+ * quiz. Where one does not exist the official caption asks the question and
+ * says so, rather than pretending to be friendly.
+ */
+/** How many real answers exist. A skip is not an answer. */
+function countAnswered(): number {
+  return Object.values(answers).filter((v) => v === 1 || v === -1).length;
+}
+
 function renderQuestion(): void {
   const c = el('q-card');
-  if (cursor >= queue.length) {
-    c.innerHTML =
-      `<div class="eyebrow">${esc(t('q.doneEyebrow'))}</div>` +
-      `<div class="q-caption">${esc(t('q.doneCaption', { n: queue.length }))}</div>` +
-      `<div class="q-sub">${esc(t('q.doneSub'))}</div>` +
-      `<div class="q-actions"><button data-preset="reset">${esc(t('q.startOver'))}</button></div>`;
-    bindPresets();
-    return;
-  }
-  // Prose only — the official caption is untouched by pes.itemProse.
+  if (cursor >= queue.length) { view = 'result'; showView(); return; }
+
   const it = pes.itemProse(queue[cursor]);
-  const prev = cursor > 0 ? queue[cursor - 1] : null;
-  // Outcomes reveal only AFTER an answer. Showing "Texas ranks 47th" beside an
-  // education question would tell the reader how to vote.
-  const prevAnswered = prev && (answers[prev.id] === 1 || answers[prev.id] === -1);
-  const prevOut = prevAnswered
-    ? (() => {
-      const found = DATA.outcomes.find((o) => o.category === prev!.category);
-      return found ? pes.outcome(found) : undefined;
-    })()
-    : undefined;
+  const answered = revealFor === queue[cursor].id;
+  const mine = answers[queue[cursor].id];
+  const last = cursor === queue.length - 1;
+  const asked = it.plain || it.caption;
 
   c.innerHTML =
-    `<div class="q-meta"><div class="eyebrow">` +
-    `${esc(t('q.counter', { i: cursor + 1, n: queue.length }))} · ${esc(it.billId)} · ` +
-    `${esc(it.label || pes.categoryName(it.category))}</div>` +
-    `<div class="eyebrow">${esc(t('q.blind'))}</div></div>` +
-    // The caption is the official record, copied word for word, and is NEVER
-    // translated. On the Spanish page it stays English and carries lang="en" so
-    // a screen reader switches voice for it — see official_text_rule in
-    // i18n/copy.json. A Spanish rendering ships beside it, not instead of it.
-    `<div class="q-caption" lang="en">${esc(it.caption)}</div>` +
-    `<div class="q-sub">${esc(t('q.caption', { yeas: it.yeas, nays: it.nays }))}</div>` +
-    // Ours, not the record's — so it is labelled, and it sits BELOW the official
-    // caption instead of replacing it. In a blind quiz the wording is the
-    // question, so the reader has to be able to see which words are whose.
-    (it.plain
-      ? `<div class="q-plain"><span class="q-plain-tag">${esc(t('q.plainTag'))}</span>${esc(it.plain)}` +
-        `<small>${esc(t('q.plainNote'))}</small></div>`
+    `<div class="q-top"><span class="q-count">${
+      esc(t('q.counter', { i: cursor + 1, n: queue.length }))}</span>` +
+    `<span class="q-cat">${esc(it.label || pes.categoryName(it.category))}</span></div>` +
+    `<div class="progress"><span style="width:${
+      (100 * (cursor + (answered ? 1 : 0))) / queue.length}%"></span></div>` +
+
+    // The question, in the largest type on the page.
+    `<h2 class="q-ask"${it.plain ? '' : ' lang="en"'}>${esc(asked)}</h2>` +
+    (it.plain ? '' : `<p class="q-note">${esc(t('q.askedAs'))}</p>`) +
+    (it.why ? `<p class="q-why">${esc(it.why)}</p>` : '') +
+
+    (answered
+      ? ''
+      : `<div class="q-actions">` +
+        `<button class="vote" data-answer="1">${esc(t('vote.yes'))}</button>` +
+        `<button class="vote" data-answer="-1">${esc(t('vote.no'))}</button>` +
+        `<button class="ghost small" data-answer="0">${esc(t('q.skip'))}</button>` +
+        `</div>`) +
+
+    (answered && (mine === 1 || mine === -1)
+      ? `<div class="q-reveal">` +
+        `<p class="q-yousaid">${esc(t('q.youSaid', {
+          vote: t(mine === 1 ? 'vote.yes' : 'vote.no'),
+        }))}</p>` +
+        candidateReveal(queue[cursor], mine as 1 | -1) +
+        `</div>`
       : '') +
-    (it.why
-      ? `<div class="headline-why"><b>${esc(t('q.whyThis'))}</b> ${esc(it.why)}</div>`
+
+    // Disclosure, not preamble, and last: the official caption is the record
+    // and is what the score is computed from, but it is not the question. It
+    // stays untranslated on the Spanish page and carries lang="en" so a screen
+    // reader switches voice — see official_text_rule in i18n/copy.json.
+    `<div class="q-official">` +
+    `<button class="ghost small" id="official-btn" aria-expanded="${officialOpen}">` +
+    `${esc(t(officialOpen ? 'q.hideOfficial' : 'q.showOfficial'))}</button>` +
+    (officialOpen
+      ? `<div class="q-caption" lang="en">${esc(it.caption)}</div>` +
+        `<p class="q-note">${esc(t('q.officialNote', { yeas: it.yeas, nays: it.nays }))}</p>`
       : '') +
-    `<div class="q-actions">` +
-    `<button data-answer="1">${esc(t('vote.yea'))}</button>` +
-    `<button data-answer="-1">${esc(t('vote.nay'))}</button>` +
-    `<button class="ghost" data-answer="0">${esc(t('q.skip'))}</button>` +
-    `<button class="ghost" id="receipt-btn">` +
-    `${esc(t(receiptOpen ? 'q.hideReceipt' : 'q.showReceipt'))}</button></div>` +
-    `<div class="receipt${receiptOpen ? ' on' : ''}">` +
-    `<strong>${esc(t('q.receiptHead'))}</strong> ${esc(t('q.receiptBody'))}` +
-    `<dl><dt>${esc(t('q.rYea'))}</dt><dd>${it.rYea === null ? '—' : pct(it.rYea)}</dd>` +
-    `<dt>${esc(t('q.dYea'))}</dt><dd>${it.dYea === null ? '—' : pct(it.dYea)}</dd>` +
-    `<dt>${esc(t('q.valenceRow'))}</dt><dd>${it.valence === null ? '—' : fmt(it.valence)}</dd>` +
-    // `it.src` is the literal token the table column shows ("journal"/"scrape"),
-    // so it stays untranslated: method.words.body names those exact words.
-    `<dt>${esc(t('rev.source'))}</dt><dd>${it.src}${it.rec ? ` · RV ${it.rec}` : ''}</dd>` +
-    `</dl></div>` +
-    (prevAnswered ? candidateReveal(prev!, answers[prev!.id] as 1 | -1) : '') +
-    (prevOut
-      ? `<div class="reveal"><div class="outc-cat">` +
-        `${esc(t('rev.outcomeHead', { category: pes.categoryName(prevOut.category).toLowerCase() }))}</div>` +
-        `<b>${esc(prevOut.value)}</b> — ${esc(prevOut.comparison)}` +
-        (prevOut.rank ? ` <span class="outc-rank st-${prevOut.standing}">${esc(prevOut.rank)}</span>` : '') +
-        `<div class="outc-src">${esc(prevOut.sourceName)} · ${esc(prevOut.year)}</div></div>`
+    `</div>` +
+
+    (answered
+      ? `<div class="q-actions"><button class="vote next" id="q-next">${
+        esc(t(last ? 'q.seeResult' : 'q.next'))}</button></div>`
       : '') +
-    `<div class="progress"><span style="width:${(100 * cursor) / queue.length}%"></span></div>`;
+
+    // An exit, once there is something to show. 67 questions is a long way to
+    // ask someone to go before they see anything, and the estimator already
+    // handles thin evidence honestly rather than pretending a few answers are
+    // a verdict.
+    (!last && countAnswered() >= 3
+      ? `<div class="q-actions"><button class="ghost small" id="q-result-now">${
+        esc(t('q.resultNow'))}</button></div>`
+      : '');
 
   c.querySelectorAll<HTMLButtonElement>('[data-answer]').forEach((b) => {
     b.addEventListener('click', () => {
-      const v = parseInt(b.dataset.answer!, 10);
-      if (v !== 0) answers[it.id] = v as 1 | -1;
-      else delete answers[it.id];
-      cursor++;
+      const v = Number(b.dataset.answer) as 1 | -1 | 0;
+      answers[queue[cursor].id] = v;
+      // A skip has nothing to reveal, so it moves straight on.
+      if (v === 0) {
+        cursor++;
+        if (cursor >= queue.length) { view = 'result'; showView(); }
+      } else {
+        revealFor = queue[cursor].id;
+      }
       render();
     });
   });
-  el('receipt-btn').addEventListener('click', () => { receiptOpen = !receiptOpen; render(); });
-  // <details> keeps its own state, but the card is re-rendered on every answer, so
-  // the choice has to be remembered or it snaps shut mid-quiz.
-  document.querySelectorAll<HTMLDetailsElement>('details.cmp').forEach((d) => {
-    d.addEventListener('toggle', () => { comparatorsOpen = d.open; });
+
+  document.getElementById('q-next')?.addEventListener('click', () => {
+    cursor++;
+    revealFor = null;
+    if (cursor >= queue.length) { view = 'result'; showView(); window.scrollTo(0, 0); }
+    render();
+  });
+
+  document.getElementById('q-result-now')?.addEventListener('click', () => {
+    view = 'result';
+    showView();
+    render();
+    window.scrollTo(0, 0);
+  });
+
+  document.getElementById('official-btn')?.addEventListener('click', () => {
+    officialOpen = !officialOpen;
+    render();
   });
 }
-
 function renderCands(): void {
   el('cands').innerHTML = CANDIDATES.map((c) => {
     const r = scoreOf(adapted, c.id, answers);
@@ -853,6 +938,77 @@ function renderBias(): void {
  * into and dropped focus after the first keystroke. Typing "147" was impossible.
  * The shell is built once; only the result region re-renders.
  */
+/**
+ * Dark mode, asked for rather than assumed.
+ *
+ * Deliberately NOT wired to prefers-color-scheme: see the note in styles.css.
+ * The choice is per-browser and stored locally; nothing about it is sent
+ * anywhere, which keeps the page's claim that it transmits nothing true.
+ */
+function showView(): void {
+  const set = (id: string, on: boolean) => {
+    const e = document.getElementById(id);
+    if (e) e.hidden = !on;
+  };
+  set('start-view', view === 'start');
+  set('quiz-view', view === 'quiz');
+  set('result-view', view === 'result');
+}
+
+/** The opening screen: a title, a line, and a button. */
+function bindStart(): void {
+  const go = document.getElementById('start-btn');
+  go?.addEventListener('click', () => {
+    view = 'quiz';
+    cursor = 0;
+    revealFor = null;
+    showView();
+    render();
+    window.scrollTo(0, 0);
+  });
+
+  // The old introduction, kept in full but folded away. It is a good
+  // explanation; it was just standing in the doorway.
+  const how = document.getElementById('start-how');
+  const panel = document.getElementById('start-how-panel');
+  how?.addEventListener('click', () => {
+    if (!panel) return;
+    const open = panel.hidden;
+    panel.hidden = !open;
+    how.setAttribute('aria-expanded', String(open));
+    how.textContent = t(open ? 'start.hide' : 'start.how');
+  });
+}
+
+function renderTheme(): void {
+  const KEY = 'theme';
+  let saved: string | null = null;
+  try { saved = localStorage.getItem(KEY); } catch { /* private mode: light it is */ }
+  const apply = (mode: 'light' | 'dark') => {
+    document.documentElement.setAttribute('data-theme', mode);
+    btn.textContent = mode === 'dark' ? t('theme.toLight') : t('theme.toDark');
+    btn.setAttribute('aria-pressed', String(mode === 'dark'));
+  };
+
+  // Never el('...').parentElement here. That is what this line used to be, and
+  // when the header it named was removed the whole module threw on start-up:
+  // no Start button handler, no quiz, and a page that looked fine in a
+  // screenshot because the opening screen is static markup.
+  const host = document.querySelector('.langswitch') ?? document.querySelector('.topbar');
+  if (!host) return;
+  const btn = document.createElement('button');
+  btn.className = 'themetoggle';
+  btn.type = 'button';
+  host.appendChild(btn);
+
+  apply(saved === 'dark' ? 'dark' : 'light');
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    apply(next);
+    try { localStorage.setItem(KEY, next); } catch { /* nothing to remember it with */ }
+  });
+}
+
 function renderRep(): void {
   const c = el('rep-card');
   const answered = Object.values(answers).filter((v) => v === 1 || v === -1).length;
@@ -1187,12 +1343,20 @@ function bindPresets(): void {
     if (b._bound) return;
     b._bound = true;
     b.addEventListener('click', () => {
+      const reset = b.dataset.preset === 'reset';
       // Presets always run on the full set: the seven headline votes contain a
       // single low-valence bill, so a "low-signal" demo has nothing to work with.
-      if (b.dataset.preset !== 'reset') setMode('full', false);
+      if (!reset) setMode('full', false);
       answers = PRESETS[b.dataset.preset!]();
-      cursor = b.dataset.preset === 'reset' ? 0 : queue.length;
+      cursor = reset ? 0 : queue.length;
+      // Clear returns to the opening screen, because an empty answer set has no
+      // result to show; a profile fills the answers, so it lands on the result
+      // it exists to demonstrate.
+      view = reset ? 'start' : 'result';
+      revealFor = null;
+      showView();
       render();
+      window.scrollTo(0, 0);
     });
   });
 }
@@ -1206,7 +1370,18 @@ function setMode(m: Mode, doRender = true): void {
   cursor = 0;
   adapted = adapt(activeItems());
   queue = buildQueue();
-  if (doRender) render();
+  // Switching the question set is a request for more questions, so it goes back
+  // to the quiz rather than leaving the reader on a result computed from
+  // answers that no longer exist. Reached from the result view, where the
+  // switch now lives, "All 67 votes" reads as "keep going" — which is what it
+  // does.
+  if (doRender) {
+    view = 'quiz';
+    revealFor = null;
+    showView();
+    render();
+    window.scrollTo(0, 0);
+  }
 }
 
 function render(): void {
@@ -1247,6 +1422,11 @@ window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (
 
 queue = buildQueue();
 render();
+// Once, at module level. It appends a control to the header, so calling it from
+// render() would add another button on every keystroke.
+renderTheme();
+bindStart();
+showView();
 
 /**
  * Page-view counting, and nothing else.

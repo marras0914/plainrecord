@@ -382,7 +382,16 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
 
   // The language switch goes FIRST, before the eyebrow: someone who cannot read
   // this page needs the way out before anything else.
-  html = html.replace(/(<header>\s*)/, `$1${langSwitch(locale)}\n    `);
+  // Both of these go where the markup SAYS they go. Positioning them by regex
+  // against <header> meant that renaming the header dropped the language switch
+  // from every page while the build still reported success.
+  const fill = (marker, content) => {
+    if (!html.includes(marker)) {
+      throw new Error(`src/index.html no longer contains ${marker} — nothing would be injected`);
+    }
+    html = html.replace(marker, content);
+  };
+  fill('<!--LANG_SWITCH-->', langSwitch(locale));
 
   // The translation notice goes LAST inside <header>, after the explainer.
   //
@@ -391,7 +400,7 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
   // the page had said what it was. A caveat is only useful once the reader knows
   // what it is a caveat about, so it now follows the explainer rather than
   // preceding everything.
-  html = html.replace(/(\s*<\/header>)/, `\n    ${translationNotice(locale)}$1`);
+  fill('<!--TRANSLATION_NOTICE-->', translationNotice(locale));
 
   const target = locale === 'es'
     ? resolve(DIST, 'es', 'index.html')
