@@ -208,6 +208,7 @@ asserted empty by `npm run i18n:sidecar`. The Spanish page says so on screen.
 | the leak phrases themselves | the leak test going vacuous. `innerText` applies CSS `text-transform`, so six of nine phrases were absent from the *English* page too until the comparison was made case-insensitive |
 | typed, not filled | the district panel rebuilding its own input on every keystroke. Focus went to `BODY` after one digit, so only districts 1-9 were reachable. Playwright `fill()` sets a value in one action and passed against that build; `keyboard.type()` plus an `activeElement` assertion fails against it |
 | exact labels, not substrings | a negative assertion that cannot fail. `!/\b0% of this ZIP/` never matches inside "100% of this ZIP" because there is no word boundary mid-number, so the check passed against a card that rendered both labels. It now compares the share strings exactly |
+| a check that fires on correct input | the worst kind, because it trains the reviewer to wave failures through. Two diacritic checks did it in a row — one demanded an accent in every Spanish string, the next mapped correct plural forms to themselves |
 
 ### Gates
 
@@ -414,6 +415,10 @@ npm run data:acts        # add opponent actions to an already-built payload
 npm run data:report      # coverage + provenance summary
 npm run data:members     # -> public/data/members_89R.json  (the district lookup)
 npm run data:zips        # -> public/data/zips_89R.json     (ZIP -> districts)
+npm run data:analyses    # official bill analyses -> data/bill_analyses_89R.json
+npm run data:plain:seed  # seed i18n/plain_89R.json from those analyses
+npm run plain:review     # -> i18n/plain_review.html, the reviewer's sheet
+npm run data:plain       # merge APPROVED summaries into the payload (--write)
 ```
 
 `data:export` takes arguments the npm script does not supply — it needs the
@@ -501,6 +506,72 @@ redistricting was **congressional** — the House map is unchanged.) Getting thi
 wrong misassigns a third of the state while every structural check still passes,
 which is why it is the hash rather than the anchors that stands guard.
 
+
+
+### Three screens, not one page
+
+The page opens on a start screen, runs one question at a time, and shows the
+result only after — the mode switch, the provenance grid and the profile presets
+all live in that result view.
+
+It was one long page until a reader who does not follow politics was handed it
+and gave the phone back. On a phone it took **2.7 screens of scrolling and 311
+words** to reach the first thing you could tap, under **27 uppercase monospace
+labels**. Everything that earns trust stood in front of the thing it was meant
+to earn trust for. Now it is 0 screens and 30 words.
+
+Nothing was deleted. The six-paragraph explainer is intact behind "How this
+works", which is a panel that opens over whatever you were doing and closes back
+to it — an earlier version switched views and scrolled to the method, which
+dropped the reader ten screens into a fourteen-screen page having pressed a
+button that promised an explanation.
+
+Inside a question the order was inverted too. The card used to open with the
+bill's official caption, up to 42 words of it, set in bold as though it were the
+headline, with the plain-language rewrite fifth, in a sidebar, under a monospace
+label. The plain wording is the question now; the legalese is behind "Official
+wording", still carrying the vote counts, and says explicitly which words are
+ours and which are the record's.
+
+`verify_site.mjs` drives the three screens through four helpers — `beginQuiz`,
+`answerAll`, `toResult`, `onResult`. Anything that clicks the mode switch or a
+preset has to reach the result view first, and a fresh load is how you get a
+clean quiz, because "Clear" now returns to the opening screen.
+
+### Dark mode is asked for, never assumed
+
+There is deliberately no `prefers-color-scheme` rule. The page followed the OS,
+which meant a phone set to dark opened on a black screen full of monospace
+capitals before the reader had agreed to anything. Light is the default on every
+device; dark applies only via `data-theme`, set by the toggle in the top bar and
+remembered in `localStorage`. Nothing about the choice is sent anywhere.
+
+### The plain-language questions
+
+7 of the 67 items shipped with a plain rewrite. The other 60 were asked in the
+bill's official caption, which is a legal title: "Relating to information
+regarding perinatal palliative care; creating an administrative penalty" does not
+say who must do what.
+
+Writing those from the caption alone would mean inventing the missing parts, so
+they are written from the analysis the Legislature publishes for each bill.
+**Which section matters:** an analysis opens with the sponsor making their case,
+then describes the operative changes. Summaries come from the second, and
+`i18n/plain_89R.json` keeps both side by side so a reviewer can see what was
+deliberately not used.
+
+Nothing ships until `status` is `"ok"`. `add_plain.mjs` refuses a draft, and
+refuses an entry that is marked approved while still carrying a flag — 8 are
+flagged where the source runs out before the operative effect, and where the
+direction of a change is not stated in the source the summary does not state it
+either.
+
+Two checks in this file fired on **correct** Spanish before being fixed: first a
+rule requiring every string to contain an accented character (15 false hits, one
+of them already live), then a word list in which `sanciones`, `elecciones`,
+`regiones` and `condicional` were mapped to themselves — a Spanish -ión noun
+drops its accent in the plural. The list now refuses at load time to contain an
+entry that maps a word to itself.
 
 
 ### One re-export is pending
