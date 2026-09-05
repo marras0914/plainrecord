@@ -31,6 +31,8 @@ export type CopyKey =
   | "axis.alignment"
   | "axis.load"
   | "intro.h1"
+  | "q.skipQuiz"
+  | "rep.answerForScore"
   | "rep.noNameMatch"
   | "result.checkRep"
   | "how.close"
@@ -299,6 +301,8 @@ export const EN: Record<CopyKey, string> = {
   "axis.alignment": "how much does this legislator vote with you",
   "axis.load": "how partisan-coded are your own positions?",
   "intro.h1": "The Purple Strip",
+  "q.skipQuiz": "Skip the quiz and look around",
+  "rep.answerForScore": "Answer a few votes and this will show how closely {name} matches you.",
   "rep.noNameMatch": "No Texas House member matches “{q}”. This searches legislators, not your own name — try your ZIP code above.",
   "result.checkRep": "How did my own representative vote?",
   "how.close": "Close",
@@ -552,6 +556,8 @@ export const ES: Record<CopyKey, string> = {
   "axis.alignment": "cuánto vota este legislador con usted",
   "axis.load": "¿qué tan partidistas son sus propias posturas?",
   "intro.h1": "La Franja Morada",
+  "q.skipQuiz": "Omitir el cuestionario y echar un vistazo",
+  "rep.answerForScore": "Responda algunos votos y aquí verá qué tan de cerca {name} coincide con usted.",
   "rep.noNameMatch": "Ningún miembro de la Cámara de Texas coincide con «{q}». Esto busca legisladores, no su propio nombre: pruebe con su código postal arriba.",
   "result.checkRep": "¿Cómo votó mi propio representante?",
   "how.close": "Cerrar",

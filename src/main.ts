@@ -803,13 +803,15 @@ function renderQuestion(): void {
         esc(t(last ? 'q.seeResult' : 'q.next'))}</button></div>`
       : '') +
 
-    // An exit, once there is something to show. 67 questions is a long way to
-    // ask someone to go before they see anything, and the estimator already
-    // handles thin evidence honestly rather than pretending a few answers are
-    // a verdict.
-    (!last && countAnswered() >= 3
+    // An exit, from the first question. 67 questions is a long way to ask
+    // someone to go before they see anything, and the estimator already handles
+    // thin evidence honestly rather than pretending a few answers are a verdict.
+    // Before anything is answered it is not a result to skip TO, it is the rest
+    // of the page — the outcomes, the member lookup, the method — which a reader
+    // who did not come here to play had no way of reaching at all.
+    (!last
       ? `<div class="q-actions"><button class="ghost small" id="q-result-now">${
-        esc(t('q.resultNow'))}</button></div>`
+        esc(t(countAnswered() >= 1 ? 'q.resultNow' : 'q.skipQuiz'))}</button></div>`
       : '');
 
   c.querySelectorAll<HTMLButtonElement>('[data-answer]').forEach((b) => {
@@ -1119,19 +1121,15 @@ function renderTheme(): void {
 
 function renderRep(): void {
   const c = el('rep-card');
-  const answered = Object.values(answers).filter((v) => v === 1 || v === -1).length;
 
   const head =
     `<div class="eyebrow">${esc(t('rep.heading'))}</div>` +
     `<p class="lede">${esc(t('rep.lede'))}</p>`;
 
-  // Nothing to score against yet. Saying so beats rendering an input that can
-  // only produce a meaningless number.
-  if (answered === 0) {
-    c.innerHTML = head + `<p class="rep-note">${esc(t('rep.answerFirst'))}</p>`;
-    repShell = false;
-    return;
-  }
+  // The panel used to refuse to render at all until something was answered,
+  // which made "skip the quiz" a dead end: the one thing a skipper most likely
+  // came for was the one thing gated behind the questions. Who represents you
+  // does not depend on your answers. Only the score does, and that says so.
 
   if (!repShell) {
     const stateLookup =
@@ -1322,7 +1320,11 @@ function renderRepOut(): void {
           // An absence is not a middling result. Without this the bands would
           // file a member who cast none of these votes under "no clearer than
           // chance", which reads as a finding rather than as missing data.
-          if (!r.phrase) {
+          if (!r.phrase && countAnswered() === 0) {
+            // The missing half here is the READER's. Saying the member cast none
+            // of these votes would be false — most of them cast nearly all.
+            html += `<p class="rep-note">${esc(t('rep.answerForScore', { name: m.n }))}</p>`;
+          } else if (!r.phrase) {
             html += `<p class="rep-note">${esc(t('rep.noVotes', { name: m.n, items }))}</p>`;
           } else {
             html += `<p class="rep-note">${
@@ -1541,8 +1543,8 @@ render();
 // Once, at module level. It appends a control to the header, so calling it from
 // render() would add another button on every keystroke.
 renderTheme();
-bindStart();
-bindHow();
+bindStart();
+bindHow();
 bindNavHow();
 showView();
 

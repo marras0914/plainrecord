@@ -190,6 +190,24 @@
     "note": "This is the project's name. Reviewer: decide whether it translates at all, or stays English as a brand. Both are defensible; translating it helps a Spanish-dominant reader understand the metaphor, keeping it English keeps one name across both sites.",
     "status": "ok"
   },
+  "q.skipQuiz": {
+    "en": "Skip the quiz and look around",
+    "es": "Omitir el cuestionario y echar un vistazo",
+    "where": "On the question card before anything has been answered.",
+    "vars": [],
+    "note": "Not everyone arrives to play. A reporter, or someone who just wants to look their own member up, had no way past the questions at all.",
+    "status": "ok"
+  },
+  "rep.answerForScore": {
+    "en": "Answer a few votes and this will show how closely {name} matches you.",
+    "es": "Responda algunos votos y aquí verá qué tan de cerca {name} coincide con usted.",
+    "where": "In the representative panel when the reader has answered nothing yet.",
+    "vars": [
+      "name"
+    ],
+    "note": "Distinct from rep.noVotes, which says the MEMBER cast none of these votes. With no answers the missing half is the reader’s, and saying the member has no record would be false.",
+    "status": "ok"
+  },
   "rep.noNameMatch": {
     "en": "No Texas House member matches “{q}”. This searches legislators, not your own name — try your ZIP code above.",
     "es": "Ningún miembro de la Cámara de Texas coincide con «{q}». Esto busca legisladores, no su propio nombre: pruebe con su código postal arriba.",
