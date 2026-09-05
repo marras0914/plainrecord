@@ -1,0 +1,48 @@
+{
+  "_meta": {
+    "what": "Corrections to the subject shown above a question.",
+    "why": "categorize.ts picks the globally RAREST of a bill's candidate categories. 52 of the 54 quiz bills with more than one candidate got the rarest, which for a multi-subject bill is systematically the least representative one.",
+    "rule": "A proposed category MUST be one of that bill's own candidate categories, derived from its official subject list at capitol.texas.gov. scripts/fix_categories.mjs refuses anything else, so a correction can only pick a different subject the Legislature itself assigned.",
+    "source": "data/bill_subjects_89R.json"
+  },
+  "session": "89R",
+  "items": {
+    "HB 5138": {
+      "current": "Abortion",
+      "proposed": "Elections & Voting",
+      "reason": "The bill gives the attorney general power to prosecute election-law crimes when a local prosecutor has not acted. Abortion is genuinely one of its ten official subjects, but the operative effect is entirely election law, and 'Abortion' above this question tells a reader something false about what they are voting on.",
+      "status": "ok"
+    },
+    "SB 5": {
+      "current": "Technology & Privacy",
+      "proposed": "Health & Human Services",
+      "reason": "Creates a state institute funding dementia prevention and research. Health & Human Services is among its official subjects. Not visible on the card — SB 5 is a headline bill and carries its own label — but the category still decides which real-world outcome is revealed after the question.",
+      "status": "ok"
+    },
+    "HB 1784": {
+      "current": "Religion & Civil Liberties",
+      "proposed": "Education",
+      "reason": "Extends the support colleges must give former foster-care students to students who are homeless. Its subjects include higher education; Religion & Civil Liberties has no outcome attached at all, so the question currently reveals nothing after it.",
+      "status": "ok"
+    },
+    "HB 145": {
+      "current": "Religion & Civil Liberties",
+      "proposed": "Energy & Environment",
+      "reason": "Electric utility wildfire liability and risk plans. Energy & Environment is among its official subjects and is what the bill is about.",
+      "status": "ok"
+    },
+    "HB 5596": {
+      "current": "Energy & Environment",
+      "proposed": "Taxes & Spending",
+      "reason": "Changes the voter-approval tax rate for coastal cities that misspent hotel occupancy tax revenue. Both are official subjects; the bill is a tax measure.",
+      "status": "ok"
+    },
+    "HB 5246": {
+      "current": "Military & Veterans",
+      "proposed": "Business & Labor",
+      "reason": "Texas Space Commission, aerospace research, the space economy consortium, and abolishing the spaceport trust fund. Military & Veterans is a real tag but incidental. The subject list names ECONOMIC DEVELOPMENT & TOURISM OFFICE, TEXAS alongside Economic & Industrial Development and Business & Commerce — the aerospace office sits inside economic development — which is why Business & Labor over Transportation, the other defensible candidate (Aeronautics, Transportation--Aviation).",
+      "status": "ok",
+      "note": "The one judgement call of the six. Flip 'proposed' to 'Transportation' and re-run if you read it the other way."
+    }
+  }
+}

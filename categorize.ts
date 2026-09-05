@@ -292,6 +292,8 @@ export function subjectRoot(term: string): string {
 export interface CategoryAssignment {
   /** billId (identifier, e.g. "HB 1") -> category. */
   byBill: Map<string, string>;
+  /** Every category a bill's own subjects mapped to, not just the one chosen. */
+  candidatesByBill: Map<string, Set<string>>;
   /** Roots seen in the data that the map does not cover. Add them deliberately. */
   unmappedRoots: Map<string, number>;
   /** Bills whose only subject terms were non-policy (ceremonial resolutions). */
@@ -354,6 +356,27 @@ export function categorizeBills(bills: BillSubject[]): CategoryAssignment {
   }
 
   // Pass 2: rarest-wins, ties alphabetical.
+  //
+  // KNOWN DEFECT, MEASURED. This rule optimises for SPREAD, not for accuracy,
+  // and those are not the same thing. A Texas bill carries many official
+  // subjects — HB 5138 carries ten — and picking the globally rarest candidate
+  // gives a nicely distributed quiz while systematically labelling each
+  // multi-subject bill with its LEAST representative subject. The rarest
+  // candidate is by definition the most surprising one, which is the opposite
+  // of what a subject line above a question is for.
+  //
+  // In 89R: 54 of the 67 selected bills had more than one candidate, and 52 of
+  // those 54 (96%) were labelled with the rarest. Six were wrong enough to
+  // matter — "Abortion" sat above a question about the attorney general
+  // prosecuting election crimes — and were corrected by hand through
+  // i18n/categories_89R.json, which may only choose a different subject the
+  // bill actually carries.
+  //
+  // Changing the rule here is not obviously an improvement: most-common-wins
+  // would collapse the quiz into a handful of broad subjects, which is the
+  // problem this rule was written to avoid. The fix is that the choice is now
+  // VISIBLE — candidatesByBill is returned so a reviewer can see what was being
+  // chosen between, instead of the pipeline silently asserting one subject.
   const byBill = new Map<string, string>();
   const counts = new Map<string, number>();
   for (const [billId, cats] of candidates) {
@@ -365,5 +388,5 @@ export function categorizeBills(bills: BillSubject[]): CategoryAssignment {
     counts.set(chosen, (counts.get(chosen) ?? 0) + 1);
   }
 
-  return { byBill, unmappedRoots, nonPolicyBills, uncategorizable, counts };
+  return { byBill, candidatesByBill: candidates, unmappedRoots, nonPolicyBills, uncategorizable, counts };
 }

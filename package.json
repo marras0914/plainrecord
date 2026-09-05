@@ -36,7 +36,9 @@
     "data:plain:seed": "node scripts/build_plain_source.mjs",
     "plain:review": "node scripts/plain_review.mjs",
     "plain:check": "node scripts/plain_review.mjs --check",
-    "data:plain": "node scripts/add_plain.mjs"
+    "data:plain": "node scripts/add_plain.mjs",
+    "data:subjects": "node scripts/fetch_subjects.mjs",
+    "data:categories": "node scripts/fix_categories.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
