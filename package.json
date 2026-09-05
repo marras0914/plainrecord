@@ -23,7 +23,7 @@
     "verify:headers": "node scripts/verify_site.mjs --with-headers",
     "dns:check": "node scripts/check_domain.mjs",
     "i18n:review": "node scripts/i18n_review.mjs",
-    "i18n:check": "node scripts/i18n_review.mjs --check && node scripts/i18n_gen.mjs --check && node scripts/check_sidecar.mjs && node scripts/check_members.mjs && node scripts/check_zips.mjs",
+    "i18n:check": "node scripts/i18n_review.mjs --check && node scripts/i18n_gen.mjs --check && node scripts/check_sidecar.mjs && node scripts/check_members.mjs && node scripts/check_zips.mjs && node scripts/plain_review.mjs --check",
     "i18n:gen": "node scripts/i18n_gen.mjs",
     "build:locales": "node scripts/build_locales.mjs",
     "i18n:sidecar": "node scripts/check_sidecar.mjs",
@@ -33,7 +33,10 @@
     "data:zips": "node scripts/build_zips.mjs",
     "data:zips:check": "node scripts/check_zips.mjs",
     "data:analyses": "node scripts/fetch_analyses.mjs",
-    "data:plain:seed": "node scripts/build_plain_source.mjs"
+    "data:plain:seed": "node scripts/build_plain_source.mjs",
+    "plain:review": "node scripts/plain_review.mjs",
+    "plain:check": "node scripts/plain_review.mjs --check",
+    "data:plain": "node scripts/add_plain.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
