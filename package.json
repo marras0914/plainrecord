@@ -31,7 +31,9 @@
     "data:members": "node --max-old-space-size=4096 scripts/build_members.mjs",
     "data:members:check": "node scripts/check_members.mjs",
     "data:zips": "node scripts/build_zips.mjs",
-    "data:zips:check": "node scripts/check_zips.mjs"
+    "data:zips:check": "node scripts/check_zips.mjs",
+    "data:analyses": "node scripts/fetch_analyses.mjs",
+    "data:plain:seed": "node scripts/build_plain_source.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
