@@ -71,7 +71,9 @@ compare('omissions', en.omissions.map((o) => o.category), Object.keys(es.omissio
 compare('opponents', en.opponents.map((o) => o.name), Object.keys(es.opponents ?? {}));
 compare('incumbents', en.incumbents.map((i) => i.name), Object.keys(es.incumbents ?? {}));
 compare('outcomes', en.outcomes.map((o) => o.label), Object.keys(es.outcomes ?? {}));
-compare('headline items', en.items.filter((i) => i.headline).map((i) => i.billId),
+const PROSE_FIELDS = ['label', 'why', 'plain'];
+const hasProse = (i) => PROSE_FIELDS.some((f) => typeof i[f] === 'string' && i[f].trim());
+compare('items carrying prose', en.items.filter(hasProse).map((i) => i.billId),
   Object.keys(es.items ?? {}));
 
 // ---- per-record field coverage -------------------------------------------
@@ -117,14 +119,17 @@ for (const inc of en.incumbents) {
 }
 say(!missing.some((m) => m.startsWith('incumbent ')), 'every incumbent act translated');
 
-for (const it of en.items.filter((i) => i.headline)) {
+for (const it of en.items.filter(hasProse)) {
   const tr = es.items?.[it.billId];
   if (!tr) continue;
-  const want = ['label', 'why', 'plain'].filter((f) => it[f]);
+  // Only the seven headline bills have a label and a "why this one"; the other
+  // sixty have a plain-language question and nothing else. Ask for whatever
+  // this item actually carries.
+  const want = PROSE_FIELDS.filter((f) => it[f]);
   const gaps = fieldsOf(tr, want);
   if (gaps.length) missing.push(`item ${it.billId} fields: ${gaps.join(', ')}`);
 }
-say(!missing.some((m) => m.startsWith('item ')), 'every headline blurb translated');
+say(!missing.some((m) => m.startsWith('item ')), 'every item\'s prose translated');
 
 // ---- the captions are exempt, and that is asserted ----------------------
 const capCount = Object.keys(es.captions ?? {}).length;
