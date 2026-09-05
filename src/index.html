@@ -57,25 +57,7 @@
     <p class="start-fine" data-i18n="start.fine">About two minutes · no sign-up · your answers never leave this device</p>
     <!--TRANSLATION_NOTICE-->
     <button class="ghost start-how" id="start-how" aria-expanded="false" data-i18n="start.how">How this works</button>
-    <div id="start-how-panel" hidden>
-    <div class="blurb">
-      <p data-i18n="intro.p1"><b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from
-      2025 and hid who voted which way. Now you vote.</p>
-      <p data-i18n="intro.p2">For each one we count how many Republicans said yes, and how many Democrats
-      said yes. Mostly Republicans? We colour it <span class="sw-r">red</span>.
-      Mostly Democrats? <span class="sw-b">Blue</span>. Both parties agreed?
-      <span class="sw-g">Grey</span> — that vote doesn't tell us much about sides.</p>
-      <p data-i18n="intro.p3">Every answer you give becomes one dot. Dots on the left mean you agreed with
-      Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots
-      land on both sides, you don't fit neatly in one party.</b> That's the purple part.</p>
-      <p data-i18n="intro.p4">Then we show you <b>what these areas actually look like in Texas today</b> —
-      school funding, health coverage, and so on — with the source for every number.</p>
-      <p data-i18n="intro.fine" class="blurb-fine">Nobody's opinion decides the colours. They come from the actual
-      vote counts, and you can check them on every question. The outcome numbers are
-      real too, but a state ranking has many causes — we show you the numbers and the
-      votes, and leave the connecting to you.</p>
-    </div>
-    </div>
+
   </main>
 
   <main id="quiz-view" hidden>
@@ -246,6 +228,40 @@
   </main>
 </div>
 
+
+<!--
+  "How this works", as an overlay.
+
+  It used to be two things: a fold-out under the Start button, and a top-bar
+  link that switched to the result view and scrolled to the method — which
+  dropped the reader ten screens into a fourteen-screen page with no context
+  and no way back. A panel that opens over what you were doing and closes
+  back to it is the whole fix.
+-->
+<div id="how-panel" hidden>
+  <div class="how-inner">
+    <button class="ghost how-close" id="how-close" data-i18n="how.close">Close</button>
+
+    <div class="blurb">
+      <p data-i18n="intro.p1"><b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from
+      2025 and hid who voted which way. Now you vote.</p>
+      <p data-i18n="intro.p2">For each one we count how many Republicans said yes, and how many Democrats
+      said yes. Mostly Republicans? We colour it <span class="sw-r">red</span>.
+      Mostly Democrats? <span class="sw-b">Blue</span>. Both parties agreed?
+      <span class="sw-g">Grey</span> — that vote doesn't tell us much about sides.</p>
+      <p data-i18n="intro.p3">Every answer you give becomes one dot. Dots on the left mean you agreed with
+      Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots
+      land on both sides, you don't fit neatly in one party.</b> That's the purple part.</p>
+      <p data-i18n="intro.p4">Then we show you <b>what these areas actually look like in Texas today</b> —
+      school funding, health coverage, and so on — with the source for every number.</p>
+      <p data-i18n="intro.fine" class="blurb-fine">Nobody's opinion decides the colours. They come from the actual
+      vote counts, and you can check them on every question. The outcome numbers are
+      real too, but a state ranking has many causes — we show you the numbers and the
+      votes, and leave the connecting to you.</p>
+    </div>
+    <p class="how-more"><a href="#method" id="how-full" data-i18n="how.full">The full method, the data, and who made this</a></p>
+  </div>
+</div>
 <div id="tip" role="tooltip" aria-hidden="true"></div>
   <script type="module" src="./main.ts"></script>
 </body>

@@ -91,7 +91,34 @@
   .ghost.small { font-size:13px; padding:8px 14px; flex:0 0 auto; }
   .q-official { margin-top:26px; padding-top:18px; border-top:1px solid var(--hair); }
   .q-reveal { margin-top:26px; padding-top:20px; border-top:1px solid var(--hair); }
-  .keep-going { margin-top:16px; font-size:14px; }
+  /* The row of things to do with a result. It sits directly under the verdict
+     because that is where a reader looks after finishing, and because the two
+     controls it replaces were unreachable: "Clear" lived ten screens down in a
+     section of demo profiles, and the district lookup had nothing pointing at
+     it from anywhere. */
+  .result-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+  .result-actions button { font-size:13.5px; }
+  .keep-going { margin-top:0; font-size:13.5px; }
+
+  /* "How this works" opens over what you were doing and closes back to it. */
+  #how-panel { position:fixed; inset:0; z-index:50; overflow-y:auto;
+    background:color-mix(in srgb, var(--page) 88%, transparent);
+    -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+    padding:24px 16px 48px; }
+  .how-inner { max-width:34rem; margin:0 auto; background:var(--surface);
+    border:1px solid var(--hair); border-radius:10px; padding:20px 20px 24px;
+    box-shadow:0 12px 40px var(--shadow); }
+  .how-close { float:right; margin:-4px -4px 8px 12px; font-size:13px; }
+  .how-more a { color:var(--ink); text-decoration-color:var(--rule);
+    text-underline-offset:3px; }
+  .how-more { margin:20px 0 0; padding-top:14px; border-top:1px solid var(--hair);
+    font-size:13.5px; }
+  body.how-open { overflow:hidden; }
+
+  @media (max-width:560px) {
+    .result-actions button { flex:1 1 100%; }
+    #how-panel { padding:12px 10px 40px; }
+  }
   .q-yousaid { font-size:15px; color:var(--ink-2); margin:0 0 14px; }
 
   @media (max-width:560px) {

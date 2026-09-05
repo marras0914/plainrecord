@@ -190,6 +190,28 @@
     "note": "This is the project's name. Reviewer: decide whether it translates at all, or stays English as a brand. Both are defensible; translating it helps a Spanish-dominant reader understand the metaphor, keeping it English keeps one name across both sites.",
     "status": "ok"
   },
+  "result.checkRep": {
+    "en": "How did my own representative vote?",
+    "es": "¿Cómo votó mi propio representante?",
+    "where": "Action under the verdict; jumps to the district and ZIP lookup.",
+    "vars": [],
+    "note": "The lookup sits nearly four screens down, after the incumbency answer that earns the right to ask about the reader’s own member. That order is deliberate, so the shortcut goes at the top instead of moving the section.",
+    "status": "ok"
+  },
+  "how.close": {
+    "en": "Close",
+    "es": "Cerrar",
+    "where": "Closes the \"How this works\" panel.",
+    "vars": [],
+    "status": "ok"
+  },
+  "how.full": {
+    "en": "The full method, the data, and who made this",
+    "es": "El método completo, los datos y quién hizo esto",
+    "where": "Link at the foot of the \"How this works\" panel, for a reader who wants everything.",
+    "vars": [],
+    "status": "ok"
+  },
   "q.resultNow": {
     "en": "See my result so far",
     "es": "Ver mi resultado hasta ahora",

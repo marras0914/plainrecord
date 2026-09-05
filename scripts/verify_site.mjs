@@ -1172,7 +1172,7 @@ try {
     // cannot go vacuous again if the copy is reworded.
     const bodyOf = async (pg) => {
       const text = await pg.evaluate(() => {
-        const ids = ['start-view', 'quiz-view', 'result-view', 'start-how-panel', 'table-panel'];
+        const ids = ['start-view', 'quiz-view', 'result-view', 'how-panel', 'table-panel'];
         const was = ids.map((id) => {
           const e = document.getElementById(id);
           return { e, hidden: e ? e.hidden : null };

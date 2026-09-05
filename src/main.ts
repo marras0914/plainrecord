@@ -486,8 +486,43 @@ function renderReadout(p: PartisanProfile): void {
   // A reader who took the early exit, or who switched to all 67, needs a way
   // back in. Without it the result is a dead end and the remaining questions
   // are unreachable.
+  if (view !== 'result') return;
+
+  // The three things a reader wants the moment they have a result, in one row
+  // under it. Before this the only way to begin again was a button labelled
+  // "Clear", ten screens down, inside a section of demo profiles — and the
+  // district lookup was nearly four screens down with nothing pointing at it.
+  const row = document.createElement('div');
+  row.className = 'result-actions';
+
+  const act = (label: string, cls: string, fn: () => void) => {
+    const b = document.createElement('button');
+    b.className = cls;
+    b.type = 'button';
+    b.textContent = label;
+    b.addEventListener('click', fn);
+    row.appendChild(b);
+  };
+
+  act(t('result.checkRep'), 'ghost', () => {
+    el('rep-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Focus the input as well as scrolling to it: arriving at a panel is not
+    // the same as being able to use it.
+    setTimeout(() => document.getElementById('rep-zip')?.focus({ preventScroll: true }), 500);
+  });
+
+  act(t('result.restart'), 'ghost', () => {
+    answers = {};
+    cursor = 0;
+    revealFor = null;
+    view = 'start';
+    showView();
+    render();
+    window.scrollTo(0, 0);
+  });
+
   const left = activeItems().length - countAnswered();
-  if (left > 0 && view === 'result') {
+  if (left > 0) {
     const b = document.createElement('button');
     b.className = 'ghost keep-going';
     b.type = 'button';
@@ -502,8 +537,9 @@ function renderReadout(p: PartisanProfile): void {
       render();
       window.scrollTo(0, 0);
     });
-    el('readout').appendChild(b);
+    row.appendChild(b);
   }
+  el('readout').appendChild(row);
 }
 
 /**
@@ -972,27 +1008,58 @@ function showView(): void {
  *
  * Costs a general reader one quiet word in the corner.
  */
-function bindNavHow(): void {
-  const host = document.querySelector('.langswitch');
-  if (!host) return;
-  const b = document.createElement('button');
-  b.className = 'ghost topbar-how';
-  b.type = 'button';
-  b.textContent = t('start.how');
-  b.addEventListener('click', () => {
-    if (view === 'start') {
-      // On the opening screen it is the same panel the Start screen offers.
-      document.getElementById('start-how')?.click();
-      document.getElementById('start-how-panel')?.scrollIntoView({ block: 'nearest' });
-      return;
-    }
-    // Anywhere else, go to the built-out version. Answers survive, and the
-    // result offers a way back into the remaining questions.
+/**
+ * Open and close "How this works" over whatever the reader was doing.
+ *
+ * The first version switched to the result view and scrolled to the method,
+ * which put the reader ten screens into a fourteen-screen page having pressed a
+ * button that promised an explanation. Nothing told them where they were or how
+ * to get back. An overlay has one virtue the jump did not: closing it returns
+ * you exactly where you were, mid-question and mid-answer.
+ */
+function openHow(on: boolean): void {
+  const panel = document.getElementById('how-panel');
+  if (!panel) return;
+  panel.hidden = !on;
+  document.body.classList.toggle('how-open', on);
+  for (const id of ['start-how', 'nav-how']) {
+    document.getElementById(id)?.setAttribute('aria-expanded', String(on));
+  }
+  if (on) document.getElementById('how-close')?.focus();
+}
+
+function bindHow(): void {
+  document.getElementById('start-how')?.addEventListener('click', () => openHow(true));
+  document.getElementById('how-close')?.addEventListener('click', () => openHow(false));
+  // Escape and a tap on the backdrop both mean "put me back".
+  document.getElementById('how-panel')?.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('how-panel')) openHow(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') openHow(false);
+  });
+  // The one path that IS a jump, taken deliberately by someone who asked for
+  // everything rather than for an explanation.
+  document.getElementById('how-full')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openHow(false);
     view = 'result';
     showView();
     render();
     document.getElementById('method')?.scrollIntoView({ block: 'start' });
   });
+}
+
+function bindNavHow(): void {
+  const host = document.querySelector('.langswitch');
+  if (!host) return;
+  const b = document.createElement('button');
+  b.className = 'ghost topbar-how';
+  b.id = 'nav-how';
+  b.type = 'button';
+  b.setAttribute('aria-expanded', 'false');
+  b.textContent = t('start.how');
+  b.addEventListener('click', () => openHow(true));
   host.appendChild(b);
 }
 
@@ -1467,6 +1534,7 @@ render();
 // render() would add another button on every keystroke.
 renderTheme();
 bindStart();
+bindHow();
 bindNavHow();
 showView();
 

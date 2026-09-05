@@ -31,6 +31,9 @@ export type CopyKey =
   | "axis.alignment"
   | "axis.load"
   | "intro.h1"
+  | "result.checkRep"
+  | "how.close"
+  | "how.full"
   | "q.resultNow"
   | "result.keepGoing"
   | "start.lede"
@@ -295,6 +298,9 @@ export const EN: Record<CopyKey, string> = {
   "axis.alignment": "how much does this legislator vote with you",
   "axis.load": "how partisan-coded are your own positions?",
   "intro.h1": "The Purple Strip",
+  "result.checkRep": "How did my own representative vote?",
+  "how.close": "Close",
+  "how.full": "The full method, the data, and who made this",
   "q.resultNow": "See my result so far",
   "result.keepGoing": "Keep answering — {left} left",
   "start.lede": "Seven votes your Texas House actually took in 2025. We hid who voted which way. Where do you land?",
@@ -544,6 +550,9 @@ export const ES: Record<CopyKey, string> = {
   "axis.alignment": "cuánto vota este legislador con usted",
   "axis.load": "¿qué tan partidistas son sus propias posturas?",
   "intro.h1": "La Franja Morada",
+  "result.checkRep": "¿Cómo votó mi propio representante?",
+  "how.close": "Cerrar",
+  "how.full": "El método completo, los datos y quién hizo esto",
   "q.resultNow": "Ver mi resultado hasta ahora",
   "result.keepGoing": "Seguir respondiendo: quedan {left}",
   "start.lede": "Siete votos que su Cámara de Texas realmente emitió en 2025. Ocultamos quién votó de qué manera. ¿Dónde se sitúa usted?",
