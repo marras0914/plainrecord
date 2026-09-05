@@ -202,10 +202,10 @@ for (const locale of LOCALES) {
     console.log(`\n  ${locale} — ${measurable} placeable answers\n`);
 
     const fonts = await page.evaluate(() => ({
-      sans: document.fonts.check('600 94px "IBM Plex Sans"'),
+      sans: document.fonts.check('600 94px "Lexend"'),
       mono: document.fonts.check('500 19px "IBM Plex Mono"'),
     }));
-    check(fonts.sans, `${locale}: IBM Plex Sans loaded`, fonts.sans ? '' : 'fell back to system-ui');
+    check(fonts.sans, `${locale}: Lexend loaded`, fonts.sans ? '' : 'fell back to system-ui');
     check(fonts.mono, `${locale}: IBM Plex Mono loaded`, fonts.mono ? '' : 'fell back to monospace');
 
     const seen = await page.evaluate(() => ({

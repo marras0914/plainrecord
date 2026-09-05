@@ -103,7 +103,7 @@
   * { box-sizing: border-box; }
   body {
     margin:0; background:var(--page); color:var(--ink);
-    font-family:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-family:"Lexend", system-ui, -apple-system, "Segoe UI", sans-serif;
     font-size:15px; line-height:1.55; -webkit-font-smoothing:antialiased;
   }
   .wrap { max-width:960px; margin:0 auto; padding:28px 22px 80px; display:flex; flex-direction:column; gap:22px; }
@@ -112,7 +112,7 @@
      single screen. That is the typographic signature of a developer tool,
      and it is the thing a reader who does not follow politics reacts to
      before reading a word. Sentence case, in the interface face. */
-  .eyebrow { font-family:"IBM Plex Sans", system-ui, sans-serif; font-size:12px;
+  .eyebrow { font-family:"Lexend", system-ui, sans-serif; font-size:12px;
     font-weight:500; letter-spacing:0; text-transform:none; color:var(--muted); }
   h1 { font-size:26px; font-weight:600; letter-spacing:-0.012em; margin:6px 0 0; text-wrap:balance; }
   .lede { color:var(--ink-2); margin:8px 0 0; max-width:66ch; }
@@ -406,6 +406,7 @@
      person who needs it cannot read the one they are looking at. */
   .topbar { padding-top:14px; }
   .langswitch { margin-bottom:10px; display:flex; gap:8px; align-items:center; }
+  .topbar-how { font-size:12.5px; padding:5px 9px; }
   .themetoggle { font-family:inherit; font-size:12.5px;
     letter-spacing:0; color:var(--muted);
     background:none; border:1px solid var(--hair); border-radius:2px;

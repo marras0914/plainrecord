@@ -953,6 +953,47 @@ function showView(): void {
   set('start-view', view === 'start');
   set('quiz-view', view === 'quiz');
   set('result-view', view === 'result');
+  // The start screen already offers this below the button; two of them in one
+  // view is clutter. It earns its place only once that screen is gone.
+  const how = document.querySelector('.topbar-how');
+  if (how) (how as HTMLElement).hidden = view === 'start';
+}
+
+/**
+ * A way to the method from every screen.
+ *
+ * The method used to BE the first screen: the rule, the data, the funding and
+ * the author's politics, before anything else. Moving that behind the quiz is
+ * right for a reader who does not follow politics and wrong for the other
+ * audience this page has — a reporter or an editor deciding in six seconds
+ * whether this is a partisan exercise. They are the reason the disclosure is
+ * written the way it is, and they should not have to answer seven questions to
+ * find it.
+ *
+ * Costs a general reader one quiet word in the corner.
+ */
+function bindNavHow(): void {
+  const host = document.querySelector('.langswitch');
+  if (!host) return;
+  const b = document.createElement('button');
+  b.className = 'ghost topbar-how';
+  b.type = 'button';
+  b.textContent = t('start.how');
+  b.addEventListener('click', () => {
+    if (view === 'start') {
+      // On the opening screen it is the same panel the Start screen offers.
+      document.getElementById('start-how')?.click();
+      document.getElementById('start-how-panel')?.scrollIntoView({ block: 'nearest' });
+      return;
+    }
+    // Anywhere else, go to the built-out version. Answers survive, and the
+    // result offers a way back into the remaining questions.
+    view = 'result';
+    showView();
+    render();
+    document.getElementById('method')?.scrollIntoView({ block: 'start' });
+  });
+  host.appendChild(b);
 }
 
 /** The opening screen: a title, a line, and a button. */
@@ -1425,7 +1466,8 @@ render();
 // Once, at module level. It appends a control to the header, so calling it from
 // render() would add another button on every keystroke.
 renderTheme();
-bindStart();
+bindStart();
+bindNavHow();
 showView();
 
 /**
