@@ -1141,12 +1141,14 @@ function renderRep(): void {
     c.innerHTML =
       head +
       `<div class="rep-form">` +
-      `<div class="rep-field"><label for="rep-district">${esc(t('rep.districtLabel'))}</label>` +
-      `<input id="rep-district" type="number" min="1" max="150" inputmode="numeric" ` +
-      `placeholder="${esc(t('rep.districtPlaceholder'))}"></div>` +
+      // ZIP leads. A reader knows their ZIP without looking anything up; the
+      // district number is the thing this panel exists to find FOR them.
       `<div class="rep-field"><label for="rep-zip">${esc(t('rep.zipLabel'))}</label>` +
       `<input id="rep-zip" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code" ` +
       `placeholder="${esc(t('rep.zipPlaceholder'))}"></div>` +
+      `<div class="rep-field"><label for="rep-district">${esc(t('rep.districtLabel'))}</label>` +
+      `<input id="rep-district" type="number" min="1" max="150" inputmode="numeric" ` +
+      `placeholder="${esc(t('rep.districtPlaceholder'))}"></div>` +
       `<div class="rep-field"><label for="rep-name">${esc(t('rep.nameLabel'))}</label>` +
       `<input id="rep-name" type="search" autocomplete="off" ` +
       `placeholder="${esc(t('rep.namePlaceholder'))}"></div>` +
@@ -1285,6 +1287,12 @@ function renderRepOut(): void {
   } else if (repFile) {
     if (repQuery.trim().length >= 2) {
       const hits = rep.searchMembers(repFile, repQuery);
+      // Silence is the worst answer a search can give. Without this the field
+      // simply did nothing for any name not in the roster, and a reader who
+      // typed his own name concluded the whole panel was broken.
+      if (!hits.length) {
+        html += `<p class="rep-note">${esc(t('rep.noNameMatch', { q: repQuery.trim() }))}</p>`;
+      }
       if (hits.length) {
         html += `<ul class="rep-hits">` + hits.map((m) =>
           `<li><button class="ghost" data-rep-d="${m.d}">${esc(m.n)} ` +

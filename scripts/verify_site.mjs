@@ -843,6 +843,45 @@ try {
       const oor = await page.$eval('#rep-card', (e) => e.textContent);
       check('rep: an out-of-range district is refused', /districts 1 to 150/.test(oor));
 
+      // --- the name search ---------------------------------------------
+      //
+      // The field said "Or search by name" beside "your ZIP code" and "your
+      // district number", so it read as the reader's OWN name — and typing a
+      // name that is not a legislator rendered NOTHING AT ALL, which is how a
+      // working search convinces someone it is broken.
+      const nameBox = await page.$('#rep-name');
+      if (nameBox) {
+        await nameBox.fill('');
+        await nameBox.click();
+        await page.keyboard.type('Talarico', { delay: 30 });
+        await page.waitForTimeout(700);
+        const hits = await page.$$eval('#rep-card .rep-hits button',
+          (bs) => bs.map((x) => x.textContent.replace(/\s+/g, ' ').trim()));
+        check('rep: a member name finds that member',
+          hits.length === 1 && /Talarico/.test(hits[0]) && /50/.test(hits[0]),
+          hits.join(' | ') || '(nothing)');
+
+        await nameBox.fill('');
+        await nameBox.click();
+        await page.keyboard.type('Marco Arras', { delay: 25 });
+        await page.waitForTimeout(700);
+        const card = await page.$eval('#rep-card', (e) => e.textContent.replace(/\s+/g, ' '));
+        check('rep: a name that is nobody says so, rather than nothing',
+          /No Texas House member matches/.test(card), card.slice(0, 96));
+        check('rep: and it says whose name the field wants',
+          /not your own name/i.test(card));
+
+        // The labels themselves, in the order a reader meets them.
+        const labels = await page.$$eval('#rep-card .rep-field label',
+          (ls) => ls.map((l) => l.textContent.trim()));
+        check('rep: the lookup leads with the ZIP, not the district number',
+          /ZIP/i.test(labels[0] ?? ''), labels.join('  ·  '));
+        check('rep: the name field says whose name it means',
+          /member/i.test(labels[2] ?? ''), labels[2] ?? '(none)');
+        await nameBox.fill('');
+        await page.waitForTimeout(200);
+      }
+
       check('rep: it says who it excludes',
         /not in this lookup/.test(await page.$eval('#rep-card', (e) => e.textContent)));
 

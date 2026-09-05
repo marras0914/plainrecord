@@ -190,6 +190,16 @@
     "note": "This is the project's name. Reviewer: decide whether it translates at all, or stays English as a brand. Both are defensible; translating it helps a Spanish-dominant reader understand the metaphor, keeping it English keeps one name across both sites.",
     "status": "ok"
   },
+  "rep.noNameMatch": {
+    "en": "No Texas House member matches “{q}”. This searches legislators, not your own name — try your ZIP code above.",
+    "es": "Ningún miembro de la Cámara de Texas coincide con «{q}». Esto busca legisladores, no su propio nombre: pruebe con su código postal arriba.",
+    "where": "Shown when a name search finds nothing.",
+    "vars": [
+      "q"
+    ],
+    "note": "The search rendered NOTHING for a name it did not find, so a reader who typed his own name concluded the field was broken. Silence is the worst answer a search can give.",
+    "status": "ok"
+  },
   "result.checkRep": {
     "en": "How did my own representative vote?",
     "es": "¿Cómo votó mi propio representante?",
@@ -1777,8 +1787,8 @@
     "status": "ok"
   },
   "rep.districtLabel": {
-    "en": "District number",
-    "es": "Número de distrito",
+    "en": "Or your district number",
+    "es": "O su número de distrito",
     "where": "Input label.",
     "vars": [],
     "status": "ok"
@@ -1791,18 +1801,20 @@
     "status": "ok"
   },
   "rep.nameLabel": {
-    "en": "Or search by name",
-    "es": "O busque por nombre",
+    "en": "Or a member's name",
+    "es": "O el nombre de un legislador",
     "where": "Input label.",
     "vars": [],
-    "status": "ok"
+    "status": "ok",
+    "note": "Said \"Or search by name\", which beside \"your ZIP code\" and \"your district number\" reads as the reader's OWN name. A reader typed his and got silence."
   },
   "rep.namePlaceholder": {
-    "en": "start typing a surname",
-    "es": "empiece a escribir un apellido",
+    "en": "e.g. Talarico",
+    "es": "p. ej. Talarico",
     "where": "Input placeholder.",
     "vars": [],
-    "status": "ok"
+    "status": "ok",
+    "note": "A real surname from the roster beats \"start typing a surname\": it shows what kind of name is wanted in the space where the instruction used to be."
   },
   "rep.findDistrict": {
     "en": "If you do not know your district, it is on your voter registration card, or search your address at {link}.",
@@ -1904,11 +1916,12 @@
     "status": "ok"
   },
   "rep.zipLabel": {
-    "en": "Or your ZIP code",
-    "es": "O su código postal",
+    "en": "Your ZIP code",
+    "es": "Su código postal",
     "where": "Label on the ZIP input in the representative panel.",
     "status": "ok",
-    "vars": []
+    "vars": [],
+    "note": "First field: a ZIP is the thing a reader knows about themselves without looking anything up. The district number went first until a reader pointed out that almost nobody knows theirs."
   },
   "rep.zipPlaceholder": {
     "en": "5 digits",

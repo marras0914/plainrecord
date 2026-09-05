@@ -31,6 +31,7 @@ export type CopyKey =
   | "axis.alignment"
   | "axis.load"
   | "intro.h1"
+  | "rep.noNameMatch"
   | "result.checkRep"
   | "how.close"
   | "how.full"
@@ -298,6 +299,7 @@ export const EN: Record<CopyKey, string> = {
   "axis.alignment": "how much does this legislator vote with you",
   "axis.load": "how partisan-coded are your own positions?",
   "intro.h1": "The Purple Strip",
+  "rep.noNameMatch": "No Texas House member matches “{q}”. This searches legislators, not your own name — try your ZIP code above.",
   "result.checkRep": "How did my own representative vote?",
   "how.close": "Close",
   "how.full": "The full method, the data, and who made this",
@@ -503,10 +505,10 @@ export const EN: Record<CopyKey, string> = {
   "intro.subhead": "How Vikki Goodwin, Gina Hinojosa and James Talarico voted in the Texas House, checked against your own answers.",
   "rep.heading": "And how did your own representative vote?",
   "rep.lede": "The three above are running for other offices. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
-  "rep.districtLabel": "District number",
+  "rep.districtLabel": "Or your district number",
   "rep.districtPlaceholder": "1 to 150",
-  "rep.nameLabel": "Or search by name",
-  "rep.namePlaceholder": "start typing a surname",
+  "rep.nameLabel": "Or a member's name",
+  "rep.namePlaceholder": "e.g. Talarico",
   "rep.findDistrict": "If you do not know your district, it is on your voter registration card, or search your address at {link}.",
   "rep.findDistrictLinkText": "the state's own lookup",
   "rep.noSuchDistrict": "District {d} has no sitting member in this record. 149 of the 150 seats are filled.",
@@ -518,7 +520,7 @@ export const EN: Record<CopyKey, string> = {
   "rep.loadFailed": "Could not load the member record. The rest of the page is unaffected; the file is at {link} if you want to check it yourself.",
   "rep.excluded": "{n} people voted in this session but are not in this lookup, having left the House since. A district whose seat changed hands will show its current member with a partial record.",
   "rep.district": "District {d}",
-  "rep.zipLabel": "Or your ZIP code",
+  "rep.zipLabel": "Your ZIP code",
   "rep.zipPlaceholder": "5 digits",
   "rep.zipWhole": "All of {zip} sits in District {d}.",
   "rep.zipSpans": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}.",
@@ -550,6 +552,7 @@ export const ES: Record<CopyKey, string> = {
   "axis.alignment": "cuánto vota este legislador con usted",
   "axis.load": "¿qué tan partidistas son sus propias posturas?",
   "intro.h1": "La Franja Morada",
+  "rep.noNameMatch": "Ningún miembro de la Cámara de Texas coincide con «{q}». Esto busca legisladores, no su propio nombre: pruebe con su código postal arriba.",
   "result.checkRep": "¿Cómo votó mi propio representante?",
   "how.close": "Cerrar",
   "how.full": "El método completo, los datos y quién hizo esto",
@@ -755,10 +758,10 @@ export const ES: Record<CopyKey, string> = {
   "intro.subhead": "Cómo votaron Vikki Goodwin, Gina Hinojosa y James Talarico en la Cámara de Texas, comparado con sus propias respuestas.",
   "rep.heading": "¿Y cómo votó su propio representante?",
   "rep.lede": "Los tres de arriba compiten por otros cargos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
-  "rep.districtLabel": "Número de distrito",
+  "rep.districtLabel": "O su número de distrito",
   "rep.districtPlaceholder": "1 a 150",
-  "rep.nameLabel": "O busque por nombre",
-  "rep.namePlaceholder": "empiece a escribir un apellido",
+  "rep.nameLabel": "O el nombre de un legislador",
+  "rep.namePlaceholder": "p. ej. Talarico",
   "rep.findDistrict": "Si no sabe su distrito, está en su tarjeta de registro de votante, o busque su domicilio en {link}.",
   "rep.findDistrictLinkText": "la herramienta del estado",
   "rep.noSuchDistrict": "El distrito {d} no tiene miembro en funciones en este registro. 149 de los 150 escaños están ocupados.",
@@ -770,7 +773,7 @@ export const ES: Record<CopyKey, string> = {
   "rep.loadFailed": "No se pudo cargar el registro de miembros. El resto de la página no se ve afectada; el archivo está en {link} si quiere comprobarlo usted mismo.",
   "rep.excluded": "{n} personas votaron en esta sesión pero no están en esta búsqueda, porque dejaron la Cámara desde entonces. Un distrito cuyo escaño cambió de manos mostrará a su miembro actual con un historial parcial.",
   "rep.district": "Distrito {d}",
-  "rep.zipLabel": "O su código postal",
+  "rep.zipLabel": "Su código postal",
   "rep.zipPlaceholder": "5 dígitos",
   "rep.zipWhole": "Todo el código postal {zip} está en el Distrito {d}.",
   "rep.zipSpans": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta.",
