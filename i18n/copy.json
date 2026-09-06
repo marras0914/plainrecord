@@ -208,16 +208,6 @@
     "note": "Distinct from rep.noVotes, which says the MEMBER cast none of these votes. With no answers the missing half is the reader’s, and saying the member has no record would be false.",
     "status": "ok"
   },
-  "rep.noNameMatch": {
-    "en": "No Texas House member matches “{q}”. This searches legislators, not your own name — try your ZIP code above.",
-    "es": "Ningún miembro de la Cámara de Texas coincide con «{q}». Esto busca legisladores, no su propio nombre: pruebe con su código postal arriba.",
-    "where": "Shown when a name search finds nothing.",
-    "vars": [
-      "q"
-    ],
-    "note": "The search rendered NOTHING for a name it did not find, so a reader who typed his own name concluded the field was broken. Silence is the worst answer a search can give.",
-    "status": "ok"
-  },
   "result.checkRep": {
     "en": "How did my own representative vote?",
     "es": "¿Cómo votó mi propio representante?",
@@ -371,6 +361,14 @@
     "es": "Empezar de nuevo",
     "where": "Returns to the opening screen from the result.",
     "vars": [],
+    "status": "ok"
+  },
+  "result.tryAll": {
+    "en": "Answer all 67 votes",
+    "es": "Responder los 67 votos",
+    "where": "Action under the verdict, offering the full set when the reader has done the seven.",
+    "vars": [],
+    "note": "The switch to the full set lived in a panel 8.9 screens down the result, where nobody found it. The seven headline bills split almost entirely on party lines, so the reader who stops there gets a lean and never reaches the votes that show where they cross over — which is the whole point of the page.",
     "status": "ok"
   },
   "theme.toDark": {
@@ -1847,22 +1845,6 @@
     "where": "Input placeholder.",
     "vars": [],
     "status": "ok"
-  },
-  "rep.nameLabel": {
-    "en": "Or a member's name",
-    "es": "O el nombre de un legislador",
-    "where": "Input label.",
-    "vars": [],
-    "status": "ok",
-    "note": "Said \"Or search by name\", which beside \"your ZIP code\" and \"your district number\" reads as the reader's OWN name. A reader typed his and got silence."
-  },
-  "rep.namePlaceholder": {
-    "en": "e.g. Talarico",
-    "es": "p. ej. Talarico",
-    "where": "Input placeholder.",
-    "vars": [],
-    "status": "ok",
-    "note": "A real surname from the roster beats \"start typing a surname\": it shows what kind of name is wanted in the space where the instruction used to be."
   },
   "rep.findDistrict": {
     "en": "If you do not know your district, it is on your voter registration card, or search your address at {link}.",

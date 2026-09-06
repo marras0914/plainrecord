@@ -210,8 +210,24 @@ page.on('request', (r) => {
 page.on('response', (r) => {
   if (/\/_vercel\/insights\//.test(r.url())) insights.status = r.status();
 });
-const isInsights404 = (e) =>
-  /404/.test(e) && /Failed to load resource/.test(e) && insights.status === 404;
+/**
+ * Console noise that only the LOCAL server can produce, and nothing else.
+ *
+ * /_vercel/insights/script.js exists only once Web Analytics is enabled on
+ * Vercel. The static server here falls back to index.html for unknown paths, so
+ * that request comes back as HTML with a 200 and the browser reports one of two
+ * things depending on timing: a failed load, or a refusal to execute HTML as a
+ * script. Both are the same local-only condition.
+ *
+ * Deliberately narrow. It matches only messages naming that exact path, so a
+ * genuine console error anywhere else still fails the run — and the same suite
+ * run against https://rightnleft.com, where the script is served properly,
+ * would catch anything this hides.
+ */
+const INSIGHTS_PATH = /_vercel\/insights\//;
+const isInsightsNoise = (e) =>
+  INSIGHTS_PATH.test(e) &&
+  (/Failed to load resource/.test(e) || /Refused to execute script/.test(e));
 
 try {
   await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
@@ -939,44 +955,26 @@ try {
       const oor = await page.$eval('#rep-card', (e) => e.textContent);
       check('rep: an out-of-range district is refused', /districts 1 to 150/.test(oor));
 
-      // --- the name search ---------------------------------------------
+      // --- the name search is GONE, deliberately ------------------------
       //
-      // The field said "Or search by name" beside "your ZIP code" and "your
-      // district number", so it read as the reader's OWN name — and typing a
-      // name that is not a legislator rendered NOTHING AT ALL, which is how a
-      // working search convinces someone it is broken.
-      const nameBox = await page.$('#rep-name');
-      if (nameBox) {
-        await nameBox.fill('');
-        await nameBox.click();
-        await page.keyboard.type('Talarico', { delay: 30 });
-        await page.waitForTimeout(700);
-        const hits = await page.$$eval('#rep-card .rep-hits button',
-          (bs) => bs.map((x) => x.textContent.replace(/\s+/g, ' ').trim()));
-        check('rep: a member name finds that member',
-          hits.length === 1 && /Talarico/.test(hits[0]) && /50/.test(hits[0]),
-          hits.join(' | ') || '(nothing)');
-
-        await nameBox.fill('');
-        await nameBox.click();
-        await page.keyboard.type('Marco Arras', { delay: 25 });
-        await page.waitForTimeout(700);
-        const card = await page.$eval('#rep-card', (e) => e.textContent.replace(/\s+/g, ' '));
-        check('rep: a name that is nobody says so, rather than nothing',
-          /No Texas House member matches/.test(card), card.slice(0, 96));
-        check('rep: and it says whose name the field wants',
-          /not your own name/i.test(card));
-
-        // The labels themselves, in the order a reader meets them.
-        const labels = await page.$$eval('#rep-card .rep-field label',
-          (ls) => ls.map((l) => l.textContent.trim()));
-        check('rep: the lookup leads with the ZIP, not the district number',
-          /ZIP/i.test(labels[0] ?? ''), labels.join('  ·  '));
-        check('rep: the name field says whose name it means',
-          /member/i.test(labels[2] ?? ''), labels[2] ?? '(none)');
-        await nameBox.fill('');
-        await page.waitForTimeout(200);
-      }
+      // It offered a third way into one panel and was the one nobody could use:
+      // you cannot look your representative up by a name you do not know yet.
+      // It also disagreed with itself — typing a name produced a LIST while the
+      // member card below went on showing whoever was looked up last, so the two
+      // halves of the panel contradicted each other until you clicked.
+      //
+      // Five checks used to run here, wrapped in "if (nameBox)". With the field
+      // removed they did not fail — they silently stopped running, which is the
+      // quiet way a suite loses coverage. One assertion that the field is absent
+      // is worth more than five that skip.
+      check('rep: the confusing name search is gone',
+        (await page.$$('#rep-name')).length === 0);
+      const repLabels = await page.$$eval('#rep-card .rep-field label',
+        (ls) => ls.map((l) => l.textContent.trim()));
+      check('rep: two ways in, the ZIP first',
+        repLabels.length === 2 && /ZIP/i.test(repLabels[0] ?? '') &&
+          /district/i.test(repLabels[1] ?? ''),
+        repLabels.join('  ·  '));
 
       check('rep: it says who it excludes',
         /not in this lookup/.test(await page.$eval('#rep-card', (e) => e.textContent)));
@@ -1086,7 +1084,7 @@ try {
       '  — /_vercel/insights/ 404s until it is switched on in the Vercel dashboard');
   }
 
-  const realErrs = errs.filter((e) => !isInsights404(e));
+  const realErrs = errs.filter((e) => !isInsightsNoise(e));
   check('no console errors', realErrs.length === 0, realErrs.join(' | '));
 
   // ---------------------------------------------------------------------------
@@ -1383,8 +1381,8 @@ try {
 
     check('es: analytics script is requested on load', esInsights.requested,
       `/_vercel/insights/ -> ${esInsights.status}`);
-    const esReal = esErrs.filter((e) =>
-      !(/404/.test(e) && /Failed to load resource/.test(e) && esInsights.status === 404));
+    // Same local-only noise as the English page; same narrow filter.
+    const esReal = esErrs.filter((e) => !isInsightsNoise(e));
     check('es: no console errors', esReal.length === 0, esReal.join(' | '));
   }
   await esPage.close();

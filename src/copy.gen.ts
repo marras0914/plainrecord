@@ -33,7 +33,6 @@ export type CopyKey =
   | "intro.h1"
   | "q.skipQuiz"
   | "rep.answerForScore"
-  | "rep.noNameMatch"
   | "result.checkRep"
   | "how.close"
   | "how.full"
@@ -54,6 +53,7 @@ export type CopyKey =
   | "q.askedAs"
   | "q.youSaid"
   | "result.restart"
+  | "result.tryAll"
   | "theme.toDark"
   | "theme.toLight"
   | "intro.p1"
@@ -245,8 +245,6 @@ export type CopyKey =
   | "rep.lede"
   | "rep.districtLabel"
   | "rep.districtPlaceholder"
-  | "rep.nameLabel"
-  | "rep.namePlaceholder"
   | "rep.findDistrict"
   | "rep.findDistrictLinkText"
   | "rep.noSuchDistrict"
@@ -307,7 +305,6 @@ export const EN: Record<CopyKey, string> = {
   "intro.h1": "The Purple Strip",
   "q.skipQuiz": "Skip the quiz and look around",
   "rep.answerForScore": "Answer a few votes and this will show how closely {name} matches you.",
-  "rep.noNameMatch": "No Texas House member matches “{q}”. This searches legislators, not your own name — try your ZIP code above.",
   "result.checkRep": "How did my own representative vote?",
   "how.close": "Close",
   "how.full": "The full method, the data, and who made this",
@@ -328,6 +325,7 @@ export const EN: Record<CopyKey, string> = {
   "q.askedAs": "This one has no plain-language version yet, so it is asked in the official wording.",
   "q.youSaid": "You said {vote}.",
   "result.restart": "Start over",
+  "result.tryAll": "Answer all 67 votes",
   "theme.toDark": "Dark",
   "theme.toLight": "Light",
   "intro.p1": "<b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from 2025 and hid who voted which way. Now you vote.",
@@ -519,8 +517,6 @@ export const EN: Record<CopyKey, string> = {
   "rep.lede": "The three above are running for other offices. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
   "rep.districtLabel": "Or your district number",
   "rep.districtPlaceholder": "1 to 150",
-  "rep.nameLabel": "Or a member's name",
-  "rep.namePlaceholder": "e.g. Talarico",
   "rep.findDistrict": "If you do not know your district, it is on your voter registration card, or search your address at {link}.",
   "rep.findDistrictLinkText": "the state's own lookup",
   "rep.noSuchDistrict": "District {d} has no sitting member in this record. 149 of the 150 seats are filled.",
@@ -566,7 +562,6 @@ export const ES: Record<CopyKey, string> = {
   "intro.h1": "La Franja Morada",
   "q.skipQuiz": "Omitir el cuestionario y echar un vistazo",
   "rep.answerForScore": "Responda algunos votos y aquí verá qué tan de cerca {name} coincide con usted.",
-  "rep.noNameMatch": "Ningún miembro de la Cámara de Texas coincide con «{q}». Esto busca legisladores, no su propio nombre: pruebe con su código postal arriba.",
   "result.checkRep": "¿Cómo votó mi propio representante?",
   "how.close": "Cerrar",
   "how.full": "El método completo, los datos y quién hizo esto",
@@ -587,6 +582,7 @@ export const ES: Record<CopyKey, string> = {
   "q.askedAs": "Este todavía no tiene versión en lenguaje sencillo, así que se plantea con el texto oficial.",
   "q.youSaid": "Usted dijo {vote}.",
   "result.restart": "Empezar de nuevo",
+  "result.tryAll": "Responder los 67 votos",
   "theme.toDark": "Oscuro",
   "theme.toLight": "Claro",
   "intro.p1": "<b>Los legisladores de Texas votan a favor o en contra de nuevas leyes.</b> Tomamos votos reales de 2025 y ocultamos quién votó de qué manera. Ahora vota usted.",
@@ -778,8 +774,6 @@ export const ES: Record<CopyKey, string> = {
   "rep.lede": "Los tres de arriba compiten por otros cargos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
   "rep.districtLabel": "O su número de distrito",
   "rep.districtPlaceholder": "1 a 150",
-  "rep.nameLabel": "O el nombre de un legislador",
-  "rep.namePlaceholder": "p. ej. Talarico",
   "rep.findDistrict": "Si no sabe su distrito, está en su tarjeta de registro de votante, o busque su domicilio en {link}.",
   "rep.findDistrictLinkText": "la herramienta del estado",
   "rep.noSuchDistrict": "El distrito {d} no tiene miembro en funciones en este registro. 149 de los 150 escaños están ocupados.",

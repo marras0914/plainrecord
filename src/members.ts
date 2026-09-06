@@ -99,14 +99,6 @@ export function memberForDistrict(file: MemberFile, district: number): Member | 
   return file.members.find((m) => m.d === district);
 }
 
-/** Members whose name contains `q`, case-insensitively. For the name search. */
-export function searchMembers(file: MemberFile, q: string, limit = 8): Member[] {
-  const needle = q.trim().toLowerCase();
-  if (needle.length < 2) return [];
-  return file.members
-    .filter((m) => m.n.toLowerCase().includes(needle))
-    .slice(0, limit);
-}
 
 export interface MemberResult {
   member: Member;

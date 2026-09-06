@@ -102,6 +102,23 @@
     </section>
 
     <!--
+      The district lookup, directly after the three candidates.
+
+      It used to sit after the incumbency card, on the reasoning that answering
+      "why only these three" earns the right to ask about the reader's own
+      member. True, and it cost more than it was worth: measured at 390x844 the
+      panel began 3.8 screens down, and a reader who does not scroll that far
+      never learns it exists. Here it answers the question the three cards have
+      just provoked — here are three, what about mine — and the incumbency
+      answer follows immediately, still ahead of the outcomes.
+
+      Rendered from JS and fetched on demand: the member record is 10.7 KB
+      gzipped and the ZIP crosswalk another 12.4 KB, and most visitors open
+      neither.
+    -->
+    <section class="card" id="rep-card"></section>
+
+    <!--
       Placed HERE, directly under the three scored Democrats, and never hidden.
 
       This is the objection the page earns the moment it shows three scores: every
@@ -115,14 +132,6 @@
       the reader's path rather than at the end of it.
     -->
     <section class="card" id="bias-card"></section>
-
-  <!--
-    The district lookup. Placed AFTER the incumbency card, because the honest
-    answer to "why only these three" is what earns the right to then ask the
-    reader about their own member. Rendered from JS and fetched on demand: the
-    member record is 10.7 KB gzipped and most visitors will not open it.
-  -->
-  <section class="card" id="rep-card"></section>
 
     <section id="outcome-card" hidden>
       <div class="card-head" style="margin-bottom:10px">

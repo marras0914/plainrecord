@@ -111,7 +111,6 @@ let comparatorsOpen = false;
 let repDistrict: number | null = null;
 let repFile: Awaited<ReturnType<typeof rep.loadMembers>> = null;
 let repStatus: 'idle' | 'loading' | 'failed' = 'idle';
-let repQuery = '';
 // Whether the lookup's inputs have been built. The result region re-renders
 // freely; the inputs must not, or typing loses focus.
 let repShell = false;
@@ -510,6 +509,14 @@ function renderReadout(p: PartisanProfile): void {
     // the same as being able to use it.
     setTimeout(() => document.getElementById('rep-zip')?.focus({ preventScroll: true }), 500);
   });
+
+  // The other sixty votes. This was reachable only from a panel nearly nine
+  // screens down, so in practice the quiz ended at seven — and those seven
+  // split almost entirely on party lines, which means the reader who stops
+  // there learns which side they lean to and never sees where they cross it.
+  if (mode === 'short') {
+    act(t('result.tryAll'), 'ghost', () => setMode('full'));
+  }
 
   act(t('result.restart'), 'ghost', () => {
     answers = {};
@@ -1175,9 +1182,6 @@ function renderRep(): void {
       `<div class="rep-field"><label for="rep-district">${esc(t('rep.districtLabel'))}</label>` +
       `<input id="rep-district" type="number" min="1" max="150" inputmode="numeric" ` +
       `placeholder="${esc(t('rep.districtPlaceholder'))}"></div>` +
-      `<div class="rep-field"><label for="rep-name">${esc(t('rep.nameLabel'))}</label>` +
-      `<input id="rep-name" type="search" autocomplete="off" ` +
-      `placeholder="${esc(t('rep.namePlaceholder'))}"></div>` +
       `</div>` +
       `<p class="rep-help">${t('rep.findDistrict', { link: stateLookup })}</p>` +
       `<div id="rep-out"></div>`;
@@ -1238,7 +1242,6 @@ function renderRep(): void {
       const digits = z.value.replace(/\D/g, '').slice(0, 5);
       if (digits !== z.value) z.value = digits;
       repZip = digits;
-      repQuery = '';
       void resolveZip();
       renderRepOut();
     });
@@ -1247,14 +1250,6 @@ function renderRep(): void {
     d.addEventListener('input', () => {
       const v = d.value.trim();
       repDistrict = v === '' ? null : Number(v);
-      repQuery = '';
-      repZipResult = { kind: 'none' };
-      void ensure();
-      renderRepOut();
-    });
-    const nm = el<HTMLInputElement>('rep-name');
-    nm.addEventListener('input', () => {
-      repQuery = nm.value;
       repZipResult = { kind: 'none' };
       void ensure();
       renderRepOut();
@@ -1311,22 +1306,6 @@ function renderRepOut(): void {
     const link = `<a href="${rep.MEMBERS_URL}">${rep.MEMBERS_URL}</a>`;
     html += `<p class="rep-note">${t('rep.loadFailed', { link })}</p>`;
   } else if (repFile) {
-    if (repQuery.trim().length >= 2) {
-      const hits = rep.searchMembers(repFile, repQuery);
-      // Silence is the worst answer a search can give. Without this the field
-      // simply did nothing for any name not in the roster, and a reader who
-      // typed his own name concluded the whole panel was broken.
-      if (!hits.length) {
-        html += `<p class="rep-note">${esc(t('rep.noNameMatch', { q: repQuery.trim() }))}</p>`;
-      }
-      if (hits.length) {
-        html += `<ul class="rep-hits">` + hits.map((m) =>
-          `<li><button class="ghost" data-rep-d="${m.d}">${esc(m.n)} ` +
-          `<span class="mono">${esc(t('rep.district', { d: m.d }))}</span></button></li>`).join('') +
-          `</ul>`;
-      }
-    }
-
     if (repDistrict !== null) {
       if (!Number.isInteger(repDistrict) || repDistrict < 1 || repDistrict > 150) {
         html += `<p class="rep-note">${esc(t('rep.outOfRange'))}</p>`;
@@ -1377,11 +1356,8 @@ function renderRepOut(): void {
   out.querySelectorAll<HTMLButtonElement>('[data-rep-d]').forEach((b) => {
     b.addEventListener('click', () => {
       repDistrict = Number(b.dataset.repD);
-      repQuery = '';
       const d = document.getElementById('rep-district') as HTMLInputElement | null;
       if (d) d.value = String(repDistrict);
-      const nm = document.getElementById('rep-name') as HTMLInputElement | null;
-      if (nm) nm.value = '';
       renderRepOut();
     });
   });
