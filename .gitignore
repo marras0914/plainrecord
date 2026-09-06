@@ -1,5 +1,10 @@
 node_modules/
 dist/
+# The Spanish build's scratch dir. build_locales.mjs sends the /es/ vite build
+# here rather than into dist/, because emptyOutDir would otherwise have it wipe
+# the English build; its assets are merged into dist/ afterwards. Output, and
+# a near-duplicate of dist/ at that -- it has no business in history.
+.locale-es/
 .vercel/
 .DS_Store
 

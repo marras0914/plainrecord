@@ -1,7 +1,7 @@
 {
   "_meta": {
     "purpose": "Single source of every user-facing string on rightnleft.com, in English and Spanish. Feeds both the reviewer's side-by-side page (npm run i18n:review) and, once the Spanish is signed off, the locale modules the page renders from.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset.",
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass.",
     "placeholders": "{name} is substituted at runtime from real data. A translator may MOVE a placeholder anywhere the Spanish needs it, but must not rename, add or drop one. Placeholder names are listed per string in 'vars'.",
     "register": {
       "decision": "usted, not tu",
@@ -1825,11 +1825,11 @@
     "status": "ok"
   },
   "rep.lede": {
-    "en": "The three above are running for other offices. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
-    "es": "Los tres de arriba compiten por otros cargos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
+    "en": "The three above are running for offices that affect every Texan. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
+    "es": "Los tres de arriba se postulan para cargos que afectan a todos los texanos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
     "where": "Under the heading.",
     "vars": [],
-    "note": "Deliberately carries NO item count. It used to interpolate activeItems().length, which contradicted the coverage line beneath it in 7-issue mode.",
+    "note": "Deliberately carries NO item count. It used to interpolate activeItems().length, which contradicted the coverage line beneath it in 7-issue mode. The first clause said the three were \"running for other offices\", which read as a dismissal — as if the reason to care about your own member is that these three have moved on. They have not moved on: Governor, Lt. Governor and U.S. Senate are all offices every Texan votes on, so the honest contrast is reach, not relevance. Those three races reach the whole state; your member is the one who answers for your part of it. Spanish approved by Marco Arras (fluent) on 5 September 2026, who chose \"se postulan para\" over \"compiten por\" as the register US Spanish-language civic material uses for running for office.",
     "status": "ok"
   },
   "rep.districtLabel": {
