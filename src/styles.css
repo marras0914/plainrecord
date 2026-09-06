@@ -474,6 +474,13 @@
                 display:inline-flex; align-items:center; cursor:pointer; }
   .topbar-btn:hover { color:var(--ink); border-color:var(--ink-2); }
   .topbar-btn:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+  /* An author display: beats the UA's [hidden] { display:none }, so the line
+     above quietly disabled every hide on this bar. showView() takes the method
+     button off the start screen because that screen already offers the same
+     button under Start; with display set and nothing to switch it off, the
+     reader got two "How this works" buttons on the first screen they see.
+     Any control added to this bar inherits both the look and this guard. */
+  .topbar-btn[hidden] { display:none; }
 
   /* Says on the Spanish page which words are ours and which are the record's.
      Not decorative: it is what keeps the "copied word for word" promise honest
