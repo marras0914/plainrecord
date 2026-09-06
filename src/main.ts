@@ -1091,7 +1091,10 @@ function bindNavHow(): void {
   const host = document.querySelector('.langswitch');
   if (!host) return;
   const b = document.createElement('button');
-  b.className = 'ghost topbar-how';
+  // topbar-btn, not ghost: .ghost is the in-page secondary button and sets its
+  // own font-size and padding at a higher specificity, which is how this one
+  // ended up a different size from its two neighbours.
+  b.className = 'topbar-btn topbar-how';
   b.id = 'nav-how';
   b.type = 'button';
   b.setAttribute('aria-expanded', 'false');
@@ -1142,7 +1145,7 @@ function renderTheme(): void {
   const host = document.querySelector('.langswitch') ?? document.querySelector('.topbar');
   if (!host) return;
   const btn = document.createElement('button');
-  btn.className = 'themetoggle';
+  btn.className = 'topbar-btn themetoggle';
   btn.type = 'button';
   host.appendChild(btn);
 

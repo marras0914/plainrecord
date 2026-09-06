@@ -451,19 +451,29 @@
      person who needs it cannot read the one they are looking at. */
   .topbar { padding-top:14px; }
   .langswitch { margin-bottom:10px; display:flex; gap:8px; align-items:center; }
-  .topbar-how { font-size:12.5px; padding:5px 9px; }
-  .themetoggle { font-family:inherit; font-size:12.5px;
-    letter-spacing:0; color:var(--muted);
-    background:none; border:1px solid var(--hair); border-radius:2px;
-    padding:5px 9px; cursor:pointer; }
-  .themetoggle:hover { color:var(--ink); border-color:var(--ink-2); }
-  .themetoggle:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
-  .langswitch a { font-family:inherit; font-size:12.5px;
-                  letter-spacing:0; text-transform:none; color:var(--ink-2);
-                  text-decoration:none; border:1px solid var(--rule);
-                  padding:3px 9px; display:inline-block; }
-  .langswitch a:hover { color:var(--ink); border-color:var(--ink-2); }
-  .langswitch a:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+
+  /* The three top-bar controls are ONE control, drawn three times.
+
+     They were not. Each was written where it was built — the language link by
+     build_locales.mjs, the theme toggle and "How this works" by two different
+     functions in main.ts — and each picked its own values. Measured in the row:
+     27px, 40px and 34px tall, borders in --rule and --hair, one of the three on
+     --surface while the others were transparent, radius 0 and 2px and the base
+     button's. align-items:center then stacked three different rectangles on one
+     line. Nothing was wrong with any of them alone; the row was the defect.
+
+     So the look lives here once, and all three wear it. inline-flex rather than
+     inline-block because one of them is an <a> and two are <button>s, and only
+     a flex box makes min-height mean the same thing to both. Anything added to
+     this bar later gets the class and cannot drift. */
+  .topbar-btn { font-family:inherit; font-size:12.5px; font-weight:400;
+                letter-spacing:0; text-transform:none; text-decoration:none;
+                color:var(--ink-2); background:none;
+                border:1px solid var(--hair); border-radius:2px;
+                padding:0 10px; min-height:34px;
+                display:inline-flex; align-items:center; cursor:pointer; }
+  .topbar-btn:hover { color:var(--ink); border-color:var(--ink-2); }
+  .topbar-btn:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
 
   /* Says on the Spanish page which words are ours and which are the record's.
      Not decorative: it is what keeps the "copied word for word" promise honest

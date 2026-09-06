@@ -282,7 +282,7 @@ function langSwitch(locale) {
   const other = locale === 'es' ? 'en' : 'es';
   return (
     `<div class="langswitch">` +
-    `<a href="${href}" lang="${other}" hreflang="${other}">${label}</a>` +
+    `<a class="topbar-btn" href="${href}" lang="${other}" hreflang="${other}">${label}</a>` +
     `</div>`
   );
 }
