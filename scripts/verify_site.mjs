@@ -251,8 +251,33 @@ try {
     (await page.$$('#q-card [data-answer]')).length === 0 ||
     !(await page.isVisible('#q-card [data-answer="1"]')));
 
+  // Exactly one way to the method, on whichever screen you are looking at.
+  //
+  // Both buttons are in the DOM by design: one under Start, one in the top bar
+  // for every screen after it. showView() hides whichever does not belong, with
+  // the hidden ATTRIBUTE — and an author `display:` on the bar's shared rule
+  // overrides the UA stylesheet's [hidden] { display:none } without a word of
+  // complaint. That shipped, and the first screen a reader saw carried the same
+  // button twice. So this counts what is VISIBLE; counting elements would have
+  // found two on a healthy page and told us nothing.
+  const howVisible = (pg) => pg.evaluate(() => {
+    const label = document.getElementById('start-how')?.textContent.trim()
+      ?? document.getElementById('nav-how')?.textContent.trim();
+    return [...document.querySelectorAll('button')]
+      .filter((b) => b.textContent.trim() === label)
+      .filter((b) => b.getBoundingClientRect().height > 0)
+      .map((b) => b.id || '(no id)');
+  });
+  const howOnStart = await howVisible(page);
+  check('one "How this works" button on the start screen, not two',
+    howOnStart.length === 1, howOnStart.join(' + ') || 'none visible');
+
   await page.click('#start-btn');
   await page.waitForTimeout(250);
+
+  const howOnQuiz = await howVisible(page);
+  check('the method is still one tap away once the quiz starts',
+    howOnQuiz.length === 1, howOnQuiz.join(' + ') || 'none visible');
 
   const meta = await page.$eval('.q-top', (e) => e.textContent.replace(/\s+/g, ' ').trim());
   check('boots in 7-issue mode', /^1 of 7/.test(meta), meta);
