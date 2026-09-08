@@ -80,6 +80,13 @@
     margin:22px 0 0; text-wrap:pretty; }
   .q-why { font-size:14.5px; color:var(--ink-2); line-height:1.5; margin:14px 0 0; }
   .q-note { font-size:12.5px; color:var(--muted); line-height:1.5; margin:10px 0 0; }
+  /* Names the act, directly above the two buttons that perform it. Quieter
+     than the summary above it and heavier than the note below, because it is
+     an instruction rather than either the subject or a caveat. When it is
+     present it owns the gap, so the buttons sit close under their own
+     question instead of floating between the two. */
+  .q-prompt { margin:26px 0 0; font-size:15px; font-weight:500; color:var(--ink); }
+  .q-prompt + .q-actions { margin-top:12px; }
   .q-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; align-items:center; }
   button.vote { font-family:inherit; font-size:1.05rem; font-weight:600;
     padding:15px 0; min-width:8.5rem; flex:1 1 8.5rem; border-radius:999px;

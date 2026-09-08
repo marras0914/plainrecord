@@ -1,7 +1,7 @@
 {
   "_meta": {
     "purpose": "Single source of every user-facing string on rightnleft.com, in English and Spanish. Feeds both the reviewer's side-by-side page (npm run i18n:review) and, once the Spanish is signed off, the locale modules the page renders from.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass.",
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass. A second pass on 7 September 2026 approved eight more: the vote framing (q.prompt, vote.yes, vote.no and the three \"You voted\" lines) and the method.labels paragraph. The framing changed because a first-time reader could not tell what Yes meant above a summary that only states what a bill does.",
     "placeholders": "{name} is substituted at runtime from real data. A translator may MOVE a placeholder anywhere the Spanish needs it, but must not rename, add or drop one. Placeholder names are listed per string in 'vars'.",
     "register": {
       "decision": "usted, not tu",
@@ -285,18 +285,26 @@
     "status": "ok"
   },
   "vote.yes": {
-    "en": "Yes",
-    "es": "Sí",
+    "en": "For",
+    "es": "A favor",
     "where": "The reader's own answer button.",
     "vars": [],
-    "note": "Separate from vote.yea, which is what the RECORD says a legislator did. A legislator votes Yea; a reader says yes.",
+    "note": "Was \"Yes\"/\"Sí\". The 67 plain summaries are statements of what a bill does, so Yes/No answered a question that had not been asked — a first-time reader had to stop and work out which Yes was meant. For/Against names a vote. The RECORD keeps its own words: a member still \"voted Yea\".",
     "status": "ok"
   },
   "vote.no": {
-    "en": "No",
-    "es": "No",
+    "en": "Against",
+    "es": "En contra",
     "where": "The reader's own answer button.",
     "vars": [],
+    "status": "ok"
+  },
+  "q.prompt": {
+    "en": "Would you vote for this bill?",
+    "es": "¿Votaría usted a favor de este proyecto de ley?",
+    "where": "One constant line between the question and the two vote buttons.",
+    "vars": [],
+    "note": "Constant on all 67 questions, which is what makes it a three-string fix rather than 134: every plain summary is shaped \"Requires... / Lets... / Creates...\", so one framing line serves them all.",
     "status": "ok"
   },
   "q.next": {
@@ -348,8 +356,8 @@
     "status": "ok"
   },
   "q.youSaid": {
-    "en": "You said {vote}.",
-    "es": "Usted dijo {vote}.",
+    "en": "You voted {vote}.",
+    "es": "Usted votó {vote}.",
     "where": "Opens the reveal after an answer.",
     "vars": [
       "vote"
@@ -1570,8 +1578,8 @@
     "status": "ok"
   },
   "rev.youSaidVote": {
-    "en": "You said <b>{vote}</b>.",
-    "es": "Usted dijo <b>{vote}</b>.",
+    "en": "You voted <b>{vote}</b>.",
+    "es": "Usted votó <b>{vote}</b>.",
     "where": "Reveal summary tail.",
     "vars": [
       "vote"
@@ -1602,8 +1610,8 @@
     "status": "ok"
   },
   "tip.youAnswered": {
-    "en": "You answered",
-    "es": "Usted respondió",
+    "en": "You voted",
+    "es": "Usted votó",
     "where": "Dot tooltip.",
     "vars": [],
     "status": "ok"
@@ -1792,6 +1800,26 @@
       "items"
     ],
     "note": "Added after a data reporter was pitched the open payload. The page showed 30% (20/67) while the file said 31.7% (19/60) and nothing on either surface said why. Deliberately does NOT quote the denominator as a number: the page cannot reliably derive it (items.length - headlineCount only works when no headline bill was already rule-selected), and crossCuttingOf is absent from the committed payload.",
+    "status": "ok"
+  },
+  "method.labels.lead": {
+    "en": "Why the subjects do not add up.",
+    "es": "Por qué las materias no cuadran.",
+    "where": "Method section, after the two-denominators paragraph.",
+    "vars": [],
+    "status": "ok"
+  },
+  "method.labels.body": {
+    "en": "The rule picked {ruleSelected} votes, at most {perCat} per subject, and we added {headline} big bills by hand — the {items} questions here. Count the subjects in the data file today and you will not get that back. After the votes were picked we corrected six subject labels that were wrong on the page: <em>Abortion</em> sat above a question about prosecuting election crimes. Correcting a label cannot reach back and change which votes the rule chose, so what you are counting is the corrected labels over the original picks. We would rather show you that than quietly relabel and let the arithmetic look tidy.",
+    "es": "La regla escogió {ruleSelected} votos, como máximo {perCat} por materia, y nosotros añadimos a mano {headline} proyectos importantes — las {items} preguntas de aquí. Si hoy cuenta las materias en el archivo de datos, esa cuenta no le saldrá. Después de escoger los votos corregimos seis etiquetas de materia que estaban mal en la página: <em>Aborto</em> aparecía encima de una pregunta sobre perseguir delitos electorales. Corregir una etiqueta no puede volver atrás y cambiar qué votos escogió la regla, así que lo que usted cuenta son las etiquetas corregidas sobre la selección original. Preferimos enseñarle eso antes que reetiquetar en silencio y dejar que la cuenta parezca limpia.",
+    "where": "Method section body, under method.labels.lead.",
+    "vars": [
+      "ruleSelected",
+      "perCat",
+      "headline",
+      "items"
+    ],
+    "note": "The counts are read from the payload, not written here: crossCuttingOf is the rule-selected denominator and the difference to items.length is the hand-picked headline bills. Rendered only when the payload carries crossCuttingOf.",
     "status": "ok"
   },
   "privacy.lead": {

@@ -45,6 +45,7 @@ export type CopyKey =
   | "start.hide"
   | "vote.yes"
   | "vote.no"
+  | "q.prompt"
   | "q.next"
   | "q.seeResult"
   | "q.showOfficial"
@@ -238,6 +239,8 @@ export type CopyKey =
   | "og.imageAlt"
   | "method.denominator.lead"
   | "method.denominator.body"
+  | "method.labels.lead"
+  | "method.labels.body"
   | "privacy.lead"
   | "privacy.body"
   | "intro.subhead"
@@ -315,15 +318,16 @@ export const EN: Record<CopyKey, string> = {
   "start.fine": "About two minutes · no sign-up · your answers never leave this device",
   "start.how": "How this works",
   "start.hide": "Hide",
-  "vote.yes": "Yes",
-  "vote.no": "No",
+  "vote.yes": "For",
+  "vote.no": "Against",
+  "q.prompt": "Would you vote for this bill?",
   "q.next": "Next",
   "q.seeResult": "See where you landed",
   "q.showOfficial": "Official wording",
   "q.hideOfficial": "Hide official wording",
   "q.officialNote": "The question above is our plain-language summary. This is the bill's official caption, word for word. The House voted {yeas} yes, {nays} no.",
   "q.askedAs": "This one has no plain-language version yet, so it is asked in the official wording.",
-  "q.youSaid": "You said {vote}.",
+  "q.youSaid": "You voted {vote}.",
   "result.restart": "Start over",
   "result.tryAll": "Answer all 67 votes",
   "theme.toDark": "Dark",
@@ -482,11 +486,11 @@ export const EN: Record<CopyKey, string> = {
   "rev.voted": "voted {vote}",
   "rev.sameAsYou": "same as you",
   "rev.oppositeToYou": "opposite to you",
-  "rev.youSaidVote": "You said <b>{vote}</b>.",
+  "rev.youSaidVote": "You voted <b>{vote}</b>.",
   "rev.reps": "Republicans",
   "rev.dems": "Democrats",
   "rev.yeaShare": "{pct} Yea",
-  "tip.youAnswered": "You answered",
+  "tip.youAnswered": "You voted",
   "tip.rYea": "R voted Yea",
   "tip.dYea": "D voted Yea",
   "tip.position": "your position",
@@ -510,6 +514,8 @@ export const EN: Record<CopyKey, string> = {
   "og.imageAlt": "The Purple Strip — a blind quiz on {n} real Texas House votes. A blue-to-red axis labelled \"agreed with Democrats\" and \"agreed with Republicans\", with {dots} purple dots spread across its whole width.",
   "method.denominator.lead": "Two cross-cutting figures, and why.",
   "method.denominator.body": "The percentage in the tiles above counts all {items} questions. The <code>crossCuttingShare</code> field in the data file is measured over the rule-selected votes only, so it is a slightly different number. That is deliberate: it exists to check the <em>rule</em>, and the seven headline bills were picked by hand rather than by the rule — six of them split the parties sharply, so counting them would make the rule look more one-sided than it is. Both numbers are honest and neither is the other one rounded.",
+  "method.labels.lead": "Why the subjects do not add up.",
+  "method.labels.body": "The rule picked {ruleSelected} votes, at most {perCat} per subject, and we added {headline} big bills by hand — the {items} questions here. Count the subjects in the data file today and you will not get that back. After the votes were picked we corrected six subject labels that were wrong on the page: <em>Abortion</em> sat above a question about prosecuting election crimes. Correcting a label cannot reach back and change which votes the rule chose, so what you are counting is the corrected labels over the original picks. We would rather show you that than quietly relabel and let the arithmetic look tidy.",
   "privacy.lead": "What this page counts, and what it does not.",
   "privacy.body": "It counts visits — how many people came and which link sent them — using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser: there is no server to send them to, and the page makes no network request while you answer. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out.",
   "intro.subhead": "How Vikki Goodwin, Gina Hinojosa and James Talarico voted in the Texas House, checked against your own answers.",
@@ -572,15 +578,16 @@ export const ES: Record<CopyKey, string> = {
   "start.fine": "Unos dos minutos · sin registro · sus respuestas nunca salen de este dispositivo",
   "start.how": "Cómo funciona esto",
   "start.hide": "Ocultar",
-  "vote.yes": "Sí",
-  "vote.no": "No",
+  "vote.yes": "A favor",
+  "vote.no": "En contra",
+  "q.prompt": "¿Votaría usted a favor de este proyecto de ley?",
   "q.next": "Siguiente",
   "q.seeResult": "Ver dónde se sitúa",
   "q.showOfficial": "Texto oficial",
   "q.hideOfficial": "Ocultar texto oficial",
   "q.officialNote": "La pregunta de arriba es nuestro resumen en lenguaje sencillo. Este es el texto oficial del proyecto de ley, palabra por palabra. La Cámara votó {yeas} a favor, {nays} en contra.",
   "q.askedAs": "Este todavía no tiene versión en lenguaje sencillo, así que se plantea con el texto oficial.",
-  "q.youSaid": "Usted dijo {vote}.",
+  "q.youSaid": "Usted votó {vote}.",
   "result.restart": "Empezar de nuevo",
   "result.tryAll": "Responder los 67 votos",
   "theme.toDark": "Oscuro",
@@ -739,11 +746,11 @@ export const ES: Record<CopyKey, string> = {
   "rev.voted": "votó {vote}",
   "rev.sameAsYou": "igual que usted",
   "rev.oppositeToYou": "al contrario que usted",
-  "rev.youSaidVote": "Usted dijo <b>{vote}</b>.",
+  "rev.youSaidVote": "Usted votó <b>{vote}</b>.",
   "rev.reps": "Republicanos",
   "rev.dems": "Demócratas",
   "rev.yeaShare": "{pct} a favor",
-  "tip.youAnswered": "Usted respondió",
+  "tip.youAnswered": "Usted votó",
   "tip.rYea": "R a favor",
   "tip.dYea": "D a favor",
   "tip.position": "su posición",
@@ -767,6 +774,8 @@ export const ES: Record<CopyKey, string> = {
   "og.imageAlt": "La Franja Morada — un cuestionario a ciegas sobre {n} votos reales de la Cámara de Texas. Un eje de azul a rojo rotulado \"coincidió con los demócratas\" y \"coincidió con los republicanos\", con {dots} puntos morados repartidos por todo su ancho.",
   "method.denominator.lead": "Dos cifras de votos sin división partidista, y por qué.",
   "method.denominator.body": "El porcentaje de los recuadros de arriba cuenta las {items} preguntas. El campo <code>crossCuttingShare</code> del archivo de datos se mide solo sobre los votos escogidos por la regla, así que es una cifra ligeramente distinta. Eso es a propósito: existe para comprobar la <em>regla</em>, y los siete proyectos principales los escogimos a mano y no por regla; seis de ellos dividieron a los partidos con claridad, así que contarlos haría parecer la regla más sesgada de lo que es. Las dos cifras son honestas y ninguna es la otra redondeada.",
+  "method.labels.lead": "Por qué las materias no cuadran.",
+  "method.labels.body": "La regla escogió {ruleSelected} votos, como máximo {perCat} por materia, y nosotros añadimos a mano {headline} proyectos importantes — las {items} preguntas de aquí. Si hoy cuenta las materias en el archivo de datos, esa cuenta no le saldrá. Después de escoger los votos corregimos seis etiquetas de materia que estaban mal en la página: <em>Aborto</em> aparecía encima de una pregunta sobre perseguir delitos electorales. Corregir una etiqueta no puede volver atrás y cambiar qué votos escogió la regla, así que lo que usted cuenta son las etiquetas corregidas sobre la selección original. Preferimos enseñarle eso antes que reetiquetar en silencio y dejar que la cuenta parezca limpia.",
   "privacy.lead": "Qué cuenta esta página y qué no.",
   "privacy.body": "Cuenta visitas —cuántas personas entraron y qué enlace las trajo— con la analítica de Vercel, que no usa cookies y no puede seguirle a otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador: no hay ningún servidor al que enviarlas, y la página no hace ninguna petición de red mientras usted responde. Eso no es una promesa, se comprueba en cada compilación: la prueba responde cinco preguntas y falla si sale un solo byte.",
   "intro.subhead": "Cómo votaron Vikki Goodwin, Gina Hinojosa y James Talarico en la Cámara de Texas, comparado con sus propias respuestas.",

@@ -497,7 +497,14 @@ if (!emitSpanish) {
     (!haveSidecar ? '    · public/data/quiz_89R.es.json is missing, so payload prose\n' +
                     '      (comparatorRule, candidateProvenance, outcome caveats, the 67\n' +
                     '      official captions) would render in English under Spanish headings\n' : '') +
-    '    · re-run with --force to emit it anyway, for local review only\n',
+    // --force overrides the SIDECAR check only (see emitSpanish above); it has
+    // no power over the approval gate, which is the point of the gate. Offering
+    // it against unapproved strings sent a reader off to run a command that
+    // cannot work, at the moment they most wanted it to.
+    (unapproved.length
+      ? `    · approve the ${unapproved.length} string(s) in i18n/copy.json ` +
+        'and re-run; --force cannot lift this\n'
+      : '    · re-run with --force to emit it anyway, for local review only\n'),
   );
 }
 

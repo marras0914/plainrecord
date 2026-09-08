@@ -441,6 +441,23 @@ function renderProv(): void {
       items: ALL_ITEMS.length,
     })),
 
+    // Says the thing a reader can catch us on before they catch us on it.
+    //
+    // Count the subjects in the published file and the stated rule does not
+    // reproduce it: the corrected labels imply 70 items, not 67. Nothing is
+    // false -- the rule really did pick three per subject, the labels really
+    // are better now -- but they describe different moments, and only the file
+    // shows both. Rendered only when the payload carries crossCuttingOf, since
+    // the paragraph quotes it and an older payload does not have it.
+    ...(DATA.crossCuttingOf === undefined ? [] : [
+      para(t('method.labels.lead'), t('method.labels.body', {
+        ruleSelected: DATA.crossCuttingOf,
+        perCat: DATA.rulePerCategory,
+        headline: ALL_ITEMS.length - DATA.crossCuttingOf,
+        items: ALL_ITEMS.length,
+      })),
+    ]),
+
     para(t('method.words.lead'), t('method.words.body')),
 
     // A page that asks you to trust its numbers has to hand them over. This is the
@@ -797,7 +814,17 @@ function renderQuestion(): void {
 
     (answered
       ? ''
-      : `<div class="q-actions">` +
+      // The framing line, and it does real work.
+      //
+      // Every one of the 67 plain summaries is a statement of what the bill
+      // does -- "Requires...", "Lets...", "Creates..." -- so two buttons reading
+      // Yes and No underneath asked a question nobody had put. A first-time
+      // reader took a visible moment to work out whether Yes meant "yes, that
+      // is what it does" or "yes, I want it". One constant line names the act,
+      // and because the summaries are uniformly shaped it works for all 67
+      // without rewriting a single one of them.
+      : `<p class="q-prompt">${esc(t('q.prompt'))}</p>` +
+        `<div class="q-actions">` +
         `<button class="vote" data-answer="1">${esc(t('vote.yes'))}</button>` +
         `<button class="vote" data-answer="-1">${esc(t('vote.no'))}</button>` +
         `<button class="ghost small" data-answer="0">${esc(t('q.skip'))}</button>` +

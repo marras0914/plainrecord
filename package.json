@@ -38,6 +38,7 @@
     "plain:check": "node scripts/plain_review.mjs --check",
     "data:plain": "node scripts/add_plain.mjs",
     "data:subjects": "node scripts/fetch_subjects.mjs",
+    "data:denominator": "node scripts/add_cross_denominator.mjs",
     "data:categories": "node scripts/fix_categories.mjs",
     "data:govacts": "node scripts/build_gov_acts.mjs",
     "data:govacts:add": "node scripts/add_gov_acts.mjs"

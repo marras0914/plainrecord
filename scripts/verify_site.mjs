@@ -350,9 +350,13 @@ try {
     revRows.map((r) => `${r.vote}/${r.match}`).join(' | '));
   const revSum = await page.$eval('.cand-rev-sum', (e) => e.textContent.replace(/\s+/g, ' ').trim());
   check('the summary counts 3 of 3 and echoes your own answer',
-    /3 of 3/.test(revSum) && /You said No/.test(revSum), revSum);
+    /3 of 3/.test(revSum) && /You voted Against/.test(revSum), revSum);
+  // Two vocabularies, deliberately kept apart: the reader votes For or Against,
+  // a member voted Yea or Nay. The reader's own answer must never be reported in
+  // the record's words -- that would put the House's language in their mouth for
+  // a vote they never cast.
   check('the reader\'s own answer is not given the record\'s word for it',
-    !/You said Nay/.test(revSum), revSum);
+    !/You voted (Yea|Nay)/.test(revSum), revSum);
 
   // Next has to be reachable WITHOUT scrolling.
   //
