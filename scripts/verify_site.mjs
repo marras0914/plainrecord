@@ -448,6 +448,31 @@ try {
       absence.sum);
   }
 
+  // --- the way past the quiz, offered before it -------------------------------
+  //
+  // Everything checked above this line lives behind the Start button. A reader
+  // who came for the outcomes, the member lookup or the method rather than for
+  // seven questions needs a door that is not Start, and it has to be on the
+  // FIRST screen: the same label sat on the question card for a while, which
+  // meant finding the exit required entering. Tested on a fresh load so the
+  // start screen is genuinely the start screen.
+  await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+  const lookVisible = await page.isVisible('#start-look');
+  check('the opening screen offers a way past the quiz', lookVisible,
+    lookVisible ? await page.$eval('#start-look', (e) => e.textContent.trim()) : 'no #start-look');
+  if (lookVisible) {
+    await page.click('#start-look');
+    await page.waitForTimeout(300);
+    const landed = await page.evaluate(() => ({
+      start: document.getElementById('start-view').hidden,
+      quiz: document.getElementById('quiz-view').hidden,
+      result: document.getElementById('result-view').hidden,
+    }));
+    check('it lands on the rest of the site, not on a question',
+      landed.start === true && landed.quiz === true && landed.result === false,
+      `start hidden ${landed.start}, quiz hidden ${landed.quiz}, result hidden ${landed.result}`);
+  }
+
   // A fresh load IS the seven-issue mode, and lands in the quiz. Clicking
   // #mode-short from the result does nothing when the mode has not changed —
   // setMode returns early — which would leave the run stranded on the result

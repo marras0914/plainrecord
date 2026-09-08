@@ -1142,6 +1142,16 @@ function bindStart(): void {
     window.scrollTo(0, 0);
   });
 
+  // Straight to the rest of the page, for a reader who did not come to play.
+  // Deliberately the same three lines as #q-result-now: two entry points to one
+  // destination, so they cannot drift into behaving differently.
+  document.getElementById('start-look')?.addEventListener('click', () => {
+    view = 'result';
+    showView();
+    render();
+    window.scrollTo(0, 0);
+  });
+
   // The old introduction, kept in full but folded away. It is a good
   // explanation; it was just standing in the doorway.
   const how = document.getElementById('start-how');

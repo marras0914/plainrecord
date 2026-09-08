@@ -53,6 +53,17 @@
     <p class="start-lede" data-i18n="start.lede">Seven votes your Texas House actually took in 2025. We hid who voted which way. Where do you land?</p>
     <div class="start-actions">
       <button id="start-btn" data-i18n="start.begin">Start</button>
+      <!--
+        The way past the quiz, offered before it rather than inside it.
+
+        This label already existed on the first question card, which meant a
+        reader who did not come here to answer 67 questions had to press Start,
+        land on a vote about perinatal palliative care, and only then find the
+        way out. The outcomes, the member lookup and the method were behind a
+        door marked Start. Same string on both screens on purpose: one action
+        should not have two names.
+      -->
+      <button class="ghost start-look" id="start-look" data-i18n="q.skipQuiz">Skip the quiz and look around</button>
     </div>
     <p class="start-fine" data-i18n="start.fine">About two minutes · no sign-up · your answers never leave this device</p>
     <!--TRANSLATION_NOTICE-->
@@ -251,22 +262,38 @@
   <div class="how-inner">
     <button class="ghost how-close" id="how-close" data-i18n="how.close">Close</button>
 
-    <div class="blurb">
-      <p data-i18n="intro.p1"><b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from
-      2025 and hid who voted which way. Now you vote.</p>
-      <p data-i18n="intro.p2">For each one we count how many Republicans said yes, and how many Democrats
-      said yes. Mostly Republicans? We colour it <span class="sw-r">red</span>.
-      Mostly Democrats? <span class="sw-b">Blue</span>. Both parties agreed?
-      <span class="sw-g">Grey</span> — that vote doesn't tell us much about sides.</p>
-      <p data-i18n="intro.p3">Every answer you give becomes one dot. Dots on the left mean you agreed with
-      Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots
-      land on both sides, you don't fit neatly in one party.</b> That's the purple part.</p>
-      <p data-i18n="intro.p4">Then we show you <b>what these areas actually look like in Texas today</b> —
-      school funding, health coverage, and so on — with the source for every number.</p>
-      <p data-i18n="intro.fine" class="blurb-fine">Nobody's opinion decides the colours. They come from the actual
-      vote counts, and you can check them on every question. The outcome numbers are
-      real too, but a state ranking has many causes — we show you the numbers and the
-      votes, and leave the connecting to you.</p>
+    <div class="blurb">
+
+      <p data-i18n="intro.p1"><b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from
+
+      2025 and hid who voted which way. Now you vote.</p>
+
+      <p data-i18n="intro.p2">For each one we count how many Republicans said yes, and how many Democrats
+
+      said yes. Mostly Republicans? We colour it <span class="sw-r">red</span>.
+
+      Mostly Democrats? <span class="sw-b">Blue</span>. Both parties agreed?
+
+      <span class="sw-g">Grey</span> — that vote doesn't tell us much about sides.</p>
+
+      <p data-i18n="intro.p3">Every answer you give becomes one dot. Dots on the left mean you agreed with
+
+      Democrats. Dots on the right mean you agreed with Republicans. <b>If your dots
+
+      land on both sides, you don't fit neatly in one party.</b> That's the purple part.</p>
+
+      <p data-i18n="intro.p4">Then we show you <b>what these areas actually look like in Texas today</b> —
+
+      school funding, health coverage, and so on — with the source for every number.</p>
+
+      <p data-i18n="intro.fine" class="blurb-fine">Nobody's opinion decides the colours. They come from the actual
+
+      vote counts, and you can check them on every question. The outcome numbers are
+
+      real too, but a state ranking has many causes — we show you the numbers and the
+
+      votes, and leave the connecting to you.</p>
+
     </div>
     <p class="how-more"><a href="#method" id="how-full" data-i18n="how.full">The full method, the data, and who made this</a></p>
   </div>
