@@ -24,8 +24,8 @@ import {
   handleNode,
   type Mode,
   type Region,
-} from './_tally';
-import type { ProfileVerdict } from '../valence';
+} from './_tally.js';
+import type { ProfileVerdict } from '../valence.js';
 
 export const config = { runtime: 'nodejs' };
 

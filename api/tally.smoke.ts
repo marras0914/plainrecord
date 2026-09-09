@@ -17,9 +17,12 @@
  * it fails loudly rather than going quietly green.
  */
 
-import { HEADLINE_ITEMS, ALL_ITEMS } from '../src/quiz-data';
-import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed } from './_tally';
-import type { SharePayload } from './_tally';
+import { existsSync, readFileSync } from 'node:fs';
+import { dirname, relative, resolve } from 'node:path';
+
+import { HEADLINE_ITEMS, ALL_ITEMS } from '../src/quiz-data.js';
+import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed } from './_tally.js';
+import type { SharePayload } from './_tally.js';
 
 let pass = 0;
 let fail = 0;
@@ -243,6 +246,88 @@ check('a preview origin is allowed', originAllowed('https://rightnleft-abc123.ve
 check('no origin is allowed (a non-browser caller)', originAllowed(null));
 check('another site is refused', !originAllowed('https://example.com'));
 check('a lookalike host is refused', !originAllowed('https://rightnleft.com.evil.test'));
+
+// ---------------------------------------------------------------------------
+// The deployed module graph
+//
+// Vercel's Node builder TRANSPILES each api/*.ts file in place rather than
+// bundling it, and it does not rewrite import specifiers. The output is ESM,
+// because package.json says "type": "module" and is copied into the function
+// verbatim. Node's ESM resolver requires a file extension, so an extensionless
+// relative import anywhere in the traced chain kills the function at cold start
+// with ERR_MODULE_NOT_FOUND, and a JSON import needs `with { type: 'json' }`.
+//
+// NOTHING ELSE CATCHES THIS. `tsc` resolves extensionless specifiers, vite
+// resolves them, this suite under tsx resolves them, and `vercel dev` resolves
+// them. It fails only on the deployed runtime, which is the one place where
+// finding out costs a deploy. It did, once.
+//
+// So the graph is walked from both handlers and every relative specifier is
+// asserted to carry an extension. A walk rather than a hardcoded file list,
+// because the failure mode is somebody adding an import, and a list would not
+// know about it.
+// ---------------------------------------------------------------------------
+
+{
+  const seen = new Set<string>();
+  const offenders: string[] = [];
+  const jsonImports: string[] = [];
+  let files = 0;
+
+  const walk = (file: string): void => {
+    const abs = resolve(file);
+    if (seen.has(abs)) return;
+    seen.add(abs);
+    if (!existsSync(abs)) return;
+    files++;
+
+    const src = readFileSync(abs, 'utf8');
+    // `from '<relative>'` plus whatever follows it on the same line, so an
+    // import attribute can be inspected too.
+    const re = /from\s+'(\.\.?\/[^']+)'([^;\n]*)/g;
+    for (const m of src.matchAll(re)) {
+      const spec = m[1];
+      const trailing = m[2] ?? '';
+      const where = relative('.', abs).replace(/\\/g, '/');
+
+      if (spec.endsWith('.json')) {
+        jsonImports.push(`${where} -> ${spec}`);
+        if (!/with\s*\{\s*type:\s*'json'\s*\}/.test(trailing)) {
+          offenders.push(`${where}: ${spec} has no { type: 'json' } attribute`);
+        }
+        continue;
+      }
+
+      if (!spec.endsWith('.js')) {
+        offenders.push(`${where}: ${spec} has no extension`);
+        continue;
+      }
+
+      // '.js' in the source means the '.ts' sitting beside it.
+      const target = resolve(dirname(abs), spec.replace(/\.js$/, '.ts'));
+      if (!existsSync(target)) {
+        offenders.push(`${where}: ${spec} resolves to nothing`);
+        continue;
+      }
+      walk(target);
+    }
+  };
+
+  walk('api/share.ts');
+  walk('api/tally.ts');
+
+  // Precondition. A walk that visited two files found no imports to follow, and
+  // every assertion below it would then be vacuously true.
+  check('the module walk reached the whole chain', files >= 7, `${files} files visited`);
+  check('it reached the estimator',
+    seen.has(resolve('valence.ts')) && seen.has(resolve('scoring.ts')));
+  check('it reached the payload adapter', seen.has(resolve('src/quiz-data.ts')));
+
+  check('every relative import in the deployed chain carries an extension',
+    offenders.length === 0, offenders.join(' | ') || `${files} files clean`);
+  check('the payload is imported with a JSON type attribute',
+    jsonImports.length === 1, jsonImports.join(' | ') || 'none found');
+}
 
 // ---------------------------------------------------------------------------
 

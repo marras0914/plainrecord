@@ -36,9 +36,9 @@ import { Redis } from '@upstash/redis';
 import { createHash } from 'node:crypto';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
-import { ALL_ITEMS, HEADLINE_ITEMS, adapt, profileOf, describe } from '../src/quiz-data';
-import type { AnswerMap } from '../src/quiz-data';
-import type { ProfileVerdict } from '../valence';
+import { ALL_ITEMS, HEADLINE_ITEMS, adapt, profileOf, describe } from '../src/quiz-data.js';
+import type { AnswerMap } from '../src/quiz-data.js';
+import type { ProfileVerdict } from '../valence.js';
 
 export type Region = 'tx' | 'us-other' | 'intl';
 export type Mode = 'short' | 'full';

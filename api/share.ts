@@ -30,7 +30,7 @@ import {
   binOf,
   carriesPosition,
   handleNode,
-} from './_tally';
+} from './_tally.js';
 
 export const config = { runtime: 'nodejs' };
 

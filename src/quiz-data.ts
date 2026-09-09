@@ -17,12 +17,12 @@
  * statistics instead of all 150 members' votes on 3,546 items (35 MB).
  */
 
-import type { VoteItem, Answer, LegislatorId, VoteCast } from '../scoring';
-import { scoreLegislator, scoreBand } from '../scoring';
-import { renderScoreBand } from './verdict';
-import { buildProfile, describeProfile } from '../valence';
-import type { ItemValence, PartisanProfile } from '../valence';
-import payload from '../public/data/quiz_89R.json';
+import type { VoteItem, Answer, LegislatorId, VoteCast } from '../scoring.js';
+import { scoreLegislator, scoreBand } from '../scoring.js';
+import { renderScoreBand } from './verdict.js';
+import { buildProfile, describeProfile } from '../valence.js';
+import type { ItemValence, PartisanProfile } from '../valence.js';
+import payload from '../public/data/quiz_89R.json' with { type: 'json' };
 
 // ---------------------------------------------------------------------------
 // Payload types (mirror scripts/export_quiz_data.ts)

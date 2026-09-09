@@ -23,9 +23,9 @@
  * Deterministic: no Math.random(), no Date, no I/O. Safe for SSG + unit tests.
  */
 
-import type { VoteItem, Answer } from './scoring';
-import { isEligible, discrimination, itemCorrelation, DEFAULT_OPTIONS } from './scoring';
-import type { ScoringOptions } from './scoring';
+import type { VoteItem, Answer } from './scoring.js';
+import { isEligible, discrimination, itemCorrelation, DEFAULT_OPTIONS } from './scoring.js';
+import type { ScoringOptions } from './scoring.js';
 
 // ---------------------------------------------------------------------------
 // Party roster
