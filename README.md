@@ -15,17 +15,26 @@ roll call, a veto, or a cited statistic. Nothing is generated to fill a gap.
 ```bash
 npm install
 npm run dev          # http://localhost:5173
-npm test             # 176 checks across 6 suites
-npm run build        # -> dist/  (~154 KB)
+npm test             # 267 checks across 8 suites
+npm run build        # -> dist/  (~162 KB)
 npm run preview      # serve the build on :4173
+npm run verify       # drive the built site in a real browser
+npm run tally        # the opt-in tally, as sentences you can paste
 ```
 
 `npm run build` runs `tsc --noEmit` first, so a type error fails the build rather
-than shipping.
+than shipping. It also **exits 1 while any string is unapproved** by a fluent
+reviewer, which fails the deploy outright rather than only holding `/es/` back —
+see [Spanish](#spanish). English is written to `dist/` before that check, so
+local verification still works while shipping is blocked.
 
 ## What ships, and what doesn't
 
-The site is fully static — no server, no API, no database at runtime.
+The site is static apart from two endpoints. The quiz, the scoring and the
+result are entirely client-side and make no network request at all; the only
+server-side code is the **opt-in tally** (`api/share.ts`, `api/tally.ts`), which
+does nothing unless a reader presses a button. See [The opt-in
+tally](#the-opt-in-tally).
 
 ```
 public/data/quiz_89R.json        53 KB   the entire quiz payload. SHIPPED.
@@ -45,6 +54,138 @@ to `SHIP_DIR`.
 
 The payload is served CORS-open at `/data/quiz_89R.json` on purpose. A civic tool
 that asks you to trust its numbers should let you take them.
+
+## The guess step
+
+Between Start and the first question the reader places themselves on the same
+blue-to-red axis they are about to be scored on. It is skippable, prominently,
+and skipping changes nothing about the quiz or the result.
+
+It exists for one number nothing else on the site can produce: how far people
+land from where they thought they would. A result on its own has nothing to be
+compared against, and asking afterwards would be asking someone to remember a
+belief they have just had corrected.
+
+`#guess-go` stays disabled until the reader moves the marker, and that is
+tracked as a separate flag rather than read off the slider's value. A range
+input has to start somewhere and it starts dead centre, which is the single most
+flattering position on the strip — counting the default as a deliberate
+prediction would put a guess in the mouth of everyone who pressed on without
+touching it. `verify_site.mjs` asserts both halves: disabled before, enabled
+after a synthetic `input` event.
+
+## The opt-in tally
+
+```
+api/_tally.ts        keys, validation, region, bucketing, the Node adapter
+api/share.ts         POST. Increments counters. Does nothing else.
+api/tally.ts         GET. The counts, public, with a fixed shape.
+api/tally.smoke.ts   54 checks. No store needed.
+scripts/tally_report.ts   the numbers as sentences, or the reason for refusing
+scripts/tally_probe.ts    end-to-end against a real store, localhost only
+```
+
+Backed by one Upstash Redis resource from the Vercel Marketplace, free plan,
+`autoUpgrade=false` so a traffic spike cannot silently start billing. Env vars
+arrive as `KV_REST_API_URL` / `KV_REST_API_TOKEN`, so `Redis.fromEnv()` does not
+work — the client is constructed explicitly.
+
+**The client posts its answers, not its position.** The body is exactly
+`{mode, guess, answers}` and nothing else. The endpoint recomputes the profile
+through `src/quiz-data.ts` and `valence.ts`, the same modules the page renders
+from. An earlier draft posted a precomputed bin, which made the tally a record
+of what browsers asserted about themselves and threw away the two numbers that
+make a reading honest — `valence.ts` is explicit that netLean alone "cannot tell
+mixed from muted". A tally of bins would have published, in aggregate, exactly
+the flattering-purple claim the result screen refuses to make for one reader.
+`verify_site.mjs` asserts the POST body has three keys and carries none of the
+page's own numbers.
+
+**Aggregate counters only.** No row per submission, no timestamp, nothing to
+correlate one response against another. A table with one row per person is a
+different privacy claim from a table of totals even when the row carries no
+name, and the page's copy promises the second one. Keys are namespaced by
+`VERCEL_ENV`, so a preview deploy or a local run can never write into the
+production number.
+
+### Three denominators, and using the wrong one turns a refusal into a fact
+
+| Counter | Means | Denominator for |
+|---|---|---|
+| `total` | everyone who shared | how many have added a result |
+| `readable` | the reading carried a position (not `fewMarks`/`weakLoad`) | anything about where people landed |
+| `guessedReadable` | predicted **and** readable | prediction versus result |
+
+Positional counters are only incremented for readable readings, so a region's
+`lean` histogram sums to its readable count by construction and no consumer has
+to rescale it. `scripts/tally_report.ts` cross-checks that against the verdict
+counts and refuses every sentence if the two disagree.
+
+The prediction claim is the one to watch. The guess is skippable, so `total`
+includes people who never predicted, and a reader whose result carried no
+position had nothing to miss their prediction by. Neither `total` nor `guessed`
+is its denominator. Nothing is quoted below n=100 on the correct one, and every
+refusal states its reason rather than returning a silent null.
+
+### What it does not defend against
+
+`/api/share` is public. The rate limit is a salted hashed IP with a six-hour
+TTL, which stops a refresh loop and an honest double-tap. It does not stop
+anyone determined: a script with a pool of addresses can move these counters,
+and no amount of server-side recomputation changes that. The numbers are worth
+quoting as "what the people who chose to share landed on", never as a
+measurement of a population. `/api/tally` restates that in its own response so a
+consumer cannot quote it as a poll by accident.
+
+### The handler signature
+
+Both endpoints export the Node `(req, res)` signature via `handleNode()` and
+build a Web `Request` at the boundary. The handlers themselves are written
+against `Request`/`Response` so the suites can construct one without a server.
+The adapter is not decoration: `vercel dev` on CLI 50 calls the default export
+with a Node `IncomingMessage`, and a Web-signature handler dies on
+`request.headers.get is not a function` — surfacing as an empty 500 that looks
+exactly like a store misconfiguration.
+
+### Running it locally
+
+```bash
+vercel env pull .env.local     # KV_REST_API_*, RATE_SALT
+vercel dev                     # :3000, VERCEL_ENV=development
+npm run tally:probe            # 25 checks against the real store
+```
+
+`tally_probe.ts` refuses any endpoint that is not localhost — every write it
+makes is a fake response, and a probe that could put fake responses into a
+quoted number eventually will. It clears its own namespace's rate-limit keys
+first so it is re-runnable, and it only ever deletes keys under
+`t:development:`.
+
+`RATE_SALT` is set for all three environments. The endpoint returns 503 without
+it, so a deployment missing it is inert rather than quietly counting with no
+rate limit. The values do not have to match across environments: rate-limit
+keys are namespaced by `VERCEL_ENV`, so each one hashes into its own keyspace.
+
+Setting it for **Preview** needs a current CLI. On 50.38.3 the command fails and
+then recommends itself:
+
+```bash
+# fails with action_required / git_branch_required, and the command it prints
+# as the fix is the command that just failed
+vercel env add RATE_SALT preview --value <salt> --yes --sensitive
+
+# works
+npx --yes vercel@latest env add RATE_SALT preview --value <salt> --yes --sensitive
+```
+
+Passing a branch as the third argument does succeed, but it pins the variable to
+that one branch, which is no use for Preview — production builds from `main`, so
+previews come from every other branch.
+
+Note also that a `--sensitive` variable cannot be read back. `vercel env pull
+--environment=production` lists the key with no value, so a script that greps
+for `^RATE_SALT=<pattern>` will report it absent when it is present and working.
+The development pull does return real values, because local dev needs them.
 
 ## Licence
 
@@ -103,8 +244,16 @@ no `unsafe-inline` means an analytics snippet or embed pasted in later will fail
 loudly in the console instead of quietly shipping a tracker on a page about
 public records. If you *want* one, widen the policy deliberately.
 
+`connect-src 'self'` is what lets `/api/share` work without touching this
+policy, and it is a reason the tally is a Vercel Function rather than a worker
+on another origin: an off-origin endpoint would have needed `connect-src`
+widened to a third-party host on the one page whose argument is that it talks to
+nobody.
+
 The build is verified against these exact headers, not just against `vite
-preview` — see [Verifying a build](#verifying-a-build).
+preview` — see [Verifying a build](#verifying-a-build). The share request is
+exercised under them, so a CSP that blocked it would surface as a console error
+and fail the no-errors check.
 
 ### One-file share build
 
@@ -616,6 +765,18 @@ bare percentage.
   categories left blank rather than filled with a weak proxy.
 - **Hand curation is logged with a reason.** `selection.ts` `Override` throws if
   constructed without one.
+- **Nothing leaves the browser unasked.** `verify_site.mjs` answers five
+  questions and fails if a single byte goes out, then sits on the result screen
+  and fails if anything goes out before the share button is pressed. The
+  paragraph in `privacy.body` that describes the request is worth less than the
+  test that watches for it, and its own note says the sentence has to be
+  reworded before either check is weakened.
+- **The tally cannot assert a position.** `/api/share` accepts answers and
+  recomputes the reading; a body carrying `netLean`, `verdict` or `bin` is
+  ignored, and the verifier asserts the page never sends one.
+- **A percentage names its denominator.** `scripts/tally_report.ts` computes
+  every figure over `readable` or `guessedReadable`, never `total`, and returns
+  the reason for each sentence it withholds instead of a null.
 
 ## Known gaps
 

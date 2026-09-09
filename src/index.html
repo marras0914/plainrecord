@@ -71,6 +71,57 @@
 
   </main>
 
+  <!--
+    The guess, between Start and the first question.
+
+    It exists for one number: how far people land from where they thought they
+    would. Nothing else on the site can produce that, because a result on its
+    own has nothing to be compared against, and asking afterwards would be
+    asking someone to remember a belief they have just had corrected.
+
+    SKIPPING IS PROMINENT, not tucked away. The pitch is two minutes and no
+    sign-up, and a screen standing between arrival and the first question is
+    exactly where a reader gives up. Skipping costs them nothing at all: the
+    quiz, the result and the tally all work without it, and the prediction
+    figure simply quotes its own smaller denominator.
+  -->
+  <main id="guess-view" hidden>
+    <section class="card">
+      <h2 id="guess-title" data-i18n="guess.heading">First, a guess: where do you think you'll land?</h2>
+      <p class="guess-body" data-i18n="guess.body">Put the marker where you expect your own answers to put you. At the end you'll see both: your guess, and where the actual votes placed you.</p>
+
+      <div class="guess-scale">
+        <div class="guess-poles">
+          <span data-i18n="strip.poleDShort">agreed with Democrats</span>
+          <span data-i18n="strip.poleRShort">agreed with Republicans</span>
+        </div>
+        <!--
+          A native range input, not a hand-rolled SVG drag. It is keyboard
+          operable, it works with a screen reader, it handles touch, and it
+          cannot invent a drag bug on a phone. The ramp behind it is the same
+          blue-to-red scale as the result strip, so the reader is placing
+          themselves on the axis they will be shown later rather than on an
+          unrelated slider.
+
+          It starts at dead centre because a range input must start somewhere,
+          which is exactly why #guess-go stays disabled until the reader has
+          actually moved it. Counting the default as a deliberate prediction of
+          the middle would put a guess in the mouth of everyone who pressed on
+          without touching it.
+        -->
+        <input id="guess-slider" type="range" min="-1" max="1" step="0.05" value="0"
+               aria-labelledby="guess-title" aria-describedby="guess-hint">
+        <div class="guess-readout" id="guess-readout" aria-live="polite" data-i18n="guess.unplaced">Move the marker to make a guess, or skip it.</div>
+      </div>
+
+      <div class="q-actions">
+        <button id="guess-go" data-i18n="guess.continue" disabled>That's my guess</button>
+        <button class="ghost" id="guess-skip" data-i18n="guess.skip">Skip this and start</button>
+      </div>
+      <p class="footnote" id="guess-hint" data-i18n="guess.hint">Drag it, tap the bar, or use the arrow keys.</p>
+    </section>
+  </main>
+
   <main id="quiz-view" hidden>
     <section class="card" id="q-card"></section>
   </main>
@@ -97,6 +148,9 @@
         <div class="legend-item">
           <svg width="13" height="13" aria-hidden="true"><path d="M6.5 1.5 L11.5 6.5 L6.5 11.5 L1.5 6.5 Z" fill="var(--ink-2)"></path></svg>
           <span data-i18n="strip.legendCands">candidate's record on the same votes</span></div>
+        <div class="legend-item" id="legend-guess" hidden>
+          <svg width="13" height="13" aria-hidden="true"><path d="M6.5 11 L11 3 L2 3 Z" fill="none" stroke="var(--ink-2)" stroke-width="1.5"></path></svg>
+          <span data-i18n="strip.legendGuess">where you guessed you'd land</span></div>
       </div>
       <div id="table-panel" hidden>
         <div class="table-wrap"><table id="table"></table></div>

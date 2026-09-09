@@ -124,8 +124,19 @@ let repShell = false;
  * follow politics simply stopped. Now the trust apparatus still exists, in full,
  * but it sits AFTER the thing it is meant to earn trust for.
  */
-type View = 'start' | 'quiz' | 'result';
+type View = 'start' | 'guess' | 'quiz' | 'result';
 let view: View = 'start';
+
+/**
+ * Where the reader predicted they would land, in the same [-1, 1] the profile
+ * uses, or null if they skipped the guess.
+ *
+ * Null and zero are different answers and must never collapse: zero is "I think
+ * I am in the middle", null is "I did not say". The tally keeps three separate
+ * denominators for exactly this reason, so a prediction figure is never quoted
+ * over people who never made one.
+ */
+let guess: number | null = null;
 
 /**
  * The item whose answer is currently being revealed.
@@ -268,6 +279,33 @@ function renderStrip(p: PartisanProfile): void {
     svg.appendChild(sv('text', {
       x: (P.x0 + P.x1) / 2, y: P.axisY - 52, 'text-anchor': 'middle', 'font-size': 12.5, fill: muted,
     }, t('strip.empty')));
+  }
+
+  // The prediction, if one was made. A HOLLOW outline and a dashed stem, so it
+  // reads as a different kind of thing from the filled answer dots and the
+  // filled candidate diamonds — it is not a measurement, it is what the reader
+  // thought before they had one. Drawn before the dots so an answer landing on
+  // the same spot sits on top of it rather than under it.
+  const guessLegend = document.getElementById('legend-guess');
+  if (guessLegend) guessLegend.hidden = guess === null;
+  if (guess !== null) {
+    const gx = xScale(guess);
+    // Grouped with its own label rather than given a bare <title>: the svg root
+    // already carries #strip-title as its accessible name, and a second title
+    // element directly under <svg> would be competing with it.
+    const g = sv('g', {
+      role: 'img',
+      'aria-label': `${t('strip.legendGuess')}: ${leanLabel(guess)}`,
+    });
+    g.appendChild(sv('line', {
+      x1: gx, y1: P.dotTop + 4, x2: gx, y2: P.axisY,
+      stroke: ink2, 'stroke-width': 1, 'stroke-dasharray': '3 3',
+    }));
+    g.appendChild(sv('path', {
+      d: `M ${gx} ${P.axisY - 1} L ${gx + 5.5} ${P.axisY - 10} L ${gx - 5.5} ${P.axisY - 10} Z`,
+      fill: surface, stroke: ink2, 'stroke-width': 1.5,
+    }));
+    svg.appendChild(g);
   }
 
   // Beeswarm: deterministic lane packing upward from the axis.
@@ -493,9 +531,26 @@ function renderReadout(p: PartisanProfile): void {
   // seven readings carry something that qualifies them, and the one that did not
   // would have been a reading the page states without any hedge at all.
   const d = renderVerdict(describe(p));
+
+  // Prediction against result, only when both exist. `p.n === 0` would compare
+  // a guess against nothing, and a reader who skipped the guess has nothing to
+  // compare — in both cases the sentence is simply absent rather than hedged.
+  let guessHtml = '';
+  if (guess !== null && p.n > 0) {
+    const guessWord = leanLabel(guess);
+    const actualWord = leanLabel(p.netLean);
+    guessHtml =
+      `<div class="readout-caveat">${esc(
+        guessWord === actualWord
+          ? t('result.guessExact', { guess: guessWord })
+          : t('result.guessLine', { guess: guessWord, actual: actualWord }),
+      )}</div>`;
+  }
+
   el('readout').innerHTML =
     `<div class="readout-head">${esc(d.headline)}</div>` +
     `<div class="readout-caveat">${esc(d.caveat)}</div>` +
+    guessHtml +
     `<div class="readout-caveat mono">` +
     `${esc(t('readout.answered', { n: p.n, total: activeItems().length }))}</div>`;
 
@@ -539,6 +594,10 @@ function renderReadout(p: PartisanProfile): void {
     answers = {};
     cursor = 0;
     revealFor = null;
+    // The prediction belongs to the run that has just ended. Leaving it set
+    // would compare the next run's result against the previous run's guess.
+    guess = null;
+    resetGuessUi();
     view = 'start';
     showView();
     render();
@@ -564,6 +623,82 @@ function renderReadout(p: PartisanProfile): void {
     row.appendChild(b);
   }
   el('readout').appendChild(row);
+
+  // The opt-in. Offered only when there is a result to add: a reader who took
+  // the early exit and answered nothing has no position to contribute, and a
+  // button that posts an empty answer set would be counting visits as opinions.
+  if (countAnswered() > 0) el('readout').appendChild(shareBlock());
+}
+
+/**
+ * The opt-in "add my result" control, and the sentence that says what it sends.
+ *
+ * THE EXPLANATION SITS NEXT TO THE BUTTON, not only in the privacy paragraph
+ * ten screens further down. A reader deciding whether to tap should be able to
+ * read what leaves without going to look for it, and the honest version of this
+ * button is one nobody feels tricked by afterwards.
+ *
+ * It posts the ANSWERS, not the position. The server recomputes the reading
+ * through the same modules this page renders from, so the tally is a record of
+ * what the votes imply rather than of what a browser claimed about itself. That
+ * also means there is nothing to gain by tampering with what is sent from here.
+ */
+function shareBlock(): HTMLElement {
+  const wrap = document.createElement('div');
+
+  const row = document.createElement('div');
+  row.className = 'result-actions';
+
+  const btn = document.createElement('button');
+  btn.className = 'ghost';
+  btn.type = 'button';
+  btn.textContent = t('share.button');
+
+  const note = document.createElement('p');
+  note.className = 'share-note';
+  note.textContent = t('share.what');
+
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    btn.textContent = t('share.sending');
+    try {
+      const res = await fetch('/api/share', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          mode,
+          guess,
+          answers: Object.entries(answers)
+            .filter(([, a]) => a === 1 || a === -1)
+            .map(([qid, a]) => ({ qid, agree: a === 1 })),
+        }),
+      });
+
+      if (res.status === 429) {
+        btn.textContent = t('share.already');
+        return;
+      }
+      if (!res.ok) {
+        btn.textContent = t('share.failed');
+        return;
+      }
+      const body = (await res.json()) as { total?: number };
+      btn.textContent = t('share.done', { total: (body.total ?? 0).toLocaleString() });
+      btn.classList.add('share-done');
+      // The sentence described what WOULD be sent. It has been, so it stops
+      // being the thing the reader needs to read.
+      note.remove();
+    } catch {
+      // Offline, blocked, or the endpoint is down. All three mean the same thing
+      // to the reader and none of them counted anything.
+      btn.textContent = t('share.failed');
+    }
+  });
+
+  row.appendChild(btn);
+  wrap.appendChild(row);
+  wrap.appendChild(note);
+  return wrap;
 }
 
 /**
@@ -1051,6 +1186,7 @@ function showView(): void {
     if (e) e.hidden = !on;
   };
   set('start-view', view === 'start');
+  set('guess-view', view === 'guess');
   set('quiz-view', view === 'quiz');
   set('result-view', view === 'result');
   // The start screen already offers this below the button; two of them in one
@@ -1131,14 +1267,98 @@ function bindNavHow(): void {
 }
 
 /** The opening screen: a title, a line, and a button. */
+/** Begin the run itself. Reached from the guess screen, either way through it. */
+function beginQuiz(): void {
+  view = 'quiz';
+  cursor = 0;
+  revealFor = null;
+  showView();
+  render();
+  window.scrollTo(0, 0);
+}
+
+/** The five words for a position, matching the labels on the guess slider. */
+function leanLabel(v: number): string {
+  if (v <= -0.6) return t('guess.label.farD');
+  if (v <= -0.2) return t('guess.label.nearD');
+  if (v < 0.2) return t('guess.label.middle');
+  if (v < 0.6) return t('guess.label.nearR');
+  return t('guess.label.farR');
+}
+
+/**
+ * The guess screen.
+ *
+ * `placed` is tracked separately from the slider's value because a range input
+ * has to start somewhere, and it starts in the middle. Without this flag,
+ * pressing the button without touching the slider would record dead centre as
+ * a deliberate prediction — and dead centre is the single most flattering
+ * position on the strip, so it is the last one to let a reader fall into by
+ * accident.
+ */
+function bindGuess(): void {
+  const slider = document.getElementById('guess-slider') as HTMLInputElement | null;
+  const readout = document.getElementById('guess-readout');
+  const go = document.getElementById('guess-go') as HTMLButtonElement | null;
+  if (!slider || !readout || !go) return;
+
+  let placed = false;
+
+  const paint = (): void => {
+    const v = Number(slider.value);
+    if (placed) {
+      const label = leanLabel(v);
+      readout.textContent = t('guess.at', { label });
+      readout.classList.add('placed');
+      slider.classList.add('placed');
+      // Screen readers otherwise announce "0.35", which is a number the reader
+      // has never been shown a scale for.
+      slider.setAttribute('aria-valuetext', label);
+      go.disabled = false;
+    } else {
+      readout.textContent = t('guess.unplaced');
+      readout.classList.remove('placed');
+      slider.classList.remove('placed');
+      slider.removeAttribute('aria-valuetext');
+      go.disabled = true;
+    }
+  };
+
+  slider.addEventListener('input', () => {
+    placed = true;
+    paint();
+  });
+
+  go.addEventListener('click', () => {
+    guess = placed ? Number(slider.value) : null;
+    beginQuiz();
+  });
+
+  document.getElementById('guess-skip')?.addEventListener('click', () => {
+    guess = null;
+    beginQuiz();
+  });
+
+  // Reset on entry, so restarting the quiz does not present the previous run's
+  // prediction as though it were still being made.
+  resetGuessUi = () => {
+    placed = false;
+    slider.value = '0';
+    paint();
+  };
+  paint();
+}
+
+/** Set by bindGuess so a restart can clear the screen it owns. */
+let resetGuessUi: () => void = () => {};
+
 function bindStart(): void {
   const go = document.getElementById('start-btn');
   go?.addEventListener('click', () => {
-    view = 'quiz';
-    cursor = 0;
-    revealFor = null;
+    guess = null;
+    resetGuessUi();
+    view = 'guess';
     showView();
-    render();
     window.scrollTo(0, 0);
   });
 
@@ -1588,6 +1808,7 @@ render();
 // render() would add another button on every keystroke.
 renderTheme();
 bindStart();
+bindGuess();
 bindHow();
 bindNavHow();
 showView();

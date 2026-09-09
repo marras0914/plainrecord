@@ -21,6 +21,8 @@
     "data:report": "tsx scripts/report_session.ts",
     "verify": "node scripts/verify_site.mjs",
     "verify:headers": "node scripts/verify_site.mjs --with-headers",
+    "tally": "tsx scripts/tally_report.ts",
+    "tally:probe": "tsx scripts/tally_probe.ts",
     "dns:check": "node scripts/check_domain.mjs",
     "i18n:review": "node scripts/i18n_review.mjs",
     "i18n:check": "node scripts/i18n_review.mjs --check && node scripts/i18n_gen.mjs --check && node scripts/check_sidecar.mjs && node scripts/check_members.mjs && node scripts/check_zips.mjs && node scripts/plain_review.mjs --check",
@@ -52,6 +54,7 @@
     "vite": "^6.0.7"
   },
   "dependencies": {
+    "@upstash/redis": "^1.38.4",
     "@vercel/analytics": "^2.0.1"
   },
   "license": "MIT"

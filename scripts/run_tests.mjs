@@ -28,6 +28,8 @@ const SUITES = [
   'scripts/ingest_legiscan.smoke.ts',
   'scripts/ingest_openstates.smoke.ts',
   'scripts/pipeline.smoke.ts',
+  'api/tally.smoke.ts',
+  'scripts/tally_report.smoke.ts',
 ];
 
 // Suites that read real ingested data. Without it they run fewer checks.
