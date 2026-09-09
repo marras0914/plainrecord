@@ -61,3 +61,5 @@ public/sitemap.xml
 # The payload is regenerable and version-controlled; a .bak beside it is a local
 # safety net for the moment of the edit, not something to commit.
 *.json.bak
+
+.env*.local

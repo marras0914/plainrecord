@@ -17,7 +17,7 @@
  *      Spanish page for a reader who explicitly asked for English.
  */
 
-import { EN, ES, ES_UNAPPROVED, type CopyKey, type Locale } from './copy.gen';
+import { EN, ES, ES_UNAPPROVED, type CopyKey, type Locale } from './copy.gen.js';
 
 /** Folded by vite. See the note on EN/ES in copy.gen.ts for why this exists. */
 declare const __BUILD_LOCALE__: Locale;

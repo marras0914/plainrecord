@@ -11,10 +11,10 @@
  * about what a reading means and only one of them is tested.
  */
 
-import type { ProfileDescription, LeanSide } from '../valence';
-import type { ScoreBand } from '../scoring';
-import { t, plural } from './i18n';
-import type { CopyKey } from './copy.gen';
+import type { ProfileDescription, LeanSide } from '../valence.js';
+import type { ScoreBand } from '../scoring.js';
+import { t, plural } from './i18n.js';
+import type { CopyKey } from './copy.gen.js';
 
 /** The party word for a side, article included where the language needs one. */
 export function partyWord(side: LeanSide): string {

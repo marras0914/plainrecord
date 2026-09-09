@@ -381,6 +381,58 @@
   .ramp { width:128px; height:9px;
           background:linear-gradient(90deg,var(--pole-blue),var(--neutral-mark) 50%,var(--pole-red)); }
 
+  /* The guess screen
+     -------------------------------------------------------------------------
+     The slider track carries the SAME blue-to-red ramp as .ramp and as the
+     result strip, so the reader is placing themselves on the axis they will be
+     shown afterwards rather than on a generic slider. Both the WebKit and the
+     Firefox thumb are styled, because a default thumb on one engine and a
+     custom one on the other is the kind of difference that reads as a broken
+     page rather than as a platform detail. */
+  .guess-body { font-size:15px; color:var(--ink-2); margin:10px 0 0; max-width:52ch; }
+  .guess-scale { margin-top:26px; }
+  .guess-poles { display:flex; justify-content:space-between; gap:12px;
+                 font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10px;
+                 letter-spacing:0.1em; color:var(--muted); margin-bottom:8px; }
+
+  #guess-slider { -webkit-appearance:none; appearance:none; width:100%; height:34px;
+                  background:transparent; margin:0; display:block; cursor:pointer; }
+  #guess-slider:focus-visible { outline:2px solid var(--focus); outline-offset:4px; }
+
+  #guess-slider::-webkit-slider-runnable-track {
+    height:10px; border-radius:5px; border:1px solid var(--rule);
+    background:linear-gradient(90deg,var(--pole-blue),var(--neutral-mark) 50%,var(--pole-red)); }
+  #guess-slider::-moz-range-track {
+    height:10px; border-radius:5px; border:1px solid var(--rule);
+    background:linear-gradient(90deg,var(--pole-blue),var(--neutral-mark) 50%,var(--pole-red)); }
+
+  #guess-slider::-webkit-slider-thumb {
+    -webkit-appearance:none; appearance:none; width:26px; height:26px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--ink); margin-top:-9px;
+    box-shadow:0 1px 3px var(--shadow); }
+  #guess-slider::-moz-range-thumb {
+    width:26px; height:26px; border-radius:50%; box-sizing:border-box;
+    background:var(--surface); border:2px solid var(--ink);
+    box-shadow:0 1px 3px var(--shadow); }
+
+  /* Untouched, the marker is hollow and grey: it is a starting position, not an
+     answer. It fills in the moment the reader moves it, which is the same
+     moment #guess-go stops being disabled. */
+  #guess-slider:not(.placed)::-webkit-slider-thumb { border-color:var(--rule); }
+  #guess-slider:not(.placed)::-moz-range-thumb { border-color:var(--rule); }
+
+  .guess-readout { margin-top:12px; font-size:14px; color:var(--ink-2); min-height:1.4em; }
+  .guess-readout.placed { color:var(--ink); font-weight:500; }
+
+  button:disabled { opacity:0.45; cursor:not-allowed; border-color:var(--hair); }
+  button:disabled:hover { border-color:var(--hair); }
+
+  /* The opt-in share button. Deliberately NOT styled as the primary action on
+     the result screen: the result is the product, and adding to the count is a
+     favour the reader may decline without missing anything. */
+  .share-note { font-size:12.5px; color:var(--muted); margin:10px 0 0; max-width:60ch; }
+  .share-done { color:var(--good); border-color:var(--hair); }
+
   .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); }
   .stat { background:var(--surface); padding:15px 16px; }
   .stat-label { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10px; letter-spacing:0.12em;

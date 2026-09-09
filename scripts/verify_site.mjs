@@ -153,9 +153,37 @@ const onResult = (pg) => pg.evaluate(() => !document.getElementById('result-view
 
 /** Load the page fresh and press Start. Replaces clicking the reset preset, */
 /** which is no longer reachable from inside the quiz. */
+/**
+ * Land on the first question.
+ *
+ * Start no longer opens a question: it opens the guess screen, and the quiz is
+ * one more click away. This helper SKIPS the guess, so every check that was
+ * written before the guess existed keeps testing what it was written to test.
+ * `beginQuizWithGuess` is the variant for the checks that are about the guess.
+ */
 async function beginQuiz(pg, url) {
   await pg.goto(url, { waitUntil: 'networkidle' });
   await pg.click('#start-btn');
+  await pg.waitForTimeout(150);
+  await pg.click('#guess-skip');
+  await pg.waitForTimeout(200);
+}
+
+/** Land on the first question having predicted `value` in [-1, 1]. */
+async function beginQuizWithGuess(pg, url, value) {
+  await pg.goto(url, { waitUntil: 'networkidle' });
+  await pg.click('#start-btn');
+  await pg.waitForTimeout(150);
+  // `fill` does not fire the input event a range listener needs, and the button
+  // is gated on that event rather than on the value — which is the whole point
+  // of the flag it sets. So the event is dispatched explicitly.
+  await pg.evaluate((v) => {
+    const el = document.getElementById('guess-slider');
+    el.value = String(v);
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }, value);
+  await pg.waitForTimeout(80);
+  await pg.click('#guess-go');
   await pg.waitForTimeout(200);
 }
 
@@ -273,6 +301,9 @@ try {
     howOnStart.length === 1, howOnStart.join(' + ') || 'none visible');
 
   await page.click('#start-btn');
+  await page.waitForTimeout(250);
+  // Past the guess screen, which now sits between Start and the first question.
+  await page.click('#guess-skip');
   await page.waitForTimeout(250);
 
   const howOnQuiz = await howVisible(page);
@@ -1200,6 +1231,11 @@ try {
     await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
     await page.waitForTimeout(400);
     await page.click('#start-btn');
+    await page.waitForTimeout(150);
+    // Past the guess screen. Skipped rather than answered, so this check stays
+    // about the quiz: the guess is covered separately, including the assertion
+    // that placing one sends nothing either.
+    await page.click('#guess-skip');
     await page.waitForTimeout(200);
     const before = await page.$eval('.readout-caveat.mono', (e) => e.textContent.trim());
 
@@ -1232,6 +1268,196 @@ try {
     check('no request carries an answer, a bill or a candidate',
       carrying.length === 0,
       carrying.length ? carrying.slice(0, 2).join(' | ') : `${NEEDLES.length} needles searched`);
+  }
+
+  // ---------------------------------------------------------------------------
+  // The guess screen
+  //
+  // Two things have to hold. It must not be possible to record a prediction
+  // nobody made — a range input starts in the middle, and dead centre is the
+  // most flattering position on the strip, so the button is gated on the input
+  // event rather than on the value. And skipping has to work, because the whole
+  // screen is optional by design.
+  //
+  // The disabled-button check ASSERTS THE ENABLED CASE TOO. "Button is
+  // disabled" passes just as well when the selector is wrong, when the screen
+  // never rendered, or when the button does not exist at all, so it is paired
+  // with a move of the slider that must enable it.
+  // ---------------------------------------------------------------------------
+
+  {
+    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(300);
+    await page.click('#start-btn');
+    await page.waitForTimeout(200);
+
+    check('guess: Start opens the guess screen, not a question',
+      (await page.isVisible('#guess-view')) && !(await page.isVisible('#q-card')));
+
+    const goDisabledBefore = await page.$eval('#guess-go', (e) => e.disabled);
+    const readoutBefore = await page.$eval('#guess-readout', (e) => e.textContent.trim());
+
+    await page.evaluate(() => {
+      const el = document.getElementById('guess-slider');
+      el.value = '0.7';
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await page.waitForTimeout(100);
+    const goDisabledAfter = await page.$eval('#guess-go', (e) => e.disabled);
+    const readoutAfter = await page.$eval('#guess-readout', (e) => e.textContent.trim());
+
+    check('guess: the button is disabled until the marker is moved',
+      goDisabledBefore === true, `disabled=${goDisabledBefore}`);
+    check('guess: and moving it enables the button',
+      goDisabledAfter === false, `disabled=${goDisabledAfter}`);
+    check('guess: the readout changes when the marker moves',
+      readoutAfter !== readoutBefore, `"${readoutBefore}" -> "${readoutAfter}"`);
+    check('guess: the slider gets an aria-valuetext a screen reader can read',
+      Boolean(await page.$eval('#guess-slider', (e) => e.getAttribute('aria-valuetext'))),
+      (await page.$eval('#guess-slider', (e) => e.getAttribute('aria-valuetext'))) ?? 'absent');
+
+    // Skipping.
+    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.click('#start-btn');
+    await page.waitForTimeout(150);
+    await page.click('#guess-skip');
+    await page.waitForTimeout(200);
+    check('guess: skipping goes straight to the first question',
+      (await page.isVisible('#q-card')) && !(await page.isVisible('#guess-view')));
+
+    // Skipped: no marker, no legend entry, no comparison sentence.
+    await answerAll(page, 1);
+    check('guess: skipped, so the strip legend does not describe a marker',
+      await page.$eval('#legend-guess', (e) => e.hidden));
+    const skippedReadout = await page.$eval('#readout', (e) => e.textContent);
+    check('guess: skipped, so the readout makes no comparison',
+      !/guessed/i.test(skippedReadout));
+
+    // Predicted: marker, legend, sentence.
+    await beginQuizWithGuess(page, URL_UNDER_TEST, -0.8);
+    await answerAll(page, 1);
+    check('guess: predicted, so the legend describes the marker',
+      !(await page.$eval('#legend-guess', (e) => e.hidden)));
+    const guessedReadout = await page.$eval('#readout', (e) => e.textContent);
+    check('guess: predicted, so the readout compares guess with result',
+      /guessed/i.test(guessedReadout),
+      guessedReadout.replace(/\s+/g, ' ').slice(0, 110));
+    check('guess: the two readouts genuinely differ',
+      guessedReadout !== skippedReadout);
+
+    // Answering yes to everything leans right; the guess was well left, so this
+    // must be the comparison sentence and not the "that is where you landed"
+    // one. Without this the check above would pass on either sentence.
+    check('guess: a wrong prediction is reported as a difference, not a match',
+      !/that is where you landed/i.test(guessedReadout),
+      guessedReadout.replace(/\s+/g, ' ').slice(0, 140));
+  }
+
+  // ---------------------------------------------------------------------------
+  // The opt-in share, and the claim in privacy.body that rests on it
+  //
+  // privacy.body now says: no network request at all while you answer, and if
+  // you tap the button, one request carrying where you landed, three numbers,
+  // and which way you answered each vote. A paragraph that describes a request
+  // is worth less than a test that watches for it, so both halves are asserted.
+  //
+  // The answering window is covered further up. What is new is the RESULT
+  // screen: the reader is now sitting on a page that has a button wired to an
+  // endpoint, and nothing may leave until they press it.
+  // ---------------------------------------------------------------------------
+
+  {
+    const payload = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+    const itemIds = payload.items.map((i) => i.id);
+
+    const FONT_HOSTS = /^https:\/\/fonts\.(googleapis|gstatic)\.com\//;
+    const BEACON = /\/_vercel\/insights\//;
+
+    const posts = [];
+    const other = [];
+    const record = (r) => {
+      const u = r.url();
+      if (u.startsWith('data:') || u.startsWith('blob:')) return;
+      if (FONT_HOSTS.test(u) || BEACON.test(u)) return;
+      let body = '';
+      try { body = r.postData() ?? ''; } catch { body = ''; }
+      if (r.method() === 'POST' && u.includes('/api/share')) posts.push({ u, body });
+      else other.push(`${r.method()} ${u}`);
+    };
+
+    await beginQuizWithGuess(page, URL_UNDER_TEST, 0.4);
+    await answerAll(page, 1);
+    await page.waitForTimeout(300);
+
+    const btn = page.locator('#readout button', { hasText: /add my result/i }).first();
+    check('share: the result screen offers the opt-in', (await btn.count()) > 0);
+    // Held as a handle, because the label is the thing under test further down:
+    // a locator that matches on "add my result" stops matching the moment the
+    // button reports what happened, which is the behaviour being checked.
+    const btnEl = await btn.elementHandle();
+
+    // Sitting on the result with the button unpressed.
+    page.on('request', record);
+    await page.waitForTimeout(1200);
+    check('share: nothing is sent while the button sits unpressed',
+      posts.length === 0 && other.length === 0,
+      posts.length
+        ? `${posts.length} POST(s)`
+        : other.length ? `UNEXPECTED ${other.slice(0, 2).join(' | ')}` : 'silent');
+
+    // Now press it. There is no API under `vite preview`, so the request fails
+    // and the button has to say so — which is the path worth checking, because
+    // the success path tells the reader the truth by accident and the failure
+    // path has to be built on purpose.
+    await btnEl?.click();
+    await page.waitForTimeout(1800);
+    page.off('request', record);
+
+    check('share: pressing it sends exactly one request',
+      posts.length === 1, `${posts.length} POST(s), ${other.length} other`);
+    check('share: and nothing else goes out with it',
+      other.length === 0, other.slice(0, 2).join(' | ') || 'nothing');
+
+    const sent = posts[0]?.body ?? '';
+    let parsed = null;
+    try { parsed = JSON.parse(sent); } catch { /* asserted immediately below */ }
+
+    check('share: the body is JSON', parsed !== null, sent.slice(0, 80));
+    if (parsed) {
+      check('share: it carries the mode',
+        parsed.mode === 'short' || parsed.mode === 'full', String(parsed.mode));
+      check('share: it carries the guess that was made',
+        typeof parsed.guess === 'number' && Math.abs(parsed.guess - 0.4) < 0.001,
+        String(parsed.guess));
+      check('share: it carries one entry per answered vote',
+        Array.isArray(parsed.answers) && parsed.answers.length === 7,
+        `${parsed.answers?.length} answers`);
+      check('share: every entry is a real item id and a boolean',
+        parsed.answers.every((a) => itemIds.includes(a.qid) && typeof a.agree === 'boolean'));
+
+      // What it may NOT carry. The point of posting answers rather than a
+      // position is that the server recomputes the reading, so none of the
+      // page's own numbers belong in here — and if one ever appears, the tally
+      // has quietly become a record of what browsers assert about themselves.
+      const keys = Object.keys(parsed);
+      check('share: it carries nothing but mode, guess and answers',
+        keys.length === 3 && keys.every((k) => ['mode', 'guess', 'answers'].includes(k)),
+        keys.join(', '));
+      for (const banned of ['netLean', 'crossover', 'partisanLoad', 'verdict', 'bin']) {
+        check(`share: the body does not carry ${banned}`, !sent.includes(banned));
+      }
+
+      // No prose. A caption or a bill title in the body would mean the page is
+      // sending content rather than counts.
+      const captions = payload.items.slice(0, 12).map((i) => i.caption).filter(Boolean);
+      const leaked = captions.find((c) => sent.includes(c.slice(0, 24)));
+      check('share: the body carries no bill text',
+        !leaked, leaked ? leaked.slice(0, 40) : `${captions.length} captions checked`);
+    }
+
+    const label = ((await btnEl?.textContent()) ?? '').trim();
+    check('share: a failed send says so, rather than leaving the reader to assume',
+      /go through|nothing was counted/i.test(label), label);
   }
 
   // ---------------------------------------------------------------------------
@@ -1331,6 +1557,8 @@ try {
     // the lang attribute is what makes a screen reader switch voice for it.
     await esPage.click('#start-btn');
     await esPage.waitForTimeout(200);
+    await esPage.click('#guess-skip');
+    await esPage.waitForTimeout(200);
     await esPage.click('#official-btn');
     await esPage.waitForTimeout(200);
     const cap = await esPage.$eval('.q-caption', (e) => ({ text: e.textContent.trim(), lang: e.lang }));
@@ -1392,8 +1620,19 @@ try {
     // Drive both to the result, in full mode, with the disclosures open: that
     // is the state that actually contains the chrome this test is looking for.
     // Comparing two start screens would pass by having almost no text at all.
-    const expose = async (pg) => {
+    const expose = async (pg, url) => {
+      // Start from a fresh load rather than from wherever the previous check
+      // left this page. Every click below is .catch()ed, so inherited state
+      // does not fail — it silently skips, and the page never reaches the
+      // state holding the phrases this test looks for. That is precisely what
+      // happened when the share checks began leaving the page on the result
+      // view, and the vacuity guard below is the only reason it was noticed.
+      await pg.goto(url, { waitUntil: 'networkidle' });
+      await pg.waitForTimeout(200);
       await pg.click('#start-btn').catch(() => {});
+      await pg.waitForTimeout(150);
+      // Past the guess screen, which now sits between Start and question one.
+      await pg.click('#guess-skip').catch(() => {});
       await pg.waitForTimeout(150);
       await pg.click('#official-btn').catch(() => {});
       await pg.waitForTimeout(100);
@@ -1419,8 +1658,8 @@ try {
       await pg.click('#table-toggle').catch(() => {});
       await pg.waitForTimeout(200);
     };
-    await expose(page);
-    await expose(esPage);
+    await expose(page, URL_UNDER_TEST);
+    await expose(esPage, esUrl);
 
     const enBody = await bodyOf(page);
     const notOnEnglish = PHRASES.filter((p) => !enBody.includes(p));

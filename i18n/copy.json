@@ -1,7 +1,7 @@
 {
   "_meta": {
     "purpose": "Single source of every user-facing string on rightnleft.com, in English and Spanish. Feeds both the reviewer's side-by-side page (npm run i18n:review) and, once the Spanish is signed off, the locale modules the page renders from.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass. A second pass on 7 September 2026 approved eight more: the vote framing (q.prompt, vote.yes, vote.no and the three \"You voted\" lines) and the method.labels paragraph. The framing changed because a first-time reader could not tell what Yes meant above a summary that only states what a bill does.",
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass. A second pass on 7 September 2026 approved eight more: the vote framing (q.prompt, vote.yes, vote.no and the three \"You voted\" lines) and the method.labels paragraph. The framing changed because a first-time reader could not tell what Yes meant above a summary that only states what a bill does. A third pass on 9 September 2026 approved the 23 strings added with the opt-in tally and the guess step, by the same reviewer. Twelve were corrected before approval: result.guessLine and result.guessExact were rebuilt because \"Predijo {guess}\" is ungrammatical once the label interpolates (predecir needs a clause, and strip.legendGuess already used the right shape); recuento was replaced with conteo to match the approved corpus; the two far position labels gained \"hacia\" to parallel the near ones; four masculine object pronouns were removed in favour of constructions that do not assume the reader's gender, matching the dative \"le\" the rest of the file uses; privacy.body took the subjunctive after \"hasta que\"; and share.failed was made plainer. start.fine and privacy.body are REWORDED, not new: \"your answers never leave this device\" and \"there is no server to send them to\" stopped being unconditionally true when /api/share was added, and privacy.body's own note records that the build check has to be weakened only after that sentence is reworded, never before.",
     "placeholders": "{name} is substituted at runtime from real data. A translator may MOVE a placeholder anywhere the Spanish needs it, but must not rename, add or drop one. Placeholder names are listed per string in 'vars'.",
     "register": {
       "decision": "usted, not tu",
@@ -13,7 +13,12 @@
         "vote yes / no": "votar a favor / en contra",
         "the purple result": "el resultado morado",
         "cross over": "cruzar líneas partidistas",
-        "party-line": "de línea partidista"
+        "party-line": "de línea partidista",
+        "guess (the prediction)": "predicción",
+        "the marker on the scale": "marcador",
+        "count (the running total)": "conteo, never recuento",
+        "network request": "petición",
+        "to land (where you ended up)": "quedar"
       },
       "diacritics": "Spanish values carry full diacritics, including ñ. The first draft of this file did not, which is not a style choice but incorrect Spanish — and two of the omissions changed meaning outright (\"campana\" is a bell, not a campaign; \"senal\" is not a word). npm run i18n:check now fails on a known list of these, so it cannot regress silently."
     },
@@ -263,11 +268,11 @@
     "status": "ok"
   },
   "start.fine": {
-    "en": "About two minutes · no sign-up · your answers never leave this device",
-    "es": "Unos dos minutos · sin registro · sus respuestas nunca salen de este dispositivo",
+    "en": "About two minutes · no sign-up · nothing leaves this device unless you ask it to",
+    "es": "Unos dos minutos · sin registro · nada sale de este dispositivo a menos que usted lo pida",
     "where": "Small print under the Start button.",
     "vars": [],
-    "note": "The privacy claim is the most persuasive thing on the screen for a reluctant reader, and it is one the build proves rather than promises.",
+    "note": "The old line said 'your answers never leave this device' full stop. With an opt-in button on the result screen that is no longer unconditionally true, and the fine print under the Start button is the worst possible place for a claim a reader can later catch out. The conditional is doing real work here and must not be trimmed back for rhythm.",
     "status": "ok"
   },
   "start.how": {
@@ -1830,11 +1835,11 @@
     "status": "ok"
   },
   "privacy.body": {
-    "en": "It counts visits — how many people came and which link sent them — using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser: there is no server to send them to, and the page makes no network request while you answer. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out.",
-    "es": "Cuenta visitas —cuántas personas entraron y qué enlace las trajo— con la analítica de Vercel, que no usa cookies y no puede seguirle a otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador: no hay ningún servidor al que enviarlas, y la página no hace ninguna petición de red mientras usted responde. Eso no es una promesa, se comprueba en cada compilación: la prueba responde cinco preguntas y falla si sale un solo byte.",
+    "en": "It counts visits · how many people came and which link sent them · using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser while you answer: the page makes no network request at all until you have finished. If you then tap <b>add my result</b> on the result screen, one request goes out, and it carries where you landed, three numbers about your answers, and which way you answered each vote. No name, no address, nothing that identifies you, and only totals are kept at the other end — there is no record of your particular submission to look up. Never tap it and nothing is ever sent. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out, then taps the button and fails if what goes out carries anything beyond those counts.",
+    "es": "Cuenta visitas · cuántas personas vinieron y qué enlace las envió · con la analítica de Vercel, que no usa cookies y no puede seguir su rastro en otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador mientras responde: la página no hace ninguna petición de red hasta que termine. Si luego toca <b>añadir mi resultado</b> en la pantalla de resultados, sale una sola petición que lleva dónde quedó, tres números sobre sus respuestas y en qué sentido respondió cada voto. Sin nombre, sin dirección, sin nada que revele su identidad, y al otro lado solo se guardan totales: no queda registro de su envío concreto que se pueda consultar. Si nunca lo toca, nunca se envía nada. Eso no es una promesa, se comprueba en cada compilación — la prueba responde cinco preguntas y falla si sale un solo byte, y después toca el botón y falla si lo que sale lleva algo más que esos conteos.",
     "where": "Privacy paragraph body, in the authorship card, before the contact line.",
     "vars": [],
-    "note": "The last sentence is the load-bearing one and must stay true. verify_site.mjs answers five questions and asserts nothing but fonts and the page-view beacon goes out. If that check is ever removed or weakened, this sentence becomes a lie and has to be reworded first.",
+    "note": "REWORDED for the opt-in tally. The old text said 'there is no server to send them to', which stopped being true the moment /api/share existed. The last sentence is still the load-bearing one: verify_site.mjs answers five questions and asserts nothing but fonts and the page-view beacon goes out, THEN clicks the share button and asserts the one request carries only bins, counts and item ids. If either half of that check is removed or weakened, this sentence becomes a lie and has to be reworded first.",
     "status": "ok"
   },
   "intro.subhead": {
@@ -2042,5 +2047,182 @@
     "where": "Shown when the ZIP crosswalk fails to load.",
     "status": "ok",
     "vars": []
+  },
+  "guess.heading": {
+    "en": "First, a guess: where do you think you'll land?",
+    "es": "Primero, una predicción: ¿dónde cree que va a quedar?",
+    "where": "Heading of the guess screen, between Start and the first question.",
+    "vars": [],
+    "note": "Framed as a guess, not a test. A reader who thinks they are being scored on it will either refuse or answer strategically, and both ruin the comparison the screen exists to set up.",
+    "status": "ok"
+  },
+  "guess.body": {
+    "en": "Put the marker where you expect your own answers to put you. At the end you'll see both: your guess, and where the actual votes placed you.",
+    "es": "Coloque el marcador donde espera quedar según sus propias respuestas. Al final verá ambos: su predicción y dónde quedó con los votos reales.",
+    "where": "Body text under the guess heading.",
+    "vars": [],
+    "note": "Says what the guess is FOR in the same breath as asking for it. Without the second sentence the screen reads as a demand for information with nothing offered back.",
+    "status": "ok"
+  },
+  "guess.hint": {
+    "en": "Drag it, tap the bar, or use the arrow keys.",
+    "es": "Arrástrelo, toque la barra o use las flechas del teclado.",
+    "where": "Small print under the guess slider.",
+    "vars": [],
+    "note": "Names all three ways in, because the control is a slider and on a phone it is not obvious that the bar itself is tappable.",
+    "status": "ok"
+  },
+  "guess.continue": {
+    "en": "That's my guess",
+    "es": "Esa es mi predicción",
+    "where": "Primary button on the guess screen. Disabled until the marker has been moved.",
+    "vars": [],
+    "note": "Disabled until the reader actually places it, because a slider that starts in the middle would otherwise record dead centre as a deliberate prediction from anyone who just pressed on.",
+    "status": "ok"
+  },
+  "guess.skip": {
+    "en": "Skip this and start",
+    "es": "Omitir esto y empezar",
+    "where": "Ghost button beside guess.continue.",
+    "vars": [],
+    "note": "Prominent on purpose. The pitch is two minutes and no sign-up, and a screen between arrival and the first question is exactly where a reader leaves. Skipping costs them nothing: the result is identical, and the tally counts them without a guess.",
+    "status": "ok"
+  },
+  "guess.unplaced": {
+    "en": "Move the marker to make a guess, or skip it.",
+    "es": "Mueva el marcador para hacer una predicción, u omítala.",
+    "where": "Status line on the guess screen before the slider is touched.",
+    "vars": [],
+    "note": "Explains why the button is disabled. A disabled button with no reason beside it reads as a broken page.",
+    "status": "ok"
+  },
+  "guess.at": {
+    "en": "Your guess: {label}",
+    "es": "Su predicción: {label}",
+    "where": "Live readout of the slider position on the guess screen.",
+    "vars": [
+      "label"
+    ],
+    "note": "Words rather than the underlying number. The number means nothing before the reader has seen the strip, and showing it invites them to think the guess is precise.",
+    "status": "ok"
+  },
+  "guess.label.farD": {
+    "en": "well over on the Democratic side",
+    "es": "bastante hacia el lado demócrata",
+    "where": "Slider position label, leftmost fifth.",
+    "vars": [],
+    "note": "Party names rather than left and right, matching the strip's own poles.",
+    "status": "ok"
+  },
+  "guess.label.nearD": {
+    "en": "a little toward the Democratic side",
+    "es": "algo hacia el lado demócrata",
+    "where": "Slider position label, second fifth.",
+    "vars": [],
+    "note": "See guess.label.farD.",
+    "status": "ok"
+  },
+  "guess.label.middle": {
+    "en": "about the middle",
+    "es": "más o menos en el medio",
+    "where": "Slider position label, centre fifth.",
+    "vars": [],
+    "note": "Not 'balanced' and not 'moderate'. Both are readings the result screen may refuse to give, and pre-loading either word here would put a verdict in the reader's mouth before they answer.",
+    "status": "ok"
+  },
+  "guess.label.nearR": {
+    "en": "a little toward the Republican side",
+    "es": "algo hacia el lado republicano",
+    "where": "Slider position label, fourth fifth.",
+    "vars": [],
+    "note": "See guess.label.farD.",
+    "status": "ok"
+  },
+  "guess.label.farR": {
+    "en": "well over on the Republican side",
+    "es": "bastante hacia el lado republicano",
+    "where": "Slider position label, rightmost fifth.",
+    "vars": [],
+    "note": "See guess.label.farD.",
+    "status": "ok"
+  },
+  "strip.legendGuess": {
+    "en": "where you guessed you'd land",
+    "es": "donde predijo que quedaría",
+    "where": "Legend entry for the guess marker on the result strip.",
+    "vars": [],
+    "note": "Only rendered when a guess was made, so the legend does not describe a mark that is absent.",
+    "status": "ok"
+  },
+  "result.guessLine": {
+    "en": "You guessed {guess}. On the actual votes you landed {actual}.",
+    "es": "Predijo que quedaría {guess}. Con los votos reales quedó {actual}.",
+    "where": "Sentence in the readout, only when a guess was made.",
+    "vars": [
+      "guess",
+      "actual"
+    ],
+    "note": "Both halves use the same word list as the slider, so the comparison is between two like things rather than between a phrase and a number.",
+    "status": "ok"
+  },
+  "result.guessExact": {
+    "en": "You guessed {guess}, and that is where you landed.",
+    "es": "Predijo que quedaría {guess}, y ahí es donde quedó.",
+    "where": "Replaces result.guessLine when the guess and the result fall in the same position.",
+    "vars": [
+      "guess"
+    ],
+    "note": "A separate sentence because the general one reads as a correction even when there is nothing to correct.",
+    "status": "ok"
+  },
+  "share.button": {
+    "en": "Add my result to the count",
+    "es": "Añadir mi resultado al conteo",
+    "where": "Opt-in button in the row of actions under the readout.",
+    "vars": [],
+    "note": "'Add' rather than 'share': nothing is published, posted or attributed. It moves counters.",
+    "status": "ok"
+  },
+  "share.what": {
+    "en": "Nothing is sent unless you tap that. If you do, one request carries where you landed, three numbers about your answers, and which way you answered each vote — no name, no address, nothing that identifies you. Only totals are kept.",
+    "es": "No se envía nada a menos que lo toque. Si lo hace, una sola petición lleva dónde quedó, tres números sobre sus respuestas y en qué sentido respondió cada voto: sin nombre, sin dirección, sin nada que revele su identidad. Solo se guardan totales.",
+    "where": "Explanatory line under the share button, before it is pressed.",
+    "vars": [],
+    "note": "Says exactly what leaves, in the same place as the button that sends it, rather than only in the privacy paragraph ten screens down. A reader deciding whether to tap should not have to go looking.",
+    "status": "ok"
+  },
+  "share.sending": {
+    "en": "Sending…",
+    "es": "Enviando…",
+    "where": "Share button label while the request is in flight.",
+    "vars": [],
+    "note": "Plain progress state.",
+    "status": "ok"
+  },
+  "share.done": {
+    "en": "Added. {total} results counted so far.",
+    "es": "Añadido. {total} resultados en el conteo hasta ahora.",
+    "where": "Replaces the share button once the result has been counted.",
+    "vars": [
+      "total"
+    ],
+    "note": "Returns the running total, because 'how many people have taken it' is the first question anyone asks in a comment thread and a real number is the best answer to it.",
+    "status": "ok"
+  },
+  "share.already": {
+    "en": "This device already added one. Try again in a few hours.",
+    "es": "Este dispositivo ya añadió uno. Inténtelo de nuevo en unas horas.",
+    "where": "Shown when the endpoint answers 429.",
+    "vars": [],
+    "note": "Names the device rather than the person: the limit is one per address per six hours, so a household or a classroom on one connection will see this without having done anything wrong.",
+    "status": "ok"
+  },
+  "share.failed": {
+    "en": "That didn't go through, so nothing was counted.",
+    "es": "Eso no se envió, así que no se contó nada.",
+    "where": "Shown when the request fails for any other reason.",
+    "vars": [],
+    "note": "States the consequence rather than the error. 'Nothing was counted' is the part a reader cares about, and it is also true of every failure path the endpoint has.",
+    "status": "ok"
   }
 }

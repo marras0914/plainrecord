@@ -266,7 +266,28 @@ export type CopyKey =
   | "rep.zipShare"
   | "rep.zipShareSmall"
   | "rep.zipUnknown"
-  | "rep.zipFailed";
+  | "rep.zipFailed"
+  | "guess.heading"
+  | "guess.body"
+  | "guess.hint"
+  | "guess.continue"
+  | "guess.skip"
+  | "guess.unplaced"
+  | "guess.at"
+  | "guess.label.farD"
+  | "guess.label.nearD"
+  | "guess.label.middle"
+  | "guess.label.nearR"
+  | "guess.label.farR"
+  | "strip.legendGuess"
+  | "result.guessLine"
+  | "result.guessExact"
+  | "share.button"
+  | "share.what"
+  | "share.sending"
+  | "share.done"
+  | "share.already"
+  | "share.failed";
 
 export type Locale = 'en' | 'es';
 
@@ -315,7 +336,7 @@ export const EN: Record<CopyKey, string> = {
   "result.keepGoing": "Keep answering — {left} left",
   "start.lede": "Seven votes your Texas House actually took in 2025. We hid who voted which way. Where do you land?",
   "start.begin": "Start",
-  "start.fine": "About two minutes · no sign-up · your answers never leave this device",
+  "start.fine": "About two minutes · no sign-up · nothing leaves this device unless you ask it to",
   "start.how": "How this works",
   "start.hide": "Hide",
   "vote.yes": "For",
@@ -517,7 +538,7 @@ export const EN: Record<CopyKey, string> = {
   "method.labels.lead": "Why the subjects do not add up.",
   "method.labels.body": "The rule picked {ruleSelected} votes, at most {perCat} per subject, and we added {headline} big bills by hand — the {items} questions here. Count the subjects in the data file today and you will not get that back. After the votes were picked we corrected six subject labels that were wrong on the page: <em>Abortion</em> sat above a question about prosecuting election crimes. Correcting a label cannot reach back and change which votes the rule chose, so what you are counting is the corrected labels over the original picks. We would rather show you that than quietly relabel and let the arithmetic look tidy.",
   "privacy.lead": "What this page counts, and what it does not.",
-  "privacy.body": "It counts visits — how many people came and which link sent them — using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser: there is no server to send them to, and the page makes no network request while you answer. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out.",
+  "privacy.body": "It counts visits · how many people came and which link sent them · using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser while you answer: the page makes no network request at all until you have finished. If you then tap <b>add my result</b> on the result screen, one request goes out, and it carries where you landed, three numbers about your answers, and which way you answered each vote. No name, no address, nothing that identifies you, and only totals are kept at the other end — there is no record of your particular submission to look up. Never tap it and nothing is ever sent. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out, then taps the button and fails if what goes out carries anything beyond those counts.",
   "intro.subhead": "How Vikki Goodwin, Gina Hinojosa and James Talarico voted in the Texas House, checked against your own answers.",
   "rep.heading": "And how did your own representative vote?",
   "rep.lede": "The three above are running for offices that affect every Texan. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
@@ -542,6 +563,27 @@ export const EN: Record<CopyKey, string> = {
   "rep.zipShareSmall": "under 1% of this ZIP",
   "rep.zipUnknown": "{zip} is not a Texas ZIP code in this record.",
   "rep.zipFailed": "Could not load the ZIP list. The district number box still works.",
+  "guess.heading": "First, a guess: where do you think you'll land?",
+  "guess.body": "Put the marker where you expect your own answers to put you. At the end you'll see both: your guess, and where the actual votes placed you.",
+  "guess.hint": "Drag it, tap the bar, or use the arrow keys.",
+  "guess.continue": "That's my guess",
+  "guess.skip": "Skip this and start",
+  "guess.unplaced": "Move the marker to make a guess, or skip it.",
+  "guess.at": "Your guess: {label}",
+  "guess.label.farD": "well over on the Democratic side",
+  "guess.label.nearD": "a little toward the Democratic side",
+  "guess.label.middle": "about the middle",
+  "guess.label.nearR": "a little toward the Republican side",
+  "guess.label.farR": "well over on the Republican side",
+  "strip.legendGuess": "where you guessed you'd land",
+  "result.guessLine": "You guessed {guess}. On the actual votes you landed {actual}.",
+  "result.guessExact": "You guessed {guess}, and that is where you landed.",
+  "share.button": "Add my result to the count",
+  "share.what": "Nothing is sent unless you tap that. If you do, one request carries where you landed, three numbers about your answers, and which way you answered each vote — no name, no address, nothing that identifies you. Only totals are kept.",
+  "share.sending": "Sending…",
+  "share.done": "Added. {total} results counted so far.",
+  "share.already": "This device already added one. Try again in a few hours.",
+  "share.failed": "That didn't go through, so nothing was counted.",
 };
 
 export const ES: Record<CopyKey, string> = {
@@ -575,7 +617,7 @@ export const ES: Record<CopyKey, string> = {
   "result.keepGoing": "Seguir respondiendo: quedan {left}",
   "start.lede": "Siete votos que su Cámara de Texas realmente emitió en 2025. Ocultamos quién votó de qué manera. ¿Dónde se sitúa usted?",
   "start.begin": "Empezar",
-  "start.fine": "Unos dos minutos · sin registro · sus respuestas nunca salen de este dispositivo",
+  "start.fine": "Unos dos minutos · sin registro · nada sale de este dispositivo a menos que usted lo pida",
   "start.how": "Cómo funciona esto",
   "start.hide": "Ocultar",
   "vote.yes": "A favor",
@@ -777,7 +819,7 @@ export const ES: Record<CopyKey, string> = {
   "method.labels.lead": "Por qué las materias no cuadran.",
   "method.labels.body": "La regla escogió {ruleSelected} votos, como máximo {perCat} por materia, y nosotros añadimos a mano {headline} proyectos importantes — las {items} preguntas de aquí. Si hoy cuenta las materias en el archivo de datos, esa cuenta no le saldrá. Después de escoger los votos corregimos seis etiquetas de materia que estaban mal en la página: <em>Aborto</em> aparecía encima de una pregunta sobre perseguir delitos electorales. Corregir una etiqueta no puede volver atrás y cambiar qué votos escogió la regla, así que lo que usted cuenta son las etiquetas corregidas sobre la selección original. Preferimos enseñarle eso antes que reetiquetar en silencio y dejar que la cuenta parezca limpia.",
   "privacy.lead": "Qué cuenta esta página y qué no.",
-  "privacy.body": "Cuenta visitas —cuántas personas entraron y qué enlace las trajo— con la analítica de Vercel, que no usa cookies y no puede seguirle a otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador: no hay ningún servidor al que enviarlas, y la página no hace ninguna petición de red mientras usted responde. Eso no es una promesa, se comprueba en cada compilación: la prueba responde cinco preguntas y falla si sale un solo byte.",
+  "privacy.body": "Cuenta visitas · cuántas personas vinieron y qué enlace las envió · con la analítica de Vercel, que no usa cookies y no puede seguir su rastro en otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador mientras responde: la página no hace ninguna petición de red hasta que termine. Si luego toca <b>añadir mi resultado</b> en la pantalla de resultados, sale una sola petición que lleva dónde quedó, tres números sobre sus respuestas y en qué sentido respondió cada voto. Sin nombre, sin dirección, sin nada que revele su identidad, y al otro lado solo se guardan totales: no queda registro de su envío concreto que se pueda consultar. Si nunca lo toca, nunca se envía nada. Eso no es una promesa, se comprueba en cada compilación — la prueba responde cinco preguntas y falla si sale un solo byte, y después toca el botón y falla si lo que sale lleva algo más que esos conteos.",
   "intro.subhead": "Cómo votaron Vikki Goodwin, Gina Hinojosa y James Talarico en la Cámara de Texas, comparado con sus propias respuestas.",
   "rep.heading": "¿Y cómo votó su propio representante?",
   "rep.lede": "Los tres de arriba se postulan para cargos que afectan a todos los texanos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
@@ -802,6 +844,27 @@ export const ES: Record<CopyKey, string> = {
   "rep.zipShareSmall": "menos del 1% de este código postal",
   "rep.zipUnknown": "{zip} no es un código postal de Texas en este registro.",
   "rep.zipFailed": "No se pudo cargar la lista de códigos postales. La casilla del número de distrito sigue funcionando.",
+  "guess.heading": "Primero, una predicción: ¿dónde cree que va a quedar?",
+  "guess.body": "Coloque el marcador donde espera quedar según sus propias respuestas. Al final verá ambos: su predicción y dónde quedó con los votos reales.",
+  "guess.hint": "Arrástrelo, toque la barra o use las flechas del teclado.",
+  "guess.continue": "Esa es mi predicción",
+  "guess.skip": "Omitir esto y empezar",
+  "guess.unplaced": "Mueva el marcador para hacer una predicción, u omítala.",
+  "guess.at": "Su predicción: {label}",
+  "guess.label.farD": "bastante hacia el lado demócrata",
+  "guess.label.nearD": "algo hacia el lado demócrata",
+  "guess.label.middle": "más o menos en el medio",
+  "guess.label.nearR": "algo hacia el lado republicano",
+  "guess.label.farR": "bastante hacia el lado republicano",
+  "strip.legendGuess": "donde predijo que quedaría",
+  "result.guessLine": "Predijo que quedaría {guess}. Con los votos reales quedó {actual}.",
+  "result.guessExact": "Predijo que quedaría {guess}, y ahí es donde quedó.",
+  "share.button": "Añadir mi resultado al conteo",
+  "share.what": "No se envía nada a menos que lo toque. Si lo hace, una sola petición lleva dónde quedó, tres números sobre sus respuestas y en qué sentido respondió cada voto: sin nombre, sin dirección, sin nada que revele su identidad. Solo se guardan totales.",
+  "share.sending": "Enviando…",
+  "share.done": "Añadido. {total} resultados en el conteo hasta ahora.",
+  "share.already": "Este dispositivo ya añadió uno. Inténtelo de nuevo en unas horas.",
+  "share.failed": "Eso no se envió, así que no se contó nada.",
 };
 
 /**
