@@ -300,9 +300,14 @@ function renderStrip(p: PartisanProfile): void {
     }, t('strip.empty')));
   }
 
-  // The other person, once a challenge has been answered. BELOW the axis,
-  // where the reader's own guess sits above it, so the two extra marks cannot
-  // be mistaken for each other or for an answer dot.
+  // The other person, once a challenge has been answered.
+  //
+  // A bead threaded ON the axis line, not hanging below it. The first version
+  // sat at axisY + 17, which is exactly where the tick labels are, so a result
+  // near +0.5 half-covered the "+0.5" and read as a collision rather than a
+  // design. Nothing else in this chart sits on the axis: the answer dots start
+  // ten pixels above it and the guess caret meets it from above, so a bead here
+  // is unambiguous and cannot overlap a label at any position.
   const themLegend = document.getElementById('legend-them');
   const theirLean = challengeLean();
   if (themLegend) themLegend.hidden = theirLean === null;
@@ -312,11 +317,10 @@ function renderStrip(p: PartisanProfile): void {
       role: 'img',
       'aria-label': `${t('strip.legendThem')}: ${leanLabel(theirLean)}`,
     });
-    gThem.appendChild(sv('line', {
-      x1: tx, y1: P.axisY, x2: tx, y2: P.axisY + 12, stroke: ink2, 'stroke-width': 1,
-    }));
+    // The surface-coloured fill is what makes it read as threaded on the line
+    // rather than drawn over it.
     gThem.appendChild(sv('circle', {
-      cx: tx, cy: P.axisY + 17, r: 5, fill: surface, stroke: ink2, 'stroke-width': 1.8,
+      cx: tx, cy: P.axisY, r: 6.5, fill: surface, stroke: ink2, 'stroke-width': 2,
     }));
     svg.appendChild(gThem);
   }

@@ -139,8 +139,14 @@
   <main id="result-view" hidden>
 
 
-    <section class="card"><div class="readout" id="readout"></div></section>
+    <!--
+      FIRST, ahead of the reader's own readout, and only when it is showing.
 
+      Somebody who arrived on a challenge came for the comparison. Leaving it
+      below the readout meant scrolling past your own verdict on a phone to
+      reach the thing you were actually sent. It is hidden with no height when
+      there is no challenge, so a plain visitor sees no difference at all.
+    -->
     <!--
       The two-person compare, when this reader arrived on somebody's invite.
 
@@ -150,6 +156,8 @@
       anywhere else, until the reader has answered the same votes themselves.
     -->
     <section class="card compare-card" id="compare-card" hidden></section>
+
+    <section class="card"><div class="readout" id="readout"></div></section>
 
     <section class="card">
       <div class="card-head">

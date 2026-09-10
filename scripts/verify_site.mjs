@@ -1489,6 +1489,41 @@ try {
       /every one of the 7|7 of the 7/i.test(compare), compare.replace(/\s+/g, ' ').slice(0, 110));
     check('compare: the strip legend now describes their mark',
       !(await page.$eval('#legend-them', (e) => e.hidden)));
+
+    // The compare is what somebody who arrived on a challenge came for, so it
+    // must sit ahead of the reader's own readout rather than below it.
+    const order = await page.evaluate(() => {
+      const c = document.getElementById('compare-card');
+      const r = document.getElementById('readout');
+      if (!c || !r) return null;
+      // Node.DOCUMENT_POSITION_FOLLOWING === 4: r comes after c.
+      return (c.compareDocumentPosition(r) & 4) !== 0;
+    });
+    check('compare: the card comes BEFORE the reader\'s own readout', order === true, String(order));
+
+    // The bead marking the other person must not sit on an axis label. It used
+    // to hang below the axis at exactly the tick labels' height, so a result
+    // near +0.5 half-covered the "+0.5". Measured from the rendered SVG at the
+    // reader's actual position rather than computed from the constants.
+    const clash = await page.evaluate(() => {
+      const svg = document.querySelector('#strip');
+      const bead = [...svg.querySelectorAll('g[role="img"] circle')]
+        .find((c) => c.getAttribute('fill') !== 'transparent'
+          && Number(c.getAttribute('stroke-width')) >= 2);
+      if (!bead) return { found: false };
+      const b = bead.getBoundingClientRect();
+      const hits = [];
+      for (const label of svg.querySelectorAll('text')) {
+        const l = label.getBoundingClientRect();
+        if (l.width === 0) continue;
+        const over = !(b.right < l.left || b.left > l.right || b.bottom < l.top || b.top > l.bottom);
+        if (over) hits.push(label.textContent.trim());
+      }
+      return { found: true, hits };
+    });
+    check('compare: their bead was found on the strip', clash.found === true);
+    check('compare: and it overlaps no axis label at all',
+      (clash.hits ?? []).length === 0, (clash.hits ?? []).join(', ') || 'clear');
     check('compare: and offers a way to challenge somebody else',
       /challenge somebody else/i.test(compare));
 
