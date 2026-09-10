@@ -64,6 +64,15 @@ public/sitemap.xml
 
 .env*.local
 
-# Never commit outreach or correspondence. See side-piece/rightnleft-outreach/
-Jesse-responded.md
+# Correspondence, outreach and strategy notes never enter this repository.
+#
+# A folder rather than filename patterns, because the patterns were what failed:
+# a maintainer's reply was committed and pushed to the public mirror on 10 Sep
+# 2026 under a filename nobody had anticipated. .githooks/pre-commit refuses
+# these too, since a gitignore does nothing about an already-tracked file or
+# `git add -f`.
+private/
+!private/README.md
 rightnleft-*.md
+*-responded.md
+*-reply.md

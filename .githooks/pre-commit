@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# Refuse to commit correspondence, outreach material, or anything under
+# private/.
+#
+# WHY A HOOK AND NOT JUST .gitignore. A gitignore only protects files git is not
+# already tracking, and it does nothing against `git add -f`. On 10 September
+# 2026 a maintainer's private reply was committed and pushed to a public mirror
+# because it sat in the repo root under a filename no pattern anticipated, and
+# `git add -A` took it. Removing it needed the whole repository deleted and
+# recreated, because a force-push does not remove a blob from GitHub.
+#
+# Enable per clone:  git config core.hooksPath .githooks
+#
+# Override, deliberately and rarely:  ALLOW_PRIVATE=1 git commit ...
+
+if [ "$ALLOW_PRIVATE" = "1" ]; then
+  exit 0
+fi
+
+staged=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged" ] && exit 0
+
+blocked=""
+
+# 1. Anything under private/, except its own README.
+for f in $staged; do
+  case "$f" in
+    private/README.md) ;;
+    private/*) blocked="$blocked  $f  (under private/)
+" ;;
+  esac
+done
+
+# 2. Correspondence and outreach shapes, anywhere in the tree. Names a human
+#    would pick in the moment, which is exactly when the mistake gets made.
+for f in $staged; do
+  case "$f" in
+    private/*) ;;
+    *responded*|*-reply*|*reply-*|*correspond*|*outreach*|*playbook*|*PLAYBOOK*|*OUTREACH*|*pitch*|*followup*|*follow-up*)
+      blocked="$blocked  $f  (looks like correspondence or outreach)
+" ;;
+  esac
+done
+
+if [ -n "$blocked" ]; then
+  printf '\n  commit refused: these paths must not enter the repository\n\n%s\n' "$blocked"
+  printf '  Move them to private/ (never committed) or to\n'
+  printf '  side-piece/rightnleft-outreach/ (outside the repo entirely).\n\n'
+  printf '  If this is genuinely wrong, override once:\n'
+  printf '    ALLOW_PRIVATE=1 git commit ...\n\n'
+  exit 1
+fi
+
+exit 0
