@@ -63,3 +63,7 @@ public/sitemap.xml
 *.json.bak
 
 .env*.local
+
+# Never commit outreach or correspondence. See side-piece/rightnleft-outreach/
+Jesse-responded.md
+rightnleft-*.md
