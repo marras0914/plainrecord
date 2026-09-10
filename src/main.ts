@@ -33,7 +33,7 @@ import {
   type Shared,
 } from './compare';
 import { PROFILE_BANDS } from '../valence';
-import { inject } from '@vercel/analytics';
+import { inject, pageview } from '@vercel/analytics';
 import { renderVerdict } from './verdict';
 import { t, word } from './i18n';
 import * as pes from './payload-i18n';
@@ -156,6 +156,44 @@ let guess: number | null = null;
  * the answers travel in a fragment no crawler or link preview can read.
  */
 let challenge: Shared | null = null;
+
+/**
+ * Funnel counting, through the page-view beacon that already fires on arrival.
+ *
+ * WHY PAGEVIEWS AND NOT A COUNTER ENDPOINT. The quiz is entirely client-side
+ * once loaded, so nothing that happens while somebody answers reaches a server
+ * and completions cannot be counted without adding a request. A new endpoint
+ * would mean new storage, a new rate limit, and a second promise to keep. A
+ * virtual page view reuses the exact mechanism `privacy.body` already discloses
+ * — Vercel's visit counting, no cookies, a visitor hash that resets daily — and
+ * carries nothing about the person beyond what arriving already carried.
+ *
+ * `pageview` rather than `track`: custom events need a paid plan, and they are
+ * also the only mechanism that could carry an answer, which is why the privacy
+ * note says they are not in use. This stays true.
+ *
+ * WHAT IT DOES COST. A reader did not tap for these, so `start.fine` and
+ * `privacy.body` both say so now. `start.fine` was already imprecise about
+ * this: it claimed nothing leaves the device unless you ask, while the arrival
+ * beacon has always fired unasked.
+ *
+ * Read in the Vercel dashboard, not `npm run stats`, which uses an API that
+ * 404s on this plan.
+ */
+const counted = new Set<string>();
+function countStep(path: string): void {
+  // Once per page load. render() runs on every keystroke in the ZIP box, and a
+  // funnel that counted re-renders would report drop-off as growth.
+  if (counted.has(path)) return;
+  counted.add(path);
+  try {
+    // Both fields: the signature wants a route pattern and an actual path, and
+    // for a virtual step they are the same thing.
+    pageview({ route: path, path });
+  } catch {
+    // Analytics being blocked, offline or absent must never break the quiz.
+  }
+}
 
 /**
  * The item whose answer is currently being revealed.
@@ -602,6 +640,11 @@ function renderReadout(p: PartisanProfile): void {
   // back in. Without it the result is a dead end and the remaining questions
   // are unreachable.
   if (view !== 'result') return;
+
+  // The third funnel step: a result actually reached, with something answered.
+  // Guarded on p.n because "skip the quiz and look around" lands here too, and
+  // a reader who answered nothing has not completed anything.
+  if (p.n > 0) countStep('/quiz/result');
 
   // The three things a reader wants the moment they have a result, in one row
   // under it. Before this the only way to begin again was a button labelled
@@ -1486,6 +1529,7 @@ function bindNavHow(): void {
 /** The opening screen: a title, a line, and a button. */
 /** Begin the run itself. Reached from the guess screen, either way through it. */
 function beginQuiz(): void {
+  countStep('/quiz/started');
   view = 'quiz';
   cursor = 0;
   revealFor = null;
@@ -1572,6 +1616,11 @@ let resetGuessUi: () => void = () => {};
 function bindStart(): void {
   const go = document.getElementById('start-btn');
   go?.addEventListener('click', () => {
+    // Counted here rather than at beginQuiz, so somebody who opens the guess
+    // screen and leaves is visible. Without this step the only readers who
+    // exist in the numbers are those who got past it, which is exactly the
+    // question the guess screen raises.
+    countStep('/quiz/guess');
     guess = null;
     resetGuessUi();
     view = 'guess';

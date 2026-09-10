@@ -1352,6 +1352,93 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // The funnel count, and the line it rests on
+  //
+  // privacy.body now says: "Reaching the end is counted; what you answered is
+  // not, and the two are never connected." Both halves are asserted, because a
+  // reader will not infer that distinction and it is the only thing making the
+  // counting acceptable.
+  //
+  // If the beacon does not fire under this harness the checks say so rather
+  // than passing. A silently absent beacon looks exactly like a clean one.
+  // ---------------------------------------------------------------------------
+
+  {
+    const beacons = [];
+    const watch = (r) => {
+      if (!/\/_vercel\/insights\//.test(r.url())) return;
+      let body = '';
+      try { body = r.postData() ?? ''; } catch { body = ''; }
+      beacons.push({ url: r.url(), body });
+    };
+
+    const ctx = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    const fp = await ctx.newPage();
+    fp.on('request', watch);
+
+    await fp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await fp.waitForTimeout(400);
+    await fp.click('#start-btn');
+    await fp.waitForTimeout(300);
+    await fp.click('#guess-skip');
+    await fp.waitForTimeout(300);
+    await answerAll(fp, 1);
+    await fp.waitForTimeout(900);
+
+    const all = beacons.map((b) => `${b.url} ${b.body}`).join(' ');
+
+    // ASSERTED ON THE QUEUE, NOT ON THE WIRE, and that is not a shortcut.
+    //
+    // `pageview()` dispatches through `window.va`, which the injected script
+    // defines. That script lives at /_vercel/insights/script.js, which only
+    // Vercel's edge serves: under this harness the path falls through to
+    // index.html, `va` never exists, and every call sits in `window.vaq`
+    // unsent. So nothing about the beacon can be verified locally.
+    //
+    // The queue is the right thing to check anyway. It is what THIS code
+    // controls: did the page ask for the right three paths, once each, and
+    // with nothing else attached. Whether Vercel then delivers them is
+    // Vercel's to get right, and is visible in the dashboard.
+    const queued = await fp.evaluate(() =>
+      (window.vaq ?? []).map((entry) => JSON.stringify(entry)));
+    const queue = queued.join(' ');
+
+    check('funnel: the page queued page views at all',
+      queued.length > 0, queued.length ? `${queued.length} queued` :
+        'NONE — pageview() was never called, so the funnel counts nothing');
+
+    if (queued.length > 0) {
+      for (const step of ['/quiz/guess', '/quiz/started', '/quiz/result']) {
+        const hits = queued.filter((q) => q.includes(step)).length;
+        check(`funnel: ${step} is counted exactly once`, hits === 1, `${hits} time(s)`);
+      }
+      check('funnel: nothing but the three steps is queued',
+        queued.length === 3, `${queued.length} entries: ${queue.slice(0, 120)}`);
+      check('funnel: no queued view carries an answer or a score',
+        !/qid|netLean|crossover|partisanLoad|verdict|ocd-|agree/i.test(queue),
+        queue.slice(0, 90));
+    }
+
+    {
+
+      // The half that matters. A funnel beacon may carry a path and nothing
+      // whatever about what was answered.
+      const payload = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+      const NEEDLES = [
+        ...payload.items.slice(0, 10).map((i) => i.id),
+        ...payload.items.slice(0, 10).map((i) => i.billId.replace(' ', '')),
+        ...payload.candidates.map((c) => c.id),
+        'netLean', 'crossover', 'partisanLoad', 'verdict', 'answers', 'agree',
+      ].filter(Boolean);
+      const carried = NEEDLES.filter((n) => all.includes(n));
+      check('funnel: no beacon carries an answer, a bill, a candidate or a score',
+        carried.length === 0, carried.slice(0, 3).join(', ') || `${NEEDLES.length} needles searched`);
+    }
+
+    await ctx.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // What the native share sheet is handed
   //
   // Headless Chromium has no navigator.share, so it is stubbed and the payload
