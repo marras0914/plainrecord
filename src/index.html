@@ -141,6 +141,16 @@
 
     <section class="card"><div class="readout" id="readout"></div></section>
 
+    <!--
+      The two-person compare, when this reader arrived on somebody's invite.
+
+      Its own card rather than a block inside the readout, because it is about
+      two people and the readout is about one. Hidden until there is a
+      comparison to make: the sender's result is not revealed, in the markup or
+      anywhere else, until the reader has answered the same votes themselves.
+    -->
+    <section class="card compare-card" id="compare-card" hidden></section>
+
     <section class="card">
       <div class="card-head">
         <div data-i18n="sec.yourAnswers" class="eyebrow">Your answers, one mark each</div>
@@ -158,6 +168,9 @@
         <div class="legend-item">
           <svg width="13" height="13" aria-hidden="true"><path d="M6.5 1.5 L11.5 6.5 L6.5 11.5 L1.5 6.5 Z" fill="var(--ink-2)"></path></svg>
           <span data-i18n="strip.legendCands">candidate's record on the same votes</span></div>
+        <div class="legend-item" id="legend-them" hidden>
+          <svg width="13" height="13" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" fill="none" stroke="var(--ink-2)" stroke-width="1.8"></circle></svg>
+          <span data-i18n="strip.legendThem">where they landed</span></div>
         <div class="legend-item" id="legend-guess" hidden>
           <svg width="13" height="13" aria-hidden="true"><path d="M6.5 11 L11 3 L2 3 Z" fill="none" stroke="var(--ink-2)" stroke-width="1.5"></path></svg>
           <span data-i18n="strip.legendGuess">where you guessed you'd land</span></div>

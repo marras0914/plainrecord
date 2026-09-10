@@ -1,7 +1,7 @@
 {
   "_meta": {
     "purpose": "Single source of every user-facing string on rightnleft.com, in English and Spanish. Feeds both the reviewer's side-by-side page (npm run i18n:review) and, once the Spanish is signed off, the locale modules the page renders from.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass. A second pass on 7 September 2026 approved eight more: the vote framing (q.prompt, vote.yes, vote.no and the three \"You voted\" lines) and the method.labels paragraph. The framing changed because a first-time reader could not tell what Yes meant above a summary that only states what a bill does. A third pass on 9 September 2026 approved the 23 strings added with the opt-in tally and the guess step, by the same reviewer. Twelve were corrected before approval: result.guessLine and result.guessExact were rebuilt because \"Predijo {guess}\" is ungrammatical once the label interpolates (predecir needs a clause, and strip.legendGuess already used the right shape); recuento was replaced with conteo to match the approved corpus; the two far position labels gained \"hacia\" to parallel the near ones; four masculine object pronouns were removed in favour of constructions that do not assume the reader's gender, matching the dative \"le\" the rest of the file uses; privacy.body took the subjunctive after \"hasta que\"; and share.failed was made plainer. start.fine and privacy.body are REWORDED, not new: \"your answers never leave this device\" and \"there is no server to send them to\" stopped being unconditionally true when /api/share was added, and privacy.body's own note records that the build check has to be weakened only after that sentence is reworded, never before. A fourth pass on 9 September 2026 approved the 7 strings added with the shareable result, by the same reviewer. Three were corrected before approval: share.copyFailed dropped the bureaucratic passive that had already been rejected for share.failed earlier the same day; share.text took the glossary term Camara de Representantes de Texas over the shorter Camara de Texas, accepting a few extra characters in a string meant to travel as a social post; and shared.intro gained an explicit subject, because without one \"su\" reads as either their or your and \"quedo\" is third person, leaving it unclear whether the position described the sender or the reader. A fifth pass on 9 September 2026 approved the reworded share.linkNote and privacy.body, by the same reviewer. Both changed because the shared result moved out of the URL fragment and into the path: the old wording said the position travels after the # and is never transmitted, which was true and was exactly why a shared link was useless, since no crawler can see a fragment. The new text states the trade instead. Two corrections before approval: the Spanish used \"le toco\", which carries a sense of something assigned by chance and quietly contradicts a result derived from the readers own answers, so it now uses the glossary verb \"quedar\"; and the English says \"landed in\" rather than \"came out in\", matching the rest of the site.",
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass. A second pass on 7 September 2026 approved eight more: the vote framing (q.prompt, vote.yes, vote.no and the three \"You voted\" lines) and the method.labels paragraph. The framing changed because a first-time reader could not tell what Yes meant above a summary that only states what a bill does. A third pass on 9 September 2026 approved the 23 strings added with the opt-in tally and the guess step, by the same reviewer. Twelve were corrected before approval: result.guessLine and result.guessExact were rebuilt because \"Predijo {guess}\" is ungrammatical once the label interpolates (predecir needs a clause, and strip.legendGuess already used the right shape); recuento was replaced with conteo to match the approved corpus; the two far position labels gained \"hacia\" to parallel the near ones; four masculine object pronouns were removed in favour of constructions that do not assume the reader's gender, matching the dative \"le\" the rest of the file uses; privacy.body took the subjunctive after \"hasta que\"; and share.failed was made plainer. start.fine and privacy.body are REWORDED, not new: \"your answers never leave this device\" and \"there is no server to send them to\" stopped being unconditionally true when /api/share was added, and privacy.body's own note records that the build check has to be weakened only after that sentence is reworded, never before. A fourth pass on 9 September 2026 approved the 7 strings added with the shareable result, by the same reviewer. Three were corrected before approval: share.copyFailed dropped the bureaucratic passive that had already been rejected for share.failed earlier the same day; share.text took the glossary term Camara de Representantes de Texas over the shorter Camara de Texas, accepting a few extra characters in a string meant to travel as a social post; and shared.intro gained an explicit subject, because without one \"su\" reads as either their or your and \"quedo\" is third person, leaving it unclear whether the position described the sender or the reader. A fifth pass on 9 September 2026 approved the reworded share.linkNote and privacy.body, by the same reviewer. Both changed because the shared result moved out of the URL fragment and into the path: the old wording said the position travels after the # and is never transmitted, which was true and was exactly why a shared link was useless, since no crawler can see a fragment. The new text states the trade instead. Two corrections before approval: the Spanish used \"le toco\", which carries a sense of something assigned by chance and quietly contradicts a result derived from the readers own answers, so it now uses the glossary verb \"quedar\"; and the English says \"landed in\" rather than \"came out in\", matching the rest of the site. A sixth pass on 10 September 2026 approved the 12 strings for the blind two-person compare, by the same reviewer. The per-result share card was removed in the same change because its link preview revealed the sender position before the recipient had answered; shared.intro was rewritten from naming that position to naming only that a challenge exists. One correction before approval: shared.intro used \"lo ha desafiado\", a masculine direct-object pronoun, and now uses the dative \"le ha lanzado un desafio\". One suggestion declined: adding \"Los dos\" to compare.agreed for parallelism with compare.same was judged redundant against the \"ambos\" later in the same sentence.",
     "placeholders": "{name} is substituted at runtime from real data. A translator may MOVE a placeholder anywhere the Spanish needs it, but must not rename, add or drop one. Placeholder names are listed per string in 'vars'.",
     "register": {
       "decision": "usted, not tu",
@@ -2226,19 +2226,19 @@
     "status": "ok"
   },
   "share.link": {
-    "en": "Share where I landed",
-    "es": "Compartir dónde quedé",
+    "en": "Challenge someone with these seven",
+    "es": "Desafiar a alguien con estos siete",
     "where": "Button on the result screen, beside the opt-in tally control.",
     "vars": [],
-    "note": "Deliberately worded to contrast with share.button, which is 'Add my result to the count'. Two actions sitting next to each other with similar words is how a reader taps the wrong one: this makes a link and sends nothing, that one moves a counter on a server.",
+    "note": "REWORDED from 'Share where I landed'. The link no longer carries a position for anyone to look at; it carries the seven answers so the next person can be compared after they play. 'Challenge' names what the recipient actually gets, which is a quiz and not a result.",
     "status": "ok"
   },
   "share.linkNote": {
-    "en": "Makes a link that carries one number: which of eleven positions you landed in. Nothing else, and nothing about which votes you judged which way. Opening that link does tell this site the position, the way opening any page tells a site which page you opened.",
-    "es": "Crea un enlace que lleva un solo dato: en cuál de las once posiciones quedó. Nada más, y nada sobre en qué sentido juzgó cada voto. Abrir ese enlace sí le indica la posición a este sitio, igual que abrir cualquier página le indica a un sitio qué página abrió.",
+    "en": "Makes a link carrying your answers to these seven votes. Whoever opens it answers the same seven blind first, then sees how the two of you compare. Nothing is sent anywhere and nothing is stored: the answers ride in the part of the address after the # symbol, which browsers never transmit to a website, so no link preview can give your result away either.",
+    "es": "Crea un enlace con sus respuestas a estos siete votos. Quien lo abra responde primero los mismos siete a ciegas, y después ve cómo se comparan los dos. No se envía nada a ningún sitio y no se guarda nada: las respuestas viajan en la parte de la dirección después del símbolo #, que los navegadores nunca transmiten a un sitio web, así que ninguna vista previa puede revelar su resultado.",
     "where": "Explanatory line under the share-link button.",
     "vars": [],
-    "note": "REWORDED when the result moved out of the URL fragment and into the path. The old text said the position 'travels in the part of the address after the # symbol, which browsers never transmit', which was true and was exactly why the link was useless to share: no crawler can see a fragment, so every shared link unfurled into the same generic card. The trade is stated rather than buried, and the comparison to opening any other page is there because it is the honest scale of it. Uses \"quedar\" from the glossary rather than \"tocar\": the position is derived from how the reader judged the votes, and \"le toco\" carries a sense of something assigned by chance, which quietly contradicts the premise of the whole site.",
+    "note": "REWORDED again, and back to the fragment. The previous version described a position in the path and admitted a request log would see it. That design is gone because the preview it bought revealed the sender's result before the recipient had answered. The privacy property and the blind property are the same property here, which is why the last clause says both.",
     "status": "ok"
   },
   "share.copy": {
@@ -2266,21 +2266,95 @@
     "status": "ok"
   },
   "share.text": {
-    "en": "I judged 7 real votes my Texas House took, with the party hidden. Where do you land?",
-    "es": "Juzgué 7 votos reales de la Cámara de Representantes de Texas, con el partido oculto. ¿Dónde queda usted?",
+    "en": "I took a blind quiz on 7 real Texas House votes. Answer the same 7, then see how we compare.",
+    "es": "Hice un cuestionario a ciegas sobre 7 votos reales de la Cámara de Representantes de Texas. Responda los mismos 7 y luego vea cómo nos comparamos.",
     "where": "The default message that travels with a shared link.",
     "vars": [],
-    "note": "SAYS NOTHING ABOUT BEING SURPRISED, on purpose. An earlier draft read 'I was surprised where I landed'. Two of the first six people to share said, unprompted, that they landed exactly where they predicted, so that wording would have put a false sentence in a third of readers' mouths on a site whose argument is that it does not overclaim. It asks a question instead. Uses the glossary term \"Camara de Representantes de Texas\" rather than the shorter \"Camara de Texas\". It costs a few characters in something meant to travel as a post, and the glossary wins.",
+    "note": "REWORDED for the compare. Says nothing about being surprised, for the reason recorded before: two of the first six people to share said unprompted that they landed exactly where they predicted. It is an invitation, not a claim about the sender's result.",
     "status": "ok"
   },
   "shared.intro": {
-    "en": "Somebody shared their result with you: they landed {label}. Where do you land?",
-    "es": "Alguien compartió con usted su resultado: esa persona quedó {label}. ¿Dónde queda usted?",
+    "en": "Somebody has challenged you on the same seven votes. Answer them first, then you will see how the two of you compare.",
+    "es": "Alguien le ha lanzado un desafío con los mismos siete votos. Respóndalos primero y luego verá cómo se comparan los dos.",
     "where": "Line on the opening screen when the address carries a shared result.",
     "vars": [
       "label"
     ],
-    "note": "Uses the same five position words as the guess slider, so a recipient reads a phrase rather than a number they have no scale for yet. \"esa persona\" is load-bearing: without a stated subject, \"su\" reads as either their or your, and \"quedo\" is third person, so it was unclear whether {label} described the sender or the reader. That distinction is the entire sentence.",
+    "note": "REWRITTEN for the blind compare. The old version named the sender's position, which was the whole problem: it spoiled the answer before the recipient had judged anything. It now says only that a challenge exists. The sender's result is not on this screen, not in the markup, and not in the link preview, because the answers travel in a fragment no crawler can read. Uses the dative \"le ha lanzado un desafio\" rather than \"lo ha desafiado\": the direct-object pronoun assumes a male reader, and the rest of the file sidesteps that the same way.",
+    "status": "ok"
+  },
+  "compare.heading": {
+    "en": "How the two of you compare",
+    "es": "Cómo se comparan los dos",
+    "where": "Heading of the compare card on the result screen, when an invite was answered.",
+    "vars": [],
+    "note": "Neutral. Not 'who won' and not 'who is more moderate', because neither is a thing this instrument measures.",
+    "status": "ok"
+  },
+  "compare.agreed": {
+    "en": "You agreed on {agreed} of the {both} votes you both answered.",
+    "es": "Coincidieron en {agreed} de los {both} votos que ambos respondieron.",
+    "where": "The headline line of the compare card.",
+    "vars": [
+      "agreed",
+      "both"
+    ],
+    "note": "The denominator is the votes BOTH people answered, never seven. Either of them can reach a result having answered fewer, and counting a vote somebody skipped as a disagreement is the same error this project refuses to make about a legislator who cast no vote. Left as a bare \"Coincidieron\" rather than \"Los dos coincidieron\", which the reviewer judged redundant against the \"ambos\" later in the same sentence. The heading directly above it says \"Como se comparan los dos\", so the subject is not actually in doubt.",
+    "status": "ok"
+  },
+  "compare.allAgreed": {
+    "en": "You agreed on every one of the {both} votes you both answered.",
+    "es": "Coincidieron en todos los {both} votos que ambos respondieron.",
+    "where": "Replaces compare.agreed when there was no disagreement.",
+    "vars": [
+      "both"
+    ],
+    "note": "A separate string because 'agreed on 7 of 7' reads as a near miss in English.",
+    "status": "ok"
+  },
+  "compare.noneShared": {
+    "en": "You did not answer any of the same votes, so there is nothing to compare yet.",
+    "es": "No respondieron ninguno de los mismos votos, así que todavía no hay nada que comparar.",
+    "where": "Shown when the two people have no answered vote in common.",
+    "vars": [],
+    "note": "Reachable: either person can stop early. Saying so is better than showing a comparison computed over nothing.",
+    "status": "ok"
+  },
+  "compare.positions": {
+    "en": "On those votes you landed {mine}. They landed {theirs}.",
+    "es": "En esos votos usted quedó {mine}. La otra persona quedó {theirs}.",
+    "where": "The two positions, under the agreement count.",
+    "vars": [
+      "mine",
+      "theirs"
+    ],
+    "note": "Uses the same five position words as the guess slider, so the two people are described on one scale in words the reader has already been shown.",
+    "status": "ok"
+  },
+  "compare.same": {
+    "en": "You both landed in the same place: {mine}.",
+    "es": "Los dos quedaron en el mismo lugar: {mine}.",
+    "where": "Replaces compare.positions when both land in the same position.",
+    "vars": [
+      "mine"
+    ],
+    "note": "Worth its own sentence. The general one reads as a contrast even when there is none.",
+    "status": "ok"
+  },
+  "strip.legendThem": {
+    "en": "where they landed",
+    "es": "donde quedó la otra persona",
+    "where": "Legend entry for the other person's mark on the result strip.",
+    "vars": [],
+    "note": "Only rendered when a compare is on screen, so the legend never describes an absent mark.",
+    "status": "ok"
+  },
+  "compare.again": {
+    "en": "Challenge somebody else",
+    "es": "Desafiar a otra persona",
+    "where": "Button on the compare card, which makes a fresh invite from the reader's own answers.",
+    "vars": [],
+    "note": "This is where the loop continues. Worded to point outward: sending it back to the person who challenged you works too, and needs no separate control.",
     "status": "ok"
   }
 }

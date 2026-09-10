@@ -391,6 +391,10 @@
                   background:var(--surface); font-size:14.5px; color:var(--ink-2); max-width:52ch; }
 
   .share-row { display:flex; flex-wrap:wrap; gap:9px; align-items:center; margin-top:14px; }
+  .invite-holder { display:flex; flex-wrap:wrap; gap:12px; align-items:center; width:100%; }
+
+  .compare-card .compare-line { font-size:19px; line-height:1.45; margin:12px 0 0; max-width:46ch; }
+  .compare-card .compare-pos { font-size:15px; color:var(--ink-2); margin:8px 0 0; max-width:52ch; }
   .share-targets { display:flex; gap:14px; align-items:center; font-size:13px; }
   .share-targets a { color:var(--ink-2); text-underline-offset:3px; }
   .share-targets a:hover { color:var(--ink); }

@@ -31,6 +31,7 @@ const SUITES = [
   'api/tally.smoke.ts',
   'scripts/tally_report.smoke.ts',
   'src/share.smoke.ts',
+  'src/compare.smoke.ts',
 ];
 
 // Suites that read real ingested data. Without it they run fewer checks.

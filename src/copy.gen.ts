@@ -294,7 +294,15 @@ export type CopyKey =
   | "share.copied"
   | "share.copyFailed"
   | "share.text"
-  | "shared.intro";
+  | "shared.intro"
+  | "compare.heading"
+  | "compare.agreed"
+  | "compare.allAgreed"
+  | "compare.noneShared"
+  | "compare.positions"
+  | "compare.same"
+  | "strip.legendThem"
+  | "compare.again";
 
 export type Locale = 'en' | 'es';
 
@@ -591,13 +599,21 @@ export const EN: Record<CopyKey, string> = {
   "share.done": "Added. {total} results counted so far.",
   "share.already": "This device already added one. Try again in a few hours.",
   "share.failed": "That didn't go through, so nothing was counted.",
-  "share.link": "Share where I landed",
-  "share.linkNote": "Makes a link that carries one number: which of eleven positions you landed in. Nothing else, and nothing about which votes you judged which way. Opening that link does tell this site the position, the way opening any page tells a site which page you opened.",
+  "share.link": "Challenge someone with these seven",
+  "share.linkNote": "Makes a link carrying your answers to these seven votes. Whoever opens it answers the same seven blind first, then sees how the two of you compare. Nothing is sent anywhere and nothing is stored: the answers ride in the part of the address after the # symbol, which browsers never transmit to a website, so no link preview can give your result away either.",
   "share.copy": "Copy link",
   "share.copied": "Link copied",
   "share.copyFailed": "Could not copy. The link is in the box above.",
-  "share.text": "I judged 7 real votes my Texas House took, with the party hidden. Where do you land?",
-  "shared.intro": "Somebody shared their result with you: they landed {label}. Where do you land?",
+  "share.text": "I took a blind quiz on 7 real Texas House votes. Answer the same 7, then see how we compare.",
+  "shared.intro": "Somebody has challenged you on the same seven votes. Answer them first, then you will see how the two of you compare.",
+  "compare.heading": "How the two of you compare",
+  "compare.agreed": "You agreed on {agreed} of the {both} votes you both answered.",
+  "compare.allAgreed": "You agreed on every one of the {both} votes you both answered.",
+  "compare.noneShared": "You did not answer any of the same votes, so there is nothing to compare yet.",
+  "compare.positions": "On those votes you landed {mine}. They landed {theirs}.",
+  "compare.same": "You both landed in the same place: {mine}.",
+  "strip.legendThem": "where they landed",
+  "compare.again": "Challenge somebody else",
 };
 
 export const ES: Record<CopyKey, string> = {
@@ -879,13 +895,21 @@ export const ES: Record<CopyKey, string> = {
   "share.done": "Añadido. {total} resultados en el conteo hasta ahora.",
   "share.already": "Este dispositivo ya añadió uno. Inténtelo de nuevo en unas horas.",
   "share.failed": "Eso no se envió, así que no se contó nada.",
-  "share.link": "Compartir dónde quedé",
-  "share.linkNote": "Crea un enlace que lleva un solo dato: en cuál de las once posiciones quedó. Nada más, y nada sobre en qué sentido juzgó cada voto. Abrir ese enlace sí le indica la posición a este sitio, igual que abrir cualquier página le indica a un sitio qué página abrió.",
+  "share.link": "Desafiar a alguien con estos siete",
+  "share.linkNote": "Crea un enlace con sus respuestas a estos siete votos. Quien lo abra responde primero los mismos siete a ciegas, y después ve cómo se comparan los dos. No se envía nada a ningún sitio y no se guarda nada: las respuestas viajan en la parte de la dirección después del símbolo #, que los navegadores nunca transmiten a un sitio web, así que ninguna vista previa puede revelar su resultado.",
   "share.copy": "Copiar enlace",
   "share.copied": "Enlace copiado",
   "share.copyFailed": "No se copió. El enlace está en el cuadro de arriba.",
-  "share.text": "Juzgué 7 votos reales de la Cámara de Representantes de Texas, con el partido oculto. ¿Dónde queda usted?",
-  "shared.intro": "Alguien compartió con usted su resultado: esa persona quedó {label}. ¿Dónde queda usted?",
+  "share.text": "Hice un cuestionario a ciegas sobre 7 votos reales de la Cámara de Representantes de Texas. Responda los mismos 7 y luego vea cómo nos comparamos.",
+  "shared.intro": "Alguien le ha lanzado un desafío con los mismos siete votos. Respóndalos primero y luego verá cómo se comparan los dos.",
+  "compare.heading": "Cómo se comparan los dos",
+  "compare.agreed": "Coincidieron en {agreed} de los {both} votos que ambos respondieron.",
+  "compare.allAgreed": "Coincidieron en todos los {both} votos que ambos respondieron.",
+  "compare.noneShared": "No respondieron ninguno de los mismos votos, así que todavía no hay nada que comparar.",
+  "compare.positions": "En esos votos usted quedó {mine}. La otra persona quedó {theirs}.",
+  "compare.same": "Los dos quedaron en el mismo lugar: {mine}.",
+  "strip.legendThem": "donde quedó la otra persona",
+  "compare.again": "Desafiar a otra persona",
 };
 
 /**

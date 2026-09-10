@@ -1,84 +1,26 @@
 /**
- * PlainRecord — sharing a result without a server
+ * PlainRecord — the platform plumbing for sharing
  *
- * The result travels in the URL FRAGMENT, the part after `#`. Browsers never
- * put a fragment in the HTTP request, so a shared link carries where somebody
- * landed without this site storing it, transmitting it, or being able to see
- * it. That is not a convenience: the page's whole claim is that answering sends
- * nothing, and a share feature that phoned home to mint a link would have
- * broken it for the sake of a nicer URL.
+ * Whether a native share sheet exists, and the prefilled fallback links for
+ * when it does not. Nothing here knows what is being shared; the invite itself
+ * is built by src/compare.ts.
  *
- * ONLY THE BIN IS ENCODED, one integer from 0 to 10. It is enough to say "they
- * landed here" and it maps to nothing about which questions were answered which
- * way. Richer encoding is possible later; it is not free, because a link that
- * carries per-question answers is a link a reader might forward without
- * realising how much of themselves is in it.
- *
- * The bin arithmetic comes from ../bins so a link means the same thing the
- * tally means. See the note in that file.
+ * This file used to also encode a result into a URL. That version put the
+ * position in the PATH (`/r/8`) so a crawler could read it and render a
+ * per-result preview card, which solved the "shared links all look identical"
+ * problem and broke a more important one: the card revealed where the sender
+ * landed before the recipient had answered anything. The blind compare is the
+ * product, so the encoding moved to a fragment in compare.ts, where no crawler
+ * can reach it. The per-result cards are in git history at b94f33b if a public
+ * "post my result" action is ever wanted as a separate, clearly-labelled thing.
  */
 
-import { binOf, isBin, BINS } from '../bins.js';
 import { LOCALE, ES_PREFIX } from './i18n.js';
 
 /** Where a shared link should point, honouring the language being read. */
 export function shareOrigin(origin: string, locale: string = LOCALE): string {
   const base = origin.replace(/\/$/, '');
   return locale === 'es' ? `${base}${ES_PREFIX}/` : `${base}/`;
-}
-
-/**
- * The link for a reader whose profile came out at `lean`.
- *
- * Takes the lean rather than a bin so callers cannot pass an unbucketed number
- * by accident and encode a position half a bin off what was displayed.
- *
- * THE POSITION IS IN THE PATH, not the fragment, and that was a deliberate
- * trade rather than an oversight. A fragment is never sent to a server, which
- * made the old `#r=8` link genuinely private and also made it worthless to
- * share: no crawler can see a fragment, so every shared link unfurled into the
- * same generic card and looked exactly like somebody pasting the homepage. The
- * two properties were the same property.
- *
- * What that costs is stated plainly in `share.linkNote` and `privacy.body`
- * rather than buried: one bucketed integer, one of eleven, with no identifier
- * attached, now appears in a request log the way every page request already
- * does. It is not an answer and not a score, and it says nothing about which
- * votes were judged which way.
- *
- * `/r/<bin>` is a static page carrying its own card, which then hands the
- * reader on to the real site. See scripts/build_result_pages.mjs.
- */
-export function resultUrl(lean: number, origin: string, locale: string = LOCALE): string {
-  return `${shareOrigin(origin, locale)}r/${binOf(lean)}`;
-}
-
-/**
- * Read a shared bin out of a URL fragment, or null.
- *
- * Takes the hash as an argument so it can be tested without a browser. Anything
- * that is not a whole number in range is refused rather than clamped: a clamped
- * value would render a confident dot for a URL somebody had typed wrong, and a
- * fragment is trivially editable by anyone who wants to try.
- */
-export function sharedBinFrom(hash: string): number | null {
-  const m = /(?:^|[#&])r=(-?\d{1,3})(?:&|$)/.exec(hash);
-  if (!m) return null;
-  const n = Number(m[1]);
-  return isBin(n) ? n : null;
-}
-
-/** The same, read from the live document. Safe outside a browser. */
-export function sharedBin(): number | null {
-  if (typeof document === 'undefined') return null;
-  return sharedBinFrom(location.hash);
-}
-
-/** Remove the shared-result fragment without reloading or adding a history entry. */
-export function clearSharedBin(): void {
-  if (typeof history === 'undefined' || typeof location === 'undefined') return;
-  if (!/(?:^|[#&])r=/.test(location.hash)) return;
-  history.replaceState(null, '', location.pathname + location.search);
 }
 
 export interface ShareTarget {
@@ -112,5 +54,3 @@ export function shareTargets(url: string, text: string): ShareTarget[] {
 export function canNativeShare(): boolean {
   return typeof navigator !== 'undefined' && typeof navigator.share === 'function';
 }
-
-export { BINS };

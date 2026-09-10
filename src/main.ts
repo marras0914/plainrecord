@@ -23,13 +23,15 @@ import {
   type Adapted,
 } from './quiz-data';
 import type { PartisanProfile } from '../valence';
+import { shareTargets, canNativeShare } from './share';
 import {
-  resultUrl,
-  sharedBin,
-  clearSharedBin,
-  shareTargets,
-  canNativeShare,
-} from './share';
+  inviteUrl,
+  incoming,
+  clearIncoming,
+  agreementWith,
+  toAnswerMap,
+  type Shared,
+} from './compare';
 import { PROFILE_BANDS } from '../valence';
 import { inject } from '@vercel/analytics';
 import { renderVerdict } from './verdict';
@@ -144,6 +146,16 @@ let view: View = 'start';
  * over people who never made one.
  */
 let guess: number | null = null;
+
+/**
+ * The answers somebody challenged this reader with, or null.
+ *
+ * Read from the fragment once at boot and held here. Deliberately NOT rendered
+ * until the reader has answered something themselves: the whole point of an
+ * invite is that the sender's result stays hidden until then, which is also why
+ * the answers travel in a fragment no crawler or link preview can read.
+ */
+let challenge: Shared | null = null;
 
 /**
  * The item whose answer is currently being revealed.
@@ -286,6 +298,27 @@ function renderStrip(p: PartisanProfile): void {
     svg.appendChild(sv('text', {
       x: (P.x0 + P.x1) / 2, y: P.axisY - 52, 'text-anchor': 'middle', 'font-size': 12.5, fill: muted,
     }, t('strip.empty')));
+  }
+
+  // The other person, once a challenge has been answered. BELOW the axis,
+  // where the reader's own guess sits above it, so the two extra marks cannot
+  // be mistaken for each other or for an answer dot.
+  const themLegend = document.getElementById('legend-them');
+  const theirLean = challengeLean();
+  if (themLegend) themLegend.hidden = theirLean === null;
+  if (theirLean !== null) {
+    const tx = xScale(theirLean);
+    const gThem = sv('g', {
+      role: 'img',
+      'aria-label': `${t('strip.legendThem')}: ${leanLabel(theirLean)}`,
+    });
+    gThem.appendChild(sv('line', {
+      x1: tx, y1: P.axisY, x2: tx, y2: P.axisY + 12, stroke: ink2, 'stroke-width': 1,
+    }));
+    gThem.appendChild(sv('circle', {
+      cx: tx, cy: P.axisY + 17, r: 5, fill: surface, stroke: ink2, 'stroke-width': 1.8,
+    }));
+    svg.appendChild(gThem);
   }
 
   // The prediction, if one was made. A HOLLOW outline and a dashed stem, so it
@@ -604,6 +637,9 @@ function renderReadout(p: PartisanProfile): void {
     // The prediction belongs to the run that has just ended. Leaving it set
     // would compare the next run's result against the previous run's guess.
     guess = null;
+    // The challenge belonged to the run that just ended. Leaving it set would
+    // compare a fresh run against a stranger the reader has already seen.
+    challenge = null;
     resetGuessUi();
     view = 'start';
     showView();
@@ -636,98 +672,175 @@ function renderReadout(p: PartisanProfile): void {
   // button that posts an empty answer set would be counting visits as opinions.
   if (countAnswered() > 0) {
     el('readout').appendChild(shareBlock());
-    el('readout').appendChild(linkBlock(p));
+    el('readout').appendChild(inviteBlock());
   }
 }
 
 /**
- * "Share where I landed": a link, and nothing sent.
+ * Where the challenger landed, over the votes they answered, or null.
  *
- * Sits beside the tally opt-in and does something completely different, which
- * is why the two are worded and styled apart. `share.button` moves a counter on
- * a server. This one builds a URL with a single integer in its fragment, which
- * browsers never transmit, so the site cannot see a link that gets shared and
- * has nothing to store.
+ * Computed through `profileOf`, the same function that places the reader, so
+ * the two marks on the strip are one measurement of two people rather than two
+ * different measurements.
  *
- * Rendered only when there is a reading to share. A profile with no answered
- * marks has no position, and a link encoding bin 5 for someone who answered
- * nothing would be asserting a result they never got.
+ * Null until the reader has answered something. With nothing of their own on
+ * screen there is nothing to compare against, and showing the sender's
+ * position alone is exactly the spoiler the fragment design exists to prevent.
  */
-function linkBlock(p: PartisanProfile): HTMLElement {
-  const wrap = document.createElement('div');
-  if (p.n === 0) return wrap;
+function challengeLean(): number | null {
+  if (!challenge || countAnswered() === 0) return null;
+  const p = profileOf(adapted, toAnswerMap(challenge));
+  return p.n === 0 ? null : p.netLean;
+}
 
-  const url = resultUrl(p.netLean, location.origin);
+/**
+ * "Challenge someone with these seven": an invite, and nothing sent.
+ *
+ * The link carries the reader's answers in a URL fragment, which browsers never
+ * transmit. So no request is made to mint it, nothing is stored, and no link
+ * preview can reveal the result to the recipient before they have answered.
+ * That last part is the feature rather than a side effect.
+ */
+function inviteControl(label: string): HTMLElement {
+  const url = inviteUrl(answers, location.origin);
   const text = t('share.text');
-
-  const row = document.createElement('div');
-  row.className = 'share-row';
-
-  const note = document.createElement('p');
-  note.className = 'share-note';
-  note.textContent = t('share.linkNote');
+  const holder = document.createElement('span');
+  holder.className = 'invite-holder';
 
   if (canNativeShare()) {
     const b = document.createElement('button');
     b.className = 'ghost';
     b.type = 'button';
-    b.textContent = t('share.link');
+    b.textContent = label;
     b.addEventListener('click', () => {
-      // A dismissed share sheet rejects, and that is a normal outcome rather
-      // than an error worth showing anybody.
-      void navigator.share({ title: t('intro.h1'), text, url }).catch(() => {});
+      // THE URL GOES INSIDE `text`, and `url` is deliberately not passed.
+      //
+      // navigator.share({ text, url }) is inconsistent across share targets:
+      // several of them, mail clients especially, take the url and silently
+      // drop the text. The recipient then gets a bare link with no idea it is
+      // a challenge, which is exactly the confusing thing this feature is
+      // supposed to avoid. Sending one string means every target carries the
+      // whole message, and mail and messaging apps linkify a URL in a body
+      // anyway.
+      //
+      // The cost is losing rich-url handling in the targets that do it well.
+      // A link nobody understands is worse than a link without a preview.
+      // A dismissed share sheet rejects, which is normal and not an error.
+      void navigator.share({ title: t('intro.h1'), text: `${text} ${url}` }).catch(() => {});
     });
-    row.appendChild(b);
-  } else {
-    const copy = document.createElement('button');
-    copy.className = 'ghost';
-    copy.type = 'button';
-    copy.textContent = t('share.copy');
-
-    // Always present, not just on failure: the clipboard API is refused often
-    // enough (insecure context, permission, an embedded browser) that a reader
-    // needs something selectable no matter what happens.
-    const box = document.createElement('input');
-    box.className = 'share-url';
-    box.readOnly = true;
-    box.value = `${text} ${url}`;
-    box.setAttribute('aria-label', t('share.link'));
-
-    copy.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(`${text} ${url}`);
-        copy.textContent = t('share.copied');
-        window.setTimeout(() => { copy.textContent = t('share.copy'); }, 2000);
-      } catch {
-        note.textContent = t('share.copyFailed');
-        box.select();
-      }
-    });
-    row.appendChild(copy);
-
-    const targets = document.createElement('div');
-    targets.className = 'share-targets';
-    const LABEL: Record<string, string> = { x: 'X', reddit: 'Reddit', facebook: 'Facebook' };
-    for (const target of shareTargets(url, text)) {
-      const a = document.createElement('a');
-      a.href = target.href;
-      a.target = '_blank';
-      // noopener keeps the opened tab from reaching back through window.opener,
-      // and noreferrer stops this page's URL being handed to the platform.
-      a.rel = 'noopener noreferrer';
-      a.textContent = LABEL[target.key] ?? target.key;
-      targets.appendChild(a);
-    }
-    row.appendChild(targets);
-    wrap.appendChild(row);
-    wrap.appendChild(note);
-    wrap.appendChild(box);
-    return wrap;
+    holder.appendChild(b);
+    return holder;
   }
 
+  // Always rendered, not only on failure: the clipboard API is refused often
+  // enough (insecure context, a permission, an embedded browser) that a reader
+  // needs something selectable regardless.
+  const box = document.createElement('input');
+  box.className = 'share-url';
+  box.readOnly = true;
+  box.value = `${text} ${url}`;
+  box.setAttribute('aria-label', label);
+
+  const copy = document.createElement('button');
+  copy.className = 'ghost';
+  copy.type = 'button';
+  copy.textContent = label;
+  copy.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      copy.textContent = t('share.copied');
+      window.setTimeout(() => { copy.textContent = label; }, 2000);
+    } catch {
+      box.select();
+    }
+  });
+
+  const targets = document.createElement('span');
+  targets.className = 'share-targets';
+  const LABEL: Record<string, string> = { x: 'X', reddit: 'Reddit', facebook: 'Facebook' };
+  for (const target of shareTargets(url, text)) {
+    const link = document.createElement('a');
+    link.href = target.href;
+    link.target = '_blank';
+    // noopener stops the opened tab reaching back through window.opener;
+    // noreferrer keeps this page's URL out of the platform's hands.
+    link.rel = 'noopener noreferrer';
+    link.textContent = LABEL[target.key] ?? target.key;
+    targets.appendChild(link);
+  }
+
+  holder.appendChild(copy);
+  holder.appendChild(targets);
+  holder.appendChild(box);
+  return holder;
+}
+
+/** The invite offered on the result screen, with the sentence explaining it. */
+function inviteBlock(): HTMLElement {
+  const wrap = document.createElement('div');
+  const row = document.createElement('div');
+  row.className = 'share-row';
+  row.appendChild(inviteControl(t('share.link')));
+  const note = document.createElement('p');
+  note.className = 'share-note';
+  note.textContent = t('share.linkNote');
   wrap.appendChild(row);
   wrap.appendChild(note);
   return wrap;
+}
+
+/**
+ * The compare card: how two people did on the same seven votes.
+ *
+ * Everything it says is scoped to the votes BOTH of them answered. Either
+ * person can stop early, and a vote somebody skipped is not a disagreement —
+ * the same rule this project applies to a legislator who cast no vote.
+ */
+function renderCompare(p: PartisanProfile): void {
+  const card = document.getElementById('compare-card');
+  if (!card) return;
+  if (!challenge || p.n === 0) {
+    card.hidden = true;
+    card.innerHTML = '';
+    return;
+  }
+
+  const a = agreementWith(challenge, answers);
+  const theirLean = challengeLean();
+  card.innerHTML = '';
+  card.hidden = false;
+
+  const head = document.createElement('div');
+  head.className = 'eyebrow';
+  head.textContent = t('compare.heading');
+  card.appendChild(head);
+
+  const line = document.createElement('p');
+  line.className = 'compare-line';
+  line.textContent = a.both === 0
+    ? t('compare.noneShared')
+    : a.agreed === a.both
+      ? t('compare.allAgreed', { both: a.both })
+      : t('compare.agreed', { agreed: a.agreed, both: a.both });
+  card.appendChild(line);
+
+  if (a.both > 0 && theirLean !== null) {
+    const mine = leanLabel(p.netLean);
+    const theirs = leanLabel(theirLean);
+    const pos = document.createElement('p');
+    pos.className = 'compare-pos';
+    pos.textContent = mine === theirs
+      ? t('compare.same', { mine })
+      : t('compare.positions', { mine, theirs });
+    card.appendChild(pos);
+  }
+
+  // Where the loop continues. Sending it back to whoever challenged you works
+  // too, and needs no separate control.
+  const row = document.createElement('div');
+  row.className = 'q-actions';
+  row.appendChild(inviteControl(t('compare.again')));
+  card.appendChild(row);
 }
 
 /**
@@ -1876,6 +1989,7 @@ function render(): void {
   renderQuestion();
   renderCands();
   renderBias();
+  renderCompare(p);
   renderRep();
   renderOutcomes();
   renderStatements();
@@ -1913,17 +2027,18 @@ window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (
 function renderSharedIntro(): void {
   const box = document.getElementById('shared-intro');
   if (!box) return;
-  const bin = sharedBin();
-  if (bin === null) {
+  challenge = incoming();
+  if (challenge === null) {
     box.hidden = true;
     return;
   }
-  // Bin back to the middle of its lean band, so the words match the scale the
-  // sender was shown rather than an edge value.
-  const lean = (bin / 5) - 1;
-  box.textContent = t('shared.intro', { label: leanLabel(lean) });
+  // Says only that a challenge exists. The sender's position is absent from
+  // this screen and from the markup, and is not revealed until the reader has
+  // answered the same votes. That is the entire point of the invite.
+  box.textContent = t('shared.intro');
   box.hidden = false;
-  clearSharedBin();
+  // Consumed, so a reload or a later solo run is not treated as a compare.
+  clearIncoming();
 }
 
 queue = buildQueue();

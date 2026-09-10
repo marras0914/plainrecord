@@ -1309,27 +1309,30 @@ try {
     // Headless Chromium has no navigator.share, so this is the desktop
     // fallback path: a copy button, the three prefilled links, and the URL in
     // a selectable box.
-    const copyBtn = page.locator('#readout button', { hasText: /copy link/i }).first();
-    check('share: the result screen offers a copy-link control', (await copyBtn.count()) > 0);
+    // The label IS the action now: the button reads "Challenge someone with
+    // these seven" and only becomes a copy confirmation after it is pressed.
+    const copyBtn = page.locator('#readout button', { hasText: /challenge someone/i }).first();
+    check('invite: the result screen offers the challenge control', (await copyBtn.count()) > 0);
 
     const shareUrl = await page.$eval('.share-url', (e) => e.value).catch(() => '');
     check('share: the link is shown so it can be selected by hand', shareUrl.length > 0,
       shareUrl.slice(0, 80));
 
     const urlPart = shareUrl.split(/\s+/).filter((w) => w.startsWith('http')).pop() ?? '';
-    check('share: the path carries only /r/<bin>',
-      /\/r\/\d{1,2}$/.test(urlPart), urlPart);
-    check('share: the link has no query string and no fragment',
-      urlPart.length > 0 && !urlPart.includes('?') && !urlPart.includes('#'), urlPart);
-    check('share: the link carries no answer, id or score',
+    check('invite: the link carries a c= fragment and nothing else',
+      /\/#c=[0-9a-z]{1,3}$/.test(urlPart), urlPart);
+    check('invite: no query string, so nothing reaches a server',
+      urlPart.length > 0 && !urlPart.includes('?'), urlPart);
+    check('invite: it carries no answer text, id or score',
       urlPart.length > 0 && !/qid|answer|netLean|crossover|partisanLoad|verdict|ocd-/i.test(urlPart),
       urlPart);
 
-    // Answering yes to everything leans right, so the bin must be above centre.
-    // Without this the path checks would pass on a hardcoded constant.
-    const bin = Number((/\/r\/(\d+)$/.exec(urlPart) ?? [])[1]);
-    check('share: the encoded bin reflects the actual result',
-      Number.isInteger(bin) && bin >= 0 && bin <= 10, String(bin));
+    // THE POINT OF THE FRAGMENT. A server, and therefore any link preview,
+    // sees only the site root. Asserted rather than assumed, because the whole
+    // blind design rests on it.
+    check('invite: everything before the # is just the site root',
+      urlPart.split('#')[0] === new URL('/', URL_UNDER_TEST).href,
+      urlPart.split('#')[0]);
 
     const targets = await page.$$eval('.share-targets a', (as) =>
       as.map((a) => ({ href: a.href, rel: a.rel, target: a.target })));
@@ -1349,108 +1352,176 @@ try {
   }
 
   // ---------------------------------------------------------------------------
-  // The eleven result pages
+  // What the native share sheet is handed
   //
-  // These exist so a shared link unfurls into a card showing where somebody
-  // landed. That only works if a crawler, which runs no JavaScript, can read
-  // the tags out of the served HTML. So the tags are asserted in the RESPONSE
-  // BODY rather than in the rendered DOM, because the rendered DOM is not what
-  // a crawler ever sees.
+  // Headless Chromium has no navigator.share, so it is stubbed and the payload
+  // captured. Worth doing because the failure it guards against is invisible
+  // from here: navigator.share({ text, url }) is inconsistent across targets,
+  // and several of them, mail clients especially, take the url and drop the
+  // text. The recipient then gets a bare link with no idea it is a challenge.
+  // That happened to a real person. So the message and the link now travel as
+  // one string, and this asserts it rather than trusting the comment saying so.
+  //
+  // On its OWN page, with addInitScript, because the stub has to exist before
+  // the module first renders the control and Playwright cannot remove an init
+  // script afterwards. Re-rendering the live page instead is not available:
+  // switching modes drops the reader back into the quiz and hides the control.
   // ---------------------------------------------------------------------------
 
   {
-    const res = await fetch(new URL('r/8', URL_UNDER_TEST).href);
-    const body = await res.text();
-    check('result page: /r/8 is served', res.ok, String(res.status));
+    const ctx = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    await ctx.addInitScript(() => {
+      window.__shared = [];
+      Object.defineProperty(navigator, 'share', {
+        configurable: true,
+        value: (data) => { window.__shared.push(data); return Promise.resolve(); },
+      });
+    });
+    const np = await ctx.newPage();
 
-    const tag = (prop) => {
-      const re = new RegExp(`<meta[^>]*(?:property|name)="${prop}"[^>]*content="([^"]*)"`, 'i');
-      return (re.exec(body) ?? [])[1] ?? '';
-    };
+    await np.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await np.click('#start-btn');
+    await np.waitForTimeout(150);
+    await np.click('#guess-skip');
+    await np.waitForTimeout(200);
+    await answerAll(np, 1);
+    await np.waitForTimeout(400);
 
-    check('result page: it carries its own og:image, not the generic card',
-      /\/og\/r8\.png$/.test(tag('og:image')), tag('og:image'));
-    check('result page: the description names the position in words',
-      /side|middle/i.test(tag('og:description')), tag('og:description').slice(0, 80));
-    check('result page: twitter card is the large image form',
-      tag('twitter:card') === 'summary_large_image', tag('twitter:card'));
-    check('result page: it is noindex, so eleven near-identical pages do not rank',
-      /noindex/i.test(tag('robots')), tag('robots'));
+    const btn = np.locator('#readout button', { hasText: /challenge someone/i }).first();
+    check('native share: the control renders when navigator.share exists',
+      (await btn.count()) > 0);
+    // And the desktop fallback must NOT also be present, or a reader gets two
+    // controls doing the same thing.
+    check('native share: the copy-box fallback is not rendered as well',
+      (await np.locator('#readout .share-url').count()) === 0);
 
-    // A different bin must produce a different card and a different sentence,
-    // or the checks above pass on whatever one page happens to contain.
-    const other = await (await fetch(new URL('r/1', URL_UNDER_TEST).href)).text();
-    const otherImg = (/<meta[^>]*property="og:image"[^>]*content="([^"]*)"/i.exec(other) ?? [])[1] ?? '';
-    check('result page: a different bin has a different card',
-      /\/og\/r1\.png$/.test(otherImg), otherImg);
-    check('result page: and a different sentence', other !== body);
+    await btn.click();
+    await np.waitForTimeout(400);
 
-    // The card must actually exist and be a real PNG of the right size, or the
-    // tag points at a 404 and every platform falls back to nothing.
-    const img = await fetch(new URL('og/r8.png', URL_UNDER_TEST).href);
-    const bytes = Buffer.from(await img.arrayBuffer());
-    check('result page: the card it points at exists', img.ok, String(img.status));
-    check('result page: and is a PNG', bytes.subarray(1, 4).toString() === 'PNG', bytes.subarray(0, 8).toString('hex'));
-    // PNG IHDR carries width and height as big-endian 32-bit ints at byte 16.
-    check('result page: 1200x630, the size every platform expects',
-      bytes.readUInt32BE(16) === 1200 && bytes.readUInt32BE(20) === 630,
-      `${bytes.readUInt32BE(16)}x${bytes.readUInt32BE(20)}`);
+    const payloads = await np.evaluate(() => window.__shared ?? []);
+    check('native share: pressing it calls navigator.share once',
+      payloads.length === 1, `${payloads.length} call(s)`);
 
-    // And a human is handed on to the real page.
-    await page.goto('about:blank');
-    await page.goto(new URL('r/8', URL_UNDER_TEST).href, { waitUntil: 'networkidle' });
-    await page.waitForTimeout(500);
-    check('result page: a person is redirected to the site itself',
-      !/\/r\/8$/.test(page.url()), page.url());
-    check('result page: and lands on the opening screen with the shared result',
-      !(await page.$eval('#shared-intro', (e) => e.hidden)));
+    const p0 = payloads[0] ?? {};
+    check('native share: the payload carries a text field', typeof p0.text === 'string',
+      Object.keys(p0).join(', '));
+    check('native share: the text explains what the link is, not just the link',
+      /answer the same 7|blind quiz/i.test(p0.text ?? ''), (p0.text ?? '').slice(0, 66));
+    check('native share: and the link is INSIDE that text',
+      /#c=[0-9a-z]{1,3}/.test(p0.text ?? ''), (p0.text ?? '').slice(-38));
+
+    // The bug itself. A separate url field is what a mail client latches onto
+    // while discarding the text, so there must not be one.
+    check('native share: no separate url field for a target to take on its own',
+      p0.url === undefined, String(p0.url));
+    check('native share: a title is set, which mail uses as the subject',
+      typeof p0.title === 'string' && p0.title.length > 0, String(p0.title));
+
+    await ctx.close();
   }
 
   // ---------------------------------------------------------------------------
-  // Arriving on somebody else's shared link
+  // Arriving on an invite, and the blind rule
+  //
+  // The rule is that the sender's result is not visible until the recipient has
+  // answered the same votes. That is worth asserting hard, because the failure
+  // is silent: a page that leaked it would look completely normal to anyone who
+  // had not been sent a link.
+  //
+  // So the opening screen is checked for the sender's position in the RENDERED
+  // TEXT AND IN THE MARKUP, not just for the absence of a compare card. The
+  // five position words are the thing that would leak, so they are the thing
+  // searched for.
   // ---------------------------------------------------------------------------
 
   {
     // A goto that changes only the fragment is a SAME-DOCUMENT navigation, so
-    // the module never re-runs and every check below would read the previous
-    // page's state. Landing on about:blank first forces a real load. This cost
-    // an afternoon once; the two negative checks further down pass happily when
-    // nothing has run at all, so they cannot be trusted to reveal it.
+    // the module never re-runs. about:blank first forces a real load.
     const freshHash = async (hash) => {
       await page.goto('about:blank');
       await page.goto(`${URL_UNDER_TEST}${hash}`, { waitUntil: 'networkidle' });
       await page.waitForTimeout(350);
     };
 
-    await freshHash('#r=8');
+    // "all seven answered yes" — bits 0..6 set plus mask bits 7..13, base36.
+    const ALL_YES = ((1 << 14) - 1).toString(36);
 
-    const shown = await page.$eval('#shared-intro', (e) => ({ hidden: e.hidden, text: e.textContent.trim() }));
-    check('shared link: the opening screen says somebody shared a result',
-      !shown.hidden && shown.text.length > 0, shown.text.slice(0, 90));
-    check('shared link: it names a position in words, not a number',
-      /side|middle/i.test(shown.text) && !/\br=?8\b/.test(shown.text), shown.text.slice(0, 90));
+    await freshHash(`#c=${ALL_YES}`);
 
-    // The fragment is consumed, so reloading or sharing again does not leave a
-    // stranger's result attached to this reader's session.
-    const hashAfter = await page.evaluate(() => location.hash);
-    check('shared link: the fragment is cleared from the address bar',
-      hashAfter === '', `hash "${hashAfter}"`);
+    const intro = await page.$eval('#shared-intro', (e) => ({ hidden: e.hidden, text: e.textContent.trim() }));
+    check('invite: the opening screen says a challenge is waiting',
+      !intro.hidden && intro.text.length > 0, intro.text.slice(0, 90));
 
-    // A different bin must produce different words, or the check above passes
-    // on a constant string.
-    await freshHash('#r=1');
-    const other = await page.$eval('#shared-intro', (e) => e.textContent.trim());
-    check('shared link: a different bin reads differently',
-      other !== shown.text, `${shown.text.slice(-28)} vs ${other.slice(-28)}`);
+    // The load-bearing check. None of the five position words may appear
+    // anywhere a reader or a scraper could see before they have answered.
+    const POSITIONS = [
+      'well over on the Democratic side', 'a little toward the Democratic side',
+      'about the middle',
+      'a little toward the Republican side', 'well over on the Republican side',
+    ];
+    const leaked = await page.evaluate((words) => {
+      const text = document.body.innerText;
+      const html = document.documentElement.outerHTML;
+      return words.filter((w) => text.includes(w) || html.includes(w));
+    }, POSITIONS);
+    check('invite: the sender\'s position is nowhere on the opening screen',
+      leaked.length === 0, leaked.join(' | ') || `${POSITIONS.length} phrases searched`);
 
-    // Nonsense in the fragment shows nothing rather than a confident wrong dot.
-    await freshHash('#r=99');
-    check('shared link: an out-of-range bin is ignored, not clamped',
-      await page.$eval('#shared-intro', (e) => e.hidden));
+    check('invite: and no compare card is showing yet',
+      await page.$eval('#compare-card', (e) => e.hidden));
+    check('invite: the fragment is cleared from the address bar',
+      (await page.evaluate(() => location.hash)) === '', await page.evaluate(() => location.hash));
 
+    // Now answer, and the compare appears.
+    await page.click('#start-btn');
+    await page.waitForTimeout(150);
+    await page.click('#guess-skip');
+    await page.waitForTimeout(200);
+    await answerAll(page, 1);
+    await page.waitForTimeout(300);
+
+    check('compare: the card appears once the reader has answered',
+      !(await page.$eval('#compare-card', (e) => e.hidden)));
+    const compare = await page.$eval('#compare-card', (e) => e.textContent);
+    // The sender answered yes to all seven and so did this run, so they agree
+    // on all seven. A wrong denominator or a mis-ordered code shows up here.
+    check('compare: it reports agreement on all seven',
+      /every one of the 7|7 of the 7/i.test(compare), compare.replace(/\s+/g, ' ').slice(0, 110));
+    check('compare: the strip legend now describes their mark',
+      !(await page.$eval('#legend-them', (e) => e.hidden)));
+    check('compare: and offers a way to challenge somebody else',
+      /challenge somebody else/i.test(compare));
+
+    // A DIFFERENT sender must produce a different comparison, or the check
+    // above passes on whatever the card happens to say.
+    // "all seven answered no": mask bits only.
+    const ALL_NO = (((1 << 7) - 1) << 7).toString(36);
+    await freshHash(`#c=${ALL_NO}`);
+    await page.click('#start-btn');
+    await page.waitForTimeout(150);
+    await page.click('#guess-skip');
+    await page.waitForTimeout(200);
+    await answerAll(page, 1);
+    await page.waitForTimeout(300);
+    const opposite = await page.$eval('#compare-card', (e) => e.textContent);
+    check('compare: an opposite sender reads as no agreement',
+      /agreed on 0 of the 7/i.test(opposite), opposite.replace(/\s+/g, ' ').slice(0, 110));
+    check('compare: the two comparisons genuinely differ', opposite !== compare);
+
+    // A visitor with no invite sees no compare at all.
+    await page.goto('about:blank');
+    await toResult(page, URL_UNDER_TEST);
+    await page.waitForTimeout(300);
+    check('compare: a plain visitor sees no compare card',
+      await page.$eval('#compare-card', (e) => e.hidden));
+    check('compare: and no legend entry for a mark that is not there',
+      await page.$eval('#legend-them', (e) => e.hidden));
+
+    // Nonsense in the fragment is ignored rather than half-read.
+    await freshHash('#c=zzzz');
+    check('invite: an out-of-range code is ignored', await page.$eval('#shared-intro', (e) => e.hidden));
     await freshHash('#method');
-    check('shared link: an unrelated fragment shows nothing',
-      await page.$eval('#shared-intro', (e) => e.hidden));
+    check('invite: an unrelated fragment shows nothing', await page.$eval('#shared-intro', (e) => e.hidden));
   }
 
   // ---------------------------------------------------------------------------

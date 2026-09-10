@@ -9,7 +9,6 @@
     "build": "tsc --noEmit && node scripts/build_locales.mjs",
     "build:artifact": "npm run build && node scripts/build_artifact.mjs",
     "build:og": "node scripts/build_og.mjs",
-    "build:cards": "node scripts/build_result_pages.mjs",
     "preview": "vite preview --port 4173",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --no-warnings scripts/run_tests.mjs",
