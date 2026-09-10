@@ -287,7 +287,14 @@ export type CopyKey =
   | "share.sending"
   | "share.done"
   | "share.already"
-  | "share.failed";
+  | "share.failed"
+  | "share.link"
+  | "share.linkNote"
+  | "share.copy"
+  | "share.copied"
+  | "share.copyFailed"
+  | "share.text"
+  | "shared.intro";
 
 export type Locale = 'en' | 'es';
 
@@ -584,6 +591,13 @@ export const EN: Record<CopyKey, string> = {
   "share.done": "Added. {total} results counted so far.",
   "share.already": "This device already added one. Try again in a few hours.",
   "share.failed": "That didn't go through, so nothing was counted.",
+  "share.link": "Share where I landed",
+  "share.linkNote": "Makes a link with only your position in it, nothing else, and nothing is sent anywhere. The position travels in the part of the address after the # symbol, which browsers never transmit to a website.",
+  "share.copy": "Copy link",
+  "share.copied": "Link copied",
+  "share.copyFailed": "Could not copy. The link is in the box above.",
+  "share.text": "I judged 7 real votes my Texas House took, with the party hidden. Where do you land?",
+  "shared.intro": "Somebody shared their result with you: they landed {label}. Where do you land?",
 };
 
 export const ES: Record<CopyKey, string> = {
@@ -865,6 +879,13 @@ export const ES: Record<CopyKey, string> = {
   "share.done": "Añadido. {total} resultados en el conteo hasta ahora.",
   "share.already": "Este dispositivo ya añadió uno. Inténtelo de nuevo en unas horas.",
   "share.failed": "Eso no se envió, así que no se contó nada.",
+  "share.link": "Compartir dónde quedé",
+  "share.linkNote": "Crea un enlace que solo contiene su posición, nada más, y no se envía nada a ningún sitio. La posición viaja en la parte de la dirección después del símbolo #, que los navegadores nunca transmiten a un sitio web.",
+  "share.copy": "Copiar enlace",
+  "share.copied": "Enlace copiado",
+  "share.copyFailed": "No se copió. El enlace está en el cuadro de arriba.",
+  "share.text": "Juzgué 7 votos reales de la Cámara de Representantes de Texas, con el partido oculto. ¿Dónde queda usted?",
+  "shared.intro": "Alguien compartió con usted su resultado: esa persona quedó {label}. ¿Dónde queda usted?",
 };
 
 /**

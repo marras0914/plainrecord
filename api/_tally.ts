@@ -39,6 +39,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import { ALL_ITEMS, HEADLINE_ITEMS, adapt, profileOf, describe } from '../src/quiz-data.js';
 import type { AnswerMap } from '../src/quiz-data.js';
 import type { ProfileVerdict } from '../valence.js';
+import { binOf } from '../bins.js';
 
 export type Region = 'tx' | 'us-other' | 'intl';
 export type Mode = 'short' | 'full';
@@ -81,9 +82,6 @@ export function carriesPosition(v: ProfileVerdict): boolean {
 /** One share per hashed address per six hours. */
 export const RATE_TTL_SECONDS = 6 * 60 * 60;
 
-/** Bins run 0 (leftmost) .. 10 (rightmost). 5 is dead centre. */
-export const BINS = 11;
-export const CENTER_BIN = 5;
 
 /**
  * The shape of a real item id, which is an Open States vote id:
@@ -164,31 +162,13 @@ export function regionOf(headers: Headers): Region {
 
 // ---------------------------------------------------------------------------
 // Bucketing
+//
+// Re-exported from ../bins so the browser's share link and this endpoint agree
+// about what bin 8 means. See the note at the top of that file for why it is
+// not just declared here.
 // ---------------------------------------------------------------------------
 
-/** A lean in [-1, 1] to a bin in [0, 10]. */
-export function binOf(lean: number): number {
-  const b = Math.round(((clamp(lean, -1, 1) + 1) / 2) * (BINS - 1));
-  return clamp(b, 0, BINS - 1);
-}
-
-export function clamp(n: number, lo: number, hi: number): number {
-  return n < lo ? lo : n > hi ? hi : n;
-}
-
-/**
- * How far the reader's actual position sat from their prediction, as a whole
- * number of bins in [-10, 10]. Negative means they landed left of their guess.
- *
- * Deliberately a difference of two BINS rather than of the two underlying
- * floats. A bin difference is exactly reproducible, needs no second bucketing
- * decision, and is the unit the reader was shown, so a sentence built on it
- * ("two bins right of where they guessed") describes the thing they actually
- * saw rather than an interior number they never did.
- */
-export function deltaBins(actualLean: number, guessLean: number): number {
-  return binOf(actualLean) - binOf(guessLean);
-}
+export { BINS, CENTER_BIN, clamp, binOf, deltaBins } from '../bins.js';
 
 // ---------------------------------------------------------------------------
 // The payload

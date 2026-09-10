@@ -381,6 +381,25 @@
   .ramp { width:128px; height:9px;
           background:linear-gradient(90deg,var(--pole-blue),var(--neutral-mark) 50%,var(--pole-red)); }
 
+  /* The shareable result
+     -------------------------------------------------------------------------
+     Two controls sit next to each other on the result screen and they do
+     different things: one moves a counter on a server, the other makes a link
+     and sends nothing. They are deliberately NOT styled alike, so a reader
+     glancing at the row does not read them as a pair of equivalent buttons. */
+  .shared-intro { margin:14px 0 0; padding:11px 14px; border:1px solid var(--hair);
+                  background:var(--surface); font-size:14.5px; color:var(--ink-2); max-width:52ch; }
+
+  .share-row { display:flex; flex-wrap:wrap; gap:9px; align-items:center; margin-top:14px; }
+  .share-targets { display:flex; gap:14px; align-items:center; font-size:13px; }
+  .share-targets a { color:var(--ink-2); text-underline-offset:3px; }
+  .share-targets a:hover { color:var(--ink); }
+  /* The link itself, shown so a reader can select it by hand when the clipboard
+     API is unavailable, which happens more often than it should. */
+  .share-url { width:100%; margin-top:9px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+               font-size:12px; padding:8px 10px; border:1px solid var(--hair);
+               background:var(--page); color:var(--ink-2); }
+
   /* The guess screen
      -------------------------------------------------------------------------
      The slider track carries the SAME blue-to-red ramp as .ramp and as the

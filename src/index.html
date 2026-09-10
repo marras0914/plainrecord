@@ -65,7 +65,17 @@
       -->
       <button class="ghost start-look" id="start-look" data-i18n="q.skipQuiz">Skip the quiz and look around</button>
     </div>
-    <p class="start-fine" data-i18n="start.fine">About two minutes · no sign-up · your answers never leave this device</p>
+    <!--
+      Social proof, when the address carries somebody else's result.
+
+      Rendered from JS and hidden by default, because the result lives in the
+      URL fragment and only a browser can read it. It sits ABOVE the fine print
+      rather than below the Start button: a recipient arrives already curious,
+      and the useful thing is to tell them what they were sent before asking
+      them to press anything.
+    -->
+    <p class="shared-intro" id="shared-intro" hidden></p>
+    <p class="start-fine" data-i18n="start.fine">About two minutes · no sign-up · nothing leaves this device unless you ask it to</p>
     <!--TRANSLATION_NOTICE-->
     <button class="ghost start-how" id="start-how" aria-expanded="false" data-i18n="start.how">How this works</button>
 

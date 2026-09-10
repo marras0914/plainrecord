@@ -1271,6 +1271,125 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // The shareable result
+  //
+  // The link is the only artefact of this site that gets forwarded to people
+  // who never visited it, so two things are asserted here.
+  //
+  // It must send NOTHING. The result rides in the URL fragment precisely so no
+  // request is needed to mint a link, and a future change that quietly added
+  // one would break the claim the whole page rests on without breaking any
+  // other test.
+  //
+  // And the fragment must carry only the bin. A URL gets pasted into group
+  // chats by people who are not thinking about what is in it.
+  // ---------------------------------------------------------------------------
+
+  {
+    const FONT_HOSTS = /^https:\/\/fonts\.(googleapis|gstatic)\.com\//;
+    const BEACON = /\/_vercel\/insights\//;
+    const out = [];
+    const record = (r) => {
+      const u = r.url();
+      if (u.startsWith('data:') || u.startsWith('blob:')) return;
+      if (FONT_HOSTS.test(u) || BEACON.test(u)) return;
+      out.push(`${r.method()} ${u}`);
+    };
+
+    await beginQuizWithGuess(page, URL_UNDER_TEST, -0.6);
+    await answerAll(page, 1);
+    await page.waitForTimeout(300);
+
+    // Headless Chromium has no navigator.share, so this is the desktop
+    // fallback path: a copy button, the three prefilled links, and the URL in
+    // a selectable box.
+    const copyBtn = page.locator('#readout button', { hasText: /copy link/i }).first();
+    check('share: the result screen offers a copy-link control', (await copyBtn.count()) > 0);
+
+    const shareUrl = await page.$eval('.share-url', (e) => e.value).catch(() => '');
+    check('share: the link is shown so it can be selected by hand', shareUrl.length > 0,
+      shareUrl.slice(0, 80));
+
+    const urlPart = shareUrl.split(/\s+/).filter((w) => w.startsWith('http')).pop() ?? '';
+    check('share: the fragment carries only r=<bin>',
+      /#r=\d{1,2}$/.test(urlPart), urlPart);
+    check('share: the link has no query string',
+      urlPart.length > 0 && !urlPart.includes('?'), urlPart);
+    check('share: the link carries no answer, id or score',
+      urlPart.length > 0 && !/qid|answer|netLean|crossover|partisanLoad|verdict|ocd-/i.test(urlPart),
+      urlPart);
+
+    // Answering no to everything leans left, so the bin must be below centre.
+    // Without this the fragment checks would pass on a hardcoded constant.
+    const bin = Number((/#r=(\d+)$/.exec(urlPart) ?? [])[1]);
+    check('share: the encoded bin reflects the actual result',
+      Number.isInteger(bin) && bin >= 0 && bin <= 10, String(bin));
+
+    const targets = await page.$$eval('.share-targets a', (as) =>
+      as.map((a) => ({ href: a.href, rel: a.rel, target: a.target })));
+    check('share: three prefilled fallback links', targets.length === 3, String(targets.length));
+    check('share: each opens in a new tab with noopener noreferrer',
+      targets.every((t) => t.target === '_blank' && /noopener/.test(t.rel) && /noreferrer/.test(t.rel)));
+    check('share: none of them is loaded by the page itself',
+      targets.every((t) => t.href.startsWith('https://')));
+
+    // THE ONE THAT MATTERS.
+    page.on('request', record);
+    await copyBtn.click();
+    await page.waitForTimeout(1200);
+    page.off('request', record);
+    check('share: making and copying a link sends nothing at all',
+      out.length === 0, out.slice(0, 3).join(' | ') || 'silent');
+  }
+
+  // ---------------------------------------------------------------------------
+  // Arriving on somebody else's shared link
+  // ---------------------------------------------------------------------------
+
+  {
+    // A goto that changes only the fragment is a SAME-DOCUMENT navigation, so
+    // the module never re-runs and every check below would read the previous
+    // page's state. Landing on about:blank first forces a real load. This cost
+    // an afternoon once; the two negative checks further down pass happily when
+    // nothing has run at all, so they cannot be trusted to reveal it.
+    const freshHash = async (hash) => {
+      await page.goto('about:blank');
+      await page.goto(`${URL_UNDER_TEST}${hash}`, { waitUntil: 'networkidle' });
+      await page.waitForTimeout(350);
+    };
+
+    await freshHash('#r=8');
+
+    const shown = await page.$eval('#shared-intro', (e) => ({ hidden: e.hidden, text: e.textContent.trim() }));
+    check('shared link: the opening screen says somebody shared a result',
+      !shown.hidden && shown.text.length > 0, shown.text.slice(0, 90));
+    check('shared link: it names a position in words, not a number',
+      /side|middle/i.test(shown.text) && !/\br=?8\b/.test(shown.text), shown.text.slice(0, 90));
+
+    // The fragment is consumed, so reloading or sharing again does not leave a
+    // stranger's result attached to this reader's session.
+    const hashAfter = await page.evaluate(() => location.hash);
+    check('shared link: the fragment is cleared from the address bar',
+      hashAfter === '', `hash "${hashAfter}"`);
+
+    // A different bin must produce different words, or the check above passes
+    // on a constant string.
+    await freshHash('#r=1');
+    const other = await page.$eval('#shared-intro', (e) => e.textContent.trim());
+    check('shared link: a different bin reads differently',
+      other !== shown.text, `${shown.text.slice(-28)} vs ${other.slice(-28)}`);
+
+    // Nonsense in the fragment shows nothing rather than a confident wrong dot.
+    await freshHash('#r=99');
+    check('shared link: an out-of-range bin is ignored, not clamped',
+      await page.$eval('#shared-intro', (e) => e.hidden));
+
+    await freshHash('#method');
+    check('shared link: an unrelated fragment shows nothing',
+      await page.$eval('#shared-intro', (e) => e.hidden));
+  }
+
+  // ---------------------------------------------------------------------------
   // The guess screen
   //
   // Two things have to hold. It must not be possible to record a prediction

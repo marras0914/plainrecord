@@ -1,7 +1,7 @@
 {
   "_meta": {
     "purpose": "Single source of every user-facing string on rightnleft.com, in English and Spanish. Feeds both the reviewer's side-by-side page (npm run i18n:review) and, once the Spanish is signed off, the locale modules the page renders from.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass. A second pass on 7 September 2026 approved eight more: the vote framing (q.prompt, vote.yes, vote.no and the three \"You voted\" lines) and the method.labels paragraph. The framing changed because a first-time reader could not tell what Yes meant above a summary that only states what a bill does. A third pass on 9 September 2026 approved the 23 strings added with the opt-in tally and the guess step, by the same reviewer. Twelve were corrected before approval: result.guessLine and result.guessExact were rebuilt because \"Predijo {guess}\" is ungrammatical once the label interpolates (predecir needs a clause, and strip.legendGuess already used the right shape); recuento was replaced with conteo to match the approved corpus; the two far position labels gained \"hacia\" to parallel the near ones; four masculine object pronouns were removed in favour of constructions that do not assume the reader's gender, matching the dative \"le\" the rest of the file uses; privacy.body took the subjunctive after \"hasta que\"; and share.failed was made plainer. start.fine and privacy.body are REWORDED, not new: \"your answers never leave this device\" and \"there is no server to send them to\" stopped being unconditionally true when /api/share was added, and privacy.body's own note records that the build check has to be weakened only after that sentence is reworded, never before.",
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 3 September 2026. The draft was written by Claude and corrected where needed. \"La Franja Morada\" for the site name was approved as part of this pass — note it does not match the English og:image, which still reads \"The Purple Strip\"; a Spanish share card is a separate asset. rep.lede was reworded and re-approved by the same reviewer on 5 September 2026; no other string has changed since that pass. A second pass on 7 September 2026 approved eight more: the vote framing (q.prompt, vote.yes, vote.no and the three \"You voted\" lines) and the method.labels paragraph. The framing changed because a first-time reader could not tell what Yes meant above a summary that only states what a bill does. A third pass on 9 September 2026 approved the 23 strings added with the opt-in tally and the guess step, by the same reviewer. Twelve were corrected before approval: result.guessLine and result.guessExact were rebuilt because \"Predijo {guess}\" is ungrammatical once the label interpolates (predecir needs a clause, and strip.legendGuess already used the right shape); recuento was replaced with conteo to match the approved corpus; the two far position labels gained \"hacia\" to parallel the near ones; four masculine object pronouns were removed in favour of constructions that do not assume the reader's gender, matching the dative \"le\" the rest of the file uses; privacy.body took the subjunctive after \"hasta que\"; and share.failed was made plainer. start.fine and privacy.body are REWORDED, not new: \"your answers never leave this device\" and \"there is no server to send them to\" stopped being unconditionally true when /api/share was added, and privacy.body's own note records that the build check has to be weakened only after that sentence is reworded, never before. A fourth pass on 9 September 2026 approved the 7 strings added with the shareable result, by the same reviewer. Three were corrected before approval: share.copyFailed dropped the bureaucratic passive that had already been rejected for share.failed earlier the same day; share.text took the glossary term Camara de Representantes de Texas over the shorter Camara de Texas, accepting a few extra characters in a string meant to travel as a social post; and shared.intro gained an explicit subject, because without one \"su\" reads as either their or your and \"quedo\" is third person, leaving it unclear whether the position described the sender or the reader.",
     "placeholders": "{name} is substituted at runtime from real data. A translator may MOVE a placeholder anywhere the Spanish needs it, but must not rename, add or drop one. Placeholder names are listed per string in 'vars'.",
     "register": {
       "decision": "usted, not tu",
@@ -2223,6 +2223,64 @@
     "where": "Shown when the request fails for any other reason.",
     "vars": [],
     "note": "States the consequence rather than the error. 'Nothing was counted' is the part a reader cares about, and it is also true of every failure path the endpoint has.",
+    "status": "ok"
+  },
+  "share.link": {
+    "en": "Share where I landed",
+    "es": "Compartir dónde quedé",
+    "where": "Button on the result screen, beside the opt-in tally control.",
+    "vars": [],
+    "note": "Deliberately worded to contrast with share.button, which is 'Add my result to the count'. Two actions sitting next to each other with similar words is how a reader taps the wrong one: this makes a link and sends nothing, that one moves a counter on a server.",
+    "status": "ok"
+  },
+  "share.linkNote": {
+    "en": "Makes a link with only your position in it, nothing else, and nothing is sent anywhere. The position travels in the part of the address after the # symbol, which browsers never transmit to a website.",
+    "es": "Crea un enlace que solo contiene su posición, nada más, y no se envía nada a ningún sitio. La posición viaja en la parte de la dirección después del símbolo #, que los navegadores nunca transmiten a un sitio web.",
+    "where": "Explanatory line under the share-link button.",
+    "vars": [],
+    "note": "Names the mechanism rather than asserting privacy. A reader who knows what a fragment is can verify the claim from the address bar, and a reader who does not still learns that something specific makes it true.",
+    "status": "ok"
+  },
+  "share.copy": {
+    "en": "Copy link",
+    "es": "Copiar enlace",
+    "where": "Desktop fallback button when the browser has no native share sheet.",
+    "vars": [],
+    "note": "Plain label.",
+    "status": "ok"
+  },
+  "share.copied": {
+    "en": "Link copied",
+    "es": "Enlace copiado",
+    "where": "Replaces share.copy for a moment after a successful copy.",
+    "vars": [],
+    "note": "Confirmation state.",
+    "status": "ok"
+  },
+  "share.copyFailed": {
+    "en": "Could not copy. The link is in the box above.",
+    "es": "No se copió. El enlace está en el cuadro de arriba.",
+    "where": "Shown when the clipboard write is refused, which happens without a secure context or a permission.",
+    "vars": [],
+    "note": "The clipboard API fails silently often enough that a reader needs somewhere to select the link by hand. Reworded before review: \"No se pudo copiar\" is the same bureaucratic passive that was rejected for share.failed on 9 September, and _meta.register asks for plain over formal.",
+    "status": "ok"
+  },
+  "share.text": {
+    "en": "I judged 7 real votes my Texas House took, with the party hidden. Where do you land?",
+    "es": "Juzgué 7 votos reales de la Cámara de Representantes de Texas, con el partido oculto. ¿Dónde queda usted?",
+    "where": "The default message that travels with a shared link.",
+    "vars": [],
+    "note": "SAYS NOTHING ABOUT BEING SURPRISED, on purpose. An earlier draft read 'I was surprised where I landed'. Two of the first six people to share said, unprompted, that they landed exactly where they predicted, so that wording would have put a false sentence in a third of readers' mouths on a site whose argument is that it does not overclaim. It asks a question instead. Uses the glossary term \"Camara de Representantes de Texas\" rather than the shorter \"Camara de Texas\". It costs a few characters in something meant to travel as a post, and the glossary wins.",
+    "status": "ok"
+  },
+  "shared.intro": {
+    "en": "Somebody shared their result with you: they landed {label}. Where do you land?",
+    "es": "Alguien compartió con usted su resultado: esa persona quedó {label}. ¿Dónde queda usted?",
+    "where": "Line on the opening screen when the address carries a shared result.",
+    "vars": [
+      "label"
+    ],
+    "note": "Uses the same five position words as the guess slider, so a recipient reads a phrase rather than a number they have no scale for yet. \"esa persona\" is load-bearing: without a stated subject, \"su\" reads as either their or your, and \"quedo\" is third person, so it was unclear whether {label} described the sender or the reader. That distinction is the entire sentence.",
     "status": "ok"
   }
 }

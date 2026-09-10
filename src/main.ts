@@ -23,6 +23,13 @@ import {
   type Adapted,
 } from './quiz-data';
 import type { PartisanProfile } from '../valence';
+import {
+  resultUrl,
+  sharedBin,
+  clearSharedBin,
+  shareTargets,
+  canNativeShare,
+} from './share';
 import { PROFILE_BANDS } from '../valence';
 import { inject } from '@vercel/analytics';
 import { renderVerdict } from './verdict';
@@ -627,7 +634,100 @@ function renderReadout(p: PartisanProfile): void {
   // The opt-in. Offered only when there is a result to add: a reader who took
   // the early exit and answered nothing has no position to contribute, and a
   // button that posts an empty answer set would be counting visits as opinions.
-  if (countAnswered() > 0) el('readout').appendChild(shareBlock());
+  if (countAnswered() > 0) {
+    el('readout').appendChild(shareBlock());
+    el('readout').appendChild(linkBlock(p));
+  }
+}
+
+/**
+ * "Share where I landed": a link, and nothing sent.
+ *
+ * Sits beside the tally opt-in and does something completely different, which
+ * is why the two are worded and styled apart. `share.button` moves a counter on
+ * a server. This one builds a URL with a single integer in its fragment, which
+ * browsers never transmit, so the site cannot see a link that gets shared and
+ * has nothing to store.
+ *
+ * Rendered only when there is a reading to share. A profile with no answered
+ * marks has no position, and a link encoding bin 5 for someone who answered
+ * nothing would be asserting a result they never got.
+ */
+function linkBlock(p: PartisanProfile): HTMLElement {
+  const wrap = document.createElement('div');
+  if (p.n === 0) return wrap;
+
+  const url = resultUrl(p.netLean, location.origin);
+  const text = t('share.text');
+
+  const row = document.createElement('div');
+  row.className = 'share-row';
+
+  const note = document.createElement('p');
+  note.className = 'share-note';
+  note.textContent = t('share.linkNote');
+
+  if (canNativeShare()) {
+    const b = document.createElement('button');
+    b.className = 'ghost';
+    b.type = 'button';
+    b.textContent = t('share.link');
+    b.addEventListener('click', () => {
+      // A dismissed share sheet rejects, and that is a normal outcome rather
+      // than an error worth showing anybody.
+      void navigator.share({ title: t('intro.h1'), text, url }).catch(() => {});
+    });
+    row.appendChild(b);
+  } else {
+    const copy = document.createElement('button');
+    copy.className = 'ghost';
+    copy.type = 'button';
+    copy.textContent = t('share.copy');
+
+    // Always present, not just on failure: the clipboard API is refused often
+    // enough (insecure context, permission, an embedded browser) that a reader
+    // needs something selectable no matter what happens.
+    const box = document.createElement('input');
+    box.className = 'share-url';
+    box.readOnly = true;
+    box.value = `${text} ${url}`;
+    box.setAttribute('aria-label', t('share.link'));
+
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(`${text} ${url}`);
+        copy.textContent = t('share.copied');
+        window.setTimeout(() => { copy.textContent = t('share.copy'); }, 2000);
+      } catch {
+        note.textContent = t('share.copyFailed');
+        box.select();
+      }
+    });
+    row.appendChild(copy);
+
+    const targets = document.createElement('div');
+    targets.className = 'share-targets';
+    const LABEL: Record<string, string> = { x: 'X', reddit: 'Reddit', facebook: 'Facebook' };
+    for (const target of shareTargets(url, text)) {
+      const a = document.createElement('a');
+      a.href = target.href;
+      a.target = '_blank';
+      // noopener keeps the opened tab from reaching back through window.opener,
+      // and noreferrer stops this page's URL being handed to the platform.
+      a.rel = 'noopener noreferrer';
+      a.textContent = LABEL[target.key] ?? target.key;
+      targets.appendChild(a);
+    }
+    row.appendChild(targets);
+    wrap.appendChild(row);
+    wrap.appendChild(note);
+    wrap.appendChild(box);
+    return wrap;
+  }
+
+  wrap.appendChild(row);
+  wrap.appendChild(note);
+  return wrap;
 }
 
 /**
@@ -1802,8 +1902,33 @@ window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener('change', (
   render();
 });
 
+/**
+ * Somebody arrived on a shared link.
+ *
+ * The fragment is read once at boot and then removed from the address bar, so
+ * that starting the quiz, sharing again, or simply reloading does not leave a
+ * stranger's result attached to this reader's own session. `replaceState` is
+ * used rather than a navigation, so there is no history entry to go back to.
+ */
+function renderSharedIntro(): void {
+  const box = document.getElementById('shared-intro');
+  if (!box) return;
+  const bin = sharedBin();
+  if (bin === null) {
+    box.hidden = true;
+    return;
+  }
+  // Bin back to the middle of its lean band, so the words match the scale the
+  // sender was shown rather than an edge value.
+  const lean = (bin / 5) - 1;
+  box.textContent = t('shared.intro', { label: leanLabel(lean) });
+  box.hidden = false;
+  clearSharedBin();
+}
+
 queue = buildQueue();
 render();
+renderSharedIntro();
 // Once, at module level. It appends a control to the header, so calling it from
 // render() would add another button on every keystroke.
 renderTheme();
