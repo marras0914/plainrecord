@@ -71,7 +71,10 @@ public/sitemap.xml
 # 2026 under a filename nobody had anticipated. .githooks/pre-commit refuses
 # these too, since a gitignore does nothing about an already-tracked file or
 # `git add -f`.
-private/
+# `private/*` and not `private/`: excluding the directory itself means git
+# cannot re-include anything inside it, so the negation below would never fire
+# and the README explaining the rule could not be committed.
+private/*
 !private/README.md
 rightnleft-*.md
 *-responded.md
