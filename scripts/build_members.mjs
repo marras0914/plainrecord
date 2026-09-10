@@ -111,17 +111,54 @@ say(roster.length > 0, 'read the roster', `${roster.length} people`);
 
 const byItemId = new Map(ingest.map((i) => [i.id, i]));
 
-// Every id that cast a real vote anywhere in the session, so the unnamed ones
-// can be counted rather than quietly dropped.
+const named = new Set(roster.map((r) => r[ix.id]));
+
+/**
+ * HOUSE ROLL CALLS ONLY, and this filter is the whole point of the block.
+ *
+ * `data/tx_bills_89R.json` holds every roll call the ingest saw, 4,554 of them,
+ * Senate included. Every other consumer filters before counting; this one did
+ * not, and the consequences were published:
+ *
+ *   - `votersInSession` read 180, which is the House plus the Senate.
+ *   - `unnamedVoters` read 4. Three of those were SENATORS, and the _meta note
+ *     described all four as people who had "left the House", which they had
+ *     not, having never sat in it. That note ships in a CC0 file offered to
+ *     other people as a public resource.
+ *   - Even the one genuine former member had the wrong total: 3,352 rather than
+ *     3,283, because 69 Senate roll calls were credited to him.
+ *
+ * The rule is `scripts/export_bulk_votes.mjs`'s, deliberately identical: an
+ * item is a House item when more than 60 of the people who voted on it sit in
+ * the House. Not a test on the bill, because a Senate bill gets a House vote
+ * too. Restating it here rather than sharing it is the lesser evil only because
+ * that script reads the shipped payload and this one builds it; the assertion
+ * below is what keeps the two honest.
+ */
+const HOUSE_QUORUM_HINT = 60;
+const houseItems = ingest.filter(
+  (it) => Object.keys(it.votes ?? {}).filter((id) => named.has(id)).length > HOUSE_QUORUM_HINT,
+);
+say(houseItems.length > 0 && houseItems.length < ingest.length,
+  'filtered the ingest to House roll calls',
+  `${houseItems.length} of ${ingest.length}, ${ingest.length - houseItems.length} excluded`);
+
+// Every id that cast a real vote on a HOUSE item, so the unnamed ones can be
+// counted rather than quietly dropped, and so a senator is not counted at all.
 const voteCount = new Map();
-for (const it of ingest) {
+for (const it of houseItems) {
   for (const [id, v] of Object.entries(it.votes ?? {})) {
     if (v === 1 || v === -1) voteCount.set(id, (voteCount.get(id) ?? 0) + 1);
   }
 }
 
-const named = new Set(roster.map((r) => r[ix.id]));
 const unnamed = [...voteCount.keys()].filter((id) => !named.has(id));
+
+// The check that would have caught this. A House chamber is 150 seats, so the
+// number of distinct people casting House votes in one session cannot be far
+// above that: 180 was the Senate leaking in and nothing said so.
+say(voteCount.size <= 165, 'session voters are a House-sized group',
+  `${voteCount.size} distinct voters, chamber is ${roster.filter((r) => r[ix.district]).length ? '150 seats' : '150 seats'}`);
 
 const house = roster
   .filter((r) => r[ix.current_chamber] === 'lower')
@@ -178,15 +215,29 @@ const out = {
       'Yea, n = voted Nay, . = no vote recorded. `voted` counts the non-dot ' +
       'characters. A dot is an absence, not a neutral position, and only ' +
       `${full} of ${members.length} members voted on all ${itemOrder.length}.`,
-    unnamed:
-      `${unnamed.length} people cast votes in this session but are absent from ` +
-      'the current roster, having left the House since. They are NOT in this ' +
-      'file because they hold no current district. One of them cast ' +
-      `${Math.max(...unnamed.map((id) => voteCount.get(id)), 0)} votes, a full ` +
-      'session, so a district whose seat changed hands will show its current ' +
-      'member with a partial record. That is accurate rather than missing data. ' +
-      'data.openstates.org publishes no retired roster for Texas (403), so ' +
-      'naming them would need another source.',
+    // Written for one or for many, because the count is data rather than a
+    // constant and a note reading "1 person ... are absent" is the kind of
+    // seam that tells a reader the file was generated and not checked.
+    unnamed: (() => {
+      const n = unnamed.length;
+      const most = Math.max(...unnamed.map((id) => voteCount.get(id)), 0);
+      const who = n === 1
+        ? '1 person cast House votes in this session but is absent from the current roster, having left the House since. They are NOT in this file because they hold no current district.'
+        : `${n} people cast House votes in this session but are absent from the current roster, having left the House since. They are NOT in this file because they hold no current district.`;
+      const scale = n === 1
+        ? `That person cast ${most} votes, so their district will show its current member with a partial record.`
+        : `The largest cast ${most} votes, so a district whose seat changed hands will show its current member with a partial record.`;
+      return `${who} ${scale} That is accurate rather than missing data. Retired ` +
+        'members can be named from the openstates/people repository, which carries ' +
+        'a retired roster for Texas; data.openstates.org itself returns 403 for it.';
+    })(),
+    unnamedCorrection:
+      'An earlier build of this file reported four such people and described all ' +
+      'four as having left the House. Three were SENATORS and had never sat in ' +
+      'it: this file counted voters across every roll call the ingest saw rather ' +
+      'than across House roll calls only, so the Senate was included. The count ' +
+      'of the one genuine former member was also overstated, because Senate votes ' +
+      'were credited to him. Corrected 10 September 2026.',
     license: 'CC0-1.0',
     licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
     licenseNote:
@@ -197,7 +248,11 @@ const out = {
   generated: 'static build',
   rosterSource: rosterFile ?? ROSTER_URL,
   provenance: {
-    sessionVotesTotal: ingest.length,
+    ingestItemsTotal: ingest.length,
+    sessionVotesTotal: houseItems.length,
+    chamberFilter:
+      'House roll calls only: more than 60 of the people voting sit in the House. ' +
+      'The same rule scripts/export_bulk_votes.mjs applies.',
     quizItems: itemOrder.length,
     votersInSession: voteCount.size,
     namedFromRoster: voteCount.size - unnamed.length,

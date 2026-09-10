@@ -1824,7 +1824,12 @@ function renderRepOut(): void {
 
     const excluded = repFile.provenance?.unnamedVoters ?? 0;
     if (excluded) {
-      html += `<p class="rep-excluded">${esc(t('rep.excluded', { n: excluded }))}</p>`;
+      // Two strings, because the plural one renders "1 people voted in this
+      // session but are not in this lookup" at n=1, and one is what the count
+      // actually is once Senate roll calls stop being counted as House ones.
+      html += `<p class="rep-excluded">${esc(
+        excluded === 1 ? t('rep.excludedOne') : t('rep.excluded', { n: excluded }),
+      )}</p>`;
     }
   }
 

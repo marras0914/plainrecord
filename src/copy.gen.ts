@@ -258,6 +258,7 @@ export type CopyKey =
   | "rep.thin"
   | "rep.loadFailed"
   | "rep.excluded"
+  | "rep.excludedOne"
   | "rep.district"
   | "rep.zipLabel"
   | "rep.zipPlaceholder"
@@ -569,6 +570,7 @@ export const EN: Record<CopyKey, string> = {
   "rep.thin": "Only {n} of your answers overlap their record, so this number is heavily shrunk toward zero and should not be read closely.",
   "rep.loadFailed": "Could not load the member record. The rest of the page is unaffected; the file is at {link} if you want to check it yourself.",
   "rep.excluded": "{n} people voted in this session but are not in this lookup, having left the House since. A district whose seat changed hands will show its current member with a partial record.",
+  "rep.excludedOne": "One person voted in this session but is not in this lookup, having left the House since. Their district will show its current member with a partial record.",
   "rep.district": "District {d}",
   "rep.zipLabel": "Your ZIP code",
   "rep.zipPlaceholder": "5 digits",
@@ -865,6 +867,7 @@ export const ES: Record<CopyKey, string> = {
   "rep.thin": "Solo {n} de sus respuestas coinciden con su historial, así que esta cifra está muy contraída hacia cero y no debería leerse de cerca.",
   "rep.loadFailed": "No se pudo cargar el registro de miembros. El resto de la página no se ve afectada; el archivo está en {link} si quiere comprobarlo usted mismo.",
   "rep.excluded": "{n} personas votaron en esta sesión pero no están en esta búsqueda, porque dejaron la Cámara desde entonces. Un distrito cuyo escaño cambió de manos mostrará a su miembro actual con un historial parcial.",
+  "rep.excludedOne": "Una persona votó en esta sesión pero no está en esta búsqueda, por haber dejado la Cámara desde entonces. Su distrito mostrará a su representante actual con un historial parcial.",
   "rep.district": "Distrito {d}",
   "rep.zipLabel": "Su código postal",
   "rep.zipPlaceholder": "5 dígitos",
