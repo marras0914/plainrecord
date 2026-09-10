@@ -32,9 +32,25 @@ export function shareOrigin(origin: string, locale: string = LOCALE): string {
  *
  * Takes the lean rather than a bin so callers cannot pass an unbucketed number
  * by accident and encode a position half a bin off what was displayed.
+ *
+ * THE POSITION IS IN THE PATH, not the fragment, and that was a deliberate
+ * trade rather than an oversight. A fragment is never sent to a server, which
+ * made the old `#r=8` link genuinely private and also made it worthless to
+ * share: no crawler can see a fragment, so every shared link unfurled into the
+ * same generic card and looked exactly like somebody pasting the homepage. The
+ * two properties were the same property.
+ *
+ * What that costs is stated plainly in `share.linkNote` and `privacy.body`
+ * rather than buried: one bucketed integer, one of eleven, with no identifier
+ * attached, now appears in a request log the way every page request already
+ * does. It is not an answer and not a score, and it says nothing about which
+ * votes were judged which way.
+ *
+ * `/r/<bin>` is a static page carrying its own card, which then hands the
+ * reader on to the real site. See scripts/build_result_pages.mjs.
  */
 export function resultUrl(lean: number, origin: string, locale: string = LOCALE): string {
-  return `${shareOrigin(origin, locale)}#r=${binOf(lean)}`;
+  return `${shareOrigin(origin, locale)}r/${binOf(lean)}`;
 }
 
 /**

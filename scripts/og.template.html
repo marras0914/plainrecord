@@ -74,9 +74,24 @@
     font-size:18px; color:var(--muted); letter-spacing:0.045em;
   }
   footer .site { color:var(--ink); font-weight:600; letter-spacing:0.02em; }
+
+  /* The state, as a quiet mark rather than a flag.
+     An outline, not a lone star and not the flag's colours. The star is used by
+     both parties and by half the businesses in Texas, and red-white-blue would
+     collide with the blue-to-red axis that carries the card's actual meaning.
+     A silhouette says where this is about and takes no side while doing it. */
+  #texas {
+    position:absolute; right:64px; top:116px;
+    width:208px; height:auto; opacity:0.13; color:var(--purple);
+  }
+  body { position:relative; }
 </style>
 </head>
 <body>
+
+  <svg id="texas" viewBox="-2 -2 78 88" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M13,0 L31,0 L31,20 C36,21 40,23 45,22.5 C50,22 55,20.5 60,21.5 C64,22.3 67,23 70,22.5 L71.5,24 C72.5,32 73,38 71,43 C70,46 71,49 69.5,51 C64,56 58,60 53,64 C48,68 44.5,72 42.5,77 C42,79 41.6,81 40.8,83 C38.5,79.5 35,76 32,72 C29,68 27,65 24,60 C21,56 17,52 13,47 C9,42 5,36 2,30 L13,30 Z" fill="currentColor"/>
+  </svg>
 
   <div class="eyebrow" id="eyebrow">TEXAS HOUSE · 89TH LEGISLATURE</div>
 

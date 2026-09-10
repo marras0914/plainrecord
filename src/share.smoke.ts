@@ -47,7 +47,7 @@ let exact = 0;
 for (let bin = 0; bin < BINS; bin++) {
   const lean = (bin / 5) - 1;
   const url = resultUrl(lean, ORIGIN, 'en');
-  const back = sharedBinFrom(new URL(url).hash);
+  const back = Number((/\/r\/(\d+)$/.exec(url) ?? [])[1]);
   if (back === bin) exact++;
 }
 check('every bin survives a round trip exactly', exact === BINS, `${exact}/${BINS}`);
@@ -60,18 +60,18 @@ const encoded = new Set(
 check('the eleven bins produce eleven different links', encoded.size === BINS, `${encoded.size} distinct`);
 
 check('a lean is bucketed, not passed through',
-  resultUrl(0.83, ORIGIN, 'en').endsWith(`#r=${binOf(0.83)}`), resultUrl(0.83, ORIGIN, 'en'));
-check('the leftmost lean encodes bin 0', resultUrl(-1, ORIGIN, 'en').endsWith('#r=0'));
-check('the rightmost lean encodes bin 10', resultUrl(1, ORIGIN, 'en').endsWith('#r=10'));
-check('dead centre encodes bin 5', resultUrl(0, ORIGIN, 'en').endsWith('#r=5'));
+  resultUrl(0.83, ORIGIN, 'en').endsWith(`/r/${binOf(0.83)}`), resultUrl(0.83, ORIGIN, 'en'));
+check('the leftmost lean encodes bin 0', resultUrl(-1, ORIGIN, 'en').endsWith('/r/0'));
+check('the rightmost lean encodes bin 10', resultUrl(1, ORIGIN, 'en').endsWith('/r/10'));
+check('dead centre encodes bin 5', resultUrl(0, ORIGIN, 'en').endsWith('/r/5'));
 
 // ---------------------------------------------------------------------------
 // What the fragment may contain
 // ---------------------------------------------------------------------------
 
 const sample = resultUrl(0.42, ORIGIN, 'en');
-check('the whole fragment is just r=<digits>',
-  /#r=\d{1,2}$/.test(sample), sample);
+check('the path is just /r/<digits>',
+  /\/r\/\d{1,2}$/.test(sample), sample);
 check('the URL carries no query string at all',
   !sample.includes('?'), sample);
 check('and nothing that looks like an answer, an id or a score',
@@ -109,7 +109,7 @@ check('an out-of-range bin is refused, NOT clamped to an edge',
 check('an English link points at the root', shareOrigin(ORIGIN, 'en') === 'https://rightnleft.com/');
 check('a Spanish link points at /es/', shareOrigin(ORIGIN, 'es') === 'https://rightnleft.com/es/');
 check('a Spanish result keeps the reader in Spanish',
-  resultUrl(0.4, ORIGIN, 'es') === 'https://rightnleft.com/es/#r=7',
+  resultUrl(0.4, ORIGIN, 'es') === 'https://rightnleft.com/es/r/7',
   resultUrl(0.4, ORIGIN, 'es'));
 check('a trailing slash on the origin is not doubled',
   shareOrigin('https://rightnleft.com/', 'en') === 'https://rightnleft.com/');

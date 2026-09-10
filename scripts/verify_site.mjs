@@ -86,6 +86,12 @@ if (withHeaders) {
       const nested = join(file, 'index.html');
       if (existsSync(nested)) file = nested;
     }
+    // cleanUrls, honoured because vercel.json sets it. Without this /r/8 falls
+    // through to the entry point and every assertion about the result pages
+    // runs against the site's generic card instead — the harness reads
+    // vercel.json for headers, so emulating its routing badly is worse than not
+    // emulating it at all.
+    if (cfg.cleanUrls && !existsSync(file) && existsSync(`${file}.html`)) file = `${file}.html`;
     // Unknown paths fall through to the entry point, as a static host does.
     if (!existsSync(file) || statSync(file).isDirectory()) file = join(dist, 'index.html');
     const served = '/' + file.slice(dist.length + 1).split(sep).join('/');
@@ -1311,17 +1317,17 @@ try {
       shareUrl.slice(0, 80));
 
     const urlPart = shareUrl.split(/\s+/).filter((w) => w.startsWith('http')).pop() ?? '';
-    check('share: the fragment carries only r=<bin>',
-      /#r=\d{1,2}$/.test(urlPart), urlPart);
-    check('share: the link has no query string',
-      urlPart.length > 0 && !urlPart.includes('?'), urlPart);
+    check('share: the path carries only /r/<bin>',
+      /\/r\/\d{1,2}$/.test(urlPart), urlPart);
+    check('share: the link has no query string and no fragment',
+      urlPart.length > 0 && !urlPart.includes('?') && !urlPart.includes('#'), urlPart);
     check('share: the link carries no answer, id or score',
       urlPart.length > 0 && !/qid|answer|netLean|crossover|partisanLoad|verdict|ocd-/i.test(urlPart),
       urlPart);
 
-    // Answering no to everything leans left, so the bin must be below centre.
-    // Without this the fragment checks would pass on a hardcoded constant.
-    const bin = Number((/#r=(\d+)$/.exec(urlPart) ?? [])[1]);
+    // Answering yes to everything leans right, so the bin must be above centre.
+    // Without this the path checks would pass on a hardcoded constant.
+    const bin = Number((/\/r\/(\d+)$/.exec(urlPart) ?? [])[1]);
     check('share: the encoded bin reflects the actual result',
       Number.isInteger(bin) && bin >= 0 && bin <= 10, String(bin));
 
@@ -1340,6 +1346,64 @@ try {
     page.off('request', record);
     check('share: making and copying a link sends nothing at all',
       out.length === 0, out.slice(0, 3).join(' | ') || 'silent');
+  }
+
+  // ---------------------------------------------------------------------------
+  // The eleven result pages
+  //
+  // These exist so a shared link unfurls into a card showing where somebody
+  // landed. That only works if a crawler, which runs no JavaScript, can read
+  // the tags out of the served HTML. So the tags are asserted in the RESPONSE
+  // BODY rather than in the rendered DOM, because the rendered DOM is not what
+  // a crawler ever sees.
+  // ---------------------------------------------------------------------------
+
+  {
+    const res = await fetch(new URL('r/8', URL_UNDER_TEST).href);
+    const body = await res.text();
+    check('result page: /r/8 is served', res.ok, String(res.status));
+
+    const tag = (prop) => {
+      const re = new RegExp(`<meta[^>]*(?:property|name)="${prop}"[^>]*content="([^"]*)"`, 'i');
+      return (re.exec(body) ?? [])[1] ?? '';
+    };
+
+    check('result page: it carries its own og:image, not the generic card',
+      /\/og\/r8\.png$/.test(tag('og:image')), tag('og:image'));
+    check('result page: the description names the position in words',
+      /side|middle/i.test(tag('og:description')), tag('og:description').slice(0, 80));
+    check('result page: twitter card is the large image form',
+      tag('twitter:card') === 'summary_large_image', tag('twitter:card'));
+    check('result page: it is noindex, so eleven near-identical pages do not rank',
+      /noindex/i.test(tag('robots')), tag('robots'));
+
+    // A different bin must produce a different card and a different sentence,
+    // or the checks above pass on whatever one page happens to contain.
+    const other = await (await fetch(new URL('r/1', URL_UNDER_TEST).href)).text();
+    const otherImg = (/<meta[^>]*property="og:image"[^>]*content="([^"]*)"/i.exec(other) ?? [])[1] ?? '';
+    check('result page: a different bin has a different card',
+      /\/og\/r1\.png$/.test(otherImg), otherImg);
+    check('result page: and a different sentence', other !== body);
+
+    // The card must actually exist and be a real PNG of the right size, or the
+    // tag points at a 404 and every platform falls back to nothing.
+    const img = await fetch(new URL('og/r8.png', URL_UNDER_TEST).href);
+    const bytes = Buffer.from(await img.arrayBuffer());
+    check('result page: the card it points at exists', img.ok, String(img.status));
+    check('result page: and is a PNG', bytes.subarray(1, 4).toString() === 'PNG', bytes.subarray(0, 8).toString('hex'));
+    // PNG IHDR carries width and height as big-endian 32-bit ints at byte 16.
+    check('result page: 1200x630, the size every platform expects',
+      bytes.readUInt32BE(16) === 1200 && bytes.readUInt32BE(20) === 630,
+      `${bytes.readUInt32BE(16)}x${bytes.readUInt32BE(20)}`);
+
+    // And a human is handed on to the real page.
+    await page.goto('about:blank');
+    await page.goto(new URL('r/8', URL_UNDER_TEST).href, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(500);
+    check('result page: a person is redirected to the site itself',
+      !/\/r\/8$/.test(page.url()), page.url());
+    check('result page: and lands on the opening screen with the shared result',
+      !(await page.$eval('#shared-intro', (e) => e.hidden)));
   }
 
   // ---------------------------------------------------------------------------
