@@ -154,6 +154,96 @@ for (const it of houseItems) {
 
 const unnamed = [...voteCount.keys()].filter((id) => !named.has(id));
 
+/**
+ * Name the former members, from the retired roster in openstates/people.
+ *
+ * `data.openstates.org` returns 403 for anything retired and
+ * /people/current/tx.csv is current-only, which is why an earlier build of this
+ * file said naming them "would need another source". Jesse Mortenson at Open
+ * States pointed out the source on 10 September 2026: the people repository
+ * carries data/tx/retired/, 348 records for Texas, named
+ * `<Name>-<uuid>.yml` with the same ocd-person uuid this pipeline already has.
+ *
+ * TYPE IS ASSERTED, not assumed, and that is the whole reason this function is
+ * careful. Before the chamber filter above existed, three of the four
+ * "former House members" were senators. A retired record whose `type` is not
+ * `lower` is refused rather than named, so the same mistake cannot be made
+ * again from the other direction.
+ *
+ * Degrades rather than fails. Without the network the members file is built
+ * exactly as before, with the count and no names, and says which happened.
+ */
+const RETIRED_DIR =
+  'https://api.github.com/repos/openstates/people/contents/data/tx/retired';
+const RETIRED_RAW =
+  'https://raw.githubusercontent.com/openstates/people/main/data/tx/retired';
+
+async function nameRetired(ids) {
+  if (ids.length === 0) return [];
+  let listing;
+  try {
+    const r = await fetch(RETIRED_DIR, { headers: { accept: 'application/vnd.github+json' } });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    listing = await r.json();
+  } catch (err) {
+    say(true, 'retired roster not reached, names omitted', String(err.message ?? err));
+    return [];
+  }
+
+  const files = new Map();
+  for (const entry of listing) {
+    const m = /^(.+)-([0-9a-f-]{36})\.yml$/.exec(entry.name ?? '');
+    if (m) files.set(m[2], entry.name);
+  }
+  say(files.size > 100, 'read the retired roster', `${files.size} Texas records`);
+
+  const out = [];
+  for (const id of ids) {
+    const uuid = id.replace('ocd-person/', '');
+    const file = files.get(uuid);
+    if (!file) {
+      say(false, `no retired record for ${uuid}`);
+      continue;
+    }
+    let text;
+    try {
+      const r = await fetch(`${RETIRED_RAW}/${encodeURIComponent(file)}`);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      text = await r.text();
+    } catch (err) {
+      say(false, `could not read ${file}`, String(err.message ?? err));
+      continue;
+    }
+
+    // Four fields off a known shape, each validated rather than trusted. A
+    // regex over YAML is only acceptable because of the assertions below.
+    const name = (/^name:\s*(.+?)\s*$/m.exec(text) ?? [])[1];
+    const roles = [...text.matchAll(/type:\s*(lower|upper)[\s\S]{0,240}?district:\s*'?([0-9]+)'?[\s\S]{0,240}?end_date:\s*'?([0-9-]+)'?/g)];
+    const lower = roles.filter((r) => r[1] === 'lower');
+
+    if (!name) { say(false, `${file} has no name field`); continue; }
+    if (lower.length === 0) {
+      // The guard that matters. A senator is not a former House member.
+      say(false, `${name} is not a former House member, refusing to name them`,
+        roles.map((r) => r[1]).join(', ') || 'no role found');
+      continue;
+    }
+    // The most recent lower-chamber role is the one that ended.
+    const role = lower.sort((a, b) => String(b[3]).localeCompare(String(a[3])))[0];
+    out.push({ id, name, district: Number(role[2]), until: role[3], voted: voteCount.get(id) ?? 0 });
+  }
+
+  out.sort((a, b) => b.voted - a.voted);
+  say(out.length === ids.length, 'named every former member who voted',
+    `${out.length} of ${ids.length}`);
+  return out;
+}
+
+const retired = await nameRetired(unnamed);
+for (const r of retired) {
+  console.log(`  ${r.name} · HD ${r.district} · ${r.voted} votes · left ${r.until}`);
+}
+
 // The check that would have caught this. A House chamber is 150 seats, so the
 // number of distinct people casting House votes in one session cannot be far
 // above that: 180 was the Senate leaking in and nothing said so.
@@ -227,9 +317,10 @@ const out = {
       const scale = n === 1
         ? `That person cast ${most} votes, so their district will show its current member with a partial record.`
         : `The largest cast ${most} votes, so a district whose seat changed hands will show its current member with a partial record.`;
-      return `${who} ${scale} That is accurate rather than missing data. Retired ` +
-        'members can be named from the openstates/people repository, which carries ' +
-        'a retired roster for Texas; data.openstates.org itself returns 403 for it.';
+      const named = retired.length
+        ? ` They are named in \`retired\`: ${retired.map((r) => `${r.name} (HD ${r.district}, left ${r.until})`).join('; ')}.`
+        : ' Names come from the retired roster in the openstates/people repository; this build could not reach it.';
+      return `${who} ${scale}${named} That is accurate rather than missing data.`;
     })(),
     unnamedCorrection:
       'An earlier build of this file reported four such people and described all ' +
@@ -264,6 +355,15 @@ const out = {
   },
   itemOrder,
   members,
+  /**
+   * Former House members who voted this session and hold no current district.
+   *
+   * Deliberately NOT in `members`: the lookup answers "who represents this
+   * district now", and a district whose seat changed hands has a current
+   * holder. This block is what lets the page say who cast the rest of that
+   * district's votes instead of only that somebody did.
+   */
+  retired,
 };
 
 const target = resolve(ROOT, 'public/data/members_89R.json');

@@ -51,6 +51,18 @@ interface MemberFile {
   itemOrder: string[];
   members: Member[];
   provenance: { sittingHouseMembers: number; unnamedVoters: number };
+  /**
+   * Former members who voted this session and hold no current district.
+   *
+   * Separate from `members` on purpose: the lookup answers who represents a
+   * district NOW, and a seat that changed hands has a current holder. This is
+   * what lets the page name who cast the rest of that district's votes instead
+   * of only saying somebody did.
+   *
+   * Optional because the build reaches the retired roster over the network and
+   * degrades to the unnamed count when it cannot.
+   */
+  retired?: { id: string; name: string; district: number; until: string; voted: number }[];
 }
 
 /**

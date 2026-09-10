@@ -1827,8 +1827,18 @@ function renderRepOut(): void {
       // Two strings, because the plural one renders "1 people voted in this
       // session but are not in this lookup" at n=1, and one is what the count
       // actually is once Senate roll calls stop being counted as House ones.
+      // Named when the retired roster reached the build, which is what makes
+      // this useful to the one reader most affected: somebody looking up the
+      // district whose seat changed hands and seeing a partial record.
+      const former = repFile.retired?.[0];
       html += `<p class="rep-excluded">${esc(
-        excluded === 1 ? t('rep.excludedOne') : t('rep.excluded', { n: excluded }),
+        excluded === 1 && former
+          ? t('rep.excludedOne', {
+              name: former.name,
+              district: former.district,
+              votes: former.voted.toLocaleString(),
+            })
+          : t('rep.excluded', { n: excluded }),
       )}</p>`;
     }
   }
