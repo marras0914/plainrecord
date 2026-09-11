@@ -57,7 +57,7 @@
     "status": "ok"
   },
   "verdict.weakLoad.caveat": {
-    "en": "On the ones you answered, Republicans and Democrats mostly voted the same way. So your answers do not say much about which party you are closer to — whichever way they fell.",
+    "en": "On the ones you answered, Republicans and Democrats mostly voted the same way. So your answers do not say much about which party you are closer to, whichever way they fell.",
     "es": "En los que respondió, republicanos y demócratas votaron casi siempre del mismo modo. Así que sus respuestas no dicen mucho sobre a qué partido está más cerca, en ninguna dirección.",
     "where": "Same readout.",
     "vars": [],
@@ -122,7 +122,7 @@
     "status": "ok"
   },
   "verdict.nearMiddle.caveat": {
-    "en": "Not because you split between the parties — the votes you answered mostly fell close to the line between them anyway.",
+    "en": "Not because you split between the parties. The votes you answered mostly fell close to the line between them anyway.",
     "es": "No porque se divida entre los partidos, sino porque los votos que respondió ya caían cerca de la línea entre ellos.",
     "where": "Same readout.",
     "vars": [],
@@ -244,7 +244,7 @@
     "status": "ok"
   },
   "result.keepGoing": {
-    "en": "Keep answering — {left} left",
+    "en": "Keep answering, {left} left",
     "es": "Seguir respondiendo: quedan {left}",
     "where": "On the result, when questions remain unanswered.",
     "vars": [
@@ -408,7 +408,7 @@
     "status": "ok"
   },
   "intro.p2": {
-    "en": "For each one we count how many Republicans said yes, and how many Democrats said yes. Mostly Republicans? We colour it <span class=\"sw-r\">red</span>. Mostly Democrats? <span class=\"sw-b\">Blue</span>. Both parties agreed? <span class=\"sw-g\">Grey</span> — that vote doesn't tell us much about sides.",
+    "en": "For each one we count how many Republicans said yes, and how many Democrats said yes. Mostly Republicans? We colour it <span class=\"sw-r\">red</span>. Mostly Democrats? <span class=\"sw-b\">Blue</span>. Both parties agreed? <span class=\"sw-g\">Grey</span>. That vote doesn't tell us much about sides.",
     "es": "En cada uno contamos cuántos republicanos votaron a favor y cuántos demócratas votaron a favor. ¿Sobre todo republicanos? Lo pintamos de <span class=\"sw-r\">rojo</span>. ¿Sobre todo demócratas? <span class=\"sw-b\">Azul</span>. ¿Los dos partidos de acuerdo? <span class=\"sw-g\">Gris</span>, porque ese voto no nos dice mucho sobre bandos.",
     "where": "Header explainer.",
     "vars": [],
@@ -422,14 +422,14 @@
     "status": "ok"
   },
   "intro.p4": {
-    "en": "Then we show you <b>what these areas actually look like in Texas today</b> — school funding, health coverage, and so on — with the source for every number.",
+    "en": "Then we show you <b>what these areas actually look like in Texas today</b> (school funding, health coverage, and so on), with the source for every number.",
     "es": "Después le mostramos <b>cómo están realmente estas áreas en Texas hoy</b>: financiamiento escolar, cobertura de salud y otras, con la fuente de cada cifra.",
     "where": "Header explainer.",
     "vars": [],
     "status": "ok"
   },
   "intro.fine": {
-    "en": "Nobody's opinion decides the colours. They come from the actual vote counts, and you can check them on every question. The outcome numbers are real too, but a state ranking has many causes — we show you the numbers and the votes, and leave the connecting to you.",
+    "en": "Nobody's opinion decides the colours. They come from the actual vote counts, and you can check them on every question. The outcome numbers are real too, but a state ranking has many causes. We show you the numbers and the votes, and leave the connecting to you.",
     "es": "La opinión de nadie decide los colores. Salen de los conteos reales de votos, y usted puede verificarlos en cada pregunta. Las cifras de resultados también son reales, pero la posición de un estado tiene muchas causas: le mostramos las cifras y los votos, y la conexión la hace usted.",
     "where": "Header explainer, fine print.",
     "vars": [],
@@ -443,7 +443,7 @@
     "status": "ok"
   },
   "bias.p1": {
-    "en": "It would, if we scored anyone else. So we don't. A score here needs one thing — the same bills, voted on by both of you. Only members of the Texas House have that. All {n} candidates above sit in the Texas House. Every one of the people they are running against does not:",
+    "en": "It would, if we scored anyone else. So we don't. A score here needs one thing: the same bills, voted on by both of you. Only members of the Texas House have that. All {n} candidates above sit in the Texas House. Every one of the people they are running against does not:",
     "es": "Lo haría, si calificáramos a alguien más. Por eso no lo hacemos. Una calificación aquí necesita una sola cosa: los mismos proyectos de ley, votados por ambos. Solo los miembros de la Cámara de Representantes de Texas tienen eso. Los {n} candidatos de arriba están en la Cámara de Texas. Ninguna de las personas contra las que compiten lo está:",
     "where": "Incumbency card, opening.",
     "vars": [
@@ -453,14 +453,14 @@
     "status": "ok"
   },
   "bias.p2": {
-    "en": "So they get no number at all — not a low one, not an estimate. Any score we printed for them would be votes we made up.",
+    "en": "So they get no number at all, not a low one, not an estimate. Any score we printed for them would be votes we made up.",
     "es": "Así que no reciben ninguna cifra: ni baja, ni estimada. Cualquier calificación que imprimiéramos para ellos serían votos que nos inventamos.",
     "where": "Incumbency card.",
     "vars": [],
     "status": "ok"
   },
   "bias.p3": {
-    "en": "What stops this being a page about {n} Democrats. Under every one of the {items} questions we also show {total} sitting House members — {reps} Republicans and {dems} Democrats.",
+    "en": "What stops this being a page about {n} Democrats. Under every one of the {items} questions we also show {total} sitting House members: {reps} Republicans and {dems} Democrats.",
     "es": "Lo que evita que esta sea una página sobre {n} demócratas. Debajo de cada una de las {items} preguntas mostramos también a {total} miembros en funciones de la Cámara: {reps} republicanos y {dems} demócratas.",
     "where": "Incumbency card, the both-caucuses defence.",
     "vars": [
@@ -486,7 +486,7 @@
     "status": "ok"
   },
   "bias.p4": {
-    "en": "Where an opponent does leave a mark. On {acts} of the {items} there is a recorded action on the exact bill — a veto, or a bill named a must-pass priority. We show it under that question and we never add it to a tally.",
+    "en": "Where an opponent does leave a mark. On {acts} of the {items} there is a recorded action on the exact bill: a veto, or a bill named a must-pass priority. We show it under that question and we never add it to a tally.",
     "es": "Donde un oponente sí deja huella. En {acts} de las {items} hay una acción registrada sobre ese mismo proyecto: un veto, o un proyecto declarado prioridad obligada. La mostramos debajo de esa pregunta y nunca la sumamos a un conteo.",
     "where": "Incumbency card.",
     "vars": [
@@ -496,7 +496,7 @@
     "status": "ok"
   },
   "bias.fine": {
-    "en": "One rule picks all {total} of those names, and it cannot be tuned question by question. So if you think it is doing work it shouldn't, the rule is the thing to argue with — and every vote behind it is in {payload}. The other half of this answer is {authorLink}.",
+    "en": "One rule picks all {total} of those names, and it cannot be tuned question by question. So if you think it is doing work it shouldn't, the rule is the thing to argue with, and every vote behind it is in {payload}. The other half of this answer is {authorLink}.",
     "es": "Una sola regla escoge los {total} nombres, y no se puede ajustar pregunta por pregunta. Así que si cree que está haciendo un trabajo que no debería, la regla es lo que hay que discutir, y cada voto detrás de ella está en {payload}. La otra mitad de esta respuesta es {authorLink}.",
     "where": "Bias card fine print. {authorLink} is an anchor to #author-card.",
     "vars": [
@@ -514,7 +514,7 @@
     "status": "ok"
   },
   "author.built": {
-    "en": "<b>I'm Marco Arras, and I built this on my own time.</b> Nobody paid for it — no campaign, no party, no PAC, no organisation. There was no budget. The cost was evenings.",
+    "en": "<b>I'm Marco Arras, and I built this on my own time.</b> Nobody paid for it. No campaign, no party, no PAC, no organisation. There was no budget. The cost was evenings.",
     "es": "<b>Soy Marco Arras y hice esto en mi propio tiempo.</b> Nadie lo pagó: ninguna campaña, ningún partido, ningún PAC, ninguna organización. No hubo presupuesto. El costo fueron mis noches.",
     "where": "Authorship card, first paragraph.",
     "vars": [],
@@ -576,7 +576,7 @@
     "status": "ok"
   },
   "mode.shortDesc": {
-    "en": "Seven of the session's biggest fights — the bills the Lieutenant Governor made priorities or the Governor vetoed. <b>Six of the seven split cleanly along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all {n} to find where you cross over.",
+    "en": "Seven of the session's biggest fights: the bills the Lieutenant Governor made priorities or the Governor vetoed. <b>Six of the seven split cleanly along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all {n} to find where you cross over.",
     "es": "Siete de las peleas más grandes de la sesión: los proyectos que el Vicegobernador hizo prioridades o que el Gobernador vetó. <b>Seis de las siete dividieron limpiamente por línea partidista</b>, así que esta versión casi solo puede decirle hacia qué partido se inclina. Cambie a los {n} votos para encontrar dónde cruza.",
     "where": "Mode bar description, 7-issue mode.",
     "vars": [
@@ -596,7 +596,7 @@
     "status": "ok"
   },
   "cand.note": {
-    "en": "All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together — where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
+    "en": "All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together. Where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
     "es": "Los tres estuvieron en la misma cámara y compiten por cargos distintos, así que estas son tres lecturas separadas, no una clasificación. Votaron juntos en la mayoría de los proyectos de línea partidista, así que espere que las cifras queden cerca; donde se separan es la parte interesante. Cobertura sobre estos {items} votos: {coverage}. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
     "where": "Under the three candidate score cards.",
     "vars": [
@@ -656,7 +656,7 @@
     "status": "ok"
   },
   "preset.note": {
-    "en": "The first two produce almost the same <code>net lean</code> — a single blended swatch would render both as the same purple. They are opposite findings, so the readout separates them on <code>partisan load</code>.",
+    "en": "The first two produce almost the same <code>net lean</code>: a single blended swatch would render both as the same purple. They are opposite findings, so the readout separates them on <code>partisan load</code>.",
     "es": "Los dos primeros producen casi la misma <code>inclinación neta</code>: una sola muestra mezclada pintaría ambos del mismo morado. Son hallazgos opuestos, así que la lectura los separa por <code>carga partidista</code>.",
     "where": "Under the preset buttons.",
     "vars": [],
@@ -907,7 +907,7 @@
     "status": "ok"
   },
   "stats.load.low": {
-    "en": "very low — these votes barely split the parties",
+    "en": "very low: these votes barely split the parties",
     "es": "muy baja: estos votos apenas dividieron a los partidos",
     "where": "Stat tile note, weak load.",
     "vars": [],
@@ -998,7 +998,7 @@
     "status": "ok"
   },
   "q.blind": {
-    "en": "blind — party not shown",
+    "en": "blind: party not shown",
     "es": "a ciegas: no se muestra el partido",
     "where": "Eyebrow on each question.",
     "vars": [],
@@ -1065,7 +1065,7 @@
     "status": "ok"
   },
   "q.receiptBody": {
-    "en": "Valence is the Republican Yea share minus the Democratic Yea share — measured, not judged.",
+    "en": "Valence is the Republican Yea share minus the Democratic Yea share. Measured, not judged.",
     "es": "La valencia es el porcentaje republicano a favor menos el porcentaje demócrata a favor: medida, no juzgada.",
     "where": "Receipt body.",
     "vars": [],
@@ -1116,7 +1116,7 @@
     "status": "ok"
   },
   "rev.threeRaces": {
-    "en": "The three races — how they voted on {bill}",
+    "en": "The three races: how they voted on {bill}",
     "es": "Las tres contiendas: cómo votaron en {bill}",
     "where": "Reveal heading.",
     "vars": [
@@ -1200,7 +1200,7 @@
     "status": "ok"
   },
   "rev.compareNote": {
-    "en": "None of these six is on the ballot. From each caucus: the most party-line member, the median, and the one who most often broke ranks — the same rule on both sides, recomputed every build, so the comparison is not a pick of names.",
+    "en": "None of these six is on the ballot. From each caucus: the most party-line member, the median, and the one who most often broke ranks. The same rule on both sides, recomputed every build, so the comparison is not a pick of names.",
     "es": "Ninguno de estos seis está en la boleta. De cada bancada: el miembro más de línea partidista, el mediano y el que más veces rompió filas; la misma regla en los dos lados, recalculada en cada compilación, para que la comparación no sea una selección de nombres.",
     "where": "Comparator note.",
     "vars": [],
@@ -1244,7 +1244,7 @@
     "status": "ok"
   },
   "rev.oppSignedNote": {
-    "en": "A governor signs most of what reaches him, so a signature means he did not object — not that he pushed for it.",
+    "en": "A governor signs most of what reaches him, so a signature means he did not object, not that he pushed for it.",
     "es": "Un gobernador firma la mayoría de lo que le llega, así que una firma significa que no se opuso, no que lo impulsara.",
     "where": "Caveat under the opponent rows whenever a signature is one of them.",
     "vars": [],
@@ -1258,7 +1258,7 @@
     "status": "ok"
   },
   "rev.oppNote": {
-    "en": "Not votes — neither of them votes in the House, so these are not counted above. And each list runs one way only: a governor vetoes just the bills he opposes, a priority list names just the bills its author wants passed. That is why you see a side on this bill and never a percentage.",
+    "en": "Not votes: neither of them votes in the House, so these are not counted above. And each list runs one way only: a governor vetoes just the bills he opposes, a priority list names just the bills its author wants passed. That is why you see a side on this bill and never a percentage.",
     "es": "No son votos: ninguno de ellos vota en la Cámara, así que no se cuentan arriba. Y cada lista corre en un solo sentido: un gobernador veta solo los proyectos que rechaza, y una lista de prioridades nombra solo los proyectos que su autor quiere aprobar. Por eso ve una postura en este proyecto y nunca un porcentaje.",
     "where": "Opponent block note. Load-bearing: it is why acts are never aggregated.",
     "vars": [],
@@ -1426,7 +1426,7 @@
     "status": "ok"
   },
   "method.where.body": {
-    "en": "These are real votes the Texas House took. We use one vote per bill, so no bill is asked about twice. Then we sort the bills into 20 subject areas — the same list the state's own library uses — and take at most {perCat} from each area.",
+    "en": "These are real votes the Texas House took. We use one vote per bill, so no bill is asked about twice. Then we sort the bills into 20 subject areas, the same list the state's own library uses, and take at most {perCat} from each area.",
     "es": "Son votos reales que emitió la Cámara de Texas. Usamos un voto por proyecto, así que ningún proyecto se pregunta dos veces. Después clasificamos los proyectos en 20 materias, la misma lista que usa la biblioteca legislativa del estado, y tomamos como máximo {perCat} de cada materia.",
     "where": "Method paragraph body.",
     "vars": [
@@ -1466,7 +1466,7 @@
     "status": "ok"
   },
   "method.seven.body": {
-    "en": "We picked these by hand, but not by our own opinion. Each one is a bill the Lieutenant Governor called a top priority, or a bill the Governor vetoed. Those are their published lists, not ours. Each question shows why it made the list. Six of the seven split the two parties sharply — that is what a headline fight is.",
+    "en": "We picked these by hand, but not by our own opinion. Each one is a bill the Lieutenant Governor called a top priority, or a bill the Governor vetoed. Those are their published lists, not ours. Each question shows why it made the list. Six of the seven split the two parties sharply, which is what a headline fight is.",
     "es": "Las escogimos a mano, pero no según nuestra propia opinión. Cada una es un proyecto que el Vicegobernador declaró prioridad, o que el Gobernador vetó. Esas son sus listas publicadas, no las nuestras. Cada pregunta muestra por qué entró en la lista. Seis de las siete dividieron a los dos partidos con claridad, y eso es lo que hace una pelea de portada.",
     "where": "Method paragraph body.",
     "vars": [],
@@ -1515,7 +1515,7 @@
     "status": "ok"
   },
   "bias.clearestCase": {
-    "en": "{name} is the clearest case — {why}",
+    "en": "{name} is the clearest case: {why}",
     "es": "{name} es el caso más claro: {why}",
     "where": "Tail of the bias card opponent-action paragraph.",
     "vars": [
@@ -1550,7 +1550,7 @@
     "status": "ok"
   },
   "outc.rankAria": {
-    "en": "{value} — {comparison}",
+    "en": "{value}, {comparison}",
     "es": "{value}: {comparison}",
     "where": "Outcome reveal line.",
     "vars": [
@@ -1673,7 +1673,7 @@
     "status": "ok"
   },
   "page.translationNotice": {
-    "en": "Everything we wrote ourselves is in Spanish. The official bill captions stay in English, exactly as they appear in the record — translating them would make them something other than the record.",
+    "en": "Everything we wrote ourselves is in Spanish. The official bill captions stay in English, exactly as they appear in the record. Translating them would make them something other than the record.",
     "es": "Todo lo que escribimos nosotros está en español. Los títulos oficiales de los proyectos de ley se quedan en inglés, tal como constan en el registro: traducirlos los convertiría en otra cosa.",
     "where": "Shown on the Spanish page only, after the header explainer.",
     "vars": [],
@@ -1781,7 +1781,7 @@
     "status": "ok"
   },
   "og.imageAlt": {
-    "en": "The Purple Strip — a blind quiz on {n} real Texas House votes. A blue-to-red axis labelled \"agreed with Democrats\" and \"agreed with Republicans\", with {dots} purple dots spread across its whole width.",
+    "en": "The Purple Strip: a blind quiz on {n} real Texas House votes. A blue-to-red axis labelled \"agreed with Democrats\" and \"agreed with Republicans\", with {dots} purple dots spread across its whole width.",
     "es": "La Franja Morada — un cuestionario a ciegas sobre {n} votos reales de la Cámara de Texas. Un eje de azul a rojo rotulado \"coincidió con los demócratas\" y \"coincidió con los republicanos\", con {dots} puntos morados repartidos por todo su ancho.",
     "where": "og:image:alt and twitter:image:alt.",
     "vars": [
@@ -1815,7 +1815,7 @@
     "status": "ok"
   },
   "method.labels.body": {
-    "en": "The rule picked {ruleSelected} votes, at most {perCat} per subject, and we added {headline} big bills by hand — the {items} questions here. Count the subjects in the data file today and you will not get that back. After the votes were picked we corrected six subject labels that were wrong on the page: <em>Abortion</em> sat above a question about prosecuting election crimes. Correcting a label cannot reach back and change which votes the rule chose, so what you are counting is the corrected labels over the original picks. We would rather show you that than quietly relabel and let the arithmetic look tidy.",
+    "en": "The rule picked {ruleSelected} votes, at most {perCat} per subject, and we added {headline} big bills by hand: the {items} questions here. Count the subjects in the data file today and you will not get that back. After the votes were picked we corrected six subject labels that were wrong on the page: <em>Abortion</em> sat above a question about prosecuting election crimes. Correcting a label cannot reach back and change which votes the rule chose, so what you are counting is the corrected labels over the original picks. We would rather show you that than quietly relabel and let the arithmetic look tidy.",
     "es": "La regla escogió {ruleSelected} votos, como máximo {perCat} por materia, y nosotros añadimos a mano {headline} proyectos importantes — las {items} preguntas de aquí. Si hoy cuenta las materias en el archivo de datos, esa cuenta no le saldrá. Después de escoger los votos corregimos seis etiquetas de materia que estaban mal en la página: <em>Aborto</em> aparecía encima de una pregunta sobre perseguir delitos electorales. Corregir una etiqueta no puede volver atrás y cambiar qué votos escogió la regla, así que lo que usted cuenta son las etiquetas corregidas sobre la selección original. Preferimos enseñarle eso antes que reetiquetar en silencio y dejar que la cuenta parezca limpia.",
     "where": "Method section body, under method.labels.lead.",
     "vars": [
@@ -2196,7 +2196,7 @@
     "status": "ok"
   },
   "share.what": {
-    "en": "Nothing is sent unless you tap that. If you do, one request carries where you landed, three numbers about your answers, and which way you answered each vote — no name, no address, nothing that identifies you. Only totals are kept.",
+    "en": "Nothing is sent unless you tap that. If you do, one request carries where you landed, three numbers about your answers, and which way you answered each vote. No name, no address, nothing that identifies you. Only totals are kept.",
     "es": "No se envía nada a menos que lo toque. Si lo hace, una sola petición lleva dónde quedó, tres números sobre sus respuestas y en qué sentido respondió cada voto: sin nombre, sin dirección, sin nada que revele su identidad. Solo se guardan totales.",
     "where": "Explanatory line under the share button, before it is pressed.",
     "vars": [],
@@ -2289,9 +2289,7 @@
     "en": "Somebody has challenged you on the same seven votes. Answer them first, then you will see how the two of you compare.",
     "es": "Alguien le ha lanzado un desafío con los mismos siete votos. Respóndalos primero y luego verá cómo se comparan los dos.",
     "where": "Line on the opening screen when the address carries a shared result.",
-    "vars": [
-      "label"
-    ],
+    "vars": [],
     "note": "REWRITTEN for the blind compare. The old version named the sender's position, which was the whole problem: it spoiled the answer before the recipient had judged anything. It now says only that a challenge exists. The sender's result is not on this screen, not in the markup, and not in the link preview, because the answers travel in a fragment no crawler can read. Uses the dative \"le ha lanzado un desafio\" rather than \"lo ha desafiado\": the direct-object pronoun assumes a male reader, and the rest of the file sidesteps that the same way.",
     "status": "ok"
   },

@@ -37,8 +37,18 @@ const problems = [];
 const fail = (key, msg) => { failures++; problems.push({ key, msg }); };
 
 const placeholders = (s) => [...String(s).matchAll(/\{(\w+)\}/g)].map((m) => m[1]);
-const setEq = (a, b) =>
-  a.length === b.length && [...a].sort().join() === [...b].sort().join();
+// A SET, as the name and the comment below both say. It used to compare
+// multisets: length first, then the sorted join. That made a string fail for
+// using one of its own variables twice, which rep.excludedOne does legitimately
+// ("{name} also represented district {district} ... so district {district}
+// shows"), and no declaration could satisfy it short of listing "district"
+// twice. Membership is the thing being checked; how often a sentence needs a
+// value is the sentence's business.
+const setEq = (a, b) => {
+  const x = [...new Set(a)].sort();
+  const y = [...new Set(b)].sort();
+  return x.length === y.length && x.join() === y.join();
+};
 
 for (const [key, e] of entries) {
   for (const field of ['en', 'es', 'where', 'status']) {
