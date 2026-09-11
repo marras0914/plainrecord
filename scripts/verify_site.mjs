@@ -118,6 +118,18 @@ if (withHeaders) {
   console.log(`\n  serving dist/ with vercel.json headers on ${URL_UNDER_TEST}`);
 }
 
+/**
+ * Whether the target is a local server, and therefore whether this run is
+ * allowed to press anything that WRITES.
+ *
+ * Read once here, after both places that can set the target have run, so the
+ * answer cannot drift later in the file.
+ */
+const LOCAL_TARGET = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?(\/|$)/.test(URL_UNDER_TEST);
+if (!LOCAL_TARGET) {
+  console.log(`\n  REMOTE TARGET ${URL_UNDER_TEST} — checks that write are skipped`);
+}
+
 // ---------------------------------------------------------------------------
 // What each preset is supposed to demonstrate
 // ---------------------------------------------------------------------------
@@ -1825,6 +1837,30 @@ try {
         ? `${posts.length} POST(s)`
         : other.length ? `UNEXPECTED ${other.slice(0, 2).join(' | ')}` : 'silent');
 
+    // THIS BUTTON IS NOT A TEST FIXTURE. It is the real opt-in, wired to the
+    // real endpoint, and everything above this line is passive observation
+    // while everything below it WRITES.
+    //
+    // Pointed at https://rightnleft.com this section once posted a fabricated
+    // submission into the production tally: seven invented "yes" answers and a
+    // 0.4 prediction, which scored into lean bin 8 and became the only
+    // right-of-centre reading in a set of thirty-one. A counter cannot be
+    // edited from the page that fed it, and the published finding at the time
+    // was that nobody had landed right of centre. One stray test run is enough
+    // to make a dataset lie, which is the reason a verifier of a site whose
+    // whole claim is that the numbers are real must never be able to add to
+    // them.
+    //
+    // So the press is refused anywhere but a local target. The passive checks
+    // above still run against production, because watching that nothing leaves
+    // an unpressed page is exactly the assertion worth making about the live
+    // site.
+    if (!LOCAL_TARGET) {
+      page.off('request', record);
+      console.log(`  [SKIP] share: not pressing the opt-in against ${new URL(URL_UNDER_TEST).host}`);
+      console.log('         the send path writes to the real tally; run it locally');
+    } else {
+
     // Now press it. There is no API under `vite preview`, so the request fails
     // and the button has to say so — which is the path worth checking, because
     // the success path tells the reader the truth by accident and the failure
@@ -1878,6 +1914,8 @@ try {
     const label = ((await btnEl?.textContent()) ?? '').trim();
     check('share: a failed send says so, rather than leaving the reader to assume',
       /go through|nothing was counted/i.test(label), label);
+
+    }
   }
 
   // ---------------------------------------------------------------------------
