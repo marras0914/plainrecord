@@ -1295,14 +1295,19 @@ function renderQuestion(): void {
         revealFor = queue[cursor].id;
       }
       render();
+      // The reveal, not the Next button: a reader who cannot see the card needs
+      // to hear how the House actually voted, not just be handed the exit.
+      focusNew(document.querySelector('#q-card .q-reveal') ?? document.querySelector('#q-card .q-ask'));
     });
   });
 
   document.getElementById('q-next')?.addEventListener('click', () => {
     cursor++;
     revealFor = null;
-    if (cursor >= queue.length) { view = 'result'; showView(); window.scrollTo(0, 0); }
+    const toResult = cursor >= queue.length;
+    if (toResult) { view = 'result'; showView(); window.scrollTo(0, 0); }
     render();
+    focusNew(toResult ? document.querySelector('#result-view .readout-head, #result-view h1, #result-view h2') : document.querySelector('#q-card .q-ask'));
   });
 
   document.getElementById('q-result-now')?.addEventListener('click', () => {
@@ -1310,6 +1315,7 @@ function renderQuestion(): void {
     showView();
     render();
     window.scrollTo(0, 0);
+    focusNew(document.querySelector('#result-view .readout-head, #result-view h1, #result-view h2'));
   });
 
   document.getElementById('official-btn')?.addEventListener('click', () => {
@@ -1452,6 +1458,34 @@ function renderBias(): void {
  * The choice is per-browser and stored locally; nothing about it is sent
  * anywhere, which keeps the page's claim that it transmits nothing true.
  */
+/**
+ * Move focus to content that has just replaced what the reader was looking at.
+ *
+ * WITHOUT THIS THE QUIZ IS BARELY OPERABLE BY KEYBOARD. Every screen here is a
+ * swap inside one document: pressing Yes destroys the button that had focus and
+ * builds a new card in its place, so focus falls back to <body>. Measured
+ * before this existed, focus was lost on Start, on the guess, and on every one
+ * of the seven answers. A sighted mouse user never notices. Anyone on a keyboard
+ * lands at the top of the document and has to tab past the header, the method
+ * link and the skip control to reach the Next button, seven times, and a screen
+ * reader announces nothing at all because nothing was focused and nothing was
+ * marked as live.
+ *
+ * The target is the new content rather than the next control, so a screen reader
+ * reads what just happened instead of only naming the way out of it. tabindex
+ * -1 makes a heading or a panel focusable without adding it to the tab order,
+ * which is the whole point: it can be landed on, but it is never tabbed to.
+ *
+ * preventScroll, because these calls are paired with an explicit scrollTo and
+ * the browser's own scroll-into-view would fight it.
+ */
+function focusNew(el: Element | null): void {
+  const target = el as HTMLElement | null;
+  if (!target) return;
+  if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+  target.focus({ preventScroll: true });
+}
+
 function showView(): void {
   const set = (id: string, on: boolean) => {
     const e = document.getElementById(id);
@@ -1548,6 +1582,7 @@ function beginQuiz(): void {
   showView();
   render();
   window.scrollTo(0, 0);
+  focusNew(document.querySelector('#q-card .q-ask'));
 }
 
 /** The five words for a position, matching the labels on the guess slider. */
@@ -1638,6 +1673,7 @@ function bindStart(): void {
     view = 'guess';
     showView();
     window.scrollTo(0, 0);
+    focusNew(document.querySelector('#guess-view h1, #guess-view h2'));
   });
 
   // Straight to the rest of the page, for a reader who did not come to play.
@@ -1648,6 +1684,7 @@ function bindStart(): void {
     showView();
     render();
     window.scrollTo(0, 0);
+    focusNew(document.querySelector('#result-view .readout-head, #result-view h1, #result-view h2'));
   });
 
   // The old introduction, kept in full but folded away. It is a good

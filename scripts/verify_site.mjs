@@ -2034,6 +2034,150 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // Accessibility: the parts a rendering check cannot reach
+  //
+  // An axe pass over every view and both themes is clean, and axe finding
+  // nothing is roughly where the guarantee stops. The three things below are
+  // the ones it structurally cannot see, and all three were broken here.
+  //
+  // Its own context, so nothing above depends on where this leaves the page.
+  // ---------------------------------------------------------------------------
+  {
+    const a11yCtx = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    const ap = await a11yCtx.newPage();
+    await ap.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+
+    // --- 1. Every colour used for text, measured from the tokens -------------
+    //
+    // NOT from what happens to be rendered, which is how three of these got
+    // through: --good, --warn and --pole-blue all failed AA in light mode while
+    // axe reported a clean page, because the badges and labels that use them
+    // only appear for outcome categories a given run does not always pull in. A
+    // contrast failure that depends on which questions you answered is still a
+    // contrast failure, and it should not take the right quiz to find it.
+    const TEXT_TOKENS = ['--ink', '--ink-2', '--muted',
+      '--pole-red-ink', '--pole-blue-ink', '--good-ink', '--warn-ink'];
+
+    for (const theme of ['light', 'dark']) {
+      await ap.evaluate((t) => document.documentElement.setAttribute('data-theme', t), theme);
+      await ap.waitForTimeout(80);
+      const worst = await ap.evaluate((tokens) => {
+        const srgb = (c) => (c / 255 <= 0.04045 ? c / 255 / 12.92 : ((c / 255 + 0.055) / 1.055) ** 2.4);
+        const hex = (s) => {
+          const m = s.trim().match(/^#?([0-9a-f]{6})$/i);
+          if (!m) return null;
+          const n = parseInt(m[1], 16);
+          return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+        };
+        const lum = ([r, g, b]) => 0.2126 * srgb(r) + 0.7152 * srgb(g) + 0.0722 * srgb(b);
+        const cs = getComputedStyle(document.documentElement);
+        const grounds = ['--page', '--surface']
+          .map((g) => [g, hex(cs.getPropertyValue(g))]).filter(([, v]) => v);
+        let worst = null;
+        for (const tok of tokens) {
+          const fg = hex(cs.getPropertyValue(tok));
+          if (!fg) { return { tok, ratio: 0, ground: 'UNDEFINED' }; }
+          for (const [gName, bg] of grounds) {
+            const [a, b] = [lum(fg), lum(bg)].sort((x, y) => y - x);
+            const ratio = (a + 0.05) / (b + 0.05);
+            if (!worst || ratio < worst.ratio) worst = { tok, ratio, ground: gName };
+          }
+        }
+        return worst;
+      }, TEXT_TOKENS);
+
+      check(`${theme}: every text colour meets WCAG AA against both grounds`,
+        worst && worst.ratio >= 4.5,
+        worst ? `worst is ${worst.tok} on ${worst.ground} at ${worst.ratio.toFixed(2)}:1` : 'nothing measured');
+    }
+    await ap.evaluate(() => document.documentElement.removeAttribute('data-theme'));
+
+    // --- 2. Focus survives every screen change -------------------------------
+    //
+    // This whole quiz is one document swapping its own contents, so a control
+    // that is pressed is usually destroyed by what it triggers, and focus falls
+    // to <body>. Measured before it was fixed: lost on Start, lost on the
+    // guess, and lost on all seven answers. Keyboard-only, that means being
+    // returned to the top of the document and tabbing past the header to reach
+    // Next, every question; with a screen reader it means silence, because
+    // nothing was focused and nothing was marked live.
+    const focused = () => ap.evaluate(() => {
+      const a = document.activeElement;
+      if (!a || a === document.body || a === document.documentElement) return 'BODY';
+      return `${a.tagName.toLowerCase()}${a.id ? '#' + a.id : ''}${a.className ? '.' + String(a.className).split(' ')[0] : ''}`;
+    });
+
+    await ap.click('#start-btn');
+    await ap.waitForTimeout(250);
+    let f = await focused();
+    check('focus moves into the guess screen, not to the body', f !== 'BODY', f);
+
+    await ap.evaluate(() => {
+      const el = document.getElementById('guess-slider');
+      el.value = '0.4';
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await ap.click('#guess-go');
+    await ap.waitForTimeout(250);
+    f = await focused();
+    check('focus lands on the question itself once the quiz starts',
+      /q-ask/.test(f), f);
+
+    await ap.click('#q-card [data-answer="1"]');
+    await ap.waitForTimeout(250);
+    f = await focused();
+    check('focus lands on the reveal after answering, so it is read aloud',
+      /q-reveal|q-ask/.test(f), f);
+
+    await ap.click('#q-next');
+    await ap.waitForTimeout(250);
+    f = await focused();
+    check('focus lands on the next question, not back at the top', /q-ask/.test(f), f);
+
+    // --- 3. Nothing you have to hit is smaller than 24x24 --------------------
+    //
+    // WCAG 2.2 AA. The inline exception is real and is applied rather than
+    // worked around: a link inside a sentence is sized by the line-height of
+    // the prose around it, and padding it would break the paragraph. Only
+    // standalone controls are held to the floor. "X" in the share row was the
+    // worst at 9x20, which is a link you would have to aim at.
+    for (let i = 0; i < 40; i++) {
+      if (await ap.isVisible('#readout')) break;
+      if (await ap.isVisible('#q-card [data-answer="1"]')) {
+        await ap.click('#q-card [data-answer="1"]'); await ap.waitForTimeout(70); continue;
+      }
+      if (await ap.isVisible('#q-next')) { await ap.click('#q-next'); await ap.waitForTimeout(70); continue; }
+      break;
+    }
+    await ap.waitForTimeout(300);
+
+    const small = await ap.evaluate(() => {
+      const inProse = (el) => {
+        const p = el.parentElement;
+        if (!p) return false;
+        // A link is "inline" when the element around it holds text of its own.
+        const own = [...p.childNodes]
+          .filter((n) => n.nodeType === 3).map((n) => n.textContent.trim()).join('');
+        return own.length > 0;
+      };
+      const out = [];
+      for (const e of document.querySelectorAll('a[href],button,input,select,summary,[role=button]')) {
+        if (e.offsetParent === null) continue;
+        const r = e.getBoundingClientRect();
+        if (r.width === 0) continue;
+        if (r.width >= 24 && r.height >= 24) continue;
+        if (e.tagName === 'A' && inProse(e)) continue;
+        out.push(`${e.tagName.toLowerCase()}.${String(e.className).split(' ')[0] || '?'} ${Math.round(r.width)}x${Math.round(r.height)}`);
+      }
+      return out;
+    });
+    check('every standalone control is at least 24x24',
+      small.length === 0, small.join(', ') || 'result view swept');
+
+    await a11yCtx.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // The Spanish page
   //
   // Only runs if the build emitted one — scripts/build_locales.mjs holds /es/

@@ -24,6 +24,24 @@
     --pole-blue:#2a78d6; --pole-red:#e34948; --neutral-mark:#898781;
     --band:rgba(137,135,129,0.10); --shadow:rgba(11,11,11,0.06); --focus:#2a78d6;
     --good:#0ca30c; --warn:#b8860b;
+    /* THE SAME HUES, DARKENED ENOUGH TO BE READ AS WORDS.
+
+       A colour that is legible as a 9px swatch or a chart fill is not
+       necessarily legible as text, and all four of these failed WCAG AA in
+       light mode when set in type: red 3.89, blue 4.35, green 3.30, amber
+       3.20. axe caught only the red, because it is the only one of the four
+       that happened to be on screen in the states it audited -- the green and
+       amber badges render for outcomes this quiz's categories did not pull in.
+       A contrast failure that depends on which questions you answered is still
+       a contrast failure.
+
+       So the pole tokens keep their values, because those are the chart's
+       meaning and they clear the 3:1 that WCAG asks of graphics, and text gets
+       its own darker set: 5.16, 5.60, 5.44 and 5.24 against the surface. Dark
+       mode already passed at 4.79 and up, so there the two sets are the same
+       colour. */
+    --pole-red-ink:#c8352f; --pole-blue-ink:#1f66bd;
+    --good-ink:#087a08; --warn-ink:#8a6508;
   }
   /* NO prefers-color-scheme HERE, ON PURPOSE.
 
@@ -42,6 +60,11 @@
     --pole-blue:#3987e5; --pole-red:#e66767; --neutral-mark:#898781;
     --band:rgba(137,135,129,0.14); --shadow:rgba(0,0,0,0.4); --focus:#3987e5;
     --good:#0ca30c; --warn:#d8a531;
+    /* Already 4.79:1 or better against both dark grounds, so text and mark can
+       be the same colour here. Declared anyway rather than inherited, so the
+       light values can never leak into dark through a missed override. */
+    --pole-red-ink:#e66767; --pole-blue-ink:#3987e5;
+    --good-ink:#0ca30c; --warn-ink:#d8a531;
   }
 
 
@@ -190,8 +213,8 @@
   .blurb p { margin:0 0 9px; font-size:16px; line-height:1.62; }
   .blurb b { font-weight:600; }
   .blurb-fine { font-size:13.5px !important; color:var(--ink-2); }
-  .sw-r { color:var(--pole-red); font-weight:600; }
-  .sw-b { color:var(--pole-blue); font-weight:600; }
+  .sw-r { color:var(--pole-red-ink); font-weight:600; }
+  .sw-b { color:var(--pole-blue-ink); font-weight:600; }
   .sw-g { color:var(--muted); font-weight:600; }
 
   .modebar { display:flex; justify-content:space-between; align-items:center; gap:16px;
@@ -220,13 +243,18 @@
   .outc-rank { display:inline-block; font-family:"IBM Plex Mono",ui-monospace,monospace;
                font-size:10px; letter-spacing:0; text-transform:none;
                border:1px solid currentColor; padding:1px 6px; margin-top:7px; }
-  .st-bottom { color:var(--pole-red); }
+  .st-bottom { color:var(--pole-red-ink); }
   .st-middle { color:var(--muted); }
-  .st-top { color:var(--good); }
+  .st-top { color:var(--good-ink); }
   .st-neutral { color:var(--ink-2); }
   .omit { font-size:12px; color:var(--muted); margin-top:10px; font-style:italic; }
   .outc-src { font-size:11.5px; color:var(--muted); margin-top:7px; }
-  .outc-src a { color:var(--ink-2); }
+  /* WCAG 2.2 asks 24x24 of anything you have to hit. This link was 34x16, the
+     only control on the page under it, and it is the one that takes a reader to
+     the evidence, which is not a thing to make people aim at. Padding rather
+     than a bigger font, so the source line keeps its weight in the row. */
+  .outc-src a { color:var(--ink-2); display:inline-block; padding:4px 2px;
+                min-height:24px; line-height:16px; }
   .outc-cav { font-size:12px; color:var(--muted); margin-top:5px; font-style:italic; }
   .causal { border-left:3px solid var(--rule); padding:2px 0 2px 14px; margin-top:14px;
             font-size:13px; color:var(--ink-2); }
@@ -275,9 +303,11 @@
   /* Comparators are a disclosure, not a section: available in one click, never
      competing with the three races above it. */
   .cmp { margin-top:12px; border-top:1px solid var(--hair); padding-top:9px; }
+  /* 886x19 before the padding: wide enough to hit easily, but the 24x24 rule
+     is about the box, not the area, and a 19px-tall control fails it. */
   .cmp > summary { cursor:pointer; font-size:12.5px; color:var(--ink-2);
                    list-style:none; display:flex; flex-wrap:wrap; gap:7px;
-                   align-items:baseline; }
+                   align-items:baseline; padding:3px 0; min-height:24px; }
   .cmp > summary::-webkit-details-marker { display:none; }
   .cmp > summary::before { content:"+"; font-family:"IBM Plex Mono",ui-monospace,monospace;
                            color:var(--muted); width:1ch; }
@@ -334,7 +364,11 @@
              color:var(--ink-2); white-space:nowrap; }
   .opp-side { font-size:11.5px; color:var(--muted); white-space:nowrap; }
   .op-same .opp-side { color:var(--ink-2); font-weight:500; }
-  .opp-src { font-size:10.5px; color:var(--muted); }
+  /* Same 24px floor as .outc-src a, and for the same reason: this is the link
+     to the evidence behind a claim about a named candidate. It is a link, not
+     a footnote mark, whatever its size suggests. */
+  .opp-src { font-size:10.5px; color:var(--muted); display:inline-block;
+             padding:4px 2px; min-height:24px; line-height:16px; }
   .opp-note { margin-top:8px; font-size:11.5px; line-height:1.5; color:var(--muted); }
 
   /* The incumbency card. Two columns — who, and why they have no votes — with the
@@ -411,7 +445,13 @@
   .compare-card .compare-line { font-size:19px; line-height:1.45; margin:12px 0 0; max-width:46ch; }
   .compare-card .compare-pos { font-size:15px; color:var(--ink-2); margin:8px 0 0; max-width:52ch; }
   .share-targets { display:flex; gap:14px; align-items:center; font-size:13px; }
-  .share-targets a { color:var(--ink-2); text-underline-offset:3px; }
+  /* Standalone controls in a row, so WCAG 2.2's 24x24 floor applies: the
+     inline-in-a-sentence exemption is for links inside prose, and these are a
+     toolbar. "X" was the worst of them at 9x20. Vertical padding only, so the
+     row keeps its height and the gap keeps them apart. */
+  .share-targets a { color:var(--ink-2); text-underline-offset:3px;
+                     display:inline-flex; align-items:center; justify-content:center;
+                     min-height:24px; min-width:24px; }
   .share-targets a:hover { color:var(--ink); }
   /* The link itself, shown so a reader can select it by hand when the clipboard
      API is unavailable, which happens more often than it should. */
@@ -469,7 +509,7 @@
      the result screen: the result is the product, and adding to the count is a
      favour the reader may decline without missing anything. */
   .share-note { font-size:12.5px; color:var(--muted); margin:10px 0 0; max-width:60ch; }
-  .share-done { color:var(--good); border-color:var(--hair); }
+  .share-done { color:var(--good-ink); border-color:var(--hair); }
 
   .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); }
   .stat { background:var(--surface); padding:15px 16px; }
@@ -624,7 +664,7 @@
   .rep-out { margin-top:16px; }
   .rep-note { font-size:12.5px; color:var(--muted); margin-top:8px; line-height:1.5;
               max-width:64ch; }
-  .rep-thin { color:var(--warn); }
+  .rep-thin { color:var(--warn-ink); }
   .rep-excluded { font-size:12px; color:var(--muted); margin-top:14px;
                   padding-top:11px; border-top:1px solid var(--hair); max-width:64ch; }
   @media (max-width:520px) {
