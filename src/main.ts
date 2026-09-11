@@ -1954,10 +1954,40 @@ function renderRepOut(): void {
 }
 
 function renderOutcomes(): void {
-  const answered = new Set(
-    activeItems().filter((i) => answers[i.id] === 1 || answers[i.id] === -1).map((i) => i.category),
-  );
-  const shown = DATA.outcomes.filter((o) => answered.has(o.category)).map(pes.outcome);
+  // ORDERED BY THE READER'S OWN RUN, not by the order these were written in.
+  //
+  // The old order was outcomes.ts's array order, which is simply the order the
+  // indicators were added. Nobody chose it, and what it produced was a panel
+  // that opened with five straight `bottom` standings: the first figure that
+  // was not an indictment appeared sixth, and the first thing Texas does well
+  // appeared tenth. That is the exact failure outcomes.ts says it exists to
+  // avoid, since a panel where every number indicts reads as advocacy and gets
+  // dismissed as such. The data was mixed; the order hid the mixture below the
+  // fold.
+  //
+  // Following the queue fixes it without anyone deciding which of these matters
+  // most, which is a judgement this page does not get to make: a reader would
+  // be equally right that the border spending or the firearm rate belongs on
+  // top. The reader's own path sets the order, and the balance improves as a
+  // side effect, because the questions are not sequenced by how badly Texas
+  // does on them.
+  //
+  // `queue`, not activeItems(): the short run is sorted by how party-coded each
+  // bill is and the full run interleaves categories, so the array order is not
+  // the order anybody was actually asked.
+  const order: string[] = [];
+  for (const it of queue) {
+    const a = answers[it.id];
+    if (a !== 1 && a !== -1) continue;
+    if (!order.includes(it.category)) order.push(it.category);
+  }
+  const rank = new Map(order.map((c, n) => [c, n]));
+  // Stable, so two indicators in one category keep the order they were written
+  // in and the only thing this changes is which category leads.
+  const shown = DATA.outcomes
+    .filter((o) => rank.has(o.category))
+    .sort((a, b) => (rank.get(a.category) as number) - (rank.get(b.category) as number))
+    .map(pes.outcome);
   const card = el('outcome-card');
   if (!shown.length) { card.hidden = true; return; }
   card.hidden = false;

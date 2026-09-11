@@ -1012,6 +1012,72 @@ try {
   check('outcomes appear after answering', !(await page.$eval('#outcome-card', (e) => e.hidden)));
   const rows = await page.$$eval('.outc-row', (ds) => ds.length);
   check('at least one sourced indicator shown', rows > 0, `${rows} rows`);
+
+  // The box follows the reader, not outcomes.ts's array order.
+  //
+  // Captured from the run rather than re-derived from the payload: repeating
+  // buildQueue's sort here would let the two drift apart and still agree with
+  // each other. The category is read off each question as it is answered, then
+  // the panel is asserted to present those categories in the same relative
+  // order.
+  //
+  // What this is really protecting is the balance. The array order opened with
+  // five straight `bottom` standings, so a reader who did not scroll saw a
+  // panel that only indicted, which outcomes.ts says is the way to get the
+  // whole thing dismissed as advocacy.
+  {
+    const oc = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    const op = await oc.newPage();
+    await beginQuiz(op, URL_UNDER_TEST);
+
+    // The question is mapped back to its category through the payload, because
+    // ".q-cat" renders the item's LABEL when it has one ("School vouchers"),
+    // not the category the outcomes are keyed by. Reading the question text and
+    // looking it up is observation; re-implementing buildQueue's sort here
+    // would be duplication that could drift and still agree with itself.
+    const qp = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+    const norm = (s) => s.replace(/\s+/g, ' ').trim().toLowerCase();
+    const catOf = new Map();
+    for (const it of qp.items) {
+      if (it.plain) catOf.set(norm(it.plain), it.category.toLowerCase());
+      if (it.caption) catOf.set(norm(it.caption), it.category.toLowerCase());
+    }
+
+    const asked = [];
+    let unmapped = 0;
+    for (let i = 0; i < 40; i++) {
+      if (await op.isVisible('#readout')) break;
+      if (await op.isVisible('#q-card [data-answer="1"]')) {
+        const cat = catOf.get(norm(await op.$eval('.q-ask', (e) => e.textContent)));
+        if (cat) { if (!asked.includes(cat)) asked.push(cat); } else unmapped++;
+        await op.click('#q-card [data-answer="1"]');
+        await op.waitForTimeout(80);
+        continue;
+      }
+      if (await op.isVisible('#q-next')) { await op.click('#q-next'); await op.waitForTimeout(80); continue; }
+      break;
+    }
+    // If the lookup silently failed, `asked` would be empty and every ordering
+    // assertion below would pass on nothing.
+    check('every question asked was matched to a category',
+      unmapped === 0 && asked.length > 0, `${asked.length} categories, ${unmapped} unmatched`);
+    await op.waitForTimeout(300);
+
+    // ".outc-cat" is "Category · Label"; only the category half is wanted.
+    const shownCats = (await op.$$eval('.outc-row .outc-cat',
+      (ds) => ds.map((d) => d.textContent.split('·')[0].trim().toLowerCase())))
+      .filter((c, i, a) => a.indexOf(c) === i);
+
+    const expected = asked.filter((c) => shownCats.includes(c));
+    check('the indicators follow the order the questions were asked in',
+      shownCats.join('|') === expected.join('|'),
+      `shown: ${shownCats.join(', ')}`);
+    check('and every indicator shown belongs to a category that was asked about',
+      shownCats.every((c) => asked.includes(c)),
+      shownCats.filter((c) => !asked.includes(c)).join(', ') || `${shownCats.length} checked`);
+
+    await oc.close();
+  }
   const src = await page.$eval('.outc-src a', (e) => e.getAttribute('href'));
   check('every indicator links to its source', /^https?:\/\//.test(src), src);
 
