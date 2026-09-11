@@ -345,32 +345,62 @@ try {
   // The general guard, rather than a test for the one phrase that was found.
   // Everything a reader can see before committing is searched for anything that
   // names a party, a partisan officeholder, or a leadership priority.
+  //
+  // ACROSS ALL SEVEN, not just the one on screen. The leak was on every
+  // headline item, and a check that only ever read question one would have
+  // passed while six others still carried "Lt. Gov. priority bill". Whichever
+  // question a defect lands on, some run has to open it.
   {
     const CUES = [
       'republican', 'democrat', 'gop', 'lt. gov', 'lt gov', 'lieutenant governor',
       'governor', 'abbott', 'patrick', 'priority bill', 'emergency item',
       'caucus', 'conservative', 'progressive',
     ];
-    const visible = (await page.$eval('#q-card', (e) => e.innerText)).toLowerCase();
-    const found = CUES.filter((c) => visible.includes(c));
-    check('no party cue is visible on the question before it is answered',
-      found.length === 0, found.join(', ') || `${CUES.length} cues searched`);
 
-    // And the same for the markup, so a cue hidden in an attribute or a
-    // collapsed panel cannot be read out of the page either.
-    const markup = (await page.$eval('#q-card', (e) => e.innerHTML)).toLowerCase();
-    const inMarkup = CUES.filter((c) => markup.includes(c));
-    check('and none is in the markup of the unanswered card',
-      inMarkup.length === 0, inMarkup.join(', ') || 'clean');
+    const dirty = [];
+    let seen = 0;
+    let whyAfterAnswer = null;
+
+    for (let i = 0; i < 40; i++) {
+      if (await onResult(page)) break;
+      if (!(await page.isVisible('#q-card [data-answer="1"]'))) break;
+      seen++;
+
+      // Visible text and markup both: a cue parked in an attribute or a
+      // collapsed panel is still a cue, and is still readable off the page.
+      const [visible, markup] = await page.$eval('#q-card', (e) => [
+        e.innerText.toLowerCase(), e.innerHTML.toLowerCase(),
+      ]);
+      const hit = CUES.filter((c) => visible.includes(c) || markup.includes(c));
+      if (hit.length) dirty.push(`q${seen}: ${hit.join(', ')}`);
+
+      if ((await page.$$('.q-why')).length) dirty.push(`q${seen}: .q-why rendered unanswered`);
+
+      await page.click('#q-card [data-answer="1"]');
+      await page.waitForTimeout(220);
+
+      // Method information must be MOVED, not lost. Checked on the first
+      // question, where the expected sentence is known.
+      if (seen === 1) {
+        whyAfterAnswer = (await page.$$('.q-why')).length
+          ? (await page.$eval('.q-why', (e) => e.textContent.trim()))
+          : '';
+      }
+      if (await page.isVisible('#q-next')) {
+        await page.click('#q-next');
+        await page.waitForTimeout(220);
+      }
+    }
+
+    check('every question in the short quiz was opened', seen === 7, `${seen} of 7`);
+    check('no party cue on ANY question before it is answered',
+      dirty.length === 0, dirty.join(' | ') || `${seen} questions x ${CUES.length} cues`);
+
+    // It must still appear once the answer is in, or the method information has
+    // simply been lost rather than moved.
+    check('the reason for the pick appears AFTER answering',
+      /marquee fight/i.test(whyAfterAnswer ?? ''), whyAfterAnswer || 'missing');
   }
-
-  // It must still appear once the answer is in, or the method information has
-  // simply been lost rather than moved.
-  await page.click('#q-card button[data-answer="1"]');
-  await page.waitForTimeout(250);
-  check('the reason for the pick appears AFTER answering',
-    /marquee fight/i.test(await page.$eval('.q-why', (e) => e.textContent.trim())),
-    (await page.$$('.q-why')).length ? 'shown' : 'missing');
   // Back to a FRESH, unanswered question one for everything that follows.
   // Clicking Next would leave the run on question two, and every later check
   // here is written against the voucher bill. Five of them failed that way
