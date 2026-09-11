@@ -529,6 +529,14 @@
     "note": "HIGHEST STAKES STRING IN THE FILE. It is the disclosure the whole project's credibility rests on, and the verifier asserts it appears before the editorial-choice paragraph. Reviewer: check it reads as a plain admission and not as a boast about transparency.",
     "status": "ok"
   },
+  "author.ai": {
+    "en": "<b>I used AI to build this.</b> The code and most of the writing were drafted with Claude and edited by me. None of it touches the record. Every vote, count and date comes from the Texas House journals and LegiScan, the arithmetic is checked on every build, and the whole file is downloadable, so you can check any figure here against the source instead of taking my word for it.",
+    "es": "<b>Usé inteligencia artificial para hacer esto.</b> El código y la mayor parte de los textos los redactó Claude y yo los edité. Nada de eso toca el registro. Cada voto, conteo y fecha viene de los diarios de la Cámara de Texas y de LegiScan, la aritmética se comprueba en cada compilación, y el archivo completo se puede descargar, así que usted puede verificar cualquier cifra de esta página contra la fuente en lugar de creerme a mí.",
+    "where": "Authorship card, third paragraph, after author.donation and before author.job.",
+    "vars": [],
+    "note": "Added 11 September 2026 after a reader on r/texas identified the prose as AI-drafted before the site had said so anywhere. Covers the code as well as the writing: a disclosure that admits only the prose is the kind that gets found out later. The middle sentence is the load-bearing one, because the honest worry on hearing \"AI wrote this\" is that the numbers might be invented, so it answers that and hands over the means to check rather than asking to be believed.",
+    "status": "ok"
+  },
   "author.job": {
     "en": "<b>What I do for a living.</b> I work as a solutions architect in energy. The sector buys and sells power, which overlaps the utilities votes on this page, so you should weigh what I say about those accordingly. My employer had no involvement in this, did not fund it and did not review it. I do no paid political work of any kind.",
     "es": "<b>A qué me dedico.</b> Trabajo como arquitecto de soluciones en el sector energético. El sector compra y vende energía, lo cual se cruza con los votos sobre servicios públicos de esta página, así que debería ponderar en consecuencia lo que yo diga sobre esos. Mi empleador no tuvo participación en esto, no lo financió y no lo revisó. No hago ningún tipo de trabajo político remunerado.",
