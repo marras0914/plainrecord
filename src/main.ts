@@ -1205,7 +1205,19 @@ function renderQuestion(): void {
     // The question, in the largest type on the page.
     `<h2 class="q-ask"${it.plain ? '' : ' lang="en"'}>${esc(asked)}</h2>` +
     (it.plain ? '' : `<p class="q-note">${esc(t('q.askedAs'))}</p>`) +
-    (it.why ? `<p class="q-why">${esc(it.why)}</p>` : '') +
+    // WHY THIS VOTE WAS PICKED, AND ONLY AFTER THE ANSWER.
+    //
+    // This used to render before the buttons, and it broke the one rule the
+    // whole design rests on. Six of the seven headline items end "Lt. Gov.
+    // priority bill" and a seventh names two Republican leaders, so the default
+    // quiz put a party cue on every single question while claiming the party
+    // was hidden. A reader on r/texas spotted it within an hour of the post.
+    //
+    // The line itself is worth keeping: why a vote was chosen is method
+    // information a reader is owed. It belongs with the rest of the method,
+    // which is to say beside the vote totals and the party, after the answer is
+    // locked in and a cue can no longer do any harm.
+    (it.why && answered ? `<p class="q-why">${esc(it.why)}</p>` : '') +
 
     (answered
       ? ''

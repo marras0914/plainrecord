@@ -319,8 +319,52 @@ try {
   const meta = await page.$eval('.q-top', (e) => e.textContent.replace(/\s+/g, ' ').trim());
   check('boots in 7-issue mode', /^1 of 7/.test(meta), meta);
   check('question 1 is the school voucher vote', /School vouchers/.test(meta), meta);
-  check('the reason for the pick is shown',
-    /marquee fight/i.test(await page.$eval('.q-why', (e) => e.textContent.trim())));
+  // THE CHECK THAT USED TO ASSERT THE BUG.
+  //
+  // It read: "the reason for the pick is shown", and it passed on an unanswered
+  // card. But six of the seven headline items end "Lt. Gov. priority bill", so
+  // what it was really asserting was that a party cue appears before the reader
+  // answers, on a site whose entire claim is that the party is hidden. A test
+  // can encode a defect as confidently as it encodes a requirement.
+  check('the reason for the pick is NOT shown before answering',
+    (await page.$$('.q-why')).length === 0,
+    `${(await page.$$('.q-why')).length} .q-why on an unanswered card`);
+
+  // The general guard, rather than a test for the one phrase that was found.
+  // Everything a reader can see before committing is searched for anything that
+  // names a party, a partisan officeholder, or a leadership priority.
+  {
+    const CUES = [
+      'republican', 'democrat', 'gop', 'lt. gov', 'lt gov', 'lieutenant governor',
+      'governor', 'abbott', 'patrick', 'priority bill', 'emergency item',
+      'caucus', 'conservative', 'progressive',
+    ];
+    const visible = (await page.$eval('#q-card', (e) => e.innerText)).toLowerCase();
+    const found = CUES.filter((c) => visible.includes(c));
+    check('no party cue is visible on the question before it is answered',
+      found.length === 0, found.join(', ') || `${CUES.length} cues searched`);
+
+    // And the same for the markup, so a cue hidden in an attribute or a
+    // collapsed panel cannot be read out of the page either.
+    const markup = (await page.$eval('#q-card', (e) => e.innerHTML)).toLowerCase();
+    const inMarkup = CUES.filter((c) => markup.includes(c));
+    check('and none is in the markup of the unanswered card',
+      inMarkup.length === 0, inMarkup.join(', ') || 'clean');
+  }
+
+  // It must still appear once the answer is in, or the method information has
+  // simply been lost rather than moved.
+  await page.click('#q-card button[data-answer="1"]');
+  await page.waitForTimeout(250);
+  check('the reason for the pick appears AFTER answering',
+    /marquee fight/i.test(await page.$eval('.q-why', (e) => e.textContent.trim())),
+    (await page.$$('.q-why')).length ? 'shown' : 'missing');
+  // Back to a FRESH, unanswered question one for everything that follows.
+  // Clicking Next would leave the run on question two, and every later check
+  // here is written against the voucher bill. Five of them failed that way
+  // before this line existed.
+  await beginQuiz(page, URL_UNDER_TEST);
+  
 
   // --- the plain-language gloss ---------------------------------------------
   // The one field on the page written by us rather than copied from the record.
