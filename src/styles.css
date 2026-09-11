@@ -206,8 +206,15 @@
   .outc { border:1px solid var(--hair); background:var(--surface); }
   .outc-row { padding:14px 16px; border-top:1px solid var(--hair); }
   .outc-row:first-of-type { border-top:0; }
-  .outc-cat { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11.5px;
-              letter-spacing:0; text-transform:none; color:var(--muted); }
+  /* The label, not a caption. It was 11.5px in --muted, the smallest and
+     faintest type in the row, while carrying the only words that say what the
+     number underneath it MEANS. A reader on r/texas: the children's health
+     figure "looks like a side note". A figure whose subject is set in the
+     house style for metadata reads as metadata, however large the digits are.
+     13px in --ink-2 (7.33:1), which still sits clearly below the 19px value so
+     the number stays the thing you see first. */
+  .outc-cat { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:13px;
+              letter-spacing:0; text-transform:none; color:var(--ink-2); }
   .outc-val { font-size:19px; font-weight:600; letter-spacing:-0.01em; margin-top:3px; }
   .outc-cmp { font-size:13.5px; color:var(--ink-2); margin-top:2px; }
   .outc-rank { display:inline-block; font-family:"IBM Plex Mono",ui-monospace,monospace;

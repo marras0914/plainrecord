@@ -1015,6 +1015,39 @@ try {
   const src = await page.$eval('.outc-src a', (e) => e.getAttribute('href'));
   check('every indicator links to its source', /^https?:\/\//.test(src), src);
 
+  // The label has to read as the subject of the number, not as its filing code.
+  // It was 11.5px in --muted, the faintest type in the row, and a reader said
+  // the figure it named "looks like a side note". Both halves are asserted:
+  // dark enough to read, and set below the value so the number still leads.
+  {
+    const m = await page.evaluate(() => {
+      const srgb = (c) => (c / 255 <= 0.04045 ? c / 255 / 12.92 : ((c / 255 + 0.055) / 1.055) ** 2.4);
+      const lum = ([r, g, b]) => 0.2126 * srgb(r) + 0.7152 * srgb(g) + 0.0722 * srgb(b);
+      const parse = (s) => (s.match(/[\d.]+/g) ?? []).map(Number);
+      const opaqueBg = (el) => {
+        for (let n = el; n; n = n.parentElement) {
+          const c = parse(getComputedStyle(n).backgroundColor);
+          if (c.length >= 3 && (c[3] === undefined || c[3] > 0)) return c;
+        }
+        return [255, 255, 255];
+      };
+      const read = (sel) => {
+        const el = document.querySelector(sel);
+        if (!el) return null;
+        const cs = getComputedStyle(el);
+        const [a, b] = [lum(parse(cs.color)), lum(opaqueBg(el))].sort((x, y) => y - x);
+        return { ratio: (a + 0.05) / (b + 0.05), px: parseFloat(cs.fontSize) };
+      };
+      return { cat: read('.outc-row .outc-cat'), val: read('.outc-row .outc-val') };
+    });
+
+    check('the indicator label is dark enough to read',
+      m.cat && m.cat.ratio >= 4.5, m.cat ? `${m.cat.ratio.toFixed(2)}:1 at ${m.cat.px}px` : 'no label');
+    check('and the value still leads it',
+      m.cat && m.val && m.val.px > m.cat.px,
+      m.cat && m.val ? `value ${m.val.px}px vs label ${m.cat.px}px` : 'missing');
+  }
+
   await page.click('#table-toggle');
   await page.waitForTimeout(250);
   const cols = await page.$$eval('#table thead th', (ts) => ts.map((t) => t.textContent));
