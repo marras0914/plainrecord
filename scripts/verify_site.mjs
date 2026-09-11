@@ -376,7 +376,59 @@ try {
   // here is written against the voucher bill. Five of them failed that way
   // before this line existed.
   await beginQuiz(page, URL_UNDER_TEST);
-  
+
+  // --- quiet text still has to be readable ----------------------------------
+  //
+  // Same r/texas thread as the party cue: "I wish that top line was darker.
+  // Being greyed out made my eyes completely ignore it." --muted was 3.41:1
+  // against the page, which fails WCAG AA for text this size, and --muted is
+  // what every piece of method on the page is written in: the question counter,
+  // the category, the note naming the official caption, the donation
+  // disclosure. A palette that made the quiet things unreadable was quietly
+  // undoing the disclosure the whole site argues for.
+  //
+  // So the ratio is computed from what the browser actually renders, walking up
+  // for the first non-transparent background rather than assuming the body's.
+  // Asserting the hex would pass while a parent changed underneath it.
+  {
+    const contrasts = await page.evaluate(() => {
+      const srgb = (c) => (c / 255 <= 0.04045 ? c / 255 / 12.92 : ((c / 255 + 0.055) / 1.055) ** 2.4);
+      const lum = ([r, g, b]) => 0.2126 * srgb(r) + 0.7152 * srgb(g) + 0.0722 * srgb(b);
+      const parse = (s) => (s.match(/[\d.]+/g) ?? []).map(Number);
+      const opaqueBg = (el) => {
+        for (let n = el; n; n = n.parentElement) {
+          const c = parse(getComputedStyle(n).backgroundColor);
+          if (c.length >= 3 && (c[3] === undefined || c[3] > 0)) return c;
+        }
+        return [255, 255, 255];
+      };
+      const out = [];
+      for (const sel of ['.q-count', '.q-cat', '.q-ask', '.q-prompt']) {
+        const el = document.querySelector(sel);
+        if (!el || !el.textContent.trim()) continue;
+        const cs = getComputedStyle(el);
+        const [a, b] = [lum(parse(cs.color)), lum(opaqueBg(el))].sort((x, y) => y - x);
+        out.push({
+          sel,
+          ratio: (a + 0.05) / (b + 0.05),
+          px: parseFloat(cs.fontSize),
+          weight: Number(cs.fontWeight) || 400,
+        });
+      }
+      return out;
+    });
+
+    check('the question card reports text to measure', contrasts.length === 4,
+      `${contrasts.length} of 4`);
+
+    for (const { sel, ratio, px, weight } of contrasts) {
+      // WCAG's large-text allowance: 18.66px bold, or 24px at any weight.
+      const large = px >= 24 || (px >= 18.66 && weight >= 700);
+      const need = large ? 3 : 4.5;
+      check(`${sel} meets WCAG AA (${need}:1)`,
+        ratio >= need, `${ratio.toFixed(2)}:1 at ${px}px/${weight}`);
+    }
+  }
 
   // --- the plain-language gloss ---------------------------------------------
   // The one field on the page written by us rather than copied from the record.

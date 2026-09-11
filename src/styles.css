@@ -12,7 +12,15 @@
   :root {
     color-scheme: light;
     --page:#faf7f1; --surface:#fffdf9; --ink:#1a1714; --ink-2:#57514a;
-    --muted:#8c857b; --hair:#e6ded1; --rule:#cabfae;
+    /* --muted was #8c857b, which is 3.41:1 on --page and fails WCAG AA (4.5:1)
+       for text this size. A reader on r/texas put it better than the number
+       does: "I wish that top line was darker. Being greyed out made my eyes
+       completely ignore it." Everything quiet on the page is this colour --
+       the question counter, the category, the notes under the summary, the
+       donation line -- so a shade chosen to recede was making the method
+       recede with it. #6f6a62 is 5.02:1, and still well clear of --ink-2 at
+       7.33:1, so the three-step hierarchy survives being legible. */
+    --muted:#6f6a62; --hair:#e6ded1; --rule:#cabfae;
     --pole-blue:#2a78d6; --pole-red:#e34948; --neutral-mark:#898781;
     --band:rgba(137,135,129,0.10); --shadow:rgba(11,11,11,0.06); --focus:#2a78d6;
     --good:#0ca30c; --warn:#b8860b;
