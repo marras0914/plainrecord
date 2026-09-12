@@ -2100,6 +2100,105 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // Locating a reader from their device
+  //
+  // The claim this panel makes in rep.locatedHow is that the map came to the
+  // device and the coordinate never left it. That is a claim about network
+  // traffic, so it is checked by watching network traffic rather than by
+  // reading the sentence back.
+  // ---------------------------------------------------------------------------
+  {
+    // A point 40 fixture samples agree is inside district 74, chosen well away
+    // from any boundary so the test is not measuring quantisation error.
+    const LON = -104.207361;
+    const LAT = 29.876145;
+    const WANT = 74;
+
+    const lc = await browser.newContext({
+      viewport: { width: 1180, height: 1000 },
+      permissions: ['geolocation'],
+      geolocation: { longitude: LON, latitude: LAT },
+    });
+    const lp = await lc.newPage();
+
+    const reqs = [];
+    lp.on('request', (r) => reqs.push({ url: r.url(), body: (() => {
+      try { return r.postData() ?? ''; } catch { return ''; }
+    })() }));
+
+    await lp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await lp.click('#start-look');
+    await lp.waitForTimeout(400);
+
+    const btn = lp.locator('#rep-locate');
+    check('locate: the representative panel offers to use the device location',
+      (await btn.count()) === 1, `${await btn.count()} button(s)`);
+    check('locate: what it will do is said before the prompt can open',
+      ((await lp.locator('.rep-locate-note').textContent()) ?? '').trim().length > 20,
+      ((await lp.locator('.rep-locate-note').textContent()) ?? '').trim().slice(0, 60));
+
+    // THE LAZY CLAIM. 122 KB has no business arriving for the great majority of
+    // readers who never press this.
+    const fetchedEarly = reqs.filter((r) => /districts_tx_house/.test(r.url));
+    check('locate: the boundaries are NOT downloaded before they are asked for',
+      fetchedEarly.length === 0, `${fetchedEarly.length} request(s)`);
+
+    await btn.click();
+    await lp.waitForTimeout(2500);
+
+    const fetched = reqs.filter((r) => /districts_tx_house/.test(r.url));
+    check('locate: pressing it downloads the boundaries, once',
+      fetched.length === 1, `${fetched.length} request(s)`);
+
+    const box = lp.locator('#rep-district');
+    check('locate: the district box is filled with the answer',
+      (await box.inputValue()) === String(WANT), await box.inputValue());
+
+    const said = ((await lp.locator('#rep-locate-msg').textContent()) ?? '').trim();
+    check('locate: it says which district and which map it used',
+      new RegExp(`\\b${WANT}\\b`).test(said) && /census/i.test(said) && /2024/.test(said),
+      said.slice(0, 120));
+    check('locate: it says the answer can be overridden',
+      /type a different number|escriba otro/i.test(said), said.slice(-60));
+
+    // THE PRIVACY CLAIM, checked against every request the page made rather
+    // than against the sentence that makes it. Six decimal places of either
+    // coordinate appearing anywhere in a URL or a body would falsify it.
+    const lonStr = String(LON).slice(0, 8);
+    const latStr = String(LAT).slice(0, 7);
+    const leaked = reqs.filter((r) =>
+      r.url.includes(lonStr) || r.url.includes(latStr)
+      || r.body.includes(lonStr) || r.body.includes(latStr));
+    check('locate: the coordinate is not in any request the page made',
+      leaked.length === 0,
+      leaked.length ? leaked[0].url.slice(0, 90) : `${reqs.length} requests checked`);
+
+    // Typing over the answer has to retract the explanation, which describes a
+    // district the reader has just replaced.
+    await box.fill('12');
+    await lp.waitForTimeout(300);
+    check('locate: typing a district clears the explanation of the old one',
+      ((await lp.locator('#rep-locate-msg').textContent()) ?? '').trim() === '',
+      ((await lp.locator('#rep-locate-msg').textContent()) ?? '').trim().slice(0, 40) || 'cleared');
+
+    await lc.close();
+
+    // Refusing permission is a normal choice and must be handled as one.
+    const dc = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    const dp = await dc.newPage();
+    await dp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await dp.context().clearPermissions();
+    await dp.click('#start-look');
+    await dp.waitForTimeout(400);
+    await dp.click('#rep-locate');
+    await dp.waitForTimeout(2000);
+    const denied = ((await dp.locator('#rep-locate-msg').textContent()) ?? '').trim();
+    check('locate: a refused prompt points at the two other ways in',
+      /zip|district number|código postal/i.test(denied), denied.slice(0, 90) || 'empty');
+    await dc.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // Accessibility: the parts a rendering check cannot reach
   //
   // An axe pass over every view and both themes is clean, and axe finding

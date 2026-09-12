@@ -1758,6 +1758,15 @@ function renderRep(): void {
       `<input id="rep-district" type="number" min="1" max="150" inputmode="numeric" ` +
       `placeholder="${esc(t('rep.districtPlaceholder'))}"></div>` +
       `</div>` +
+      // Offered only where the browser can actually answer. A button that opens
+      // a permission prompt and then fails is worse than no button.
+      (navigator.geolocation
+        ? `<div class="rep-locate">` +
+          `<button type="button" class="ghost small" id="rep-locate">${esc(t('rep.useLocation'))}</button>` +
+          `<span class="rep-locate-note">${esc(t('rep.locateNote'))}</span>` +
+          `<p class="rep-locate-msg" id="rep-locate-msg" role="status" aria-live="polite"></p>` +
+          `</div>`
+        : '') +
       `<p class="rep-help">${t('rep.findDistrict', { link: stateLookup })}</p>` +
       `<div id="rep-out"></div>`;
 
@@ -1828,6 +1837,59 @@ function renderRep(): void {
       repZipResult = { kind: 'none' };
       void ensure();
       renderRepOut();
+      // Typing is the reader overriding whatever the location said, so the
+      // explanation of where that district came from stops being true.
+      const msg = document.getElementById('rep-locate-msg');
+      if (msg) msg.textContent = '';
+    });
+
+    // --- locating the reader ------------------------------------------------
+    //
+    // The result is written into the district box and then sent down the SAME
+    // path as a typed number, rather than into a private piece of state. One
+    // way for a district to be chosen means the panel below cannot disagree
+    // with the box above about which district is selected, and the reader can
+    // see and correct what was decided for them.
+    const locate = document.getElementById('rep-locate') as HTMLButtonElement | null;
+    locate?.addEventListener('click', () => {
+      const msg = document.getElementById('rep-locate-msg');
+      const setMsg = (s: string) => { if (msg) msg.textContent = s; };
+      setMsg(t('rep.locating'));
+      locate.disabled = true;
+
+      const done = () => { locate.disabled = false; };
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { longitude: lon, latitude: lat } = pos.coords;
+          // Imported here rather than at the top of the file so the decoder and
+          // the 122 KB of boundaries are a separate chunk that only a reader who
+          // asks to be located ever downloads.
+          void import('./districts.js')
+            .then(({ loadDistricts, districtAt, plausibleCoord, DISTRICTS_VINTAGE }) => {
+              if (!plausibleCoord(lon, lat)) { setMsg(t('rep.locateOutside')); return; }
+              return loadDistricts().then((ds) => {
+                const found = districtAt(ds, lon, lat);
+                if (found === null) { setMsg(t('rep.locateOutside')); return; }
+                d.value = String(found);
+                repDistrict = found;
+                repZipResult = { kind: 'none' };
+                void ensure();
+                renderRepOut();
+                setMsg(t('rep.locatedHow', { d: found, year: DISTRICTS_VINTAGE }));
+              });
+            })
+            .catch(() => setMsg(t('rep.locateFailed')))
+            .finally(done);
+        },
+        (err) => {
+          setMsg(err.code === err.PERMISSION_DENIED ? t('rep.locateDenied') : t('rep.locateFailed'));
+          done();
+        },
+        // A district is not a moving target, so a cached fix from the last few
+        // minutes is as good as a new one and much faster.
+        { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 },
+      );
     });
 
     repShell = true;

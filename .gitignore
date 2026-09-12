@@ -28,6 +28,15 @@ dist/
 # the 51 MB of bulk inputs first.
 !/data/tx_evidence_vetoes.json
 
+# Same reasoning as the line above. district_points.fixture.json holds 2,250
+# points with the district that contains them, answered from the Census file at
+# source resolution BEFORE the shipped boundaries were quantised. It is what
+# makes `npm run data:districts:check` a comparison rather than the shipped file
+# agreeing with itself, and regenerating it needs the 900 KB Census download and
+# mapshaper. Uncommitted, the only check that can catch the page telling a
+# reader they live in the wrong district would not run on a fresh clone.
+!/data/district_points.fixture.json
+
 # Belt and braces: these used to live in the ship dir before the WORK_DIR split,
 # so a stale script or an old checkout can still drop them there.
 public/data/tx_bills_*.json

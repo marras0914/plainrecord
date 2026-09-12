@@ -248,6 +248,13 @@ export type CopyKey =
   | "rep.heading"
   | "rep.lede"
   | "rep.districtLabel"
+  | "rep.useLocation"
+  | "rep.locateNote"
+  | "rep.locating"
+  | "rep.locatedHow"
+  | "rep.locateDenied"
+  | "rep.locateFailed"
+  | "rep.locateOutside"
   | "rep.districtPlaceholder"
   | "rep.findDistrict"
   | "rep.findDistrictLinkText"
@@ -561,6 +568,13 @@ export const EN: Record<CopyKey, string> = {
   "rep.heading": "And how did your own representative vote?",
   "rep.lede": "The three above are running for offices that affect every Texan. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
   "rep.districtLabel": "Or your district number",
+  "rep.useLocation": "Use my location",
+  "rep.locateNote": "Your browser will ask first. The boundaries download to your device and the check runs there.",
+  "rep.locating": "Checking where that falls.",
+  "rep.locatedHow": "Your browser gave this page a coordinate and it falls inside district {d}, measured against the Census {year} boundaries for Texas House districts. Nothing was sent anywhere: the map downloaded here and the check ran on your device. Type a different number above if it is wrong.",
+  "rep.locateDenied": "Your browser did not share a location. Type a ZIP or a district number instead.",
+  "rep.locateFailed": "Could not work out a location. Type a ZIP or a district number instead.",
+  "rep.locateOutside": "That location is not inside a Texas House district.",
   "rep.districtPlaceholder": "1 to 150",
   "rep.findDistrict": "If you do not know your district, it is on your voter registration card, or search your address at {link}.",
   "rep.findDistrictLinkText": "the state's own lookup",
@@ -859,6 +873,13 @@ export const ES: Record<CopyKey, string> = {
   "rep.heading": "¿Y cómo votó su propio representante?",
   "rep.lede": "Los tres de arriba se postulan para cargos que afectan a todos los texanos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
   "rep.districtLabel": "O su número de distrito",
+  "rep.useLocation": "Usar mi ubicación",
+  "rep.locateNote": "Su navegador le preguntará primero. Los límites se descargan a su dispositivo y la comprobación ocurre ahí.",
+  "rep.locating": "Comprobando dónde queda.",
+  "rep.locatedHow": "Su navegador le dio a esta página una coordenada y queda dentro del distrito {d}, medida contra los límites del Censo de {year} para los distritos de la Cámara de Texas. No se envió nada a ningún lado: el mapa se descargó aquí y la comprobación ocurrió en su dispositivo. Escriba otro número arriba si no es correcto.",
+  "rep.locateDenied": "Su navegador no compartió una ubicación. Escriba un código postal o un número de distrito.",
+  "rep.locateFailed": "No se pudo determinar una ubicación. Escriba un código postal o un número de distrito.",
+  "rep.locateOutside": "Esa ubicación no está dentro de ningún distrito de la Cámara de Texas.",
   "rep.districtPlaceholder": "1 a 150",
   "rep.findDistrict": "Si no sabe su distrito, está en su tarjeta de registro de votante, o busque su domicilio en {link}.",
   "rep.findDistrictLinkText": "la herramienta del estado",

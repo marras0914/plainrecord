@@ -1880,6 +1880,65 @@
     "vars": [],
     "status": "ok"
   },
+  "rep.useLocation": {
+    "en": "Use my location",
+    "es": "Usar mi ubicación",
+    "where": "Button in the representative lookup, beside the ZIP and district boxes.",
+    "vars": [],
+    "note": "Rendered only when navigator.geolocation exists. A button that opens a permission prompt and then cannot answer is worse than no button.",
+    "status": "ok"
+  },
+  "rep.locateNote": {
+    "en": "Your browser will ask first. The boundaries download to your device and the check runs there.",
+    "es": "Su navegador le preguntará primero. Los límites se descargan a su dispositivo y la comprobación ocurre ahí.",
+    "where": "Beside the locate button, before it is pressed.",
+    "vars": [],
+    "note": "Placed beside the button rather than under it so it is read BEFORE the permission prompt opens, not after the reader has already decided.",
+    "status": "ok"
+  },
+  "rep.locating": {
+    "en": "Checking where that falls.",
+    "es": "Comprobando dónde queda.",
+    "where": "Status line under the locate button while it works.",
+    "vars": [],
+    "note": "In an aria-live region, so a screen reader hears that something is happening.",
+    "status": "ok"
+  },
+  "rep.locatedHow": {
+    "en": "Your browser gave this page a coordinate and it falls inside district {d}, measured against the Census {year} boundaries for Texas House districts. Nothing was sent anywhere: the map downloaded here and the check ran on your device. Type a different number above if it is wrong.",
+    "es": "Su navegador le dio a esta página una coordenada y queda dentro del distrito {d}, medida contra los límites del Censo de {year} para los distritos de la Cámara de Texas. No se envió nada a ningún lado: el mapa se descargó aquí y la comprobación ocurrió en su dispositivo. Escriba otro número arriba si no es correcto.",
+    "where": "Status line under the locate button once a district has been found.",
+    "vars": [
+      "d",
+      "year"
+    ],
+    "note": "States where the coordinate came from, which map it was measured against, where the measuring happened, and how to override it. A page that tells a reader where they live owes them all four, and the last one matters most because the answer can be wrong within about 11 m of a boundary.",
+    "status": "ok"
+  },
+  "rep.locateDenied": {
+    "en": "Your browser did not share a location. Type a ZIP or a district number instead.",
+    "es": "Su navegador no compartió una ubicación. Escriba un código postal o un número de distrito.",
+    "where": "Status line under the locate button when permission is refused.",
+    "vars": [],
+    "note": "Refusing is a normal choice, not an error, so this names the other two ways in rather than reporting a failure.",
+    "status": "ok"
+  },
+  "rep.locateFailed": {
+    "en": "Could not work out a location. Type a ZIP or a district number instead.",
+    "es": "No se pudo determinar una ubicación. Escriba un código postal o un número de distrito.",
+    "where": "Status line under the locate button when locating or the boundary download fails.",
+    "vars": [],
+    "note": "Covers both a geolocation error and a failed boundary download. The reader does not care which it was and both have the same fix.",
+    "status": "ok"
+  },
+  "rep.locateOutside": {
+    "en": "That location is not inside a Texas House district.",
+    "es": "Esa ubicación no está dentro de ningún distrito de la Cámara de Texas.",
+    "where": "Status line under the locate button when the coordinate is in no district.",
+    "vars": [],
+    "note": "Reachable for real: a reader in Oklahoma, or a few hundred metres out into the Gulf. districtAt returns null rather than reaching for the nearest district.",
+    "status": "ok"
+  },
   "rep.districtPlaceholder": {
     "en": "1 to 150",
     "es": "1 a 150",
