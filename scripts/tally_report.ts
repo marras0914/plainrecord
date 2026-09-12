@@ -47,6 +47,7 @@ interface TallyResponse {
   guessed: number;
   guessedReadable: number;
   mode: Record<string, number>;
+  byMode?: Record<string, Record<string, RegionTally>>;
   regions: Record<string, RegionTally>;
   questions: Record<string, { agree: number; disagree: number }>;
   note: string;
@@ -358,6 +359,42 @@ async function main(): Promise<void> {
     );
   }
   if (o.skew !== 0) console.log(`\n  !! histogram/verdict skew ${o.skew} — see consistencyProblem()`);
+
+  // WHICH QUIZ PRODUCED THE READING, which is the difference between a finding
+  // and a property of the instrument.
+  //
+  // Six of the seven headline bills split on party lines, so the short set
+  // cannot return a crossover reading however anyone answers it. Quoting a
+  // crossover rate over a mostly-short sample would be quoting the question set
+  // back. These counters started later than the ones above, so they sum to less
+  // than the totals, which is stated rather than reconciled.
+  if (t.byMode) {
+    console.log('');
+    console.log('  by which quiz was answered (counting began 12 Sep, so below the totals above)');
+    for (const [m, regions] of Object.entries(t.byMode)) {
+      let readable = 0;
+      let cross = 0;
+      let n = 0;
+      for (const r of Object.values(regions)) {
+        n += r.total ?? 0;
+        readable += (r.lean ?? []).reduce((x, y) => x + y, 0);
+        cross += (r.verdict?.crossover ?? 0) + (r.verdict?.balanced ?? 0);
+      }
+      const pct = readable ? Math.round((100 * cross) / readable) : 0;
+      console.log(
+        `  ${m.padEnd(9)}${String(n).padStart(6)} shared${String(readable).padStart(8)} readable` +
+        `   crossover or balanced ${cross}` + (readable ? ` (${pct}%)` : ''),
+      );
+    }
+    const full = t.byMode.full;
+    const fullReadable = full
+      ? Object.values(full).reduce((x, r) => x + (r.lean ?? []).reduce((p, q) => p + q, 0), 0)
+      : 0;
+    if (fullReadable < 30) {
+      console.log(`  !! only ${fullReadable} readable full-set readings. The full set is the only`);
+      console.log('     one that can find crossover, so any such claim rests on these alone.');
+    }
+  }
 
   const say = (label: string, line: Line): void => {
     console.log(`\n${label}`);

@@ -21,7 +21,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 
 import { HEADLINE_ITEMS, ALL_ITEMS } from '../src/quiz-data.js';
-import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed } from './_tally.js';
+import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed, KEYS, MODES, REGIONS } from './_tally.js';
 import type { SharePayload } from './_tally.js';
 
 let pass = 0;
@@ -330,6 +330,63 @@ check('a lookalike host is refused', !originAllowed('https://rightnleft.com.evil
 }
 
 // ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// Counter keys
+//
+// The per-mode counters were added alongside the region-only ones rather than
+// replacing them, so the one way this can go wrong is a key that collides with
+// something already holding data. A collision would not throw: it would
+// silently add short-quiz readings into a hash being read as something else,
+// and the first sign would be a published number that was wrong.
+// ---------------------------------------------------------------------------
+
+{
+  const all = new Map<string, string>();
+  let collision = '';
+  const add = (name: string, key: string) => {
+    if (all.has(key)) collision ||= `${name} collides with ${all.get(key)} at ${key}`;
+    all.set(key, name);
+  };
+
+  add('meta', KEYS.meta());
+  add('region', KEYS.region());
+  add('mode', KEYS.mode());
+  add('questions', KEYS.questions());
+  for (const r of REGIONS) {
+    add(`verdict:${r}`, KEYS.verdict(r));
+    add(`lean:${r}`, KEYS.lean(r));
+    add(`guess:${r}`, KEYS.guess(r));
+    add(`delta:${r}`, KEYS.delta(r));
+    for (const m of MODES) {
+      add(`verdict:${r}:${m}`, KEYS.verdictMode(r, m));
+      add(`lean:${r}:${m}`, KEYS.leanMode(r, m));
+      add(`guess:${r}:${m}`, KEYS.guessMode(r, m));
+      add(`delta:${r}:${m}`, KEYS.deltaMode(r, m));
+    }
+  }
+
+  const expected = 4 + REGIONS.length * 4 * (1 + MODES.length);
+  check('every counter key is distinct', collision === '', collision || `${all.size} keys`);
+  check('the key set is the size it should be', all.size === expected,
+    `${all.size} of ${expected}`);
+
+  // The per-mode key must EXTEND its region key rather than shadow it, so the
+  // two can never be read as each other.
+  const r0 = REGIONS[0];
+  const m0 = MODES[0];
+  check('a per-mode key extends the region key it splits',
+    KEYS.leanMode(r0, m0).startsWith(KEYS.lean(r0) + ':')
+    && KEYS.leanMode(r0, m0) !== KEYS.lean(r0),
+    `${KEYS.lean(r0)} -> ${KEYS.leanMode(r0, m0)}`);
+
+  // Namespacing by deployment environment is what stops a preview writing into
+  // the number a reporter gets quoted. It has to survive on the new keys too.
+  check('the per-mode keys are namespaced like the rest',
+    MODES.every((m) => REGIONS.every((r) => KEYS.leanMode(r, m).startsWith('t:'))),
+    KEYS.leanMode(r0, m0));
+}
+
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);

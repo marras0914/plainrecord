@@ -122,6 +122,26 @@ export const KEYS = {
   delta: (r: Region) => `t:${ns()}:delta:${r}`,
   questions: () => `t:${ns()}:q`,
   rate: (hash: string) => `t:${ns()}:rl:${hash}`,
+
+  // THE SAME FOUR, SPLIT BY WHICH QUIZ WAS ANSWERED.
+  //
+  // Added because the counters above cannot answer the question this site
+  // exists to ask. At 88 readings, 81 of them were the short set, 46 of 73
+  // Texans landed in one bin and `crossover` was exactly zero. That looks like
+  // a finding and is mostly a property of the instrument: six of the seven
+  // headline bills split on party lines, which mode.shortDesc says outright, so
+  // the short quiz CANNOT produce a crossover reading. The full set is the one
+  // that could, and with lean and verdict keyed by region alone there was no
+  // way to look at those readings separately. Reaching the 100 gate would have
+  // proved nothing about the thing being measured.
+  //
+  // Parallel rather than a replacement: the existing keys keep their meaning as
+  // the all-modes total, nothing already counted is stranded, and no migration
+  // has to be got right. The cost is four more hincrby in the same pipeline.
+  leanMode: (r: Region, m: Mode) => `t:${ns()}:lean:${r}:${m}`,
+  verdictMode: (r: Region, m: Mode) => `t:${ns()}:verdict:${r}:${m}`,
+  guessMode: (r: Region, m: Mode) => `t:${ns()}:guess:${r}:${m}`,
+  deltaMode: (r: Region, m: Mode) => `t:${ns()}:delta:${r}:${m}`,
 };
 
 export function redis(): Redis {

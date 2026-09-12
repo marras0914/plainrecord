@@ -18,6 +18,7 @@ import {
   KEYS,
   MODES,
   REGIONS,
+  UNREADABLE_VERDICTS,
   VERDICTS,
   json,
   redis,
@@ -73,6 +74,17 @@ export interface TallyResponse {
   guessedReadable: number;
   mode: Record<Mode, number>;
   regions: Record<Region, RegionTally>;
+  /**
+   * The same per-region tallies, split by which quiz produced them.
+   *
+   * Present because the region-only numbers above cannot answer the question
+   * the site exists to ask. The short set is six-sevenths party-line by
+   * construction and so cannot produce a crossover reading at all; without this
+   * split there is no way to tell a finding about Texans from a property of the
+   * instrument. Counting began later than `regions`, so these sum to less than
+   * the totals above and deliberately are not reconciled to them.
+   */
+  byMode: Record<Mode, Record<Region, RegionTally>>;
   questions: Record<string, { agree: number; disagree: number }>;
   /** Restated in the payload so a consumer cannot quote it as a poll by accident. */
   note: string;
@@ -94,7 +106,16 @@ async function tally(request: Request): Promise<Response> {
       db.hgetall(KEYS.guess(r)) as Promise<Counts>,
       db.hgetall(KEYS.delta(r)) as Promise<Counts>,
     ]),
+    ...MODES.flatMap((m) => REGIONS.flatMap((r) => [
+      db.hgetall(KEYS.verdictMode(r, m)) as Promise<Counts>,
+      db.hgetall(KEYS.leanMode(r, m)) as Promise<Counts>,
+      db.hgetall(KEYS.guessMode(r, m)) as Promise<Counts>,
+      db.hgetall(KEYS.deltaMode(r, m)) as Promise<Counts>,
+    ])),
   ]);
+  // Everything after the region block belongs to the per-mode block, in the
+  // order MODES x REGIONS was flattened above.
+  const perMode = perRegion.splice(REGIONS.length * 4);
 
   const regions = {} as Record<Region, RegionTally>;
   REGIONS.forEach((r, i) => {
@@ -112,6 +133,32 @@ async function tally(request: Request): Promise<Response> {
 
   const mode = {} as Record<Mode, number>;
   for (const m of MODES) mode[m] = num(modeCounts, m);
+
+  // Same fixed shape as `regions`: every mode, every region, every bin, with
+  // explicit zeros. A consumer must not have to tell absent from zero.
+  const byMode = {} as Record<Mode, Record<Region, RegionTally>>;
+  MODES.forEach((m, mi) => {
+    const forMode = {} as Record<Region, RegionTally>;
+    REGIONS.forEach((r, ri) => {
+      const at = (mi * REGIONS.length + ri) * 4;
+      const [vH, lH, gH, dH] = perMode.slice(at, at + 4);
+      const verdict = {} as Record<ProfileVerdict, number>;
+      for (const v of VERDICTS) verdict[v] = num(vH ?? null, v);
+      const lean = bins(lH ?? null);
+      forMode[r] = {
+        // The lean histogram only counts readings that carry a position, so its
+        // sum IS the readable count for this mode and region. There is no
+        // separate per-mode total to keep in step with it.
+        total: lean.reduce((n, x) => n + x, 0)
+          + UNREADABLE_VERDICTS.reduce((n, v) => n + verdict[v], 0),
+        lean,
+        guess: bins(gH ?? null),
+        delta: deltas(dH ?? null),
+        verdict,
+      };
+    });
+    byMode[m] = forMode;
+  });
 
   // The per-question hash is one flat key/count map with `<qid>:agree` fields,
   // so it is split back apart here rather than stored as two keys per question.
@@ -132,6 +179,7 @@ async function tally(request: Request): Promise<Response> {
     guessedReadable: num(meta, 'guessedReadable'),
     mode,
     regions,
+    byMode,
     questions,
     note:
       'Self-selected: these are the people who chose to add their result, not a sample of anyone. ' +

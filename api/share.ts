@@ -109,10 +109,15 @@ async function share(request: Request): Promise<Response> {
     // Always counted, including the unreadable readings: this hash is how
     // "how many could not be read" is answered, so it must see everything.
     pipe.hincrby(KEYS.verdict(region), derived.verdict, 1);
+    pipe.hincrby(KEYS.verdictMode(region, payload.mode), derived.verdict, 1);
 
     if (readable) {
       pipe.hincrby(KEYS.meta(), 'readable', 1);
       pipe.hincrby(KEYS.lean(region), String(derived.bin), 1);
+      // The same reading, filed under which quiz produced it. See KEYS in
+      // _tally.ts for why the region-only counters could not answer the
+      // question the site is for.
+      pipe.hincrby(KEYS.leanMode(region, payload.mode), String(derived.bin), 1);
     }
 
     // The guess counters move only for readers who made a prediction, and the
@@ -127,6 +132,11 @@ async function share(request: Request): Promise<Response> {
         pipe.hincrby(KEYS.meta(), 'guessedReadable', 1);
         pipe.hincrby(KEYS.guess(region), String(binOf(payload.guess)), 1);
         pipe.hincrby(KEYS.delta(region), String(deltaBins(derived.netLean, payload.guess)), 1);
+        pipe.hincrby(KEYS.guessMode(region, payload.mode), String(binOf(payload.guess)), 1);
+        pipe.hincrby(
+          KEYS.deltaMode(region, payload.mode),
+          String(deltaBins(derived.netLean, payload.guess)), 1,
+        );
       }
     }
 
