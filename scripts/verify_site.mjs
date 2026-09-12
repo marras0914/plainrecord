@@ -2126,7 +2126,25 @@ try {
       try { return r.postData() ?? ''; } catch { return ''; }
     })() }));
 
-    await lp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    const landing = await lp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+
+    // THE HEADER THAT TURNED THIS FEATURE OFF IN PRODUCTION WHILE EVERY LOCAL
+    // CHECK PASSED. vercel.json sent `geolocation=()`, which disables the API
+    // for the origin no matter what the reader grants, and `vite preview` sends
+    // no such header, so `npm run verify` could not see it and
+    // `npm run verify:headers` could. Asserted by value now rather than left to
+    // be noticed by a failure downstream, and asserted to be NARROW: self only,
+    // with the camera and microphone still refused outright.
+    const pp = (landing?.headers() ?? {})['permissions-policy'];
+    if (pp) {
+      check('locate: the origin is allowed to ask for a location, and only it',
+        /geolocation=\(self\)/.test(pp), pp.slice(0, 80));
+      check('locate: relaxing it did not relax the camera or the microphone',
+        /camera=\(\)/.test(pp) && /microphone=\(\)/.test(pp), pp.slice(0, 80));
+    } else {
+      console.log('  [SKIP] locate: no Permissions-Policy on this target (run verify:headers)');
+    }
+
     await lp.click('#start-look');
     await lp.waitForTimeout(400);
 
