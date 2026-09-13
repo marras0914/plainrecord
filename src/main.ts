@@ -1943,11 +1943,20 @@ function renderRep(): void {
           // Imported here rather than at the top of the file so the decoder and
           // the 122 KB of boundaries are a separate chunk that only a reader who
           // asks to be located ever downloads.
-          void import('./districts.js')
-            .then(({ loadDistricts, districtAt, plausibleCoord, DISTRICTS_VINTAGE }) => {
+          void import('./boundaries.js')
+            .then(({ loadBoundaries, districtAt, countyAt, plausibleCoord, DISTRICTS_VINTAGE }) => {
               if (!plausibleCoord(lon, lat)) { setMsg(t('rep.locateOutside')); return; }
-              return loadDistricts().then((ds) => {
-                const found = districtAt(ds, lon, lat);
+              return loadBoundaries().then((b) => {
+                // The county comes out of the same file and the same point, and
+                // it answers a different question: during early voting a
+                // registered Texan may vote at ANY early voting location in
+                // their county, so the county name is the whole answer for that
+                // window. Kept even when the district lookup fails, because the
+                // two are independent facts about one coordinate.
+                locatedCounty = countyAt(b.counties, lon, lat);
+                renderElection();
+
+                const found = districtAt(b.districts, lon, lat);
                 if (found === null) { setMsg(t('rep.locateOutside')); return; }
                 d.value = String(found);
                 repDistrict = found;
@@ -2113,6 +2122,11 @@ function renderRepOut(): void {
  * and a wrong one costs somebody their vote. The state's own site is linked
  * instead of guessed at.
  */
+/** The county the reader's own device put them in, once they have asked.
+ *  null until then, and null for anyone outside Texas, which is a real answer
+ *  rather than a missing one. */
+let locatedCounty: string | null = null;
+
 function renderElection(): void {
   const card = el('election-card');
   if (!stillCurrent()) { card.hidden = true; return; }
@@ -2143,6 +2157,12 @@ function renderElection(): void {
       `<div class="vote-row${i === next ? ' vote-next' : ''}">`
       + `<dt>${esc(r.label)}</dt><dd>${esc(r.when)}</dd></div>`).join('')
     + `</dl>`
+    + (locatedCounty
+      // Only when the reader's own device has said so. The site does not guess
+      // at a county from an address it was never given, and a wrong county here
+      // would point somebody at the wrong county's list of locations.
+      ? `<p class="vote-county">${esc(t('vote.countyRule', { county: locatedCounty }))}</p>`
+      : '')
     + `<p class="vote-check">${t('vote.checkLine', { link })}</p>`;
 }
 

@@ -1,11 +1,12 @@
 /**
- * Texas House district boundaries, for locating a reader from their device.
+ * Texas House district AND county boundaries, for locating a reader from their
+ * device.
  *
- *   npm run data:districts            # dry run: says what it would write
- *   npm run data:districts -- --write
+ *   npm run data:boundaries            # dry run: says what it would write
+ *   npm run data:boundaries -- --write
  *
- * Output: public/data/districts_tx_house.topo.json, plus a frozen fixture of
- * sample points that scripts/check_districts.mjs asserts the shipped file still
+ * Output: public/data/boundaries_tx.topo.json, plus a frozen fixture of sample
+ * points that scripts/check_boundaries.mjs asserts the shipped file still
  * answers correctly.
  *
  * WHY THE BOUNDARIES AND NOT THE ZIP TABLE WE ALREADY SHIP
@@ -34,13 +35,27 @@
  * answers would be a bad deal anywhere, and on a page whose argument is that
  * you can check the record it is the wrong kind of cheap.
  *
- * TOPOJSON, NOT GEOJSON
+ * TOPOJSON, NOT GEOJSON, AND BOTH LAYERS IN ONE TOPOLOGY
  *
  * The same geometry is 396 KB gzipped as GeoJSON and 122 KB as TopoJSON,
- * because districts share their borders and TopoJSON stores each shared border
- * once. 80% of this site's traffic is mobile, so that difference is the
- * difference between a usable feature and one nobody waits for. src/districts.ts
- * carries the decoder; it is 40 lines and needs no library.
+ * because a shared border is stored once. 80% of this site's traffic is mobile,
+ * so that difference is the difference between a usable feature and one nobody
+ * waits for. src/boundaries.ts carries the decoder; it is 40 lines and needs no
+ * library.
+ *
+ * Counties ride in the SAME topology rather than a second file, and that is
+ * measured too: 161 KB gzipped together against 122 + 115 = 237 KB apart. The
+ * saving is real because many Texas district lines follow county lines, so the
+ * two layers share arcs and each shared run of boundary is stored once for
+ * both. A reader who asks to be located gets both answers for 39 KB more than
+ * the districts alone used to cost.
+ *
+ * Counties matter because of a rule rather than a dataset: during early voting a
+ * registered Texan may vote at ANY early voting location in their county of
+ * residence. So the county is the whole answer to "where can I vote" for that
+ * window, with no precinct assignment involved. Election day is different and
+ * depends on the Countywide Polling Place Program, whose approvals are published
+ * per election, which is why this ships no polling places.
  *
  * VINTAGE: 2024, AND WHY THAT IS SAFE
  *
@@ -62,13 +77,20 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
 const CACHE = join(ROOT, 'data/cache');
-const OUT = join(ROOT, 'public/data/districts_tx_house.topo.json');
-const FIXTURE = join(ROOT, 'data/district_points.fixture.json');
+const OUT = join(ROOT, 'public/data/boundaries_tx.topo.json');
+const FIXTURE = join(ROOT, 'data/boundary_points.fixture.json');
 
 const VINTAGE = '2024';
 const SOURCE =
   `https://www2.census.gov/geo/tiger/GENZ${VINTAGE}/shp/cb_${VINTAGE}_48_sldl_500k.zip`;
 const ZIP = join(CACHE, `cb_${VINTAGE}_48_sldl_500k.zip`);
+
+// Counties are published nationally only; there is no per-state edition, so the
+// 11.6 MB file is fetched once, cached, and filtered to Texas on the way past.
+const COUNTY_SOURCE =
+  `https://www2.census.gov/geo/tiger/GENZ${VINTAGE}/shp/cb_${VINTAGE}_us_county_500k.zip`;
+const COUNTY_ZIP = join(CACHE, `cb_${VINTAGE}_us_county_500k.zip`);
+const TX_FIPS = '48';
 
 /** ~11 m. See the note above for what this costs and what it buys. */
 const PRECISION = 0.0001;
@@ -81,14 +103,14 @@ const POINTS_PER_DISTRICT = 15;
 const write = process.argv.includes('--write');
 const say = (s) => console.log('  ' + s);
 
-async function fetchCached() {
+async function fetchCached(url, to) {
   if (!existsSync(CACHE)) mkdirSync(CACHE, { recursive: true });
-  if (existsSync(ZIP)) { say(`cached ${ZIP.replace(ROOT, '.')}`); return; }
-  say(`downloading ${SOURCE}`);
-  const res = await fetch(SOURCE);
+  if (existsSync(to)) { say(`cached ${to.replace(ROOT, '.')}`); return; }
+  say(`downloading ${url}`);
+  const res = await fetch(url);
   if (!res.ok) throw new Error(`census returned ${res.status}`);
-  await pipeline(Readable.fromWeb(res.body), createWriteStream(ZIP));
-  say(`downloaded ${(readFileSync(ZIP).length / 1024).toFixed(0)} KB`);
+  await pipeline(Readable.fromWeb(res.body), createWriteStream(to));
+  say(`downloaded ${(readFileSync(to).length / 1024).toFixed(0)} KB`);
 }
 
 /** mapshaper is invoked through npx and is deliberately NOT a dependency: this
@@ -109,32 +131,73 @@ function mapshaper(args) {
   });
 }
 
-console.log('\n  Texas House district boundaries\n');
-await fetchCached();
+console.log('\n  Texas district and county boundaries\n');
+await fetchCached(SOURCE, ZIP);
+await fetchCached(COUNTY_SOURCE, COUNTY_ZIP);
 
-const topoPath = join(CACHE, 'districts.topo.json');
+const topoPath = join(CACHE, 'boundaries.topo.json');
 const fullPath = join(CACHE, 'districts.full.json');
+const countyFullPath = join(CACHE, 'counties.full.json');
+const dLayer = join(CACHE, 'layer_districts.json');
+const cLayer = join(CACHE, 'layer_counties.json');
 
-say('converting to TopoJSON at full topology');
-mapshaper(['-i', ZIP, '-filter-fields', 'SLDLST',
+// Each layer is normalised to its own file first, then the two are combined so
+// mapshaper builds ONE topology across both and every shared run of boundary is
+// stored once. That is what makes counties cost 39 KB rather than 115.
+say('normalising the district layer');
+mapshaper(['-i', ZIP, '-filter-fields', 'SLDLST', '-o', dLayer]);
+
+say('normalising the county layer, filtered to Texas');
+mapshaper(['-i', COUNTY_ZIP, '-filter', `STATEFP === "${TX_FIPS}"`,
+  '-filter-fields', 'NAME,GEOID', '-o', cLayer]);
+
+say('combining into one topology');
+mapshaper(['-i', dLayer, cLayer, 'combine-files',
   '-o', `precision=${PRECISION}`, 'format=topojson', topoPath]);
 
-say('converting to GeoJSON at source resolution, for the fixture');
+say('converting both at source resolution, for the fixtures');
 mapshaper(['-i', ZIP, '-filter-fields', 'SLDLST',
   '-o', 'precision=0.000001', 'format=geojson', fullPath]);
+mapshaper(['-i', COUNTY_ZIP, '-filter', `STATEFP === "${TX_FIPS}"`,
+  '-filter-fields', 'NAME,GEOID', '-o', 'precision=0.000001', 'format=geojson', countyFullPath]);
 
 // --- verify before writing anything ----------------------------------------
 
 const topo = JSON.parse(readFileSync(topoPath, 'utf8'));
-const layer = Object.keys(topo.objects)[0];
-const geoms = topo.objects[layer].geometries;
+const layerNames = Object.keys(topo.objects);
+if (!layerNames.includes('layer_districts') || !layerNames.includes('layer_counties')) {
+  throw new Error(`expected both layers, got ${layerNames.join(', ')}`);
+}
+// Renamed to what the page calls them, so the decoder is not reading a
+// mapshaper input filename out of a shipped file.
+topo.objects.districts = topo.objects.layer_districts;
+topo.objects.counties = topo.objects.layer_counties;
+delete topo.objects.layer_districts;
+delete topo.objects.layer_counties;
 
+const geoms = topo.objects.districts.geometries;
 const ids = geoms.map((g) => Number(g.properties.SLDLST)).sort((a, b) => a - b);
 const expected = Array.from({ length: 150 }, (_, i) => i + 1);
 if (ids.join() !== expected.join()) {
   throw new Error(`expected districts 1-150, got ${ids.length}: ${ids.slice(0, 8).join(',')}...`);
 }
 say(`150 districts, numbered 1 to 150`);
+
+// 254 is not a round number anyone would reach by accident, which makes it a
+// good assertion: a filter that silently matched nothing, or matched the whole
+// country, fails here rather than shipping.
+const counties = topo.objects.counties.geometries;
+if (counties.length !== 254) {
+  throw new Error(`Texas has 254 counties, got ${counties.length}`);
+}
+const outOfState = counties.filter((g) => !String(g.properties.GEOID ?? '').startsWith(TX_FIPS));
+if (outOfState.length) {
+  throw new Error(`${outOfState.length} county/counties outside Texas survived the filter`);
+}
+if (counties.some((g) => !String(g.properties.NAME ?? '').trim())) {
+  throw new Error('a county came through with no name, and the name is what the page shows');
+}
+say(`254 counties, all in state ${TX_FIPS}, all named`);
 
 const [sx, sy] = topo.transform.scale;
 const [tx, ty] = topo.transform.translate;
@@ -186,24 +249,36 @@ const bboxOf = (g) => {
 let seed = 20260912;
 const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
 
-const points = [];
-for (const f of full.features) {
-  const d = Number(f.properties.SLDLST);
-  const [a, b, c, e] = bboxOf(f.geometry);
-  let got = 0, tries = 0;
-  while (got < POINTS_PER_DISTRICT && tries < POINTS_PER_DISTRICT * 500) {
-    tries++;
-    const pt = [
-      Number((a + rnd() * (c - a)).toFixed(6)),
-      Number((b + rnd() * (e - b)).toFixed(6)),
-    ];
-    if (!inGeom(pt, f.geometry)) continue;
-    points.push([pt[0], pt[1], d]);
-    got++;
+/** Points inside each feature, with the id that contains them, at SOURCE
+ *  resolution. Frozen so the check compares the shipped file against something
+ *  else rather than against itself. */
+function sample(features, idOf, what) {
+  const out = [];
+  for (const f of features) {
+    const id = idOf(f);
+    const [a, b, c, e] = bboxOf(f.geometry);
+    let got = 0, tries = 0;
+    while (got < POINTS_PER_DISTRICT && tries < POINTS_PER_DISTRICT * 500) {
+      tries++;
+      const pt = [
+        Number((a + rnd() * (c - a)).toFixed(6)),
+        Number((b + rnd() * (e - b)).toFixed(6)),
+      ];
+      if (!inGeom(pt, f.geometry)) continue;
+      out.push([pt[0], pt[1], id]);
+      got++;
+    }
+    if (got < POINTS_PER_DISTRICT) throw new Error(`could not sample ${what} ${id}`);
   }
-  if (got < POINTS_PER_DISTRICT) throw new Error(`could not sample district ${d}`);
+  return out;
 }
-say(`${points.length} fixture points sampled at source resolution`);
+
+const points = sample(full.features, (f) => Number(f.properties.SLDLST), 'district');
+say(`${points.length} district fixture points sampled at source resolution`);
+
+const countyFull = JSON.parse(readFileSync(countyFullPath, 'utf8'));
+const countyPoints = sample(countyFull.features, (f) => String(f.properties.GEOID), 'county');
+say(`${countyPoints.length} county fixture points sampled at source resolution`);
 
 const out = JSON.stringify(topo);
 say(`output ${(out.length / 1024).toFixed(0)} KB raw`);
@@ -216,13 +291,14 @@ if (!write) {
 writeFileSync(OUT, out, 'utf8');
 writeFileSync(FIXTURE, JSON.stringify({
   _meta: {
-    what: 'Sample points with the district that contains them, answered at Census source resolution.',
-    why: 'scripts/check_districts.mjs asserts the shipped, quantised file still answers these. Frozen from the unsimplified geometry so the check is a comparison, not a tautology.',
-    source: SOURCE,
+    what: 'Sample points with the district and the county that contain them, answered at Census source resolution.',
+    why: 'scripts/check_boundaries.mjs asserts the shipped, quantised file still answers these. Frozen from the unsimplified geometry so the check is a comparison, not a tautology.',
+    sources: [SOURCE, COUNTY_SOURCE],
     vintage: VINTAGE,
-    perDistrict: POINTS_PER_DISTRICT,
+    perFeature: POINTS_PER_DISTRICT,
   },
   points,
+  countyPoints,
 }), 'utf8');
 
 console.log(`\n  wrote ${OUT.replace(ROOT, '.')}`);

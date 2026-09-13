@@ -1,7 +1,7 @@
 /**
  * Does the shipped boundary file still answer the frozen points correctly?
  *
- *   npm run data:districts:check
+ *   npm run data:boundaries:check
  *
  * THE POINT OF THIS CHECK IS THAT THE ANSWERS CAME FROM SOMEWHERE ELSE.
  * data/district_points.fixture.json was sampled from the Census file at source
@@ -20,13 +20,13 @@
 import { readFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { districtAt, _internals } from '../src/districts.ts';
+import { districtAt, countyAt, _internals } from '../src/boundaries.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
 
-const TOPO = join(ROOT, 'public/data/districts_tx_house.topo.json');
-const FIXTURE = join(ROOT, 'data/district_points.fixture.json');
+const TOPO = join(ROOT, 'public/data/boundaries_tx.topo.json');
+const FIXTURE = join(ROOT, 'data/boundary_points.fixture.json');
 
 /** Points within this of a boundary can legitimately fall either side once the
  *  coordinates are rounded to about 11 m. Measured at 0.04% when the file was
@@ -43,9 +43,9 @@ const check = (label, ok, detail = '') => {
 console.log('\n  Texas House district boundaries\n');
 
 const topo = JSON.parse(readFileSync(TOPO, 'utf8'));
-const { points } = JSON.parse(readFileSync(FIXTURE, 'utf8'));
+const { points, countyPoints } = JSON.parse(readFileSync(FIXTURE, 'utf8'));
 
-const districts = _internals.decode(topo);
+const { districts, counties } = _internals.decode(topo);
 
 check('150 districts decode', districts.length === 150, `${districts.length}`);
 
@@ -107,6 +107,64 @@ check('a point outside Texas is in no district',
   districtAt(districts, -97.0, 40.0) === null, 'Nebraska');
 check('a point in the Gulf is in no district',
   districtAt(districts, -94.0, 27.0) === null, 'offshore');
+
+// --- counties ---------------------------------------------------------------
+//
+// The county layer exists for a RULE rather than for a map: during early voting
+// a registered Texan may vote at any early voting location in their county of
+// residence. So the county name is the whole answer for that window, and a
+// wrong name sends somebody to the wrong county's list.
+
+check('254 counties decode', counties.length === 254, `${counties.length}`);
+
+check('every county is named, since the name is what the page says',
+  counties.every((c) => typeof c.name === 'string' && c.name.trim().length > 0),
+  counties.filter((c) => !c.name).length + ' unnamed');
+
+check('every county id is a Texas FIPS code',
+  counties.every((c) => /^48\d{3}$/.test(String(c.id))),
+  counties.filter((c) => !/^48\d{3}$/.test(String(c.id))).map((c) => c.id).slice(0, 4).join(', ')
+    || '48xxx');
+
+check('county names are distinct',
+  new Set(counties.map((c) => c.name)).size === counties.length,
+  `${new Set(counties.map((c) => c.name)).size} of ${counties.length}`);
+
+check('the county fixture has points to check',
+  Array.isArray(countyPoints) && countyPoints.length > 1000,
+  `${countyPoints?.length ?? 0} points`);
+
+{
+  let wrong = 0;
+  let missing = 0;
+  const byCounty = new Map();
+  // The fixture stores the FIPS id; the page answers with the name, so the two
+  // are joined here rather than the fixture storing both and going out of step.
+  const nameOf = new Map(counties.map((c) => [String(c.id), c.name]));
+  for (const [lon, lat, id] of countyPoints) {
+    const got = countyAt(counties, lon, lat);
+    const want = nameOf.get(String(id));
+    if (got === want) continue;
+    if (got === null) missing++; else wrong++;
+    byCounty.set(want, (byCounty.get(want) ?? 0) + 1);
+  }
+  const bad = wrong + missing;
+  const rate = bad / countyPoints.length;
+  check(`counties agree with the source geometry (under ${(TOLERANCE * 100).toFixed(1)}%)`,
+    rate <= TOLERANCE,
+    `${bad} of ${countyPoints.length} disagree (${(rate * 100).toFixed(3)}%), `
+    + `${wrong} wrong county, ${missing} no county`);
+
+  const per = countyPoints.length / 254;
+  const concentrated = [...byCounty.entries()].filter(([, n]) => n > per * 0.25);
+  check('no single county is mostly wrong',
+    concentrated.length === 0,
+    concentrated.map(([c, n]) => `${c}:${n}`).slice(0, 4).join(', ')
+      || `worst off by ${Math.max(0, ...byCounty.values())} of ${per}`);
+}
+
+check('a point outside Texas is in no county',
+  countyAt(counties, -97.0, 40.0) === null, 'Nebraska');
 
 console.log(fails
   ? `\n  ${fails} problem(s)\n`

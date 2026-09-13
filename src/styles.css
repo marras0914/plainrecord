@@ -680,6 +680,12 @@
   .vote-row dd { font-size:15px; margin:0; font-variant-numeric:tabular-nums; }
   .vote-next { border-left:3px solid var(--rule); padding-left:12px; margin-left:-15px; }
   .vote-next dt, .vote-next dd { color:var(--ink); font-weight:600; }
+  /* The county rule, when the reader's device has told us the county. Sits
+     between the dates and the sourcing line, set at reading size rather than
+     as fine print, because it is the part that answers "where do I go". */
+  .vote-county { font-size:14px; color:var(--ink); line-height:1.5;
+                 margin:14px 0 0; padding-top:12px; border-top:1px solid var(--hair); }
+
   .vote-check { font-size:12.5px; color:var(--muted); margin:12px 0 0; line-height:1.5; }
   .vote-check a { color:var(--ink-2); }
 
