@@ -39,6 +39,7 @@ import { renderVerdict } from './verdict';
 import { t, word } from './i18n';
 import * as pes from './payload-i18n';
 import * as rep from './members';
+import { ELECTION, readable, readableRange, stillCurrent } from './election';
 
 /**
  * Where the raw quiz payload lives. Relative on the deployed site so it works the
@@ -2072,6 +2073,64 @@ function renderRepOut(): void {
   });
 }
 
+/**
+ * The dates a Texas voter has to hit.
+ *
+ * STATES FACTS, ASKS FOR NOTHING. No "make your voice heard", no countdown
+ * urging anybody on. The author of this site discloses a party donation on the
+ * same page, and a turnout appeal from a disclosed donor reads differently than
+ * a voting record does however non-partisan its content. Dates survive that
+ * test; an exhortation would not.
+ *
+ * A deadline that has passed STAYS on screen. It is still true, and taking it
+ * down as it expires would be the page quietly managing what the reader knows.
+ * The whole block goes only when the election itself is past, at which point
+ * every date in it belongs to a different cycle. scripts/check_election_dates
+ * enforces the same rule from the build side, where it can fail loudly.
+ *
+ * No polling places. 254 Texas counties publish their own, they move between
+ * early voting and election day, there is no free authoritative statewide feed,
+ * and a wrong one costs somebody their vote. The state's own site is linked
+ * instead of guessed at.
+ */
+function renderElection(): void {
+  const card = el('election-card');
+  if (!stillCurrent()) { card.hidden = true; return; }
+  card.hidden = false;
+
+  const today = todayIso();
+  const rows: Array<{ label: string; when: string; on: string }> = [
+    { label: t('vote.registerBy'), when: readable(ELECTION.registerBy), on: ELECTION.registerBy },
+    { label: t('vote.early'), when: readableRange(ELECTION.earlyStart, ELECTION.earlyEnd), on: ELECTION.earlyStart },
+    { label: t('vote.mailApply'), when: readable(ELECTION.mailApplyBy), on: ELECTION.mailApplyBy },
+    { label: t('vote.electionDay'), when: readable(ELECTION.election), on: ELECTION.election },
+  ];
+
+  // The first date still ahead. Marked so a reader scanning the block can see
+  // which one has a clock on it, without the page telling anybody to hurry.
+  // As each passes the mark moves on by itself, and -1 once they all have,
+  // which cannot happen while the election is still ahead of us.
+  const next = rows.findIndex((r) => r.on >= today);
+
+  const link = '<a href="https://www.votetexas.gov/register/" target="_blank" rel="noopener">'
+    + 'votetexas.gov</a>';
+
+  card.innerHTML =
+    `<div class="card-head" style="margin-bottom:10px">`
+    + `<div class="eyebrow">${esc(t('vote.heading'))}</div></div>`
+    + `<dl class="vote-dates">`
+    + rows.map((r, i) =>
+      `<div class="vote-row${i === next ? ' vote-next' : ''}">`
+      + `<dt>${esc(r.label)}</dt><dd>${esc(r.when)}</dd></div>`).join('')
+    + `</dl>`
+    + `<p class="vote-check">${t('vote.checkLine', { link })}</p>`;
+}
+
+/** Today, as the same ISO shape the election file uses. */
+function todayIso(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
 function renderOutcomes(): void {
   // ORDERED BY THE READER'S OWN RUN, not by the order these were written in.
   //
@@ -2272,6 +2331,7 @@ function render(): void {
   renderCompare(p);
   renderRep();
   renderOutcomes();
+  renderElection();
   renderStatements();
   renderTable(p);
   bindPresets();

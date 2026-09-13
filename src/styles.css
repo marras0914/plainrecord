@@ -668,6 +668,21 @@
   /* The locate control. The note sits beside the button rather than under it,
      because what tapping does needs saying BEFORE the permission prompt opens,
      not after the reader has already decided. */
+  /* The voting dates. A definition list because that is what it is: four
+     labels and four dates. The next one still ahead is marked with weight and
+     a rule rather than with colour, so it does not read as an alarm and does
+     not depend on being able to tell two colours apart. */
+  .vote-dates { margin:0; }
+  .vote-row { display:flex; flex-wrap:wrap; gap:4px 14px; justify-content:space-between;
+              align-items:baseline; padding:9px 0; border-top:1px solid var(--hair); }
+  .vote-row:first-child { border-top:0; }
+  .vote-row dt { font-size:13.5px; color:var(--ink-2); margin:0; }
+  .vote-row dd { font-size:15px; margin:0; font-variant-numeric:tabular-nums; }
+  .vote-next { border-left:3px solid var(--rule); padding-left:12px; margin-left:-15px; }
+  .vote-next dt, .vote-next dd { color:var(--ink); font-weight:600; }
+  .vote-check { font-size:12.5px; color:var(--muted); margin:12px 0 0; line-height:1.5; }
+  .vote-check a { color:var(--ink-2); }
+
   .rep-locate { margin-top:10px; display:flex; flex-wrap:wrap; gap:8px 10px; align-items:center; }
   .rep-locate-note { font-size:12px; color:var(--muted); }
   .rep-locate-msg { flex:1 1 100%; margin:2px 0 0; font-size:12.5px;
