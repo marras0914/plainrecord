@@ -18,6 +18,7 @@ import {
   describe,
   scoreOf,
   candidateLean,
+  POOLABLE_DEPTH,
   type QuizItem,
   type AnswerMap,
   type Adapted,
@@ -674,7 +675,11 @@ function renderReadout(p: PartisanProfile): void {
   // split almost entirely on party lines, which means the reader who stops
   // there learns which side they lean to and never sees where they cross it.
   if (mode === 'short') {
-    act(t('result.tryAll'), 'ghost', () => setMode('full'));
+    // The ask, priced honestly. The seven already answered carry over, and 25
+    // is where the position becomes worth stating, so what this actually costs
+    // is the difference rather than a fresh 67.
+    act(t('result.tryAll', { n: Math.max(1, POOLABLE_DEPTH - countAnswered()) }),
+      'ghost', () => setMode('full'));
   }
 
   act(t('result.restart'), 'ghost', () => {
@@ -713,6 +718,33 @@ function renderReadout(p: PartisanProfile): void {
     row.appendChild(b);
   }
   el('readout').appendChild(row);
+
+  // HOW MUCH THIS READING IS WORTH, said out loud.
+  //
+  // The full run is deterministic, so a reader who stops at 25 has answered the
+  // same first 25 questions as everyone else who stopped at 25, spread across
+  // all 20 subjects rather than clustered in one. That is what makes a partial
+  // reading meaningful at all, and scripts/prefix_accuracy.ts measures what it
+  // is worth: at 25 the position is within one bin 98-99% of the time, while
+  // the VERDICT still only matches the final one 60-81% of the time, because a
+  // position is a mean and a verdict is a threshold crossing. Telling a reader
+  // both were equally solid would be the easy lie here.
+  //
+  // Full set only. The 7-question run is not what was measured, and the
+  // existing fewMarks and weakLoad caveats already cover a thin short run.
+  const answeredNow = countAnswered();
+  if (mode === 'full' && left > 0 && answeredNow > 0) {
+    const p = document.createElement('p');
+    p.className = 'depth-note';
+    p.textContent = t(answeredNow >= POOLABLE_DEPTH ? 'result.depthFirm' : 'result.depthThin', {
+      n: answeredNow,
+      items: activeItems().length,
+      // Interpolated rather than written into the sentence, so the number the
+      // copy quotes cannot drift from the one the code branches on.
+      min: POOLABLE_DEPTH,
+    });
+    el('readout').appendChild(p);
+  }
 
   // The opt-in. Offered only when there is a result to add: a reader who took
   // the early exit and answered nothing has no position to contribute, and a
@@ -1179,8 +1211,33 @@ function opponentReveal(item: QuizItem, yourAnswer: 1 | -1): string {
  * says so, rather than pretending to be friendly.
  */
 /** How many real answers exist. A skip is not an answer. */
+/**
+ * The next question in the queue the reader has not already answered.
+ *
+ * Plain `cursor + 1` was right while answers only ever arrived in queue order.
+ * They no longer do: switching to the full set carries the seven headline
+ * answers over, and those seven sit scattered through the interleaved full
+ * queue rather than at its front. Advancing one at a time would walk the reader
+ * back through questions they had already answered and quietly ask them again,
+ * which would make the carried answers worth nothing.
+ *
+ * A skipped question holds 0, which is not an answer, but it is also behind the
+ * cursor by the time this is called, so it is not revisited.
+ */
+function nextUnanswered(from: number): number {
+  for (let i = from; i < queue.length; i++) {
+    const a = answers[queue[i].id];
+    if (a !== 1 && a !== -1) return i;
+  }
+  return queue.length;
+}
+
 function countAnswered(): number {
-  return Object.values(answers).filter((v) => v === 1 || v === -1).length;
+  // Scoped to the ACTIVE set, not to every answer held. Answers survive a mode
+  // switch now, so after a full run a reader on the short set holds answers for
+  // items the short set does not contain. Counting those would report more
+  // answers than there are questions and drive `left` negative.
+  return activeItems().filter((it) => answers[it.id] === 1 || answers[it.id] === -1).length;
 }
 
 function renderQuestion(): void {
@@ -1289,7 +1346,7 @@ function renderQuestion(): void {
       answers[queue[cursor].id] = v;
       // A skip has nothing to reveal, so it moves straight on.
       if (v === 0) {
-        cursor++;
+        cursor = nextUnanswered(cursor + 1);
         if (cursor >= queue.length) { view = 'result'; showView(); }
       } else {
         revealFor = queue[cursor].id;
@@ -1302,7 +1359,7 @@ function renderQuestion(): void {
   });
 
   document.getElementById('q-next')?.addEventListener('click', () => {
-    cursor++;
+    cursor = nextUnanswered(cursor + 1);
     revealFor = null;
     const toResult = cursor >= queue.length;
     if (toResult) { view = 'result'; showView(); window.scrollTo(0, 0); }
@@ -2170,17 +2227,31 @@ function bindPresets(): void {
 function setMode(m: Mode, doRender = true): void {
   if (mode === m) return;
   mode = m;
-  answers = {};
-  cursor = 0;
+
+  // ANSWERS SURVIVE THE SWITCH. They used to be thrown away here, which made
+  // "answer all 67" cost a reader everything they had just done: all seven
+  // headline votes are in the 67, their answers were still perfectly valid, and
+  // the switch deleted them anyway. That is very likely a large part of why
+  // only 8% of finishers ever took the full set, and the full set is the only
+  // one that can produce a crossover reading at all.
+  //
+  // Keeping them turns the offer from "answer 67 questions" into "answer 18
+  // more", which is the same thing asked honestly.
   adapted = adapt(activeItems());
   queue = buildQueue();
+
+  // Resume at the first question with no answer rather than at the top, the
+  // same rule the "keep answering" button follows. Everything already answered
+  // means there is nothing to resume to, so that lands on the result.
+  const next = nextUnanswered(0);
+  cursor = next >= queue.length ? 0 : next;
   // Switching the question set is a request for more questions, so it goes back
   // to the quiz rather than leaving the reader on a result computed from
   // answers that no longer exist. Reached from the result view, where the
   // switch now lives, "All 67 votes" reads as "keep going" — which is what it
   // does.
   if (doRender) {
-    view = 'quiz';
+    view = next >= queue.length ? 'result' : 'quiz';
     revealFor = null;
     showView();
     render();

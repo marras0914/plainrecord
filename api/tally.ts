@@ -18,6 +18,7 @@ import {
   KEYS,
   MODES,
   REGIONS,
+  DEPTH_BUCKETS,
   UNREADABLE_VERDICTS,
   VERDICTS,
   json,
@@ -85,6 +86,15 @@ export interface TallyResponse {
    * the totals above and deliberately are not reconciled to them.
    */
   byMode: Record<Mode, Record<Region, RegionTally>>;
+  /**
+   * How far into the quiz each reading got, bucketed, per mode.
+   *
+   * A 25-question full-set reading and a 67-question one are both honest and
+   * are not the same evidence. Without this the aggregate cannot tell them
+   * apart, and the boundary at 25 is where a prefix reading starts being worth
+   * pooling: see DEPTH_BUCKETS in _tally.ts for the measurement.
+   */
+  depth: Record<Mode, Record<string, number>>;
   questions: Record<string, { agree: number; disagree: number }>;
   /** Restated in the payload so a consumer cannot quote it as a poll by accident. */
   note: string;
@@ -112,9 +122,12 @@ async function tally(request: Request): Promise<Response> {
       db.hgetall(KEYS.guessMode(r, m)) as Promise<Counts>,
       db.hgetall(KEYS.deltaMode(r, m)) as Promise<Counts>,
     ])),
+    ...MODES.map((m) => db.hgetall(KEYS.depth(m)) as Promise<Counts>),
   ]);
-  // Everything after the region block belongs to the per-mode block, in the
-  // order MODES x REGIONS was flattened above.
+  // One round trip for all of it. Everything after the region block is the
+  // per-mode block in the order MODES x REGIONS was flattened, then one depth
+  // hash per mode. Splicing from the end keeps those offsets in one place.
+  const depthHashes = perRegion.splice(REGIONS.length * 4 + MODES.length * REGIONS.length * 4);
   const perMode = perRegion.splice(REGIONS.length * 4);
 
   const regions = {} as Record<Region, RegionTally>;
@@ -134,8 +147,18 @@ async function tally(request: Request): Promise<Response> {
   const mode = {} as Record<Mode, number>;
   for (const m of MODES) mode[m] = num(modeCounts, m);
 
-  // Same fixed shape as `regions`: every mode, every region, every bin, with
-  // explicit zeros. A consumer must not have to tell absent from zero.
+  // Same fixed-shape rule as everything else here: every mode, every bucket,
+  // explicit zeros, so absent and zero are never the consumer's problem.
+  const depth = {} as Record<Mode, Record<string, number>>;
+  MODES.forEach((m, i) => {
+    const h = depthHashes[i] ?? null;
+    const forMode: Record<string, number> = {};
+    for (const b2 of DEPTH_BUCKETS) forMode[b2] = num(h, b2);
+    depth[m] = forMode;
+  });
+
+  // Every mode, every region, every bin, with explicit zeros, for the same
+  // reason as `regions` above.
   const byMode = {} as Record<Mode, Record<Region, RegionTally>>;
   MODES.forEach((m, mi) => {
     const forMode = {} as Record<Region, RegionTally>;
@@ -180,6 +203,7 @@ async function tally(request: Request): Promise<Response> {
     mode,
     regions,
     byMode,
+    depth,
     questions,
     note:
       'Self-selected: these are the people who chose to add their result, not a sample of anyone. ' +

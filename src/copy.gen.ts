@@ -38,6 +38,8 @@ export type CopyKey =
   | "how.full"
   | "q.resultNow"
   | "result.keepGoing"
+  | "result.depthFirm"
+  | "result.depthThin"
   | "start.lede"
   | "start.begin"
   | "start.fine"
@@ -358,6 +360,8 @@ export const EN: Record<CopyKey, string> = {
   "how.full": "The full method, the data, and who made this",
   "q.resultNow": "See my result so far",
   "result.keepGoing": "Keep answering, {left} left",
+  "result.depthFirm": "You answered {n} of {items}, which is enough to place where you landed to within about one step on the strip. The label above it turns on thresholds that are still moving at this point, so it can change as you answer more.",
+  "result.depthThin": "You answered {n} of {items}. That gives a rough position, not a firm one: it settles at about {min} answers, and the label takes longer than that.",
   "start.lede": "Seven votes your Texas House actually took in 2025. We hid who voted which way. Where do you land?",
   "start.begin": "Start",
   "start.fine": "About two minutes · no sign-up · your answers stay on this device unless you send them",
@@ -374,7 +378,7 @@ export const EN: Record<CopyKey, string> = {
   "q.askedAs": "This one has no plain-language version yet, so it is asked in the official wording.",
   "q.youSaid": "You voted {vote}.",
   "result.restart": "Start over",
-  "result.tryAll": "Answer all 67 votes",
+  "result.tryAll": "Answer {n} more and we can place you",
   "theme.toDark": "Dark",
   "theme.toLight": "Light",
   "intro.p1": "<b>Texas lawmakers vote yes or no on new laws.</b> We took real votes from 2025 and hid who voted which way. Now you vote.",
@@ -663,6 +667,8 @@ export const ES: Record<CopyKey, string> = {
   "how.full": "El método completo, los datos y quién hizo esto",
   "q.resultNow": "Ver mi resultado hasta ahora",
   "result.keepGoing": "Seguir respondiendo: quedan {left}",
+  "result.depthFirm": "Respondió {n} de {items}, suficiente para ubicar dónde quedó, con un margen de alrededor de un paso en la franja. La etiqueta de arriba depende de umbrales que todavía se mueven en este punto, así que puede cambiar si sigue respondiendo.",
+  "result.depthThin": "Respondió {n} de {items}. Eso da una ubicación aproximada, no firme: se estabiliza alrededor de las {min} respuestas, y la etiqueta tarda más.",
   "start.lede": "Siete votos que su Cámara de Texas realmente emitió en 2025. Ocultamos quién votó de qué manera. ¿Dónde se sitúa usted?",
   "start.begin": "Empezar",
   "start.fine": "Unos dos minutos · sin registro · sus respuestas se quedan en este dispositivo salvo que las envíe",
@@ -679,7 +685,7 @@ export const ES: Record<CopyKey, string> = {
   "q.askedAs": "Este todavía no tiene versión en lenguaje sencillo, así que se plantea con el texto oficial.",
   "q.youSaid": "Usted votó {vote}.",
   "result.restart": "Empezar de nuevo",
-  "result.tryAll": "Responder los 67 votos",
+  "result.tryAll": "Responda {n} más y podremos ubicar dónde queda",
   "theme.toDark": "Oscuro",
   "theme.toLight": "Claro",
   "intro.p1": "<b>Los legisladores de Texas votan a favor o en contra de nuevas leyes.</b> Tomamos votos reales de 2025 y ocultamos quién votó de qué manera. Ahora vota usted.",

@@ -211,6 +211,29 @@ export interface Adapted {
   scoringWeights: Map<string, number>;
 }
 
+/**
+ * How many answers a partial full run needs before its position is worth
+ * pooling into the aggregate, or stating to the reader with confidence.
+ *
+ * MEASURED, NOT PICKED. buildQueue's full ordering is deterministic and
+ * round-robins over sorted categories, so the first N questions are the same N
+ * for every reader and are spread across all 20 subjects. Simulating
+ * respondents over that ordering and reading prefixes of their answers
+ * (scripts/prefix_accuracy.ts) gives, across answer models from noisy to
+ * near-deterministic:
+ *
+ *   20 answers   position within one bin 96-98%   aggregate crossover 0.91-0.95x
+ *   25 answers   position within one bin 98-99%   aggregate crossover 0.94-0.97x
+ *   30 answers   position within one bin 99-100%  aggregate crossover 0.94-0.97x
+ *
+ * The individual VERDICT is a different thing and matches the final one only
+ * 60-81% at 25, because a position is a weighted mean and a verdict is a
+ * threshold crossing. The page says the first confidently and the second
+ * carefully, and this constant is what both the page and api/_tally.ts read so
+ * they cannot drift apart.
+ */
+export const POOLABLE_DEPTH = 25;
+
 export function adapt(quizItems: QuizItem[], session = DATA.session): Adapted {
   const items: VoteItem[] = [];
   const valences = new Map<string, ItemValence>();
