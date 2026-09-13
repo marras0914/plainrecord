@@ -273,6 +273,16 @@
       <p class="footnote" id="method"></p>
     </section>
 
+    <!-- Filled by renderElection(), and left out entirely once the election it
+         describes has passed.
+
+         LAST THING BEFORE THE DISCLOSURE, on purpose. It follows "check it
+         yourself" and precedes "who made this", so a reader meets the dates
+         immediately before meeting the fact that the person who published them
+         donates to a party. Putting a civic deadline anywhere upstream of that
+         disclosure would be asking for trust the page has not yet earned. -->
+    <section class="card" id="election-card" hidden></section>
+
     <!--
       STATIC, deliberately — this is the one section on the page that does not
       come from the payload, and it is the one a skeptic reads first. Rendering it

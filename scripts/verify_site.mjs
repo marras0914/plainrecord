@@ -2110,6 +2110,90 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // The voting dates
+  //
+  // Checked against the DATA FILE rather than against expected text, so the page
+  // cannot drift from what the state said without this failing. Hard-coding
+  // "October 5" here would pass happily through the next cycle.
+  // ---------------------------------------------------------------------------
+  {
+    const ec = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    const ep = await ec.newPage();
+    await ep.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await ep.click('#start-look');
+    await ep.waitForTimeout(400);
+
+    const dates = JSON.parse(readFileSync(join(ROOT, 'public/data/election_tx.json'), 'utf8'));
+    const shown = (await ep.$eval('#election-card', (e) => e.innerText)).trim();
+
+    check('vote: the dates block is on the page', shown.length > 20, `${shown.length} chars`);
+
+    // PLACEMENT IS A DECISION, so it is asserted rather than left to whoever
+    // next edits the markup. The block follows "check it yourself" and precedes
+    // "who made this", so a reader meets a civic deadline immediately before
+    // meeting the fact that the person publishing it donates to a party.
+    // Anywhere upstream of that disclosure is asking for trust the page has not
+    // yet earned.
+    const placement = await ep.evaluate(() => {
+      const method = document.getElementById('method');
+      const block = document.getElementById('election-card');
+      const author = document.getElementById('author-card');
+      if (!method || !block || !author) return 'missing';
+      const after = method.compareDocumentPosition(block) & Node.DOCUMENT_POSITION_FOLLOWING;
+      const before = block.compareDocumentPosition(author) & Node.DOCUMENT_POSITION_FOLLOWING;
+      return after && before ? 'ok' : 'out of order';
+    });
+    check('vote: the dates sit after the method and before the disclosure',
+      placement === 'ok', placement);
+
+    // The block is the last thing on a long page, so the way down to it is the
+    // difference between existing and being found.
+    const jump = ep.locator('.result-actions button', { hasText: /voting in texas|votar en texas/i });
+    check('vote: the result offers a way down to it', (await jump.count()) === 1,
+      `${await jump.count()} button(s)`);
+    await jump.click();
+    await ep.waitForTimeout(900);
+    check('vote: the jump actually reaches it',
+      await ep.evaluate(() => {
+        const r = document.getElementById('election-card').getBoundingClientRect();
+        return r.top > -50 && r.top < window.innerHeight;
+      }));
+    check('vote: and takes focus with it, not just the scrollbar',
+      await ep.evaluate(() => document.activeElement?.id === 'election-card'),
+      await ep.evaluate(() => document.activeElement?.id || 'body'));
+
+    // Every date in the file has to appear, by day number, in the language the
+    // page is in. The month is left to Intl; the day is the part a reader acts
+    // on and the part a timezone bug moves.
+    const days = ['registerBy', 'earlyStart', 'earlyEnd', 'mailApplyBy', 'election']
+      .map((k) => [k, String(Number(dates[k].slice(8, 10)))]);
+    const missing = days.filter(([, d]) => !new RegExp(`\\b${d}\\b`).test(shown));
+    check('vote: every date from the state file is on screen',
+      missing.length === 0,
+      missing.map(([k]) => k).join(', ') || days.map(([, d]) => d).join(', '));
+
+    check('vote: it says where the dates came from',
+      /secretary of state|secretar[ií]a de estado/i.test(shown), shown.slice(-90));
+
+    const href = await ep.$eval('#election-card a', (a) => a.getAttribute('href'));
+    check('vote: it links the state, not a lookup we cannot verify',
+      /^https:\/\/www\.votetexas\.gov\//.test(href ?? ''), href ?? 'no link');
+
+    // It states dates and asks for nothing. The author discloses a party
+    // donation on this same page, so an exhortation here would read as turnout
+    // work however non-partisan the content.
+    const URGING = [
+      'make your voice', 'get out and vote', 'don\'t miss', 'act now', 'hurry',
+      'your vote matters', 'make sure you vote', 'no olvide votar', 'su voto importa',
+    ];
+    const found = URGING.filter((u) => shown.toLowerCase().includes(u));
+    check('vote: the block states dates and does not campaign',
+      found.length === 0, found.join(', ') || `${URGING.length} phrases checked`);
+
+    await ec.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // Switching to the full set keeps what you already answered
   //
   // It used to wipe them. All seven headline votes are in the 67 and their

@@ -248,6 +248,12 @@ export type CopyKey =
   | "privacy.body"
   | "intro.subhead"
   | "rep.heading"
+  | "vote.heading"
+  | "vote.registerBy"
+  | "vote.early"
+  | "vote.electionDay"
+  | "vote.mailApply"
+  | "vote.checkLine"
   | "rep.lede"
   | "rep.districtLabel"
   | "rep.useLocation"
@@ -570,6 +576,12 @@ export const EN: Record<CopyKey, string> = {
   "privacy.body": "It counts visits · how many people came, which link sent them, and how many reach each step of the quiz · using Vercel's analytics, which sets no cookies and cannot follow you to another site. <b>Your answers are not part of that.</b> They never leave your browser while you answer. Reaching the end is counted; what you answered is not, and the two are never connected. If you then tap <b>add my result</b> on the result screen, one request goes out, and it carries where you landed, three numbers about your answers, and which way you answered each vote. No name, no address, nothing that identifies you, and only totals are kept at the other end — there is no record of your particular submission to look up. If instead you tap <b>challenge someone</b>, you get a link holding your seven answers in the part of the address after the # symbol, which browsers never transmit, so nothing about it reaches this site at all. Tap neither and nothing but the visit count is ever sent. That is not a promise, it is checked on every build — the test answers five questions and fails if a single byte goes out beyond that count, then taps each button and fails if what goes out carries anything more.",
   "intro.subhead": "How Vikki Goodwin, Gina Hinojosa and James Talarico voted in the Texas House, checked against your own answers.",
   "rep.heading": "And how did your own representative vote?",
+  "vote.heading": "Voting in Texas",
+  "vote.registerBy": "Last day to register",
+  "vote.early": "Early voting",
+  "vote.electionDay": "Election day",
+  "vote.mailApply": "Mail ballot applications close",
+  "vote.checkLine": "Dates from the Texas Secretary of State. Check your registration at {link}.",
   "rep.lede": "The three above are running for offices that affect every Texan. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
   "rep.districtLabel": "Or your district number",
   "rep.useLocation": "Use my location",
@@ -877,6 +889,12 @@ export const ES: Record<CopyKey, string> = {
   "privacy.body": "Cuenta visitas · cuántas personas vinieron, qué enlace las envió y cuántas llegan a cada paso del cuestionario · con la analítica de Vercel, que no usa cookies y no puede seguir su rastro en otro sitio. <b>Sus respuestas no forman parte de eso.</b> Nunca salen de su navegador mientras responde. Se cuenta que usted llegó al final; no se cuenta lo que respondió, y las dos cosas nunca se conectan. Si luego toca <b>añadir mi resultado</b> en la pantalla de resultados, sale una sola petición que lleva dónde quedó, tres números sobre sus respuestas y en qué sentido respondió cada voto. Sin nombre, sin dirección, sin nada que revele su identidad, y al otro lado solo se guardan totales: no queda registro de su envío concreto que se pueda consultar. Si en cambio toca <b>desafiar a alguien</b>, obtiene un enlace que lleva sus siete respuestas en la parte de la dirección después del símbolo #, que los navegadores nunca transmiten, así que nada de eso llega a este sitio. Si no toca ninguno de los dos, nunca se envía nada más que el recuento de visitas. Eso no es una promesa, se comprueba en cada compilación — la prueba responde cinco preguntas y falla si sale un solo byte más que ese recuento, y después toca cada botón y falla si lo que sale lleva algo más.",
   "intro.subhead": "Cómo votaron Vikki Goodwin, Gina Hinojosa y James Talarico en la Cámara de Texas, comparado con sus propias respuestas.",
   "rep.heading": "¿Y cómo votó su propio representante?",
+  "vote.heading": "Votar en Texas",
+  "vote.registerBy": "Último día para registrarse",
+  "vote.early": "Votación anticipada",
+  "vote.electionDay": "Día de la elección",
+  "vote.mailApply": "Cierran las solicitudes de boleta por correo",
+  "vote.checkLine": "Fechas de la Secretaría de Estado de Texas. Verifique su registro en {link}.",
   "rep.lede": "Los tres de arriba se postulan para cargos que afectan a todos los texanos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
   "rep.districtLabel": "O su número de distrito",
   "rep.useLocation": "Usar mi ubicación",

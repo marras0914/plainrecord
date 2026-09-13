@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "what": "Dates a Texas voter has to hit for the current cycle, taken from the state.",
+    "why": "A wrong deadline on a page that tells people to register is the one number here that can cost somebody their vote.",
+    "sources": [
+      "https://www.sos.state.tx.us/elections/voter/important-election-dates.shtml",
+      "https://www.votetexas.gov/"
+    ],
+    "generated": "2026-09-13",
+    "rule": "Both pages must agree on the registration deadline or nothing is written. scripts/check_election_dates.mjs refuses a file whose election date has passed."
+  },
+  "election": "2026-11-03",
+  "registerBy": "2026-10-05",
+  "earlyStart": "2026-10-19",
+  "earlyEnd": "2026-10-30",
+  "mailApplyBy": "2026-10-23"
+}

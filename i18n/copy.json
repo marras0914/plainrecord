@@ -1890,6 +1890,56 @@
     "vars": [],
     "status": "ok"
   },
+  "vote.heading": {
+    "en": "Voting in Texas",
+    "es": "Votar en Texas",
+    "where": "Heading of the voting-dates block, under the representative lookup.",
+    "vars": [],
+    "note": "States dates and links to the state. No instruction and no appeal: the author discloses a party donation, and a turnout appeal from a disclosed donor reads differently than a voting record does, however non-partisan the content.",
+    "status": "ok"
+  },
+  "vote.registerBy": {
+    "en": "Last day to register",
+    "es": "Último día para registrarse",
+    "where": "Label in the voting-dates block.",
+    "vars": [],
+    "note": "Date is rendered from public/data/election_tx.json through Intl, not written into this string, so it cannot drift from the state.",
+    "status": "ok"
+  },
+  "vote.early": {
+    "en": "Early voting",
+    "es": "Votación anticipada",
+    "where": "Label in the voting-dates block.",
+    "vars": [],
+    "note": "Rendered as a span, both dates from the state file.",
+    "status": "ok"
+  },
+  "vote.electionDay": {
+    "en": "Election day",
+    "es": "Día de la elección",
+    "where": "Label in the voting-dates block.",
+    "vars": [],
+    "note": "The block disappears entirely once this date is past, because every other date in it then describes a different cycle.",
+    "status": "ok"
+  },
+  "vote.mailApply": {
+    "en": "Mail ballot applications close",
+    "es": "Cierran las solicitudes de boleta por correo",
+    "where": "Label in the voting-dates block.",
+    "vars": [],
+    "note": "Included because it falls after the registration deadline and is easy to miss.",
+    "status": "ok"
+  },
+  "vote.checkLine": {
+    "en": "Dates from the Texas Secretary of State. Check your registration at {link}.",
+    "es": "Fechas de la Secretaría de Estado de Texas. Verifique su registro en {link}.",
+    "where": "Sourcing line and the only outbound link in the block.",
+    "vars": [
+      "link"
+    ],
+    "note": "Links votetexas.gov, which answers 200. NOT the SOS lookup at teamrv-mvp.sos.texas.gov, which answers 403 to anything that can verify it; sending readers to a page that cannot be confirmed is not something this site does. \"Verifique su registro\" rather than \"si esta registrado\", which would be a masculine participle agreeing with the reader.",
+    "status": "ok"
+  },
   "rep.lede": {
     "en": "The three above are running for offices that affect every Texan. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
     "es": "Los tres de arriba se postulan para cargos que afectan a todos los texanos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",

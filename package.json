@@ -47,6 +47,8 @@
     "data:govacts:add": "node scripts/add_gov_acts.mjs",
     "data:districts": "node scripts/build_districts.mjs",
     "data:districts:check": "node --experimental-strip-types --no-warnings scripts/check_districts.mjs",
+    "data:election": "node scripts/build_election_dates.mjs",
+    "data:election:check": "node scripts/check_election_dates.mjs",
     "prefix:accuracy": "tsx scripts/prefix_accuracy.ts"
   },
   "devDependencies": {
