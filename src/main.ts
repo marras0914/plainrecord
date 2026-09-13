@@ -671,6 +671,26 @@ function renderReadout(p: PartisanProfile): void {
     setTimeout(() => document.getElementById('rep-zip')?.focus({ preventScroll: true }), 500);
   });
 
+  // The dates sit last on the page, immediately before the disclosure, which is
+  // the right place for them and a long way from where a reader lands. This is
+  // the way down to them. It reuses the block's own heading rather than
+  // inventing a second name for one destination, which is the same rule the
+  // skip-the-quiz control follows.
+  //
+  // Offered only while there is an election left to be early for. Once the date
+  // is past renderElection hides the block, and a button scrolling to nothing
+  // is worse than no button.
+  if (stillCurrent()) {
+    act(t('vote.heading'), 'ghost', () => {
+      const card = el('election-card');
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Moved as well as scrolled to, for the same reason as every other jump
+      // on this page: a reader on a keyboard or a screen reader gets taken
+      // nowhere by a scroll alone.
+      setTimeout(() => focusNew(card), 500);
+    });
+  }
+
   // The other sixty votes. This was reachable only from a panel nearly nine
   // screens down, so in practice the quiz ended at seven — and those seven
   // split almost entirely on party lines, which means the reader who stops

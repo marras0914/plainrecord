@@ -214,11 +214,6 @@
     -->
     <section class="card" id="rep-card"></section>
 
-    <!-- Filled by renderElection(), and left out entirely once the election it
-         describes has passed. Sits after the representative lookup because that
-         is where a reader has just found out who represents them. -->
-    <section class="card" id="election-card" hidden></section>
-
     <!--
       Placed HERE, directly under the three scored Democrats, and never hidden.
 
@@ -277,6 +272,16 @@
       <div data-i18n="ui.methodHeading" class="eyebrow" style="margin-bottom:8px">How this is built</div>
       <p class="footnote" id="method"></p>
     </section>
+
+    <!-- Filled by renderElection(), and left out entirely once the election it
+         describes has passed.
+
+         LAST THING BEFORE THE DISCLOSURE, on purpose. It follows "check it
+         yourself" and precedes "who made this", so a reader meets the dates
+         immediately before meeting the fact that the person who published them
+         donates to a party. Putting a civic deadline anywhere upstream of that
+         disclosure would be asking for trust the page has not yet earned. -->
+    <section class="card" id="election-card" hidden></section>
 
     <!--
       STATIC, deliberately — this is the one section on the page that does not
