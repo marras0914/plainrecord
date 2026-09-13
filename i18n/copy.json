@@ -258,8 +258,7 @@
     "where": "Result screen, full set only, when the reader stopped short at POOLABLE_DEPTH answers or more.",
     "vars": [
       "n",
-      "items",
-      "min"
+      "items"
     ],
     "note": "Says the position confidently and the label carefully, because they converge at very different rates. scripts/prefix_accuracy.ts: at 25 answers the position is within one bin 98-99% of the time while the verdict matches the final one only 60-81%, since a position is a weighted mean and a verdict is a threshold crossing. Treating both as equally settled would be the easy lie here.",
     "status": "ok"
@@ -401,11 +400,13 @@
     "status": "ok"
   },
   "result.tryAll": {
-    "en": "Answer all 67 votes",
-    "es": "Responder los 67 votos",
+    "en": "Answer {n} more and we can place you",
+    "es": "Responda {n} más y podremos ubicar dónde queda",
     "where": "Action under the verdict, offering the full set when the reader has done the seven.",
-    "vars": [],
-    "note": "The switch to the full set lived in a panel 8.9 screens down the result, where nobody found it. The seven headline bills split almost entirely on party lines, so the reader who stops there gets a lean and never reaches the votes that show where they cross over — which is the whole point of the page.",
+    "vars": [
+      "n"
+    ],
+    "note": "Priced at what continuing actually costs, not at the size of the set. The seven headline answers now survive the switch to the full set, so the ask is the distance to POOLABLE_DEPTH, which is where a partial reading becomes worth stating. The old text said \"Answer all 67 votes\", which was true only while the switch deleted everything the reader had already done.",
     "status": "ok"
   },
   "theme.toDark": {
