@@ -21,7 +21,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 
 import { HEADLINE_ITEMS, ALL_ITEMS } from '../src/quiz-data.js';
-import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed, KEYS, MODES, REGIONS } from './_tally.js';
+import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed, KEYS, MODES, REGIONS, depthOf, DEPTH_BUCKETS, POOLABLE_DEPTH } from './_tally.js';
 import type { SharePayload } from './_tally.js';
 
 let pass = 0;
@@ -385,6 +385,60 @@ check('a lookalike host is refused', !originAllowed('https://rightnleft.com.evil
   check('the per-mode keys are namespaced like the rest',
     MODES.every((m) => REGIONS.every((r) => KEYS.leanMode(r, m).startsWith('t:'))),
     KEYS.leanMode(r0, m0));
+}
+
+
+// ---------------------------------------------------------------------------
+// How deep a reading went
+//
+// The boundary at POOLABLE_DEPTH is the one number here that a product decision
+// rests on: below it a prefix reading is not worth pooling into the aggregate,
+// at or above it the position is within one bin 98-99% of the time. So it is
+// asserted on both sides rather than sampled in the middle, where an off-by-one
+// would pass.
+// ---------------------------------------------------------------------------
+
+{
+  const FULL = 67;
+  check('a complete run is complete', depthOf(FULL, FULL) === 'complete', depthOf(FULL, FULL));
+  check('answering more than the set is still complete, not a new bucket',
+    depthOf(FULL + 3, FULL) === 'complete', depthOf(FULL + 3, FULL));
+  check('one short of the set is NOT complete',
+    depthOf(FULL - 1, FULL) === '50plus', depthOf(FULL - 1, FULL));
+
+  check('the poolable boundary is inclusive',
+    depthOf(POOLABLE_DEPTH, FULL) === '25to49', depthOf(POOLABLE_DEPTH, FULL));
+  check('one below the poolable boundary is not poolable',
+    depthOf(POOLABLE_DEPTH - 1, FULL) === '10to24', depthOf(POOLABLE_DEPTH - 1, FULL));
+
+  check('a short run answered in full is complete, not shallow',
+    depthOf(7, 7) === 'complete', depthOf(7, 7));
+  check('a handful of answers is the shallowest bucket',
+    depthOf(3, FULL) === 'under10', depthOf(3, FULL));
+  check('zero answers does not fall off the scale',
+    depthOf(0, FULL) === 'under10', depthOf(0, FULL));
+
+  // Every bucket must be reachable, or one of them is dead and the histogram
+  // has a column that can never fill.
+  const reached = new Set<string>();
+  for (let n = 0; n <= FULL; n++) reached.add(depthOf(n, FULL));
+  check('every depth bucket is reachable over a full run',
+    DEPTH_BUCKETS.every((b) => reached.has(b)),
+    DEPTH_BUCKETS.filter((b) => !reached.has(b)).join(', ') || `${reached.size} buckets`);
+
+  // Deeper must never bucket shallower.
+  let monotonic = true;
+  for (let n = 1; n <= FULL; n++) {
+    if (DEPTH_BUCKETS.indexOf(depthOf(n, FULL)) < DEPTH_BUCKETS.indexOf(depthOf(n - 1, FULL))) {
+      monotonic = false;
+    }
+  }
+  check('answering one more never moves a reading to a shallower bucket', monotonic);
+
+  check('the depth key is per mode and namespaced',
+    MODES.every((m) => KEYS.depth(m).startsWith('t:') && KEYS.depth(m).endsWith(':' + m))
+    && new Set(MODES.map((m) => KEYS.depth(m))).size === MODES.length,
+    MODES.map((m) => KEYS.depth(m)).join(' '));
 }
 
 

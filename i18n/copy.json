@@ -252,6 +252,30 @@
     ],
     "status": "ok"
   },
+  "result.depthFirm": {
+    "en": "You answered {n} of {items}, which is enough to place where you landed to within about one step on the strip. The label above it turns on thresholds that are still moving at this point, so it can change as you answer more.",
+    "es": "Respondió {n} de {items}, suficiente para ubicar dónde quedó, con un margen de alrededor de un paso en la franja. La etiqueta de arriba depende de umbrales que todavía se mueven en este punto, así que puede cambiar si sigue respondiendo.",
+    "where": "Result screen, full set only, when the reader stopped short at POOLABLE_DEPTH answers or more.",
+    "vars": [
+      "n",
+      "items",
+      "min"
+    ],
+    "note": "Says the position confidently and the label carefully, because they converge at very different rates. scripts/prefix_accuracy.ts: at 25 answers the position is within one bin 98-99% of the time while the verdict matches the final one only 60-81%, since a position is a weighted mean and a verdict is a threshold crossing. Treating both as equally settled would be the easy lie here.",
+    "status": "ok"
+  },
+  "result.depthThin": {
+    "en": "You answered {n} of {items}. That gives a rough position, not a firm one: it settles at about {min} answers, and the label takes longer than that.",
+    "es": "Respondió {n} de {items}. Eso da una ubicación aproximada, no firme: se estabiliza alrededor de las {min} respuestas, y la etiqueta tarda más.",
+    "where": "Result screen, full set only, when the reader stopped short below POOLABLE_DEPTH answers.",
+    "vars": [
+      "n",
+      "items",
+      "min"
+    ],
+    "note": "{min} is interpolated from POOLABLE_DEPTH rather than written into the sentence, so the number the copy quotes cannot drift from the one the code branches on. The Spanish avoids a masculine object pronoun (\"Eso da una ubicación\" rather than \"Eso lo ubica\"), which was corrected four times in the ninth review pass.",
+    "status": "ok"
+  },
   "start.lede": {
     "en": "Seven votes your Texas House actually took in 2025. We hid who voted which way. Where do you land?",
     "es": "Siete votos que su Cámara de Texas realmente emitió en 2025. Ocultamos quién votó de qué manera. ¿Dónde se sitúa usted?",

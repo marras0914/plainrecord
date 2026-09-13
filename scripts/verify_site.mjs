@@ -789,7 +789,17 @@ try {
   // refuses to score the third case, which is a refusal to endorse something he
   // also declined to stop.
   {
-    await toResult(page, URL_UNDER_TEST);
+    // A FRESH full run, not the short set switched over. Answers now survive a
+    // mode switch, so a reader who has done the seven headline votes arrives at
+    // the full set with those seven already answered and skipped. One of them is
+    // the THC ban, which is the vetoed bill this block goes looking for, and it
+    // had already shown its reveal during the short run. Walking the full set
+    // from there finds no veto and the check failed for a reason that was
+    // correct behaviour. Reaching the result without answering anything gets to
+    // the mode switch with nothing carried.
+    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.click('#start-look');
+    await page.waitForTimeout(300);
     await page.click('#mode-full');
     await page.waitForTimeout(400);
 
@@ -2097,6 +2107,95 @@ try {
       /go through|nothing was counted/i.test(label), label);
 
     }
+  }
+
+  // ---------------------------------------------------------------------------
+  // Switching to the full set keeps what you already answered
+  //
+  // It used to wipe them. All seven headline votes are in the 67 and their
+  // answers stay valid, so deleting them charged a reader the full 67 for
+  // continuing, and the full set is the only one that can produce a crossover
+  // reading. This asserts the counter, because the counter is the thing the
+  // reader sees and is what makes the offer credible.
+  // ---------------------------------------------------------------------------
+  {
+    const mc = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    const mp = await mc.newPage();
+    await beginQuiz(mp, URL_UNDER_TEST);
+    await answerAll(mp, 1);
+    await mp.waitForTimeout(400);
+
+    const offer = mp.locator('#readout button', { hasText: /answer|more|67/i }).first();
+    check('full set: the result offers the longer quiz', (await offer.count()) > 0);
+
+    const label = ((await offer.textContent()) ?? '').trim();
+    // The number it quotes has to be what continuing actually costs, not the
+    // size of the whole set, or the button is selling the old behaviour.
+    check('full set: the offer is priced at what continuing costs, not 67',
+      !/\b67\b/.test(label), label);
+
+    await offer.click();
+    await mp.waitForTimeout(600);
+
+    // NOT "question eight". The full queue interleaves categories, so the seven
+    // headline votes are scattered through it rather than sitting at its front,
+    // and the first unanswered question is usually the first one. What has to be
+    // true is that the reader lands on a question they have NOT answered, and
+    // that the set is now the long one.
+    const counter = ((await mp.locator('.q-count').textContent()) ?? '').trim();
+    check('full set: the switch lands on the long set', /\b67\b/.test(counter), counter);
+    check('full set: it lands on a question that is not already answered',
+      (await mp.locator('#q-card [data-answer="1"]').count()) === 1
+      && (await mp.locator('#q-card .q-reveal').count()) === 0,
+      counter);
+
+    // And the seven must still be counted, which is what the reader is being
+    // promised. Answer one more, bail to the result, and the count must be 8.
+    await mp.click('#q-card [data-answer="1"]');
+    await mp.waitForTimeout(200);
+    const bail = mp.locator('#q-result-now');
+    if (await bail.count()) {
+      await bail.click();
+    } else {
+      await mp.click('#q-next');
+      await mp.waitForTimeout(200);
+      await mp.locator('#q-result-now').click();
+    }
+    await mp.waitForTimeout(500);
+    const note = ((await mp.locator('.depth-note').textContent()) ?? '').trim();
+    check('full set: the reading counts the carried-over answers',
+      /\b8\b/.test(note) && /\b67\b/.test(note), note.slice(0, 90) || 'no depth note');
+    check('full set: a thin reading says so rather than sounding settled',
+      /rough|aproximada/i.test(note), note.slice(0, 90) || 'no depth note');
+
+    // AND THE CARRIED ANSWERS ARE NOT ASKED AGAIN. Walking the rest of the set
+    // must present 59 more questions, not 66: the seven carried over plus the
+    // one answered above are skipped on the way past. Without this the carried
+    // answers would be worth nothing, and the reader would notice long before a
+    // test did.
+    // Back into the quiz first: the checks above left the run on the result.
+    const resume = mp.locator('.keep-going').first();
+    check('full set: the result offers a way back into the remaining questions',
+      (await resume.count()) > 0);
+    await resume.click();
+    await mp.waitForTimeout(400);
+
+    let asked = 0;
+    for (let i = 0; i < 120; i++) {
+      if (await mp.isVisible('#readout')) break;
+      if (await mp.isVisible('#q-card [data-answer="1"]')) {
+        asked++;
+        await mp.click('#q-card [data-answer="1"]');
+        await mp.waitForTimeout(40);
+        continue;
+      }
+      if (await mp.isVisible('#q-next')) { await mp.click('#q-next'); await mp.waitForTimeout(40); continue; }
+      break;
+    }
+    check('full set: questions already answered are not asked again',
+      asked === 59, `${asked} asked, expected 59`);
+
+    await mc.close();
   }
 
   // ---------------------------------------------------------------------------

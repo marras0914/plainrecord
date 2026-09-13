@@ -38,6 +38,8 @@ export type CopyKey =
   | "how.full"
   | "q.resultNow"
   | "result.keepGoing"
+  | "result.depthFirm"
+  | "result.depthThin"
   | "start.lede"
   | "start.begin"
   | "start.fine"
@@ -358,6 +360,8 @@ export const EN: Record<CopyKey, string> = {
   "how.full": "The full method, the data, and who made this",
   "q.resultNow": "See my result so far",
   "result.keepGoing": "Keep answering, {left} left",
+  "result.depthFirm": "You answered {n} of {items}, which is enough to place where you landed to within about one step on the strip. The label above it turns on thresholds that are still moving at this point, so it can change as you answer more.",
+  "result.depthThin": "You answered {n} of {items}. That gives a rough position, not a firm one: it settles at about {min} answers, and the label takes longer than that.",
   "start.lede": "Seven votes your Texas House actually took in 2025. We hid who voted which way. Where do you land?",
   "start.begin": "Start",
   "start.fine": "About two minutes · no sign-up · your answers stay on this device unless you send them",
@@ -663,6 +667,8 @@ export const ES: Record<CopyKey, string> = {
   "how.full": "El método completo, los datos y quién hizo esto",
   "q.resultNow": "Ver mi resultado hasta ahora",
   "result.keepGoing": "Seguir respondiendo: quedan {left}",
+  "result.depthFirm": "Respondió {n} de {items}, suficiente para ubicar dónde quedó, con un margen de alrededor de un paso en la franja. La etiqueta de arriba depende de umbrales que todavía se mueven en este punto, así que puede cambiar si sigue respondiendo.",
+  "result.depthThin": "Respondió {n} de {items}. Eso da una ubicación aproximada, no firme: se estabiliza alrededor de las {min} respuestas, y la etiqueta tarda más.",
   "start.lede": "Siete votos que su Cámara de Texas realmente emitió en 2025. Ocultamos quién votó de qué manera. ¿Dónde se sitúa usted?",
   "start.begin": "Empezar",
   "start.fine": "Unos dos minutos · sin registro · sus respuestas se quedan en este dispositivo salvo que las envíe",
