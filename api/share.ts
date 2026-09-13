@@ -28,6 +28,8 @@ import {
   validate,
   deltaBins,
   binOf,
+  depthOf,
+  itemsFor,
   carriesPosition,
   handleNode,
 } from './_tally.js';
@@ -105,6 +107,15 @@ async function share(request: Request): Promise<Response> {
     pipe.hincrby(KEYS.meta(), 'total', 1);
     pipe.hincrby(KEYS.region(), region, 1);
     pipe.hincrby(KEYS.mode(), payload.mode, 1);
+
+    // How much of the set this reading rests on. A 25-question reading and a
+    // 67-question one are both honest and are not the same evidence, and
+    // without this the aggregate cannot tell them apart. See DEPTH_BUCKETS.
+    pipe.hincrby(
+      KEYS.depth(payload.mode),
+      depthOf(payload.answers.length, itemsFor(payload.mode).length),
+      1,
+    );
 
     // Always counted, including the unreadable readings: this hash is how
     // "how many could not be read" is answered, so it must see everything.

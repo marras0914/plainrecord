@@ -36,7 +36,10 @@ import { Redis } from '@upstash/redis';
 import { createHash } from 'node:crypto';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
-import { ALL_ITEMS, HEADLINE_ITEMS, adapt, profileOf, describe } from '../src/quiz-data.js';
+import { ALL_ITEMS, HEADLINE_ITEMS, adapt, profileOf, describe, POOLABLE_DEPTH }
+  from '../src/quiz-data.js';
+// Re-exported so a consumer of the tally sees one definition, not two.
+export { POOLABLE_DEPTH };
 import type { AnswerMap } from '../src/quiz-data.js';
 import type { ProfileVerdict } from '../valence.js';
 import { binOf } from '../bins.js';
@@ -79,9 +82,41 @@ export function carriesPosition(v: ProfileVerdict): boolean {
   return !UNREADABLE_VERDICTS.includes(v);
 }
 
+/**
+ * How many questions a reading rests on, bucketed.
+ *
+ * THE BOUNDARY AT 25 IS MEASURED, NOT CHOSEN. The full run is deterministic
+ * (buildQueue round-robins over sorted categories with no randomisation), so
+ * the first N questions are the same N for every reader and are spread across
+ * all 20 subjects rather than clustered in one. Simulating respondents over
+ * that ordering and reading prefixes of their answers:
+ *
+ *   after 20 questions   within one bin 96-98%   aggregate crossover 0.91-0.95x
+ *   after 25 questions   within one bin 98-99%   aggregate crossover 0.94-0.97x
+ *   after 30 questions   within one bin 99-100%  aggregate crossover 0.94-0.97x
+ *
+ * held across answer models from noisy to near-deterministic. So a reading from
+ * 25 or more carries a position worth pooling, with a known undercount of
+ * crossover of a few percent, and one from fewer does not.
+ *
+ * The individual VERDICT is a different matter and converges far more slowly,
+ * 60-81% at 25, because it turns on threshold crossings rather than on a mean.
+ * That is why the page states a position confidently at 25 and the label
+ * cautiously. See scripts/prefix_accuracy.ts.
+ */
+export const DEPTH_BUCKETS = ['under10', '10to24', '25to49', '50plus', 'complete'] as const;
+export type DepthBucket = (typeof DEPTH_BUCKETS)[number];
+
+export function depthOf(answered: number, total: number): DepthBucket {
+  if (answered >= total) return 'complete';
+  if (answered >= 50) return '50plus';
+  if (answered >= POOLABLE_DEPTH) return '25to49';
+  if (answered >= 10) return '10to24';
+  return 'under10';
+}
+
 /** One share per hashed address per six hours. */
 export const RATE_TTL_SECONDS = 6 * 60 * 60;
-
 
 /**
  * The shape of a real item id, which is an Open States vote id:
@@ -138,6 +173,14 @@ export const KEYS = {
   // Parallel rather than a replacement: the existing keys keep their meaning as
   // the all-modes total, nothing already counted is stranded, and no migration
   // has to be got right. The cost is four more hincrby in the same pipeline.
+  /**
+   * How far into the quiz a reading got, bucketed. Not split by region: the
+   * question it answers is how much of the full set a reading rests on, and
+   * slicing that by region as well would spread 7 full-set readings over three
+   * buckets and three regions.
+   */
+  depth: (m: Mode) => `t:${ns()}:depth:${m}`,
+
   leanMode: (r: Region, m: Mode) => `t:${ns()}:lean:${r}:${m}`,
   verdictMode: (r: Region, m: Mode) => `t:${ns()}:verdict:${r}:${m}`,
   guessMode: (r: Region, m: Mode) => `t:${ns()}:guess:${r}:${m}`,
