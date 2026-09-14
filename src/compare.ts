@@ -48,7 +48,35 @@ export const COMPARE_N = 7;
  * payload silently, and `compare.smoke.ts` asserts this is the sorted set of
  * the headline items rather than the payload's own ordering.
  */
-export const COMPARE_IDS: readonly string[] = HEADLINE_ITEMS.map((i) => i.id).slice().sort();
+/**
+ * PINNED BY BILL, because a vote id is not a stable name for a question.
+ *
+ * This used to be the headline vote ids, sorted. That was stable only while the
+ * ids were, and on 14 September 2026 they were not: correcting the
+ * vote-selection rule repointed SB 6 from a procedural 80-59 to its real 103-25
+ * passage, which changed its id, which moved it from position 0 to position 6
+ * and shifted every other bill by one. Every challenge link already in
+ * circulation would have decoded with all seven answers attached to the wrong
+ * questions. Not an error, just quietly wrong, which is the worse failure.
+ *
+ * The order below is exactly the order the sorted ids produced before that
+ * correction, so codes issued under the old scheme still decode correctly. From
+ * here it is fixed: a bill keeps its position no matter how often the record it
+ * points at is corrected, and a shared link outlives a data fix.
+ */
+const COMPARE_BILLS: readonly string[] = [
+  'SB 6', 'SB 10', 'SB 14', 'SB 8', 'SB 5', 'SB 2', 'SB 3',
+];
+
+/** The seven ids, in the pinned bill order, so position 0 means the same
+ *  QUESTION forever even when the vote behind it is corrected. */
+export const COMPARE_IDS: readonly string[] = COMPARE_BILLS.map((bill) => {
+  const item = HEADLINE_ITEMS.find((i) => i.billId === bill);
+  // A headline bill leaving the set has to be loud. Silently shortening this
+  // list would renumber every position after it and break the same links again.
+  if (!item) throw new Error(`compare: ${bill} is pinned but is not a headline item`);
+  return item.id;
+});
 
 const MASK_SHIFT = COMPARE_N;
 const MAX_CODE = (1 << (COMPARE_N * 2)) - 1; // 14 bits

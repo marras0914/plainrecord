@@ -42,16 +42,30 @@ const payloadOrder = HEADLINE_ITEMS.map((i) => i.id);
 const sorted = payloadOrder.slice().sort();
 
 check('the compare covers seven votes', COMPARE_IDS.length === COMPARE_N, String(COMPARE_IDS.length));
-check('the canonical order is the SORTED ids',
-  JSON.stringify(COMPARE_IDS) === JSON.stringify(sorted));
-// The precondition that makes the check above worth having. If the payload
-// happened to be sorted already, sorting would be a no-op and this suite would
-// pass just as well with the bug present.
-check('and the payload order is genuinely different, so sorting is load-bearing',
-  JSON.stringify(payloadOrder) !== JSON.stringify(sorted),
-  `payload starts ${payloadOrder[0].slice(9, 13)}, sorted starts ${sorted[0].slice(9, 13)}`);
+// THE ORDER IS PINNED BY BILL NOW, not by sorted id. It used to be the sorted
+// ids, which was stable only while the ids were: correcting the vote-selection
+// rule repointed SB 6 at its real passage vote, changing its id, moving it from
+// position 0 to position 6 and shifting every other bill by one. Every link in
+// circulation would have decoded with all seven answers on the wrong questions.
+//
+// So the assertion is no longer "sorted". It is that each position holds the
+// bill it has always held.
+const PINNED_BILLS = ['SB 6', 'SB 10', 'SB 14', 'SB 8', 'SB 5', 'SB 2', 'SB 3'];
+const billAt = COMPARE_IDS.map((id) => HEADLINE_ITEMS.find((i) => i.id === id)?.billId);
+check('each position holds the bill it has always held',
+  JSON.stringify(billAt) === JSON.stringify(PINNED_BILLS),
+  billAt.join(', '));
+
+// The precondition that makes the check above worth having. If the pinned order
+// happened to equal the sorted one, pinning would be doing nothing and this
+// suite would pass just as well with the old code.
+check('and the pinned order is genuinely not the sorted order, so pinning is load-bearing',
+  JSON.stringify(COMPARE_IDS) !== JSON.stringify(sorted),
+  `pinned starts ${COMPARE_IDS[0].slice(9, 13)}, sorted starts ${sorted[0].slice(9, 13)}`);
+
 check('the ids are the headline set, nothing else',
-  COMPARE_IDS.every((id) => payloadOrder.includes(id)));
+  COMPARE_IDS.every((id) => payloadOrder.includes(id))
+  && COMPARE_IDS.length === new Set(COMPARE_IDS).size);
 
 // ---------------------------------------------------------------------------
 // Round trip over every reachable answer set: 3^7 = 2187.
