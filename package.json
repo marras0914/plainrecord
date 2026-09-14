@@ -49,7 +49,8 @@
     "data:election:check": "node scripts/check_election_dates.mjs",
     "prefix:accuracy": "tsx scripts/prefix_accuracy.ts",
     "data:boundaries": "node scripts/build_boundaries.mjs",
-    "data:boundaries:check": "node --experimental-strip-types --no-warnings scripts/check_boundaries.mjs"
+    "data:boundaries:check": "node --experimental-strip-types --no-warnings scripts/check_boundaries.mjs",
+    "data:headlines": "tsx scripts/sync_headline_prose.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
