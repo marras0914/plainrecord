@@ -50,7 +50,8 @@
     "data:election": "node scripts/build_election_dates.mjs",
     "data:election:check": "node scripts/check_election_dates.mjs",
     "prefix:accuracy": "tsx scripts/prefix_accuracy.ts",
-    "data:headlines": "tsx scripts/sync_headline_prose.mjs"
+    "data:headlines": "tsx scripts/sync_headline_prose.mjs",
+    "data:votes:check": "node scripts/check_vote_selection.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",

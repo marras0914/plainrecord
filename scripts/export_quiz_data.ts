@@ -238,10 +238,43 @@ function main() {
   // whose votes correlate above 0.72, so two readings that diverged slightly both
   // survive with near-full weight. Collapsing to the most divisive vote per bill
   // removes the duplication at the source rather than discounting it afterwards.
+  // DISCRIMINATION ALONE PICKED PROCEDURAL MOTIONS, and it did so by design
+  // rather than by accident. 4p(1-p) peaks at a 50/50 split, and a motion that
+  // FAILED sits closer to 50/50 than a passage vote almost by definition, so it
+  // won every time the two were compared.
+  //
+  // A reader on r/texas found it on SB 17. The question was pointing at a 64-74
+  // vote with no journal record, which was a motion to print remarks during
+  // debate, and which did not pass. The actual third-reading passage was 86-59,
+  // House Record 1881. Worse than the wrong record: the two carry OPPOSITE
+  // signs, -0.87 against +0.98, so everyone who answered that question was
+  // scored backwards on it. Four of the 67 were affected and two had the sign
+  // inverted.
+  //
+  //   SB 17    64-74 -> 0.995 beat  86-59 (j1881) -> 0.965
+  //   HB 610   76-68 -> 0.997 beat  144-1 (j1535) -> 0.027
+  //   HB 3053  81-56 -> 0.967 beat  85-56 (j2266) -> 0.958
+  //   SB 6     80-59 -> 0.977 beat 117-24 (j3558) -> 0.565
+  //
+  // So the criterion is unchanged and its INPUT is narrowed: the most divisive
+  // vote, chosen from the bill's actual dispositions rather than from every
+  // roll call it ever attracted. A disposition is a vote that passed, and a
+  // journal-sourced one is preferred over a scrape because it carries a record
+  // number somebody can look up. Tiers first, discrimination within a tier, id
+  // last, so the published set still cannot drift.
+  const passed = (it: VoteItem) => it.yeas > it.nays;
+  const tierOf = (it: VoteItem): number => {
+    if (passed(it) && it.voteSource === 'journal') return 0;
+    if (passed(it)) return 1;
+    return 2;
+  };
   const bestPerBill = new Map<string, VoteItem>();
   for (const it of withCategory) {
     const cur = bestPerBill.get(it.billId);
     if (!cur) { bestPerBill.set(it.billId, it); continue; }
+    const tier = tierOf(it) - tierOf(cur);
+    if (tier < 0) { bestPerBill.set(it.billId, it); continue; }
+    if (tier > 0) continue;
     const d = discrimination(it) - discrimination(cur);
     // Deterministic tie-break so the published question set cannot drift.
     if (d > 1e-12 || (Math.abs(d) <= 1e-12 && it.id < cur.id)) bestPerBill.set(it.billId, it);
