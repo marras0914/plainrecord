@@ -2338,18 +2338,37 @@ try {
       ((await lp.locator('.rep-locate-note').textContent()) ?? '').trim().length > 20,
       ((await lp.locator('.rep-locate-note').textContent()) ?? '').trim().slice(0, 60));
 
-    // THE LAZY CLAIM. 122 KB has no business arriving for the great majority of
+    // THE FILENAME IS READ FROM THE SOURCE, NOT TYPED HERE.
+    //
+    // It was typed here, and then the file was renamed when counties joined it.
+    // The "downloads once" check below failed loudly, which is how it was found,
+    // but its partner above did not: "no request matched districts_tx_house" was
+    // trivially true once nothing was called that, so the lazy-loading guarantee
+    // was being confirmed by a pattern that could no longer match anything. A
+    // check that cannot fail is worse than no check, and a pair where one half
+    // goes vacuous is how that hides.
+    //
+    // So the name comes from BOUNDARIES_URL, and not finding it is itself a
+    // failure rather than an empty filter.
+    const boundarySrc = readFileSync(join(ROOT, 'src/boundaries.ts'), 'utf8');
+    const urlMatch = /BOUNDARIES_URL\s*=\s*'([^']+)'/.exec(boundarySrc);
+    check('locate: the boundaries filename can be read from the source',
+      Boolean(urlMatch), urlMatch ? urlMatch[1] : 'BOUNDARIES_URL not found in src/boundaries.ts');
+    const boundaryFile = urlMatch ? urlMatch[1].split('/').pop() : ' never-matches';
+    const wantsBoundaries = (r) => r.url.includes(boundaryFile);
+
+    // THE LAZY CLAIM. 160 KB has no business arriving for the great majority of
     // readers who never press this.
-    const fetchedEarly = reqs.filter((r) => /districts_tx_house/.test(r.url));
+    const fetchedEarly = reqs.filter(wantsBoundaries);
     check('locate: the boundaries are NOT downloaded before they are asked for',
-      fetchedEarly.length === 0, `${fetchedEarly.length} request(s)`);
+      fetchedEarly.length === 0, `${fetchedEarly.length} request(s) for ${boundaryFile}`);
 
     await btn.click();
     await lp.waitForTimeout(2500);
 
-    const fetched = reqs.filter((r) => /districts_tx_house/.test(r.url));
+    const fetched = reqs.filter(wantsBoundaries);
     check('locate: pressing it downloads the boundaries, once',
-      fetched.length === 1, `${fetched.length} request(s)`);
+      fetched.length === 1, `${fetched.length} request(s) for ${boundaryFile}`);
 
     const box = lp.locator('#rep-district');
     check('locate: the district box is filled with the answer',
