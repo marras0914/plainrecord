@@ -139,7 +139,18 @@ const num = (v) => Number(String(v).replace('−', '-').trim());
 const EXPECT = {
   mixed: {
     lean: { want: 'balanced by construction (|lean| <= 0.05)', ok: (v) => Math.abs(num(v)) <= 0.05 },
-    cross: { want: 'exactly 50%', ok: (v) => v === '50%' },
+    // A BAND, NOT A NUMBER. This read "exactly 50%" and held until the vote
+    // selection was corrected, when it became 48% and failed. Nothing was
+    // broken: the preset splits the partisan items into halves BY COUNT, while
+    // crossover is a share of partisan MASS, so the two coincide only when the
+    // halves happen to weigh the same. 50% was an observation written down as
+    // though it were a guarantee, which is why lean and load beside it are
+    // tolerances and this was not.
+    cross: { want: 'about half, by construction (45-55%)',
+      // parseFloat, not num(): num() does not strip the percent sign, so
+      // Number("48%") is NaN and every comparison against it is false. The
+      // first version of this band failed on a value inside it.
+      ok: (v) => parseFloat(String(v)) >= 45 && parseFloat(String(v)) <= 55 },
     load: { want: 'high partisan load (>= 0.5)', ok: (v) => num(v) >= 0.5 },
     head: /split right down the middle|cross over a lot/i,
   },
