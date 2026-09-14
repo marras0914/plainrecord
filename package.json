@@ -49,7 +49,8 @@
     "data:districts:check": "node --experimental-strip-types --no-warnings scripts/check_districts.mjs",
     "data:election": "node scripts/build_election_dates.mjs",
     "data:election:check": "node scripts/check_election_dates.mjs",
-    "prefix:accuracy": "tsx scripts/prefix_accuracy.ts"
+    "prefix:accuracy": "tsx scripts/prefix_accuracy.ts",
+    "data:headlines": "tsx scripts/sync_headline_prose.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",

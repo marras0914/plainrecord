@@ -69,7 +69,18 @@ import { actsBySession, normBill, OPPONENTS } from './opponent_acts';
  * a reader than a dense accurate one. That gap is deliberate and is stated in the
  * payload, not hidden.
  */
-const HEADLINE_SET: { billId: string; label: string; why: string; plain: string }[] = [
+/**
+ * EXPORTED so scripts/sync_headline_prose.mjs can apply `why` and `label` to an
+ * already-built payload. Re-running this exporter needs the LegiScan CSVs, which
+ * are not committed, so a wording change here would otherwise be unreachable
+ * without 51 MB of bulk input. Same reason add_plain.mjs exists.
+ *
+ * NOTE that `plain` below is a SEED, not the authority. i18n/plain_89R.json owns
+ * the summaries and add_plain.mjs overwrites these, so the strings here are
+ * deliberately out of date and a fresh export must be followed by
+ * `npm run data:plain -- --write`.
+ */
+export const HEADLINE_SET: { billId: string; label: string; why: string; plain: string }[] = [
   { billId: 'SB 2',  label: 'School vouchers',
     why: 'The marquee fight of the session: public money for private school tuition. Lt. Gov. priority bill.',
     plain: 'Creates state-funded accounts that families can spend on private school tuition and other approved school costs. The money comes out of the state budget.' },
@@ -86,8 +97,7 @@ const HEADLINE_SET: { billId: string; label: string; why: string; plain: string 
     why: 'Creates a state office to review regulations. Lt. Gov. priority bill.',
     plain: 'Sets up a new state office to review the rules that agencies write, and tells judges to stop treating an agency’s own reading of the law as the correct one.' },
   { billId: 'SB 6',  label: 'Electric grid and large power users',
-    why: 'Grid reliability rules for large loads such as data centres. Lt. Gov. priority bill.',
-    plain: 'Sets the rules for how very large electricity users, such as data centres, connect to the Texas grid and how much of the cost of serving them they pay.' },
+    why: 'Grid reliability rules for large loads such as data centres. The 75 megawatt threshold is per site; ERCOT forecasts about 78 GW of data centre demand by 2030, from interconnection requests, which is roughly a thousand sites that size. The energy emergency alert it turns on is the one the Legislature set up after the 2021 freeze, for when demand may exceed supply. Lt. Gov. priority bill.',    plain: 'Sets the rules for how very large electricity users, such as data centres, connect to the Texas grid and how much of the cost of serving them they pay.' },
   { billId: 'SB 5',  label: 'Dementia research institute',
     why: 'Creates a state dementia research institute. Included deliberately as the least party-coded of the headline bills — without it the short set would be entirely party-line.',
     plain: 'Creates a state institute that funds dementia prevention and research.' },
