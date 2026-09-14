@@ -79,7 +79,7 @@ for (const item of payload.items) {
     alt: better.map((b) => `${b.yeas}-${b.nays}(j${b.journalRecord})`).join(' ') });
 }
 
-check('no question is scored on a lesser vote while the bill\'s passage is on the record',
+check('no question is scored on a lesser vote while an adopted one is on the record',
   shadowed.length === 0,
   shadowed.length
     ? shadowed.map((s) => `${s.bill} using ${s.using} [${s.src}] vs ${s.alt}${s.flip ? ' SIGN FLIP' : ''}`).join('; ')
@@ -88,12 +88,12 @@ check('no question is scored on a lesser vote while the bill\'s passage is on th
 // Called out separately because it is the difference between a question being
 // imprecise and a question scoring the reader the wrong way round.
 const flips = shadowed.filter((s) => s.flip);
-check('no question carries the opposite sign to its own bill\'s passage',
+check('no question carries the opposite sign to an adopted vote on the same bill',
   flips.length === 0,
   flips.map((s) => s.bill).join(', ') || 'none');
 
 console.log(fails
   ? `\n  ${fails} problem(s). See scripts/export_quiz_data.ts for the selection rule.\n`
-  : '\n  every question points at its bill\'s disposition\n');
+  : '\n  every question points at a roll call the House adopted\n');
 
 process.exitCode = fails ? 1 : 0;

@@ -257,11 +257,21 @@ function main() {
   //   SB 6     80-59 -> 0.977 beat 117-24 (j3558) -> 0.565
   //
   // So the criterion is unchanged and its INPUT is narrowed: the most divisive
-  // vote, chosen from the bill's actual dispositions rather than from every
-  // roll call it ever attracted. A disposition is a vote that passed, and a
-  // journal-sourced one is preferred over a scrape because it carries a record
-  // number somebody can look up. Tiers first, discrimination within a tier, id
-  // last, so the published set still cannot drift.
+  // vote, chosen from the roll calls the House ADOPTED rather than from every
+  // one a bill attracted. A journal-sourced adoption is preferred over a scrape
+  // because it carries a record number somebody can look up. Tiers first,
+  // discrimination within a tier, id last, so the published set still cannot
+  // drift.
+  //
+  // "ADOPTED" IS NOT "THE BILL'S FATE", and an earlier version of this comment
+  // said it was. A bill can carry a vote that passed and still die: the
+  // reconciliation log shows the Journal recording HB 2442 failing 62-77 and
+  // HB 3892 failing 65-77, while the only roll call our ingest holds for either
+  // is the earlier one that passed, and neither bill ever reached the Governor.
+  // Those questions are asked on a real recorded vote, which is what the page
+  // asks about, and the page never claims the bill became law. But the filter
+  // below separates adopted votes from rejected ones; it does not know how a
+  // bill ended up, and should not be read as though it does.
   const passed = (it: VoteItem) => it.yeas > it.nays;
   const tierOf = (it: VoteItem): number => {
     if (passed(it) && it.voteSource === 'journal') return 0;
