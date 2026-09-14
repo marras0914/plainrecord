@@ -50,7 +50,8 @@
     "prefix:accuracy": "tsx scripts/prefix_accuracy.ts",
     "data:boundaries": "node scripts/build_boundaries.mjs",
     "data:boundaries:check": "node --experimental-strip-types --no-warnings scripts/check_boundaries.mjs",
-    "data:headlines": "tsx scripts/sync_headline_prose.mjs"
+    "data:headlines": "tsx scripts/sync_headline_prose.mjs",
+    "data:votes:check": "node scripts/check_vote_selection.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
