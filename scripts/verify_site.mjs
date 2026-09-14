@@ -2316,7 +2316,7 @@ try {
     const lp = await lc.newPage();
 
     const reqs = [];
-    lp.on('request', (r) => reqs.push({ url: r.url(), body: (() => {
+    lp.on('request', (r) => reqs.push({ url: r.url(), method: r.method(), body: (() => {
       try { return r.postData() ?? ''; } catch { return ''; }
     })() }));
 
@@ -2384,6 +2384,40 @@ try {
     check('locate: the coordinate is not in any request the page made',
       leaked.length === 0,
       leaked.length ? leaked[0].url.slice(0, 90) : `${reqs.length} requests checked`);
+
+    // WHAT privacy.body PROMISES ABOUT THIS BUTTON, checked as traffic.
+    //
+    // That paragraph used to end "tap neither and nothing but the visit count is
+    // ever sent", and cited a build test as proof. The test tapped the share and
+    // challenge buttons and never this one, so the proof was narrower than the
+    // claim from the day the locator shipped: pressing it fetches the boundary
+    // file, which is a request the sentence did not allow for. The paragraph now
+    // says so, and this is the check that keeps the two honest with each other.
+    //
+    // The boundary file is expected. Analytics is expected, and is disclosed in
+    // the same paragraph. Anything else is not.
+    // Loading the page is not "sending": the document, its stylesheet and its
+    // script have to arrive or there is nothing to read. What the paragraph
+    // promises is that pressing this button transmits nothing ABOUT YOU, so the
+    // two shapes that could are what get looked for. A POST is how data leaves,
+    // and a third-party call is how it leaves to somebody else.
+    const origin = new URL(URL_UNDER_TEST).origin;
+    const thirdParty = (u) => u.startsWith('http') && !u.startsWith(origin)
+      && !/fonts\.(googleapis|gstatic)\.com/.test(u);
+    const beyond = reqs.filter((r) => r.method !== 'GET' || thirdParty(r.url));
+    check('locate: pressing it POSTs nothing and calls nobody else',
+      beyond.length === 0,
+      beyond.length
+        ? beyond.map((r) => `${r.method} ${r.url.slice(0, 60)}`).join(' | ')
+        : `${reqs.length} requests checked`);
+
+    // And the paragraph has to actually mention it, in both languages, or the
+    // check above is guarding a promise the page never made.
+    const copy = JSON.parse(readFileSync(join(ROOT, 'i18n/copy.json'), 'utf8'));
+    const privacy = copy['privacy.body'] ?? {};
+    check('locate: the privacy paragraph accounts for the district download, in both languages',
+      /district map/i.test(privacy.en ?? '') && /mapa de distritos/i.test(privacy.es ?? ''),
+      [privacy.en ? 'en ok' : 'en MISSING', privacy.es ? 'es ok' : 'es MISSING'].join(', '));
 
     // Typing over the answer has to retract the explanation, which describes a
     // district the reader has just replaced.
