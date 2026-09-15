@@ -263,6 +263,23 @@ const pct = (v: number) => `${Math.round(v * 100)}%`;
 const esc = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+/**
+ * A bill's page at Texas Legislature Online: full text, every version, the
+ * official analyses and the history.
+ *
+ * The session comes from the payload rather than a literal, so a future session
+ * cannot silently keep pointing at 89R. Bill ids are "SB 17" or "HJR 218" and
+ * the URL wants them closed up.
+ *
+ * `scripts/check_bill_links.mjs` verifies all 67 of these by CONTENT, not by
+ * status: capitol.texas.gov answers a request for a bill that does not exist
+ * with HTTP 200 and a page saying so, so a status check would pass every
+ * broken link we could ship.
+ */
+const billUrl = (billId: string): string =>
+  `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=${
+    encodeURIComponent(DATA.session)}&Bill=${encodeURIComponent(billId.replace(/\s+/g, ''))}`;
+
 // ---------------------------------------------------------------------------
 // The strip
 // ---------------------------------------------------------------------------
@@ -1337,7 +1354,19 @@ function renderQuestion(): void {
     `${esc(t(officialOpen ? 'q.hideOfficial' : 'q.showOfficial'))}</button>` +
     (officialOpen
       ? `<div class="q-caption" lang="en">${esc(it.caption)}</div>` +
-        `<p class="q-note">${esc(t('q.officialNote', { yeas: it.yeas, nays: it.nays }))}</p>`
+        `<p class="q-note">${esc(t('q.officialNote', { yeas: it.yeas, nays: it.nays }))}</p>` +
+        // THE WAY OUT TO THE ACTUAL BILL.
+        //
+        // A reader on r/FortWorth pointed out that a one-sentence summary often
+        // cannot say what a bill really does, and that there was nowhere to go
+        // and find out. He was right: the site had no outbound link to any bill
+        // at all, only this caption, which is a legal title and not the text.
+        //
+        // Inside the toggle on purpose. The same reader said most people will
+        // not read the full text, so this belongs where someone who wants it
+        // will look, not in front of everyone who does not.
+        `<p class="q-billlink"><a href="${billUrl(it.billId)}" target="_blank" rel="noopener">` +
+        `${esc(t('q.readBill', { bill: it.billId }))}</a></p>`
       : '') +
     `</div>` +
 

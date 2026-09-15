@@ -53,6 +53,7 @@ export type CopyKey =
   | "q.showOfficial"
   | "q.hideOfficial"
   | "q.officialNote"
+  | "q.readBill"
   | "q.askedAs"
   | "q.youSaid"
   | "result.restart"
@@ -386,6 +387,7 @@ export const EN: Record<CopyKey, string> = {
   "q.showOfficial": "Official wording",
   "q.hideOfficial": "Hide official wording",
   "q.officialNote": "The question above is our plain-language summary. This is the bill's official caption, word for word. The House voted {yeas} yes, {nays} no.",
+  "q.readBill": "Read {bill} in full at the Texas Legislature",
   "q.askedAs": "This one has no plain-language version yet, so it is asked in the official wording.",
   "q.youSaid": "You voted {vote}.",
   "result.restart": "Start over",
@@ -703,7 +705,8 @@ export const ES: Record<CopyKey, string> = {
   "q.seeResult": "Ver dónde se sitúa",
   "q.showOfficial": "Texto oficial",
   "q.hideOfficial": "Ocultar texto oficial",
-  "q.officialNote": "La pregunta de arriba es nuestro resumen en lenguaje sencillo. Este es el texto oficial del proyecto de ley, palabra por palabra. La Cámara votó {yeas} a favor, {nays} en contra.",
+  "q.officialNote": "La pregunta de arriba es nuestro resumen en lenguaje sencillo. Este es el título oficial del proyecto de ley, palabra por palabra. La Cámara votó {yeas} a favor, {nays} en contra.",
+  "q.readBill": "Lea el texto completo de {bill} en la Legislatura de Texas",
   "q.askedAs": "Este todavía no tiene versión en lenguaje sencillo, así que se plantea con el texto oficial.",
   "q.youSaid": "Usted votó {vote}.",
   "result.restart": "Empezar de nuevo",

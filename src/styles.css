@@ -113,6 +113,11 @@
     margin:22px 0 0; text-wrap:pretty; }
   .q-why { font-size:14.5px; color:var(--ink-2); line-height:1.5; margin:14px 0 0; }
   .q-note { font-size:12.5px; color:var(--muted); line-height:1.5; margin:10px 0 0; }
+  /* The way out to the bill itself. Same size as the note above it but in
+     --ink-2, because it is the one thing in this block a reader might want to
+     act on rather than read past. */
+  .q-billlink { font-size:12.5px; line-height:1.5; margin:8px 0 0; }
+  .q-billlink a { color:var(--ink-2); }
   /* Names the act, directly above the two buttons that perform it. Quieter
      than the summary above it and heavier than the note below, because it is
      an instruction rather than either the subject or a caveat. When it is
