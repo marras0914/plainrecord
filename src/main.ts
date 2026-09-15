@@ -2139,6 +2139,11 @@ function renderElection(): void {
   const link = '<a href="https://www.votetexas.gov/register/" target="_blank" rel="noopener">'
     + 'votetexas.gov</a>';
 
+  // A different page from the registration one above, and the only place that
+  // answers the election-day question in the state's own words. Verified 200.
+  const whereLink = '<a href="https://www.votetexas.gov/voting/where.html" target="_blank" rel="noopener">'
+    + 'votetexas.gov</a>';
+
   card.innerHTML =
     `<div class="card-head" style="margin-bottom:10px">`
     + `<h2 class="eyebrow">${esc(t('vote.heading'))}</h2></div>`
@@ -2147,6 +2152,15 @@ function renderElection(): void {
       `<div class="vote-row${i === next ? ' vote-next' : ''}">`
       + `<dt>${esc(r.label)}</dt><dd>${esc(r.when)}</dd></div>`).join('')
     + `</dl>`
+    // The gap the rest of this block leaves open. Stating the early voting rule
+    // and then stopping invites a reader to assume election day works the same
+    // way, and for a lot of Texas counties it does not. This says the two
+    // differ and refuses to say which kind any given county is, because that is
+    // genuinely not knowable from one place: the Secretary of State's CWPP list
+    // covers the May runoff, there is no November list, and being on it means a
+    // county MAY run vote centers rather than will. Dallas and Williamson both
+    // dropped countywide voting for March 2026.
+    + `<p class="vote-daynote">${t('vote.dayNote', { link: whereLink })}</p>`
     + `<p class="vote-check">${t('vote.checkLine', { link })}</p>`;
 }
 

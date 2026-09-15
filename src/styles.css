@@ -689,6 +689,13 @@
   .vote-row dd { font-size:15px; margin:0; font-variant-numeric:tabular-nums; }
   .vote-next { border-left:3px solid var(--rule); padding-left:12px; margin-left:-15px; }
   .vote-next dt, .vote-next dd { color:var(--ink); font-weight:600; }
+  /* Sits between the dates and the sourcing line, and is the one thing in this
+     block a reader could get wrong on their own. Set in --ink-2 rather than
+     --muted so it reads as part of the information, not as the fine print
+     under it; the sourcing line below stays quieter on purpose. */
+  .vote-daynote { font-size:13px; color:var(--ink-2); margin:14px 0 0; line-height:1.55;
+                  max-width:64ch; }
+  .vote-daynote a { color:var(--ink-2); }
   .vote-check { font-size:12.5px; color:var(--muted); margin:12px 0 0; line-height:1.5; }
   .vote-check a { color:var(--ink-2); }
 

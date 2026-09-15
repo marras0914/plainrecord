@@ -254,6 +254,7 @@ export type CopyKey =
   | "vote.electionDay"
   | "vote.mailApply"
   | "vote.checkLine"
+  | "vote.dayNote"
   | "rep.lede"
   | "rep.districtLabel"
   | "rep.useLocation"
@@ -582,6 +583,7 @@ export const EN: Record<CopyKey, string> = {
   "vote.electionDay": "Election day",
   "vote.mailApply": "Mail ballot applications close",
   "vote.checkLine": "Dates from the Texas Secretary of State. Check your registration at {link}.",
+  "vote.dayNote": "Election day is not like early voting. In early voting you can vote at any early voting place in your county. On election day, some counties let you vote anywhere in the county and some send you to one place near your home. Counties change this between elections, so check {link} before you go.",
   "rep.lede": "The three above are running for offices that affect every Texan. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
   "rep.districtLabel": "Or your district number",
   "rep.useLocation": "Use my location",
@@ -895,6 +897,7 @@ export const ES: Record<CopyKey, string> = {
   "vote.electionDay": "Día de la elección",
   "vote.mailApply": "Cierran las solicitudes de boleta por correo",
   "vote.checkLine": "Fechas de la Secretaría de Estado de Texas. Verifique su registro en {link}.",
+  "vote.dayNote": "El día de la elección no funciona como la votación anticipada. En la votación anticipada usted puede votar en cualquier centro de votación anticipada de su condado. El día de la elección, algunos condados le permiten votar en cualquier lugar del condado y otros le asignan un solo lugar cerca de su casa. Los condados cambian esto de una elección a otra, así que consulte {link} antes de ir.",
   "rep.lede": "Los tres de arriba se postulan para cargos que afectan a todos los texanos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
   "rep.districtLabel": "O su número de distrito",
   "rep.useLocation": "Usar mi ubicación",
