@@ -86,6 +86,10 @@ export type CopyKey =
   | "cand.note"
   | "stmt.heading"
   | "stmt.note"
+  | "stmt.line"
+  | "stmt.shown"
+  | "stmt.shownNone"
+  | "stmt.claimed"
   | "preset.heading"
   | "preset.mixed"
   | "preset.muted"
@@ -415,6 +419,10 @@ export const EN: Record<CopyKey, string> = {
   "cand.note": "All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together. Where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
   "stmt.heading": "Statements of vote",
   "stmt.note": "A Texas member may file a statement saying the Journal recorded them wrongly. The recorded vote is the official act and is what is scored here; the statement is shown beside it, never applied in its place.",
+  "stmt.line": "{member} on {bill} ({detail})",
+  "stmt.shown": "recorded {vote}",
+  "stmt.shownNone": "no position recorded",
+  "stmt.claimed": "says intended {vote}",
   "preset.heading": "Try a profile",
   "preset.mixed": "Cross-pressured voter",
   "preset.muted": "Low-signal votes only",
@@ -728,7 +736,11 @@ export const ES: Record<CopyKey, string> = {
   "mode.fullDesc": "Los {n} votos: uno por proyecto, repartidos en 20 materias, incluidos aquellos en los que republicanos y demócratas estuvieron de acuerdo. Esos son los votos que pueden mostrarle cruzando líneas partidistas.",
   "cand.note": "Los tres estuvieron en la misma cámara y compiten por cargos distintos, así que estas son tres lecturas separadas, no una clasificación. Votaron juntos en la mayoría de los proyectos de línea partidista, así que espere que las cifras queden cerca; donde se separan es la parte interesante. Cobertura sobre estos {items} votos: {coverage}. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
   "stmt.heading": "Declaraciones de voto",
-  "stmt.note": "Un miembro de Texas puede presentar una declaración diciendo que el Diario lo registró mal. El voto registrado es el acto oficial y es lo que se califica aquí; la declaración se muestra al lado, nunca se aplica en su lugar.",
+  "stmt.note": "Un miembro de Texas puede presentar una declaración diciendo que el Diario registró mal su voto. El voto registrado es el acto oficial y es lo que se califica aquí; la declaración se muestra al lado, nunca se aplica en su lugar.",
+  "stmt.line": "{member} sobre {bill} ({detail})",
+  "stmt.shown": "consta como {vote}",
+  "stmt.shownNone": "no consta ninguna posición",
+  "stmt.claimed": "dice que quiso votar {vote}",
   "preset.heading": "Pruebe un perfil",
   "preset.mixed": "Votante con presiones cruzadas",
   "preset.muted": "Solo votos de señal baja",

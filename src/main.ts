@@ -2227,18 +2227,50 @@ function renderOutcomes(): void {
     `<ul>${i.acts.map((a) => `<li>${esc(a)}</li>`).join('')}</ul></div>`).join('');
 }
 
+/**
+ * Where a member says the Journal got their vote wrong.
+ *
+ * THIS RENDERED ENTIRELY IN ENGLISH ON THE SPANISH PAGE until 15 September
+ * 2026. `stmt.heading` and `stmt.note` had existed in copy.json for weeks,
+ * reviewed and approved, and the renderer simply did not call them; the rest of
+ * the card was English glued together in code with no strings at all. Nothing
+ * caught it because the i18n gate checks that every string is approved, not
+ * that the page actually uses one.
+ *
+ * It matters more than four rows suggests. All four statements belong to the
+ * three candidates this site scores, and one of them is on SB 3, which is in
+ * the seven-item short set — so the card is reachable from the short quiz, not
+ * only from a full run.
+ *
+ * The statement text itself stays English and is marked `lang="en"`, under the
+ * same rule as the bill captions: it is quoted from the House Journal, and a
+ * translation of an official record is not that record.
+ */
 function renderStatements(): void {
   const withStmt = activeItems().filter((i) => i.statements && i.statements.length);
   const card = el('stmt-card');
   if (!withStmt.length) { card.hidden = true; return; }
   card.hidden = false;
-  card.innerHTML = `<h2 class="eyebrow">Statements of vote</h2>` +
-    `<p class="footnote" style="margin:10px 0 0">A Texas member may file a statement saying the Journal recorded them wrongly. The recorded vote is the official act and is what is scored here; the statement is shown beside it, never applied in its place.</p>` +
+
+  const detailFor = (s: { shownAs: number | null; claimed: number | null }): string => {
+    const shown = s.shownAs === null
+      ? t('stmt.shownNone')
+      : t('stmt.shown', { vote: t(s.shownAs === 1 ? 'vote.yea' : 'vote.nay') });
+    if (s.claimed === null) return shown;
+    return `${shown}, ${t('stmt.claimed', { vote: t(s.claimed === 1 ? 'vote.yea' : 'vote.nay') })}`;
+  };
+
+  card.innerHTML =
+    `<h2 class="eyebrow">${esc(t('stmt.heading'))}</h2>` +
+    `<p class="footnote" style="margin:10px 0 0">${esc(t('stmt.note'))}</p>` +
     withStmt.map((i) => i.statements!.map((s) =>
-      `<div class="stmt"><b>${esc(s.member)}</b> on ${esc(i.billId)} ` +
-      `(${s.shownAs === 1 ? 'recorded Yea' : s.shownAs === -1 ? 'recorded Nay' : 'no position recorded'}` +
-      `${s.claimed !== null ? `, says intended ${s.claimed === 1 ? 'Yea' : 'Nay'}` : ''})` +
-      `<div class="stmt-q">"${esc(s.text)}"</div></div>`).join('')).join('');
+      `<div class="stmt">` +
+      t('stmt.line', {
+        member: `<b>${esc(s.member)}</b>`,
+        bill: esc(i.billId),
+        detail: esc(detailFor(s)),
+      }) +
+      `<div class="stmt-q" lang="en">"${esc(s.text)}"</div></div>`).join('')).join('');
 }
 
 function renderTable(p: PartisanProfile): void {

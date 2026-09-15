@@ -2744,6 +2744,20 @@ try {
       // Neither is a sentence, which is exactly why a prose-shaped leak list
       // missed them.
       'democratic-coded', 'republican-coded',
+      // THE STATEMENTS CARD, WHICH RENDERED WHOLLY IN ENGLISH FOR WEEKS.
+      //
+      // stmt.heading and stmt.note were in copy.json, translated and approved,
+      // and renderStatements() called neither — the rest of the card was
+      // English assembled in code with no strings at all. This list is why it
+      // survived: it is eleven phrases somebody thought to type, and nobody
+      // thought of this card, so the check passed by not looking. A hand-made
+      // needle list only ever finds the leaks its author already imagined.
+      //
+      // The card is easy to miss by eye too. It renders only when an active
+      // item carries a statement, which is 4 of the 67, and all four belong to
+      // the three candidates being scored.
+      'statements of vote', 'may file a statement',
+      'no position recorded', 'says intended',
     ];
     // Drive both to the result, in full mode, with the disclosures open: that
     // is the state that actually contains the chrome this test is looking for.
