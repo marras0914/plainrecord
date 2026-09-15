@@ -54,9 +54,19 @@ for (const it of payload.items) {
     es: prior?.es ?? esExisting,
     status: prior?.status ?? (shipped ? 'ok' : 'draft'),
     source: a?.url ?? null,
-    // Trimmed hard: a reviewer needs enough to check a 25-word summary against,
-    // not the whole document. The URL is there for the whole document.
-    operative: (a?.describes ?? '').slice(0, 900),
+    // Was 900, which threw away two thirds of what the fetch had already kept.
+    //
+    // The old comment said a reviewer needs enough to check a 25-word summary
+    // against, not the whole document. That was right about the whole document
+    // and wrong about 900 characters: a section-by-section analysis spends its
+    // opening on citation and legislative findings, so 900 characters often ran
+    // out before reaching a single operative change. A reviewer asking "does
+    // this summary say what the bill DOES" was being shown the part that says
+    // what the bill is CALLED.
+    //
+    // 3000 is what fetch_analyses keeps, so this no longer discards anything we
+    // have. The URL is still there for the rest.
+    operative: (a?.describes ?? '').slice(0, 3000),
     sponsorsCase: (a?.sponsorsCase ?? '').slice(0, 400),
   };
   if (entry.status === 'ok') approved++; else drafts++;
