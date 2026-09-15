@@ -45,6 +45,27 @@ const argv = process.argv.slice(2);
 const urlArg = argv[argv.indexOf('--url') + 1];
 const BASE = argv.includes('--url') && urlArg ? urlArg : 'http://127.0.0.1:4173';
 
+/**
+ * REFUSE TO RUN AGAINST ANYTHING BUT A LOCAL SERVER.
+ *
+ * This is stricter than verify_site.mjs, which merely skips its writing checks
+ * on a remote target, and it is stricter on purpose. There is no read-only way
+ * to run this file: the walk is the test. It starts the quiz, answers every
+ * question and reaches the result, and each of those three milestones fires a
+ * virtual page view through the beacon. Pointed at rightnleft.com it would add a
+ * full fake reading to the production tally on every run, which is exactly how
+ * the counters were polluted once before and had to be decremented by hand.
+ *
+ * So: localhost only, and no flag to override it. Point it at `vite preview`.
+ */
+const LOCAL_TARGET = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?(\/|$)/.test(BASE);
+if (!LOCAL_TARGET) {
+  console.error(`\n  REFUSING to run against ${BASE}`);
+  console.error('  This walk answers the whole quiz and would post a fake reading to the tally.');
+  console.error('  Run `npm run preview` and point it at http://127.0.0.1:4173.\n');
+  process.exit(2);
+}
+
 let chromium;
 try {
   ({ chromium } = await import('playwright'));
