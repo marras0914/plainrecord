@@ -19,6 +19,7 @@ import {
   MODES,
   REGIONS,
   DEPTH_BUCKETS,
+  RULE_VERSION,
   UNREADABLE_VERDICTS,
   VERDICTS,
   json,
@@ -96,6 +97,15 @@ export interface TallyResponse {
    */
   depth: Record<Mode, Record<string, number>>;
   questions: Record<string, { agree: number; disagree: number }>;
+  /**
+   * Which question set every number above was measured with.
+   *
+   * Counters are namespaced by this, so a response only ever describes one
+   * rule version and totals reset when it changes. Emitted because a consumer
+   * comparing two fetches taken either side of a bump would otherwise see the
+   * count fall and have no way to know why.
+   */
+  ruleVersion: string;
   /** Restated in the payload so a consumer cannot quote it as a poll by accident. */
   note: string;
 }
@@ -205,6 +215,7 @@ async function tally(request: Request): Promise<Response> {
     byMode,
     depth,
     questions,
+    ruleVersion: RULE_VERSION,
     note:
       'Self-selected: these are the people who chose to add their result, not a sample of anyone. ' +
       'Regions come from coarse edge geolocation, so "tx" is not "registered Texas voter". Not a poll. ' +

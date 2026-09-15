@@ -72,7 +72,23 @@ export interface SelectionRule {
  * threshold in SCORING.md).
  */
 export const DEFAULT_RULE: SelectionRule = {
-  version: 'sel-2026-09-01.a',
+  /**
+   * BUMP THIS WHENEVER A CHANGE MOVES WHICH ROLL CALL AN ITEM POINTS AT.
+   *
+   * It did not get bumped on 14 September, when the vote-collapse rule was
+   * narrowed to adopted roll calls, and that omission is what let readings
+   * taken against two different question sets pile into one counter. Four
+   * items changed. SB 17 flipped sign, from -0.873 to +0.984, and SB 6 went
+   * from -0.672 to -0.309 while sitting in the seven-item short set that most
+   * readers answer. Nothing could tell the two sets apart afterwards because
+   * this string still claimed they were the same rule.
+   *
+   * The tally now namespaces its counters by this value, so a bump freezes the
+   * old counts where they stand and starts the new rule from zero rather than
+   * averaging across a change of instrument. That is the point: this is the
+   * identity of the question set, not a changelog entry.
+   */
+  version: 'sel-2026-09-14.b',
   minMinorityShare: 0.05,
   minMinorityCount: 10,
   substantiveOnly: true,

@@ -50,8 +50,22 @@ interface TallyResponse {
   byMode?: Record<string, Record<string, RegionTally>>;
   regions: Record<string, RegionTally>;
   questions: Record<string, { agree: number; disagree: number }>;
+  /** Optional: a deploy older than 15 September 2026 does not send it. */
+  ruleVersion?: string;
   note: string;
 }
+
+/**
+ * The count that was stranded by the 14 September rule correction.
+ *
+ * Recorded here so the report can say what happened to it rather than leave a
+ * total that dropped to zero looking like a failure. These 96 readings are
+ * still in Redis under `t:production:sel-2026-09-01.a:*` and can be read by
+ * key. They are not deleted and they are not usable: every one was scored
+ * against a question set in which SB 17 carried the opposite sign and SB 6,
+ * which is in the short set, had roughly double the valence it has now.
+ */
+const PRIOR_SET = { version: 'sel-2026-09-01.a', readings: 96 } as const;
 
 /** Below this, nothing gets a sentence. Self-selected data at n<100 is anecdote. */
 const MIN_N = 100;
@@ -344,6 +358,22 @@ async function main(): Promise<void> {
 
   const o = overall(t);
   console.log(`${endpoint}`);
+
+  // WHICH QUESTION SET THESE NUMBERS BELONG TO.
+  //
+  // Counters are namespaced by the selection rule's version, so a rule change
+  // freezes the previous counts and starts the new set at zero. Printed first,
+  // and with the reason attached when the count is still small, because
+  // otherwise a total that fell from 96 to single figures overnight reads as a
+  // lost database rather than as the thing working correctly.
+  console.log(`  question set: ${t.ruleVersion ?? 'unversioned (old deploy)'}`);
+  if ((t.ruleVersion ?? '') === 'sel-2026-09-14.b' && t.total < PRIOR_SET.readings) {
+    console.log(
+      `  the previous set (${PRIOR_SET.version}) holds ${PRIOR_SET.readings} readings and is frozen, not lost.\n` +
+      `  They are not comparable: four items changed which roll call they point at, and one of\n` +
+      `  them, SB 6, sits in the seven-question short set that most of those readings answered.`,
+    );
+  }
   console.log(
     `  ${t.total.toLocaleString()} shared · ${o.readable.toLocaleString()} readable · ` +
     `${o.unreadable.toLocaleString()} unreadable · ${t.guessed.toLocaleString()} predicted ` +

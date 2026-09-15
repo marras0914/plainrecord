@@ -36,8 +36,11 @@ import { Redis } from '@upstash/redis';
 import { createHash } from 'node:crypto';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
-import { ALL_ITEMS, HEADLINE_ITEMS, adapt, profileOf, describe, POOLABLE_DEPTH }
+import { ALL_ITEMS, HEADLINE_ITEMS, adapt, profileOf, describe, POOLABLE_DEPTH, RULE_VERSION }
   from '../src/quiz-data.js';
+// Re-exported so the endpoint can tell a consumer which question set the
+// numbers belong to, rather than leaving them to assume it is the current one.
+export { RULE_VERSION };
 // Re-exported so a consumer of the tally sees one definition, not two.
 export { POOLABLE_DEPTH };
 import type { AnswerMap } from '../src/quiz-data.js';
@@ -136,14 +139,43 @@ const QID_RE = /^[A-Za-z0-9_./-]{1,64}$/;
 // ---------------------------------------------------------------------------
 
 /**
- * Counter keys, namespaced by deployment environment.
+ * Counter keys, namespaced by deployment environment AND by question set.
  *
  * A preview deployment and a local `vercel dev` share the one Upstash store
- * with production, so without the namespace every test click would land in the
- * number a reporter gets quoted. `VERCEL_ENV` is set by the platform and is not
- * something a request can influence.
+ * with production, so without the environment segment every test click would
+ * land in the number a reporter gets quoted. `VERCEL_ENV` is set by the
+ * platform and is not something a request can influence.
+ *
+ * THE RULE VERSION IS THE SECOND SEGMENT, AND IT IS THERE FOR A REASON.
+ *
+ * On 14 September the vote-collapse rule was corrected and four of the 67
+ * items changed which roll call they point at. SB 17 flipped sign entirely,
+ * and SB 6 halved its valence while sitting inside the seven-item short set
+ * that 87 of the first 96 readings answered. Every one of those 96 readings
+ * was therefore taken against a question set that no longer exists, and
+ * because the counters carried no version, there was no way to separate them
+ * or even to notice. The gate at 100 readings would have tripped and printed
+ * a confident sentence about a mixture of two different instruments.
+ *
+ * Namespacing by rule version means a bump freezes the old counts where they
+ * are, still in Redis and still readable by key, and starts the new question
+ * set from zero. Nothing is destroyed and nothing is averaged across a change
+ * of instrument. The cost is that a rule change resets the visible count,
+ * which is the honest price and is exactly what should happen.
  */
 export function ns(): string {
+  return `${env()}:${RULE_VERSION}`;
+}
+
+/**
+ * Environment alone, for keys that must survive a rule change.
+ *
+ * Rate limiting is about a person posting too often and has nothing to do with
+ * which questions they answered. If the rate key carried the rule version, a
+ * bump would clear every limit at once and hand anyone mid-cooldown a fresh
+ * allowance on deploy.
+ */
+export function env(): string {
   return process.env.VERCEL_ENV ?? 'development';
 }
 
@@ -156,7 +188,8 @@ export const KEYS = {
   guess: (r: Region) => `t:${ns()}:guess:${r}`,
   delta: (r: Region) => `t:${ns()}:delta:${r}`,
   questions: () => `t:${ns()}:q`,
-  rate: (hash: string) => `t:${ns()}:rl:${hash}`,
+  // env(), not ns(): a rule bump must not clear everyone's cooldown.
+  rate: (hash: string) => `t:${env()}:rl:${hash}`,
 
   // THE SAME FOUR, SPLIT BY WHICH QUIZ WAS ANSWERED.
   //

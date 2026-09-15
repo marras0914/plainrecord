@@ -168,6 +168,17 @@ export interface QuizPayload {
 }
 
 export const DATA = payload as unknown as QuizPayload;
+
+/**
+ * Which question set this build is asking about.
+ *
+ * Exported for the tally, which namespaces every counter by it. Two readings
+ * taken against different rule versions are not the same measurement and must
+ * never land in one average, so this string is the identity of the instrument
+ * rather than a version number for humans to read.
+ */
+export const RULE_VERSION: string = DATA.ruleVersion;
+
 export const ALL_ITEMS: QuizItem[] = DATA.items;
 export const HEADLINE_ITEMS: QuizItem[] = ALL_ITEMS.filter((i) => i.headline);
 export const OPPONENTS: Opponent[] = DATA.opponents ?? [];

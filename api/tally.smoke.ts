@@ -21,7 +21,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 
 import { HEADLINE_ITEMS, ALL_ITEMS } from '../src/quiz-data.js';
-import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed, KEYS, MODES, REGIONS, depthOf, DEPTH_BUCKETS, POOLABLE_DEPTH } from './_tally.js';
+import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed, KEYS, MODES, REGIONS, depthOf, DEPTH_BUCKETS, POOLABLE_DEPTH, RULE_VERSION } from './_tally.js';
 import type { SharePayload } from './_tally.js';
 
 let pass = 0;
@@ -439,6 +439,31 @@ check('a lookalike host is refused', !originAllowed('https://rightnleft.com.evil
     MODES.every((m) => KEYS.depth(m).startsWith('t:') && KEYS.depth(m).endsWith(':' + m))
     && new Set(MODES.map((m) => KEYS.depth(m))).size === MODES.length,
     MODES.map((m) => KEYS.depth(m)).join(' '));
+
+  // THE RULE VERSION IS IN THE KEY, AND THE RATE LIMIT IS NOT.
+  //
+  // 96 readings were stranded because counters carried no question-set
+  // identity, so readings taken before and after the 14 September vote-collapse
+  // correction pooled into one average with nothing able to tell them apart.
+  // Every counting key must now name the rule version. The rate key must NOT,
+  // or a rule bump hands everyone mid-cooldown a fresh allowance on deploy.
+  const counting = [
+    KEYS.meta(), KEYS.region(), KEYS.mode(), KEYS.questions(),
+    ...REGIONS.flatMap((r) => [KEYS.verdict(r), KEYS.lean(r), KEYS.guess(r), KEYS.delta(r)]),
+    ...MODES.map((m) => KEYS.depth(m)),
+  ];
+  check('the rule version really looks like one',
+    /^sel-\d{4}-\d{2}-\d{2}\.[a-z]$/.test(RULE_VERSION), RULE_VERSION);
+  check('every counting key carries the rule version',
+    counting.every((k) => k.includes(RULE_VERSION)),
+    counting.find((k) => !k.includes(RULE_VERSION)) ?? `all ${counting.length} do`);
+  check('the rate-limit key does NOT carry the rule version',
+    !KEYS.rate('probe').includes(RULE_VERSION), KEYS.rate('probe'));
+
+  // A control, so the two assertions above cannot both pass by the version
+  // being an empty string that every key trivially "contains".
+  check('CONTROL: a made-up version is absent from the keys',
+    !counting.some((k) => k.includes('sel-1999-01-01.z')), 'needle genuinely absent');
 }
 
 
