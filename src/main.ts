@@ -632,7 +632,11 @@ function renderReadout(p: PartisanProfile): void {
   }
 
   el('readout').innerHTML =
-    `<div class="readout-head">${esc(d.headline)}</div>` +
+    // An h1, not a div. This sentence is the whole point of the result view and
+    // it was not a heading at all, so a screen reader user pressing H to move
+    // through the page found nothing on the page they had just finished the
+    // quiz to reach. Each view carries exactly one h1; this is the result's.
+    `<h1 class="readout-head">${esc(d.headline)}</h1>` +
     `<div class="readout-caveat">${esc(d.caveat)}</div>` +
     guessHtml +
     `<div class="readout-caveat mono">` +
@@ -1461,7 +1465,7 @@ function renderBias(): void {
     `<a href="${PAYLOAD_URL}">${PAYLOAD_URL.replace(/^https?:\/\/[^/]+/, '')}</a>`;
 
   el('bias-card').innerHTML =
-    `<div class="eyebrow">${esc(t('bias.heading'))}</div>` +
+    `<h2 class="eyebrow">${esc(t('bias.heading'))}</h2>` +
 
     `<div class="blurb" style="margin-top:12px">` +
 
@@ -1811,7 +1815,7 @@ function renderRep(): void {
   const c = el('rep-card');
 
   const head =
-    `<div class="eyebrow">${esc(t('rep.heading'))}</div>` +
+    `<h2 class="eyebrow">${esc(t('rep.heading'))}</h2>` +
     `<p class="lede">${esc(t('rep.lede'))}</p>`;
 
   // The panel used to refuse to render at all until something was answered,
@@ -2137,7 +2141,7 @@ function renderElection(): void {
 
   card.innerHTML =
     `<div class="card-head" style="margin-bottom:10px">`
-    + `<div class="eyebrow">${esc(t('vote.heading'))}</div></div>`
+    + `<h2 class="eyebrow">${esc(t('vote.heading'))}</h2></div>`
     + `<dl class="vote-dates">`
     + rows.map((r, i) =>
       `<div class="vote-row${i === next ? ' vote-next' : ''}">`
@@ -2214,7 +2218,7 @@ function renderStatements(): void {
   const card = el('stmt-card');
   if (!withStmt.length) { card.hidden = true; return; }
   card.hidden = false;
-  card.innerHTML = `<div class="eyebrow">Statements of vote</div>` +
+  card.innerHTML = `<h2 class="eyebrow">Statements of vote</h2>` +
     `<p class="footnote" style="margin:10px 0 0">A Texas member may file a statement saying the Journal recorded them wrongly. The recorded vote is the official act and is what is scored here; the statement is shown beside it, never applied in its place.</p>` +
     withStmt.map((i) => i.statements!.map((s) =>
       `<div class="stmt"><b>${esc(s.member)}</b> on ${esc(i.billId)} ` +

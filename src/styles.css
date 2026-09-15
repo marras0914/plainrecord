@@ -193,8 +193,14 @@
      single screen. That is the typographic signature of a developer tool,
      and it is the thing a reader who does not follow politics reacts to
      before reading a word. Sentence case, in the interface face. */
+  /* These are h2 elements, not divs. They read as small grey captions and that
+     is the whole point of the class, but the result view is the page a reader
+     finishes the quiz to reach and it had no headings in it at all, so nothing
+     to jump between. margin:0 keeps the h2 looking exactly like the div did.
+     The two instances carrying an inline margin-bottom still override this. */
   .eyebrow { font-family:"Lexend", system-ui, sans-serif; font-size:12px;
-    font-weight:500; letter-spacing:0; text-transform:none; color:var(--muted); }
+    font-weight:500; letter-spacing:0; text-transform:none; color:var(--muted);
+    margin:0; }
   h1 { font-size:26px; font-weight:600; letter-spacing:-0.012em; margin:6px 0 0; text-wrap:balance; }
   .lede { color:var(--ink-2); margin:8px 0 0; max-width:66ch; }
   .mono { font-family:"IBM Plex Mono", ui-monospace, monospace; }
@@ -519,7 +525,10 @@
   .stat-note { font-size:12px; color:var(--ink-2); margin-top:4px; }
 
   .readout { border-left:3px solid var(--rule); padding-left:15px; }
-  .readout-head { font-size:19px; font-weight:600; letter-spacing:-0.01em; text-wrap:balance; }
+  /* An h1 now. margin:0 because the global h1 rule sets `margin:6px 0 0`, and
+     this heading sits against a left rule where that shift is visible. */
+  .readout-head { font-size:19px; font-weight:600; letter-spacing:-0.01em; text-wrap:balance;
+    margin:0; }
   .readout-caveat { font-size:13px; color:var(--ink-2); margin-top:6px; max-width:64ch; }
 
   .q-meta { display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; }

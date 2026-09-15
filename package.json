@@ -21,6 +21,7 @@
     "data:report": "tsx scripts/report_session.ts",
     "verify": "node scripts/verify_site.mjs",
     "verify:headers": "node scripts/verify_site.mjs --with-headers",
+    "verify:a11y": "node scripts/check_a11y_tree.mjs",
     "tally": "tsx scripts/tally_report.ts",
     "tally:probe": "tsx scripts/tally_probe.ts",
     "dns:check": "node scripts/check_domain.mjs",
