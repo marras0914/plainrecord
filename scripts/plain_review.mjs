@@ -51,11 +51,28 @@ const tooClose = entries.filter(([, v]) => {
 say(tooClose.length === 0, 'no summary just repeats the caption\'s "Relating to" form',
   tooClose.map(([k]) => k).join(', '));
 
-// Length: long enough to say something, short enough to be the question.
-const tooLong = entries.filter(([, v]) => (v.en.match(/\S+/g) ?? []).length > 34);
-const tooShort = entries.filter(([, v]) => (v.en.match(/\S+/g) ?? []).length < 8);
-say(tooLong.length === 0, 'no summary is longer than 34 words',
-  tooLong.map(([k, v]) => `${k} (${(v.en.match(/\S+/g) ?? []).length})`).join(', '));
+// Length.
+//
+// THE 34-WORD CAP IS GONE, and it was doing real damage.
+//
+// A reader on r/FortWorth went through about 50 of these and said several left
+// him with no idea what the bill would actually do. Reviewing them bore that
+// out, and the cap was frequently the reason. HB 2040's summary said the
+// instructional requirement changed "from seven hours a day for 180 days to
+// 43,200 minutes a year", which is accurate, fits the cap, and hides that the
+// requirement fell by 43 percent. There was no room left to say so.
+//
+// A summary that omits an effective date two years out, a penalty, or the
+// direction of a change is not short. It is wrong in the way that matters, and
+// it is wrong precisely because being short was enforced and being complete was
+// not. Length is now REPORTED so nothing balloons unnoticed, and it no longer
+// fails.
+//
+// The floor stays. A summary under eight words is not a summary.
+const words = (s) => (s.match(/\S+/g) ?? []).length;
+const lengths = entries.map(([k, v]) => ({ k, n: words(v.en) })).sort((a, b) => b.n - a.n);
+const tooShort = entries.filter(([, v]) => words(v.en) < 8);
+console.log(`  [INFO] longest summaries — ${lengths.slice(0, 5).map((x) => `${x.k} ${x.n}w`).join(', ')}`);
 say(tooShort.length === 0, 'no summary is shorter than 8 words',
   tooShort.map(([k]) => k).join(', '));
 
