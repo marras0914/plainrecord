@@ -53,7 +53,15 @@ for (const it of payload.items) {
     en: prior?.en ?? it.plain ?? '',
     es: prior?.es ?? esExisting,
     status: prior?.status ?? (shipped ? 'ok' : 'draft'),
-    source: a?.url ?? null,
+    // The analysis if the Legislature published one, otherwise the bill's own
+    // page, which always exists and carries the full text.
+    //
+    // HJR 218 has no analysis: constitutional amendments often do not get one.
+    // Falling through to null made it the only approved item with no source at
+    // all, which `plain:check` rightly refuses, since an approved summary with
+    // nothing to check it against is just an assertion. The bill page is a
+    // weaker source than an analysis and it is a real one.
+    source: a?.url ?? `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=${payload.session}&Bill=${it.billId.replace(/\s+/g, '')}`,
     // Was 900, which threw away two thirds of what the fetch had already kept.
     //
     // The old comment said a reviewer needs enough to check a 25-word summary
