@@ -309,3 +309,25 @@ says so.
 early-voting any-location rule, finished and unmerged, pending an answer from
 the Texas Ethics Commission on whether the site is political advertising under
 Election Code chapter 255. Sent 15 September.
+
+## 14. Largest-first may imply likelihood even once the label is honest
+
+Raised 17 September 2026, out of a removed r/houston post. The split-ZIP pick
+list has always been sorted by share descending, and the share has always been
+**land area** — `zips_89R.json` says so in both its `method` and `format`
+fields — while `rep.zipShare` rendered an unqualified "{pct}% of this ZIP".
+Nothing reader-facing named the unit, so the natural reading of the top entry
+was "this is where most people in my ZIP live". That is not measured here and is
+not knowable from a block-level ID join without population counts.
+
+The labels now say land, and `rep.zipSpans` says the percentages are shares of
+land rather than of people. The site never picked for the reader, which is the
+part that held: `src/main.ts` sets the district to null on a split.
+
+**Open: whether the ORDER still makes the claim the label now disowns.** A list
+sorted largest-first says something before any word on it is read. The
+alternatives are worse in other ways — district number is arbitrary, and the
+only non-arbitrary order is by population, which is the number we do not have.
+Getting it would mean joining block-level P.L. 94-171 population onto the same
+blocks the crosswalk already uses, which is one more file and a real answer
+rather than a rewording. Until then this is a known implicature, disclosed.

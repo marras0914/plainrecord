@@ -2218,32 +2218,33 @@
     "status": "ok"
   },
   "rep.zipSpans": {
-    "en": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}.",
-    "es": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta.",
+    "en": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}. The percentages are shares of land, not of people, so the biggest is not the likeliest.",
+    "es": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta. Los porcentajes son proporciones de superficie, no de habitantes, así que el mayor no es el más probable.",
     "where": "Shown when a ZIP spans two or more districts. {link} is the state lookup anchor.",
     "vars": [
       "zip",
       "n",
       "link"
     ],
-    "note": "A split ZIP is a real ambiguity, not a defect in the data. Saying so is better than picking the largest share and hoping.",
-    "status": "ok"
+    "note": "A split ZIP is a real ambiguity, not a defect in the data. Saying so is better than picking the largest share and hoping. REWORDED 17 September 2026, gaining the last sentence. The percentages have always been shares of ZIP land area — zips_89R.json says so in its own method and format fields — and no reader-facing string said which. A list sorted largest-first, with no unit on it, invites exactly the inference that the top entry is where most people in the ZIP live. That is not measured and is not knowable from this join. The sentence sits at the end because the paragraph's first job is still to say pick yours below.",
+    "status": "draft"
   },
   "rep.zipShare": {
-    "en": "{pct}% of this ZIP",
-    "es": "{pct}% de este código postal",
+    "en": "{pct}% of this ZIP's land",
+    "es": "{pct}% de la superficie de este código postal",
     "where": "Under each district in the pick list, giving its share of the ZIP.",
     "vars": [
       "pct"
     ],
-    "status": "ok"
+    "note": "REWORDED 17 September 2026 to name the unit. It read \"{pct}% of this ZIP\", which counts land area but does not say so, and a reader picking from the list takes an unqualified percentage to be people. The row has to carry the unit itself and cannot lean on rep.zipSpans above it: each row is a button, and a screen reader tabbing through the list hears the buttons without the paragraph. \"Land\" rather than \"area\" to match the word rep.zipSpans now uses.",
+    "status": "draft"
   },
   "rep.zipShareSmall": {
-    "en": "under 1% of this ZIP",
-    "es": "menos del 1% de este código postal",
+    "en": "under 1% of this ZIP's land",
+    "es": "menos del 1% de la superficie de este código postal",
     "where": "Replaces rep.zipShare when a district rounds to 0% of the ZIP.",
-    "note": "Rendering \"0% of this ZIP\" beside a real option reads as a data error. The sliver is kept because dropping it could hide someone’s actual district.",
-    "status": "ok",
+    "note": "Rendering \"0% of this ZIP\" beside a real option reads as a data error. The sliver is kept because dropping it could hide someone’s actual district. REWORDED 17 September 2026 in step with rep.zipShare, which it has to stay parallel with: the two strings alternate within one list, so a unit on one and not the other would read as two different measurements.",
+    "status": "draft",
     "vars": []
   },
   "rep.zipUnknown": {

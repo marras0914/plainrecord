@@ -1408,7 +1408,15 @@ try {
         const shares = await page.$$eval('#rep-card .rep-share',
           (ns) => ns.map((n) => n.textContent.trim()));
         check('rep: a sliver district is labelled, not shown as 0%',
-          shares.includes('under 1% of this ZIP') && !shares.includes('0% of this ZIP'),
+          shares.includes("under 1% of this ZIP's land")
+            && !shares.includes("0% of this ZIP's land"),
+          shares.join('  ·  ') || '(no share labels)');
+        // The unit is the point of the label, not decoration on it. A share
+        // that says only "27%" is read as 27% of the people, which is not what
+        // the join measures and is not knowable from it. Every rendered label
+        // has to name the land, so assert over all of them rather than one.
+        check('rep: every share label names what it is a share OF',
+          shares.length > 0 && shares.every((s) => /this ZIP's land$/.test(s)),
           shares.join('  ·  ') || '(no share labels)');
 
         await zipBox.fill('');
