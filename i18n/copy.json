@@ -1651,6 +1651,16 @@
     ],
     "status": "ok"
   },
+  "rev.elsewhere": {
+    "en": "Voted {vote} on another vote on this bill. Shown here, not counted as this one.",
+    "es": "Votó {vote} en otra votación sobre este mismo proyecto de ley. Se muestra aquí, no se cuenta como esta.",
+    "where": "Under a person's name in the reveal, when they cast no vote on the roll call the question uses but did vote on another roll call of the same bill.",
+    "vars": [
+      "vote"
+    ],
+    "note": "NEW 17 September 2026. A reader checked SB 3 against the House Journal and said Goodwin's blank looked wrong. The question uses record 3304, the vote that passed the bill, and she is Absent on it; she is recorded NAY on the other two roll calls of SB 3. A blank reads as \"did not take a position\", and for 42 cases across the nine people shown that reading is wrong. Only 2 of them carried a Journal statement, so 40 said nothing at all before this string existed. The second sentence is the load-bearing half and is modelled on stmt.note's \"shown beside it, never applied in its place\": the other vote is NOT counted, and must not be, because every member is scored on the same roll call and a second reading is a different vote from a third. The Spanish says \"no se cuenta como esta\" rather than a bureaucratic passive, matching the register the earlier passes settled on, and carries no gendered pronoun.",
+    "status": "draft"
+  },
   "rev.sameAsYou": {
     "en": "same as you",
     "es": "igual que usted",

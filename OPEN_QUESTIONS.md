@@ -408,21 +408,34 @@ what `assertComparable()` and the evidence tiers exist to prevent. Second and
 third reading are genuinely different votes — SB 3 moved from 95-44 to 87-54
 between them, an eight-vote swing.
 
-**What is open is the disclosure.** A reader looking at a blank sees "did not
-take a position", and for 40 of these that reading is wrong. The options:
+**ANSWERED 2026-09-17: it is said per member, where it happens.** The payload
+carries an `elsewhere` field, written by `scripts/add_elsewhere_votes.mjs` from
+the published corpus, and a blank in the reveal now reads:
 
-- Say it per member, where it happens: this member has a recorded vote on
-  another roll call of this bill. New copy, so a Spanish review, and it must not
-  imply the other vote was counted.
-- Say it once, in the method section, as a property of the instrument.
-- Do nothing, on the grounds that the statements card covers the cases where the
-  member cared enough to file.
+> Voted Nay on another vote on this bill. Shown here, not counted as this one.
 
-The third is the current behaviour by default rather than by decision, and it is
-the one this question exists to stop being the default.
+The second sentence is the load-bearing one and is modelled on `stmt.note`'s
+"shown beside it, never applied in its place". A note that only said "voted Nay"
+would read as a vote this page counted, which would be the same error in the
+other direction.
 
-**This is question 10's lesson again from the other side.** That one was about
-the rule picking the wrong roll call. This one is about the rule picking the
-RIGHT roll call and the display still telling a reader something false. The
-corpus is the place both are visible from, and `check_vote_selection.mjs` is
-where a check for this belongs.
+Three things hold it in place:
+
+- The field is **display only**. Nothing in `scoring.ts` or `valence.ts` reads
+  it, and `check_vote_selection.mjs` asserts that no mark ever sits on a member
+  who did vote on the roll call in question.
+- `add_elsewhere_votes.mjs` **throws** if anyone voted both ways on different
+  roll calls of one bill. It does not happen in 89R, and if it ever does the
+  answer is new copy rather than a silent pick between them.
+- The check **recomputes the field from the corpus** rather than trusting it. A
+  payload that lost the field to a re-export is otherwise a perfectly correct
+  file, which is exactly the class of failure question 10 is about. Verified by
+  breaking it three ways: dropping the field, flipping one mark, and putting a
+  mark on somebody who voted. Each fails its own check and nothing else.
+
+**Still open, and narrow:** the reader's own member, in the district panel, gets
+no such note. That panel reports a score and a coverage count rather than a
+per-question mark, so there is no blank to explain — but the coverage count
+itself is quietly affected, since a member absent at passage is dropped from the
+denominator for that question. Whether "covers 64 of the 67" should say anything
+about the other three is unasked.

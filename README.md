@@ -561,6 +561,7 @@ npm run data:reconcile   # cross-check against the House Journal
 npm run data:backfill    # recover member votes the bulk export dropped
 npm run data:export      # -> public/data/quiz_89R.json   (the only shipped file)
 npm run data:acts        # add opponent actions to an already-built payload
+npm run data:elsewhere   # mark absences that hide a vote on another roll call
 npm run data:report      # coverage + provenance summary
 npm run data:members     # -> public/data/members_89R.json  (the district lookup)
 npm run data:zips        # -> public/data/zips_89R.json     (ZIP -> districts)

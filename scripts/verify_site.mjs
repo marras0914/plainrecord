@@ -2473,6 +2473,70 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // A blank that is not a blank
+  //
+  // A reader checked SB 3 against the House Journal and said Goodwin's "no vote
+  // recorded" looked wrong. The question uses record 3304, the vote that passed
+  // the bill, and she is Absent on it; she is recorded NAY on the two other roll
+  // calls of SB 3. A bare blank reads as "did not take a position", and for 42
+  // cases on this payload that reading is wrong.
+  //
+  // The note must say the other vote is NOT counted. Asserting it is present is
+  // half the check; asserting it disclaims itself is the half that matters,
+  // because a note that merely said "voted Nay" would read as a vote we scored.
+  //
+  // Its own context, so nothing above depends on where this leaves the page.
+  // ---------------------------------------------------------------------------
+  {
+    const ec2 = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    const ep2 = await ec2.newPage();
+    await beginQuiz(ep2, URL_UNDER_TEST);
+
+    let found = null;
+    for (let i = 0; i < 12 && !found; i++) {
+      if (await onResult(ep2)) break;
+      if (await ep2.isVisible('#q-card [data-answer="-1"]')) {
+        await ep2.click('#q-card [data-answer="-1"]');
+        await ep2.waitForTimeout(220);
+        const bill = await ep2.$eval('.cand-reveal .outc-cat', (e) => e.textContent).catch(() => '');
+        if (/\bSB 3\b/.test(bill)) {
+          found = await ep2.$$eval('.cand-revs:not(.rep-revs) .cand-rev', (rs) =>
+            rs.map((r) => ({
+              name: r.querySelector('.cr-name')?.textContent.replace(/\s+/g, ' ').trim() ?? '',
+              vote: r.querySelector('.cr-vote')?.textContent.trim() ?? '',
+              note: r.querySelector('.cr-else')?.textContent.replace(/\s+/g, ' ').trim() ?? '',
+            })));
+          break;
+        }
+      }
+      if (await ep2.isVisible('#q-next')) { await ep2.click('#q-next'); await ep2.waitForTimeout(120); }
+    }
+
+    check('reveal: SB 3 is reachable in the short quiz', Boolean(found),
+      found ? `${found.length} rows` : 'never reached SB 3');
+
+    if (found) {
+      const goodwin = found.find((r) => /Goodwin/.test(r.name));
+      check('reveal: Goodwin shows no vote on SB 3, which is what the record says',
+        Boolean(goodwin) && /no vote recorded/i.test(goodwin.vote),
+        goodwin ? goodwin.vote : '(no Goodwin row)');
+      check('reveal: and the blank says she voted Nay on another vote on this bill',
+        Boolean(goodwin) && /Nay/.test(goodwin.note) && /this bill/i.test(goodwin.note),
+        goodwin ? goodwin.note || '(no note)' : '(no Goodwin row)');
+      check('reveal: the note disclaims itself, so it cannot read as a counted vote',
+        Boolean(goodwin) && /not counted/i.test(goodwin.note),
+        goodwin ? goodwin.note || '(no note)' : '(no Goodwin row)');
+      // Nobody with a real vote may carry one, or the row contradicts itself.
+      check('reveal: no row shows both a vote and an elsewhere note',
+        found.every((r) => !r.note || /no vote recorded/i.test(r.vote)),
+        found.filter((r) => r.note && !/no vote recorded/i.test(r.vote))
+          .map((r) => r.name).join(', ') || 'none');
+    }
+
+    await ec2.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // Accessibility: the parts a rendering check cannot reach
   //
   // An axe pass over every view and both themes is clean, and axe finding

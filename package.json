@@ -52,6 +52,7 @@
     "data:election:check": "node scripts/check_election_dates.mjs",
     "prefix:accuracy": "tsx scripts/prefix_accuracy.ts",
     "data:headlines": "tsx scripts/sync_headline_prose.mjs",
+    "data:elsewhere": "node --max-old-space-size=4096 scripts/add_elsewhere_votes.mjs",
     "data:votes:check": "node scripts/check_vote_selection.mjs"
   },
   "devDependencies": {

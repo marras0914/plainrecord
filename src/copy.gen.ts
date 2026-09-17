@@ -217,6 +217,7 @@ export type CopyKey =
   | "q.valenceRow"
   | "outc.rankAria"
   | "rev.voted"
+  | "rev.elsewhere"
   | "rev.sameAsYou"
   | "rev.oppositeToYou"
   | "rev.youSaidVote"
@@ -552,6 +553,7 @@ export const EN: Record<CopyKey, string> = {
   "q.valenceRow": "valence",
   "outc.rankAria": "{value}, {comparison}",
   "rev.voted": "voted {vote}",
+  "rev.elsewhere": "Voted {vote} on another vote on this bill. Shown here, not counted as this one.",
   "rev.sameAsYou": "same as you",
   "rev.oppositeToYou": "opposite to you",
   "rev.youSaidVote": "You voted <b>{vote}</b>.",
@@ -872,6 +874,7 @@ export const ES: Record<CopyKey, string> = {
   "q.valenceRow": "valencia",
   "outc.rankAria": "{value}: {comparison}",
   "rev.voted": "votó {vote}",
+  "rev.elsewhere": "Votó {vote} en otra votación sobre este mismo proyecto de ley. Se muestra aquí, no se cuenta como esta.",
   "rev.sameAsYou": "igual que usted",
   "rev.oppositeToYou": "al contrario que usted",
   "rev.youSaidVote": "Usted votó <b>{vote}</b>.",
@@ -992,5 +995,5 @@ export const ES: Record<CopyKey, string> = {
  * rather than presenting a machine draft as a translation.
  */
 export const ES_UNAPPROVED: readonly CopyKey[] = [
-
+  "rev.elsewhere",
 ];

@@ -92,6 +92,65 @@ check('no question carries the opposite sign to an adopted vote on the same bill
   flips.length === 0,
   flips.map((s) => s.bill).join(', ') || 'none');
 
+// -----------------------------------------------------------------------------
+// The blanks that are not blanks
+//
+// A person shown on the page with no vote on the question's roll call, who DID
+// vote on another roll call of the same bill. The page used to render that as a
+// plain absence, which reads as "did not take a position" and is wrong. The
+// payload now carries an `elsewhere` field for it, written by
+// add_elsewhere_votes.mjs and displayed only, never scored.
+//
+// This recomputes the field from the corpus rather than trusting it. A stale
+// payload — the field written once, then a re-export dropping it — is the
+// failure that would otherwise be invisible, because every other thing about
+// such a file is correct.
+
+const idxOf = new Map();
+(corpusFile.memberOrder ?? []).forEach((id, i) => idxOf.set(id, i));
+const castOf = (ch) => (ch === 'y' ? 1 : ch === 'n' ? -1 : null);
+const onPage = [
+  ...payload.candidates.map((c) => c.id),
+  ...(payload.comparators ?? []).map((c) => c.id),
+];
+
+let expected = 0;
+const missing = [], spurious = [], wrongWay = [], onAVoter = [];
+for (const item of payload.items) {
+  const all = corpus.filter((v) => v.billId === item.billId);
+  const sel = all.find((v) => v.id === item.id);
+  if (!sel) continue;
+  const others = all.filter((v) => v.id !== item.id);
+  const have = item.elsewhere ?? {};
+
+  for (const id of onPage) {
+    const i = idxOf.get(id);
+    if (i === undefined) continue;
+    const here = castOf(sel.v[i]);
+    const there = others.map((v) => castOf(v.v[i])).filter((c) => c !== null);
+    const want = here === null && there.length && new Set(there).size === 1 ? there[0] : null;
+
+    if (want !== null) {
+      expected++;
+      if (!(id in have)) missing.push(`${item.billId}/${id.slice(-6)}`);
+      else if (have[id] !== want) wrongWay.push(`${item.billId}/${id.slice(-6)}`);
+    } else if (id in have) {
+      // Either nothing to report, or — worse — the person has a real vote on
+      // this roll call and the mark would contradict it on screen.
+      (here === null ? spurious : onAVoter).push(`${item.billId}/${id.slice(-6)}`);
+    }
+  }
+}
+
+check('every absence that hides a vote on the same bill is marked',
+  missing.length === 0, missing.join(', ') || `${expected} case(s) marked`);
+check('no mark claims a vote the corpus does not show',
+  spurious.length === 0 && wrongWay.length === 0,
+  [...spurious, ...wrongWay].join(', ') || 'none');
+check('no mark sits on a member who DID vote on this roll call',
+  onAVoter.length === 0, onAVoter.join(', ') || 'none');
+
+
 console.log(fails
   ? `\n  ${fails} problem(s). See scripts/export_quiz_data.ts for the selection rule.\n`
   : '\n  every question points at a roll call the House adopted\n');

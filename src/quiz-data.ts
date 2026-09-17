@@ -69,6 +69,20 @@ export interface QuizItem {
    * vote tally and says on screen why.
    */
   acts?: OpponentAct[];
+  /**
+   * People who cast no vote on THIS roll call but did vote on another roll call
+   * of the same bill. Keyed by member id, 1 for Yea and -1 for Nay.
+   *
+   * DISPLAY ONLY. Never read by scoring.ts or valence.ts, and the string that
+   * renders it says on screen that it is not counted. A bill's second and third
+   * readings are different votes — SB 3 went 95-44 then 87-54 — so substituting
+   * one for the other would score different members on different events, which
+   * is exactly what the evidence tiers exist to prevent.
+   *
+   * It exists because a blank reads as "did not take a position", and for the 42
+   * cases in 89R that reading is wrong. See scripts/add_elsewhere_votes.mjs.
+   */
+  elsewhere?: Record<string, VoteCast>;
 }
 
 /** One recorded action on a specific bill by a non-legislator. */

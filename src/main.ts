@@ -1036,6 +1036,29 @@ function shareBlock(): HTMLElement {
 }
 
 /**
+ * The line under a blank saying this person did vote on the bill, elsewhere.
+ *
+ * A blank reads as "did not take a position", and in 42 places on this payload
+ * that reading is wrong: the person cast no vote on the roll call the question
+ * uses and a recorded vote on another roll call of the same bill. The reader who
+ * found it was looking at SB 3, where Goodwin is Absent on the vote that passed
+ * the bill and recorded NAY on the two before it.
+ *
+ * The string says the other vote is not counted, because it is not and must not
+ * be. Substituting it would score different members on different events, and a
+ * second reading is a different vote from a third: SB 3 went 95-44 then 87-54.
+ *
+ * Returns '' when there is nothing to say, so it can be concatenated blind.
+ */
+function elsewhereNote(item: QuizItem, memberId: string): string {
+  const other = item.elsewhere?.[memberId];
+  if (other !== 1 && other !== -1) return '';
+  return `<small class="cr-else">${esc(t('rev.elsewhere', {
+    vote: t(other === 1 ? 'vote.yea' : 'vote.nay'),
+  }))}</small>`;
+}
+
+/**
  * How the three candidates voted on the bill the reader just answered.
  *
  * This is the payoff of a blind quiz: you commit to a position with no party cue,
@@ -1064,7 +1087,8 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
 
     if (cast !== 1 && cast !== -1) {
       return (
-        `<li class="cand-rev cr-none"><span class="cr-name">${esc(cand.name)}${tag}</span>` +
+        `<li class="cand-rev cr-none"><span class="cr-name">${esc(cand.name)}${tag}${
+          elsewhereNote(item, cand.id)}</span>` +
         `<span class="cr-vote">${esc(t('vote.none'))}</span>` +
         `<span class="cr-match">—</span></li>`
       );
@@ -1104,7 +1128,8 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
         const tag = `<small>${esc(c.party)} · ${esc(c.role)}</small>`;
         if (cast !== 1 && cast !== -1) {
           return (
-            `<li class="cand-rev cr-none"><span class="cr-name">${esc(c.name)}${tag}</span>` +
+            `<li class="cand-rev cr-none"><span class="cr-name">${esc(c.name)}${tag}${
+              elsewhereNote(item, c.id)}</span>` +
             `<span class="cr-vote">${esc(t('vote.none'))}</span><span class="cr-match">—</span></li>`
           );
         }
