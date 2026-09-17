@@ -309,3 +309,48 @@ says so.
 early-voting any-location rule, finished and unmerged, pending an answer from
 the Texas Ethics Commission on whether the site is political advertising under
 Election Code chapter 255. Sent 15 September.
+
+## 14. The split-ZIP list was ordered by land — ANSWERED, and it was wrong 108 times
+
+Raised and answered 17 September 2026, out of a removed r/houston post.
+
+The split-ZIP pick list has always been sorted by share descending, and the
+share was **land area** — `zips_89R.json` said so in both its `method` and
+`format` fields — while `rep.zipShare` rendered an unqualified "{pct}% of this
+ZIP". Nothing reader-facing named the unit, so the natural reading of the top
+entry was "this is where most people in my ZIP live".
+
+The first fix was to label it. That was not enough, because **a list sorted
+largest-first makes the claim before any label on it is read**, and the label
+would then have been disowning the order directly above it.
+
+So the number changed instead. The crosswalk now joins 2020 census block
+population from the Texas P.L. 94-171 file, and the list is ordered by people.
+
+**Ordering by land put a different district at the top in 108 of the 913 split
+ZIPs, 11.8%.** The worst is 75148, where the land-largest district holds 57% of
+the ground and 13% of the people while HD-4 holds 87% of the people. Downtown
+Houston was another: 77002 is 58% HD-147 by land, but 42% of its residents live
+in HD-142, on 5% of the land, and it sorted third of four.
+
+Three things worth keeping:
+
+- **The payload stores head counts, not percentages.** Rounded to a percent, a
+  district holding 0.4% of a ZIP's people and a district holding nobody are both
+  "0", and the panel would tell the first group that nobody lives where they
+  live. 77002 has exactly that case: HD-134, 71 people. Counts separate them and
+  the client divides.
+- **102 pairs hold no 2020 population at all** and are still listed, labelled
+  "nobody lived in this part in 2020". Empty in 2020 is not empty now, and the
+  panel's standing rule is that a surplus row costs a glance while a missing row
+  names the wrong representative.
+- **One anchor in `check_zips.mjs` got weaker on purpose.** The anchors read the
+  FIRST district, which meant "the district this downtown is in" only while the
+  order was land. They now assert that the ZIP reaches the known district. The
+  map itself is pinned by sha256 in the builder, which is exact where seven
+  downtowns were only plausible — six of the seven survived a wrong map once.
+
+**Still open, and smaller:** the population is 2020 and the district map is
+2022. A ZIP that has been built out since the census is described by who lived
+there then. There is no more recent block-level count, so this is the best
+available rather than a thing to fix.

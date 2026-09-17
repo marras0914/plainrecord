@@ -73,22 +73,79 @@ const badKey = entries.find(([z]) => !/^\d{5}$/.test(z));
 say(!badKey, 'every key is a 5-digit ZIP', badKey ? badKey[0] : '');
 
 let badRange = null, dupe = null, badSum = null, unordered = null, badType = null;
+let badTriple = null, badLandSum = null, suspiciousHeads = null;
 for (const [z, v] of entries) {
   if (typeof v !== 'number' && !Array.isArray(v)) { badType ??= z; continue; }
   const ds = districtsOf(v);
   if (ds.some((d) => !Number.isInteger(d) || d < 1 || d > 150)) badRange ??= z;
   if (new Set(ds).size !== ds.length) dupe ??= z;
   if (Array.isArray(v)) {
-    const sum = v.reduce((a, e) => a + e[1], 0);
-    if (Math.abs(sum - 100) > 2) badSum ??= `${z} sums to ${sum}`;
+    if (v.some((e) => e.length !== 3)) badTriple ??= z;
+    // Field 1 is a head count, so there is no 100 to sum to. What it must not
+    // be is a percentage wearing a count's name: a ZIP whose "counts" total
+    // about 100 is the shape of that mistake, and 100 residents spread over a
+    // split ZIP is rare enough to be worth a look either way.
+    const heads = v.reduce((a, e) => a + e[1], 0);
+    if (!Number.isInteger(heads) || heads < 1) badSum ??= `${z} totals ${heads} people`;
+    if (heads >= 98 && heads <= 102) suspiciousHeads ??= `${z} totals ${heads} people`;
+    const landSum = v.reduce((a, e) => a + e[2], 0);
+    if (Math.abs(landSum - 100) > 2) badLandSum ??= `${z} sums to ${landSum}`;
     for (let i = 1; i < v.length; i++) if (v[i][1] > v[i - 1][1]) unordered ??= z;
   }
 }
 say(!badType, 'each value is a district number or a list of pairs', badType ?? '');
 say(!badRange, 'every district is between 1 and 150', badRange ?? '');
 say(!dupe, 'no ZIP lists the same district twice', dupe ?? '');
-say(!badSum, 'shares within a ZIP sum to 100', badSum ?? '');
-say(!unordered, 'shares are ordered largest first', unordered ?? '');
+say(!badTriple, 'every pair is [district, people, land]', badTriple ?? '');
+say(!badSum, 'every split ZIP holds a whole number of people, and at least one', badSum ?? '');
+say(!suspiciousHeads,
+  'no split ZIP has head counts totalling about 100, which would suggest percentages',
+  suspiciousHeads ?? '');
+say(!badLandSum, 'land shares within a ZIP sum to 100', badLandSum ?? '');
+say(!unordered, 'districts are ordered by population, most people first', unordered ?? '');
+
+// -----------------------------------------------------------------------------
+// The shares count people
+//
+// This is the field that says which number the panel is reading. A file
+// without it is the pre-17-September crosswalk, whose one share was land; the
+// client withholds the percentage entirely rather than relabel it, and a build
+// must not ship it.
+
+say(file.shares === 'population',
+  'the file declares that its shares count people', file.shares ?? 'absent');
+
+const prov = file.provenance ?? {};
+say(prov.populationOfTexas === 29145505,
+  'the population denominator is the published 2020 state total',
+  String(prov.populationOfTexas ?? 'absent'));
+say(prov.blocksWithoutPopulation === 0,
+  'every joined block carried a population', String(prov.blocksWithoutPopulation ?? 'absent'));
+say(prov.populationInZctas / prov.populationOfTexas > 0.999,
+  'nearly every Texan lives in a ZCTA the crosswalk covers',
+  `${(100 * prov.populationInZctas / prov.populationOfTexas).toFixed(2)}%`);
+
+// Land and people disagree, and the file has to be able to show it. If these
+// two ever matched it would mean the population join had silently fallen back
+// to land, which is the failure this whole field exists to prevent — and it
+// would be invisible in every other check here, because a land-weighted file
+// passes all of them.
+let flipped = 0;
+for (const [, v] of entries) {
+  if (!Array.isArray(v) || v.length < 2) continue;
+  const topByLand = [...v].sort((a, b) => b[2] - a[2] || a[0] - b[0])[0][0];
+  if (topByLand !== v[0][0]) flipped++;
+}
+// The builder publishes its own count, measured on the exact shares before
+// rounding. Reading it back off the published percentages gives a few more,
+// because rounding makes ties that the two orders break differently, so this
+// checks that the two agree closely rather than exactly. What it is really
+// asserting is that the number is not ZERO: a file whose population shares had
+// silently fallen back to land would pass every other check on this page.
+const claimed = prov.zipsWhereLandWouldLeadWithAnotherDistrict;
+say(flipped > 0 && Number.isInteger(claimed) && Math.abs(flipped - claimed) <= 5,
+  'the published count of ZIPs that land would mislead on matches the file',
+  `${flipped} read back, ${claimed} claimed, of ${entries.filter(([, v]) => Array.isArray(v)).length} split ZIPs`);
 
 // -----------------------------------------------------------------------------
 // Coverage — a district no ZIP reaches is a district whose voters cannot use
@@ -128,17 +185,43 @@ const ANCHORS = [
   ['79401', 84, 'Lubbock', 'Tepper'],
 ];
 
+// These used to read districtsOf(v)[0] — the FIRST district — which was the
+// same thing as "the district this downtown is in" only while the list was
+// ordered by land. It is now ordered by people, and downtown Houston moved:
+// 77002 is 58% HD-147 by land, but 42% of the people in it live in HD-142, on
+// 5% of the ground. HD-147 is still downtown Houston's district and Jones is
+// still its member; the anchor was quietly asserting something narrower than
+// the fact it was built from.
+//
+// So it asserts membership, which is the fact. That is weaker as a detector of
+// a wrong district map, and the honest reason it can afford to be is that the
+// map is no longer detected here at all: build_zips.mjs pins its sha256, which
+// is exact where seven downtowns were only plausible. The comment at the top
+// of this file records that six of those seven survived the wrong map anyway.
 for (const [zip, want, place, surname] of ANCHORS) {
   const v = zips[zip];
   if (v === undefined) { say(false, `anchor ${zip} (${place}) is in the file`, 'absent'); continue; }
-  const got = districtsOf(v)[0];
-  const m = members.members.find((x) => x.d === got);
-  // Both halves must agree: the district the ZIP points at, and the member the
-  // members file puts in it. Either being wrong is a wrong answer on screen.
-  say(got === want && Boolean(m) && m.n.includes(surname),
-    `${zip} (${place}) resolves to HD-${want}`,
-    `HD-${got} ${m ? m.n : 'no member'}`);
+  const got = districtsOf(v);
+  const m = members.members.find((x) => x.d === want);
+  // Both halves must agree: that the ZIP reaches the district, and that the
+  // members file puts the known member in it. Either being wrong is a wrong
+  // answer on screen.
+  say(got.includes(want) && Boolean(m) && m.n.includes(surname),
+    `${zip} (${place}) reaches HD-${want}`,
+    `HD-${got.join(', HD-')} — ${m ? m.n : 'no member in HD-' + want}`);
 }
+
+// One anchor kept at full strength, because the population join is what would
+// break it. 77002 is the clearest case in Texas of the two weightings
+// disagreeing, and it is checkable by hand: downtown Houston's land belongs
+// mostly to HD-147 and its residents mostly to HD-142.
+const downtown = zips['77002'];
+say(Array.isArray(downtown) && downtown[0][0] === 142 && downtown[0][1] >= 40
+  && downtown[0][2] <= 10,
+  '77002 leads with HD-142, which holds most of downtown Houston on little of its land',
+  Array.isArray(downtown)
+    ? downtown.map(([d, pop, land]) => `HD-${d} ${pop}%/${land}%`).join('  ')
+    : String(downtown));
 
 // Cross-metro exclusion: no downtown ZIP may touch a district five hundred
 // miles away. A shifted or mismatched map shows up here even if an anchor
@@ -155,14 +238,13 @@ say(!bleed, 'no downtown ZIP reaches another metro\'s district', bleed ?? '');
 // -----------------------------------------------------------------------------
 // Provenance and licence
 
-const p = file.provenance ?? {};
-say(p.blocksUnmatched === 0,
-  'every joined block had both a ZIP and a district', `${p.blocksUnmatched} unmatched`);
-say(p.districtsInPlan === 150,
-  'the district plan it joined against had 150 districts', String(p.districtsInPlan));
-say(p.zipsInOneDistrict + p.zipsSpanningDistricts === entries.length,
+say(prov.blocksUnmatched === 0,
+  'every joined block had both a ZIP and a district', `${prov.blocksUnmatched} unmatched`);
+say(prov.districtsInPlan === 150,
+  'the district plan it joined against had 150 districts', String(prov.districtsInPlan));
+say(prov.zipsInOneDistrict + prov.zipsSpanningDistricts === entries.length,
   'the ZIP tallies add up',
-  `${p.zipsInOneDistrict} + ${p.zipsSpanningDistricts} = ${entries.length}`);
+  `${prov.zipsInOneDistrict} + ${prov.zipsSpanningDistricts} = ${entries.length}`);
 say(file._meta?.license === 'CC0-1.0', 'declares its licence', file._meta?.license ?? 'none');
 say(/2022/.test(file.sources?.blockToDistrict ?? '') ||
     /2022/.test(file.sources?.blockToDistrictNote ?? ''),

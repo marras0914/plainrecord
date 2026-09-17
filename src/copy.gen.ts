@@ -288,6 +288,7 @@ export type CopyKey =
   | "rep.zipSpans"
   | "rep.zipShare"
   | "rep.zipShareSmall"
+  | "rep.zipShareNone"
   | "rep.zipUnknown"
   | "rep.zipFailed"
   | "guess.heading"
@@ -619,9 +620,10 @@ export const EN: Record<CopyKey, string> = {
   "rep.zipLabel": "Your ZIP code",
   "rep.zipPlaceholder": "5 digits",
   "rep.zipWhole": "All of {zip} sits in District {d}.",
-  "rep.zipSpans": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}.",
-  "rep.zipShare": "{pct}% of this ZIP",
-  "rep.zipShareSmall": "under 1% of this ZIP",
+  "rep.zipSpans": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}. The percentages are shares of the people in this ZIP at the 2020 census, not of its area.",
+  "rep.zipShare": "{pct}% of this ZIP's people",
+  "rep.zipShareSmall": "under 1% of this ZIP's people",
+  "rep.zipShareNone": "nobody lived in this part in 2020",
   "rep.zipUnknown": "{zip} is not a Texas ZIP code in this record.",
   "rep.zipFailed": "Could not load the ZIP list. The district number box still works.",
   "guess.heading": "First, a guess: where do you think you'll land?",
@@ -938,9 +940,10 @@ export const ES: Record<CopyKey, string> = {
   "rep.zipLabel": "Su código postal",
   "rep.zipPlaceholder": "5 dígitos",
   "rep.zipWhole": "Todo el código postal {zip} está en el Distrito {d}.",
-  "rep.zipSpans": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta.",
-  "rep.zipShare": "{pct}% de este código postal",
-  "rep.zipShareSmall": "menos del 1% de este código postal",
+  "rep.zipSpans": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta. Los porcentajes son proporciones de la población de este código postal según el censo de 2020, no de su superficie.",
+  "rep.zipShare": "{pct}% de la población de este código postal",
+  "rep.zipShareSmall": "menos del 1% de la población de este código postal",
+  "rep.zipShareNone": "en 2020 no vivía nadie en esta parte",
   "rep.zipUnknown": "{zip} no es un código postal de Texas en este registro.",
   "rep.zipFailed": "No se pudo cargar la lista de códigos postales. La casilla del número de distrito sigue funcionando.",
   "guess.heading": "Primero, una predicción: ¿dónde cree que va a quedar?",
