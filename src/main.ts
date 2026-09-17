@@ -2039,14 +2039,29 @@ function renderRepOut(): void {
     })}</p>`;
     html += `<ul class="rep-hits rep-split">` + repZipResult.ds.map((c) => {
       const m = repFile ? rep.memberForDistrict(repFile, c.d) : undefined;
-      // A share that rounds to nothing must not render as "0% of this ZIP",
-      // which reads like broken data next to a real option.
-      const share = c.pct >= 1 ? t('rep.zipShare', { pct: c.pct }) : t('rep.zipShareSmall');
+      // Three cases, and the difference between the last two is the difference
+      // between a fact and a rounding artifact. An exact zero is a real count
+      // and says something a reader can use; a share that merely rounds to
+      // nothing must not render as "0% of this ZIP's people", which reads like
+      // broken data next to a real option. The empty case is tested on the
+      // HEAD COUNT for that reason — 77002 has a district with 71 residents,
+      // which rounds to 0% and is not nobody.
+      //
+      // popPct is null only for a crosswalk built before the shares counted
+      // people, which /data's one-hour cache can still hand a returning
+      // reader. Then the row carries no percentage at all: the land share is
+      // the wrong answer to the question the label asks, and offering it would
+      // reintroduce exactly the error this replaced.
+      const share = c.popPct === null ? null
+        : c.people === 0 ? t('rep.zipShareNone')
+        : c.popPct >= 1 ? t('rep.zipShare', { pct: c.popPct })
+        : t('rep.zipShareSmall');
       return `<li><button class="ghost" data-rep-d="${c.d}"${
         c.d === repDistrict ? ' aria-current="true"' : ''}>` +
         `${esc(m ? m.n : t('rep.district', { d: c.d }))} ` +
-        `<span class="mono">${esc(t('rep.district', { d: c.d }))}</span> ` +
-        `<span class="rep-share">${esc(share)}</span></button></li>`;
+        `<span class="mono">${esc(t('rep.district', { d: c.d }))}</span>` +
+        (share === null ? '' : ` <span class="rep-share">${esc(share)}</span>`) +
+        `</button></li>`;
     }).join('') + `</ul>`;
   }
 

@@ -1394,8 +1394,9 @@ try {
         check('rep: picking from a split ZIP scores that member',
           picked !== null && /Hinojosa|Flores/.test(picked ?? ''), picked ?? '(none)');
 
-        // 75001 is 100% HD-115 and a rounding-to-nothing sliver of HD-112. The
-        // sliver is kept on purpose, so it must not read as "0% of this ZIP".
+        // 75001 is all of HD-115's people and a piece of HD-112 that nobody
+        // lived in at the 2020 census. The empty piece is kept on purpose, so
+        // it must not read as "0% of this ZIP's people".
         await zipBox.fill('');
         await zipBox.click();
         await page.keyboard.type('75001', { delay: 45 });
@@ -1407,17 +1408,36 @@ try {
         // against a card that really did render both labels.
         const shares = await page.$$eval('#rep-card .rep-share',
           (ns) => ns.map((n) => n.textContent.trim()));
-        check('rep: a sliver district is labelled, not shown as 0%',
-          shares.includes("under 1% of this ZIP's land")
-            && !shares.includes("0% of this ZIP's land"),
+        check('rep: an empty piece of a ZIP says so, and is not shown as 0%',
+          shares.includes('nobody lived in this part in 2020')
+            && !shares.includes("0% of this ZIP's people"),
           shares.join('  ·  ') || '(no share labels)');
         // The unit is the point of the label, not decoration on it. A share
-        // that says only "27%" is read as 27% of the people, which is not what
-        // the join measures and is not knowable from it. Every rendered label
-        // has to name the land, so assert over all of them rather than one.
+        // that says only "27%" is read as a share of the people, and for two
+        // weeks it was a share of the land — a different number, and a
+        // different district at the top of the list in 108 of the 913 split
+        // ZIPs. Every rendered label has to name what it counts, so assert over
+        // all of them rather than one.
         check('rep: every share label names what it is a share OF',
-          shares.length > 0 && shares.every((s) => /this ZIP's land$/.test(s)),
+          shares.length > 0 && shares.every(
+            (s) => /this ZIP's people$/.test(s) || s === 'nobody lived in this part in 2020'),
           shares.join('  ·  ') || '(no share labels)');
+
+        // 75028 carries the other end of the same distinction: HD-98 holds 169
+        // of its 46,830 people, which rounds to 0% and is emphatically not
+        // nobody. The crosswalk stores head counts rather than percentages so
+        // that these two cases cannot collapse into one label, and this is the
+        // assertion that would catch them collapsing.
+        await zipBox.fill('');
+        await zipBox.click();
+        await page.keyboard.type('75028', { delay: 45 });
+        await page.waitForTimeout(1200);
+        const tiny = await page.$$eval('#rep-card .rep-share',
+          (ns) => ns.map((n) => n.textContent.trim()));
+        check('rep: a district with few of the ZIP\'s people reads as under 1%, not as nobody',
+          tiny.includes("under 1% of this ZIP's people")
+            && !tiny.includes('nobody lived in this part in 2020'),
+          tiny.join('  ·  ') || '(no share labels)');
 
         await zipBox.fill('');
         await zipBox.click();

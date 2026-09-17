@@ -2218,32 +2218,40 @@
     "status": "ok"
   },
   "rep.zipSpans": {
-    "en": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}. The percentages are shares of land, not of people, so the biggest is not the likeliest.",
-    "es": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta. Los porcentajes son proporciones de superficie, no de habitantes, así que el mayor no es el más probable.",
+    "en": "ZIP {zip} is split across {n} House districts. Which one you are in comes down to your street, so pick yours below, or get an exact answer from {link}. The percentages are shares of the people in this ZIP at the 2020 census, not of its area.",
+    "es": "El código postal {zip} está repartido entre {n} distritos de la Cámara. Cuál le corresponde depende de su calle, así que elija el suyo abajo, o consulte {link} para una respuesta exacta. Los porcentajes son proporciones de la población de este código postal según el censo de 2020, no de su superficie.",
     "where": "Shown when a ZIP spans two or more districts. {link} is the state lookup anchor.",
     "vars": [
       "zip",
       "n",
       "link"
     ],
-    "note": "A split ZIP is a real ambiguity, not a defect in the data. Saying so is better than picking the largest share and hoping. REWORDED 17 September 2026, gaining the last sentence. The percentages have always been shares of ZIP land area — zips_89R.json says so in its own method and format fields — and no reader-facing string said which. A list sorted largest-first, with no unit on it, invites exactly the inference that the top entry is where most people in the ZIP live. That is not measured and is not knowable from this join. The sentence sits at the end because the paragraph's first job is still to say pick yours below.",
+    "note": "A split ZIP is a real ambiguity, not a defect in the data. Saying so is better than picking the largest share and hoping. REWORDED 17 September 2026, gaining the last sentence, and reworded again the same day when the number behind it changed. The percentages used to be shares of ZIP land area with no reader-facing string saying which, and a list sorted largest-first invites the inference that the top entry is where most people live. The first fix was to label the land. The second was to stop showing land: the crosswalk now carries 2020 census population per (ZIP, district) pair, which put a DIFFERENT district at the top of 108 of the 913 split ZIPs. So the sentence no longer warns the reader off the order, it tells them what the order is made of. The sentence sits at the end because the paragraph's first job is still to say pick yours below.",
     "status": "draft"
   },
   "rep.zipShare": {
-    "en": "{pct}% of this ZIP's land",
-    "es": "{pct}% de la superficie de este código postal",
+    "en": "{pct}% of this ZIP's people",
+    "es": "{pct}% de la población de este código postal",
     "where": "Under each district in the pick list, giving its share of the ZIP.",
     "vars": [
       "pct"
     ],
-    "note": "REWORDED 17 September 2026 to name the unit. It read \"{pct}% of this ZIP\", which counts land area but does not say so, and a reader picking from the list takes an unqualified percentage to be people. The row has to carry the unit itself and cannot lean on rep.zipSpans above it: each row is a button, and a screen reader tabbing through the list hears the buttons without the paragraph. \"Land\" rather than \"area\" to match the word rep.zipSpans now uses.",
+    "note": "REWORDED 17 September 2026 to name the unit, then reworded again the same day when the unit changed. It read \"{pct}% of this ZIP\", which counted land area but did not say so, and a reader picking from the list takes an unqualified percentage to be people. It now IS people, from the 2020 census. The row has to carry the unit itself and cannot lean on rep.zipSpans above it: each row is a button, and a screen reader tabbing through the list hears the buttons without the paragraph.",
     "status": "draft"
   },
   "rep.zipShareSmall": {
-    "en": "under 1% of this ZIP's land",
-    "es": "menos del 1% de la superficie de este código postal",
-    "where": "Replaces rep.zipShare when a district rounds to 0% of the ZIP.",
+    "en": "under 1% of this ZIP's people",
+    "es": "menos del 1% de la población de este código postal",
+    "where": "Replaces rep.zipShare when a district holds some of the ZIP's people but rounds to 0%.",
     "note": "Rendering \"0% of this ZIP\" beside a real option reads as a data error. The sliver is kept because dropping it could hide someone’s actual district. REWORDED 17 September 2026 in step with rep.zipShare, which it has to stay parallel with: the two strings alternate within one list, so a unit on one and not the other would read as two different measurements.",
+    "status": "draft",
+    "vars": []
+  },
+  "rep.zipShareNone": {
+    "en": "nobody lived in this part in 2020",
+    "es": "en 2020 no vivía nadie en esta parte",
+    "where": "Replaces rep.zipShare for a district that holds part of the ZIP but had no residents at the 2020 census.",
+    "note": "NEW 17 September 2026, with the move to population shares. 102 of the 3,268 pairs are like this — a piece of a ZIP that is genuinely inside a district and genuinely empty, typically an industrial tract or a park. \"under 1%\" would be false, since the count is exactly zero, and \"0%\" reads as broken data for the same reason it did before. The option is still listed and still clickable, because an empty block in 2020 is not an empty block today and the panel's rule is that a surplus row costs a glance while a missing row tells someone the wrong representative. Says \"in 2020\" rather than \"at the census\": the year is the part a reader can judge for themselves.",
     "status": "draft",
     "vars": []
   },

@@ -178,13 +178,23 @@ export const ZIPS_URL = '/data/zips_89R.json';
 
 /**
  * A ZIP maps either to one district, stored as a bare number, or to several,
- * stored as [district, percent of ZIP land area] pairs, largest share first.
- * The bare-number case is 54% of Texas ZIPs and halves the file.
+ * stored as [district, people, percent of ZIP land area] triples, most people
+ * first. `people` is a 2020 census HEAD COUNT, not a percent, and the counts
+ * for a ZIP sum to its population. The bare-number case is 54% of Texas ZIPs
+ * and halves the file.
+ *
+ * The two-element form is the file as it stood before 17 September 2026, when
+ * the only share was land area. It is still accepted because /data is cached
+ * for an hour, so a reader who loaded the old file can be running this code
+ * against it. Its share is NOT read as a population share — see
+ * districtsForZip.
  */
-export type ZipEntry = number | Array<[number, number]>;
+export type ZipEntry = number | Array<[number, number, number] | [number, number]>;
 
 export interface ZipFile {
   session: string;
+  /** 'population' once the shares count people. Absent in files built before that. */
+  shares?: string;
   zips: Record<string, ZipEntry>;
   provenance?: { zips?: number; zipsSpanningDistricts?: number };
 }
@@ -215,13 +225,32 @@ export async function loadZips(): Promise<ZipFile | null> {
 
 export interface ZipDistrict {
   d: number;
-  /** Percent of the ZIP's land area in this district. 100 when it is the only one. */
-  pct: number;
+  /**
+   * People who lived in this district's part of the ZIP at the 2020 census.
+   *
+   * Null only when the loaded file predates population counts, in which case
+   * the panel shows no percentage at all. It is deliberately not filled in
+   * from `landPct`: those two numbers disagree about which district is largest
+   * in 108 of the 913 split ZIPs, so substituting one for the other is the
+   * exact error this field exists to end.
+   */
+  people: number | null;
+  /**
+   * `people` as a percent of the whole ZIP, rounded, or null alongside it.
+   *
+   * Zero only when `people` is zero. A district holding a handful of a ZIP's
+   * residents rounds to 0% and must not be described as holding nobody — 77002
+   * has one, HD-134 with 71 people — so the caller tests `people`, not this,
+   * to tell an empty piece from a small one.
+   */
+  popPct: number | null;
+  /** Percent of the ZIP's land area in this district. Published for audit, never ranked on. */
+  landPct: number;
 }
 
 /**
- * The districts a ZIP touches, largest share first, or null if the ZIP is not
- * in the file.
+ * The districts a ZIP touches, most people first, or null if the ZIP is not in
+ * the file.
  *
  * Returns every district rather than the largest one. A ZIP that spans
  * districts is a genuine ambiguity — it is decided by the reader's street — and
@@ -231,6 +260,23 @@ export interface ZipDistrict {
 export function districtsForZip(file: ZipFile, zip: string): ZipDistrict[] | null {
   const v = file.zips[zip];
   if (v === undefined) return null;
-  if (typeof v === 'number') return [{ d: v, pct: 100 }];
-  return v.map(([d, pct]) => ({ d, pct }));
+  if (typeof v === 'number') return [{ d: v, people: null, popPct: 100, landPct: 100 }];
+  const byPopulation = file.shares === 'population';
+  if (!byPopulation || v.some((e) => e.length !== 3)) {
+    // An old cached file. Its one share is land, and the list is in land
+    // order, so the share is carried through for provenance and withheld from
+    // the reader rather than relabelled.
+    return v.map((e) => ({ d: e[0], people: null, popPct: null, landPct: e[1] }));
+  }
+  const total = v.reduce((a, e) => a + (e[1] ?? 0), 0);
+  return v.map((e) => ({
+    d: e[0],
+    people: e[1],
+    // The ZIP's own population is the denominator, and it is the sum of these
+    // counts by construction. A ZIP that spans districts and holds nobody
+    // cannot be built — build_zips.mjs throws on it — but dividing by zero
+    // here would produce NaN on screen rather than an error anyone sees.
+    popPct: total > 0 ? Math.round((e[1] / total) * 100) : null,
+    landPct: e[2] as number,
+  }));
 }
