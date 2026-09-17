@@ -103,8 +103,31 @@ export const HEADLINE_SET: { billId: string; label: string; why: string; plain: 
     plain: 'Creates a state institute that funds dementia prevention and research.' },
 ];
 
+/**
+ * `running` names the sitting Republican each candidate faces, and nobody else.
+ *
+ * Goodwin's line used to read 'vs Dan Patrick (R), Mike Collier (I)'. Mike
+ * Collier is not going to be on the ballot — Ballotpedia's Lieutenant Governor
+ * general election list for 3 November 2026 is Patrick (R), Goodwin (D), Kevin
+ * McCormick (G), Anthony Cristo (L) and two independent write-ins, with Collier
+ * below it under withdrawn or disqualified candidates. Reported by a reader,
+ * 17 September 2026.
+ *
+ * So it is one name per race now, and the reason it is not the FULL ballot is
+ * worth writing down rather than leaving to look like laziness. The Lieutenant
+ * Governor race is the only one of the three whose full field has been checked.
+ * Naming a Green and a Libertarian in that race and nobody in the other two
+ * would make one race look crowded and two look like two-horse races, which is
+ * a claim about the ballot rather than a fact about it. Either all three get
+ * researched to the same depth or none do, and until then the honest line is
+ * the one thing all three have in common: an incumbent Republican with no House
+ * voting record this site can score.
+ *
+ * This string is the only place the page names an opponent at all. It renders
+ * under the candidate's name, and nothing about it is scored.
+ */
 const CANDIDATES = [
-  { name: 'Vikki Goodwin', office: 'Lieutenant Governor', running: 'vs Dan Patrick (R), Mike Collier (I)' },
+  { name: 'Vikki Goodwin', office: 'Lieutenant Governor', running: 'vs Dan Patrick (R)' },
   { name: 'Gina Hinojosa', office: 'Governor', running: 'vs Greg Abbott (R)' },
   { name: 'James Talarico', office: 'U.S. Senate', running: 'vs Ken Paxton (R)' },
 ];

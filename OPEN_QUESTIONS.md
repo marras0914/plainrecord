@@ -88,12 +88,26 @@ sample.
 **Both of this question's former "still open" items are MOOT, closed 2026-09-15.**
 They asked whether Paxton should appear on the ballot page, and said Mike
 Collier needed researching before a race could be covered two-thirds. **There is
-no ballot page.** No opponent is named anywhere in the shipped copy — grep
-`Abbott`, `Patrick` or `Paxton` in `i18n/copy.json` and each returns zero.
-(The OFFICE appears: some `why` lines end "Lt. Gov. priority bill", which is
-why those lines are gated behind the answer. An office is not a candidate,
-and a reader who infers the holder has inferred it, not been told it.) The
-evidence-tier design was built and then solved in prose instead:
+no ballot page.**
+
+**Correction, 2026-09-17.** This paragraph used to say that no opponent is named
+anywhere in the shipped copy, and offered a grep of `i18n/copy.json` as proof.
+The grep is real and the claim it supports is not: opponents are named in the
+shipped PAYLOAD, not in the copy file. `quiz_89R.json`'s `candidates[].running`
+carries "vs Greg Abbott (R)", "vs Dan Patrick (R)" and "vs Ken Paxton (R)", and
+`main.ts` renders it under each candidate's name. Grepping the file where the
+strings are not is the same mistake as an internal-consistency check that
+passes because it asked the wrong source — see question 10.
+
+What is true is the narrower thing: no opponent is SCORED, and the naming is one
+line of context, identical in shape for all three races.
+
+(Separately, the OFFICE appears inside the questions themselves: some `why`
+lines end "Lt. Gov. priority bill", which is why those lines are gated behind
+the answer. That was always a different point from the naming above, and this
+file used to run the two together.)
+
+The evidence-tier design was built and then solved in prose instead:
 
 - `method.bothSides` puts sitting members of both caucuses under every question,
   scored on the same items as the candidates.
@@ -108,8 +122,20 @@ So the bias this question worried about is disclosed rather than designed
 around. Reopen it only if a ballot page is ever built; until then there is no
 race being covered two-thirds, because no race is being covered at all.
 
-(The only `Collier` in the shipped data is Nicole Collier, the sitting member
-for HD-95. Not the same person.)
+(Mike Collier is **not going to be on the ballot**, reported by a reader on
+2026-09-17. Ballotpedia's Lieutenant Governor general election list for 3
+November 2026 is Patrick (R), Goodwin (D), Kevin McCormick (G), Anthony Cristo
+(L) and two independent write-ins, with Collier below it under withdrawn or
+disqualified. Goodwin's `running` line had read "vs Dan Patrick (R), Mike
+Collier (I)" and now names Patrick alone. The only other `Collier` in the
+shipped data is Nicole Collier, the sitting member for HD-95, who is not the
+same person.
+
+That race is also the only one of the three whose full field has been checked.
+Naming a Green and a Libertarian there and nobody in the other two would make
+one race look crowded and two look like two-horse races, which is a claim about
+the ballot rather than a fact about it. Either all three get researched to the
+same depth or none do.)
 
 ## 3. What the score is called in the UI — MOSTLY ANSWERED
 
@@ -354,3 +380,49 @@ Three things worth keeping:
 2022. A ZIP that has been built out since the census is described by who lived
 there then. There is no more recent block-level count, so this is the best
 available rather than a thing to fix.
+
+## 15. An absence on the selected roll call can hide a recorded vote on the same bill
+
+Found 2026-09-17, by a reader who checked SB 3 against the House Journal and
+said Goodwin's "no vote" looked wrong.
+
+She is right, and the site is not wrong either, which is what makes this worth
+writing down.
+
+**SB 3 has three roll calls in the published corpus.** The site asks about
+record 3304, the vote that passed the bill, 87-54. Goodwin is Absent on it and
+filed a statement of vote saying her vote failed to register and she would have
+voted no. On the other two — record 3192 at 95-44, and a scrape-sourced 86-53 —
+she is recorded **NAY**. So the page shows no vote from her on the THC ban while
+the record holds two of hers on that bill.
+
+**Measured across the whole payload: 42 cases**, over the three candidates and
+six comparators, where the person has no vote on the roll call the question uses
+and a recorded vote on another roll call of the same bill. **Only 2 are covered
+by a journal statement.** The other 40 show an absence and say nothing.
+
+**The scoring should not change, and that is the easy half.** Every member is
+scored on the same roll call; letting a second-reading vote stand in for an
+absence at passage would score different members on different events, which is
+what `assertComparable()` and the evidence tiers exist to prevent. Second and
+third reading are genuinely different votes — SB 3 moved from 95-44 to 87-54
+between them, an eight-vote swing.
+
+**What is open is the disclosure.** A reader looking at a blank sees "did not
+take a position", and for 40 of these that reading is wrong. The options:
+
+- Say it per member, where it happens: this member has a recorded vote on
+  another roll call of this bill. New copy, so a Spanish review, and it must not
+  imply the other vote was counted.
+- Say it once, in the method section, as a property of the instrument.
+- Do nothing, on the grounds that the statements card covers the cases where the
+  member cared enough to file.
+
+The third is the current behaviour by default rather than by decision, and it is
+the one this question exists to stop being the default.
+
+**This is question 10's lesson again from the other side.** That one was about
+the rule picking the wrong roll call. This one is about the rule picking the
+RIGHT roll call and the display still telling a reader something false. The
+corpus is the place both are visible from, and `check_vote_selection.mjs` is
+where a check for this belongs.
