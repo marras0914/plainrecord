@@ -995,5 +995,5 @@ export const ES: Record<CopyKey, string> = {
  * rather than presenting a machine draft as a translation.
  */
 export const ES_UNAPPROVED: readonly CopyKey[] = [
-  "rev.elsewhere",
+
 ];
