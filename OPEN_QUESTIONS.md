@@ -439,3 +439,61 @@ per-question mark, so there is no blank to explain — but the coverage count
 itself is quietly affected, since a member absent at passage is dropped from the
 denominator for that question. Whether "covers 64 of the 67" should say anything
 about the other three is unasked.
+
+## 16. The seven-question default is guessable, and that is the whole premise
+
+Raised 17 September 2026 by an r/houston moderator, removing a post: "a stupid
+survey (anyone could easily guess which of the items were supported by
+republicans or democrats)".
+
+He is right about the quiz almost everyone takes.
+
+| short-set item | \|valence\| |
+| --- | --- |
+| SB 2, school vouchers | 0.98 |
+| SB 8, immigration enforcement | 0.95 |
+| SB 10, Ten Commandments in classrooms | 0.92 |
+| SB 3, THC ban | 0.86 |
+| SB 14, regulatory review | 0.77 |
+| SB 6, electric grid and large power users | 0.31 |
+| SB 5, dementia research institute | 0.27 |
+
+Five of the seven have the two caucus majorities on opposite sides. **The page
+sells a blind quiz, and blindness buys nothing on an item a reader can label
+without being told.** Item 8 already said the short set is six-sevenths
+party-line by construction and cannot produce a crossover result; this is the
+same fact arriving from outside, unprompted and hostile, which is the strongest
+form of it.
+
+The full 67 are a genuinely different object — 21 items below |valence| 0.4, 16
+where the caucuses did not divide at all, a measured cross-cutting share of
+0.317. That is not a defence. Almost nobody answers 67 questions, and answering
+a fair criticism of the default with the behaviour of the long tail is a
+technicality.
+
+**The tally cannot settle it.** 4 readable readings against a threshold of 100,
+so the prediction figure — how often a reader's guess matched where they landed,
+which is the direct measurement of guessability — is withheld and will be for a
+while.
+
+**The tension is real and is not a bug to fix quickly.** The seven were picked by
+hand for salience, and `export_quiz_data.ts` records that SB 5 was included
+"deliberately as the least party-coded of the headline bills — without it the
+short set would be entirely party-line". Recognisable bills are recognisable
+because the parties fought over them in public. A short set chosen for low
+valence would be unguessable and would also be seven bills nobody has heard of,
+which is a different product.
+
+Three ways out, none free:
+
+- **Rebalance the seven**, say four salient and three cross-cutting. Changes
+  which roll calls the instrument points at, so it bumps `DEFAULT_RULE.version`
+  and resets the tally to zero for the second time in a month.
+- **Stop calling it blind for the short set** and let the long set carry that
+  claim. Cheapest, and it concedes the marketing rather than the product.
+- **Lead with the surprise the data can actually deliver**: the reader's own
+  representative, and the 16 items where the caucuses agreed. Neither depends on
+  the reader failing to guess.
+
+Unresolved. Whatever is chosen, do not answer it publicly by quoting the full
+set's cross-cutting share while the default stays as it is.
