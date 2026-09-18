@@ -497,3 +497,39 @@ Three ways out, none free:
 
 Unresolved. Whatever is chosen, do not answer it publicly by quoting the full
 set's cross-cutting share while the default stays as it is.
+
+### 16a. Measured: the local content exists and stops short of the votes
+
+Checked against production 18 September 2026, walking the path a Houston reader
+would actually take.
+
+**What works.** `Skip the quiz and look around` is a first-class button on the
+start screen, and `#start-look` goes straight to the result view. Typing 77002
+with zero answers returns four named members — Dutton HD-142 at 42% of the ZIP's
+people, Jones HD-147 at 37%, Morales HD-145 at 21%, Johnson HD-134 under 1%.
+Local, specific, and nothing to do with the statewide races.
+
+**What does not.** After picking a district, still at zero answers, the card
+contains no `Yea`, no `Nay`, no bill number and not the word `voted`. The
+heading above it asks "And how did your own representative vote?" and the page
+does not answer it. `rep.answerForScore` takes over: "Answer a few votes and
+this will show how closely {name} matches you."
+
+That is correct for a SCORE, which cannot exist without the reader's answers.
+It is not correct for the VOTES, which are already in `members_89R.json` for all
+150 members on all 67 items and need nothing from the reader at all.
+
+**So the gate is on the wrong thing.** A sceptic who skips the quiz — which is
+exactly what a moderator evaluating a link does — meets a heading that promises
+their representative's record and a prompt to go and take the survey instead.
+That reads as the advert the r/houston mod said it was, and the page had the
+answer in hand the whole time.
+
+**This is the strongest version of option 3 above.** The reader's own member is
+the one thing on this site that is genuinely local, cannot be guessed from a
+party label, and does not need a single answer to be worth reading. It is
+currently the hardest thing to reach.
+
+Open: show the member's votes with zero answers, keeping the score gated. New
+copy, so a Spanish review, and a decision about how much of 67 votes to show at
+once. Not built — it is a product call, not a cleanup.
