@@ -213,6 +213,70 @@
     "note": "Distinct from rep.noVotes, which says the MEMBER cast none of these votes. With no answers the missing half is the reader’s, and saying the member has no record would be false.",
     "status": "ok"
   },
+  "rep.recordLine": {
+    "en": "{name} has a recorded vote on {voted} of these {items} questions.",
+    "es": "{name} tiene voto registrado en {voted} de estas {items} preguntas.",
+    "where": "In the district panel, under the member's name. Shown whether or not the reader has answered anything.",
+    "vars": [
+      "name",
+      "voted",
+      "items"
+    ],
+    "note": "NEW 19 September 2026. The panel could previously say nothing at all until the reader had answered something, because everything in it was a score, and a score needs both halves. A reader who came to look up their representative met a heading asking how that representative voted above a prompt to go and take a quiz. This line and the crossing lines below it need nothing from the reader.",
+    "status": "draft"
+  },
+  "rep.crossedHead": {
+    "en": "Votes where {name} broke with their own party",
+    "es": "Votos en los que {name} se apartó de su propio partido",
+    "where": "Heading above the list of a member's crossings, in the district panel.",
+    "vars": [
+      "name"
+    ],
+    "note": "\"Their own party\" rather than \"their caucus\", which is the word the file uses internally and is not everyday English. The Spanish avoids a possessive that would agree in gender with the member: \"su propio partido\" agrees with partido, not with the person.",
+    "status": "draft"
+  },
+  "rep.crossedCount": {
+    "en": "{n} of the {divisive} votes where the two parties took opposite sides.",
+    "es": "{n} de los {divisive} votos en los que los dos partidos tomaron lados opuestos.",
+    "where": "Under rep.crossedHead, giving the denominator.",
+    "vars": [
+      "n",
+      "divisive"
+    ],
+    "note": "The denominator is load-bearing and is NOT the 67. A member can only break with their party on a vote where their party took a side the other one did not, and there are fewer of those. Without it, \"crossed twice\" reads as twice out of 67, which understates it by a third.",
+    "status": "draft"
+  },
+  "rep.crossedNone": {
+    "en": "On all {divisive} votes where the two parties took opposite sides, {name} voted with their own.",
+    "es": "En los {divisive} votos en los que los dos partidos tomaron lados opuestos, {name} votó con el suyo.",
+    "where": "Replaces the crossing list when a member never broke with their party.",
+    "vars": [
+      "divisive",
+      "name"
+    ],
+    "note": "Zero crossings is a finding, not an empty state, and it is worthless without the denominator: a member with 51 chances who took none is a different fact from one with three. Phrased as what they DID do rather than as an absence, because \"no crossings\" reads like missing data.",
+    "status": "draft"
+  },
+  "rep.crossedRow": {
+    "en": "voted {vote}",
+    "es": "votó {vote}",
+    "where": "Beside each bill in the crossing list, carrying the member's own vote.",
+    "vars": [
+      "vote"
+    ],
+    "note": "Interpolates the approved vote.yea and vote.nay, so it reads \"voted Yea\" / \"votó A favor\", matching rev.voted in the reveal. Deliberately the same shape as rev.voted rather than a second way of saying one thing.",
+    "status": "draft"
+  },
+  "rep.crossedMore": {
+    "en": "and {n} more",
+    "es": "y {n} más",
+    "where": "After the crossing list when it is capped.",
+    "vars": [
+      "n"
+    ],
+    "note": "The list is capped because one member crossed 28 times and a panel is not a table. The count is shown rather than the rest hidden silently.",
+    "status": "draft"
+  },
   "result.checkRep": {
     "en": "How did my own representative vote?",
     "es": "¿Cómo votó mi propio representante?",

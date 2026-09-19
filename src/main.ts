@@ -1036,6 +1036,57 @@ function shareBlock(): HTMLElement {
 }
 
 /**
+ * The votes where a member's own party went the other way.
+ *
+ * The least guessable thing this site holds, and until now the hardest to
+ * reach. It needs no answers from the reader, so it renders whether or not any
+ * exist. Returns '' only when the member cast none of these votes at all.
+ *
+ * Capped, because one comparator crossed 28 times and a panel is not a table.
+ * The remainder is counted out loud rather than dropped quietly.
+ */
+const CROSSINGS_SHOWN = 6;
+
+function renderCrossings(m: rep.Member): string {
+  if (!repFile) return '';
+  const report = rep.crossings(ALL_ITEMS, repFile, m);
+  if (report.divisive === 0) return '';
+
+  const head = `<p class="rep-note rep-crossed-head">${
+    esc(t('rep.crossedHead', { name: m.n }))}</p>`;
+
+  if (report.crossings.length === 0) {
+    return `<p class="rep-note">${
+      esc(t('rep.crossedNone', { divisive: report.divisive, name: m.n }))}</p>`;
+  }
+
+  const byId = new Map(ALL_ITEMS.map((i) => [i.id, i]));
+  const rows = report.crossings.slice(0, CROSSINGS_SHOWN).map((c) => {
+    const it = byId.get(c.itemId);
+    if (!it) return '';
+    // Only the seven headline bills carry a short label. For the rest the label
+    // falls back to the bill number, and printing the number underneath it
+    // again rendered "HB 1128HB 1128".
+    const what = it.label ?? it.billId;
+    const sub = it.label ? `<small>${esc(it.billId)}</small>` : '';
+    return `<li><span class="cr-name">${esc(what)}${sub}</span>` +
+      `<span class="cr-vote">${esc(t('rep.crossedRow', {
+        vote: t(c.cast === 1 ? 'vote.yea' : 'vote.nay'),
+      }))}</span></li>`;
+  }).join('');
+
+  const more = report.crossings.length > CROSSINGS_SHOWN
+    ? `<p class="rep-note rep-crossed-more">${esc(t('rep.crossedMore', {
+        n: report.crossings.length - CROSSINGS_SHOWN }))}</p>`
+    : '';
+
+  return head +
+    `<p class="rep-note">${esc(t('rep.crossedCount', {
+      n: report.crossings.length, divisive: report.divisive }))}</p>` +
+    `<ul class="cand-revs rep-crossed">${rows}</ul>` + more;
+}
+
+/**
  * The line under a blank saying this person did vote on the bill, elsewhere.
  *
  * A blank reads as "did not take a position", and in 42 places on this payload
@@ -2112,6 +2163,24 @@ function renderRepOut(): void {
             `<div class="cand-phrase">${esc(r.phrase ?? '')}</div>` +
             `<div class="cand-n">n = ${r.n}</div>` +
             `</div></div>`;
+          // What this member did, which needs nothing from the reader.
+          //
+          // Everything else in this panel is a SCORE, and a score is a
+          // comparison that cannot exist until the reader has answered
+          // something. That left a reader who came only to look up their
+          // representative facing a heading that asks how their representative
+          // voted, above a prompt to go and take a quiz. This block answers the
+          // heading in every state, including the zero-answer one.
+          // Skipped at zero, where rep.noVotes below says the same thing in
+          // words written for it. "A recorded vote on 0 of these 67" is the
+          // same fact, worse said, immediately above the better sentence.
+          if (m.voted > 0) {
+            html += `<p class="rep-note">${esc(t('rep.recordLine', {
+              name: m.n, voted: m.voted, items,
+            }))}</p>`;
+            html += renderCrossings(m);
+          }
+
           // An absence is not a middling result. Without this the bands would
           // file a member who cast none of these votes under "no clearer than
           // chance", which reads as a finding rather than as missing data.

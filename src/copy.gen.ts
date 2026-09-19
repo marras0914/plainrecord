@@ -33,6 +33,12 @@ export type CopyKey =
   | "intro.h1"
   | "q.skipQuiz"
   | "rep.answerForScore"
+  | "rep.recordLine"
+  | "rep.crossedHead"
+  | "rep.crossedCount"
+  | "rep.crossedNone"
+  | "rep.crossedRow"
+  | "rep.crossedMore"
   | "result.checkRep"
   | "how.close"
   | "how.full"
@@ -369,6 +375,12 @@ export const EN: Record<CopyKey, string> = {
   "intro.h1": "The Purple Strip",
   "q.skipQuiz": "Skip the quiz and look around",
   "rep.answerForScore": "Answer a few votes and this will show how closely {name} matches you.",
+  "rep.recordLine": "{name} has a recorded vote on {voted} of these {items} questions.",
+  "rep.crossedHead": "Votes where {name} broke with their own party",
+  "rep.crossedCount": "{n} of the {divisive} votes where the two parties took opposite sides.",
+  "rep.crossedNone": "On all {divisive} votes where the two parties took opposite sides, {name} voted with their own.",
+  "rep.crossedRow": "voted {vote}",
+  "rep.crossedMore": "and {n} more",
   "result.checkRep": "How did my own representative vote?",
   "how.close": "Close",
   "how.full": "The full method, the data, and who made this",
@@ -690,6 +702,12 @@ export const ES: Record<CopyKey, string> = {
   "intro.h1": "La Franja Morada",
   "q.skipQuiz": "Omitir el cuestionario y echar un vistazo",
   "rep.answerForScore": "Responda algunos votos y aquí verá qué tan de cerca {name} coincide con usted.",
+  "rep.recordLine": "{name} tiene voto registrado en {voted} de estas {items} preguntas.",
+  "rep.crossedHead": "Votos en los que {name} se apartó de su propio partido",
+  "rep.crossedCount": "{n} de los {divisive} votos en los que los dos partidos tomaron lados opuestos.",
+  "rep.crossedNone": "En los {divisive} votos en los que los dos partidos tomaron lados opuestos, {name} votó con el suyo.",
+  "rep.crossedRow": "votó {vote}",
+  "rep.crossedMore": "y {n} más",
   "result.checkRep": "¿Cómo votó mi propio representante?",
   "how.close": "Cerrar",
   "how.full": "El método completo, los datos y quién hizo esto",
@@ -995,5 +1013,10 @@ export const ES: Record<CopyKey, string> = {
  * rather than presenting a machine draft as a translation.
  */
 export const ES_UNAPPROVED: readonly CopyKey[] = [
-
+  "rep.recordLine",
+  "rep.crossedHead",
+  "rep.crossedCount",
+  "rep.crossedNone",
+  "rep.crossedRow",
+  "rep.crossedMore",
 ];

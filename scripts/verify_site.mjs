@@ -1282,9 +1282,14 @@ try {
       // Both denominators in one sentence, so they cannot be read as
       // contradicting each other. An earlier version put "the same 7 votes" in
       // the lede and "63 of the 67" underneath it.
-      const cov = await txt('#rep-card .rep-note');
+      // Read the note that makes the claim, not "the first one". These two
+      // checks used to take .rep-note positionally and broke the day a line was
+      // added above them, which is a fragile way to assert a sentence exists.
+      const notes = async () => page.$$eval('#rep-card .rep-note',
+        (ns) => ns.map((n) => n.textContent.replace(/\s+/g, ' ').trim()));
+      const cov = (await notes()).find((n) => /overlap what you answered/.test(n)) ?? '';
       check('rep: coverage states both scales together',
-        Boolean(cov) && /of the 67/.test(cov) && /overlap what you answered/.test(cov),
+        /of the 67/.test(cov) && /overlap what you answered/.test(cov),
         cov ? cov.slice(0, 74) : '(none)');
       const lede = await txt('#rep-card .lede');
       check('rep: the lede quotes no item count',
@@ -1294,10 +1299,16 @@ try {
       await input.fill('83');
       await page.waitForTimeout(700);
       const zeroScore = await txt('#rep-card .cand-score');
-      const zeroNote = await txt('#rep-card .rep-note');
+      const zeroNotes = await notes();
+      const zeroNote = zeroNotes.find((n) => /none of the/.test(n)) ?? '';
       check('rep: a member with no votes reports an absence, not a score',
-        zeroScore === '—' && /none of the/.test(zeroNote ?? ''),
-        `${zeroScore} · ${(zeroNote ?? '').slice(0, 50)}`);
+        zeroScore === '—' && /none of the/.test(zeroNote),
+        `${zeroScore} · ${zeroNote.slice(0, 50)}`);
+      // And it must not ALSO say "a recorded vote on 0 of these 67", which is
+      // the same fact worse said, next to a string written for this case.
+      check('rep: a member with no votes is not told so twice',
+        !zeroNotes.some((n) => /recorded vote on 0 of/.test(n)),
+        zeroNotes.find((n) => /recorded vote on 0 of/.test(n)) ?? 'said once');
 
       await input.fill('999');
       await page.waitForTimeout(400);
@@ -2534,6 +2545,58 @@ try {
     }
 
     await ec2.close();
+  }
+
+  // ---------------------------------------------------------------------------
+  // The district panel answers its own heading, with no answers
+  //
+  // "And how did your own representative vote?" used to sit above a prompt to
+  // go and take the quiz, because everything in the panel was a SCORE and a
+  // score needs the reader's half. A reader who came only to look up their
+  // member met a question the page declined to answer. An r/houston moderator
+  // read the site as an advert on exactly that basis.
+  //
+  // A member's votes need nothing from the reader, so the panel now shows where
+  // they broke with their own party before anything is answered. That is also
+  // the least guessable content on the site, which is the standing criticism of
+  // the quiz answered with data rather than with an argument.
+  //
+  // Its own context, so nothing above depends on where this leaves the page.
+  // ---------------------------------------------------------------------------
+  {
+    const gCtx = await browser.newContext({ viewport: { width: 1180, height: 1200 } });
+    const gp = await gCtx.newPage();
+    await gp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await gp.click('#start-look');
+    await gp.waitForTimeout(600);
+
+    const answered = await gp.$$eval('.cand-reveal', (n) => n.length);
+    const box = await gp.$('#rep-district');
+    await box.click();
+    await gp.keyboard.type('31', { delay: 30 });
+    await gp.waitForTimeout(1400);
+    const card = await gp.$eval('#rep-card .rep-out',
+      (e) => e.textContent.replace(/\s+/g, ' ').trim()).catch(() => '');
+
+    check('lookup: reachable without answering anything',
+      answered === 0 && card.length > 0, `${answered} reveals, card ${card.length} chars`);
+    // HD-31 is the most crossover-prone member in the payload, so this is the
+    // strongest case and the one that exercises the cap.
+    check('lookup: it names where the member broke with their own party',
+      /broke with their own party/i.test(card), card.slice(0, 90) || '(empty)');
+    check('lookup: with a denominator, not a bare count',
+      /of the \d+ votes where the two parties took opposite sides/i.test(card),
+      (card.match(/\d+ of the \d+ votes[^.]*/i) ?? ['(none)'])[0]);
+    check('lookup: and an actual vote of theirs, before any answer',
+      /voted (Yea|Nay)/.test(card), (card.match(/voted (Yea|Nay)/) ?? ['(none)'])[0]);
+    check('lookup: a long crossing list is capped and says so',
+      /and \d+ more/i.test(card), (card.match(/and \d+ more/i) ?? ['(not capped)'])[0]);
+    // The score is still gated, because a score genuinely needs both halves.
+    check('lookup: the SCORE is still withheld until the reader answers',
+      /n = 0/.test(card) && /Answer a few votes/i.test(card),
+      /n = 0/.test(card) ? 'n = 0 and the invitation is shown' : 'a score appeared at zero answers');
+
+    await gCtx.close();
   }
 
   // ---------------------------------------------------------------------------

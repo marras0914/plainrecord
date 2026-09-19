@@ -315,6 +315,13 @@
      roll call. Separated from the office line above it so two stacked smalls
      do not read as one wrapped sentence. */
   .cr-name small.cr-else { margin-top:3px; color:var(--ink-2); }
+  /* The crossing list in the district panel. Same row furniture as the reveal,
+     so a bill reads the same way in both places, but it is a record rather
+     than a comparison: no match column and no agreement colour. */
+  .rep-crossed { margin-top:6px; }
+  .rep-crossed .cand-rev { grid-template-columns:1fr auto; border-left-color:var(--hair); }
+  .rep-crossed-head { margin-top:14px; font-weight:500; color:var(--ink); }
+  .rep-crossed-more { margin-top:6px; color:var(--muted); font-size:12px; }
   /* Comparators are a disclosure, not a section: available in one click, never
      competing with the three races above it. */
   .cmp { margin-top:12px; border-top:1px solid var(--hair); padding-top:9px; }

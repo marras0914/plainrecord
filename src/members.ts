@@ -162,6 +162,88 @@ export function scoreMember(
   };
 }
 
+/** One vote where a member went against their own caucus's majority. */
+export interface Crossing {
+  /** The payload item id, so the caller can reach the bill and its links. */
+  itemId: string;
+  /** 1 for Yea, -1 for Nay — the member's own vote, not their caucus's. */
+  cast: 1 | -1;
+}
+
+export interface CrossingReport {
+  /** Items where the two caucus majorities landed on opposite sides. */
+  divisive: number;
+  crossings: Crossing[];
+}
+
+/**
+ * Where a member voted against their own caucus's majority.
+ *
+ * WHY THIS EXISTS AND WHY IT NEEDS NO ANSWERS
+ *
+ * Until now the district panel could say nothing at all until the reader had
+ * answered something, because everything it showed was a SCORE, and a score is
+ * a comparison that needs both halves. So a reader who arrived to look up their
+ * representative met a heading asking how that representative voted, above a
+ * prompt to go and take a quiz. An r/houston moderator read the site as an
+ * advert on exactly that basis, and he had a point.
+ *
+ * A member's votes need nothing from the reader. They are already in
+ * members_89R.json, one character per item, for all 150 seats.
+ *
+ * WHY CROSSINGS RATHER THAN ALL 67
+ *
+ * Sixty-seven rows is a wall, and most of them are a member voting the way
+ * their party voted, which a reader can predict without reading. The crossings
+ * are the opposite: they are short, they are specific, and they are the one
+ * thing on this site that cannot be guessed from a party label. That is also
+ * the standing criticism of the quiz — that the answers are obvious — so the
+ * panel answers it with the data instead of with an argument.
+ *
+ * `divisive` is reported alongside because zero crossings is a real finding and
+ * needs a denominator. "Never crossed" means nothing without "out of how many
+ * chances", and a member with 51 chances who took none is a different fact from
+ * one with three.
+ */
+export function crossings(
+  items: { id: string; rYea: number | null; dYea: number | null }[],
+  file: MemberFile,
+  member: Member,
+): CrossingReport {
+  const at = new Map(file.itemOrder.map((id, i) => [id, i]));
+  const out: Crossing[] = [];
+  let divisive = 0;
+
+  for (const it of items) {
+    // A caucus share can be missing, and a missing share is not a tie. Treating
+    // null as 0 would silently call every such item a Nay majority and invent
+    // crossings out of absent data, so the item is skipped and does not count
+    // toward the denominator either.
+    if (it.rYea === null || it.dYea === null) continue;
+
+    // Which way each caucus went. An item where both majorities agree offers no
+    // caucus to break with, so it is not a chance to cross and is not counted.
+    const rMajority = it.rYea > 0.5 ? 1 : -1;
+    const dMajority = it.dYea > 0.5 ? 1 : -1;
+    if (rMajority === dMajority) continue;
+    divisive++;
+
+    const i = at.get(it.id);
+    if (i === undefined) continue;
+    const c = member.v[i];
+    const cast = c === 'y' ? 1 : c === 'n' ? -1 : null;
+    if (cast === null) continue;
+
+    // An independent or an unrecognised party letter has no caucus majority to
+    // break with, so nothing is reported rather than a guess being made.
+    const own = member.p === 'R' ? rMajority : member.p === 'D' ? dMajority : null;
+    if (own === null) continue;
+    if (cast !== own) out.push({ itemId: it.id, cast });
+  }
+
+  return { divisive, crossings: out };
+}
+
 // -----------------------------------------------------------------------------
 // ZIP codes
 //
