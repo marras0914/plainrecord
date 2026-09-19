@@ -2537,6 +2537,65 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // Nothing third-party, on a page the reader has not touched
+  //
+  // The page used to load its fonts from fonts.googleapis.com and
+  // fonts.gstatic.com. Two requests to Google on every load, before any
+  // interaction, handing over the visitor's IP -- sitting directly under a
+  // privacy paragraph that did not mention them. The fonts are vendored now.
+  //
+  // This asserts it rather than trusting it, because the claim is the kind that
+  // rots silently: one @import, one embed, one analytics snippet added later and
+  // the promise is false again with nothing failing. It is also the exact thing
+  // a Hacker News reader checks first, by opening the network tab.
+  //
+  // WHAT IT DOES AND DOES NOT GUARD. The production CSP is the primary defence
+  // and is stricter: `default-src 'self'` with no third-party origin allowed
+  // anywhere, so a stray font link is BLOCKED and never becomes a request. That
+  // makes this check look redundant, and under --with-headers it partly is.
+  // It earns its place on the day somebody loosens the CSP to make an embed
+  // work, which is exactly how the fonts got in originally. Demonstrated to
+  // fail by serving dist with the link reinstated and no CSP: the predicate
+  // flips and names the URL.
+  //
+  // Note it cannot see Vercel's analytics script, and should not: that is
+  // served from this origin at /_vercel/insights/script.js. First-party by
+  // proxy is still analytics, and the privacy copy is where that is disclosed.
+  //
+  // Its own context, so nothing above depends on where this leaves the page.
+  // ---------------------------------------------------------------------------
+  {
+    const tpCtx = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
+    const tp = await tpCtx.newPage();
+    const offsite = [];
+    const origin = new URL(URL_UNDER_TEST).origin;
+    tp.on('request', (r) => {
+      const u = r.url();
+      if (u.startsWith('data:') || u.startsWith('blob:')) return;
+      if (!u.startsWith(origin)) offsite.push(r.method() + ' ' + u.slice(0, 100));
+    });
+    await tp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await tp.waitForTimeout(2500);
+
+    check('privacy: a bare page load requests nothing off this origin',
+      offsite.length === 0,
+      offsite.length ? [...new Set(offsite)].join('  |  ') : 'same-origin only');
+
+    // And the fonts really are the local ones, not a silent fallback to a system
+    // face that would make the check above pass for the wrong reason.
+    const fontReqs = await tp.evaluate(() => performance.getEntriesByType('resource')
+      .map((e) => e.name).filter((n) => /\.woff2?($|\?)/.test(n)));
+    // `origin` is this script's, not the page's. Reaching for location.origin
+    // here is a ReferenceError in Node, and it took the whole block with it
+    // silently the first time.
+    check('privacy: the webfonts that loaded came from this origin',
+      fontReqs.length > 0 && fontReqs.every((n) => n.startsWith(origin + '/fonts/')),
+      fontReqs.length ? fontReqs.map((n) => n.split('/').pop()).join(', ') : '(no webfont loaded)');
+
+    await tpCtx.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // Accessibility: the parts a rendering check cannot reach
   //
   // An axe pass over every view and both themes is clean, and axe finding
