@@ -81,11 +81,11 @@ import { actsBySession, normBill, OPPONENTS } from './opponent_acts';
  * `npm run data:plain -- --write`.
  */
 export const HEADLINE_SET: { billId: string; label: string; why: string; plain: string }[] = [
-  { billId: 'SB 2',  label: 'School vouchers',
-    why: 'The marquee fight of the session: public money for private school tuition. Lt. Gov. priority bill.',
+  { billId: 'SB 2',  label: 'Education savings accounts',
+    why: 'The marquee fight of the session, and the one each side named its own way: supporters call it school choice, opponents call it vouchers. The bill itself says education savings account. Lt. Gov. priority bill.',
     plain: 'Creates state-funded accounts that families can spend on private school tuition and other approved school costs. The money comes out of the state budget.' },
   { billId: 'SB 8',  label: 'Immigration enforcement',
-    why: 'Requires local law enforcement to assist federal deportation efforts. Lt. Gov. priority bill.',
+    why: 'Requires the sheriff of every county that runs a jail to seek an agreement with federal immigration authorities. Lt. Gov. priority bill.',
     plain: 'Requires sheriffs to sign agreements letting their deputies carry out federal immigration enforcement, and creates state grants to pay for doing it.' },
   { billId: 'SB 10', label: 'Ten Commandments in classrooms',
     why: 'Requires the Ten Commandments displayed in public schools. Lt. Gov. priority bill.',
@@ -93,7 +93,7 @@ export const HEADLINE_SET: { billId: string; label: string; why: string; plain: 
   { billId: 'SB 3',  label: 'THC ban',
     why: 'Lt. Gov. priority bill that the Governor then VETOED — a documented split between two Republican leaders on one bill.',
     plain: 'Bans hemp products containing THC — the ones sold in smoke shops and convenience stores — and adds licences, fees and criminal penalties for selling them.' },
-  { billId: 'SB 14', label: 'Regulatory review ("Texas DOGE")',
+  { billId: 'SB 14', label: 'Regulatory review',
     why: 'Creates a state office to review regulations. Lt. Gov. priority bill.',
     plain: 'Sets up a new state office to review the rules that agencies write, and tells judges to stop treating an agency’s own reading of the law as the correct one.' },
   { billId: 'SB 6',  label: 'Electric grid and large power users',

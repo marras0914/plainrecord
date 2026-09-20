@@ -341,7 +341,16 @@ try {
 
   const meta = await page.$eval('.q-top', (e) => e.textContent.replace(/\s+/g, ' ').trim());
   check('boots in 7-issue mode', /^1 of 7/.test(meta), meta);
-  check('question 1 is the school voucher vote', /School vouchers/.test(meta), meta);
+  // There used to be a check here asserting the card said "School vouchers".
+  // That is the opponents' word for SB 2, and the neutrality pass removed it
+  // precisely because the label renders BEFORE the reader answers. A check that
+  // pins a label is a check that resists relabelling it, which is the wrong way
+  // round: the label is editable copy and the bill is the fact.
+  //
+  // It is not replaced here, because the bill's identity is already asserted
+  // further down, against the official caption ("Relating to the establishment
+  // of an education savings account program"). That is the record's own wording
+  // rather than ours, so it holds however the question is labelled.
   // THE CHECK THAT USED TO ASSERT THE BUG.
   //
   // It read: "the reason for the pick is shown", and it passed on an unanswered
