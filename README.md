@@ -234,12 +234,29 @@ npx netlify deploy --prod
 ### The CSP is tight on purpose
 
 ```
-default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';
+default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';
+font-src 'self'; img-src 'self' data:; connect-src 'self';
 form-action 'none'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'
 ```
 
-Google Fonts is the only third party the page touches. `script-src 'self'` with
+**Nothing third party is allowed, and nothing third party is requested.** The
+fonts came from fonts.googleapis.com and fonts.gstatic.com until 19 September
+2026, which was two requests to Google on every page load, before the reader
+touched anything, handing over their IP address — underneath a privacy paragraph
+that did not mention it. `npm run fonts:vendor` pulls them local, keeping every
+`@font-face` and `unicode-range` exactly as Google serves them so the subsetting
+is unchanged, and both Google origins came out of the policy above.
+
+`verify_site.mjs` asserts that a bare page load requests nothing off-origin, and
+that the webfonts that loaded came from here. The CSP is the primary guard and
+is stricter; the check earns its place the day somebody widens the policy to
+make an embed work, which is how the fonts got in originally.
+
+It does NOT cover Vercel's analytics, and should not: that is served from this
+origin at `/_vercel/insights/script.js`. First-party by proxy is still analytics,
+and `privacy.body` is where it is disclosed to readers.
+
+`script-src 'self'` with
 no `unsafe-inline` means an analytics snippet or embed pasted in later will fail
 loudly in the console instead of quietly shipping a tracker on a page about
 public records. If you *want* one, widen the policy deliberately.
@@ -286,7 +303,10 @@ node scripts/build_og.mjs --locale es # just the Spanish one
 `public/og.png` is committed, and **not** wired into `npm run build` on purpose:
 the card is rendered by headless Chromium and pulls IBM Plex from Google Fonts,
 so putting it in the build path would make every Vercel deploy depend on
-Playwright browsers and on a font CDN. It only needs re-running when the payload
+Playwright browsers and on a font CDN. That is a BUILD-time dependency and
+not a reader-facing one: no visitor to the site fetches anything from Google
+since the fonts were vendored. If the card is ever regenerated in CI, point it
+at `public/fonts/` instead. It only needs re-running when the payload
 numbers change — after `npm run data:export`.
 
 Every figure on the card is read out of `public/data/quiz_89R.json` at build
@@ -562,6 +582,8 @@ npm run data:backfill    # recover member votes the bulk export dropped
 npm run data:export      # -> public/data/quiz_89R.json   (the only shipped file)
 npm run data:acts        # add opponent actions to an already-built payload
 npm run data:elsewhere   # mark absences that hide a vote on another roll call
+npm run data:headlines   # apply headline label/why to a built payload (--write --spanish-reviewed)
+npm run fonts:vendor     # pull the webfonts local; fonts:check verifies them
 npm run data:report      # coverage + provenance summary
 npm run data:members     # -> public/data/members_89R.json  (the district lookup)
 npm run data:zips        # -> public/data/zips_89R.json     (ZIP -> districts)
@@ -612,6 +634,32 @@ says so on screen rather than quietly rounding 149 up to 150.
 A member with zero of the 67 votes reports an absence, not a band. Without that,
 the estimator files them under "no clearer than chance", which reads as a
 finding about the member instead of missing data.
+
+**The panel answers its own heading without a quiz.** Added 19 September 2026.
+Its heading asks "And how did your own representative vote?" and until then
+everything under it was a SCORE, which is a comparison and cannot exist before
+the reader has answered something. So a reader who came only to look up their
+member met a question the page declined to answer, above a prompt to go and take
+the quiz. An r/houston moderator read the site as an advert on exactly that
+basis, and he had a point.
+
+A member's votes need nothing from the reader. The panel now shows where they
+broke with their own party, at zero answers: `rep.crossings()` in
+`src/members.ts`. Not all 67, because most of those are a member voting the way
+their party voted and a reader can predict them without reading. The crossings
+are short, specific, and the one thing on this site that cannot be guessed from
+a party label — which is also the standing criticism of the quiz, answered with
+data rather than with an argument.
+
+The denominator is **not** 67. A member can only break with their party on a
+vote where the two parties took opposite sides, which is 51 of the 67, and
+quoting it out of 67 understates it by a third. Zero crossings is reported as a
+finding with that denominator rather than as an empty state.
+
+The score stays gated, because a score really does need both halves. Guillen in
+HD-31 crossed on 28 of 51, so the list caps at six and counts the remainder out
+loud; Dutton in HD-142 crossed 5 times and one of them was the Ten Commandments
+bill.
 
 ### ZIP codes, and why they cannot give one answer
 
@@ -766,9 +814,15 @@ bare percentage.
   categories left blank rather than filled with a weak proxy.
 - **Hand curation is logged with a reason.** `selection.ts` `Override` throws if
   constructed without one.
-- **Nothing leaves the browser unasked.** `verify_site.mjs` answers five
-  questions and fails if a single byte goes out, then sits on the result screen
-  and fails if anything goes out before the share button is pressed. The
+- **Nothing leaves the browser unasked beyond the visit count.** The qualifier
+  is load-bearing and was added 20 September 2026: this line used to say
+  "nothing leaves the browser unasked" flat, which is the same overclaim
+  `start.fine` was narrowed for in September, because the analytics beacon has
+  always fired on arrival without being asked. `verify_site.mjs` answers five
+  questions and fails if a single byte goes out beyond that count, then sits on
+  the result screen and fails if anything goes out before the share button is
+  pressed. A separate check fails if any request on page load goes off-origin
+  at all. The
   paragraph in `privacy.body` that describes the request is worth less than the
   test that watches for it, and its own note says the sentence has to be
   reworded before either check is weakened.

@@ -370,3 +370,49 @@ Describe legislative function, mechanism, and fiscal impact. No loaded adjective
 If summaries are generated rather than hand-written, publish the generation prompt
 and the diffs alongside the output, and accept PRs against summary text. The
 process being inspectable matters more than any individual summary being perfect.
+
+### Write from the operative sections, never from the sponsor
+
+`i18n/plain_89R.json` owns all 67 summaries in both languages and states the rule
+in its own `_meta`: written from the operative section of the official bill
+analysis, **never from the caption alone and never from the sponsor's statement
+of intent**. Each entry carries the `source` URL and an `operative` excerpt so the
+summary can be checked against what it was supposed to be written from.
+
+That rule looks pedantic until it fires. On 19 September 2026 a neutrality pass
+"corrected" SB 8's summary from "requires sheriffs" to "requires sheriffs in
+counties of more than 100,000 people", and added that grants go to "counties
+under a million". Both figures came from the bill's own sponsor, summarising
+their own bill at the top of the same document. The operative sections say
+something else entirely: §753.051 covers the sheriff of **every county that
+operates a jail or contracts one out**, with no population test anywhere, and
+§753.102 makes any sheriff who signs an agreement eligible for a grant, with
+population only determining the size of the award.
+
+So the correction was wrong twice and the original was closer to the truth than
+the fix. The gap that actually existed — the jail qualifier — was in neither.
+A sponsor describing their own bill is a party to it, which is the whole reason
+the rule names that section specifically.
+
+### The label is part of the question
+
+A headline item's `label` renders as the question chip **before the reader
+answers**, so it is not a filing convenience, it is the first framing a reader
+sees. Two words to test against: would a supporter and an opponent both call it
+fair, and does either campaign use it as a slogan.
+
+SB 2 failed both for months. It was labelled "School vouchers", which is the
+opponents' term; supporters say "school choice"; the bill's own analysis says
+"education savings account" throughout and never once says voucher. On the most
+party-coded item in the set, valence 0.98, the first thing on screen was one
+side's word for it. The Spanish carried it too. It is now the statutory term in
+both languages, with the plain summary doing the work of explaining it.
+
+Reason lines (`why`) are safer, because they render only AFTER the answer. That
+is what lets SB 2's now name both sides' words and the bill's own, which is more
+informative than any neutral paraphrase would have been.
+
+`scripts/sync_headline_prose.mjs` applies label and `why` to a built payload and
+refuses to write until the Spanish sidecar is updated and `--spanish-reviewed` is
+passed. `scripts/add_plain.mjs` merges only summaries marked `ok`. Both gates
+exist because the payload is not rebuilt from the exporter in normal work.

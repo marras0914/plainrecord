@@ -2,6 +2,10 @@
 
 Roughly in order of how much they change the product.
 
+**Reviewed 2026-09-20.** Questions 14, 15 and 16a were answered and shipped
+between 17 and 19 September; 16 is open and is the one to read if you are
+picking up work. The note below is from the 2026-09-15 pass and still applies.
+
 **Reviewed 2026-09-15.** The measured answers below are unchanged and still
 worth reading; what had rotted was their STATUS. Several things this file called
 open had shipped weeks earlier, and question 2's "still open" items described a
@@ -519,17 +523,24 @@ That is correct for a SCORE, which cannot exist without the reader's answers.
 It is not correct for the VOTES, which are already in `members_89R.json` for all
 150 members on all 67 items and need nothing from the reader at all.
 
-**So the gate is on the wrong thing.** A sceptic who skips the quiz — which is
-exactly what a moderator evaluating a link does — meets a heading that promises
+**So the gate was on the wrong thing.** A sceptic who skips the quiz — which is
+exactly what a moderator evaluating a link does — met a heading that promises
 their representative's record and a prompt to go and take the survey instead.
 That reads as the advert the r/houston mod said it was, and the page had the
 answer in hand the whole time.
 
-**This is the strongest version of option 3 above.** The reader's own member is
-the one thing on this site that is genuinely local, cannot be guessed from a
-party label, and does not need a single answer to be worth reading. It is
-currently the hardest thing to reach.
+**BUILT 19 September 2026.** The panel shows where a member broke with their own
+party at zero answers, via `rep.crossings()`. Crossings rather than all 67,
+because most of the 67 are a member voting the way their party voted, which a
+reader can predict without reading. The denominator is the 51 votes where the
+two parties took opposite sides, not the 67. The score stays gated, because a
+score genuinely needs both halves, and `verify_site.mjs` asserts that it does.
 
-Open: show the member's votes with zero answers, keeping the score gated. New
-copy, so a Spanish review, and a decision about how much of 67 votes to show at
-once. Not built — it is a product call, not a cleanup.
+This was option 3 above, and it is the only one of the three that improves the
+guessability problem without touching the item set, so it cost no rule-version
+bump and no third tally reset.
+
+**Still open, and narrow.** The coverage line in that panel still says "covers
+64 of the 67", and a member absent at passage is dropped from that denominator
+the same way question 15 describes. Nothing there reads as false, but the count
+is quietly affected and says nothing about it.
