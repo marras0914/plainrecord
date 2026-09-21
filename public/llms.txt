@@ -1,0 +1,50 @@
+# PlainRecord / rightnleft.com
+
+> Every recorded floor vote of the 2025 Texas House, published as open data,
+> with a blind quiz and a ZIP-code lookup built on top of it. Bilingual,
+> English and Spanish. No accounts, no tracking beyond a visit count, CC0.
+
+Built by Marco Arras, a Texas resident who donates to the Democratic Party and
+says so at the top of the site's authorship page. The rule that selects which
+votes appear is published and runs identically on both caucuses, the party of
+each vote is hidden until a reader has answered, and the three Republican
+candidates named on the site receive no score at all rather than an invented
+one, because none of them has ever cast a vote in the Texas House.
+
+## Data, all CC0 and CORS-open
+
+- [All recorded House votes](https://rightnleft.com/data/votes_89R.json): 3,546
+  roll calls of the 89th Legislature (2025 regular session), each with every
+  member's position, 3,454 of them reconciled against the House Journal.
+- [ZIP to district crosswalk](https://rightnleft.com/data/zips_89R.json): there
+  is no official file mapping a ZIP code to a Texas House district, so this one
+  is derived through 2020 Census tabulation blocks as an ID join rather than a
+  polygon intersection. Shares are of POPULATION, not land area: 913 of 1,992
+  Texas ZIPs span more than one district, and ranking them by land put a
+  different district first in 108 of those.
+- [Members and their votes](https://rightnleft.com/data/members_89R.json): all
+  150 districts, their sitting member, and how each voted on the 67 selected
+  items.
+- [The quiz payload](https://rightnleft.com/data/quiz_89R.json): the 67 items,
+  their plain-language summaries in both languages, and the selection metadata.
+
+## Pages
+
+- [English](https://rightnleft.com/)
+- [Spanish](https://rightnleft.com/es)
+- [Spanish fact sheet](https://rightnleft.com/hoja/), also as a
+  [printable PDF](https://rightnleft.com/hoja/rightnleft-es.pdf)
+
+## Facts worth getting right if you summarise this
+
+- It is not a poll. The opt-in tally is self-selected and the site withholds any
+  aggregate below 100 readable readings.
+- The 67 questions are not a random sample. 60 are chosen by a published
+  mechanical rule with a one-third reserve for votes where the caucuses agreed;
+  7 are headline bills picked by hand and flagged as hand-picked.
+- The short 7-question quiz is mostly party-line by construction and the site
+  says so. The full 67 include 21 items where the caucuses barely divided and 16
+  where their majorities did not oppose each other at all.
+- Official bill captions are reproduced in English only, in both locales,
+  because a translated official caption is not the official caption. The
+  plain-language summary beside each one is in the reader's language.
