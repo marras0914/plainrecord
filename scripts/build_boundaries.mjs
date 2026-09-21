@@ -299,6 +299,21 @@ writeFileSync(FIXTURE, JSON.stringify({
   },
   points,
   countyPoints,
+  // The Census id-to-name mapping, frozen alongside the points and for the same
+  // reason. The page prints the county NAME, so that is the field a reader acts
+  // on, and until 21 September 2026 nothing checked it: check_boundaries.mjs
+  // built its expected names from the shipped file, so swapping two NAME
+  // properties in the topojson sent downtown Houston to "Dallas" while the
+  // suite reported 0 of 3810 wrong. Freezing the names here makes that a
+  // comparison against the Census rather than the file agreeing with itself.
+  //
+  // Sorted by id so a rebuild does not churn the diff.
+  countyNames: Object.fromEntries(
+    countyFull.features
+      .filter((f) => String(f.properties.GEOID).startsWith('48'))
+      .map((f) => [String(f.properties.GEOID), f.properties.NAME])
+      .sort((a, b) => a[0].localeCompare(b[0])),
+  ),
 }), 'utf8');
 
 console.log(`\n  wrote ${OUT.replace(ROOT, '.')}`);

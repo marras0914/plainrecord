@@ -43,7 +43,7 @@ const check = (label, ok, detail = '') => {
 console.log('\n  Texas House district boundaries\n');
 
 const topo = JSON.parse(readFileSync(TOPO, 'utf8'));
-const { points, countyPoints } = JSON.parse(readFileSync(FIXTURE, 'utf8'));
+const { points, countyPoints, countyNames } = JSON.parse(readFileSync(FIXTURE, 'utf8'));
 
 const { districts, counties } = _internals.decode(topo);
 
@@ -134,13 +134,42 @@ check('the county fixture has points to check',
   Array.isArray(countyPoints) && countyPoints.length > 1000,
   `${countyPoints?.length ?? 0} points`);
 
+// THE NAMES COME FROM THE CENSUS FILE, NOT FROM THE FILE UNDER TEST.
+//
+// This check used to build its expected names with
+//   new Map(counties.map((c) => [String(c.id), c.name]))
+// which reads the id-to-name mapping out of the very file it is checking. The
+// header above says a check that regenerates its expectations from the file
+// under test "would pass whatever that file happened to contain", and that is
+// exactly what it did for the one field the reader actually sees.
+//
+// Demonstrated on 21 September 2026: swapping the NAME properties of Harris and
+// Dallas in the shipped topojson made countyAt answer "Dallas" for downtown
+// Houston, and this suite reported 0 of 3810 disagreeing, 0 wrong county. Every
+// other county check passed too, because names stayed non-empty and distinct.
+// A reader in Houston would have been told to use Dallas County's early voting
+// locations.
+//
+// So the expected names now live in the fixture, captured from
+// cb_2024_us_county_500k at build time, and a shipped name that drifts from the
+// Census name fails here rather than reaching a voter.
+check('the fixture carries Census county names to check against',
+  countyNames && Object.keys(countyNames).length === 254,
+  `${countyNames ? Object.keys(countyNames).length : 0} of 254`);
+
+{
+  const drifted = counties.filter((c) => countyNames[String(c.id)] !== c.name);
+  check('every shipped county name matches the Census name for its FIPS id',
+    drifted.length === 0,
+    drifted.slice(0, 4).map((c) => `${c.id} ships "${c.name}", Census says "${countyNames[String(c.id)]}"`).join('; ')
+      || '254 of 254');
+}
+
 {
   let wrong = 0;
   let missing = 0;
   const byCounty = new Map();
-  // The fixture stores the FIPS id; the page answers with the name, so the two
-  // are joined here rather than the fixture storing both and going out of step.
-  const nameOf = new Map(counties.map((c) => [String(c.id), c.name]));
+  const nameOf = new Map(Object.entries(countyNames));
   for (const [lon, lat, id] of countyPoints) {
     const got = countyAt(counties, lon, lat);
     const want = nameOf.get(String(id));
