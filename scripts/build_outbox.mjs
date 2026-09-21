@@ -1,25 +1,28 @@
 /**
- * PlainRecord — build ready-to-send .eml drafts for the broadcast pitch
+ * PlainRecord — the six broadcast pitches, as one-click Gmail drafts
  *
  *   node scripts/build_outbox.mjs
  *
- * Writes one .eml per station into private/outbox/. Double-clicking one opens it
- * in the default mail client with the recipient, the subject and the body
- * already filled, so sending is a click rather than six copy-pastes.
+ * Writes private/outbox/gmail.html. Open it in the browser you are signed into
+ * Gmail with, click a station, and Gmail's compose window opens with the
+ * recipient, the subject and the right local paragraph already filled. Read it,
+ * then press send.
  *
- * WHY .eml AND NOT mailto:
+ * WHY THIS AND NOT .eml
  *
- * mailto: links break on exactly this content: they have a practical length
- * limit well under this body, and accented characters have to be percent-encoded
- * by hand, which is how "¿Cómo votó?" becomes mojibake in somebody's sent
- * folder. An .eml file carries a real MIME header and states its charset.
+ * The first version of this wrote .eml files, which is correct for Outlook or
+ * Thunderbird and useless for Gmail on the web: there is no way to open a local
+ * .eml as a Gmail draft. Gmail's own compose URL is the right mechanism.
  *
- * The body is base64-encoded UTF-8 rather than quoted-printable, because the
- * Spanish here is dense with accents and tildes and quoted-printable turns it
- * into an unreadable diff that is easy to corrupt by editing.
+ * WHY NOT mailto:
  *
- * NOTHING IS SENT. This only writes files. Sending stays a human action, which
- * is the right place for it when the recipients are real newsrooms.
+ * mailto has a short practical length limit and hands the accented characters to
+ * whatever the OS mail handler happens to be, which is how "cómo votó" arrives
+ * as mojibake. An https compose URL with encodeURIComponent is unambiguous
+ * UTF-8 and Gmail decodes it correctly.
+ *
+ * NOTHING IS SENT. This writes one HTML file. The recipients are real newsrooms
+ * and pressing send stays a human act.
  */
 
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -32,26 +35,20 @@ mkdirSync(OUT, { recursive: true });
 
 const SUBJECT = 'Una herramienta gratuita en español: cómo votó su representante estatal';
 
-// Addresses read off each station's own contact page on 20 September 2026 by
+// Read off each station's own contact page on 20 September 2026 by
 // scripts/find_station_contacts.mjs. None is constructed from a pattern.
 const STATIONS = [
-  { order: 1, metro: 'Houston', to: 'univision45@televisaunivision.com',
-    lead: 'En el área de Houston viven 890,598 personas' },
-  { order: 2, metro: 'Dallas', to: 'noticias23dfw@televisaunivision.com',
-    lead: 'En el área de Dallas viven 482,153 personas' },
-  { order: 3, metro: 'Valle del Rio Grande', to: 'ecanavati@entravision.com',
-    lead: 'En el Valle del Río Grande viven 333,440 personas', valley: true },
-  { order: 4, metro: 'El Paso', to: 'rfranco@entravision.com',
-    lead: 'En el área de El Paso viven 250,224 personas' },
-  { order: 5, metro: 'San Antonio', to: 'sanantoniodesk@televisaunivision.com',
-    lead: 'En el área de San Antonio viven 236,313 personas' },
-  { order: 6, metro: 'Austin', to: 'noticias62@televisaunivision.com',
-    lead: 'En el área de Austin viven 161,014 personas' },
+  { order: 1, metro: 'Houston', people: '890,598', to: 'univision45@televisaunivision.com', station: 'Univision 45 KXLN' },
+  { order: 2, metro: 'Dallas', people: '482,153', to: 'noticias23dfw@televisaunivision.com', station: 'Univision 23 KUVN' },
+  { order: 3, metro: 'Valle del Río Grande', people: '333,440', to: 'ecanavati@entravision.com', station: 'Univision 48 KNVO', valley: true },
+  { order: 4, metro: 'El Paso', people: '250,224', to: 'rfranco@entravision.com', station: 'Univision 26 KINT' },
+  { order: 5, metro: 'San Antonio', people: '236,313', to: 'sanantoniodesk@televisaunivision.com', station: 'Univision 41 KWEX' },
+  { order: 6, metro: 'Austin', people: '161,014', to: 'noticias62@televisaunivision.com', station: 'Univision 62 KAKW' },
 ];
 
 const variable = (s) => s.valley
-  ? `${s.lead} que hablan español en casa y que dicen hablar inglés menos que "muy bien", según la Oficina del Censo. En proporción, es una de las concentraciones más altas del estado, y la información sobre lo que hace la legislatura estatal casi nunca existe en su idioma.`
-  : `${s.lead} que hablan español en casa y que dicen hablar inglés menos que "muy bien", según la Oficina del Censo. Para muchas de ellas, la información sobre lo que hace su legislatura estatal simplemente no existe en su idioma.`;
+  ? `En el Valle del Río Grande viven ${s.people} personas que hablan español en casa y que dicen hablar inglés menos que "muy bien", según la Oficina del Censo. En proporción, es una de las concentraciones más altas del estado, y la información sobre lo que hace la legislatura estatal casi nunca existe en su idioma.`
+  : `En el área de ${s.metro} viven ${s.people} personas que hablan español en casa y que dicen hablar inglés menos que "muy bien", según la Oficina del Censo. Para muchas de ellas, la información sobre lo que hace su legislatura estatal simplemente no existe en su idioma.`;
 
 const body = (s) => `Buenos días,
 
@@ -72,32 +69,67 @@ https://rightnleft.com/es
 Gracias por su tiempo,
 
 Marco Arras
-rightnleft.com
+rightnleft.com`;
+
+const composeUrl = (s) => 'https://mail.google.com/mail/?view=cm&fs=1'
+  + `&to=${encodeURIComponent(s.to)}`
+  + `&su=${encodeURIComponent(SUBJECT)}`
+  + `&body=${encodeURIComponent(body(s))}`;
+
+const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const rows = STATIONS.map((s) => {
+  const url = composeUrl(s);
+  return `    <li>
+      <a class="go" href="${esc(url)}" target="_blank" rel="noopener">${s.order}. ${esc(s.metro)}</a>
+      <div class="meta"><b>${esc(s.station)}</b> &middot; ${esc(s.to)} &middot; ${esc(s.people)} personas</div>
+      <details><summary>Read the email first</summary><pre>${esc(body(s))}</pre></details>
+    </li>`;
+}).join('\n');
+
+const html = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Broadcast pitches</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.55 system-ui, sans-serif; max-width: 46rem; margin: 2rem auto; padding: 0 16px; }
+  h1 { font-size: 1.35rem; margin-bottom: .2rem; }
+  .warn { background: #fff4e5; border-left: 4px solid #d97706; padding: .7rem .9rem; margin: 1rem 0; }
+  @media (prefers-color-scheme: dark) { .warn { background: #2a2010; } }
+  ol { list-style: none; padding: 0; }
+  li { border-top: 1px solid #8884; padding: 1rem 0; }
+  a.go { font-size: 1.1rem; font-weight: 600; text-decoration: none; }
+  a.go:hover { text-decoration: underline; }
+  .meta { color: #7a7a7a; font-size: .86rem; margin-top: .2rem; }
+  details { margin-top: .55rem; }
+  summary { cursor: pointer; font-size: .86rem; color: #7a7a7a; }
+  pre { white-space: pre-wrap; font: 13px/1.5 ui-monospace, monospace; background: #8881; padding: .8rem; border-radius: 6px; }
+</style></head><body>
+<h1>Spanish-language TV pitches</h1>
+<p>Click a metro. Gmail opens with the recipient, subject and that market's own
+figure already filled in. Read it, then send.</p>
+<div class="warn">
+  <b>Nothing here has been sent.</b> Six separate emails, not one to all six:
+  they are competing newsrooms, and the local number is the only line that is
+  about them rather than about us.<br><br>
+  Check two things before the first send: the email says you write
+  <b>from McKinney</b>, and the dates line carries the <b>5 October</b>
+  registration deadline, which is wrong from 6 October.<br><br>
+  Log all six in <code>rightnleft-sent-ledger.md</code> the day they go out.
+</div>
+<ol>
+${rows}
+</ol>
+</body></html>
 `;
 
-// RFC 2047 for the header, base64 UTF-8 for the body.
-const encHeader = (s) => `=?UTF-8?B?${Buffer.from(s, 'utf8').toString('base64')}?=`;
-const b64 = (s) => (Buffer.from(s, 'utf8').toString('base64').match(/.{1,76}/g) ?? []).join('\r\n');
+writeFileSync(resolve(OUT, 'gmail.html'), html, 'utf8');
 
+console.log('');
 for (const s of STATIONS) {
-  const eml = [
-    `To: ${s.to}`,
-    `Subject: ${encHeader(SUBJECT)}`,
-    'X-Unsent: 1',
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=UTF-8',
-    'Content-Transfer-Encoding: base64',
-    '',
-    b64(body(s)),
-    '',
-  ].join('\r\n');
-
-  const name = `${String(s.order).padStart(2, '0')}-${s.metro.toLowerCase().replace(/\s+/g, '-')}.eml`;
-  writeFileSync(resolve(OUT, name), eml, 'utf8');
-  console.log(`  ${name.padEnd(28)} -> ${s.to}`);
+  const len = composeUrl(s).length;
+  console.log(`  ${String(s.order)}. ${s.metro.padEnd(22)} ${s.to.padEnd(38)} url ${len} chars${len > 8000 ? '  ** TOO LONG **' : ''}`);
 }
-
-console.log(`\n  ${STATIONS.length} drafts in private/outbox/`);
-console.log('  X-Unsent: 1 makes Outlook open them as editable drafts rather than received mail.');
-console.log('  NOTHING HAS BEEN SENT. Open each one, read it, press send.');
-console.log('  Then log all six in rightnleft-outreach/rightnleft-sent-ledger.md.\n');
+console.log(`\n  wrote ${resolve(OUT, 'gmail.html')}`);
+console.log('  Open it in the browser you are signed into Gmail with.');
+console.log('  NOTHING HAS BEEN SENT.\n');
