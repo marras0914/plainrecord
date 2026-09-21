@@ -2064,6 +2064,16 @@
     "note": "Links votetexas.gov, which answers 200. NOT the SOS lookup at teamrv-mvp.sos.texas.gov, which answers 403 to anything that can verify it; sending readers to a page that cannot be confirmed is not something this site does. \"Verifique su registro\" rather than \"si esta registrado\", which would be a masculine participle agreeing with the reader.",
     "status": "ok"
   },
+  "vote.countyRule": {
+    "en": "You are in {county} County. During early voting you can vote at any early voting location in {county} County, not only the one nearest home.",
+    "es": "Está en el condado de {county}. Durante la votación anticipada puede votar en cualquier centro de votación anticipada del condado de {county}, no solo en el más cercano a su casa.",
+    "where": "Voting-dates block, between the dates and the sourcing line. Only once the reader has asked to be located.",
+    "vars": [
+      "county"
+    ],
+    "note": "A statewide RULE, not a dataset: votetexas.gov states that a registered voter may vote at any early voting location in their county of residence. That is why the county name is the whole answer for the early voting window and why this site ships no polling places. Election day is different and depends on the Countywide Polling Place Program, whose approvals are published per election.",
+    "status": "ok"
+  },
   "vote.dayNote": {
     "en": "Election day is not like early voting. In early voting you can vote at any early voting place in your county. On election day, some counties let you vote anywhere in the county and some send you to one place near your home. Counties change this between elections, so check {link} before you go.",
     "es": "El día de la elección no funciona como la votación anticipada. En la votación anticipada usted puede votar en cualquier centro de votación anticipada de su condado. El día de la elección, algunos condados le permiten votar en cualquier lugar del condado y otros le asignan un solo lugar cerca de su casa. Los condados cambian esto de una elección a otra, así que consulte {link} antes de ir.",

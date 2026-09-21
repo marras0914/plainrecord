@@ -1,5 +1,6 @@
 /**
- * PlainRecord — finding a reader's Texas House district from a coordinate.
+ * PlainRecord — finding a reader's Texas House district and county from a
+ * coordinate.
  *
  * NOTHING IS SENT ANYWHERE. The browser's geolocation API hands the page a
  * latitude and longitude, the boundaries are a static file the page downloads,
@@ -17,15 +18,15 @@
  * share of readers a representative who is not theirs, and the reader would
  * have no way to tell. Asking permission and being right is the better trade.
  *
- * See scripts/build_districts.mjs for where the boundaries come from and why
- * they are not simplified.
+ * See scripts/build_boundaries.mjs for where the boundaries come from, why they
+ * are not simplified, and why both layers ride in one file.
  */
 
 /** Lower-48 sanity, wide enough for any Texas coordinate and nothing absurd. */
 const LON_RANGE = [-110, -88] as const;
 const LAT_RANGE = [24, 38] as const;
 
-export const DISTRICTS_URL = '/data/districts_tx_house.topo.json';
+export const BOUNDARIES_URL = '/data/boundaries_tx.topo.json';
 
 /** Census vintage of the boundaries, stated to the reader alongside the answer
  *  so "which map is this" is on the page rather than in a build script. */
@@ -40,16 +41,27 @@ interface Topology {
     geometries: Array<{
       type: 'Polygon' | 'MultiPolygon';
       arcs: number[][] | number[][][];
-      properties: { SLDLST: string };
+      properties: Record<string, string>;
     }>;
   }>;
 }
 
-/** A district, as rings of absolute [lon, lat], plus a bounding box. */
-export interface District {
-  id: number;
+/** An area, as rings of absolute [lon, lat], plus a bounding box. */
+export interface Area<Id> {
+  id: Id;
+  /** Only counties carry one; districts are known by number. */
+  name?: string;
   polygons: number[][][][];
   bbox: [number, number, number, number];
+}
+
+export type District = Area<number>;
+export type County = Area<string>;
+
+/** Both layers, decoded from the one file. */
+export interface Boundaries {
+  districts: District[];
+  counties: County[];
 }
 
 /**
@@ -62,7 +74,7 @@ export interface District {
  * arcs in a ring share an endpoint, so each arc after the first drops its first
  * point, otherwise every join is a duplicated vertex.
  */
-function decode(topo: Topology): District[] {
+function decode(topo: Topology): Boundaries {
   const [sx, sy] = topo.transform.scale;
   const [tx, ty] = topo.transform.translate;
 
@@ -88,26 +100,47 @@ function decode(topo: Topology): District[] {
     return out;
   };
 
-  const layer = topo.objects[Object.keys(topo.objects)[0]];
-  return layer.geometries.map((g) => {
-    const polys = g.type === 'Polygon'
-      ? [(g.arcs as number[][]).map(ringOf)]
-      : (g.arcs as number[][][]).map((poly) => poly.map(ringOf));
+  // Named, not "the first object". Both layers live in one topology so they can
+  // share arcs, and reading whichever happens to come first would silently
+  // answer district questions with counties the day mapshaper changes its
+  // ordering.
+  const layerOf = <Id>(
+    name: string,
+    idOf: (p: Record<string, string>) => Id,
+    nameOf?: (p: Record<string, string>) => string,
+  ): Array<Area<Id>> => {
+    const layer = topo.objects[name];
+    if (!layer) throw new Error(`boundaries: no "${name}" layer in the file`);
+    return layer.geometries.map((g) => {
+      const polys = g.type === 'Polygon'
+        ? [(g.arcs as number[][]).map(ringOf)]
+        : (g.arcs as number[][][]).map((poly) => poly.map(ringOf));
 
-    let a = Infinity;
-    let b = Infinity;
-    let c = -Infinity;
-    let d = -Infinity;
-    for (const poly of polys) {
-      for (const [x, y] of poly[0]) {
-        if (x < a) a = x;
-        if (x > c) c = x;
-        if (y < b) b = y;
-        if (y > d) d = y;
+      let a = Infinity;
+      let b = Infinity;
+      let c = -Infinity;
+      let d = -Infinity;
+      for (const poly of polys) {
+        for (const [x, y] of poly[0]) {
+          if (x < a) a = x;
+          if (x > c) c = x;
+          if (y < b) b = y;
+          if (y > d) d = y;
+        }
       }
-    }
-    return { id: Number(g.properties.SLDLST), polygons: polys, bbox: [a, b, c, d] };
-  });
+      return {
+        id: idOf(g.properties),
+        ...(nameOf ? { name: nameOf(g.properties) } : {}),
+        polygons: polys,
+        bbox: [a, b, c, d] as [number, number, number, number],
+      };
+    });
+  };
+
+  return {
+    districts: layerOf('districts', (p) => Number(p.SLDLST)),
+    counties: layerOf('counties', (p) => String(p.GEOID), (p) => String(p.NAME)),
+  };
 }
 
 /** Ray casting. A point on an odd number of crossings is inside. */
@@ -130,6 +163,18 @@ function inPolygon(lon: number, lat: number, rings: number[][][]): boolean {
   return true;
 }
 
+/** The first area whose box contains the point and whose rings do too. */
+function areaAt<Id>(areas: Array<Area<Id>>, lon: number, lat: number): Area<Id> | null {
+  for (const a of areas) {
+    const [x0, y0, x1, y1] = a.bbox;
+    if (lon < x0 || lon > x1 || lat < y0 || lat > y1) continue;
+    for (const poly of a.polygons) {
+      if (inPolygon(lon, lat, poly)) return a;
+    }
+  }
+  return null;
+}
+
 /**
  * Which district contains this point, or null if none does.
  *
@@ -138,14 +183,19 @@ function inPolygon(lon: number, lat: number, rings: number[][][]): boolean {
  * so rather than reaching for the nearest one.
  */
 export function districtAt(districts: District[], lon: number, lat: number): number | null {
-  for (const d of districts) {
-    const [a, b, c, e] = d.bbox;
-    if (lon < a || lon > c || lat < b || lat > e) continue;
-    for (const poly of d.polygons) {
-      if (inPolygon(lon, lat, poly)) return d.id;
-    }
-  }
-  return null;
+  return areaAt(districts, lon, lat)?.id ?? null;
+}
+
+/**
+ * The county containing a point, by name, or null.
+ *
+ * The NAME rather than the FIPS code, because the name is what the page says
+ * out loud and what a reader would type into the state's own finder. null is a
+ * real answer: somebody in Oklahoma is in no Texas county, and the caller must
+ * say so rather than reaching for the nearest.
+ */
+export function countyAt(counties: County[], lon: number, lat: number): string | null {
+  return areaAt(counties, lon, lat)?.name ?? null;
 }
 
 export function plausibleCoord(lon: number, lat: number): boolean {
@@ -154,7 +204,7 @@ export function plausibleCoord(lon: number, lat: number): boolean {
     && lat >= LAT_RANGE[0] && lat <= LAT_RANGE[1];
 }
 
-let cache: Promise<District[]> | null = null;
+let cache: Promise<Boundaries> | null = null;
 
 /**
  * Fetched on demand and only once.
@@ -164,11 +214,11 @@ let cache: Promise<District[]> | null = null;
  * module through a dynamic import for the same reason, so the decoder is a
  * separate chunk too and nothing here is in the main bundle.
  */
-export function loadDistricts(fetchImpl: typeof fetch = fetch): Promise<District[]> {
+export function loadBoundaries(fetchImpl: typeof fetch = fetch): Promise<Boundaries> {
   if (!cache) {
-    cache = fetchImpl(DISTRICTS_URL)
+    cache = fetchImpl(BOUNDARIES_URL)
       .then((r) => {
-        if (!r.ok) throw new Error(`districts: HTTP ${r.status}`);
+        if (!r.ok) throw new Error(`boundaries: HTTP ${r.status}`);
         return r.json();
       })
       .then((t: Topology) => decode(t))
