@@ -605,6 +605,12 @@ npx tsx scripts/export_quiz_data.ts 89R <bills.csv> <people.csv>
 Journal's member lists, the surname collision that overwrote a real member's
 record. Read it before touching an ingest.
 
+`ZIP_TO_DISTRICT.md` is the companion for the geography: why the ZIP to district
+crosswalk is an ID join through census blocks rather than a polygon
+intersection, why the block assignment file is pinned by hash, and the ordering
+mistake that put a district holding 7% of a ZIP's people at the top of its list
+because it covered 70% of its land.
+
 
 ### The district lookup
 
