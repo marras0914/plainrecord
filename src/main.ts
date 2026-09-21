@@ -2067,7 +2067,7 @@ function renderRep(): void {
           // the 122 KB of boundaries are a separate chunk that only a reader who
           // asks to be located ever downloads.
           void import('./boundaries.js')
-            .then(({ loadBoundaries, districtAt, countyAt, plausibleCoord, DISTRICTS_VINTAGE }) => {
+            .then(({ loadBoundaries, districtAt, countyIfUnambiguous, plausibleCoord, DISTRICTS_VINTAGE }) => {
               if (!plausibleCoord(lon, lat)) { setMsg(t('rep.locateOutside')); return; }
               return loadBoundaries().then((b) => {
                 // The county comes out of the same file and the same point, and
@@ -2076,7 +2076,11 @@ function renderRep(): void {
                 // their county, so the county name is the whole answer for that
                 // window. Kept even when the district lookup fails, because the
                 // two are independent facts about one coordinate.
-                locatedCounty = countyAt(b.counties, lon, lat);
+                // Unambiguous rather than nearest: near a county line the
+                // quantised boundaries cannot be trusted, and this sentence
+                // tells somebody where they may vote. Silence beats a
+                // confident wrong county. See countyIfUnambiguous.
+                locatedCounty = countyIfUnambiguous(b.counties, lon, lat);
                 renderElection();
 
                 const found = districtAt(b.districts, lon, lat);

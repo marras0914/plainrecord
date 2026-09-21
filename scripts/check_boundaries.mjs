@@ -20,7 +20,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { districtAt, countyAt, _internals } from '../src/boundaries.ts';
+import { districtAt, countyAt, countyIfUnambiguous, _internals } from '../src/boundaries.ts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -190,6 +190,57 @@ check('the fixture carries Census county names to check against',
     concentrated.length === 0,
     concentrated.map(([c, n]) => `${c}:${n}`).slice(0, 4).join(', ')
       || `worst off by ${Math.max(0, ...byCounty.values())} of ${per}`);
+}
+
+// --- the borderline guard ---------------------------------------------------
+//
+// countyIfUnambiguous refuses to answer within about 78m of a county line,
+// because that is where the quantised geometry disagrees with the Census source
+// (1.30% wrong at 56m, measured) and the sentence it feeds tells somebody which
+// county's early voting locations they may use.
+//
+// BOTH DIRECTIONS ARE ASSERTED ON PURPOSE. A guard that never fires is the same
+// failure as a check that cannot fail, and a guard that always fires silently
+// removes the feature. So: a downtown point must still get an answer, and a
+// point sitting on a real county-line vertex must not.
+{
+  const interior = [
+    ['Houston City Hall', -95.3698, 29.7604, 'Harris'],
+    ['Dallas City Hall', -96.7970, 32.7767, 'Dallas'],
+    ['Texas Capitol', -97.7404, 30.2747, 'Travis'],
+    ['The Alamo', -98.4861, 29.4260, 'Bexar'],
+    ['El Paso downtown', -106.4850, 31.7619, 'El Paso'],
+  ];
+  const missed = interior.filter(([, lon, lat, want]) =>
+    countyIfUnambiguous(counties, lon, lat) !== want);
+  check('the guard still answers well inside a county',
+    missed.length === 0,
+    missed.map(([n]) => n).join(', ') || `${interior.length} landmarks answered`);
+
+  // Vertices of the shipped county rings ARE the line, so a point on one is as
+  // borderline as it gets. If the guard lets these through it is not working.
+  const onTheLine = [];
+  for (const c of counties.slice(0, 40)) {
+    const ring = c.rings?.[0] ?? c.polygons?.[0]?.[0] ?? null;
+    if (ring && ring.length) onTheLine.push(ring[0]);
+  }
+  const answered = onTheLine.filter(([lon, lat]) =>
+    countyIfUnambiguous(counties, lon, lat) !== null);
+  check('the guard declines on points sitting on a county line',
+    onTheLine.length > 10 && answered.length === 0,
+    `${onTheLine.length} line points, ${answered.length} answered`);
+
+  // AND IT MUST DECLINE FOR THE RIGHT REASON. A vertex can come back null from
+  // countyAt itself, since a point exactly on a ring can fall either side of a
+  // ray cast, and then the guard's own logic never ran. Counting only the cases
+  // where countyAt WAS confident and the guard overrode it keeps this from
+  // passing on an accident. 37 of 40 when written.
+  const overridden = onTheLine.filter(([lon, lat]) =>
+    countyAt(counties, lon, lat) !== null
+    && countyIfUnambiguous(counties, lon, lat) === null);
+  check('the guard, not a null from the ray cast, is what silences them',
+    overridden.length > onTheLine.length / 2,
+    `${overridden.length} of ${onTheLine.length} were confident answers the guard overrode`);
 }
 
 check('a point outside Texas is in no county',

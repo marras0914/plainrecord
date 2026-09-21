@@ -198,6 +198,56 @@ export function countyAt(counties: County[], lon: number, lat: number): string |
   return areaAt(counties, lon, lat)?.name ?? null;
 }
 
+/**
+ * How far around a coordinate the county answer has to hold, in degrees.
+ *
+ * 0.0007 is about 78 metres. Measured, not picked: probing points nudged off
+ * real county-line vertices, the shipped geometry disagrees with the
+ * unsimplified Census source 1.30% of the time at 56m from a line, 0.49% at
+ * 223m and 0.11% at 1.1km. Every radius from 78m upward removed 100% of those
+ * disagreements, so the smallest one is the cheapest: it silences 0.83% of
+ * Texas rather than the 2.17% a 245m radius would.
+ */
+const COUNTY_AGREE_RADIUS = 0.0007;
+
+/**
+ * The county containing a point, but ONLY when the answer is not borderline.
+ *
+ * WHY THIS EXISTS. The shipped boundaries are quantised so the file stays at
+ * 536 KB, and quantisation moves county lines by tens of metres. Deep inside a
+ * county that is invisible: 0 of 4,000 uniformly sampled Texas points disagree
+ * with the Census source, and 12 of 12 city-hall landmarks resolve correctly.
+ * Within about 50 metres of a line it is wrong 1.3% of the time.
+ *
+ * That band is small and the consequence in it is not. The sentence this feeds
+ * tells somebody which county's early voting locations they may use, they
+ * cannot correct it the way they can retype a district number, and being
+ * confidently wrong about where a person may vote is the one failure this
+ * whole block exists to avoid.
+ *
+ * So rather than qualifying the sentence, this declines to produce one. The
+ * coordinate and four points a radius away must all land in the same county;
+ * if they disagree, the reader is near a line, and near a line this data cannot
+ * answer. They still get the dates, the election-day note and the state's own
+ * link, which is what they had before the county feature existed.
+ *
+ * Five point-in-polygon tests instead of one, on boundaries already decoded and
+ * in memory.
+ */
+export function countyIfUnambiguous(
+  counties: County[],
+  lon: number,
+  lat: number,
+): string | null {
+  const here = countyAt(counties, lon, lat);
+  if (here === null) return null;
+  const r = COUNTY_AGREE_RADIUS;
+  for (const [dx, dy] of [[r, 0], [-r, 0], [0, r], [0, -r]] as const) {
+    if (countyAt(counties, lon + dx, lat + dy) !== here) return null;
+  }
+  return here;
+}
+
 export function plausibleCoord(lon: number, lat: number): boolean {
   return Number.isFinite(lon) && Number.isFinite(lat)
     && lon >= LON_RANGE[0] && lon <= LON_RANGE[1]
