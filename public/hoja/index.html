@@ -95,15 +95,18 @@ body{margin:0 auto;padding:32px 24px 40px;max-width:47rem;background:var(--page)
 h1{font-size:31px;line-height:1.1;margin:0 0 9px;letter-spacing:-.02em;font-weight:600}
 .lede{font-size:15.5px;color:var(--ink-2);margin:0 0 20px;max-width:41rem}
 .lede b{color:var(--ink);font-weight:600}
-/* One card in the outcomes grammar, carrying a real figure. It is the hook:
-   it says why looking yourself up is worth doing, in the site's own voice. */
-.card{background:var(--surface);border:1px solid var(--hair);padding:15px 17px;margin:0 0 20px}
-.card-cat{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;color:var(--ink-2)}
-.card-val{font-size:27px;font-weight:600;letter-spacing:-.015em;margin-top:3px;line-height:1.12}
-.card-cmp{font-size:13.5px;color:var(--ink-2);margin-top:3px}
+/* The outcomes, in the site's own card grammar: stacked rows separated by
+   hairlines rather than boxed, exactly as they appear on the page. */
+.outs{background:var(--surface);border:1px solid var(--hair);margin:0 0 14px}
+.out{padding:12px 16px;border-top:1px solid var(--hair)}
+.out:first-child{border-top:0}
+.out-cat{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--ink-2)}
+.out-val{font-size:21px;font-weight:600;letter-spacing:-.015em;margin-top:2px;line-height:1.15}
+.out-cmp{font-size:13px;color:var(--ink-2);margin-top:2px}
 .badge{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;
-       border:1px solid currentColor;padding:2px 7px;margin-top:9px;color:var(--rust)}
-.card-cav{font-size:12px;color:var(--muted);margin-top:7px;font-style:italic}
+       border:1px solid currentColor;padding:2px 7px;margin-top:7px;color:var(--rust)}
+.out-foot{font-size:11.5px;color:var(--muted);margin:0 0 6px;font-style:italic}
+.causal{font-size:11.5px;color:var(--muted);margin:0 0 18px;line-height:1.45}
 .cols{display:flex;gap:32px;flex-wrap:wrap}
 .col{flex:1;min-width:15rem}
 h2{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;color:var(--ink-2);
@@ -141,13 +144,29 @@ li{margin-bottom:5px}
 <h1>¿Cómo votó su representante en la Cámara de Texas?</h1>
 <p class="lede">En 2025, la Cámara de Representantes de Texas votó cientos de proyectos de ley. Este sitio toma <b>67 de esos votos reales</b> y le pregunta qué habría votado usted, sin decirle antes qué partido tomó qué lado.</p>
 
-<div class="card">
-  <div class="card-cat">Códigos postales de Texas · Distritos de la Cámara</div>
-  <div class="card-val">913 de 1,992</div>
-  <div class="card-cmp">están repartidos entre más de un distrito de la Cámara de Texas</div>
-  <div class="badge">su calle decide, no su código postal</div>
-  <div class="card-cav">Por eso el sitio le muestra todos los distritos que toca su código postal y le deja elegir, en vez de adivinar uno por usted. No hace falta responder ni una pregunta para verlo.</div>
+<h2>Cómo se ve Texas hoy</h2>
+<div class="outs">
+  <div class="out">
+    <div class="out-cat">Educación &middot; Financiamiento escolar por estudiante</div>
+    <div class="out-val">$13,189 por estudiante</div>
+    <div class="out-cmp">$5,664 por debajo del promedio nacional de $18,853</div>
+    <div class="badge">47.º de 50 estados</div>
+  </div>
+  <div class="out">
+    <div class="out-cat">Familias y niñez &middot; Niños sin seguro médico</div>
+    <div class="out-val">13.6% de los niños, cerca de 1.1 millones</div>
+    <div class="out-cmp">más del doble de la tasa nacional de 6.0%; casi una cuarta parte de todos los niños sin seguro de Estados Unidos</div>
+    <div class="badge">la más alta del país</div>
+  </div>
+  <div class="out">
+    <div class="out-cat">Energía y medio ambiente &middot; Lo que pagan los hogares por la electricidad</div>
+    <div class="out-val">16.11¢ por kWh, un alza de cerca de 40% desde 2020</div>
+    <div class="out-cmp">desde 11.50¢ en 2020; las tarifas entregadas van de 14 a 19¢ en 2026, y algunas facturas mensuales han llegado a $600–$800</div>
+    
+  </div>
 </div>
+<p class="out-foot">Cada cifra lleva su fuente y sus salvedades en el sitio.</p>
+<p class="causal">Estas cifras son la situación de Texas, según las fuentes citadas. No son prueba de que un voto, un proyecto de ley o un funcionario en particular las haya causado: las clasificaciones se mueven también por el crecimiento de la población, el valor de las propiedades locales, las reglas federales y la economía, no solo por la ley estatal. Lo que está en el registro es el resultado, el voto y quién ocupaba el cargo. La línea entre ellos la traza usted.</p>
 
 <div class="cols">
   <div class="col">

@@ -57,6 +57,37 @@ if (faces.length < 2) {
   process.exit(1);
 }
 
+// The figures are READ FROM THE SHIPPED PAYLOAD, not retyped here.
+//
+// The site already publishes these with their sources, ranks and caveats, and
+// the Spanish is already approved in the sidecar, so quoting them by key means
+// the sheet cannot drift from the site and needs no new translation review.
+//
+// Three chosen, and the choice is the editorial act worth naming: schools,
+// children's health cover and the electricity bill. They are what a family
+// actually feels, they are not coded to either party, and they leave out the
+// two most inflammatory rows in the set (the abortion and border-spending
+// figures) because this is a sheet handed across a table in a library.
+const payload = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+const sidecar = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.json'), 'utf8'));
+const PICK = [
+  'Per-student school funding',
+  'Children without health insurance',
+  'What households pay for electricity',
+];
+const outcomesFor = (lang) => PICK.map((key) => {
+  const en = payload.outcomes.find((o) => o.label === key);
+  if (!en) throw new Error(`outcome not in the payload: ${key}`);
+  if (lang === 'en') return { cat: en.category, label: en.label, value: en.value, cmp: en.comparison, rank: en.rank };
+  const es = sidecar.outcomes?.[key];
+  if (!es) throw new Error(`outcome not translated in the sidecar: ${key}`);
+  return {
+    cat: sidecar.categories?.[en.category] ?? en.category,
+    label: es.label, value: es.value, cmp: es.comparison, rank: es.rank,
+  };
+});
+const causalFor = (lang) => (lang === 'es' ? sidecar.causalNote : payload.causalNote);
+
 const LOCALES = [
   {
     lang: 'es', dir: 'hoja', pdf: 'rightnleft-es.pdf', target: `${SITE}/es`,
@@ -66,11 +97,8 @@ const LOCALES = [
     meta: 'Hoja informativa: 67 votos reales de la Cámara de Representantes de Texas de 2025, en español. Escriba su código postal y vea cómo votó su propio representante. Sin registro, sin anuncios, gratis.',
     lede: 'En 2025, la Cámara de Representantes de Texas votó cientos de proyectos de ley. Este sitio toma <b>67 de esos votos reales</b> y le pregunta qué habría votado usted, sin decirle antes qué partido tomó qué lado.',
     kicker: 'Cámara de Representantes de Texas · Sesión de 2025',
-    cardCat: 'Códigos postales de Texas · Distritos de la Cámara',
-    cardVal: '913 de 1,992',
-    cardCmp: 'están repartidos entre más de un distrito de la Cámara de Texas',
-    cardBadge: 'su calle decide, no su código postal',
-    cardCav: 'Por eso el sitio le muestra todos los distritos que toca su código postal y le deja elegir, en vez de adivinar uno por usted. No hace falta responder ni una pregunta para verlo.',
+    h2out: 'Cómo se ve Texas hoy',
+    outFoot: 'Cada cifra lleva su fuente y sus salvedades en el sitio.',
     h2how: 'Cómo funciona',
     steps: [
       'Lea en español, y en palabras sencillas, lo que hace un proyecto de ley.',
@@ -103,11 +131,8 @@ const LOCALES = [
     meta: 'Fact sheet: 67 real votes from the 2025 Texas House. Type your ZIP code and see how your own representative voted. No sign-up, no ads, free.',
     lede: 'In 2025 the Texas House voted on hundreds of bills. This site takes <b>67 of those real votes</b> and asks how you would have voted, without telling you first which party took which side.',
     kicker: 'Texas House of Representatives · 2025 session',
-    cardCat: 'Texas ZIP codes · Texas House districts',
-    cardVal: '913 of 1,992',
-    cardCmp: 'are split across more than one Texas House district',
-    cardBadge: 'your street decides, not your ZIP',
-    cardCav: 'So the site shows every district your ZIP touches and lets you pick, instead of guessing one for you. You do not have to answer a single question to see it.',
+    h2out: 'What Texas looks like now',
+    outFoot: 'Every figure carries its source and its caveats on the site.',
     h2how: 'How it works',
     steps: [
       'Read what a bill does, in plain language.',
@@ -181,15 +206,18 @@ body{margin:0 auto;padding:32px 24px 40px;max-width:47rem;background:var(--page)
 h1{font-size:31px;line-height:1.1;margin:0 0 9px;letter-spacing:-.02em;font-weight:600}
 .lede{font-size:15.5px;color:var(--ink-2);margin:0 0 20px;max-width:41rem}
 .lede b{color:var(--ink);font-weight:600}
-/* One card in the outcomes grammar, carrying a real figure. It is the hook:
-   it says why looking yourself up is worth doing, in the site's own voice. */
-.card{background:var(--surface);border:1px solid var(--hair);padding:15px 17px;margin:0 0 20px}
-.card-cat{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;color:var(--ink-2)}
-.card-val{font-size:27px;font-weight:600;letter-spacing:-.015em;margin-top:3px;line-height:1.12}
-.card-cmp{font-size:13.5px;color:var(--ink-2);margin-top:3px}
+/* The outcomes, in the site's own card grammar: stacked rows separated by
+   hairlines rather than boxed, exactly as they appear on the page. */
+.outs{background:var(--surface);border:1px solid var(--hair);margin:0 0 14px}
+.out{padding:12px 16px;border-top:1px solid var(--hair)}
+.out:first-child{border-top:0}
+.out-cat{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--ink-2)}
+.out-val{font-size:21px;font-weight:600;letter-spacing:-.015em;margin-top:2px;line-height:1.15}
+.out-cmp{font-size:13px;color:var(--ink-2);margin-top:2px}
 .badge{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;
-       border:1px solid currentColor;padding:2px 7px;margin-top:9px;color:var(--rust)}
-.card-cav{font-size:12px;color:var(--muted);margin-top:7px;font-style:italic}
+       border:1px solid currentColor;padding:2px 7px;margin-top:7px;color:var(--rust)}
+.out-foot{font-size:11.5px;color:var(--muted);margin:0 0 6px;font-style:italic}
+.causal{font-size:11.5px;color:var(--muted);margin:0 0 18px;line-height:1.45}
 .cols{display:flex;gap:32px;flex-wrap:wrap}
 .col{flex:1;min-width:15rem}
 h2{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12.5px;color:var(--ink-2);
@@ -247,13 +275,17 @@ const pageFor = (L, qrSvg) => `<!doctype html>
 <h1>${esc(L.title)}</h1>
 <p class="lede">${L.lede}</p>
 
-<div class="card">
-  <div class="card-cat">${esc(L.cardCat)}</div>
-  <div class="card-val">${esc(L.cardVal)}</div>
-  <div class="card-cmp">${esc(L.cardCmp)}</div>
-  <div class="badge">${esc(L.cardBadge)}</div>
-  <div class="card-cav">${esc(L.cardCav)}</div>
+<h2>${esc(L.h2out)}</h2>
+<div class="outs">
+${outcomesFor(L.lang).map((o) => `  <div class="out">
+    <div class="out-cat">${esc(o.cat)} &middot; ${esc(o.label)}</div>
+    <div class="out-val">${esc(o.value)}</div>
+    <div class="out-cmp">${esc(o.cmp)}</div>
+    ${o.rank ? `<div class="badge">${esc(o.rank)}</div>` : ''}
+  </div>`).join('\n')}
 </div>
+<p class="out-foot">${esc(L.outFoot)}</p>
+<p class="causal">${esc(causalFor(L.lang))}</p>
 
 <div class="cols">
   <div class="col">
