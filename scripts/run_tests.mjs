@@ -31,6 +31,7 @@ const SUITES = [
   'api/tally.smoke.ts',
   'scripts/tally_report.smoke.ts',
   'src/share.smoke.ts',
+  'src/funnel.smoke.ts',
   'src/compare.smoke.ts',
   'src/election.smoke.ts',
   'scripts/guards.smoke.ts',

@@ -36,7 +36,7 @@ import {
 import { PROFILE_BANDS } from '../valence';
 import { inject, pageview } from '@vercel/analytics';
 import { renderVerdict } from './verdict';
-import { t, word } from './i18n';
+import { t, word, LOCALE, ES_PREFIX } from './i18n';
 import * as pes from './payload-i18n';
 import * as rep from './members';
 import { ELECTION, readable, readableRange, stillCurrent } from './election';
@@ -183,7 +183,21 @@ let challenge: Shared | null = null;
  * 404s on this plan.
  */
 const counted = new Set<string>();
-function countStep(path: string): void {
+function countStep(step: string): void {
+  // THE LOCALE PREFIX IS THE WHOLE POINT OF THIS LINE.
+  //
+  // Until 20 September these were bare literals, so a reader on /es emitted
+  // exactly the path an English reader emitted and the Spanish funnel was
+  // invisible by construction. The page breakdown showed /es arriving and then
+  // nothing, which reads as "nobody starts the quiz in Spanish" and was
+  // actually "every Spanish step was filed under English". With Spanish
+  // outreach going out this week, that is the one number that has to be
+  // readable.
+  //
+  // It discloses nothing new: /es is already the page these readers are on, so
+  // the arrival beacon carries the locale either way.
+  const path = LOCALE === 'es' ? `${ES_PREFIX}${step}` : step;
+
   // Once per page load. render() runs on every keystroke in the ZIP box, and a
   // funnel that counted re-renders would report drop-off as growth.
   if (counted.has(path)) return;
