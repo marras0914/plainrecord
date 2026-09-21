@@ -446,6 +446,16 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     .concat(`      <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/"/>`)
     .join('\n');
 
+  // The Spanish fact sheet is a standalone document rather than a locale of the
+  // app, so it carries no hreflang alternates: there is no English twin of it,
+  // and claiming one would point crawlers at a page that does not exist. It is
+  // listed because an unlisted page is an unfindable page, and being findable is
+  // the entire reason it is HTML and not only a PDF.
+  // This file uses fs/promises throughout, so presence is tested with access()
+  // rather than by importing the sync twin alongside it.
+  const hojaShipped = await access(resolve(DIST, 'hoja/index.html')).then(() => true, () => false);
+  const docs = hojaShipped ? [{ loc: `${SITE}/hoja/`, priority: '0.8' }] : [];
+
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n' +
@@ -457,10 +467,17 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
       '    <changefreq>weekly</changefreq>\n' +
       `    <priority>${u.locale === 'en' ? '1.0' : '0.9'}</priority>\n` +
       '  </url>').join('\n') + '\n' +
+    docs.map((d) =>
+      '  <url>\n' +
+      `    <loc>${d.loc}</loc>\n` +
+      '    <changefreq>monthly</changefreq>\n' +
+      `    <priority>${d.priority}</priority>\n` +
+      '  </url>\n').join('') +
     '</urlset>\n';
 
   await writeFile(resolve(DIST, 'sitemap.xml'), xml, 'utf8');
-  say(true, 'wrote dist/sitemap.xml', `${urls.length} url(s), hreflang on each`);
+  say(true, 'wrote dist/sitemap.xml',
+    `${urls.length + docs.length} url(s), hreflang on the ${urls.length} locale page(s)`);
 }
 
 // The point of the whole two-build arrangement: the pages must NOT share a
