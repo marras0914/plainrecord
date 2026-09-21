@@ -451,10 +451,20 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // and claiming one would point crawlers at a page that does not exist. It is
   // listed because an unlisted page is an unfindable page, and being findable is
   // the entire reason it is HTML and not only a PDF.
-  // This file uses fs/promises throughout, so presence is tested with access()
-  // rather than by importing the sync twin alongside it.
-  const hojaShipped = await access(resolve(DIST, 'hoja/index.html')).then(() => true, () => false);
-  const docs = hojaShipped ? [{ loc: `${SITE}/hoja/`, priority: '0.8' }] : [];
+  // The fact sheets, listed WITHOUT a trailing slash. Vercel serves /hoja and
+  // 308-redirects /hoja/ to it, so listing the slashed form points crawlers at a
+  // redirect — and it was worse than untidy: the page used a relative image path,
+  // which on the unslashed URL resolved to the site root and 404'd, so the QR was
+  // a broken image in production. The QR is inline SVG now and every URL here is
+  // absolute, but the sitemap should still name what is actually served.
+  //
+  // No hreflang alternates between them: they are documents rather than locales
+  // of the app, and each already declares its own alternates in its head.
+  const docs = [];
+  for (const [dir, priority] of [['hoja', '0.8'], ['fact-sheet', '0.8']]) {
+    const shipped = await access(resolve(DIST, `${dir}/index.html`)).then(() => true, () => false);
+    if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority });
+  }
 
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
