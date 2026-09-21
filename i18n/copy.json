@@ -441,12 +441,12 @@
   },
   "q.readBill": {
     "en": "Read {bill} in full at the Texas Legislature",
-    "es": "Lea el texto completo de {bill} en la Legislatura de Texas",
+    "es": "Lea el texto completo de {bill} en la Legislatura de Texas (en inglés)",
     "where": "Inside the official block, under the caption, once the reader has opened it.",
     "vars": [
       "bill"
     ],
-    "note": "Asked for on r/FortWorth: \"producing a one sentence summary of bills that properly explain what the bill does is extremely difficult... I'd be nice to have a link to the full text of the bills or extended summaries\". He is right, and the site had NO outbound link to any bill, only the caption behind a toggle. This links capitol.texas.gov's bill page, which carries the full text, every version, the official analyses and the history, from the authority rather than from us. Deliberately inside the disclosure toggle rather than on the card: the same reader said most people will not read them, so it is there for the one who wants it and out of the way of everyone else. scripts/check_bill_links.mjs verifies all 67 by CONTENT, because a bill that does not exist answers 200 with a page saying so, and a status check would pass every broken link.",
+    "note": "Asked for on r/FortWorth: \"producing a one sentence summary of bills that properly explain what the bill does is extremely difficult... I'd be nice to have a link to the full text of the bills or extended summaries\". He is right, and the site had NO outbound link to any bill, only the caption behind a toggle. This links capitol.texas.gov's bill page, which carries the full text, every version, the official analyses and the history, from the authority rather than from us. Deliberately inside the disclosure toggle rather than on the card: the same reader said most people will not read them, so it is there for the one who wants it and out of the way of everyone else. scripts/check_bill_links.mjs verifies all 67 by CONTENT, because a bill that does not exist answers 200 with a page saying so, and a status check would pass every broken link. The Spanish carries \"(en inglés)\" and the English carries no equivalent, which is deliberate rather than drift: capitol.texas.gov is English only, so this is the one place a Spanish reader taps a Spanish sentence and lands somewhere they may not be able to read. An English reader cannot be surprised by English. A parenthetical rather than a sentence because it is link text, and a second sentence would swamp the link it belongs to.",
     "status": "ok"
   },
   "q.askedAs": {

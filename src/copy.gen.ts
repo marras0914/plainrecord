@@ -728,7 +728,7 @@ export const ES: Record<CopyKey, string> = {
   "q.showOfficial": "Texto oficial",
   "q.hideOfficial": "Ocultar texto oficial",
   "q.officialNote": "La pregunta de arriba es nuestro resumen en lenguaje sencillo. Este es el título oficial del proyecto de ley, palabra por palabra. La Cámara votó {yeas} a favor, {nays} en contra.",
-  "q.readBill": "Lea el texto completo de {bill} en la Legislatura de Texas",
+  "q.readBill": "Lea el texto completo de {bill} en la Legislatura de Texas (en inglés)",
   "q.askedAs": "Este todavía no tiene versión en lenguaje sencillo, así que se plantea con el texto oficial.",
   "q.youSaid": "Usted votó {vote}.",
   "result.restart": "Empezar de nuevo",
