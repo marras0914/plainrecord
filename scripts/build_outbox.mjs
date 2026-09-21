@@ -25,7 +25,7 @@
  * and pressing send stays a human act.
  */
 
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
@@ -35,16 +35,55 @@ mkdirSync(OUT, { recursive: true });
 
 const SUBJECT = 'Una herramienta gratuita en español: cómo votó su representante estatal';
 
-// Read off each station's own contact page on 20 September 2026 by
-// scripts/find_station_contacts.mjs. None is constructed from a pattern.
-const STATIONS = [
-  { order: 1, metro: 'Houston', people: '890,598', to: 'univision45@televisaunivision.com', station: 'Univision 45 KXLN' },
-  { order: 2, metro: 'Dallas', people: '482,153', to: 'noticias23dfw@televisaunivision.com', station: 'Univision 23 KUVN' },
-  { order: 3, metro: 'Valle del Río Grande', people: '333,440', to: 'ecanavati@entravision.com', station: 'Univision 48 KNVO', valley: true },
-  { order: 4, metro: 'El Paso', people: '250,224', to: 'rfranco@entravision.com', station: 'Univision 26 KINT' },
-  { order: 5, metro: 'San Antonio', people: '236,313', to: 'sanantoniodesk@televisaunivision.com', station: 'Univision 41 KWEX' },
-  { order: 6, metro: 'Austin', people: '161,014', to: 'noticias62@televisaunivision.com', station: 'Univision 62 KAKW' },
-];
+// ADDRESSES ARE NOT IN THIS FILE, AND MUST NOT BE.
+//
+// They were, and scripts/guards.smoke.ts caught it: six newsroom addresses
+// hardcoded into a script that is pushed to the PUBLIC mirror. That guard
+// exists because a maintainer's work email was once published that way and it
+// took deleting and recreating the repository to get it out.
+//
+// So the roster lives in private/, which is gitignored, and this script reads
+// it. If the file is missing, that is a clean failure rather than a fallback:
+// there is no pattern to guess an address from and guessing is how the
+// outreach archive got two bounces already.
+const ROSTER = resolve(ROOT, 'private/station_contacts.json');
+if (!existsSync(ROSTER)) {
+  console.error('\n  private/station_contacts.json not found.');
+  console.error('  Run: node scripts/find_station_contacts.mjs\n');
+  process.exit(1);
+}
+
+// metro -> the figure for that market, from scripts/spanish_districts.mjs.
+// Numbers are fine to commit; they are published census aggregates.
+const PEOPLE = {
+  Houston: '890,598', Dallas: '482,153', RGV: '333,440',
+  'El Paso': '250,224', 'San Antonio': '236,313', Austin: '161,014',
+};
+const METRO_NAME = { RGV: 'Valle del Río Grande' };
+const ORDER = ['Houston', 'Dallas', 'RGV', 'El Paso', 'San Antonio', 'Austin'];
+
+const roster = JSON.parse(readFileSync(ROSTER, 'utf8'));
+const STATIONS = ORDER.flatMap((metro, i) => {
+  // Univision and Entravision publish a newsroom address; the Telemundo
+  // stations publish a form and no address, so they are not emailable and are
+  // skipped rather than guessed at.
+  const hit = roster.find((r) => r.metro === metro && /Univision/i.test(r.station)
+    && r.emails.some((e) => e && !e.includes('.@')));
+  if (!hit) return [];
+  const to = hit.emails.find((e) => e && !e.includes('.@'));
+  return [{
+    order: i + 1,
+    metro: METRO_NAME[metro] ?? metro,
+    people: PEOPLE[metro],
+    to,
+    station: hit.station,
+    valley: metro === 'RGV',
+  }];
+});
+if (!STATIONS.length) {
+  console.error('\n  No emailable stations found in the roster.\n');
+  process.exit(1);
+}
 
 const variable = (s) => s.valley
   ? `En el Valle del Río Grande viven ${s.people} personas que hablan español en casa y que dicen hablar inglés menos que "muy bien", según la Oficina del Censo. En proporción, es una de las concentraciones más altas del estado, y la información sobre lo que hace la legislatura estatal casi nunca existe en su idioma.`

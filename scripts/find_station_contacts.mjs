@@ -7,7 +7,7 @@
  *
  * A plain fetch of these sites returns a shell: the contact pages redirect to the
  * homepage and the only addresses in the HTML source are ad-tech placeholders
- * (mailAddress@client.com, 555-555-5555). Everything real is rendered by
+ * (an ad-tech placeholder address, and a 555 phone number). Everything real is rendered by
  * JavaScript. So this drives an actual browser, follows the site's own contact
  * link, and reads the rendered DOM.
  *
@@ -20,7 +20,7 @@
  * calling the station, not by inference.
  *
  * Placeholders are filtered, because a list that confidently reports
- * mailAddress@client.com is worse than a list that reports nothing.
+ * a placeholder address is worse than a list that reports nothing.
  */
 
 import { chromium } from 'playwright';
@@ -48,7 +48,7 @@ const JUNK_PHONE = /^\(?555\)?/;
 // Deliberately NARROW. The first version included "denuncia", meaning "report a
 // tip", and it matched the headline "aumentan denuncias contra educadores" — so
 // the crawler read a news article as a contact page and harvested
-// admin@SubscriptionMembershipSettlement.com out of an Amazon class-action
+// the settlement administrator's address out of an Amazon class-action
 // story. That is a real, well-formed, entirely wrong address: the junk filter
 // screens for FORMAT and cannot see CONTEXT, so the matcher has to.
 //
