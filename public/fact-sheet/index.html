@@ -97,12 +97,17 @@ h1{font-size:31px;line-height:1.1;margin:0 0 9px;letter-spacing:-.02em;font-weig
 .lede b{color:var(--ink);font-weight:600}
 /* The outcomes, in the site's own card grammar: stacked rows separated by
    hairlines rather than boxed, exactly as they appear on the page. */
-.outs{background:var(--surface);border:1px solid var(--hair);margin:0 0 14px}
-.out{padding:12px 16px;border-top:1px solid var(--hair)}
-.out:first-child{border-top:0}
+.outs{background:var(--surface);border:1px solid var(--hair);margin:0 0 14px;
+      display:grid;grid-template-columns:1fr 1fr}
+.out{padding:11px 14px;border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
+/* The top row has nothing above it and the left column nothing beside it, so
+   the grid draws its own rules and the container draws the outside. */
+.out:nth-child(-n+2){border-top:0}
+.out:nth-child(odd){border-left:0}
+@media (max-width:520px){.outs{grid-template-columns:1fr}
+  .out{border-left:0}.out:nth-child(2){border-top:1px solid var(--hair)}}
 .out-cat{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--ink-2)}
-.out-val{font-size:21px;font-weight:600;letter-spacing:-.015em;margin-top:2px;line-height:1.15}
-.out-cmp{font-size:13px;color:var(--ink-2);margin-top:2px}
+.out-val{font-size:18.5px;font-weight:600;letter-spacing:-.015em;margin-top:2px;line-height:1.15}
 .badge{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;
        border:1px solid currentColor;padding:2px 7px;margin-top:7px;color:var(--rust)}
 .out-foot{font-size:11.5px;color:var(--muted);margin:0 0 6px;font-style:italic}
@@ -151,20 +156,32 @@ li{margin-bottom:5px}
   <div class="out">
     <div class="out-cat">Education &middot; Per-student school funding</div>
     <div class="out-val">$13,189 per student</div>
-    <div class="out-cmp">$5,664 below the national average of $18,853</div>
     <div class="badge">47th of 50 states</div>
+  </div>
+  <div class="out">
+    <div class="out-cat">Business &amp; Labor &middot; Job growth</div>
+    <div class="out-val">132,500 jobs added in 2025 — more than any other state</div>
+    <div class="badge">1st of 50 states for jobs added</div>
   </div>
   <div class="out">
     <div class="out-cat">Families &amp; Children &middot; Children without health insurance</div>
     <div class="out-val">13.6% of children — about 1.1 million</div>
-    <div class="out-cmp">more than double the national rate of 6.0%; nearly a quarter of all uninsured children in the U.S.</div>
     <div class="badge">highest in the nation</div>
+  </div>
+  <div class="out">
+    <div class="out-cat">Housing &middot; How much housing is being built</div>
+    <div class="out-val">74,350 new residential permits in 2025 — more than any state</div>
+    <div class="badge">1st of 50 states</div>
   </div>
   <div class="out">
     <div class="out-cat">Energy &amp; Environment &middot; What households pay for electricity</div>
     <div class="out-val">16.11¢ per kWh — up about 40% since 2020</div>
-    <div class="out-cmp">from 11.50¢ in 2020; delivered rates are running 14–19¢ in 2026, and some monthly bills have reached $600–$800</div>
     
+  </div>
+  <div class="out">
+    <div class="out-cat">Taxes &amp; Spending &middot; Property tax burden</div>
+    <div class="out-val">1.245% effective rate — a median bill of $4,108</div>
+    <div class="badge">9th highest of 50 states</div>
   </div>
 </div>
 <p class="out-foot">Every figure carries its source and its caveats on the site.</p>

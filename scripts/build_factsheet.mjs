@@ -69,27 +69,46 @@ if (faces.length < 2) {
 // the Spanish is already approved in the sidecar, so quoting them by key means
 // the sheet cannot drift from the site and needs no new translation review.
 //
-// Three chosen, and the choice is the editorial act worth naming: schools,
-// children's health cover and the electricity bill. They are what a family
-// actually feels, they are not coded to either party, and they leave out the
-// two most inflammatory rows in the set (the abortion and border-spending
-// figures) because this is a sheet handed across a table in a library.
+// Six chosen, and the choice is the editorial act worth naming.
+//
+// WHAT THEY HAVE IN COMMON: each is something a household feels directly, and
+// none of them is the property of one party to talk about. The two most
+// inflammatory rows in the set, the abortion and border-spending figures, are
+// left out on purpose. This is a sheet handed across a table in a library.
+//
+// THEY DO NOT ALL POINT THE SAME WAY, and that is a rule rather than an
+// accident. The first version of this sheet carried three figures and all three
+// said Texas ranks badly. Published by someone who discloses a party donation
+// two inches further down the page, a run of figures that all lean one way is
+// the whole project's credibility spent on three numbers. So two of the six are
+// places Texas leads the country, and they are not consolation prizes: most jobs
+// added and most homes permitted, both first of fifty. The picture that leaves
+// is a state growing faster than anywhere else and straining under it, which is
+// harder to fit on a bumper sticker and is what the numbers actually say.
+//
+// The long comparison line each figure carried is gone. At half width it was
+// what made a row tall, and every one of these six is legible from its value and
+// its rank alone. The full comparison, its sources and its caveats are on the
+// site, which the line under the block says.
 const payload = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
 const sidecar = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.json'), 'utf8'));
 const PICK = [
   'Per-student school funding',
+  'Job growth',
   'Children without health insurance',
+  'How much housing is being built',
   'What households pay for electricity',
+  'Property tax burden',
 ];
 const outcomesFor = (lang) => PICK.map((key) => {
   const en = payload.outcomes.find((o) => o.label === key);
   if (!en) throw new Error(`outcome not in the payload: ${key}`);
-  if (lang === 'en') return { cat: en.category, label: en.label, value: en.value, cmp: en.comparison, rank: en.rank };
+  if (lang === 'en') return { cat: en.category, label: en.label, value: en.value, rank: en.rank };
   const es = sidecar.outcomes?.[key];
   if (!es) throw new Error(`outcome not translated in the sidecar: ${key}`);
   return {
     cat: sidecar.categories?.[en.category] ?? en.category,
-    label: es.label, value: es.value, cmp: es.comparison, rank: es.rank,
+    label: es.label, value: es.value, rank: es.rank,
   };
 });
 const causalFor = (lang) => (lang === 'es' ? sidecar.causalNote : payload.causalNote);
@@ -271,12 +290,17 @@ h1{font-size:31px;line-height:1.1;margin:0 0 9px;letter-spacing:-.02em;font-weig
 .lede b{color:var(--ink);font-weight:600}
 /* The outcomes, in the site's own card grammar: stacked rows separated by
    hairlines rather than boxed, exactly as they appear on the page. */
-.outs{background:var(--surface);border:1px solid var(--hair);margin:0 0 14px}
-.out{padding:12px 16px;border-top:1px solid var(--hair)}
-.out:first-child{border-top:0}
+.outs{background:var(--surface);border:1px solid var(--hair);margin:0 0 14px;
+      display:grid;grid-template-columns:1fr 1fr}
+.out{padding:11px 14px;border-top:1px solid var(--hair);border-left:1px solid var(--hair)}
+/* The top row has nothing above it and the left column nothing beside it, so
+   the grid draws its own rules and the container draws the outside. */
+.out:nth-child(-n+2){border-top:0}
+.out:nth-child(odd){border-left:0}
+@media (max-width:520px){.outs{grid-template-columns:1fr}
+  .out{border-left:0}.out:nth-child(2){border-top:1px solid var(--hair)}}
 .out-cat{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:12px;color:var(--ink-2)}
-.out-val{font-size:21px;font-weight:600;letter-spacing:-.015em;margin-top:2px;line-height:1.15}
-.out-cmp{font-size:13px;color:var(--ink-2);margin-top:2px}
+.out-val{font-size:18.5px;font-weight:600;letter-spacing:-.015em;margin-top:2px;line-height:1.15}
 .badge{display:inline-block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:10px;
        border:1px solid currentColor;padding:2px 7px;margin-top:7px;color:var(--rust)}
 .out-foot{font-size:11.5px;color:var(--muted);margin:0 0 6px;font-style:italic}
@@ -345,7 +369,6 @@ const pageFor = (L, qrSvg) => `<!doctype html>
 ${outcomesFor(L.lang).map((o) => `  <div class="out">
     <div class="out-cat">${esc(o.cat)} &middot; ${esc(o.label)}</div>
     <div class="out-val">${esc(o.value)}</div>
-    <div class="out-cmp">${esc(o.cmp)}</div>
     ${o.rank ? `<div class="badge">${esc(o.rank)}</div>` : ''}
   </div>`).join('\n')}
 </div>
