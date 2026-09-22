@@ -460,10 +460,27 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   //
   // No hreflang alternates between them: they are documents rather than locales
   // of the app, and each already declares its own alternates in its head.
+  // The fact sheets and the race pages, all listed WITHOUT a trailing slash for
+  // the reason above. Each is included only if it was actually built, so a
+  // sitemap never names a URL that 404s.
+  //
+  // The race pages are the search surface. Before them this site had four
+  // indexable URLs and took eight search referrals in a fortnight, because
+  // nothing here answered a question anybody types: people search a candidate's
+  // name, and no candidate's name appeared in a crawlable page. Priority is
+  // above the fact sheets because these are the pages meant to be FOUND, where
+  // the sheets are mostly meant to be printed.
   const docs = [];
   for (const [dir, priority] of [['hoja', '0.8'], ['fact-sheet', '0.8']]) {
     const shipped = await access(resolve(DIST, `${dir}/index.html`)).then(() => true, () => false);
     if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority });
+  }
+  for (const dir of [
+    'race/governor', 'race/lieutenant-governor', 'race/us-senate',
+    'contienda/gobernador', 'contienda/vicegobernador', 'contienda/senado',
+  ]) {
+    const shipped = await access(resolve(DIST, `${dir}/index.html`)).then(() => true, () => false);
+    if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority: '0.9' });
   }
 
   const xml =
