@@ -524,6 +524,59 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   await writeFile(resolve(DIST, 'sitemap.xml'), xml, 'utf8');
   say(true, 'wrote dist/sitemap.xml',
     `${urls.length + docs.length} url(s), hreflang on the ${urls.length} locale page(s)`);
+
+  // llms.txt, whose Pages section is generated from the same list for the same
+  // reason. The committed file named four of these thirty URLs, and included the
+  // Spanish fact sheet while omitting the English one. Everything above the
+  // heading is prose and stays hand-written; only the inventory is rebuilt.
+  //
+  // The district lines carry the member's name. That is the whole finding behind
+  // these pages existing: people search a person, not a district number, and
+  // before the race pages no name on this site appeared anywhere crawlable.
+  const members = JSON.parse(await readFile(resolve(ROOT, 'public/data/members_89R.json'), 'utf8'));
+  const nameOf = new Map(Object.values(members.members).map((m) => [m.d, m.n]));
+
+  const RACE_TITLE = {
+    'race/governor': 'Governor, in English',
+    'race/lieutenant-governor': 'Lieutenant Governor, in English',
+    'race/us-senate': 'U.S. Senate, in English',
+    'contienda/gobernador': 'Governor, in Spanish',
+    'contienda/vicegobernador': 'Lieutenant Governor, in Spanish',
+    'contienda/senado': 'U.S. Senate, in Spanish',
+  };
+
+  const label = (loc) => {
+    const path = loc.replace(SITE, '');
+    if (path === '/fact-sheet') return 'Fact sheet, in English';
+    if (path === '/hoja') return 'Fact sheet, in Spanish';
+    const race = RACE_TITLE[path.slice(1)];
+    if (race) return `The race for ${race}`;
+    const d = /^\/(district|distrito)\/(\d+)$/.exec(path);
+    if (d) {
+      const who = nameOf.get(Number(d[2])) ?? `District ${d[2]}`;
+      return `${who}, Texas House District ${d[2]}, in ${d[1] === 'district' ? 'English' : 'Spanish'}`;
+    }
+    return path;
+  };
+
+  const lines = [
+    '- [The quiz, in English](' + SITE + '/)',
+    '- [The quiz, in Spanish](' + SITE + '/es)',
+    ...docs.map((d) => {
+      const pdf = d.loc.endsWith('/fact-sheet') ? `${d.loc}/rightnleft-en.pdf`
+        : d.loc.endsWith('/hoja') ? `${d.loc}/rightnleft-es.pdf` : null;
+      return `- [${label(d.loc)}](${d.loc})` + (pdf ? `, also a [printable PDF](${pdf})` : '');
+    }),
+  ];
+
+  const src = await readFile(resolve(ROOT, 'public/llms.txt'), 'utf8');
+  const before = src.indexOf('## Pages');
+  if (before < 0) throw new Error('public/llms.txt has no "## Pages" heading to regenerate');
+  const after = src.indexOf('\n## ', before + 1);
+  if (after < 0) throw new Error('public/llms.txt has no heading after "## Pages"');
+  const out = src.slice(0, before) + '## Pages\n\n' + lines.join('\n') + '\n' + src.slice(after);
+  await writeFile(resolve(DIST, 'llms.txt'), out, 'utf8');
+  say(true, 'wrote dist/llms.txt', `${lines.length} page(s) listed`);
 }
 
 // The point of the whole two-build arrangement: the pages must NOT share a

@@ -30,6 +30,11 @@ one, because none of them has ever cast a vote in the Texas House.
 
 ## Pages
 
+<!-- GENERATED. scripts/build_locales.mjs rewrites everything between this
+     heading and the next one, from the pages that were actually built, so
+     this list cannot fall behind the sitemap the way it did. Editing it
+     here has no effect. Change the generator instead. -->
+
 - [English](https://rightnleft.com/)
 - [Spanish](https://rightnleft.com/es)
 - [Spanish fact sheet](https://rightnleft.com/hoja/), also as a
