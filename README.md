@@ -612,6 +612,51 @@ mistake that put a district holding 7% of a ZIP's people at the top of its list
 because it covered 70% of its land.
 
 
+### The static pages, which exist to be found
+
+The app is one page per language. That is a bad shape for search: on
+21 September 2026 the site had **four indexable URLs and had taken eight search
+referrals in a fortnight against 4,230 views.** The corpus was already
+crawlable; none of it answered a question anybody types. People search a
+candidate's name, and no candidate's name appeared in a crawlable page, because
+the panel naming them only fills in after a reader types a district number.
+
+Three generators write plain HTML into `public/`, and all of them run **before**
+vite so the pages cannot drift from the payload they quote:
+
+| Script | Writes | Notes |
+| --- | --- | --- |
+| `build_factsheet.mjs` | `/hoja`, `/fact-sheet` | plus a PDF printed from the page itself, so the handout cannot say something the page does not |
+| `build_races.mjs` | `/race/*`, `/contienda/*` | one page per RACE, not per candidate |
+| `build_district_pages.mjs` | `/district/{n}`, `/distrito/{n}` | ten districts, a pilot |
+
+They share `scripts/_page_shell.mjs`, which exists because the second generator
+would otherwise have begun as a copy of the first and two copies of a stylesheet
+drift.
+
+**A page per race rather than per candidate** because three of the six
+candidates have no roll-call record at all, for three different reasons already
+written and sourced in the payload. Six candidate pages would mean publishing
+one titled for a candidate whose whole content is that no evidence attaches to
+him, which is thin and, on a site that discloses a donation to one party, would
+be three rich pages for Democrats and three empty ones for Republicans. A race
+page carries both names in its title, so it is findable either way, and the
+asymmetry becomes the thing the page explains.
+
+**The ten districts were chosen by a party-blind rule**, not by hand: the
+district holding most people in the downtown ZIP of the five largest Texas
+cities, plus the five members who most often voted against their own party. It
+came out 4 Democrats and 6 Republicans on its own.
+
+`build_locales.mjs` finds the district pages by reading the directory rather
+than from a list, so growing the pilot needs no edit there. The sitemap went
+from 4 URLs to 30.
+
+**These three carry Spanish that `i18n:check` cannot see**, because their copy
+is inline rather than in `i18n/copy.json`. Each says so in its own header. An
+edit to that Spanish ships unreviewed and no build will catch it.
+
+
 ### The district lookup
 
 `npm run data:members` builds `public/data/members_89R.json` — every 89R House
