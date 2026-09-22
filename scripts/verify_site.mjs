@@ -248,7 +248,15 @@ const page = await (await browser.newContext({ viewport: { width: 1180, height: 
 const errs = [];
 page.on('pageerror', (e) => errs.push('PAGEERROR ' + e.message));
 page.on('console', (m) => {
-  if (m.type() === 'error') errs.push('CONSOLE ' + m.text());
+  if (m.type() !== 'error') return;
+  // THE URL IS NOT IN THE TEXT, AND THAT IS WHY THE FILTER BELOW WAS DEAD.
+  // Chromium reports a failed subresource as the bare sentence "Failed to load
+  // resource: the server responded with a status of 404 (Not Found)" with no
+  // path in it. isInsightsNoise matched on the path, so it never matched
+  // anything, and every local run reported two mismatches it was written to
+  // suppress. The path is in the message's location instead, so both are stored.
+  const where = m.location?.()?.url ?? '';
+  errs.push('CONSOLE ' + m.text() + (where ? ` [${where}]` : ''));
 });
 
 // Did the analytics script get requested, and did it resolve?
@@ -2849,7 +2857,13 @@ try {
   const esPage = await (await browser.newContext({ viewport: { width: 1180, height: 1000 } })).newPage();
   const esErrs = [];
   esPage.on('pageerror', (e) => esErrs.push('PAGEERROR ' + e.message));
-  esPage.on('console', (m) => { if (m.type() === 'error') esErrs.push('CONSOLE ' + m.text()); });
+  esPage.on('console', (m) => {
+    if (m.type() !== 'error') return;
+    // Same reason as the English tracker above: the path lives in location(),
+    // not in text(), and without it isInsightsNoise cannot match.
+    const where = m.location?.()?.url ?? '';
+    esErrs.push('CONSOLE ' + m.text() + (where ? ` [${where}]` : ''));
+  });
 
   // The Spanish page loads the same bundle, so it makes the same insights request
   // and gets the same 404 until Web Analytics is switched on. It needs its own
