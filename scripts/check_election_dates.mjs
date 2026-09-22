@@ -16,7 +16,7 @@
  * while nobody is looking at it.
  */
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -74,6 +74,56 @@ if (d.election >= today) {
   console.log(n >= 0
     ? `\n  ${n} day(s) until registration closes, ${days(today, d.election)} until the election`
     : `\n  ${days(today, d.election)} day(s) until the election`);
+}
+
+// --- the printed sheets ------------------------------------------------------
+//
+// WHY THIS LIVES HERE. scripts/build_factsheet.mjs derives its dates from this
+// same file and refuses to build a stale one, but that only helps if somebody
+// runs it, and nothing does: it is not in `npm run build` and never has been.
+// The sheets therefore sit on disk with whatever they said the last time a human
+// typed the command. This is the check that runs, so this is where the drift has
+// to be caught.
+//
+// It reads the SHIPPED HTML rather than re-deriving anything, because the thing
+// worth knowing is what a reader is being handed today.
+
+const SHEETS = [
+  { file: 'public/fact-sheet/index.html', lang: 'en', open: /last day to register/i, closed: /registration has closed/i },
+  { file: 'public/hoja/index.html', lang: 'es', open: /último día para registrarse/i, closed: /el registro ya cerró/i },
+];
+
+for (const sheet of SHEETS) {
+  const path = join(ROOT, sheet.file);
+  if (!existsSync(path)) {
+    console.log(`  [ -- ] ${sheet.file} has not been built`);
+    continue;
+  }
+  const html = readFileSync(path, 'utf8');
+
+  // By day number, with the month left to Intl. The day is the part a reader
+  // acts on and the part a timezone bug moves. Same rule as verify_site.mjs.
+  const missing = FIELDS
+    .filter((k) => k !== 'mailApplyBy')   // the sheet carries three rows, not five
+    .filter((k) => !new RegExp(`\\b${Number(d[k].slice(8, 10))}\\b`).test(html));
+  check(`${sheet.lang} sheet: every date it shows is a date from this file`,
+    missing.length === 0, missing.join(', ') || 'register, early voting, election day');
+
+  // The wording has to match the calendar. Before the deadline the sheet tells
+  // people to register; after it, saying so on a piece of paper somebody is
+  // holding is worse than saying nothing.
+  const closed = d.registerBy < today;
+  check(`${sheet.lang} sheet: the registration line matches the calendar`,
+    closed ? sheet.closed.test(html) && !sheet.open.test(html) : sheet.open.test(html),
+    closed ? 'registration has closed, the sheet must say so' : 'registration is open');
+
+  check(`${sheet.lang} sheet: it says when the dates were confirmed`,
+    /confirmed|confirmadas/.test(html));
+}
+
+if (d.registerBy < today || d.election < today) {
+  console.log('\n  The sheets are also PDFs that people print. Rebuild and redistribute:'
+    + '\n    npm run data:factsheet');
 }
 
 // --- optional: ask the state again ------------------------------------------

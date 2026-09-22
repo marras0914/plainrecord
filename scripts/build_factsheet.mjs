@@ -31,8 +31,14 @@
  * NO JAVASCRIPT, NOTHING THIRD-PARTY, NO TRACKING on these pages. Handing one to
  * a library only works if there is nothing in it to object to.
  *
- * The Spanish is the text approved on 20 September 2026. The English is a
- * separate writing of the same content, not a gloss of the Spanish.
+ * The Spanish is the text approved on 20 September 2026, plus the voting-dates
+ * block approved on 22 September 2026: the three captions, the wording used once
+ * registration has closed, and the line naming the Secretary of State. The
+ * English is a separate writing of the same content, not a gloss of the Spanish.
+ *
+ * THAT DATE IS THE ONLY RECORD. These strings live here rather than in
+ * i18n/copy.json, so the gate that fails the build over one unapproved Spanish
+ * string does not see them. Anything added here needs a person, not the build.
  */
 
 import QRCode from 'qrcode';
@@ -88,6 +94,73 @@ const outcomesFor = (lang) => PICK.map((key) => {
 });
 const causalFor = (lang) => (lang === 'es' ? sidecar.causalNote : payload.causalNote);
 
+// --- the voting dates -------------------------------------------------------
+//
+// READ FROM public/data/election_tx.json for the same reason the figures above
+// are read from the payload: the site already publishes these with their source,
+// and a sheet keeping its own copy of a deadline is a sheet that will one day
+// disagree with the page it points at. They were six hardcoded strings.
+//
+// THE PRINTED SHEET IS THE HARD CASE. Everything else here can be corrected by
+// deploying. A PDF somebody printed in September and put on a table in October
+// cannot be, and it carries no clue about its own age. Two things follow. The
+// build refuses to write a sheet for an election that has already happened, and
+// the block states when the dates were last confirmed with the state, so a sheet
+// found lying around says how old it is.
+const ELECTION = JSON.parse(readFileSync(resolve(ROOT, 'public/data/election_tx.json'), 'utf8'));
+// Overridable ONLY so the two wordings below can be exercised on a day that is
+// not the day they matter. A guard that has never been seen to fire is a guard
+// nobody knows the shape of, and this one first matters on 6 October, which is
+// too late to find out it was wrong.
+const TODAY = process.env.FACTSHEET_TODAY ?? new Date().toISOString().slice(0, 10);
+
+if (ELECTION.election < TODAY) {
+  console.error(`\n  election_tx.json describes an election on ${ELECTION.election}, which has passed.`
+    + '\n  Refresh it with: npm run data:election\n  Nothing written.\n');
+  process.exit(1);
+}
+
+// Registration closing mid-cycle is normal and is NOT a build failure. What has
+// to change is the caption. "last day to register" is an instruction, and an
+// expired instruction on a piece of paper is worse than no line at all, so once
+// the date is past the row states what happened instead of telling anyone to act.
+const REGISTRATION_CLOSED = ELECTION.registerBy < TODAY;
+
+const LOC = { es: 'es-US', en: 'en-US' };
+const at = (iso) => new Date(`${iso}T00:00:00Z`);
+const day = (iso, lang) => new Intl.DateTimeFormat(LOC[lang], { day: 'numeric', month: 'long', timeZone: 'UTC' }).format(at(iso));
+const monthOf = (iso, lang) => new Intl.DateTimeFormat(LOC[lang], { month: 'long', timeZone: 'UTC' }).format(at(iso));
+const dayNum = (iso) => String(Number(iso.slice(8, 10)));
+
+/** "October 19 to 30" against "19 al 30 de octubre", which are not one shape. */
+const span = (fromIso, toIso, lang) => {
+  // Early voting has never crossed a month boundary in Texas, but the fallback
+  // is here because the day it does is not the day to find out.
+  if (fromIso.slice(0, 7) !== toIso.slice(0, 7)) return `${day(fromIso, lang)} - ${day(toIso, lang)}`;
+  return lang === 'es'
+    ? `${dayNum(fromIso)} al ${dayNum(toIso)} de ${monthOf(fromIso, 'es')}`
+    : `${monthOf(fromIso, 'en')} ${dayNum(fromIso)} to ${dayNum(toIso)}`;
+};
+
+const CAPTIONS = {
+  es: { open: 'último día para registrarse', closed: 'el registro ya cerró', early: 'votación temprana', day: 'día de la elección' },
+  en: { open: 'last day to register', closed: 'registration has closed', early: 'early voting', day: 'election day' },
+};
+
+const datesFor = (lang) => [
+  [day(ELECTION.registerBy, lang), REGISTRATION_CLOSED ? CAPTIONS[lang].closed : CAPTIONS[lang].open],
+  [span(ELECTION.earlyStart, ELECTION.earlyEnd, lang), CAPTIONS[lang].early],
+  [day(ELECTION.election, lang), CAPTIONS[lang].day],
+];
+
+/** Where the dates came from and when. Only the printed copy really needs it. */
+const asOfFor = (lang) => {
+  const on = ELECTION._meta.generated;
+  return lang === 'es'
+    ? `Fechas de la Secretaría de Estado de Texas, confirmadas el ${day(on, 'es')} de ${on.slice(0, 4)}.`
+    : `Dates from the Texas Secretary of State, confirmed ${day(on, 'en')}, ${on.slice(0, 4)}.`;
+};
+
 const LOCALES = [
   {
     lang: 'es', dir: 'hoja', pdf: 'rightnleft-es.pdf', target: `${SITE}/es`,
@@ -112,11 +185,6 @@ const LOCALES = [
       'Sus respuestas se quedan en su dispositivo, salvo que usted decida enviarlas.',
     ],
     h2dates: 'Fechas en Texas',
-    dates: [
-      ['5 de octubre', 'último día para registrarse'],
-      ['19 al 30 de octubre', 'votación temprana'],
-      ['3 de noviembre', 'día de la elección'],
-    ],
     urlLabel: 'rightnleft.com/es',
     urlSub: 'Gratis. En español. Sin registro.',
     whoLabel: 'Quién lo hizo.',
@@ -146,11 +214,6 @@ const LOCALES = [
       'Your answers stay on your device unless you choose to send them.',
     ],
     h2dates: 'Texas dates',
-    dates: [
-      ['October 5', 'last day to register'],
-      ['October 19 to 30', 'early voting'],
-      ['November 3', 'election day'],
-    ],
     urlLabel: 'rightnleft.com',
     urlSub: 'Free. No sign-up. Also in Spanish.',
     whoLabel: 'Who made it.',
@@ -229,6 +292,7 @@ li{margin-bottom:5px}
 .dates div{min-width:8rem}
 .dates b{display:block;font-size:18px;font-weight:600;letter-spacing:-.01em}
 .dates span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11px;color:var(--muted)}
+.asof{font-size:10px;color:var(--muted);margin:6px 0 0}
 .cta{display:flex;align-items:center;gap:20px;margin-top:20px;padding-top:17px;
      border-top:2px solid var(--ink)}
 .cta svg{width:106px;height:106px;flex:none;display:block}
@@ -299,8 +363,9 @@ ${outcomesFor(L.lang).map((o) => `  <div class="out">
 </div>
 
 <div class="dates">
-  ${L.dates.map(([d, w]) => `<div><b>${esc(d)}</b><span>${esc(w)}</span></div>`).join('')}
+  ${datesFor(L.lang).map(([d, w]) => `<div><b>${esc(d)}</b><span>${esc(w)}</span></div>`).join('')}
 </div>
+<p class="asof">${esc(asOfFor(L.lang))}</p>
 
 <div class="cta">
   ${qrSvg}
