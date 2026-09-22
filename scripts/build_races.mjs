@@ -51,27 +51,14 @@
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
+import { SITE, esc, loadFaces, document_ } from './_page_shell.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const SITE = 'https://rightnleft.com';
 
 const payload = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
 const sidecar = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.json'), 'utf8'));
 
-const esc = (s) => String(s)
-  .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-  .replace(/"/g, '&quot;');
-
-// The Latin faces, read from the vendored stylesheet, exactly as the fact sheet
-// does. Linking /fonts.css would 404: vite bundles it into a hashed asset that
-// does not exist under public/.
-const vendored = readFileSync(resolve(ROOT, 'src/fonts.css'), 'utf8');
-const faces = (vendored.match(/@font-face\s*\{[^}]*\}/g) ?? [])
-  .filter((b) => /(lexend|newsreader)-latin(-ext)?-/.test(b));
-if (faces.length < 2) {
-  console.error('\n  Could not find the Latin Lexend and Newsreader faces in src/fonts.css.\n');
-  process.exit(1);
-}
+const faces = loadFaces(ROOT);
 
 // ---------------------------------------------------------------------------
 // The figures, computed rather than written down
@@ -285,39 +272,6 @@ const COPY = {
 // Render
 // ---------------------------------------------------------------------------
 
-const CSS = `
-${faces.join('\n')}
-:root{--page:#faf7f1;--surface:#fffdf9;--ink:#1a1714;--ink-2:#57514a;--muted:#6f6a62;
-      --hair:#e6ded1;--rule:#cabfae;--blue:#1f66bd;--red:#c8352f;}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
-  --hair:#2c2c2a;--rule:#383835;--blue:#3987e5;--red:#e66767;}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--page);color:var(--ink);
-  font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
-  font-size:17px;-webkit-text-size-adjust:100%}
-main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
-h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
-  line-height:1.15;text-wrap:balance}
-h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}
-h2{font-size:clamp(1.25rem,4.4vw,1.5rem);margin:40px 0 10px}
-.kicker{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
-.lede{font-size:1.1rem;color:var(--ink-2);margin:0 0 8px;text-wrap:pretty}
-p{margin:0 0 14px}
-.label{font-weight:600}
-.card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
-  padding:18px 18px 6px;margin:14px 0}
-ul{margin:0 0 14px;padding-left:1.1rem}
-li{margin:0 0 8px}
-.bill{font-variant-numeric:tabular-nums;font-weight:600}
-.small{font-size:13.5px;color:var(--muted)}
-a{color:var(--blue)}
-.cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
-  background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
-hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
-  font-size:13px;margin-bottom:22px}
-`;
 
 function billList(rows, kinds, lang) {
   const seen = new Map();
@@ -379,32 +333,13 @@ function render(race, lang) {
     license: 'https://creativecommons.org/publicdomain/zero/1.0/',
   };
 
-  return `<!doctype html>
-<html lang="${lang === 'es' ? 'es-US' : 'en-US'}">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(c.title(race))} | ${esc(c.siteName)}</title>
-<meta name="description" content="${esc(c.meta(race))}">
-<link rel="canonical" href="${canonical}">
-<link rel="alternate" hreflang="${lang}" href="${canonical}">
-<link rel="alternate" hreflang="${c.other}" href="${SITE}/${otherSlug}">
-<meta property="og:type" content="article">
-<meta property="og:title" content="${esc(c.title(race))}">
-<meta property="og:description" content="${esc(c.meta(race))}">
-<meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}">
-<meta name="twitter:card" content="summary_large_image">
-<style>${CSS}</style>
-<script type="application/ld+json">${JSON.stringify(jsonld)}</script>
-</head>
-<body>
-<main>
-  <div class="top">
-    <span class="kicker">${esc(c.kicker)}</span>
-    <a href="${SITE}/${otherSlug}">${esc(c.langSwitch)}</a>
-  </div>
-
+  return document_({
+    lang, otherLang: c.other, title: c.title(race), siteName: c.siteName,
+    desc: c.meta(race), canonical, altHref: `${SITE}/${otherSlug}`,
+    altLabel: c.langSwitch, kicker: c.kicker,
+    ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
+    jsonld, faces,
+    body: `
   <h1>${esc(c.title(race))}</h1>
   <p class="lede">${esc(c.lede(race))}</p>
 
@@ -432,11 +367,8 @@ function render(race, lang) {
   <hr>
 
   <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>
-  <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source(race))}</p>
-</main>
-</body>
-</html>
-`;
+  <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source(race))}</p>`,
+  });
 }
 
 // ---------------------------------------------------------------------------

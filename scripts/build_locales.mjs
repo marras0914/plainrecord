@@ -483,6 +483,25 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority: '0.9' });
   }
 
+  // The district pages, found by reading the directory rather than by listing
+  // them here. The pilot is ten districts and the point of a pilot is that it
+  // grows or stops: hardcoding the ten would mean this file has to be edited
+  // again for the other 140, and the sitemap would silently omit them if it
+  // were not. Numeric sort so the sitemap reads 31, 49, 95 rather than 108, 112.
+  for (const [parent, lang] of [['district', 'en'], ['distrito', 'es']]) {
+    let entries = [];
+    try {
+      entries = (await readdir(resolve(DIST, parent), { withFileTypes: true }))
+        .filter((e) => e.isDirectory() && /^\d+$/.test(e.name))
+        .map((e) => Number(e.name))
+        .sort((a, b) => a - b);
+    } catch { entries = []; }
+    for (const n of entries) {
+      const shipped = await access(resolve(DIST, `${parent}/${n}/index.html`)).then(() => true, () => false);
+      if (shipped) docs.push({ loc: `${SITE}/${parent}/${n}`, priority: '0.9' });
+    }
+  }
+
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n' +
