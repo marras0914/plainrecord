@@ -31,6 +31,15 @@
  * Every figure is computed from the shipped payload. Crossings use the site's
  * own definition, over the votes where the two caucuses took opposite sides, so
  * a page and the site's own panel never disagree.
+ *
+ * THE SPANISH IS APPROVED. Bill summaries are quoted from the sidecar reviewed
+ * on 20 September; the framing in COPY.es was written and approved on
+ * 21 September.
+ *
+ * It sits inline here, as build_races.mjs and build_factsheet.mjs do, which
+ * means THE SPANISH GATE DOES NOT COVER IT. npm run i18n:check will pass no
+ * matter what this file says, so a later edit to the Spanish needs a human
+ * read; no build will catch it.
  */
 
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
