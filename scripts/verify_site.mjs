@@ -2636,6 +2636,62 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // The links out to the race and district pages actually go somewhere
+  //
+  // Those pages are built by a different script with its own slug table, and
+  // main.ts keeps a copy of that table. Two tables that must agree and are
+  // edited in different files is exactly the drift that ships a dead link, so
+  // this FOLLOWS each href rather than asserting its shape. A 404 here means the
+  // slugs have diverged.
+  //
+  // The district link is deliberately conditional: only 10 of the 150 districts
+  // have a page, so this also checks that a district WITHOUT one renders no link
+  // at all, which is the half that would send a reader to a 404.
+  // ---------------------------------------------------------------------------
+  {
+    const lc = await browser.newContext({ viewport: { width: 1180, height: 1200 } });
+    const lp = await lc.newPage();
+    await beginQuiz(lp, URL_UNDER_TEST);
+    await answerAll(lp, 1);
+    await lp.waitForTimeout(600);
+
+    const raceHrefs = await lp.$$eval('.cand-race', (as) => as.map((a) => a.getAttribute('href')));
+    check('links: each candidate card offers its race page',
+      raceHrefs.length >= 3, `${raceHrefs.length} link(s): ${raceHrefs.join(', ')}`);
+
+    const bad = [];
+    for (const h of [...new Set(raceHrefs)]) {
+      const r = await lp.request.get(new URL(h, URL_UNDER_TEST).href);
+      if (!r.ok()) bad.push(`${h} -> ${r.status()}`);
+    }
+    check('links: every race link resolves to a live page',
+      bad.length === 0, bad.join(', ') || `${new Set(raceHrefs).size} checked`);
+
+    // A district WITH a page offers the link; one WITHOUT must offer nothing.
+    const box = await lp.$('#rep-district');
+    await box.click();
+    await lp.keyboard.type('31', { delay: 30 });
+    await lp.waitForTimeout(1200);
+    const withPage = await lp.$$eval('#rep-card .cand-race', (as) => as.map((a) => a.getAttribute('href')));
+    await box.fill('');
+    await box.click();
+    await lp.keyboard.type('47', { delay: 30 });
+    await lp.waitForTimeout(1200);
+    const withoutPage = await lp.$$eval('#rep-card .cand-race', (as) => as.length);
+
+    check('links: a district with its own page offers it',
+      withPage.length === 1 && withPage[0] === '/district/31', withPage.join(', ') || '(none)');
+    check('links: a district without one offers no link rather than a 404',
+      withoutPage === 0, `HD-47 rendered ${withoutPage} link(s)`);
+    if (withPage.length) {
+      const r = await lp.request.get(new URL(withPage[0], URL_UNDER_TEST).href);
+      check('links: the district link resolves to a live page', r.ok(), `${withPage[0]} -> ${r.status()}`);
+    }
+
+    await lc.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // Nothing third-party, on a page the reader has not touched
   //
   // The page used to load its fonts from fonts.googleapis.com and

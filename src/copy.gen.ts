@@ -91,6 +91,7 @@ export type CopyKey =
   | "mode.shortDesc"
   | "mode.fullDesc"
   | "cand.note"
+  | "cand.raceLink"
   | "stmt.heading"
   | "stmt.note"
   | "stmt.line"
@@ -270,6 +271,7 @@ export type CopyKey =
   | "vote.dayNote"
   | "rep.lede"
   | "rep.districtLabel"
+  | "rep.districtLink"
   | "rep.useLocation"
   | "rep.locateNote"
   | "rep.locating"
@@ -434,6 +436,7 @@ export const EN: Record<CopyKey, string> = {
   "mode.shortDesc": "Seven of the session's biggest fights: the bills the Lieutenant Governor made priorities or the Governor vetoed. <b>Six of the seven split cleanly along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all {n} to find where you cross over.",
   "mode.fullDesc": "All {n} votes: one per bill, spread across 20 subject areas, including the ones where Republicans and Democrats agreed. Those are the votes that can show you crossing party lines.",
   "cand.note": "All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together. Where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
+  "cand.raceLink": "What each of them has on the record",
   "stmt.heading": "Statements of vote",
   "stmt.note": "A Texas member may file a statement saying the Journal recorded them wrongly. The recorded vote is the official act and is what is scored here; the statement is shown beside it, never applied in its place.",
   "stmt.line": "{member} on {bill} ({detail})",
@@ -613,6 +616,7 @@ export const EN: Record<CopyKey, string> = {
   "vote.dayNote": "Election day is not like early voting. In early voting you can vote at any early voting place in your county. On election day, some counties let you vote anywhere in the county and some send you to one place near your home. Counties change this between elections, so check {link} before you go.",
   "rep.lede": "The three above are running for offices that affect every Texan. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
   "rep.districtLabel": "Or your district number",
+  "rep.districtLink": "More about {name} and District {d}",
   "rep.useLocation": "Use my location",
   "rep.locateNote": "Your browser will ask first. The boundaries download to your device and the check runs there.",
   "rep.locating": "Checking where that falls.",
@@ -762,6 +766,7 @@ export const ES: Record<CopyKey, string> = {
   "mode.shortDesc": "Siete de las peleas más grandes de la sesión: los proyectos que el Vicegobernador hizo prioridades o que el Gobernador vetó. <b>Seis de las siete dividieron limpiamente por línea partidista</b>, así que esta versión casi solo puede decirle hacia qué partido se inclina. Cambie a los {n} votos para encontrar dónde cruza.",
   "mode.fullDesc": "Los {n} votos: uno por proyecto, repartidos en 20 materias, incluidos aquellos en los que republicanos y demócratas estuvieron de acuerdo. Esos son los votos que pueden mostrarle cruzando líneas partidistas.",
   "cand.note": "Los tres estuvieron en la misma cámara y compiten por cargos distintos, así que estas son tres lecturas separadas, no una clasificación. Votaron juntos en la mayoría de los proyectos de línea partidista, así que espere que las cifras queden cerca; donde se separan es la parte interesante. Cobertura sobre estos {items} votos: {coverage}. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
+  "cand.raceLink": "Qué tiene cada uno en el registro",
   "stmt.heading": "Declaraciones de voto",
   "stmt.note": "Un miembro de Texas puede presentar una declaración diciendo que el Diario registró mal su voto. El voto registrado es el acto oficial y es lo que se califica aquí; la declaración se muestra al lado, nunca se aplica en su lugar.",
   "stmt.line": "{member} sobre {bill} ({detail})",
@@ -941,6 +946,7 @@ export const ES: Record<CopyKey, string> = {
   "vote.dayNote": "El día de la elección no funciona como la votación anticipada. En la votación anticipada usted puede votar en cualquier centro de votación anticipada de su condado. El día de la elección, algunos condados le permiten votar en cualquier lugar del condado y otros le asignan un solo lugar cerca de su casa. Los condados cambian esto de una elección a otra, así que consulte {link} antes de ir.",
   "rep.lede": "Los tres de arriba se postulan para cargos que afectan a todos los texanos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
   "rep.districtLabel": "O su número de distrito",
+  "rep.districtLink": "Más sobre {name} y el Distrito {d}",
   "rep.useLocation": "Usar mi ubicación",
   "rep.locateNote": "Su navegador le preguntará primero. Los límites se descargan a su dispositivo y la comprobación ocurre ahí.",
   "rep.locating": "Comprobando dónde queda.",

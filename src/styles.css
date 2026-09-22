@@ -575,7 +575,18 @@
                  text-transform:none; color:var(--muted); }
   .cand-score { font-size:26px; font-weight:600; letter-spacing:-0.02em; margin-top:7px; }
   .cand-phrase { font-size:12.5px; color:var(--ink-2); }
-  .cand-n { font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; color:var(--muted); margin-top:5px; }
+  .cand-n { font-family:"IBM Plex Mono",ui-monospace,monospace;
+             font-size:11px; color:var(--muted); margin-top:5px; }
+  /* The way out of a card to that race's or district's own page. Sits under the
+     n, because it is a next step rather than part of the reading.
+     line-height is explicit rather than inherited: the 24x24 tap-target check in
+     verify_site caught this at 23px, because min-height does not win against a
+     line box, and the first attempt at fixing it never applied at all — the rule
+     had been inserted INTO the unclosed .cand-n block above. */
+  .cand-race { display:inline-block; margin-top:8px; font-size:12px; line-height:16px;
+               color:var(--ink-2); text-decoration:underline; text-underline-offset:2px;
+               padding:4px 2px; min-height:24px; }
+  .cand-race:hover { color:var(--ink); }
 
   .stmt { border-left:3px solid var(--warn); padding-left:14px; margin-top:12px; font-size:13px; color:var(--ink-2); }
   .stmt b { color:var(--ink); }

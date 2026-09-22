@@ -1524,14 +1524,59 @@ function renderQuestion(): void {
     render();
   });
 }
+/**
+ * Where each race's own page lives, per office and per locale.
+ *
+ * The pages are built by scripts/build_races.mjs and have been indexed since 21
+ * September with nothing on this site linking to them: reachable by a crawler
+ * through the sitemap, and by a reader not at all. They exist to be found by
+ * somebody searching a candidate's name, and an internal link is both a ranking
+ * signal and the only way a reader here can reach one.
+ *
+ * Kept in step with the SLUG table in that script. If a slug changes there and
+ * not here, this links to a 404, which is why the check in verify_site follows
+ * every one of these to a live page rather than asserting the href's shape.
+ */
+/**
+ * The districts that actually have a page, and the reason this list exists.
+ *
+ * build_district_pages.mjs deliberately builds TEN of the 150, ranked by how
+ * often the member crossed their own caucus, as a test of whether they rank at
+ * all before 150 near-identical templated pages get published. So the link has
+ * to be conditional: rendering it for any other district sends a reader who has
+ * just typed their ZIP code to a 404, which is worse than no link.
+ *
+ * When the other 140 are built, this becomes unnecessary rather than merely
+ * longer, and the conditional should be deleted rather than extended.
+ */
+const DISTRICT_PAGES = new Set([31, 32, 49, 71, 95, 108, 112, 118, 123, 142]);
+
+function districtPageLink(m: rep.Member): string {
+  if (!DISTRICT_PAGES.has(m.d)) return '';
+  const slug = LOCALE === 'es' ? 'distrito' : 'district';
+  return `<a class="cand-race" href="/${slug}/${m.d}">${
+    esc(t('rep.districtLink', { name: m.n, d: m.d }))}</a>`;
+}
+
+const RACE_SLUG: Record<string, { en: string; es: string }> = {
+  'Governor': { en: 'race/governor', es: 'contienda/gobernador' },
+  'Lieutenant Governor': { en: 'race/lieutenant-governor', es: 'contienda/vicegobernador' },
+  'U.S. Senate': { en: 'race/us-senate', es: 'contienda/senado' },
+};
+
 function renderCands(): void {
   el('cands').innerHTML = CANDIDATES.map((c) => {
     const r = scoreOf(adapted, c.id, answers);
+    const slug = RACE_SLUG[c.office]?.[LOCALE === 'es' ? 'es' : 'en'];
+    const link = slug
+      ? `<a class="cand-race" href="/${slug}">${esc(t('cand.raceLink'))}</a>`
+      : '';
     return `<div class="cand"><div class="cand-name">${esc(c.name)}</div>` +
       `<div class="cand-office">${esc(c.office)} · TX House ${DATA.session}</div>` +
       `<div class="cand-score num">${r.n ? fmt(r.adjusted) : '—'}</div>` +
       `<div class="cand-phrase">${r.n ? esc(r.phrase) : 'no answered votes yet'}</div>` +
-      `<div class="cand-n">n = ${r.n}${r.n && r.n < 10 ? ' · heavily shrunk' : ''}</div></div>`;
+      `<div class="cand-n">n = ${r.n}${r.n && r.n < 10 ? ' · heavily shrunk' : ''}</div>` +
+      link + `</div>`;
   }).join('');
   el('cand-note').innerHTML =
     `All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together — where they diverge is the interesting part. Coverage over these ${ALL_ITEMS.length} votes: ` +
@@ -2189,6 +2234,7 @@ function renderRepOut(): void {
             `<div class="cand-score num">${r.phrase ? fmt(r.adjusted) : '—'}</div>` +
             `<div class="cand-phrase">${esc(r.phrase ?? '')}</div>` +
             `<div class="cand-n">n = ${r.n}</div>` +
+            districtPageLink(m) +
             `</div></div>`;
           // What this member did, which needs nothing from the reader.
           //
