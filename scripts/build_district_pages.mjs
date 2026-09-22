@@ -45,7 +45,7 @@
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
-import { SITE, esc, loadFaces, document_ } from './_page_shell.mjs';
+import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -116,6 +116,37 @@ for (const [zip, v] of Object.entries(zipFile.zips)) {
 const zipsFor = (d) => (zipsByDistrict.get(d) ?? [])
   .slice().sort((a, b) => (b.people ?? 0) - (a.people ?? 0)).map((z) => z.zip);
 
+/**
+ * Where a reader goes to check a bill for themselves.
+ *
+ * WHY THIS EXISTS. The race pages link every bill they name to its history at
+ * the Legislature. These pages did not, and they are the ones making a claim
+ * about a named living person's voting record, so they were the pages where
+ * "check it yourself" was hardest to act on.
+ *
+ * The payload already carries a curated URL for the 31 bills that drew a
+ * Governor or Lieutenant Governor action, and that one is preferred wherever it
+ * exists. It is not merely the same string: SB 3 deliberately points at the
+ * Legislative Reference Library rather than at capitol.texas.gov, and
+ * reconstructing it would quietly throw that decision away.
+ *
+ * The rest are built from the bill number. All 29 of those were fetched and
+ * confirmed to name their bill before this shipped; capitol.texas.gov answers
+ * 200 with a generic search page rather than a 404, so a bill that does not
+ * exist returns about 3.6 KB naming nothing, against 5.9 KB or more for a real
+ * one. A dead link on this page would be worse than no link at all.
+ */
+const CURATED = new Map();
+for (const it of payload.items) {
+  for (const a of it.acts ?? []) {
+    if (/capitol\.texas\.gov|lrl\.texas\.gov/.test(a.sourceUrl) && !CURATED.has(it.billId)) {
+      CURATED.set(it.billId, a.sourceUrl);
+    }
+  }
+}
+const billUrl = (billId) => CURATED.get(billId)
+  ?? `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=${billId.replace(/\s+/g, '')}`;
+
 function summaryFor(it, lang) {
   if (lang !== 'es') return it.plain ?? it.caption;
   const es = sidecar.items?.[it.billId]?.plain;
@@ -147,6 +178,7 @@ const COPY = {
     disclose: 'Marco Arras, a Texas resident. I donate to the Democratic Party, and I say so before anything else rather than in a footnote. The rule that picks which votes appear is published and runs identically on both caucuses, and every vote and count is in a file you can download and check.',
     sourceLabel: 'Sources.',
     source: 'Roll calls from the Texas House Journal and LegiScan. Districts and ZIP codes derived from 2020 Census blocks; the method and its known error are documented in ZIP_TO_DISTRICT.md.',
+    histLabel: 'history',
     langSwitch: 'En español',
   },
   es: {
@@ -167,6 +199,7 @@ const COPY = {
     disclose: 'Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar.',
     sourceLabel: 'Fuentes.',
     source: 'Votaciones nominales del Diario de la Cámara de Texas y de LegiScan. Los distritos y códigos postales se derivan de los bloques del censo de 2020; el método y su error conocido están documentados en ZIP_TO_DISTRICT.md.',
+    histLabel: 'historial',
     langSwitch: 'In English',
   },
 };
@@ -182,7 +215,8 @@ function render(m, lang) {
 
   const crossBlock = r.crossings.length
     ? `<h2>${esc(c.h2cross)}</h2><ul>${r.crossings.map((it) =>
-      `<li><span class="bill">${esc(it.billId)}</span> — ${esc(summaryFor(it, lang))}</li>`).join('')}</ul>`
+      `<li><span class="bill">${esc(it.billId)}</span> — ${esc(summaryFor(it, lang))} `
+      + `<a class="hist" href="${esc(billUrl(it.billId))}" rel="nofollow noopener" target="_blank">${esc(c.histLabel)}</a></li>`).join('')}</ul>`
     : `<h2>${esc(c.h2cross)}</h2><p>${esc(c.noCross(m))}</p>`;
 
   const body = `
@@ -196,6 +230,7 @@ function render(m, lang) {
   <h2>${esc(c.h2try)}</h2>
   <p>${esc(c.tryBody)}</p>
   <p><a class="cta" href="${c.target}">${esc(c.tryCta)}</a></p>
+  <p class="small">${sheetLine(lang)}</p>
   <hr>
   <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>
   <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source)}</p>`;

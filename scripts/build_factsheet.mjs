@@ -297,6 +297,7 @@ li{margin-bottom:5px}
      border-top:2px solid var(--ink)}
 .cta svg{width:106px;height:106px;flex:none;display:block}
 .url{font-size:30px;font-weight:600;line-height:1.05;letter-spacing:-.02em;word-break:break-word}
+.url a{color:inherit;text-decoration:none}
 .url span{display:block;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:11.5px;
           font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:0}
 .who{font-size:11.5px;color:var(--muted);margin-top:15px;padding-top:11px;
@@ -369,7 +370,7 @@ ${outcomesFor(L.lang).map((o) => `  <div class="out">
 
 <div class="cta">
   ${qrSvg}
-  <div class="url">${esc(L.urlLabel)}<span>${esc(L.urlSub)}</span></div>
+  <div class="url"><a href="${L.target}">${esc(L.urlLabel)}</a><span>${esc(L.urlSub)}</span></div>
 </div>
 
 <p class="who"><b>${esc(L.whoLabel)}</b> ${esc(L.who)}</p>

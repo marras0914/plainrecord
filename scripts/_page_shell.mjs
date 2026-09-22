@@ -63,6 +63,10 @@ ul{margin:0 0 14px;padding-left:1.1rem}
 li{margin:0 0 8px}
 .bill{font-variant-numeric:tabular-nums;font-weight:600}
 .small{font-size:13.5px;color:var(--muted)}
+/* The check-it-yourself link beside a bill. Deliberately quieter than the
+   summary it follows: it is there for the reader who doubts the line, not a
+   thing every reader is being sent to. */
+.hist{font-size:12.5px;white-space:nowrap}
 a{color:var(--blue)}
 .cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
   background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
@@ -82,6 +86,20 @@ hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
  * one from a search result needs a way across that does not involve the site's
  * front door.
  */
+/**
+ * A line pointing at the printable one-page sheet.
+ *
+ * RETURNS HTML, not text, so callers must NOT pass it through esc(). It is the
+ * only string in these builders that carries a tag, which is why it says so
+ * here rather than trusting whoever adds the next caller to notice.
+ *
+ * It exists because both sheets were orphans: in the sitemap, linked from no
+ * page on the site, and carrying no outbound link of their own.
+ */
+export const sheetLine = (lang) => (lang === 'es'
+  ? `También hay una <a href="${SITE}/hoja">hoja informativa de una página</a>, para imprimir o para entregar en mano.`
+  : `There is also a <a href="${SITE}/fact-sheet">one-page fact sheet</a>, to print or to hand to someone.`);
+
 export function document_({ lang, title, siteName, desc, canonical, altHref, altLabel, otherLang, ogImage, jsonld, faces, kicker, body }) {
   return `<!doctype html>
 <html lang="${lang === 'es' ? 'es-US' : 'en-US'}">

@@ -51,7 +51,7 @@
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
-import { SITE, esc, loadFaces, document_ } from './_page_shell.mjs';
+import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -363,6 +363,7 @@ function render(race, lang) {
   <h2>${esc(c.h2try)}</h2>
   <p>${esc(c.tryBody)}</p>
   <p><a class="cta" href="${c.target}">${esc(c.tryCta)}</a></p>
+  <p class="small">${sheetLine(lang)}</p>
 
   <hr>
 
