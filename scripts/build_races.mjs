@@ -34,11 +34,15 @@
  * opposite sides — so a reader who checks one against the other finds the same
  * number.
  *
- * THE SPANISH SUBSTANCE IS ALREADY APPROVED. whyNoVotes, evidence and oneSided
- * come from public/data/quiz_89R.es.json, reviewed on 20 September. Only the
- * framing below is new, and like build_factsheet.mjs it sits inline here rather
- * than in i18n/copy.json, so the Spanish gate does NOT cover it. It needs a
- * human read before it ships.
+ * THE SPANISH IS APPROVED. The substance — whyNoVotes, evidence, oneSided and
+ * every bill summary — is quoted from public/data/quiz_89R.es.json, reviewed on
+ * 20 September. The framing in COPY.es below was written on 21 September and
+ * approved by Marco the same day.
+ *
+ * It sits inline here rather than in i18n/copy.json, exactly as
+ * build_factsheet.mjs does, which means THE SPANISH GATE DOES NOT COVER IT.
+ * npm run i18n:check will pass no matter what this file says, so any later edit
+ * to the Spanish here needs a human read; the build will not catch it.
  *
  * NO JAVASCRIPT, NOTHING THIRD-PARTY, NO TRACKING, every URL absolute. Same
  * rules as the fact sheet and for the same reason.
