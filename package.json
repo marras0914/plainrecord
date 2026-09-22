@@ -57,7 +57,8 @@
     "data:elsewhere": "node --max-old-space-size=4096 scripts/add_elsewhere_votes.mjs",
     "data:votes:check": "node scripts/check_vote_selection.mjs",
     "data:races": "node scripts/build_races.mjs",
-    "data:districtpages": "node scripts/build_district_pages.mjs"
+    "data:districtpages": "node scripts/build_district_pages.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.4.1",
