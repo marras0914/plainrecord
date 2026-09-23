@@ -147,6 +147,14 @@ for (const it of payload.items) {
 const billUrl = (billId) => CURATED.get(billId)
   ?? `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=${billId.replace(/\s+/g, '')}`;
 
+/** The short approved name for a headline bill, in the reader's language. */
+function labelFor(it, lang) {
+  if (lang !== 'es') return it.label ?? it.billId;
+  const es = sidecar.items?.[it.billId]?.label;
+  if (!es) throw new Error(`no Spanish label in the sidecar for ${it.billId}`);
+  return es;
+}
+
 function summaryFor(it, lang) {
   if (lang !== 'es') return it.plain ?? it.caption;
   const es = sidecar.items?.[it.billId]?.plain;
@@ -167,6 +175,12 @@ const COPY = {
     desc: (m, r) => `How ${m.n} voted on 67 recorded Texas House votes from the 2025 session, `
       + `including the ${r.crossed} where they broke with their own party. Free, no sign-up, nothing tracked.`,
     lede: (m, r, why) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}.`,
+    h2head: 'How they voted on the bills people have heard of',
+    headNote: 'These seven drew the most attention of the 67 this site publishes. Every member has a position on record for each one, whichever way they went.',
+    yea: 'Voted for',
+    nay: 'Voted against',
+    noVote: 'No recorded vote',
+    elsewhere: (v) => `${v}, on another vote on this bill`,
     h2cross: 'Where they broke with their own party',
     noCross: (m) => `On the votes where the two parties took opposite sides, ${m.n} voted with their own party every time.`,
     h2zip: (m) => `ZIP codes in District ${m.d}`,
@@ -188,6 +202,12 @@ const COPY = {
     desc: (m, r) => `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, `
       + `incluidos los ${r.crossed} en los que se apartó de su propio partido. Gratis, sin registro y sin rastreo.`,
     lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}.`,
+    h2head: 'Cómo votó en los proyectos de ley de los que sí se habló',
+    headNote: 'Estos siete fueron los que más atención recibieron de los 67 que publica este sitio. De cada uno hay una posición registrada para cada legislador, sea cual sea.',
+    yea: 'Votó a favor',
+    nay: 'Votó en contra',
+    noVote: 'Sin voto registrado',
+    elsewhere: (v) => `${v}, en otra votación sobre este mismo proyecto`,
     h2cross: 'Dónde se apartó de su propio partido',
     noCross: (m) => `En los votos en los que los dos partidos tomaron lados opuestos, ${m.n} votó siempre con el suyo.`,
     h2zip: (m) => `Códigos postales del Distrito ${m.d}`,
@@ -204,6 +224,36 @@ const COPY = {
   },
 };
 
+/**
+ * The seven bills the payload flags as headline, in the order it lists them.
+ *
+ * Every one carries an approved plain-language summary in both languages and an
+ * approved label, so this block needs no new translation of bill content.
+ */
+const HEADLINE = payload.items.filter((i) => i.headline);
+
+/**
+ * How one member stood on one bill.
+ *
+ * A blank is not always an absence. The payload records, per item, members who
+ * cast no vote on THE roll call this site uses but who did vote on another roll
+ * call of the same bill. Reporting those as "no recorded vote" would be the
+ * single most misleading thing this page could say about somebody, so they are
+ * shown with the position they actually took and marked as not counted here.
+ * That is the same rule the site itself applies.
+ */
+function standOn(item, member, lang) {
+  const mark = member.v[order.indexOf(item.id)];
+  const c = COPY[lang];
+  if (mark === 'y') return { kind: 'yea', text: c.yea };
+  if (mark === 'n') return { kind: 'nay', text: c.nay };
+  const other = item.elsewhere?.[member.id];
+  if (other === 1 || other === -1) {
+    return { kind: 'elsewhere', text: c.elsewhere(other === 1 ? c.yea : c.nay) };
+  }
+  return { kind: 'none', text: c.noVote };
+}
+
 const slugFor = (d, lang) => (lang === 'es' ? `distrito/${d}` : `district/${d}`);
 
 function render(m, lang) {
@@ -212,6 +262,20 @@ function render(m, lang) {
   const canonical = `${SITE}/${slugFor(m.d, lang)}`;
   const altHref = `${SITE}/${slugFor(m.d, c.other)}`;
   const zips = zipsFor(m.d);
+
+  // Placed BELOW the crossings on purpose. This block is identical on all 150
+  // pages except for seven words, so it is the boilerplate; the crossing list is
+  // the part that is only true of this member. Unique content goes first, and an
+  // earlier draft had these the other way round, which pushed the distinctive
+  // material below seven repeated bill summaries on every page in the set.
+  const headBlock = `<h2>${esc(c.h2head)}</h2><p class="small">${esc(c.headNote)}</p><ul class="stand">${
+    HEADLINE.map((it) => {
+      const st = standOn(it, m, lang);
+      return `<li><span class="bill">${esc(it.billId)}</span> <b>${esc(labelFor(it, lang))}</b>`
+        + ` <span class="vm vm-${st.kind}">${esc(st.text)}</span><br>`
+        + `<span class="small">${esc(summaryFor(it, lang))} `
+        + `<a class="hist" href="${esc(billUrl(it.billId))}" rel="nofollow noopener" target="_blank">${esc(c.histLabel)}</a></span></li>`;
+    }).join('')}</ul>`;
 
   const crossBlock = r.crossings.length
     ? `<h2>${esc(c.h2cross)}</h2><ul>${r.crossings.map((it) =>
@@ -223,6 +287,7 @@ function render(m, lang) {
   <h1>${esc(c.title(m))}</h1>
   <p class="lede">${esc(c.lede(m, r))}</p>
   ${crossBlock}
+  ${headBlock}
   <h2>${esc(c.h2zip(m))}</h2>
   <p class="zips">${zips.map(esc).join(' · ')}</p>
   <p class="small">${esc(c.zipNote)}</p>
