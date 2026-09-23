@@ -666,6 +666,13 @@
     "vars": [],
     "status": "ok"
   },
+  "author.districtIndex": {
+    "en": "Or browse <a href=\"https://rightnleft.com/districts\">all 150 Texas House districts</a>, one page per member.",
+    "es": "O vea <a href=\"https://rightnleft.com/distritos\">los 150 distritos de la Cámara de Texas</a>, una página por cada legislador.",
+    "where": "Authorship card, fine print, directly under the contact line.",
+    "vars": [],
+    "status": "ok"
+  },
   "mode.short": {
     "en": "7 big issues",
     "es": "7 temas grandes",

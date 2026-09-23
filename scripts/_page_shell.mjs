@@ -69,6 +69,11 @@ li{margin:0 0 8px}
 .hist{font-size:12.5px;white-space:nowrap}
 /* How a member stood on a headline bill. A word, not a colour: the page is read
    by people who cannot distinguish red from green, and printed in black. */
+.dindex{list-style:none;padding:0;margin:14px 0 18px;columns:2;column-gap:26px}
+.dindex li{break-inside:avoid;padding:3px 0;font-size:15.5px}
+.dindex a{text-decoration:none}
+.dindex a:hover{text-decoration:underline}
+@media (max-width:520px){.dindex{columns:1}}
 .stand{list-style:none;padding:0;margin:0}
 .stand li{padding:9px 0;border-top:1px solid var(--hair)}
 .stand li:first-child{border-top:0}

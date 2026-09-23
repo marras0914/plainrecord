@@ -174,6 +174,13 @@ const COPY = {
     desc: (m, r) => `How ${m.n} voted on 67 recorded Texas House votes from the 2025 session, `
       + `including the ${r.crossed} where they broke with their own party. Free, no sign-up, nothing tracked.`,
     lede: (m, r) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
+    indexTitle: 'Every Texas House district',
+    indexDesc: 'All 150 Texas House districts, the member who holds each one, and how they voted in the 2025 session. Free, no sign-up, nothing tracked.',
+    indexLede: 'One page per sitting member, showing how they voted on the bills that drew the most attention and where they broke with their own party.',
+    indexKey: 'The pair after each name is how often that member voted against their own party, out of the votes where the two parties took opposite sides.',
+    indexVacant: (d) => `District ${d} has no sitting member and so has no page. Nate Schatzline held it and left on 29 July 2026, after casting 3,283 votes that are still the record for that district.`,
+    indexZip: 'If you do not know your district, the lookup takes a ZIP code. Nearly half of Texas ZIP codes sit in more than one House district, so it lists every district yours touches rather than picking one.',
+    indexBack: 'All 150 districts',
     h2head: 'How they voted on the bills people have heard of',
     headNote: 'These seven drew the most attention of the 67 this site publishes. Every member has a position on record for each one, whichever way they went.',
     yea: 'Voted for',
@@ -201,6 +208,13 @@ const COPY = {
     desc: (m, r) => `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, `
       + `incluidos los ${r.crossed} en los que se apartó de su propio partido. Gratis, sin registro y sin rastreo.`,
     lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
+    indexTitle: 'Todos los distritos de la Cámara de Texas',
+    indexDesc: 'Los 150 distritos de la Cámara de Texas, quién ocupa cada uno, y cómo votaron en la sesión de 2025. Gratis, sin registro y sin rastreo.',
+    indexLede: 'Una página por cada legislador en funciones, con cómo votó en los proyectos de ley que más atención recibieron y dónde se apartó de su propio partido.',
+    indexKey: 'El par que sigue a cada nombre es cuántas veces esa persona votó en contra de su propio partido, de los votos en los que los dos partidos tomaron lados opuestos.',
+    indexVacant: (d) => `El Distrito ${d} no tiene legislador en funciones, así que no tiene página. Nate Schatzline lo ocupaba y se fue el 29 de julio de 2026, después de emitir 3,283 votos que siguen siendo el registro de ese distrito.`,
+    indexZip: 'Si no sabe cuál es su distrito, la búsqueda acepta un código postal. Casi la mitad de los códigos postales de Texas están en más de un distrito, así que le muestra todos los que le tocan en vez de escoger uno.',
+    indexBack: 'Los 150 distritos',
     h2head: 'Cómo votó en los proyectos de ley de los que sí se habló',
     headNote: 'Estos siete fueron los que más atención recibieron de los 67 que publica este sitio. De cada uno hay una posición registrada para cada legislador, sea cual sea.',
     yea: 'Votó a favor',
@@ -299,6 +313,7 @@ function render(m, lang) {
   <p>${esc(c.tryBody)}</p>
   <p><a class="cta" href="${c.target}">${esc(c.tryCta)}</a></p>
   <p class="small">${sheetLine(lang)}</p>
+  <p class="small"><a href="${SITE}/${lang === 'es' ? 'distritos' : 'districts'}">${esc(c.indexBack)}</a></p>
   <hr>
   <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>
   <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source)}</p>`;
@@ -343,5 +358,56 @@ for (const { d } of chosen) {
   console.log(`  HD-${String(d).padStart(3)}  ${m.n.padEnd(22)}${m.p}  `
     + `cast ${r.cast}/${r.total}, crossed ${r.crossed} of ${r.divisive}, ${zipsFor(d).length} ZIPs`);
 }
-console.log(`\n  ${n} district pages written (${chosen.length} sitting members x 2 languages)\n`);
+// --- the index -------------------------------------------------------------
+//
+// This exists because nothing linked to the district pages. Each one had a
+// single crawlable inbound link, its own translation, so the set was 149 closed
+// pairs that a reader could only reach by finishing the quiz and a crawler could
+// only reach through the sitemap.
+for (const lang of ['en', 'es']) {
+  const c = COPY[lang];
+  const dir = lang === 'es' ? 'distritos' : 'districts';
+  const canonical = `${SITE}/${dir}`;
+  const altHref = `${SITE}/${lang === 'es' ? 'districts' : 'distritos'}`;
+
+  const items = [...members.members].sort((a, b) => a.d - b.d).map((m) => {
+    const r = stat.get(m.d);
+    return `<li><a href="${SITE}/${slugFor(m.d, lang)}">`
+      + `<span class="bill">${esc(String(m.d))}</span> ${esc(m.n)}</a>`
+      + ` <span class="small">${esc(PARTY[lang][m.p])}, ${r.crossed}/${r.divisive}</span></li>`;
+  }).join('');
+
+  const body = `
+  <h1>${esc(c.indexTitle)}</h1>
+  <p class="lede">${esc(c.indexLede)}</p>
+  <p class="small">${esc(c.indexKey)}</p>
+  <ul class="dindex">${items}</ul>
+  <p class="small">${esc(c.indexVacant(93))}</p>
+  <p class="small">${esc(c.indexZip)}</p>
+  <hr>
+  <p><a class="cta" href="${c.target}">${esc(c.tryCta)}</a></p>
+  <p class="small">${sheetLine(lang)}</p>
+  <hr>
+  <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>
+  <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source)}</p>`;
+
+  const html = document_({
+    lang, title: c.indexTitle, siteName: c.siteName, desc: c.indexDesc,
+    canonical, altHref, altLabel: c.langSwitch, otherLang: c.other,
+    faces, kicker: c.kicker, body,
+    jsonld: JSON.stringify({
+      '@context': 'https://schema.org', '@type': 'CollectionPage',
+      name: c.indexTitle, description: c.indexDesc, url: canonical,
+      inLanguage: lang === 'es' ? 'es-US' : 'en-US',
+      isPartOf: { '@type': 'WebSite', name: c.siteName, url: SITE },
+    }),
+  });
+  const out = resolve(ROOT, 'public', dir);
+  mkdirSync(out, { recursive: true });
+  writeFileSync(join(out, 'index.html'), html, 'utf8');
+  n++;
+}
+console.log(`  /districts and /distritos written, linking all ${members.members.length} members`);
+
+console.log(`\n  ${n} district pages written (${chosen.length} sitting members x 2 languages, plus 2 index pages)\n`);
 

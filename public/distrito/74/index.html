@@ -77,6 +77,11 @@ li{margin:0 0 8px}
 .hist{font-size:12.5px;white-space:nowrap}
 /* How a member stood on a headline bill. A word, not a colour: the page is read
    by people who cannot distinguish red from green, and printed in black. */
+.dindex{list-style:none;padding:0;margin:14px 0 18px;columns:2;column-gap:26px}
+.dindex li{break-inside:avoid;padding:3px 0;font-size:15.5px}
+.dindex a{text-decoration:none}
+.dindex a:hover{text-decoration:underline}
+@media (max-width:520px){.dindex{columns:1}}
 .stand{list-style:none;padding:0;margin:0}
 .stand li{padding:9px 0;border-top:1px solid var(--hair)}
 .stand li:first-child{border-top:0}
@@ -113,6 +118,7 @@ hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
   <p>El sitio le pregunta sobre estos mismos votos con las etiquetas de partido ocultas, y después le muestra dónde quedó usted junto a quienes votaron de verdad.</p>
   <p><a class="cta" href="https://rightnleft.com/es">Ábralo en español</a></p>
   <p class="small">También hay una <a href="https://rightnleft.com/hoja">hoja informativa de una página</a>, para imprimir o para entregar en mano.</p>
+  <p class="small"><a href="https://rightnleft.com/distritos">Los 150 distritos</a></p>
   <hr>
   <p class="small"><span class="label">Quién lo hizo.</span> Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar.</p>
   <p class="small"><span class="label">Fuentes.</span> Votaciones nominales del Diario de la Cámara de Texas y de LegiScan. Los distritos y códigos postales se derivan de los bloques del censo de 2020; el método y su error conocido están documentados en ZIP_TO_DISTRICT.md.</p>

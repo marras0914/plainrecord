@@ -1083,7 +1083,11 @@ function renderCrossings(m: rep.Member): string {
     // again rendered "HB 1128HB 1128".
     const what = it.label ?? it.billId;
     const sub = it.label ? `<small>${esc(it.billId)}</small>` : '';
-    return `<li><span class="cr-name">${esc(what)}${sub}</span>` +
+    // class="cand-rev" is what makes this a grid row. Without it the <li> was a
+    // plain block, the two spans fell back to inline, and they rendered with no
+    // space between them: "HB 5616voted Yea". styles.css has always had a
+    // `.rep-crossed .cand-rev` rule expecting this class to be here.
+    return `<li class="cand-rev"><span class="cr-name">${esc(what)}${sub}</span>` +
       `<span class="cr-vote">${esc(t('rep.crossedRow', {
         vote: t(c.cast === 1 ? 'vote.yea' : 'vote.nay'),
       }))}</span></li>`;

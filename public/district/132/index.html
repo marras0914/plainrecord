@@ -77,6 +77,11 @@ li{margin:0 0 8px}
 .hist{font-size:12.5px;white-space:nowrap}
 /* How a member stood on a headline bill. A word, not a colour: the page is read
    by people who cannot distinguish red from green, and printed in black. */
+.dindex{list-style:none;padding:0;margin:14px 0 18px;columns:2;column-gap:26px}
+.dindex li{break-inside:avoid;padding:3px 0;font-size:15.5px}
+.dindex a{text-decoration:none}
+.dindex a:hover{text-decoration:underline}
+@media (max-width:520px){.dindex{columns:1}}
 .stand{list-style:none;padding:0;margin:0}
 .stand li{padding:9px 0;border-top:1px solid var(--hair)}
 .stand li:first-child{border-top:0}
@@ -113,6 +118,7 @@ hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
   <p>The site asks you about these same votes with the party labels hidden, then shows you where you landed next to the members who actually voted.</p>
   <p><a class="cta" href="https://rightnleft.com/">Open it in English</a></p>
   <p class="small">There is also a <a href="https://rightnleft.com/fact-sheet">one-page fact sheet</a>, to print or to hand to someone.</p>
+  <p class="small"><a href="https://rightnleft.com/districts">All 150 districts</a></p>
   <hr>
   <p class="small"><span class="label">Who made this.</span> Marco Arras, a Texas resident. I donate to the Democratic Party, and I say so before anything else rather than in a footnote. The rule that picks which votes appear is published and runs identically on both caucuses, and every vote and count is in a file you can download and check.</p>
   <p class="small"><span class="label">Sources.</span> Roll calls from the Texas House Journal and LegiScan. Districts and ZIP codes derived from 2020 Census blocks; the method and its known error are documented in ZIP_TO_DISTRICT.md.</p>
