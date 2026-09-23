@@ -2667,7 +2667,13 @@ try {
     check('links: every race link resolves to a live page',
       bad.length === 0, bad.join(', ') || `${new Set(raceHrefs).size} checked`);
 
-    // A district WITH a page offers the link; one WITHOUT must offer nothing.
+    // EVERY sitting member has a page now, so both of these must offer a link.
+    //
+    // This check used to require that HD-47 offered NO link, because only ten
+    // districts had a page and anything else would have been a 404. That rule is
+    // gone. 47 is kept as the second probe precisely because it was outside the
+    // old ten: it is the case that proves the scale-up reached the pages the
+    // pilot never covered, rather than merely not regressing on the ten.
     const box = await lp.$('#rep-district');
     await box.click();
     await lp.keyboard.type('31', { delay: 30 });
@@ -2677,12 +2683,18 @@ try {
     await box.click();
     await lp.keyboard.type('47', { delay: 30 });
     await lp.waitForTimeout(1200);
-    const withoutPage = await lp.$$eval('#rep-card .cand-race', (as) => as.length);
+    const beyondPilot = await lp.$$eval('#rep-card .cand-race', (as) => as.map((a) => a.getAttribute('href')));
 
-    check('links: a district with its own page offers it',
+    check('links: a district from the original ten offers its page',
       withPage.length === 1 && withPage[0] === '/district/31', withPage.join(', ') || '(none)');
-    check('links: a district without one offers no link rather than a 404',
-      withoutPage === 0, `HD-47 rendered ${withoutPage} link(s)`);
+    check('links: a district outside the original ten offers one too',
+      beyondPilot.length === 1 && beyondPilot[0] === '/district/47',
+      beyondPilot.join(', ') || '(none)');
+    if (beyondPilot.length) {
+      const r = await lp.request.get(new URL(beyondPilot[0], URL_UNDER_TEST).href);
+      check('links: and that page is really there, not a 404',
+        r.ok(), `${beyondPilot[0]} -> ${r.status()}`);
+    }
     if (withPage.length) {
       const r = await lp.request.get(new URL(withPage[0], URL_UNDER_TEST).href);
       check('links: the district link resolves to a live page', r.ok(), `${withPage[0]} -> ${r.status()}`);

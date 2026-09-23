@@ -1538,21 +1538,19 @@ function renderQuestion(): void {
  * every one of these to a live page rather than asserting the href's shape.
  */
 /**
- * The districts that actually have a page, and the reason this list exists.
+ * Every sitting member has a page, so there is no longer a list to be in.
  *
- * build_district_pages.mjs deliberately builds TEN of the 150, ranked by how
- * often the member crossed their own caucus, as a test of whether they rank at
- * all before 150 near-identical templated pages get published. So the link has
- * to be conditional: rendering it for any other district sends a reader who has
- * just typed their ZIP code to a 404, which is worse than no link.
+ * This was a Set of ten districts with a conditional around the link, because
+ * only ten pages existed and rendering the link for any other district would
+ * have sent a reader who had just typed their ZIP code to a 404. The comment
+ * here said that when the rest were built this should be deleted rather than
+ * extended, and it has been.
  *
- * When the other 140 are built, this becomes unnecessary rather than merely
- * longer, and the conditional should be deleted rather than extended.
+ * HD-93 is the one district with no link, and it needs no special case: it has
+ * no sitting member, so nothing here ever renders a card for it.
  */
-const DISTRICT_PAGES = new Set([31, 32, 49, 71, 95, 108, 112, 118, 123, 142]);
 
 function districtPageLink(m: rep.Member): string {
-  if (!DISTRICT_PAGES.has(m.d)) return '';
   const slug = LOCALE === 'es' ? 'distrito' : 'district';
   return `<a class="cand-race" href="/${slug}/${m.d}">${
     esc(t('rep.districtLink', { name: m.n, d: m.d }))}</a>`;

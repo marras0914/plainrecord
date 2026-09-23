@@ -78,28 +78,27 @@ function recordOf(m) {
 
 const stat = new Map(members.members.map((m) => [m.d, recordOf(m)]));
 
-// --- the ten ---------------------------------------------------------------
+// --- who gets a page ------------------------------------------------------
+//
+// Everyone who holds a seat. This was ten districts, picked by the five biggest
+// cities and then by who broke with their caucus most often, and the comment
+// here said plainly that it was a pilot to see whether they rank at all before
+// a page per member got published.
+//
+// What made scaling risky was thin pages: the only per-member content was the
+// crossing list, the median member crossed four times, and pages ran as short
+// as 319 words. The headline block fixed that, taking the minimum to 625.
+//
+// 149 and not 150. HD-93 has had no sitting member since 29 July 2026, and it
+// drops out naturally because this reads the roster rather than counting to 150.
+// The assertion below is what turns that from a silent omission into a stated
+// fact if the roster ever changes shape.
+const chosen = [...members.members]
+  .sort((a, b) => a.d - b.d)
+  .map((m) => ({ d: m.d }));
 
-const BIG_CITY = {
-  Houston: '77002', 'San Antonio': '78205', Dallas: '75201',
-  Austin: '78701', 'Fort Worth': '76102',
-};
-
-const chosen = [];
-const taken = new Set();
-for (const [city, zip] of Object.entries(BIG_CITY)) {
-  const v = zipFile.zips[zip];
-  const d = Array.isArray(v) ? v[0][0] : v;
-  if (taken.has(d)) continue;
-  taken.add(d);
-  chosen.push({ d, why: { en: city, es: city } });
-}
-const ranked = [...members.members].sort((a, b) => stat.get(b.d).crossed - stat.get(a.d).crossed);
-for (const m of ranked) {
-  if (chosen.length >= 10) break;
-  if (taken.has(m.d)) continue;
-  taken.add(m.d);
-  chosen.push({ d: m.d, why: { en: 'breaks with their party most often', es: 'de quienes más se apartan de su partido' } });
+if (chosen.length < 100) {
+  throw new Error(`only ${chosen.length} members on the roster; the file is probably truncated`);
 }
 
 // --- ZIPs per district ------------------------------------------------------
@@ -174,7 +173,7 @@ const COPY = {
     title: (m) => `${m.n}, Texas House District ${m.d}`,
     desc: (m, r) => `How ${m.n} voted on 67 recorded Texas House votes from the 2025 session, `
       + `including the ${r.crossed} where they broke with their own party. Free, no sign-up, nothing tracked.`,
-    lede: (m, r, why) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}.`,
+    lede: (m, r) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
     h2head: 'How they voted on the bills people have heard of',
     headNote: 'These seven drew the most attention of the 67 this site publishes. Every member has a position on record for each one, whichever way they went.',
     yea: 'Voted for',
@@ -201,7 +200,7 @@ const COPY = {
     title: (m) => `${m.n}, Distrito ${m.d} de la Cámara de Texas`,
     desc: (m, r) => `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, `
       + `incluidos los ${r.crossed} en los que se apartó de su propio partido. Gratis, sin registro y sin rastreo.`,
-    lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}.`,
+    lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
     h2head: 'Cómo votó en los proyectos de ley de los que sí se habló',
     headNote: 'Estos siete fueron los que más atención recibieron de los 67 que publica este sitio. De cada uno hay una posición registrada para cada legislador, sea cual sea.',
     yea: 'Votó a favor',
@@ -277,11 +276,15 @@ function render(m, lang) {
         + `<a class="hist" href="${esc(billUrl(it.billId))}" rel="nofollow noopener" target="_blank">${esc(c.histLabel)}</a></span></li>`;
     }).join('')}</ul>`;
 
+  // Nothing to show is not a section. For the five members who never broke with
+  // their caucus the lede already says so, and a heading followed by one
+  // sentence restating it pushed the useful part of the page down while telling
+  // the reader the same thing twice.
   const crossBlock = r.crossings.length
     ? `<h2>${esc(c.h2cross)}</h2><ul>${r.crossings.map((it) =>
       `<li><span class="bill">${esc(it.billId)}</span> — ${esc(summaryFor(it, lang))} `
       + `<a class="hist" href="${esc(billUrl(it.billId))}" rel="nofollow noopener" target="_blank">${esc(c.histLabel)}</a></li>`).join('')}</ul>`
-    : `<h2>${esc(c.h2cross)}</h2><p>${esc(c.noCross(m))}</p>`;
+    : '';
 
   const body = `
   <h1>${esc(c.title(m))}</h1>
@@ -340,6 +343,5 @@ for (const { d } of chosen) {
   console.log(`  HD-${String(d).padStart(3)}  ${m.n.padEnd(22)}${m.p}  `
     + `cast ${r.cast}/${r.total}, crossed ${r.crossed} of ${r.divisive}, ${zipsFor(d).length} ZIPs`);
 }
-console.log(`\n  ${n} district pages written (${chosen.length} districts x 2 languages)\n`);
+console.log(`\n  ${n} district pages written (${chosen.length} sitting members x 2 languages)\n`);
 
-export const PILOT_DISTRICTS = chosen.map((c) => c.d);

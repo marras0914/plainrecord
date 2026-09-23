@@ -75,6 +75,14 @@ li{margin:0 0 8px}
    summary it follows: it is there for the reader who doubts the line, not a
    thing every reader is being sent to. */
 .hist{font-size:12.5px;white-space:nowrap}
+/* How a member stood on a headline bill. A word, not a colour: the page is read
+   by people who cannot distinguish red from green, and printed in black. */
+.stand{list-style:none;padding:0;margin:0}
+.stand li{padding:9px 0;border-top:1px solid var(--hair)}
+.stand li:first-child{border-top:0}
+.vm{font-size:12.5px;padding:1px 8px;border-radius:999px;white-space:nowrap;
+    border:1px solid var(--rule);color:var(--ink-2)}
+.vm-none{opacity:.75}
 a{color:var(--blue)}
 .cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
   background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
