@@ -86,6 +86,8 @@ export type CopyKey =
   | "author.races"
   | "author.why"
   | "author.contact"
+  | "rev.billPage"
+  | "author.districtIndex"
   | "mode.short"
   | "mode.full"
   | "mode.shortDesc"
@@ -431,6 +433,8 @@ export const EN: Record<CopyKey, string> = {
   "author.races": "<b>As a fellow Texas resident, I picked these three races.</b> Governor, Lieutenant Governor and U.S. Senate. That is an editorial decision, not a measurement, and it is the choice most worth arguing with, but I believe they are three of the most important races for all Texans. I also picked them because all three Democratic candidates sit in the Texas House, which means their records can be checked against your answers vote for vote. Their opponents cannot be, so this page gives them no score at all rather than an invented one.",
   "author.why": "<b>Why I made it.</b> Almost everything that reaches people about how their state is actually governed arrives pre-framed by someone who wants something. The votes themselves are public, tedious, and genuinely hard to get at. I wanted a way to see the record before seeing the label, and to hand over the entire file so that anyone can check the record is what I say it is.",
   "author.contact": "If something here is wrong, tell me: <a href=\"mailto:arras.marco@gmail.com\">arras.marco@gmail.com</a>. Corrections get made, and noted on the page.",
+  "rev.billPage": "How every House member voted on {bill}",
+  "author.districtIndex": "Or browse <a href=\"https://rightnleft.com/districts\">all 150 Texas House districts</a>, one page per member.",
   "mode.short": "7 big issues",
   "mode.full": "All {n} votes",
   "mode.shortDesc": "Seven of the session's biggest fights: the bills the Lieutenant Governor made priorities or the Governor vetoed. <b>Six of the seven split cleanly along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all {n} to find where you cross over.",
@@ -761,6 +765,8 @@ export const ES: Record<CopyKey, string> = {
   "author.races": "<b>Como residente de Texas, yo escogí estas tres contiendas.</b> Gobernador, Vicegobernador y Senado de Estados Unidos. Esa es una decisión editorial, no una medición, y es la elección que más vale la pena discutir, pero creo que son tres de las contiendas más importantes para todo Texas. También las escogí porque los tres candidatos demócratas están en la Cámara de Texas, lo que significa que sus historiales se pueden comparar con sus respuestas voto por voto. Los de sus oponentes no, así que esta página no les da ninguna calificación en lugar de darles una inventada.",
   "author.why": "<b>Por qué lo hice.</b> Casi todo lo que llega a la gente sobre cómo se gobierna realmente su estado llega ya enmarcado por alguien que quiere algo. Los votos en sí son públicos, tediosos y de verdad difíciles de alcanzar. Quería una manera de ver el registro antes de ver la etiqueta, y de entregar el archivo completo para que cualquiera pueda verificar que el registro es lo que yo digo que es.",
   "author.contact": "Si algo aquí está mal, dígamelo: <a href=\"mailto:arras.marco@gmail.com\">arras.marco@gmail.com</a>. Las correcciones se hacen y se anotan en la página.",
+  "rev.billPage": "Cómo votó cada integrante de la Cámara sobre el proyecto {bill}",
+  "author.districtIndex": "O vea <a href=\"https://rightnleft.com/distritos\">los 150 distritos de la Cámara de Texas</a>, una página por cada legislador.",
   "mode.short": "7 temas grandes",
   "mode.full": "Los {n} votos",
   "mode.shortDesc": "Siete de las peleas más grandes de la sesión: los proyectos que el Vicegobernador hizo prioridades o que el Gobernador vetó. <b>Seis de las siete dividieron limpiamente por línea partidista</b>, así que esta versión casi solo puede decirle hacia qué partido se inclina. Cambie a los {n} votos para encontrar dónde cruza.",

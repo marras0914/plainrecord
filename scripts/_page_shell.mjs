@@ -18,6 +18,7 @@
  */
 
 import { readFileSync } from 'node:fs';
+import { navHtml, footerHtml } from './_site_nav.mjs';
 
 export const SITE = 'https://rightnleft.com';
 
@@ -90,6 +91,17 @@ a{color:var(--blue)}
 hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
 .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
   font-size:13px;margin-bottom:22px}
+/* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
+   scrolling sideways on a phone; the current section is ink, not link blue. */
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sitenav a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}
+.sitenav a:hover{text-decoration:underline}
+.sitenav a[aria-current]{color:var(--ink);font-weight:600}
+.sitefoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px}
+.sitefoot ul{list-style:none;padding:0;margin:0}.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}.sitefoot a:hover{text-decoration:underline}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
 /* Charts, drawn by scripts/_charts.mjs. */
 .chart{margin:16px 0 10px}
 .chart svg{display:block;width:100%;height:auto;overflow:visible}
@@ -193,7 +205,9 @@ ${scripts.map((s) => `<script src="${s}" defer></script>\n`).join('')}</head>
     <span class="kicker">${esc(kicker)}</span>
     <a href="${altHref}">${esc(altLabel)}</a>
   </div>
+  ${navHtml(lang, canonical)}
 ${body}
+  ${footerHtml(lang)}
 </main>
 </body>
 </html>

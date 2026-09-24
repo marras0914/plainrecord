@@ -98,6 +98,17 @@ a{color:var(--blue)}
 hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
 .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
   font-size:13px;margin-bottom:22px}
+/* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
+   scrolling sideways on a phone; the current section is ink, not link blue. */
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sitenav a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}
+.sitenav a:hover{text-decoration:underline}
+.sitenav a[aria-current]{color:var(--ink);font-weight:600}
+.sitefoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px}
+.sitefoot ul{list-style:none;padding:0;margin:0}.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}.sitefoot a:hover{text-decoration:underline}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
 /* Charts, drawn by scripts/_charts.mjs. */
 .chart{margin:16px 0 10px}
 .chart svg{display:block;width:100%;height:auto;overflow:visible}
@@ -151,6 +162,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
     <span class="kicker">Texas House · 2025 session</span>
     <a href="https://rightnleft.com/distrito/6">En español</a>
   </div>
+  <nav class="sitenav" aria-label="Site sections"><a href="https://rightnleft.com/">Quiz</a><a href="https://rightnleft.com/districts" aria-current="true">Your rep</a><a href="https://rightnleft.com/bills">Bills</a><a href="https://rightnleft.com/races">Races</a><a href="https://rightnleft.com/charts">Charts</a></nav>
 
   <h1>Daniel Alders, Texas House District 6</h1>
   <p class="lede">Daniel Alders represents Texas House District 6 and is a Republican. This page is the record: of the 67 votes this site publishes, Daniel Alders cast 66, and on the 51 of those where the two parties took opposite sides, they voted against their own party 4 times.</p>
@@ -168,6 +180,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   <hr>
   <p class="small"><span class="label">Who made this.</span> Marco Arras, a Texas resident. I donate to the Democratic Party, and I say so before anything else rather than in a footnote. The rule that picks which votes appear is published and runs identically on both caucuses, and every vote and count is in a file you can download and check.</p>
   <p class="small"><span class="label">Sources.</span> Roll calls from the Texas House Journal and LegiScan. Districts and ZIP codes derived from 2020 Census blocks; the method and its known error are documented in ZIP_TO_DISTRICT.md.</p>
+  <footer class="sitefoot" aria-label="More on this site"><div><p class="foot-head">The site</p><ul><li><a href="https://rightnleft.com/">The quiz</a></li><li><a href="https://rightnleft.com/districts">Find your representative</a></li><li><a href="https://rightnleft.com/bills">The bills</a></li><li><a href="https://rightnleft.com/races">The races</a></li><li><a href="https://rightnleft.com/charts">Charts</a></li><li><a href="https://rightnleft.com/fact-sheet">One-page fact sheet</a></li><li><a href="https://rightnleft.com/open-data">Download the data</a></li></ul></div><div><p class="foot-head">The seven bills</p><ul><li><a href="https://rightnleft.com/bill/sb-2"><span class="bill">SB 2</span> Education savings accounts</a></li><li><a href="https://rightnleft.com/bill/sb-8"><span class="bill">SB 8</span> Immigration enforcement</a></li><li><a href="https://rightnleft.com/bill/sb-10"><span class="bill">SB 10</span> Ten Commandments in classrooms</a></li><li><a href="https://rightnleft.com/bill/sb-3"><span class="bill">SB 3</span> THC ban</a></li><li><a href="https://rightnleft.com/bill/sb-14"><span class="bill">SB 14</span> Regulatory review</a></li><li><a href="https://rightnleft.com/bill/sb-6"><span class="bill">SB 6</span> Electric grid and large power users</a></li><li><a href="https://rightnleft.com/bill/sb-5"><span class="bill">SB 5</span> Dementia research institute</a></li></ul></div><div><p class="foot-head">The three races</p><ul><li><a href="https://rightnleft.com/race/governor">Governor: Gina Hinojosa and Greg Abbott</a></li><li><a href="https://rightnleft.com/race/lieutenant-governor">Lieutenant Governor: Vikki Goodwin and Dan Patrick</a></li><li><a href="https://rightnleft.com/race/us-senate">U.S. Senate: James Talarico and Ken Paxton</a></li></ul></div></footer>
 </main>
 </body>
 </html>

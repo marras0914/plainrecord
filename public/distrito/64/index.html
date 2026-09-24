@@ -98,6 +98,17 @@ a{color:var(--blue)}
 hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
 .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
   font-size:13px;margin-bottom:22px}
+/* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
+   scrolling sideways on a phone; the current section is ink, not link blue. */
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sitenav a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}
+.sitenav a:hover{text-decoration:underline}
+.sitenav a[aria-current]{color:var(--ink);font-weight:600}
+.sitefoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px}
+.sitefoot ul{list-style:none;padding:0;margin:0}.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}.sitefoot a:hover{text-decoration:underline}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
 /* Charts, drawn by scripts/_charts.mjs. */
 .chart{margin:16px 0 10px}
 .chart svg{display:block;width:100%;height:auto;overflow:visible}
@@ -151,6 +162,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
     <span class="kicker">Cámara de Texas · Sesión de 2025</span>
     <a href="https://rightnleft.com/district/64">In English</a>
   </div>
+  <nav class="sitenav" aria-label="Secciones del sitio"><a href="https://rightnleft.com/es">Cuestionario</a><a href="https://rightnleft.com/distritos" aria-current="true">Su representante</a><a href="https://rightnleft.com/proyectos">Proyectos</a><a href="https://rightnleft.com/contiendas">Contiendas</a><a href="https://rightnleft.com/graficas">Gráficas</a></nav>
 
   <h1>Andy Hopper, Distrito 64 de la Cámara de Texas</h1>
   <p class="lede">Andy Hopper representa al Distrito 64 de la Cámara de Texas y es republicano. Esta página es el registro: de los 67 votos que publica este sitio, Andy Hopper emitió 67, y en los 51 en los que los dos partidos tomaron lados opuestos, votó en contra de su propio partido 6 veces.</p>
@@ -168,6 +180,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   <hr>
   <p class="small"><span class="label">Quién lo hizo.</span> Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar.</p>
   <p class="small"><span class="label">Fuentes.</span> Votaciones nominales del Diario de la Cámara de Texas y de LegiScan. Los distritos y códigos postales se derivan de los bloques del censo de 2020; el método y su error conocido están documentados en ZIP_TO_DISTRICT.md.</p>
+  <footer class="sitefoot" aria-label="Más en este sitio"><div><p class="foot-head">El sitio</p><ul><li><a href="https://rightnleft.com/es">El cuestionario</a></li><li><a href="https://rightnleft.com/distritos">Encuentre a su representante</a></li><li><a href="https://rightnleft.com/proyectos">Los proyectos</a></li><li><a href="https://rightnleft.com/contiendas">Las contiendas</a></li><li><a href="https://rightnleft.com/graficas">Gráficas</a></li><li><a href="https://rightnleft.com/hoja">Hoja informativa de una página</a></li><li><a href="https://rightnleft.com/open-data">Descargar los datos (en inglés)</a></li></ul></div><div><p class="foot-head">Los siete proyectos</p><ul><li><a href="https://rightnleft.com/proyecto/sb-2"><span class="bill">SB 2</span> Cuentas de ahorro educativo</a></li><li><a href="https://rightnleft.com/proyecto/sb-8"><span class="bill">SB 8</span> Aplicación de la ley migratoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-10"><span class="bill">SB 10</span> Los Diez Mandamientos en las aulas</a></li><li><a href="https://rightnleft.com/proyecto/sb-3"><span class="bill">SB 3</span> Prohibición del THC</a></li><li><a href="https://rightnleft.com/proyecto/sb-14"><span class="bill">SB 14</span> Revisión regulatoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-6"><span class="bill">SB 6</span> Red eléctrica y grandes consumidores</a></li><li><a href="https://rightnleft.com/proyecto/sb-5"><span class="bill">SB 5</span> Instituto de investigación sobre demencia</a></li></ul></div><div><p class="foot-head">Las tres contiendas</p><ul><li><a href="https://rightnleft.com/contienda/gobernador">Gobernador: Gina Hinojosa y Greg Abbott</a></li><li><a href="https://rightnleft.com/contienda/vicegobernador">Vicegobernador: Vikki Goodwin y Dan Patrick</a></li><li><a href="https://rightnleft.com/contienda/senado">Senado de Estados Unidos: James Talarico y Ken Paxton</a></li></ul></div></footer>
 </main>
 </body>
 </html>

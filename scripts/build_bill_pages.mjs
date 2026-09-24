@@ -70,8 +70,10 @@ const sitting = new Set(roster.members.map((m) => m.id));
 const retired = new Map((roster.retired ?? []).map((r) => [r.id, r]));
 const bulkOf = new Map(bulk.items.map((i) => [i.id, i]));
 
-export const billSlug = (billId) => billId.toLowerCase().replace(/\s+/g, '-');
-export const billPath = (billId, lang) => `${lang === 'es' ? 'proyecto' : 'bill'}/${billSlug(billId)}`;
+// Defined once in _site_nav.mjs, which the footer also uses; re-exported so the
+// district, data and chart builders keep importing it from here.
+import { billSlug, billPath } from './_site_nav.mjs';
+export { billSlug, billPath };
 const districtPath = (d, lang) => (lang === 'es' ? `distrito/${d}` : `district/${d}`);
 
 /** Same rule as build_district_pages.mjs: the curated source URL wins. */
@@ -110,7 +112,7 @@ const ACT = {
     office: { Governor: 'El gobernador', 'Lieutenant Governor': 'El vicegobernador' },
   },
 };
-function actsLine(it, lang) {
+export function actsLine(it, lang) {
   const t = ACT[lang];
   // Priority before signature, which is the order they happened in.
   const rank = { priority_bill: 0, signed: 1, veto: 1, became_law_unsigned: 1 };

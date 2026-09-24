@@ -34,6 +34,7 @@ import { readFile, writeFile, mkdir, access, readdir, copyFile, rm } from 'node:
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { footerHtml } from './_site_nav.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -392,6 +393,7 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
     html = html.replace(marker, content);
   };
   fill('<!--LANG_SWITCH-->', langSwitch(locale));
+  fill('<!--SITE_FOOTER-->', footerHtml(locale));
 
   // The translation notice goes LAST inside <header>, after the explainer.
   //
@@ -478,7 +480,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // The two district indexes. They are hubs rather than leaves: before they
   // existed every district page had exactly one crawlable inbound link, its own
   // translation, so the whole set was unreachable except through the sitemap.
-  for (const dir of ['districts', 'distritos', 'open-data', 'charts', 'graficas']) {
+  for (const dir of ['districts', 'distritos', 'bills', 'proyectos', 'races', 'contiendas', 'open-data', 'charts', 'graficas']) {
     const shipped = await access(resolve(DIST, `${dir}/index.html`)).then(() => true, () => false);
     if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority: '0.9' });
   }
@@ -578,6 +580,10 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     if (path === '/fact-sheet') return 'Fact sheet, in English';
     if (path === '/hoja') return 'Fact sheet, in Spanish';
     if (path === '/open-data') return 'Download every House vote as data (JSON, CC0), in English';
+    if (path === '/bills') return 'Index of the seven headline bills, in English';
+    if (path === '/proyectos') return 'Index of the seven headline bills, in Spanish';
+    if (path === '/races') return 'Index of the three statewide races, in English';
+    if (path === '/contiendas') return 'Index of the three statewide races, in Spanish';
     if (path === '/charts') return 'Every House vote in three charts, in English';
     if (path === '/graficas') return 'Every House vote in three charts, in Spanish';
     const race = RACE_TITLE[path.slice(1)];

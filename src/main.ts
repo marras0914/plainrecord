@@ -1263,8 +1263,24 @@ function candidateReveal(item: QuizItem, yourAnswer: 1 | -1): string {
     `<div class="ps-head">${esc(t('rev.partyVote'))}</div>` +
     split +
     opponentReveal(item, yourAnswer) +
+    billPageLink(item) +
     `</div>`
   );
+}
+
+/**
+ * The way from a headline question to its page listing every member's vote.
+ *
+ * In the REVEAL, never on the question: that page shows how each party voted,
+ * so linking it before the reader answers would break the blind. Only the seven
+ * headline bills have a page; the other 60 get nothing rather than a 404.
+ */
+function billPageLink(item: QuizItem): string {
+  if (!item.headline) return '';
+  const slug = item.billId.toLowerCase().replace(/\s+/g, '-');
+  const base = LOCALE === 'es' ? 'proyecto' : 'bill';
+  return `<p class="rev-billpage"><a href="/${base}/${slug}">${
+    esc(t('rev.billPage', { bill: item.billId }))}</a></p>`;
 }
 
 /**

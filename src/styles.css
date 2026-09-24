@@ -744,3 +744,31 @@
     .rep-field { flex:1 1 100%; }
     #rep-district { width:100%; }
   }
+
+/* The site footer, injected by build_locales.mjs from scripts/_site_nav.mjs.
+   The same rules as the static pages' .sitefoot in _page_shell.mjs, on the
+   same tokens, so a reader moving between the quiz and a district page sees
+   one footer. */
+.sitefoot{margin-top:28px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px;color:var(--ink-2)}
+.sitefoot ul{list-style:none;padding:0;margin:0}
+/* Each link a 24px-tall target, which verify_site asserts for every standalone
+   control; at 13.5px text the bare line box was 17px. */
+.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0;color:var(--ink-2)}
+.sitefoot a:hover{color:var(--ink)}
+.sitefoot a:hover{text-decoration:underline}
+.sitefoot .bill{font-variant-numeric:tabular-nums;font-weight:600}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
+
+/* The link from a headline question's reveal to its bill page. Quieter than the
+   reveal itself, louder than the read-the-bill link inside the official block. */
+.rev-billpage{font-size:14px;margin:14px 0 0;font-weight:600}
+/* Same treatment as .cand-race: ink, not browser blue, and a 24px target. */
+.rev-billpage a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;display:inline-block;min-height:24px;padding:3px 0}
+
+/* No footer while a question or the guess is on screen. The quiz strips its
+   chrome on purpose, and the fixed Next bar sat on top of the footer anyway.
+   It returns on the start view and the result. */
+#guess-view:not([hidden]) ~ .sitefoot,
+#quiz-view:not([hidden]) ~ .sitefoot{display:none}
