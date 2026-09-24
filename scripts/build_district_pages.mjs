@@ -200,6 +200,7 @@ const COPY = {
     indexTitle: 'Find your Texas House representative',
     indexDesc: 'Type a ZIP code to see which Texas House district you are in, who represents it, and how they voted in 2025. All 150 districts, free, nothing tracked.',
     indexListHead: 'All 150 districts',
+    indexCharts: 'See every House vote in three charts',
     indexLede: 'One page per sitting member, showing how they voted on the bills that drew the most attention and where they broke with their own party.',
     indexKey: 'The pair after each name is how often that member voted against their own party, out of the votes where the two parties took opposite sides.',
     indexVacant: (d) => `District ${d} has no sitting member and so has no page. Nate Schatzline held it and left on 29 July 2026, after casting 3,283 votes that are still the record for that district.`,
@@ -236,6 +237,7 @@ const COPY = {
     indexTitle: 'Encuentre a su representante en la Cámara de Texas',
     indexDesc: 'Escriba su código postal para ver qué distrito de la Cámara de Texas le corresponde, quién representa ese distrito y cómo votó en 2025. Los 150 distritos, gratis y sin rastreo.',
     indexListHead: 'Los 150 distritos',
+    indexCharts: 'Vea todos los votos de la Cámara en tres gráficas',
     indexLede: 'Una página por cada legislador en funciones, con cómo votó en los proyectos de ley que más atención recibieron y dónde se apartó de su propio partido.',
     indexKey: 'El par que sigue a cada nombre es cuántas veces esa persona votó en contra de su propio partido, de los votos en los que los dos partidos tomaron lados opuestos.',
     indexVacant: (d) => `El Distrito ${d} no tiene legislador en funciones, así que no tiene página. Nate Schatzline lo ocupaba y se fue el 29 de julio de 2026, después de emitir 3,283 votos que siguen siendo el registro de ese distrito.`,
@@ -424,6 +426,7 @@ for (const lang of ['en', 'es']) {
   <p class="small">${esc(c.indexKey)}</p>
   <ul class="dindex">${items}</ul>
   <p class="small">${esc(c.indexVacant(93))}</p>
+  <p><a href="${SITE}/${lang === 'es' ? 'graficas' : 'charts'}">${esc(c.indexCharts)}</a></p>
   <hr>
   <p><a class="cta" href="${c.target}">${esc(c.tryCta)}</a></p>
   <p class="small">${sheetLine(lang)}</p>

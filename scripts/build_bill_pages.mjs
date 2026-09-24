@@ -35,6 +35,24 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
+import { seatChartSvg } from './_charts.mjs';
+
+// The seat chart's labels. Vote words reuse the approved COPY strings below; the
+// party names use 'bancada', as the party-split lines on these pages do.
+const SEAT = {
+  en: (it, c) => ({
+    yea: c.yea, nay: c.nay, noVote: c.noVote, dem: 'Democrats', rep: 'Republicans',
+    split: (d, r) => `${d} D · ${r} R`,
+    tip: (m) => `${m.n} (${m.p}, District ${m.d})${m.retired ? ', left the House on 29 July 2026' : ''}`,
+    alt: `How all 150 members voted on ${it.billId}, grouped by vote and coloured by party`,
+  }),
+  es: (it, c) => ({
+    yea: c.yea, nay: c.nay, noVote: c.noVote, dem: 'Bancada demócrata', rep: 'Bancada republicana',
+    split: (d, r) => `${d} D · ${r} R`,
+    tip: (m) => `${m.n} (${m.p}, Distrito ${m.d})${m.retired ? ', se fue de la Cámara el 29 de julio de 2026' : ''}`,
+    alt: `Cómo votaron los 150 integrantes sobre el proyecto ${it.billId}, agrupados por voto y con el color de su partido`,
+  }),
+};
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -257,6 +275,7 @@ function render(it, lang) {
     `<li><a href="${SITE}/${billPath(o.billId, lang)}"><span class="bill">${esc(o.billId)}</span> ${esc(labelFor(o, lang))}</a></li>`).join('');
 
   const acts = actsLine(it, lang);
+  const seat = seatChartSvg(rows, SEAT[lang](it, c));
 
   const body = `
   <h1>${esc(c.h1(it))}</h1>
@@ -265,6 +284,8 @@ function render(it, lang) {
   ${gapLine}
   <p class="small"><a href="${esc(billUrl(it.billId))}" rel="nofollow noopener" target="_blank">${esc(c.readBill(it))}</a></p>
   <h2>${esc(c.h2party)}</h2>
+  ${seat.legendHtml}
+  <figure class="chart">${seat.svg}</figure>
   <ul>${['R', 'D'].map((p) => `<li>${esc(c.partyLine(p, party[p]))}</li>`).join('')}</ul>
   <h2>${esc(c.h2split)}</h2>
   ${splitBlock}

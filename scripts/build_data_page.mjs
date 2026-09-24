@@ -104,6 +104,7 @@ const body = `
 
   <h2>The same data, as pages</h2>
   <ul>
+    <li><a href="${SITE}/charts">Every vote in three charts</a>: how often the parties agreed, and who broke with their own</li>
     <li><a href="${SITE}/districts">Every Texas House district</a>, with how its member voted</li>
     ${headline.map((it) => `<li><a href="${SITE}/${billPath(it.billId, 'en')}"><span class="bill">${esc(it.billId)}</span> ${esc(it.label)}</a>, every member's vote</li>`).join('')}
   </ul>
