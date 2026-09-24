@@ -113,13 +113,18 @@ export const sheetLine = (lang) => (lang === 'es'
   ? `También hay una <a href="${SITE}/hoja">hoja informativa de una página</a>, para imprimir o para entregar en mano.`
   : `There is also a <a href="${SITE}/fact-sheet">one-page fact sheet</a>, to print or to hand to someone.`);
 
-export function document_({ lang, title, siteName, desc, canonical, altHref, altLabel, otherLang, ogImage, jsonld, faces, kicker, body }) {
+/**
+ * docTitle, when given, is the whole <title> with no site-name suffix. Search
+ * results show about 60 characters, and a page whose h1 is already long lost
+ * its tail to " | The Purple Strip". og:title keeps the h1 wording either way.
+ */
+export function document_({ lang, title, docTitle, siteName, desc, canonical, altHref, altLabel, otherLang, ogImage, jsonld, faces, kicker, body }) {
   return `<!doctype html>
 <html lang="${lang === 'es' ? 'es-US' : 'en-US'}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(title)} | ${esc(siteName)}</title>
+<title>${esc(docTitle ?? `${title} | ${siteName}`)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">
 <link rel="alternate" hreflang="${lang}" href="${canonical}">

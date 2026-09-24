@@ -190,6 +190,18 @@ const RUNNING_FOR_EN = {
   'Lieutenant Governor': 'Lieutenant Governor of Texas',
   'U.S. Senate': "one of Texas's seats in the United States Senate",
 };
+// The search-result title. The h1 never names the office, and "Texas governor
+// race" is what people type, so the office goes here. Kept under 60 characters.
+const RACE_EN = {
+  Governor: 'Texas Governor race',
+  'Lieutenant Governor': 'Texas Lt. Governor race',
+  'U.S. Senate': 'Texas U.S. Senate race',
+};
+const RACE_ES = {
+  Governor: 'contienda por Gobernador de Texas',
+  'Lieutenant Governor': 'contienda por Vicegobernador de Texas',
+  'U.S. Senate': 'contienda por el Senado de EE. UU.',
+};
 const RUNNING_FOR_ES = {
   Governor: 'Gobernador de Texas',
   'Lieutenant Governor': 'Vicegobernador de Texas',
@@ -208,6 +220,7 @@ const COPY = {
   en: {
     lang: 'en', other: 'es', target: `${SITE}/`, siteName: 'The Purple Strip',
     title: (r) => `${r.cand.name} and ${r.opp.name} on the 2025 Texas bills`,
+    docTitle: (r) => `${r.cand.name} and ${r.opp.name}: ${RACE_EN[r.cand.office]}`,
     meta: (r) => `What the public record shows about both candidates for Texas ${r.cand.office}: `
       + `${r.rec.cast} recorded Texas House votes for ${r.cand.name}, and ${r.opp.evidence} for ${r.opp.name}. `
       + `Free, no sign-up, nothing tracked.`,
@@ -240,6 +253,7 @@ const COPY = {
   es: {
     lang: 'es', other: 'en', target: `${SITE}/es`, siteName: 'La Franja Morada',
     title: (r) => `${r.cand.name} y ${r.opp.name} ante los proyectos de ley de Texas de 2025`,
+    docTitle: (r) => `${r.cand.name} y ${r.opp.name}: ${RACE_ES[r.cand.office]}`,
     meta: (r) => `Lo que muestra el registro público sobre ambos candidatos a ${OFFICE_ES[r.cand.office]} de Texas: `
       + `${r.rec.cast} votos registrados en la Cámara de Texas para ${r.cand.name}, y ${r.esOpp.evidence} para ${r.opp.name}. `
       + `Gratis, sin registro y sin rastreo.`,
@@ -334,7 +348,7 @@ function render(race, lang) {
   };
 
   return document_({
-    lang, otherLang: c.other, title: c.title(race), siteName: c.siteName,
+    lang, otherLang: c.other, title: c.title(race), docTitle: c.docTitle(race), siteName: c.siteName,
     desc: c.meta(race), canonical, altHref: `${SITE}/${otherSlug}`,
     altLabel: c.langSwitch, kicker: c.kicker,
     ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
