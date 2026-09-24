@@ -12,8 +12,8 @@ work email address in it. It took deleting and recreating that repository to get
 it out, because a force-push does not remove a blob from GitHub.
 
 The gitignore had patterns for outreach filenames at the time. They did not
-match, because the file was called `Jesse-responded.md` and nobody had thought of
-that name in advance. A folder does not need anyone to guess a filename.
+match, because the file was named after the person who replied, and nobody had
+thought of that name in advance. A folder does not need anyone to guess a filename.
 
 ## The two guards
 

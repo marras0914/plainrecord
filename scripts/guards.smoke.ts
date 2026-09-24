@@ -9,8 +9,8 @@
  * repository, because a force-push does not remove a blob from GitHub.
  *
  * The gitignore had patterns for outreach filenames at the time. They did not
- * match: the file was called `Jesse-responded.md` and nobody had guessed that
- * name in advance. So the guard became a folder, which needs no guessing, plus
+ * match: the file was named after the person who replied, and nobody had
+ * guessed that name in advance. So the guard became a folder, which needs no guessing, plus
  * a hook, because a gitignore does nothing about an already-tracked file or
  * `git add -f`.
  *
