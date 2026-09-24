@@ -8,7 +8,8 @@
  *
  * Same three share cases as src/main.ts: a real zero says nobody lived there, a
  * share that rounds to nothing says under 1%, and anything else is a percent of
- * PEOPLE, never of land.
+ * PEOPLE, never of land. The percent is computed from the head counts, because
+ * the percent stored in the file IS land.
  */
 (function () {
   var root = document.getElementById('ziplookup');
@@ -19,6 +20,7 @@
   var input = root.querySelector('input');
   var out = root.querySelector('.zipout');
   var zips = null;
+  var byPopulation = false;
   var failed = false;
 
   function fill(s, vars) {
@@ -81,9 +83,18 @@
       ul.appendChild(districtItem(v, null));
     } else {
       out.appendChild(paraWithLink(S.zipSpans, { zip: zip, n: v.length }));
+      // The share is COMPUTED from the head counts, exactly as districtsForZip()
+      // in src/members.ts does. The third number in each row is percent of LAND
+      // area, published for audit; the first version of this file read it as
+      // people and told readers of 78045 that 68% of them lived in a district
+      // holding 45 residents. An old-format file has no counts, so it shows no
+      // share rather than a relabelled land figure.
+      var counted = byPopulation && v.every(function (r) { return r.length === 3; });
+      var total = counted ? v.reduce(function (a, r) { return a + (r[1] || 0); }, 0) : 0;
       v.forEach(function (row) {
-        var people = row[1], pct = row[2];
-        var share = pct === null || pct === undefined ? null
+        var people = row[1];
+        var pct = counted && total > 0 ? Math.round((people / total) * 100) : null;
+        var share = pct === null ? null
           : people === 0 ? S.zipShareNone
           : pct >= 1 ? fill(S.zipShare, { pct: pct })
           : S.zipShareSmall;
@@ -96,7 +107,7 @@
   function load() {
     fetch('/data/zips_89R.json')
       .then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
-      .then(function (j) { zips = j.zips; show(); })
+      .then(function (j) { zips = j.zips; byPopulation = j.shares === 'population'; show(); })
       .catch(function () { failed = true; show(); });
   }
 
