@@ -36,6 +36,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { seatChartSvg } from './_charts.mjs';
+import { cardsFresh, billCard } from './_share_cards.mjs';
 
 // The seat chart's labels. Vote words reuse the approved COPY strings below; the
 // party names use 'bancada', as the party-split lines on these pages do.
@@ -330,7 +331,9 @@ function render(it, lang) {
     html: document_({
       lang, otherLang: c.other, title: c.h1(it), docTitle: c.docTitle(it), siteName: c.siteName,
       desc: c.desc(it), canonical, altHref, altLabel: c.langSwitch,
-      ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
+      // Its own card when the committed images match the data; the generic one
+      // otherwise, never a stale picture of this vote. See _share_cards.mjs.
+      ogImage: cardsFresh() ? billCard(billSlug(it.billId), lang) : `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
       jsonld, faces, kicker: c.kicker, body,
     }),
     t, party, split,

@@ -9,6 +9,7 @@
     "build": "tsc --noEmit && node scripts/build_races.mjs && node scripts/build_bill_pages.mjs && node scripts/build_district_pages.mjs && node scripts/build_data_page.mjs && node scripts/build_charts.mjs && node scripts/build_hubs.mjs && node scripts/build_locales.mjs",
     "build:artifact": "npm run build && node scripts/build_artifact.mjs",
     "build:og": "node scripts/build_og.mjs",
+    "build:cards": "node scripts/build_share_cards.mjs",
     "preview": "vite preview --port 4173",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --no-warnings scripts/run_tests.mjs",

@@ -23,6 +23,7 @@ import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { crossingRates, gapBins, histogramSvg, dotPlotSvg, loadTopo, mapSvg } from './_charts.mjs';
 import { billPath } from './build_bill_pages.mjs';
+import { cardsFresh, chartsCard, chartDownload } from './_share_cards.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -124,6 +125,7 @@ const COPY = {
     },
     tableNote: 'The table under the previous chart lists every member.',
     seeNumbers: 'See the numbers',
+    download: 'Download image', linkHere: 'Link to this chart',
     h2more: 'The same data, as pages',
     more: [
       [`${SITE}/districts`, 'Find your representative by ZIP code'],
@@ -181,6 +183,7 @@ const COPY = {
     },
     tableNote: 'La tabla de la gráfica anterior incluye a cada integrante.',
     seeNumbers: 'Ver los números',
+    download: 'Descargar imagen', linkHere: 'Enlace a esta gráfica',
     h2more: 'Los mismos datos, en páginas',
     more: [
       [`${SITE}/distritos`, 'Encuentre a su representante por código postal'],
@@ -204,6 +207,12 @@ function render(lang) {
   // A member who has left has no page: HD-93 is vacant and /district/93 404s.
   const href = (r) => (r.left ? null : `${SITE}/${districtPath(r.d, lang)}`);
 
+  // Download and link-to-chart, under each chart. The download only exists
+  // while the committed image matches the data; the anchor always works.
+  const share = (id) => `<p class="small chart-share">`
+    + (cardsFresh() ? `<a href="${chartDownload(id, lang)}" download>${esc(c.download)}</a> · ` : '')
+    + `<a href="#${id}">${esc(c.linkHere)}</a></p>`;
+
   const histTable = `<table class="chart-table"><thead><tr><th>${esc(c.tableA[0])}</th><th class="num">${esc(c.tableA[1])}</th><th class="num">${esc(c.tableA[2])}</th></tr></thead><tbody>`
     + bins.map((v, i) => `<tr><td>${esc(c.hist.band(i * 10, i * 10 + 10))}</td><td class="num">${n(v)}</td><td class="num">${P(v / total)}</td></tr>`).join('')
     + '</tbody></table>';
@@ -226,12 +235,14 @@ function render(lang) {
   <p>${esc(c.capA)}</p>
   <p class="small" id="agree-end">${esc(c.caveatA)}</p>
   <details class="table"><summary>${esc(c.seeNumbers)}</summary>${histTable}</details>
+  ${share('agree')}
 
   <h2 id="ranks">${esc(c.h2b)}</h2>
   <figure class="chart">${dotPlotSvg(rates, c.dots, href)}</figure>
   <p>${esc(c.capB)}</p>
   <p class="small" id="ranks-end">${esc(c.speakerNote(noVotes[0]))}</p>
   <details class="table"><summary>${esc(c.seeNumbers)}</summary>${memberTable}</details>
+  ${share('ranks')}
 
   <h2 id="map">${esc(c.h2c)}</h2>
   ${legendHtml}
@@ -239,6 +250,7 @@ function render(lang) {
   <div class="chart insets">${insetSvgs.join('')}</div>
   <p id="map-end">${esc(c.capC)}</p>
   <p class="small">${esc(c.tableNote)}</p>
+  ${share('map')}
 
   <h2>${esc(c.h2more)}</h2>
   <ul>${c.more.map(([u, t]) => `<li><a href="${u}">${esc(t)}</a></li>`).join('')}</ul>
@@ -251,7 +263,7 @@ function render(lang) {
   return document_({
     lang, otherLang: c.other, title: c.h1, docTitle: c.docTitle, siteName: c.siteName,
     desc: c.desc, canonical, altHref, altLabel: c.langSwitch,
-    ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`, faces, kicker: c.kicker, body,
+    ogImage: cardsFresh() ? chartsCard(lang) : `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`, faces, kicker: c.kicker, body,
     jsonld: {
       '@context': 'https://schema.org', '@type': 'WebPage', name: c.h1, description: c.desc,
       inLanguage: lang === 'es' ? 'es-US' : 'en-US', url: canonical,
