@@ -53,6 +53,11 @@ ${faces.join('\n')}
   --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
   --hair:#2c2c2a;--rule:#383835;--blue:#3987e5;--red:#e66767;
   --p1:#684b88;--p2:#865eb1;--p3:#a377d3;--p4:#bc97e8;--p5:#d5b9f7;--pbar:#a377d3;}
+/* A crossfade between pages instead of a hard cut, using the browser's own
+   cross-document view transitions: CSS only, same-origin only, and ignored by
+   browsers without it. Off for anyone who asked for reduced motion. The quiz
+   carries the same rule in src/styles.css, so moving between them fades too. */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);
   font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
@@ -201,6 +206,8 @@ ${otherLang ? `<link rel="alternate" hreflang="${lang}" href="${canonical}">
 <meta property="og:image" content="${ogImage}">
 <meta name="twitter:card" content="summary_large_image">
 <script src="/js/theme.js"></script>
+<link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/newsreader-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
 <style>${css(faces)}</style>
 <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 ${scripts.map((s) => `<script src="${s}" defer></script>\n`).join('')}</head>

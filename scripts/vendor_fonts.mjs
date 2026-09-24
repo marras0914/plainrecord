@@ -26,6 +26,11 @@
  * block and every unicode-range exactly as served, and rewrites only the url()
  * to point at the local copy. The result renders identically and downloads the
  * same subsets, from our own origin.
+ *
+ * CACHED AS IMMUTABLE. vercel.json serves /fonts/* with max-age one year and
+ * immutable, so a browser that has a file never asks for it again. If a face is
+ * ever re-vendored with different bytes, it must get a NEW FILENAME, or every
+ * returning reader keeps the old one for a year.
  */
 
 import { writeFileSync, mkdirSync, existsSync, readFileSync, statSync } from 'node:fs';

@@ -772,3 +772,7 @@
    It returns on the start view and the result. */
 #guess-view:not([hidden]) ~ .sitefoot,
 #quiz-view:not([hidden]) ~ .sitefoot{display:none}
+
+/* Crossfade between pages, matching the static pages' rule in _page_shell.mjs.
+   Cross-document view transitions: CSS only, and ignored where unsupported. */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
