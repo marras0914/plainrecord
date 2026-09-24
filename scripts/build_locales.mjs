@@ -478,7 +478,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // The two district indexes. They are hubs rather than leaves: before they
   // existed every district page had exactly one crawlable inbound link, its own
   // translation, so the whole set was unreachable except through the sitemap.
-  for (const dir of ['districts', 'distritos']) {
+  for (const dir of ['districts', 'distritos', 'open-data']) {
     const shipped = await access(resolve(DIST, `${dir}/index.html`)).then(() => true, () => false);
     if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority: '0.9' });
   }
@@ -577,6 +577,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     if (path === '/distritos') return 'Index of all 150 Texas House districts, in Spanish';
     if (path === '/fact-sheet') return 'Fact sheet, in English';
     if (path === '/hoja') return 'Fact sheet, in Spanish';
+    if (path === '/open-data') return 'Download every House vote as data (JSON, CC0), in English';
     const race = RACE_TITLE[path.slice(1)];
     if (race) return `The race for ${race}`;
     const b = /^\/(bill|proyecto)\/([a-z]+-\d+)$/.exec(path);

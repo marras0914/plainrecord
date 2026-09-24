@@ -56,6 +56,22 @@ const sidecar = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.j
 const members = JSON.parse(readFileSync(resolve(ROOT, 'public/data/members_89R.json'), 'utf8'));
 const zipFile = JSON.parse(readFileSync(resolve(ROOT, 'public/data/zips_89R.json'), 'utf8'));
 
+// The ZIP box on the index reuses the quiz lookup's approved strings, read from
+// the same copy.json the Spanish gate checks, so it adds no unreviewed Spanish.
+const copyFile = JSON.parse(readFileSync(resolve(ROOT, 'i18n/copy.json'), 'utf8'));
+function approved(key, lang) {
+  const e = copyFile[key];
+  if (!e || !e[lang]) throw new Error(`copy.json has no ${lang} string for ${key}`);
+  if (lang === 'es' && e.status !== 'ok') throw new Error(`${key} is not approved (status ${e.status})`);
+  return e[lang];
+}
+const ZIP_KEYS = {
+  zipWhole: 'rep.zipWhole', zipSpans: 'rep.zipSpans', zipShare: 'rep.zipShare',
+  zipShareSmall: 'rep.zipShareSmall', zipShareNone: 'rep.zipShareNone',
+  zipUnknown: 'rep.zipUnknown', zipFailed: 'rep.zipFailed', district: 'rep.district',
+  noSuchDistrict: 'rep.noSuchDistrict', linkText: 'rep.findDistrictLinkText',
+};
+
 const order = members.itemOrder;
 const itemOf = new Map(payload.items.map((i) => [i.id, i]));
 const opposed = (it) => (it.dYea > 0.5) !== (it.rYea > 0.5);
@@ -178,12 +194,15 @@ const COPY = {
     desc: (m, r) => `How ${m.n} voted on 67 recorded Texas House votes from the 2025 session, `
       + `including the ${r.crossed} where they broke with their own party. Free, no sign-up, nothing tracked.`,
     lede: (m, r) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
-    indexTitle: 'Every Texas House district',
-    indexDesc: 'All 150 Texas House districts, the member who holds each one, and how they voted in the 2025 session. Free, no sign-up, nothing tracked.',
+    // The index answers "who is my state rep", the question people actually type,
+    // so the title, h1 and description say that and the ZIP box sits first.
+    indexDocTitle: 'Who is my Texas state representative? Find yours by ZIP code',
+    indexTitle: 'Find your Texas House representative',
+    indexDesc: 'Type a ZIP code to see which Texas House district you are in, who represents it, and how they voted in 2025. All 150 districts, free, nothing tracked.',
+    indexListHead: 'All 150 districts',
     indexLede: 'One page per sitting member, showing how they voted on the bills that drew the most attention and where they broke with their own party.',
     indexKey: 'The pair after each name is how often that member voted against their own party, out of the votes where the two parties took opposite sides.',
     indexVacant: (d) => `District ${d} has no sitting member and so has no page. Nate Schatzline held it and left on 29 July 2026, after casting 3,283 votes that are still the record for that district.`,
-    indexZip: 'If you do not know your district, the lookup takes a ZIP code. Nearly half of Texas ZIP codes sit in more than one House district, so it lists every district yours touches rather than picking one.',
     indexBack: 'All 150 districts',
     h2head: 'How they voted on the bills people have heard of',
     headNote: 'These seven drew the most attention of the 67 this site publishes. Every member has a position on record for each one, whichever way they went.',
@@ -213,12 +232,13 @@ const COPY = {
     desc: (m, r) => `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, `
       + `incluidos los ${r.crossed} en los que se apartó de su propio partido. Gratis, sin registro y sin rastreo.`,
     lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
-    indexTitle: 'Todos los distritos de la Cámara de Texas',
-    indexDesc: 'Los 150 distritos de la Cámara de Texas, quién ocupa cada uno, y cómo votaron en la sesión de 2025. Gratis, sin registro y sin rastreo.',
+    indexDocTitle: '¿Quién es mi representante estatal en Texas? Búsqueda por código postal',
+    indexTitle: 'Encuentre a su representante en la Cámara de Texas',
+    indexDesc: 'Escriba su código postal para ver qué distrito de la Cámara de Texas le corresponde, quién representa ese distrito y cómo votó en 2025. Los 150 distritos, gratis y sin rastreo.',
+    indexListHead: 'Los 150 distritos',
     indexLede: 'Una página por cada legislador en funciones, con cómo votó en los proyectos de ley que más atención recibieron y dónde se apartó de su propio partido.',
     indexKey: 'El par que sigue a cada nombre es cuántas veces esa persona votó en contra de su propio partido, de los votos en los que los dos partidos tomaron lados opuestos.',
     indexVacant: (d) => `El Distrito ${d} no tiene legislador en funciones, así que no tiene página. Nate Schatzline lo ocupaba y se fue el 29 de julio de 2026, después de emitir 3,283 votos que siguen siendo el registro de ese distrito.`,
-    indexZip: 'Si no sabe cuál es su distrito, la búsqueda acepta un código postal. Casi la mitad de los códigos postales de Texas están en más de un distrito, así que le muestra todos los que le tocan en vez de escoger uno.',
     indexBack: 'Los 150 distritos',
     h2head: 'Cómo votó en los proyectos de ley de los que sí se habló',
     headNote: 'Estos siete fueron los que más atención recibieron de los 67 que publica este sitio. De cada uno hay una posición registrada para cada legislador, sea cual sea.',
@@ -382,24 +402,40 @@ for (const lang of ['en', 'es']) {
       + ` <span class="small">${esc(PARTY[lang][m.p])}, ${r.crossed}/${r.divisive}</span></li>`;
   }).join('');
 
+  // The ZIP box starts hidden and zip-lookup.js reveals it, so a reader without
+  // JavaScript sees the list rather than a box that does nothing. Its strings are
+  // the approved rep.* ones the quiz's own lookup uses, not new copy.
+  const zipStrings = Object.fromEntries(Object.entries(ZIP_KEYS).map(([k, key]) => [k, approved(key, lang)]));
+  const nameMap = Object.fromEntries(members.members.map((m) => [m.d, m.n]));
+  const zipBox = `<div id="ziplookup" class="card" hidden
+    data-strings="${esc(JSON.stringify(zipStrings))}"
+    data-members="${esc(JSON.stringify(nameMap))}"
+    data-base="${SITE}/${lang === 'es' ? 'distrito' : 'district'}/">
+    <p><label for="zip"><b>${esc(approved('rep.zipLabel', lang))}</b></label><br>
+    <input id="zip" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="${esc(approved('rep.zipPlaceholder', lang))}"></p>
+    <div class="zipout" aria-live="polite"></div>
+  </div>`;
+
   const body = `
   <h1>${esc(c.indexTitle)}</h1>
   <p class="lede">${esc(c.indexLede)}</p>
+  ${zipBox}
+  <h2>${esc(c.indexListHead)}</h2>
   <p class="small">${esc(c.indexKey)}</p>
   <ul class="dindex">${items}</ul>
   <p class="small">${esc(c.indexVacant(93))}</p>
-  <p class="small">${esc(c.indexZip)}</p>
   <hr>
   <p><a class="cta" href="${c.target}">${esc(c.tryCta)}</a></p>
   <p class="small">${sheetLine(lang)}</p>
   <hr>
   <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>
-  <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source)}</p>`;
+  <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source)}</p>
+  ${lang === 'en' ? `<p class="small"><a href="${SITE}/open-data">Download every House vote as data</a> (JSON, CC0).</p>` : ''}`;
 
   const html = document_({
-    lang, title: c.indexTitle, siteName: c.siteName, desc: c.indexDesc,
+    lang, title: c.indexTitle, docTitle: c.indexDocTitle, siteName: c.siteName, desc: c.indexDesc,
     canonical, altHref, altLabel: c.langSwitch, otherLang: c.other,
-    faces, kicker: c.kicker, body,
+    faces, kicker: c.kicker, body, scripts: ['/js/zip-lookup.js'],
     jsonld: {
       '@context': 'https://schema.org', '@type': 'CollectionPage',
       name: c.indexTitle, description: c.indexDesc, url: canonical,

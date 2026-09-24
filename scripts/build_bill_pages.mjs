@@ -282,7 +282,8 @@ function render(it, lang) {
   <p class="small"><a href="${SITE}/${lang === 'es' ? 'distritos' : 'districts'}">${esc(c.indexBack)}</a></p>
   <hr>
   <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>
-  <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source)}</p>`;
+  <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source)}</p>
+  ${lang === 'en' ? `<p class="small"><a href="${SITE}/open-data">Download every House vote as data</a> (JSON, CC0).</p>` : ''}`;
 
   const jsonld = {
     '@context': 'https://schema.org',

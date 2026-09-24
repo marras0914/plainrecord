@@ -252,23 +252,10 @@ const jsonldFor = (L) => JSON.stringify({
       isPartOf: { '@type': 'WebSite', url: `${SITE}/`, name: 'PlainRecord' },
       author: { '@type': 'Person', name: 'Marco Arras' },
     },
-    {
-      '@type': 'Dataset',
-      name: 'Texas House of Representatives recorded floor votes, 89th Legislature (2025)',
-      description: 'Every recorded floor vote of the 2025 Texas House regular session: 3,546 roll calls with each member’s position, reconciled against the House Journal. Includes a derived ZIP code to Texas House district crosswalk built through 2020 Census blocks.',
-      url: `${SITE}/`,
-      license: 'https://creativecommons.org/publicdomain/zero/1.0/',
-      creator: { '@type': 'Person', name: 'Marco Arras' },
-      isAccessibleForFree: true,
-      spatialCoverage: { '@type': 'Place', name: 'Texas, United States' },
-      temporalCoverage: '2025',
-      keywords: ['Texas Legislature', 'roll call votes', 'Texas House of Representatives', 'open data', 'civic data', 'ZIP code to legislative district'],
-      distribution: [
-        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `${SITE}/data/votes_89R.json`, name: 'All 3,546 recorded House votes' },
-        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `${SITE}/data/zips_89R.json`, name: 'ZIP code to Texas House district crosswalk' },
-        { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: `${SITE}/data/members_89R.json`, name: 'Members and their votes on the 67 selected items' },
-      ],
-    },
+    // The corpus Dataset used to sit here too, with its url pointing at the
+    // homepage. It now lives once, on /open-data (build_data_page.mjs), because
+    // two descriptions of one dataset at different urls is what Dataset Search
+    // handles worst.
   ],
 });
 

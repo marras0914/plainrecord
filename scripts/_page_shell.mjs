@@ -86,6 +86,10 @@ a{color:var(--blue)}
 hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
 .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
   font-size:13px;margin-bottom:22px}
+/* The ZIP box on /districts. 17px so iOS does not zoom the page on focus. */
+#ziplookup input{font:inherit;font-size:17px;padding:10px 12px;width:9.5rem;margin-top:6px;
+  border:1px solid var(--rule);border-radius:8px;background:var(--page);color:var(--ink)}
+#ziplookup .zipout p{margin:12px 0 6px}
 .zips{font-variant-numeric:tabular-nums;font-size:14px;color:var(--ink-2);
   line-height:1.8;word-spacing:.15em}
 `;
@@ -118,7 +122,7 @@ export const sheetLine = (lang) => (lang === 'es'
  * results show about 60 characters, and a page whose h1 is already long lost
  * its tail to " | The Purple Strip". og:title keeps the h1 wording either way.
  */
-export function document_({ lang, title, docTitle, siteName, desc, canonical, altHref, altLabel, otherLang, ogImage, jsonld, faces, kicker, body }) {
+export function document_({ lang, title, docTitle, siteName, desc, canonical, altHref, altLabel, otherLang, ogImage, jsonld, faces, kicker, body, scripts = [] }) {
   // A string here gets stringified again and ships as one quoted string, which
   // Google rejects as 'Invalid top level element'. /districts did exactly that.
   if (typeof jsonld !== 'object' || jsonld === null) throw new Error('document_: jsonld must be an object, got ' + typeof jsonld);
@@ -130,9 +134,9 @@ export function document_({ lang, title, docTitle, siteName, desc, canonical, al
 <title>${esc(docTitle ?? `${title} | ${siteName}`)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${canonical}">
-<link rel="alternate" hreflang="${lang}" href="${canonical}">
+${otherLang ? `<link rel="alternate" hreflang="${lang}" href="${canonical}">
 <link rel="alternate" hreflang="${otherLang}" href="${altHref}">
-<meta property="og:type" content="article">
+` : ''}<meta property="og:type" content="article">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${canonical}">
@@ -140,7 +144,7 @@ export function document_({ lang, title, docTitle, siteName, desc, canonical, al
 <meta name="twitter:card" content="summary_large_image">
 <style>${css(faces)}</style>
 <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
-</head>
+${scripts.map((s) => `<script src="${s}" defer></script>\n`).join('')}</head>
 <body>
 <main>
   <div class="top">
