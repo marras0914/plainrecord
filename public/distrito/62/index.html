@@ -14,6 +14,7 @@
 <meta property="og:url" content="https://rightnleft.com/distrito/62">
 <meta property="og:image" content="https://rightnleft.com/og.es.png">
 <meta name="twitter:card" content="summary_large_image">
+<script src="/js/theme.js"></script>
 <style>
 @font-face {
   font-family: 'Lexend';
@@ -52,10 +53,14 @@
       /* Chart purples, one hue light to dark, validated --ordinal against both
          the card and the page surface. --pbar is the single-series bar. */
       --p1:#bda5da;--p2:#a583cc;--p3:#8e62bc;--p4:#7241a0;--p5:#54277c;--pbar:#8e62bc;}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+/* Dark by the quiz's rule, not the OS: light by default, dark only when the
+   reader chose it on the quiz. /js/theme.js sets data-theme before paint. These
+   pages used to follow prefers-color-scheme, which turned a light quiz into a
+   dark race page for anyone whose phone was set to dark. */
+:root[data-theme="dark"]{color-scheme:dark;
   --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
   --hair:#2c2c2a;--rule:#383835;--blue:#3987e5;--red:#e66767;
-  --p1:#684b88;--p2:#865eb1;--p3:#a377d3;--p4:#bc97e8;--p5:#d5b9f7;--pbar:#a377d3;}}
+  --p1:#684b88;--p2:#865eb1;--p3:#a377d3;--p4:#bc97e8;--p5:#d5b9f7;--pbar:#a377d3;}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);
   font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
