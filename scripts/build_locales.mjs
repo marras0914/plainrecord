@@ -509,6 +509,22 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     }
   }
 
+  // The bill pages, found the same way and for the same reason: seven today,
+  // and whatever build_bill_pages.mjs writes tomorrow.
+  for (const parent of ['bill', 'proyecto']) {
+    let entries = [];
+    try {
+      entries = (await readdir(resolve(DIST, parent), { withFileTypes: true }))
+        .filter((e) => e.isDirectory() && /^[a-z]+-\d+$/.test(e.name))
+        .map((e) => e.name)
+        .sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
+    } catch { entries = []; }
+    for (const slug of entries) {
+      const shipped = await access(resolve(DIST, `${parent}/${slug}/index.html`)).then(() => true, () => false);
+      if (shipped) docs.push({ loc: `${SITE}/${parent}/${slug}`, priority: '0.9' });
+    }
+  }
+
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n' +
@@ -542,6 +558,9 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // before the race pages no name on this site appeared anywhere crawlable.
   const members = JSON.parse(await readFile(resolve(ROOT, 'public/data/members_89R.json'), 'utf8'));
   const nameOf = new Map(Object.values(members.members).map((m) => [m.d, m.n]));
+  const quiz = JSON.parse(await readFile(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+  const billOf = new Map(quiz.items.filter((i) => i.headline)
+    .map((i) => [i.billId.toLowerCase().replace(/\s+/g, '-'), i]));
 
   const RACE_TITLE = {
     'race/governor': 'Governor, in English',
@@ -560,6 +579,12 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     if (path === '/hoja') return 'Fact sheet, in Spanish';
     const race = RACE_TITLE[path.slice(1)];
     if (race) return `The race for ${race}`;
+    const b = /^\/(bill|proyecto)\/([a-z]+-\d+)$/.exec(path);
+    if (b) {
+      const it = billOf.get(b[2]);
+      const what = it ? `${it.billId} (${it.label})` : b[2];
+      return `How every Texas House member voted on ${what}, in ${b[1] === 'bill' ? 'English' : 'Spanish'}`;
+    }
     const d = /^\/(district|distrito)\/(\d+)$/.exec(path);
     if (d) {
       const who = nameOf.get(Number(d[2])) ?? `District ${d[2]}`;

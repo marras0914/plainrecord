@@ -46,6 +46,7 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
+import { billPath } from './build_bill_pages.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -171,6 +172,9 @@ const COPY = {
     other: 'es', siteName: 'The Purple Strip', target: `${SITE}/`,
     kicker: 'Texas House · 2025 session',
     title: (m) => `${m.n}, Texas House District ${m.d}`,
+    // The search-result title. People search "<name> voting record", and the h1
+    // is a name and a district with nothing a searcher would type after it.
+    docTitle: (m) => `${m.n} voting record, Texas House District ${m.d}`,
     desc: (m, r) => `How ${m.n} voted on 67 recorded Texas House votes from the 2025 session, `
       + `including the ${r.crossed} where they broke with their own party. Free, no sign-up, nothing tracked.`,
     lede: (m, r) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
@@ -205,6 +209,7 @@ const COPY = {
     other: 'en', siteName: 'La Franja Morada', target: `${SITE}/es`,
     kicker: 'Cámara de Texas · Sesión de 2025',
     title: (m) => `${m.n}, Distrito ${m.d} de la Cámara de Texas`,
+    docTitle: (m) => `${m.n}: historial de votos, Distrito ${m.d} de la Cámara de Texas`,
     desc: (m, r) => `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, `
       + `incluidos los ${r.crossed} en los que se apartó de su propio partido. Gratis, sin registro y sin rastreo.`,
     lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
@@ -284,7 +289,7 @@ function render(m, lang) {
   const headBlock = `<h2>${esc(c.h2head)}</h2><p class="small">${esc(c.headNote)}</p><ul class="stand">${
     HEADLINE.map((it) => {
       const st = standOn(it, m, lang);
-      return `<li><span class="bill">${esc(it.billId)}</span> <b>${esc(labelFor(it, lang))}</b>`
+      return `<li><span class="bill">${esc(it.billId)}</span> <b><a href="${SITE}/${billPath(it.billId, lang)}">${esc(labelFor(it, lang))}</a></b>`
         + ` <span class="vm vm-${st.kind}">${esc(st.text)}</span><br>`
         + `<span class="small">${esc(summaryFor(it, lang))} `
         + `<a class="hist" href="${esc(billUrl(it.billId))}" rel="nofollow noopener" target="_blank">${esc(c.histLabel)}</a></span></li>`;
@@ -334,7 +339,7 @@ function render(m, lang) {
   };
 
   return document_({
-    lang, otherLang: c.other, title: c.title(m), siteName: c.siteName,
+    lang, otherLang: c.other, title: c.title(m), docTitle: c.docTitle(m), siteName: c.siteName,
     desc: c.desc(m, r), canonical, altHref, altLabel: c.langSwitch,
     ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
     jsonld, faces, kicker: c.kicker, body,
