@@ -395,12 +395,12 @@ for (const lang of ['en', 'es']) {
     lang, title: c.indexTitle, siteName: c.siteName, desc: c.indexDesc,
     canonical, altHref, altLabel: c.langSwitch, otherLang: c.other,
     faces, kicker: c.kicker, body,
-    jsonld: JSON.stringify({
+    jsonld: {
       '@context': 'https://schema.org', '@type': 'CollectionPage',
       name: c.indexTitle, description: c.indexDesc, url: canonical,
       inLanguage: lang === 'es' ? 'es-US' : 'en-US',
       isPartOf: { '@type': 'WebSite', name: c.siteName, url: SITE },
-    }),
+    },
   });
   const out = resolve(ROOT, 'public', dir);
   mkdirSync(out, { recursive: true });

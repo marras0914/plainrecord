@@ -119,6 +119,9 @@ export const sheetLine = (lang) => (lang === 'es'
  * its tail to " | The Purple Strip". og:title keeps the h1 wording either way.
  */
 export function document_({ lang, title, docTitle, siteName, desc, canonical, altHref, altLabel, otherLang, ogImage, jsonld, faces, kicker, body }) {
+  // A string here gets stringified again and ships as one quoted string, which
+  // Google rejects as 'Invalid top level element'. /districts did exactly that.
+  if (typeof jsonld !== 'object' || jsonld === null) throw new Error('document_: jsonld must be an object, got ' + typeof jsonld);
   return `<!doctype html>
 <html lang="${lang === 'es' ? 'es-US' : 'en-US'}">
 <head>
