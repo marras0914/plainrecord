@@ -46,6 +46,9 @@ const size = (f) => {
 };
 // '2026-07-29' -> '29 July 2026', the way every other page on the site writes it.
 const longDate = (iso) => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+// The public mirror. It went public on 9 September 2026 and nothing linked to it
+// until this page, so "open source" was true but unfindable.
+const REPO = 'https://github.com/marras0914/plainrecord';
 const url = (f) => `${SITE}/data/${f}`;
 
 const c = bulk.counts;
@@ -93,6 +96,7 @@ const body = `
 
   <h2>Where it comes from</h2>
   <p>${esc(bulk._meta.provenance)}</p>
+  <p>The code that builds every file is public, with the method written up alongside it: <a href="${REPO}/blob/main/DATA_PIPELINE.md">how the votes are ingested, reconciled and selected</a>, <a href="${REPO}/blob/main/SCORING.md">how the quiz scores an answer</a>, and <a href="${REPO}/blob/main/ZIP_TO_DISTRICT.md">how ZIP codes are mapped to districts</a>, with its known error. <a href="${REPO}">The repository</a> is MIT licensed.</p>
 
   <h2>Licence and citation</h2>
   <p>${esc(bulk._meta.licenseNote)} Credit is appreciated and not required:</p>
