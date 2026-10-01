@@ -55,6 +55,9 @@ const payload = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json
 const sidecar = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.json'), 'utf8'));
 const members = JSON.parse(readFileSync(resolve(ROOT, 'public/data/members_89R.json'), 'utf8'));
 const zipFile = JSON.parse(readFileSync(resolve(ROOT, 'public/data/zips_89R.json'), 'utf8'));
+// From the Secretary of State, via scripts/fetch_ballot.mjs. Re-run that before
+// a build if the state's certified list may have changed.
+const ballot = JSON.parse(readFileSync(resolve(ROOT, 'data/ballot_2026_house.json'), 'utf8'));
 
 // The ZIP box on the index reuses the quiz lookup's approved strings, read from
 // the same copy.json the Spanish gate checks, so it adds no unreviewed Spanish.
@@ -183,6 +186,70 @@ const PARTY = {
   es: { D: 'demócrata', R: 'republicano' },
 };
 
+// --- the November ballot -----------------------------------------------------
+//
+// Names as the state certified them, so the reader can find the same person on
+// the ballot. Party as a noun in Spanish, because the adjective would have to
+// agree with each candidate's gender and the state does not record it. "Voto
+// escrito" is what Texas ballots print under the write-in line, per the
+// Secretary of State's ballot advisories, so it is the phrase a reader will see.
+const BALLOT_PARTY = {
+  en: { R: 'Republican', D: 'Democrat', L: 'Libertarian', G: 'Green', I: 'Independent', W: 'Write-in' },
+  es: { R: 'Partido Republicano', D: 'Partido Demócrata', L: 'Partido Libertario', G: 'Partido Verde', I: 'Independiente', W: 'Voto escrito' },
+};
+const PARTY_ORDER = ['R', 'D', 'L', 'G', 'I', 'W'];
+
+/** The state publishes names in capitals. "MCLAUGHLIN" -> "McLaughlin", "O'BRIEN" -> "O'Brien". */
+const ballotName = (s) => s.toLowerCase()
+  .replace(/(^|[\s\-'".(])([a-z])/g, (_, a, b) => a + b.toUpperCase())
+  .replace(/\bMc([a-z])/g, (_, b) => `Mc${b.toUpperCase()}`);
+
+const nameTokens = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase()
+  .replace(/[^A-Z ]/g, ' ').split(/\s+/).filter(Boolean);
+
+/**
+ * Which candidate, if any, is the sitting member.
+ *
+ * Matched on the member's surname appearing in the ballot name, within the same
+ * district. A first-name check was tried and dropped: it misses "Mando" against
+ * "ARMANDO MANDO MARTINEZ" and "Lulu" against "MARIA LUISA "LULU" FLORES". The
+ * cost of surname-only is a challenger who shares the member's surname, which
+ * happens in HD-77 (Humberto Perez and Vincent "Vince" Perez). There the
+ * member's first name breaks the tie, and if it cannot, the build stops rather
+ * than guess.
+ */
+function incumbentOf(m) {
+  const [first, ...rest] = nameTokens(m.n);
+  const last = rest.at(-1) ?? first;
+  let hits = (ballot.seats[m.d] ?? []).filter((c) => nameTokens(c.name).includes(last));
+  if (hits.length > 1) hits = hits.filter((c) => nameTokens(c.name).includes(first));
+  if (hits.length > 1) throw new Error(`HD-${m.d}: ${hits.length} candidates match ${m.n}; check by hand`);
+  return hits[0] ?? null;
+}
+
+function fetchedDate(lang) {
+  const [y, mo, d] = ballot._meta.fetched.split('-').map(Number);
+  const month = new Date(Date.UTC(y, mo - 1, d)).toLocaleString(lang === 'es' ? 'es' : 'en', { month: 'long', timeZone: 'UTC' });
+  return lang === 'es' ? `${d} de ${month} de ${y}` : `${d} ${month} ${y}`;
+}
+
+function ballotBlock(m, lang) {
+  const c = COPY[lang];
+  const seat = [...(ballot.seats[m.d] ?? [])]
+    .sort((a, b) => a.writeIn - b.writeIn || PARTY_ORDER.indexOf(a.party) - PARTY_ORDER.indexOf(b.party));
+  const inc = incumbentOf(m);
+  const printed = seat.filter((x) => !x.writeIn);
+  const items = seat.map((x) => {
+    const tags = [x.writeIn ? c.ballotWriteIn : BALLOT_PARTY[lang][x.party]];
+    if (x === inc) tags.push(c.ballotIncumbent);
+    return `<li><b>${esc(ballotName(x.name))}</b> <span class="small">${esc(tags.join(' · '))}</span></li>`;
+  }).join('');
+  return `<h2>${esc(c.h2ballot(m))}</h2>
+  <p>${esc(inc ? c.ballotRunning(m) : c.ballotNotRunning(m))}${printed.length === 1 ? ` ${esc(c.ballotOnly)}` : ''}</p>
+  <ul class="stand">${items}</ul>
+  <p class="small">${esc(c.ballotNote(fetchedDate(lang)))} <a href="${esc(ballot._meta.source)}" rel="nofollow noopener" target="_blank">${esc(c.ballotSource)}</a></p>`;
+}
+
 const COPY = {
   en: {
     other: 'es', siteName: 'The Purple Strip', target: `${SITE}/`,
@@ -205,6 +272,15 @@ const COPY = {
     indexKey: 'The pair after each name is how often that member voted against their own party, out of the votes where the two parties took opposite sides.',
     indexVacant: (d) => `District ${d} has no sitting member and so has no page. Nate Schatzline held it and left on 29 July 2026, after casting 3,283 votes that are still the record for that district.`,
     indexBack: 'All 150 districts',
+    h2ballot: (m) => `On the November 3 ballot for District ${m.d}`,
+    ballotRunning: (m) => `${m.n} holds this seat now and is running again, so the record on this page is theirs.`,
+    ballotNotRunning: (m) => `${m.n} holds this seat now and is not on the November ballot for it. The record on this page is theirs, not any candidate's.`,
+    ballotOnly: 'Only one candidate is on the ballot for this seat.',
+    ballotIncumbent: 'holds the seat now',
+    ballotWriteIn: 'declared write-in, name not printed on the ballot',
+    ballotNote: (date) => `As certified by the Texas Secretary of State, retrieved ${date}. This site has voting records only for current House members. Your ballot has many other races, and your county's sample ballot shows all of them.`,
+    ballotSource: 'The state’s candidate list',
+    printUrl: (m) => `rightnleft.com/district/${m.d}`,
     h2head: 'How they voted on the bills people have heard of',
     headNote: 'These seven drew the most attention of the 67 this site publishes. Every member has a position on record for each one, whichever way they went.',
     yea: 'Voted for',
@@ -242,6 +318,16 @@ const COPY = {
     indexKey: 'El par que sigue a cada nombre es cuántas veces esa persona votó en contra de su propio partido, de los votos en los que los dos partidos tomaron lados opuestos.',
     indexVacant: (d) => `El Distrito ${d} no tiene legislador en funciones, así que no tiene página. Nate Schatzline lo ocupaba y se fue el 29 de julio de 2026, después de emitir 3,283 votos que siguen siendo el registro de ese distrito.`,
     indexBack: 'Los 150 distritos',
+    // The eight ballot strings below were approved on 30 September 2026.
+    h2ballot: (m) => `En la boleta del 3 de noviembre para el Distrito ${m.d}`,
+    ballotRunning: (m) => `${m.n} ocupa este escaño ahora y se postula de nuevo, así que el historial de esta página es suyo.`,
+    ballotNotRunning: (m) => `${m.n} ocupa este escaño ahora y no aparece en la boleta de noviembre para este distrito. El historial de esta página es suyo, no de ninguna de las candidaturas.`,
+    ballotOnly: 'Solo hay una candidatura en la boleta para este escaño.',
+    ballotIncumbent: 'ocupa el escaño ahora',
+    ballotWriteIn: 'candidatura declarada por voto escrito; el nombre no aparece impreso en la boleta',
+    ballotNote: (date) => `Según la certificación de la Secretaría de Estado de Texas, consultada el ${date}. Este sitio solo tiene historial de votos de los miembros actuales de la Cámara. Su boleta incluye muchas otras contiendas, y la boleta de muestra de su condado las muestra todas.`,
+    ballotSource: 'La lista de candidatos del estado',
+    printUrl: (m) => `rightnleft.com/distrito/${m.d}`,
     h2head: 'Cómo votó en los proyectos de ley de los que sí se habló',
     headNote: 'Estos siete fueron los que más atención recibieron de los 67 que publica este sitio. De cada uno hay una posición registrada para cada legislador, sea cual sea.',
     yea: 'Votó a favor',
@@ -330,17 +416,21 @@ function render(m, lang) {
   const body = `
   <h1>${esc(c.title(m))}</h1>
   <p class="lede">${esc(c.lede(m, r))}</p>
+  ${ballotBlock(m, lang)}
   ${crossBlock}
   ${headBlock}
   <h2>${esc(c.h2zip(m))}</h2>
   <p class="zips">${zips.map(esc).join(' · ')}</p>
   <p class="small">${esc(c.zipNote)}</p>
+  <div class="noprint">
   <hr>
   <h2>${esc(c.h2try)}</h2>
   <p>${esc(c.tryBody)}</p>
   <p><a class="cta" href="${c.target}">${esc(c.tryCta)}</a></p>
   <p class="small">${sheetLine(lang)}</p>
   <p class="small"><a href="${SITE}/${lang === 'es' ? 'distritos' : 'districts'}">${esc(c.indexBack)}</a></p>
+  </div>
+  <p class="printonly">${esc(c.printUrl(m))}</p>
   <hr>
   <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>
   <p class="small"><span class="label">${esc(c.sourceLabel)}</span> ${esc(c.source)}</p>`;

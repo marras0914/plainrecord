@@ -167,6 +167,25 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
 #ziplookup .zipout p{margin:12px 0 6px}
 .zips{font-variant-numeric:tabular-nums;font-size:14px;color:var(--ink-2);
   line-height:1.8;word-spacing:.15em}
+/* Printing. A district page is the thing someone takes to the kitchen table
+   before voting, so on paper it drops the navigation and the invitations, goes
+   black on white whatever theme was chosen, and ends with its own address so a
+   printed copy can be checked against the live one. */
+.printonly{display:none}
+@media print{
+  :root,:root[data-theme="dark"]{color-scheme:light;--page:#fff;--surface:#fff;--ink:#000;
+    --ink-2:#222;--muted:#444;--hair:#bbb;--rule:#888;--blue:#000;--red:#000}
+  body{font-size:11.5pt;line-height:1.4}
+  main{max-width:none;padding:0}
+  .top,.sitenav,.sitefoot,.noprint,.hist,.cta{display:none}
+  .printonly{display:block;font-size:10pt;color:var(--muted)}
+  h1{font-size:20pt;margin:0 0 10px}
+  h2{font-size:14pt;margin:18px 0 6px;break-after:avoid}
+  li,.stand li{break-inside:avoid}
+  .stand li{padding:5px 0}
+  a{color:inherit;text-decoration:none}
+  hr{margin:16px 0}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Find your Texas House representative","description":"Type a ZIP code to see which Texas House district you are in, who represents it, and how they voted in 2025. All 150 districts, free, nothing tracked.","url":"https://rightnleft.com/districts","inLanguage":"en-US","isPartOf":{"@type":"WebSite","name":"The Purple Strip","url":"https://rightnleft.com"}}</script>
 <script src="/js/zip-lookup.js" defer></script>

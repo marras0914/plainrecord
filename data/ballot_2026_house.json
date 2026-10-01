@@ -1,0 +1,1777 @@
+{
+  "_meta": {
+    "what": "Candidates on the 3 November 2026 general election ballot for each Texas House seat.",
+    "source": "https://goelect.txelections.civixapps.com/ivis-cbp-ui/candidate-information",
+    "api": "https://goelect.txelections.civixapps.com/api-ivis-cbp/api/cbp/findQualifiedCandidates",
+    "electionId": 53815,
+    "rule": "Filing status CG (candidate in the general election) and declaration status A (accepted). Write-ins are declared write-in candidates, whose names are not printed on the ballot.",
+    "fetched": "2026-09-30",
+    "excluded": [
+      {
+        "district": 19,
+        "name": "KELLY HALL",
+        "filing": null,
+        "declaration": "DI"
+      },
+      {
+        "district": 124,
+        "name": "L.D. HOWARD",
+        "filing": null,
+        "declaration": "R"
+      },
+      {
+        "district": 126,
+        "name": "LISA EMERSON",
+        "filing": null,
+        "declaration": "R"
+      }
+    ]
+  },
+  "seats": {
+    "1": [
+      {
+        "name": "SEAN HUFFMAN",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "CHRIS SPENCER",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "2": [
+      {
+        "name": "BRENT A. MONEY",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "FATIMA LA'JUAN MUSE",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "3": [
+      {
+        "name": "NICOLE KING",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "KRISTEN PLAISANCE",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "4": [
+      {
+        "name": "MARK A.  MOSELEY",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "KEITH BELL",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "5": [
+      {
+        "name": "COLE HEFNER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "HECTOR GARZA",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "6": [
+      {
+        "name": "LORENZO JOHNSON",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "DANIEL ALDERS",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "7": [
+      {
+        "name": "FANTASHA ALLEN",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JAY DEAN",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "8": [
+      {
+        "name": "CODY HARRIS",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JEFF CHAVEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "9": [
+      {
+        "name": "SHELLEY TATUM",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "ROCKY THIGPEN",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "10": [
+      {
+        "name": "BRIAN HARRISON",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "MICHAEL MYERS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "11": [
+      {
+        "name": "JOANNE SHOFNER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ROXANNE LATHAN",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "12": [
+      {
+        "name": "ANDIE HO",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "TREY WHARTON",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "13": [
+      {
+        "name": "ALBERT HUNTER",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "ANGELIA ORR",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "14": [
+      {
+        "name": "PAUL DYSON",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JANET TYCELIA DUDDING",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JEFF MILLER",
+        "party": "L",
+        "writeIn": false
+      }
+    ],
+    "15": [
+      {
+        "name": "JESSI COWART",
+        "party": "L",
+        "writeIn": false
+      },
+      {
+        "name": "MONIQUA' S. SCOTT",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "BRAD BAILEY",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "16": [
+      {
+        "name": "WILL METCALF",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "BOBBIE CLAYTON",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "17": [
+      {
+        "name": "MARY ELIZABETH KLENZ",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "STAN GERDES",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "18": [
+      {
+        "name": "JANIS HOLT",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "VALORIE BARTON",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "19": [
+      {
+        "name": "ELLEN TROXCLAIR",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "TOM LUCK",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "20": [
+      {
+        "name": "TERRY M. WILSON",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "MATTHIAS-JONAH EARLY",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "21": [
+      {
+        "name": "RAY CALLAS",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JACQUELINE \"JACKY\" HERNANDEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "22": [
+      {
+        "name": "CHRISTIAN MANUEL",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "23": [
+      {
+        "name": "CHERYL LYNN CLARK",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "TERRI LEO WILSON",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "24": [
+      {
+        "name": "FRANK N CARR",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "GREG BONNEN",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "25": [
+      {
+        "name": "CODY THANE VASUT",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "MIKE MEADORS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "26": [
+      {
+        "name": "MATT MORGAN",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ELIZABETH \"ELIZ\" MARKOWITZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "27": [
+      {
+        "name": "RON REYNOLDS",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "MAX ALALIBO",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "28": [
+      {
+        "name": "GARY GATES",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "SANDY IBANEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "29": [
+      {
+        "name": "JEFF BARRY",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "KAREN REEDER",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "30": [
+      {
+        "name": "CRYSTAL SEDILLO",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "AJ LOUDERBACK",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "31": [
+      {
+        "name": "RYAN GUILLEN",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JENNIFER \"JJ\" DOMINGUEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "32": [
+      {
+        "name": "GABRIEL \"GABE\" LOZANO MARROQUIN",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "TODD HUNTER",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "33": [
+      {
+        "name": "KATRINA PIERSON",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ORLANDO LOPEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "34": [
+      {
+        "name": "DENISE VILLALOBOS",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "STEPHANIE GUERRERO SAENZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "35": [
+      {
+        "name": "OSCAR LONGORIA",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "OSCAR ROSA",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "36": [
+      {
+        "name": "SERGIO MUÑOZ, JR",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "37": [
+      {
+        "name": "JANIE LOPEZ",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "OZIEL \"OZZIE\" OCHOA, JR",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "38": [
+      {
+        "name": "ERIN ELIZABETH GAMEZ",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "LAURA E. CISNEROS",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "39": [
+      {
+        "name": "ARMANDO MANDO MARTINEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "40": [
+      {
+        "name": "TERRY CANALES",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "CELESTE CABRERA-HUFF",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "41": [
+      {
+        "name": "JULIO SALINAS",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "GARY GROVES",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "42": [
+      {
+        "name": "RICHARD PENA RAYMOND",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "TERESA JOHNSON-HERNANDEZ",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "43": [
+      {
+        "name": "J.M. LOZANO",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JEFFREY T JACKSON",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "44": [
+      {
+        "name": "ERIC NORMAN",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "ALAN SCHOOLCRAFT",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "45": [
+      {
+        "name": "TENNYSON G. MORENO",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ERIN ZWIENER",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "46": [
+      {
+        "name": "SHERYL COLE",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "47": [
+      {
+        "name": "JENNIFER MUSHTALER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "POOJA SETHI",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "48": [
+      {
+        "name": "ANTHONY GUPTA",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "DONNA HOWARD",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "49": [
+      {
+        "name": "ARSHIA PAPARI",
+        "party": "G",
+        "writeIn": false
+      },
+      {
+        "name": "MONTSERRAT GARIBAY",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "50": [
+      {
+        "name": "SAMANTHA LOPEZ-RESENDEZ",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "HOWARD OLSEN",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "51": [
+      {
+        "name": "MARIA LUISA \"LULU\" FLORES",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JESSICA MARTINEZ",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "52": [
+      {
+        "name": "CAROLINE HARRIS DAVILA",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "CHRIS JIMENEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "53": [
+      {
+        "name": "WES VIRDELL",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "KATHRYN HARTMANN",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "54": [
+      {
+        "name": "BRAD BUCKLEY",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "DAWN RICHARDSON",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "55": [
+      {
+        "name": "AMELIA RABROKER",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "HILLARY HICKLAND",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "56": [
+      {
+        "name": "ASHLEY BEAN THORNTON",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "PAT CURRY",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "57": [
+      {
+        "name": "DARREN HAMILTON",
+        "party": "L",
+        "writeIn": false
+      },
+      {
+        "name": "RICHARD HAYES",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "RAY STITH",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "58": [
+      {
+        "name": "CHRIS OLDHAM",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "HELEN KERWIN",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "59": [
+      {
+        "name": "ANDREW TURNER",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "SHELBY SLAWSON",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "60": [
+      {
+        "name": "MIKE OLCOTT",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "KRISSY GUESS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "61": [
+      {
+        "name": "BRITTANY BLACK",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "KERESA RICHARDSON",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ANISSA CHILMERAN",
+        "party": "G",
+        "writeIn": false
+      }
+    ],
+    "62": [
+      {
+        "name": "SHELLEY LUTHER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "CATHERINE THORNE",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "63": [
+      {
+        "name": "BEN BUMGARNER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "DENISE WOOTEN",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "64": [
+      {
+        "name": "ANDY HOPPER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JULIE EVANS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "65": [
+      {
+        "name": "MITCH LITTLE",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "DETRICK DEBURR",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "66": [
+      {
+        "name": "SANDEEP SRIVASTAVA",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "MATT SHAHEEN",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "67": [
+      {
+        "name": "JEFF LEACH",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JORDAN WHEATLEY",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "68": [
+      {
+        "name": "DAVID SPILLER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JASMINE HENDERSON",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "69": [
+      {
+        "name": "JAMES B. FRANK",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "LEILANI BARNETT",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "70": [
+      {
+        "name": "MIHAELA ELIZABETH PLESA",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "GEORGE FLINT",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "71": [
+      {
+        "name": "DIANA LUNA",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JAY HARDAWAY",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "72": [
+      {
+        "name": "SHILOH SALAZAR",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "DREW DARBY",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "73": [
+      {
+        "name": "MERRIE FOX",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "CARRIE ISAAC",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "74": [
+      {
+        "name": "EDDIE MORALES, JR",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "ROBERT GARZA",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "75": [
+      {
+        "name": "MARY E GONZALEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "76": [
+      {
+        "name": "SULEMAN LALANI",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "LINDA HOWELL",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "77": [
+      {
+        "name": "HUMBERTO PEREZ",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "VINCENT \"VINCE\" PEREZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "78": [
+      {
+        "name": "JOE MOODY",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "79": [
+      {
+        "name": "CLAUDIA ORDAZ",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JESSE ROMERO",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "80": [
+      {
+        "name": "DON MCLAUGHLIN",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "CECILIA CASTELLANO",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "81": [
+      {
+        "name": "CEASAR SANCHEZ",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "BROOKS LANDGRAF",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "82": [
+      {
+        "name": "TOM CRADDICK",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "CATHY BROADRICK",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "83": [
+      {
+        "name": "MALIK WILLIAMS",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "DUSTIN BURROWS",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "84": [
+      {
+        "name": "MARGARET DURHAM",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "CARL TEPPER",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "85": [
+      {
+        "name": "DENNIS \"GOOSE\" GEESAMAN",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "LAWRENCE BRANDYBURG",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "86": [
+      {
+        "name": "CULLIN KNUTSON",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "HOLLY JEFFREYS",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "87": [
+      {
+        "name": "CAROLINE FAIRLY",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "DIANA LOYA",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "88": [
+      {
+        "name": "KEN KING",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "HEATHER J. WALLACE",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "89": [
+      {
+        "name": "ANGIE CARRAWAY",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "CANDY NOBLE",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "90": [
+      {
+        "name": "RAMON ROMERO, JR",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "91": [
+      {
+        "name": "YISAK WORKU",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "DAVID LOWE",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "92": [
+      {
+        "name": "SALMAN BHOJANI",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JP WOODRUFF",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "93": [
+      {
+        "name": "ERICKA LOMICK",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "ALAN BLAYLOCK",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "94": [
+      {
+        "name": "KATIE O'BRIEN DUZAN",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "CHERYL BEAN",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "95": [
+      {
+        "name": "NICOLE COLLIER",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "96": [
+      {
+        "name": "ELLEN FLEISCHMANN",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "EBONY M. TURNER",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "97": [
+      {
+        "name": "BETH LLEWELLYN MCLAUGHLIN",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JOHN W. MCQUEENEY",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "98": [
+      {
+        "name": "CATE BRENNAN",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "ARMIN MIZANI",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "99": [
+      {
+        "name": "CHARLIE GEREN",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "MICHELLE WINDER",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "100": [
+      {
+        "name": "VENTON JONES",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JORDAN SCOTT HOFFNAGLE",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "101": [
+      {
+        "name": "JUNIOR EZEONU",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "102": [
+      {
+        "name": "ANA-MARIA RODRIGUEZ RAMOS",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "BONNIE ABADIE",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "103": [
+      {
+        "name": "MELANIE MEDLEY-THOMAS",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "RAFAEL ANCHIA",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "104": [
+      {
+        "name": "JESSICA GONZALEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "105": [
+      {
+        "name": "TERRY MEZA",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "106": [
+      {
+        "name": "JOE MAYES",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JARED PATTERSON",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "107": [
+      {
+        "name": "LINDA GARCIA",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "108": [
+      {
+        "name": "MORGAN MEYER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ALLISON MITCHELL",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "109": [
+      {
+        "name": "WILL CAMPBELL",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "AICHA DAVIS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "110": [
+      {
+        "name": "TONI ROSE",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "111": [
+      {
+        "name": "YVONNE DAVIS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "112": [
+      {
+        "name": "ZACH HERBERT",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "ANGIE CHEN BUTTON",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "113": [
+      {
+        "name": "STEPHEN W. STANLEY",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "RHETTA ANDREWS BOWERS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "114": [
+      {
+        "name": "TIM MCDONOUGH",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JOHN BRYANT",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "115": [
+      {
+        "name": "DANNY ROSELLINI",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "CASSANDRA HERNANDEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "116": [
+      {
+        "name": "RHETT ROSENQUEST SMITH",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "TREY MARTINEZ FISCHER",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "117": [
+      {
+        "name": "BEN MOSTYN",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "PHILIP CORTEZ",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "118": [
+      {
+        "name": "JORGE BORREGO",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "KRISTIAN CARRANZA",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "119": [
+      {
+        "name": "ELIZABETH \"LIZ\" CAMPOS",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "MELVA PEREZ",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "120": [
+      {
+        "name": "BARBARA GERVIN HAWKINS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "121": [
+      {
+        "name": "MARC LAHOOD",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ZACK DUNN",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "122": [
+      {
+        "name": "MARK DORAZIO",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "SHELLY NICKELS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "123": [
+      {
+        "name": "DIEGO BERNAL",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "124": [
+      {
+        "name": "L.D. HOWARD",
+        "party": "W",
+        "writeIn": true
+      },
+      {
+        "name": "SYLVIA SOTO",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JOSEY GARCIA",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "125": [
+      {
+        "name": "RICARDO 'RICK' MARTINEZ",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ADRIAN REYNA",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "126": [
+      {
+        "name": "STEFANIE BORD",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "STAN STANART",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "127": [
+      {
+        "name": "CHARLES CUNNINGHAM",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "MICHELLE WILLIAMS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "128": [
+      {
+        "name": "TOM BUTLER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "DESIREE KLAUS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "129": [
+      {
+        "name": "SCOTT BOWEN",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ALBERT WITTLIFF",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "130": [
+      {
+        "name": "TOM OLIVERSON",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "BRETT ROBINSON",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "131": [
+      {
+        "name": "STACI CHILDS",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "SCOTT WHITMARSH",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "132": [
+      {
+        "name": "SARA MCGEE",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "MIKE SCHOFIELD",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "133": [
+      {
+        "name": "MANO DEAYALA",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JOSH WALLENSTEIN",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "134": [
+      {
+        "name": "ANN JOHNSON",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "MIKE MICHNA",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "135": [
+      {
+        "name": "ODUS E. EVBAGHARU",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "LIZ RAMOS",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "136": [
+      {
+        "name": "THEODORE SCHRAMM",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JOHN H. BUCY, III",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "137": [
+      {
+        "name": "HELEN ZHOU",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "GENE WU",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "138": [
+      {
+        "name": "TYLER SMITH",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "LACEY HULL",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "139": [
+      {
+        "name": "CHARLENE WARD JOHNSON",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "KYLE HARDING",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "140": [
+      {
+        "name": "LAURA GARCIA DELEON",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "ARMANDO LUCIO WALLE",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "141": [
+      {
+        "name": "SENFRONIA THOMPSON",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "JULIE HUNT",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "142": [
+      {
+        "name": "HAROLD V. DUTTON, JR",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "HEIDI HALL",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "143": [
+      {
+        "name": "ANA HERNANDEZ",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "FRANK SALAZAR",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "144": [
+      {
+        "name": "MARY ANN PEREZ",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "DAVID FLORES",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "145": [
+      {
+        "name": "INOCENSIA MORENO",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "CHRISTINA MORALES",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "146": [
+      {
+        "name": "ALEXANDRIA NICOLE BUTLER",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "LAUREN ASHLEY SIMMONS",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "147": [
+      {
+        "name": "THEODIS DANIEL",
+        "party": "R",
+        "writeIn": false
+      },
+      {
+        "name": "JOLANDA JONES",
+        "party": "D",
+        "writeIn": false
+      }
+    ],
+    "148": [
+      {
+        "name": "PENNY MORALES SHAW",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "AMANDA LABRIE",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "149": [
+      {
+        "name": "DARLENE BREAUX",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "DAVE BENNETT",
+        "party": "R",
+        "writeIn": false
+      }
+    ],
+    "150": [
+      {
+        "name": "A'YONNA KELLUM",
+        "party": "D",
+        "writeIn": false
+      },
+      {
+        "name": "VALOREE SWANSON",
+        "party": "R",
+        "writeIn": false
+      }
+    ]
+  }
+}

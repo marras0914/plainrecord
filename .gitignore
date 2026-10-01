@@ -28,6 +28,11 @@ dist/
 # the 51 MB of bulk inputs first.
 !/data/tx_evidence_vetoes.json
 
+# ...and the November ballot. build_district_pages.mjs reads it, so without it
+# the Vercel build fails. 32 KB, names and parties only, from the Secretary of
+# State via scripts/fetch_ballot.mjs.
+!/data/ballot_2026_house.json
+
 # Same reasoning as the line above. district_points.fixture.json holds 2,250
 # points with the district that contains them, answered from the Census file at
 # source resolution BEFORE the shipped boundaries were quantised. It is what
