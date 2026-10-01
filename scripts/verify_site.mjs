@@ -1722,12 +1722,17 @@ try {
         'NONE — pageview() was never called, so the funnel counts nothing');
 
     if (queued.length > 0) {
-      for (const step of ['/quiz/guess', '/quiz/started', '/quiz/result']) {
-        const hits = queued.filter((q) => q.includes(step)).length;
+      // The three milestones, plus one progress step per question of the short
+      // set (added 1 October 2026). Matched on the quoted path, so /quiz/short/1
+      // is not also a hit for a /quiz/short/1x.
+      const STEPS = ['/quiz/guess', '/quiz/started',
+        ...[1, 2, 3, 4, 5, 6, 7].map((k) => `/quiz/short/${k}`), '/quiz/result'];
+      for (const step of STEPS) {
+        const hits = queued.filter((q) => q.includes(`"${step}"`)).length;
         check(`funnel: ${step} is counted exactly once`, hits === 1, `${hits} time(s)`);
       }
-      check('funnel: nothing but the three steps is queued',
-        queued.length === 3, `${queued.length} entries: ${queue.slice(0, 120)}`);
+      check('funnel: nothing but the milestones and the seven progress steps is queued',
+        queued.length === STEPS.length, `${queued.length} entries: ${queue.slice(0, 120)}`);
       check('funnel: no queued view carries an answer or a score',
         !/qid|netLean|crossover|partisanLoad|verdict|ocd-|agree/i.test(queue),
         queue.slice(0, 90));

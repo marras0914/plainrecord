@@ -155,6 +155,32 @@ for (const [dim, label] of DIMS) {
   console.log('');
 }
 
+// The quiz funnel, in order, per language. The page table above is capped at 12
+// rows and sorted by volume, so the progress steps (/quiz/short/1 to 7, and the
+// full set's quarter marks) would be cut off or shuffled there. Each step is a
+// share of the readers who started, which is the question drop-off asks.
+{
+  const r = api(`/v1/query/web-analytics/visits/aggregate?${base}&by=requestPath&limit=100`);
+  const byPath = new Map((r.data ?? []).map((x) => [x.requestPath, x.visitors ?? 0]));
+  const STEPS = ['/quiz/guess', '/quiz/started',
+    ...[1, 2, 3, 4, 5, 6, 7].map((k) => `/quiz/short/${k}`),
+    ...[1, 17, 34, 51, 67].map((k) => `/quiz/full/${k}`), '/quiz/result'];
+  console.log('  Quiz funnel (visitors, and share of those who started)');
+  if (r.error) console.log(`      (${r.error})`);
+  for (const [prefix, lang] of [['', 'English'], ['/es', 'Spanish']]) {
+    const started = byPath.get(`${prefix}/quiz/started`) ?? 0;
+    const seen = STEPS.filter((s) => byPath.has(`${prefix}${s}`));
+    if (!seen.length) { console.log(`      ${lang}: no quiz steps recorded`); continue; }
+    console.log(`      ${lang}`);
+    for (const s of seen) {
+      const v = byPath.get(`${prefix}${s}`);
+      const pct = started ? `${String(Math.round((100 * v) / started)).padStart(4)}%` : '     ';
+      console.log(`        ${`${prefix}${s}`.padEnd(30)} ${n(v)} visitors ${pct}`);
+    }
+  }
+  console.log('      Progress steps began on 1 October 2026; earlier days have only guess, started and result.\n');
+}
+
 // The one thing this project is watching for. Named explicitly so it does not
 // have to be re-derived from the referrer table every time.
 const refs = Array.isArray(rows.referrerHostname) ? rows.referrerHostname : [];

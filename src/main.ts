@@ -179,8 +179,8 @@ let challenge: Shared | null = null;
  * this: it claimed nothing leaves the device unless you ask, while the arrival
  * beacon has always fired unasked.
  *
- * Read in the Vercel dashboard, not `npm run stats`, which uses an API that
- * 404s on this plan.
+ * Read with `npm run stats`, whose "Quiz funnel" section lists every step in
+ * order, or in the Vercel dashboard.
  */
 const counted = new Set<string>();
 function countStep(step: string): void {
@@ -209,6 +209,36 @@ function countStep(step: string): void {
   } catch {
     // Analytics being blocked, offline or absent must never break the quiz.
   }
+}
+
+/**
+ * Drop-off inside the quiz, counted the same way: a virtual page view, once per
+ * page load, and nothing the reader sees or does changes.
+ *
+ * WHY. /quiz/started and /quiz/result say how many begin and how many finish,
+ * but not where the rest stop. A reader who leaves at question 2 and one who
+ * leaves at question 6 look identical, and those call for different fixes.
+ *
+ * WHAT IS COUNTED. Progress through the active set, where a skip counts as
+ * progress: it is a reader moving on, not leaving. The short set (7) is counted
+ * at every question, /quiz/short/1 to /quiz/short/7, because seven paths is a
+ * readable curve. The full set (67) is counted at its quarter marks only,
+ * /quiz/full/1, /17, /34, /51, /67, because 67 paths would bury the page list.
+ *
+ * WHAT IS NOT. The path is a mode and a number and nothing else: not which
+ * question, not what was answered. `privacy.body` already says the site counts
+ * "how many reach each step of the quiz", which is exactly this, and
+ * verify_site.mjs fails if a queued view carries an item, a bill or a score.
+ */
+function countProgress(): void {
+  const items = activeItems();
+  const done = items.filter((it) => it.id in answers).length;
+  if (mode === 'short') {
+    for (let k = 1; k <= done; k++) countStep(`/quiz/short/${k}`);
+    return;
+  }
+  const marks = [1, ...[1, 2, 3, 4].map((q) => Math.ceil((items.length * q) / 4))];
+  for (const k of marks) if (done >= k) countStep(`/quiz/full/${k}`);
 }
 
 /**
@@ -1508,6 +1538,7 @@ function renderQuestion(): void {
     b.addEventListener('click', () => {
       const v = Number(b.dataset.answer) as 1 | -1 | 0;
       answers[queue[cursor].id] = v;
+      countProgress();
       // A skip has nothing to reveal, so it moves straight on.
       if (v === 0) {
         cursor = nextUnanswered(cursor + 1);

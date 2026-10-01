@@ -79,6 +79,33 @@ check('no call site prefixes the step itself',
 check('every step is a rooted path', calls.every((c) => c.startsWith('/quiz/')));
 
 // ---------------------------------------------------------------------------
+// Drop-off inside the quiz (added 1 October 2026)
+//
+// countProgress builds its steps from a mode and a number. The checks pin that
+// shape, because the one way this goes wrong is somebody "improving" the path
+// with the question's id, which would turn a progress count into a record of
+// what each reader saw.
+// ---------------------------------------------------------------------------
+
+const prog = main.slice(
+  main.indexOf('function countProgress'),
+  main.indexOf('function countProgress') + 700,
+);
+const progCalls = [...prog.matchAll(/countStep\(`([^`]+)`\)/g)].map((m) => m[1]);
+
+check('countProgress exists', prog.length > 100);
+check('countProgress emits exactly the short and the full steps',
+  progCalls.length === 2
+    && progCalls.includes('/quiz/short/${k}')
+    && progCalls.includes('/quiz/full/${k}'),
+  progCalls.join(', '));
+check('a progress step carries a number, never an item',
+  !/\$\{[^}]*(\.id|qid|billId|answers\[)/.test(progCalls.join(' ')));
+check('progress is counted where an answer is recorded',
+  /answers\[queue\[cursor\]\.id\]\s*=\s*v;\s*\n\s*countProgress\(\);/.test(main),
+  'moved elsewhere, it could count re-renders instead of answers');
+
+// ---------------------------------------------------------------------------
 // The locale the prefix depends on. This half is real behaviour.
 // ---------------------------------------------------------------------------
 
