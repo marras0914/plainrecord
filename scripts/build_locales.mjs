@@ -497,6 +497,13 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // grows or stops: hardcoding the ten would mean this file has to be edited
   // again for the other 140, and the sitemap would silently omit them if it
   // were not. Numeric sort so the sitemap reads 31, 49, 95 rather than 108, 112.
+  //
+  // They carry a <lastmod>, and it is the day the ballot list was pulled, because
+  // that is what changes on them now. Nothing else here gets one: a build date on
+  // every URL would claim the whole site changed on every deploy, and an engine
+  // that catches a sitemap's lastmod being wrong stops reading it.
+  const ballotDate = await readFile(resolve(ROOT, 'data/ballot_2026_house.json'), 'utf8')
+    .then((s) => JSON.parse(s)._meta.fetched, () => null);
   for (const [parent, lang] of [['district', 'en'], ['distrito', 'es']]) {
     let entries = [];
     try {
@@ -507,7 +514,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     } catch { entries = []; }
     for (const n of entries) {
       const shipped = await access(resolve(DIST, `${parent}/${n}/index.html`)).then(() => true, () => false);
-      if (shipped) docs.push({ loc: `${SITE}/${parent}/${n}`, priority: '0.9' });
+      if (shipped) docs.push({ loc: `${SITE}/${parent}/${n}`, priority: '0.9', lastmod: ballotDate });
     }
   }
 
@@ -541,6 +548,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     docs.map((d) =>
       '  <url>\n' +
       `    <loc>${d.loc}</loc>\n` +
+      (d.lastmod ? `    <lastmod>${d.lastmod}</lastmod>\n` : '') +
       '    <changefreq>monthly</changefreq>\n' +
       `    <priority>${d.priority}</priority>\n` +
       '  </url>\n').join('') +

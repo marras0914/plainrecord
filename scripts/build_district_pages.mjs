@@ -233,10 +233,20 @@ function fetchedDate(lang) {
   return lang === 'es' ? `${d} de ${month} de ${y}` : `${d} ${month} ${y}`;
 }
 
+const seatOf = (d) => [...(ballot.seats[d] ?? [])]
+  .sort((a, b) => a.writeIn - b.writeIn || PARTY_ORDER.indexOf(a.party) - PARTY_ORDER.indexOf(b.party));
+
+/**
+ * "Brad Bailey (R), Moniqua' S. Scott (D), Jessi Cowart (L)", for the search
+ * description. Printed candidates only: a write-in's name is not on the ballot,
+ * and the description is the line a searcher reads before deciding to click.
+ */
+const ballotLine = (d) => seatOf(d).filter((x) => !x.writeIn)
+  .map((x) => `${ballotName(x.name)} (${x.party})`).join(', ');
+
 function ballotBlock(m, lang) {
   const c = COPY[lang];
-  const seat = [...(ballot.seats[m.d] ?? [])]
-    .sort((a, b) => a.writeIn - b.writeIn || PARTY_ORDER.indexOf(a.party) - PARTY_ORDER.indexOf(b.party));
+  const seat = seatOf(m.d);
   const inc = incumbentOf(m);
   const printed = seat.filter((x) => !x.writeIn);
   const items = seat.map((x) => {
@@ -255,11 +265,15 @@ const COPY = {
     other: 'es', siteName: 'The Purple Strip', target: `${SITE}/`,
     kicker: 'Texas House · 2025 session',
     title: (m) => `${m.n}, Texas House District ${m.d}`,
-    // The search-result title. People search "<name> voting record", and the h1
-    // is a name and a district with nothing a searcher would type after it.
-    docTitle: (m) => `${m.n} voting record, Texas House District ${m.d}`,
-    desc: (m, r) => `How ${m.n} voted on 67 recorded Texas House votes from the 2025 session, `
-      + `including the ${r.crossed} where they broke with their own party. Free, no sign-up, nothing tracked.`,
+    // The search-result title. Until the election, the district and "candidates
+    // 2026" lead, because that is the search a voter types and on the 24 open
+    // seats the member's name is not one any candidate carries. The member's
+    // record follows, for the "<name> voting record" search the page began with.
+    // Same pattern on every page, whoever holds the seat.
+    docTitle: (m) => `Texas House District ${m.d} candidates 2026 · ${m.n} voting record`,
+    // The candidates are named so a search for a challenger can find the page.
+    desc: (m, r, line) => `On the November 3, 2026 ballot for Texas House District ${m.d}: ${line}. `
+      + `Plus how ${m.n} voted on 67 recorded House votes from 2025. Free, nothing tracked.`,
     lede: (m, r) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
     // The index answers "who is my state rep", the question people actually type,
     // so the title, h1 and description say that and the ZIP box sits first.
@@ -305,9 +319,11 @@ const COPY = {
     other: 'en', siteName: 'La Franja Morada', target: `${SITE}/es`,
     kicker: 'Cámara de Texas · Sesión de 2025',
     title: (m) => `${m.n}, Distrito ${m.d} de la Cámara de Texas`,
-    docTitle: (m) => `${m.n}: historial de votos, Distrito ${m.d} de la Cámara de Texas`,
-    desc: (m, r) => `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, `
-      + `incluidos los ${r.crossed} en los que se apartó de su propio partido. Gratis, sin registro y sin rastreo.`,
+    // Approved 30 September 2026. "candidatos" rather than the page's
+    // "candidaturas" on purpose: it is the word people type into a search box.
+    docTitle: (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026 · historial de ${m.n}`,
+    desc: (m, r, line) => `En la boleta del 3 de noviembre de 2026 para el Distrito ${m.d} de la Cámara de Texas: ${line}. `
+      + `Además, cómo votó ${m.n} en 67 votos registrados de la Cámara en 2025. Gratis y sin rastreo.`,
     lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
     indexDocTitle: '¿Quién es mi representante estatal en Texas? Búsqueda por código postal',
     indexTitle: 'Encuentre a su representante en la Cámara de Texas',
@@ -439,7 +455,7 @@ function render(m, lang) {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: c.title(m),
-    description: c.desc(m, r),
+    description: c.desc(m, r, ballotLine(m.d)),
     inLanguage: lang === 'es' ? 'es-US' : 'en-US',
     url: canonical,
     isPartOf: { '@type': 'WebSite', name: c.siteName, url: SITE },
@@ -452,7 +468,7 @@ function render(m, lang) {
 
   return document_({
     lang, otherLang: c.other, title: c.title(m), docTitle: c.docTitle(m), siteName: c.siteName,
-    desc: c.desc(m, r), canonical, altHref, altLabel: c.langSwitch,
+    desc: c.desc(m, r, ballotLine(m.d)), canonical, altHref, altLabel: c.langSwitch,
     ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
     jsonld, faces, kicker: c.kicker, body,
   });
