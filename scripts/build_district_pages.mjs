@@ -385,8 +385,8 @@ const COPY = {
     docTitle: (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026 · historial de ${m.n}`,
     desc: (m, r, line) => `En la boleta del 3 de noviembre de 2026 para el Distrito ${m.d} de la Cámara de Texas: ${line}. `
       + `${whereShort(m.d, 'es')} Además, cómo votó ${m.n} en 67 votos registrados de la Cámara en 2025. Gratis y sin cookies.`,
-    // The ten "where" strings and whereShort's Spanish were written 5 October
-    // 2026 and are NOT YET APPROVED. Marco reads them before this ships.
+    // The ten "where" strings and whereShort's Spanish were written and
+    // approved on 5 October 2026.
     h2where: (m) => `Dónde queda el Distrito ${m.d}`,
     whereCounties: (m, cs, pop) => (cs.length === 1
       ? `El Distrito ${m.d} está en el condado de ${cs[0].name}, y según el censo de 2020 vivían en él ${pop} personas.`
