@@ -33,6 +33,11 @@ dist/
 # State via scripts/fetch_ballot.mjs.
 !/data/ballot_2026_house.json
 
+# ...and where each district's people live. Same reason: build_district_pages.mjs
+# reads it on Vercel, where the Census block files it is computed from do not
+# exist. 230 KB, from scripts/build_district_places.mjs.
+!/data/district_places_2020.json
+
 # Same reasoning as the line above. district_points.fixture.json holds 2,250
 # points with the district that contains them, answered from the Census file at
 # source resolution BEFORE the shipped boundaries were quantised. It is what

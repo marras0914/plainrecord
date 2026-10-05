@@ -260,6 +260,56 @@ function ballotBlock(m, lang) {
   <p class="small">${esc(c.ballotNote(fetchedDate(lang)))} <a href="${esc(ballot._meta.source)}" rel="nofollow noopener" target="_blank">${esc(c.ballotSource)}</a></p>`;
 }
 
+// --- where the district is ---------------------------------------------------
+//
+// From data/district_places_2020.json (scripts/build_district_places.mjs): the
+// counties and Census places each district's 2020 residents live in. Added
+// 5 October 2026 after Search Console reported the pages "Crawled, currently not
+// indexed". About three quarters of a typical page matched the other 149 word
+// for word, and none named a town, which is what people actually search.
+
+const places = JSON.parse(readFileSync(resolve(ROOT, 'data/district_places_2020.json'), 'utf8')).districts;
+const fmtN = (n) => n.toLocaleString('en-US');
+const pct = (x) => (x < 0.01 ? null : `${Math.min(99, Math.round(x * 100))}%`);
+const andList = (xs, and) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} ${and} ${xs.at(-1)}`);
+// Half the district or more outside any named place: say so first, because a
+// list of 1% slivers would describe a district that does not exist.
+const mostlyUnincorporated = (p) => p.outsideAnyPlace >= 0.5;
+
+/** The short form for the search description: three places, and the counties. */
+function whereShort(d, lang) {
+  const p = places[d];
+  const cs = p.counties.map((c) => c.name);
+  const top = p.places.slice(0, 3).map((x) => x.name);
+  const L = lang === 'es'
+    ? { and: 'y', some: 'Incluye todo o parte de', mostly: 'Sobre todo zonas no incorporadas',
+      one: (c) => `condado de ${c}`, many: (xs) => `${cs.length > 3 ? 'sobre todo los ' : ''}condados de ${andList(xs, 'y')}` }
+    : { and: 'and', some: 'Takes in all or part of', mostly: 'Mostly unincorporated',
+      one: (c) => `${c} County`, many: (xs) => `${cs.length > 3 ? 'mainly ' : ''}${andList(xs, 'and')} counties` };
+  const county = cs.length === 1 ? L.one(cs[0]) : L.many(cs.slice(0, 3));
+  if (mostlyUnincorporated(p) || !top.length) {
+    return lang === 'es' ? `${L.mostly} del ${county}.` : `${L.mostly} ${county}.`;
+  }
+  return `${L.some} ${andList(top, L.and)} (${county}).`;
+}
+
+function whereBlock(m, lang) {
+  const c = COPY[lang];
+  const p = places[m.d];
+  const counties = p.counties.map((x) => ({ name: x.name, share: pct(x.shareOfDistrict) }));
+  const items = p.places.map((x) => {
+    const ofPlace = x.shareOfPlace === 1 ? c.whereAll(x.name) : c.wherePart(pct(x.shareOfPlace), x.name);
+    return `<li><b>${esc(x.name)}</b> <span class="small">${esc(c.whereOfDistrict(pct(x.shareOfDistrict)))} · ${esc(ofPlace)}${x.cdp ? ` · ${esc(c.whereCdp)}` : ''}</span></li>`;
+  }).join('');
+  const outside = pct(p.outsideAnyPlace);
+  return `<h2>${esc(c.h2where(m))}</h2>
+  <p>${esc(c.whereCounties(m, counties, fmtN(p.pop)))}</p>
+  ${mostlyUnincorporated(p) ? `<p>${esc(c.whereMostlyOutside(m, outside, counties))}</p>` : ''}
+  ${items ? `<ul class="stand">${items}</ul>` : ''}
+  ${!mostlyUnincorporated(p) && outside ? `<p class="small">${esc(c.whereOutside(outside))}</p>` : ''}
+  <p class="small">${esc(c.whereNote)}</p>`;
+}
+
 const COPY = {
   en: {
     other: 'es', siteName: 'The Purple Strip', target: `${SITE}/`,
@@ -273,7 +323,18 @@ const COPY = {
     docTitle: (m) => `Texas House District ${m.d} candidates 2026 · ${m.n} voting record`,
     // The candidates are named so a search for a challenger can find the page.
     desc: (m, r, line) => `On the November 3, 2026 ballot for Texas House District ${m.d}: ${line}. `
-      + `Plus how ${m.n} voted on 67 recorded House votes from 2025. Free, no cookies.`,
+      + `${whereShort(m.d, 'en')} Plus how ${m.n} voted on 67 recorded House votes from 2025. Free, no cookies.`,
+    h2where: (m) => `Where District ${m.d} is`,
+    whereCounties: (m, cs, pop) => (cs.length === 1
+      ? `District ${m.d} is in ${cs[0].name} County, and ${pop} people lived in it at the 2020 Census.`
+      : `District ${m.d} spans ${cs.length} counties, and ${pop} people lived in it at the 2020 Census: ${andList(cs.map((x) => `${x.name} County${x.share ? ` (${x.share})` : ''}`), 'and')}.`),
+    whereMostlyOutside: (m, share, cs) => `Most of District ${m.d} (${share}) lives outside any city or named community, in unincorporated ${cs.length === 1 ? `${cs[0].name} County` : 'parts of those counties'}.`,
+    whereOfDistrict: (share) => `${share ?? 'under 1%'} of the district`,
+    whereAll: (name) => `all of ${name}`,
+    wherePart: (share, name) => `${share ?? 'under 1%'} of ${name}’s residents`,
+    whereCdp: 'unincorporated community',
+    whereOutside: (share) => `The other ${share} of the district lives outside any city or named community.`,
+    whereNote: 'Counted from 2020 Census blocks. A city split between districts appears on each of their pages, and your street decides which one is yours.',
     lede: (m, r) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
     // The index answers "who is my state rep", the question people actually type,
     // so the title, h1 and description say that and the ZIP box sits first.
@@ -323,7 +384,20 @@ const COPY = {
     // "candidaturas" on purpose: it is the word people type into a search box.
     docTitle: (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026 · historial de ${m.n}`,
     desc: (m, r, line) => `En la boleta del 3 de noviembre de 2026 para el Distrito ${m.d} de la Cámara de Texas: ${line}. `
-      + `Además, cómo votó ${m.n} en 67 votos registrados de la Cámara en 2025. Gratis y sin cookies.`,
+      + `${whereShort(m.d, 'es')} Además, cómo votó ${m.n} en 67 votos registrados de la Cámara en 2025. Gratis y sin cookies.`,
+    // The ten "where" strings and whereShort's Spanish were written 5 October
+    // 2026 and are NOT YET APPROVED. Marco reads them before this ships.
+    h2where: (m) => `Dónde queda el Distrito ${m.d}`,
+    whereCounties: (m, cs, pop) => (cs.length === 1
+      ? `El Distrito ${m.d} está en el condado de ${cs[0].name}, y según el censo de 2020 vivían en él ${pop} personas.`
+      : `El Distrito ${m.d} abarca ${cs.length} condados, y según el censo de 2020 vivían en él ${pop} personas: ${andList(cs.map((x) => `${x.name}${x.share ? ` (${x.share})` : ''}`), 'y')}.`),
+    whereMostlyOutside: (m, share, cs) => `La mayor parte del Distrito ${m.d} (${share}) vive fuera de cualquier ciudad o comunidad con nombre, en zonas no incorporadas ${cs.length === 1 ? `del condado de ${cs[0].name}` : 'de esos condados'}.`,
+    whereOfDistrict: (share) => `${share ?? 'menos del 1%'} del distrito`,
+    whereAll: (name) => `todo ${name}`,
+    wherePart: (share, name) => `${share ?? 'menos del 1%'} de los habitantes de ${name}`,
+    whereCdp: 'comunidad no incorporada',
+    whereOutside: (share) => `El ${share} restante del distrito vive fuera de cualquier ciudad o comunidad con nombre.`,
+    whereNote: 'Contado a partir de los bloques del censo de 2020. Una ciudad repartida entre distritos aparece en la página de cada uno, y su calle decide cuál le corresponde.',
     lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
     indexDocTitle: '¿Quién es mi representante estatal en Texas? Búsqueda por código postal',
     indexTitle: 'Encuentre a su representante en la Cámara de Texas',
@@ -410,13 +484,17 @@ function render(m, lang) {
   // the part that is only true of this member. Unique content goes first, and an
   // earlier draft had these the other way round, which pushed the distinctive
   // material below seven repeated bill summaries on every page in the set.
+  //
+  // The summaries themselves came out on 5 October 2026. They were the largest
+  // block repeated word for word across all 150 pages, and Google had declined
+  // to index the set. Each label links to the bill's own page, which carries the
+  // summary and every member's vote, so the reader is one tap from it.
   const headBlock = `<h2>${esc(c.h2head)}</h2><p class="small">${esc(c.headNote)}</p><ul class="stand">${
     HEADLINE.map((it) => {
       const st = standOn(it, m, lang);
       return `<li><span class="bill">${esc(it.billId)}</span> <b><a href="${SITE}/${billPath(it.billId, lang)}">${esc(labelFor(it, lang))}</a></b>`
-        + ` <span class="vm vm-${st.kind}">${esc(st.text)}</span><br>`
-        + `<span class="small">${esc(summaryFor(it, lang))} `
-        + `<a class="hist" href="${esc(billUrl(it.billId))}" rel="nofollow noopener" target="_blank">${esc(c.histLabel)}</a></span></li>`;
+        + ` <span class="vm vm-${st.kind}">${esc(st.text)}</span> `
+        + `<a class="hist" href="${esc(billUrl(it.billId))}" rel="nofollow noopener" target="_blank">${esc(c.histLabel)}</a></li>`;
     }).join('')}</ul>`;
 
   // Nothing to show is not a section. For the five members who never broke with
@@ -433,6 +511,7 @@ function render(m, lang) {
   <h1>${esc(c.title(m))}</h1>
   <p class="lede">${esc(c.lede(m, r))}</p>
   ${ballotBlock(m, lang)}
+  ${whereBlock(m, lang)}
   ${crossBlock}
   ${headBlock}
   <h2>${esc(c.h2zip(m))}</h2>
