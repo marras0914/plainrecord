@@ -273,13 +273,13 @@ const COPY = {
     docTitle: (m) => `Texas House District ${m.d} candidates 2026 · ${m.n} voting record`,
     // The candidates are named so a search for a challenger can find the page.
     desc: (m, r, line) => `On the November 3, 2026 ballot for Texas House District ${m.d}: ${line}. `
-      + `Plus how ${m.n} voted on 67 recorded House votes from 2025. Free, nothing tracked.`,
+      + `Plus how ${m.n} voted on 67 recorded House votes from 2025. Free, no cookies.`,
     lede: (m, r) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
     // The index answers "who is my state rep", the question people actually type,
     // so the title, h1 and description say that and the ZIP box sits first.
     indexDocTitle: 'Who is my Texas state representative? Find yours by ZIP code',
     indexTitle: 'Find your Texas House representative',
-    indexDesc: 'Type a ZIP code to see which Texas House district you are in, who represents it, and how they voted in 2025. All 150 districts, free, nothing tracked.',
+    indexDesc: 'Type a ZIP code to see which Texas House district you are in, who represents it, and how they voted in 2025. All 150 districts, free, no cookies.',
     indexListHead: 'All 150 districts',
     indexCharts: 'See every House vote in three charts',
     indexLede: 'One page per sitting member, showing how they voted on the bills that drew the most attention and where they broke with their own party.',
@@ -323,11 +323,11 @@ const COPY = {
     // "candidaturas" on purpose: it is the word people type into a search box.
     docTitle: (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026 · historial de ${m.n}`,
     desc: (m, r, line) => `En la boleta del 3 de noviembre de 2026 para el Distrito ${m.d} de la Cámara de Texas: ${line}. `
-      + `Además, cómo votó ${m.n} en 67 votos registrados de la Cámara en 2025. Gratis y sin rastreo.`,
+      + `Además, cómo votó ${m.n} en 67 votos registrados de la Cámara en 2025. Gratis y sin cookies.`,
     lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
     indexDocTitle: '¿Quién es mi representante estatal en Texas? Búsqueda por código postal',
     indexTitle: 'Encuentre a su representante en la Cámara de Texas',
-    indexDesc: 'Escriba su código postal para ver qué distrito de la Cámara de Texas le corresponde, quién representa ese distrito y cómo votó en 2025. Los 150 distritos, gratis y sin rastreo.',
+    indexDesc: 'Escriba su código postal para ver qué distrito de la Cámara de Texas le corresponde, quién representa ese distrito y cómo votó en 2025. Los 150 distritos, gratis y sin cookies.',
     indexListHead: 'Los 150 distritos',
     indexCharts: 'Vea todos los votos de la Cámara en tres gráficas',
     indexLede: 'Una página por cada legislador en funciones, con cómo votó en los proyectos de ley que más atención recibieron y dónde se apartó de su propio partido.',

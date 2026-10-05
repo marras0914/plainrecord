@@ -10,8 +10,9 @@
  * type, the colour tokens in both schemes, the layout, and the head. What does
  * NOT live here is anything a page says, because that is the part that differs.
  *
- * SAME RULES AS THE FACT SHEET. No JavaScript, nothing third-party, no
- * tracking, every URL absolute. The fonts are read from the vendored
+ * Nothing third-party, every URL absolute. The one script that is not the
+ * page's own is the visit count (see ANALYTICS below), which the fact sheet
+ * deliberately does not carry. The fonts are read from the vendored
  * src/fonts.css at build time and served from this origin, because linking
  * /fonts.css would 404: vite bundles it into a hashed asset that does not exist
  * under public/.
@@ -21,6 +22,23 @@ import { readFileSync } from 'node:fs';
 import { navHtml, footerHtml } from './_site_nav.mjs';
 
 export const SITE = 'https://rightnleft.com';
+
+/**
+ * The visit count, the same Vercel Web Analytics the quiz loads through
+ * inject(): no cookie, a visitor hash that resets daily, a page view and a
+ * referrer. Without it, the 300-odd pages built for search were invisible to
+ * npm run stats, which listed only the quiz, so "did the district pages beat
+ * the race pages" could not be answered from our own numbers at all (found
+ * 5 October 2026, 15 days into the pilot).
+ *
+ * Only the external script, not the inline window.va queue the docs pair it
+ * with: the CSP is script-src 'self' and the inline half would be blocked. The
+ * queue only matters for custom events, which this plan does not have.
+ *
+ * The pages' descriptions say "no cookies", not "nothing tracked", because of
+ * this tag. Keep the two in step.
+ */
+export const ANALYTICS = '<script src="/_vercel/insights/script.js" defer></script>';
 
 export const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -227,6 +245,7 @@ ${otherLang ? `<link rel="alternate" hreflang="${lang}" href="${canonical}">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <script src="/js/theme.js"></script>
+${ANALYTICS}
 <link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/newsreader-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
 <style>${css(faces)}</style>

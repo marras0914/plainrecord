@@ -44,8 +44,8 @@
  * npm run i18n:check will pass no matter what this file says, so any later edit
  * to the Spanish here needs a human read; the build will not catch it.
  *
- * NO JAVASCRIPT, NOTHING THIRD-PARTY, NO TRACKING, every URL absolute. Same
- * rules as the fact sheet and for the same reason.
+ * Nothing third-party and every URL absolute, as on the fact sheet. Unlike the
+ * fact sheet, it carries the visit count from _page_shell.mjs.
  */
 
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
@@ -223,7 +223,7 @@ const COPY = {
     docTitle: (r) => `${r.cand.name} and ${r.opp.name}: ${RACE_EN[r.cand.office]}`,
     meta: (r) => `What the public record shows about both candidates for Texas ${r.cand.office}: `
       + `${r.rec.cast} recorded Texas House votes for ${r.cand.name}, and ${r.opp.evidence} for ${r.opp.name}. `
-      + `Free, no sign-up, nothing tracked.`,
+      + `Free, no sign-up, no cookies.`,
     kicker: 'Texas House · 2025 session',
     lede: (r) => `They are running for ${RUNNING_FOR_EN[r.cand.office]}. Only one of them has cast a vote on the bills this site asks about, and that is a fact about the offices they have held rather than a judgement about either of them. This page says exactly what the record shows for each, and where the two kinds of record stop being comparable.`,
     h2dem: (r) => `What ${r.cand.name}'s record shows`,
@@ -256,7 +256,7 @@ const COPY = {
     docTitle: (r) => `${r.cand.name} y ${r.opp.name}: ${RACE_ES[r.cand.office]}`,
     meta: (r) => `Lo que muestra el registro público sobre ambos candidatos a ${OFFICE_ES[r.cand.office]} de Texas: `
       + `${r.rec.cast} votos registrados en la Cámara de Texas para ${r.cand.name}, y ${r.esOpp.evidence} para ${r.opp.name}. `
-      + `Gratis, sin registro y sin rastreo.`,
+      + `Gratis, sin registro y sin cookies.`,
     kicker: 'Cámara de Texas · Sesión de 2025',
     lede: (r) => `Compiten por ${RUNNING_FOR_ES[r.cand.office]}. Solo una de las dos personas ha emitido votos sobre los proyectos de ley que este sitio consulta, y eso es un hecho sobre los cargos que han ocupado, no un juicio sobre ninguna de ellas. Esta página dice exactamente qué muestra el registro de cada una, y dónde los dos tipos de registro dejan de ser comparables.`,
     h2dem: (r) => `Qué muestra el historial de ${r.cand.name}`,
