@@ -572,6 +572,21 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   const billOf = new Map(quiz.items.filter((i) => i.headline)
     .map((i) => [i.billId.toLowerCase().replace(/\s+/g, '-'), i]));
 
+  // And the places, from the same file the district pages print, because a
+  // model answering "who represents Frisco" has to match a town, not a number.
+  // Top three places and up to three counties, by population.
+  const places = JSON.parse(await readFile(resolve(ROOT, 'data/district_places_2020.json'), 'utf8')).districts;
+  const whereOf = (n) => {
+    const p = places[n];
+    if (!p) return '';
+    const cs = p.counties.slice(0, 3).map((c) => c.name);
+    const county = cs.length === 1 ? `${cs[0]} County` : `${cs.join(', ')} counties`;
+    const towns = p.places.slice(0, 3).map((x) => x.name);
+    return p.outsideAnyPlace >= 0.5 || !towns.length
+      ? ` (mostly unincorporated ${county})`
+      : ` (${towns.join(', ')}; ${county})`;
+  };
+
   const RACE_TITLE = {
     'race/governor': 'Governor, in English',
     'race/lieutenant-governor': 'Lieutenant Governor, in English',
@@ -605,7 +620,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     const d = /^\/(district|distrito)\/(\d+)$/.exec(path);
     if (d) {
       const who = nameOf.get(Number(d[2])) ?? `District ${d[2]}`;
-      return `${who}, Texas House District ${d[2]}, in ${d[1] === 'district' ? 'English' : 'Spanish'}`;
+      return `${who}, Texas House District ${d[2]}${whereOf(Number(d[2]))}, in ${d[1] === 'district' ? 'English' : 'Spanish'}`;
     }
     return path;
   };
