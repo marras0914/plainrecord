@@ -8,6 +8,11 @@ outcomes tied to those categories.
 Every question is a vote that happened. Every number on the screen traces to a
 roll call, a veto, or a cited statistic. Nothing is generated to fill a gap.
 
+**The data, CC0:** every 2025 Texas House floor vote as JSON at
+[rightnleft.com/open-data](https://rightnleft.com/open-data), and as CSV tables
+on [Hugging Face](https://huggingface.co/datasets/babas03/texas-house-votes-2025)
+(built by `scripts/export_dataset_csv.mjs`).
+
 ---
 
 ## Quick start

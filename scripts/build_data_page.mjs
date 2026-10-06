@@ -49,6 +49,10 @@ const longDate = (iso) => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-GB
 // The public mirror. It went public on 9 September 2026 and nothing linked to it
 // until this page, so "open source" was true but unfindable.
 const REPO = 'https://github.com/marras0914/plainrecord';
+// The same data as flat CSV tables, from scripts/export_dataset_csv.mjs,
+// published 6 October 2026. A dataset hub links back here, and Google trusts
+// and indexes it far faster than a new domain, which is half the point.
+const HF = 'https://huggingface.co/datasets/babas03/texas-house-votes-2025';
 const url = (f) => `${SITE}/data/${f}`;
 
 const c = bulk.counts;
@@ -82,6 +86,7 @@ const body = `
   <h2>The files</h2>
   <ul class="stand">${FILES.map((x) => `<li><a href="${url(x.f)}"><b>${esc(x.f)}</b></a> <span class="small">${esc(size(x.f))}</span><br>`
     + `<b>${esc(x.name)}.</b> <span class="small">${esc(x.what)}</span></li>`).join('')}</ul>
+  <p><b>As CSV tables.</b> The same votes, one row per roll call and one row per member's position, with the ZIP crosswalk and the counties and towns in each district, are on <a href="${HF}">Hugging Face</a>, for a spreadsheet, pandas or R. Nothing there is new data: the tables are these files unpacked.</p>
 
   <h2>How a vote is encoded</h2>
   <p>${esc(bulk._meta.encoding)}</p>
@@ -122,6 +127,7 @@ const dataset = {
   name: 'Texas House of Representatives recorded floor votes, 89th Legislature (2025)',
   description: `Every recorded floor vote of the 2025 Texas House regular session: ${n(c.items)} roll calls with each member's position, ${n(c.journalSourced)} of them reconciled against the official House Journal. Includes the ${quiz.items.length} votes selected by a published rule for the quiz at rightnleft.com, and a ZIP code to Texas House district crosswalk built through 2020 Census blocks.`,
   url: canonical,
+  sameAs: [HF],
   license: 'https://creativecommons.org/publicdomain/zero/1.0/',
   isAccessibleForFree: true,
   creator: { '@type': 'Person', name: 'Marco Arras', url: `${SITE}/` },
