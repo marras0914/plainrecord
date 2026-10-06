@@ -80,7 +80,7 @@ const COPY = {
       tally: (it) => `La Cámara votó ${it.yeas} a ${it.nays}.`,
       open: (it) => `Cómo votó cada integrante sobre el proyecto ${it.billId}`,
       rest: 'Los otros 60 votos están en el cuestionario, con las etiquetas de partido ocultas hasta que usted responda.',
-      cta: 'Ábralo en español',
+      cta: 'Haga el cuestionario',
     },
     races: {
       slug: 'contiendas', otherSlug: 'races',
@@ -91,7 +91,7 @@ const COPY = {
       noVotes: (r) => `Por qué ${r.opp} no tiene votos aquí:`,
       open: () => 'Lo que muestra el historial de cada una',
       rest: 'El cuestionario muestra cómo votaron las tres personas candidatas de la Cámara en cada proyecto, una vez que usted responde.',
-      cta: 'Ábralo en español',
+      cta: 'Haga el cuestionario',
     },
     discloseLabel: 'Quién lo hizo.',
     disclose: 'Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar.',

@@ -192,7 +192,7 @@ const COPY = {
         return [`${SITE}/${billPath(it.billId, 'es')}`, `${it.billId}, ${es}: el voto de cada integrante`];
       }),
     ],
-    tryCta: 'Ábralo en español',
+    tryCta: 'Haga el cuestionario',
     discloseLabel: 'Quién lo hizo.',
     disclose: 'Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. Cada gráfica de esta página se calcula a partir de archivos que usted puede descargar y verificar.',
     sourceLabel: 'Fuentes.',

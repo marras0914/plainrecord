@@ -441,7 +441,7 @@ const COPY = {
     zipNote: 'Ordenados por población. Casi la mitad de los códigos postales de Texas están repartidos entre más de un distrito, así que un código de esta lista puede estar también en otro, y su calle decide cuál le corresponde.',
     h2try: 'Vea cómo se comparan sus propias respuestas',
     tryBody: 'El sitio le pregunta sobre estos mismos votos con las etiquetas de partido ocultas, y después le muestra dónde quedó usted junto a quienes votaron de verdad.',
-    tryCta: 'Ábralo en español',
+    tryCta: 'Haga el cuestionario',
     discloseLabel: 'Quién lo hizo.',
     disclose: 'Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar.',
     sourceLabel: 'Fuentes.',

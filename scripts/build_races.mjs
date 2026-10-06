@@ -272,7 +272,7 @@ const COPY = {
     whyBody: 'Un voto es una elección entre sí y no sobre una sola pregunta, hecha en el mismo momento que otras 149 personas, y puede salir para cualquier lado. Una firma es la última palabra sobre un proyecto que ya se aprobó, y una lista de prioridades solo nombra proyectos que alguien quería. Ponerlos lado a lado como si fueran una sola medición favorecería a quien usted ya prefería, así que esta página los mantiene separados y dice qué es cada uno.',
     h2try: 'Vea dónde queda usted, antes de ver el partido',
     tryBody: 'El sitio le pregunta sobre votos reales con las etiquetas de partido ocultas, y después le muestra dónde quedó y cómo votaron de verdad estos legisladores.',
-    tryCta: 'Hágalo en español',
+    tryCta: 'Haga el cuestionario',
     discloseLabel: 'Quién lo hizo.',
     disclose: 'Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, la etiqueta de partido queda oculta hasta que usted responde, y cada voto, conteo y calificación está en un archivo que puede descargar y verificar, así que nada de esto le pide que confíe en mí.',
     sourceLabel: 'Fuentes.',
