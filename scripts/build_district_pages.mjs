@@ -321,6 +321,11 @@ const COPY = {
     // record follows, for the "<name> voting record" search the page began with.
     // Same pattern on every page, whoever holds the seat.
     docTitle: (m) => `Texas House District ${m.d} candidates 2026 · ${m.n} voting record`,
+    // Shorter forms, used in order only when the one before runs past 70
+    // characters. Bing's site scan flagged 185 titles over 70 on 6 October 2026,
+    // and search results cut them off. Each drops words from the end, never adds
+    // any, so the district and "candidates 2026" always lead.
+    docTitleShorter: [(m) => `Texas House District ${m.d} candidates 2026 · ${m.n}`],
     // The candidates are named so a search for a challenger can find the page.
     desc: (m, r, line) => `On the November 3, 2026 ballot for Texas House District ${m.d}: ${line}. `
       + `${whereShort(m.d, 'en')} Plus how ${m.n} voted on 67 recorded House votes from 2025. Free, no cookies.`,
@@ -383,6 +388,11 @@ const COPY = {
     // Approved 30 September 2026. "candidatos" rather than the page's
     // "candidaturas" on purpose: it is the word people type into a search box.
     docTitle: (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026 · historial de ${m.n}`,
+    // The approved title with words taken off the end, nothing new written.
+    docTitleShorter: [
+      (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026 · ${m.n}`,
+      (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026`,
+    ],
     desc: (m, r, line) => `En la boleta del 3 de noviembre de 2026 para el Distrito ${m.d} de la Cámara de Texas: ${line}. `
       + `${whereShort(m.d, 'es')} Además, cómo votó ${m.n} en 67 votos registrados de la Cámara en 2025. Gratis y sin cookies.`,
     // The ten "where" strings and whereShort's Spanish were written and
@@ -470,6 +480,10 @@ function standOn(item, member, lang) {
   return { kind: 'none', text: c.noVote };
 }
 
+/** The first title that fits in 70 characters, or the last (shortest) one. */
+const TITLE_MAX = 70;
+const fitTitle = (forms) => forms.find((t) => [...t].length <= TITLE_MAX) ?? forms.at(-1);
+
 const slugFor = (d, lang) => (lang === 'es' ? `distrito/${d}` : `district/${d}`);
 
 function render(m, lang) {
@@ -546,7 +560,7 @@ function render(m, lang) {
   };
 
   return document_({
-    lang, otherLang: c.other, title: c.title(m), docTitle: c.docTitle(m), siteName: c.siteName,
+    lang, otherLang: c.other, title: c.title(m), docTitle: fitTitle([c.docTitle, ...c.docTitleShorter].map((f) => f(m))), siteName: c.siteName,
     desc: c.desc(m, r, ballotLine(m.d)), canonical, altHref, altLabel: c.langSwitch,
     ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
     jsonld, faces, kicker: c.kicker, body,
