@@ -148,7 +148,7 @@ const COPY = {
     h2others: 'The other six bills that drew the most attention',
     h2try: 'See how your own answers compare',
     tryBody: 'The site asks you about these same votes with the party labels hidden, then shows you where you landed next to the members who actually voted.',
-    tryCta: 'Open it in English',
+    tryCta: 'Take the quiz',
     indexBack: 'All 150 districts',
     discloseLabel: 'Who made this.',
     disclose: 'Marco Arras, a Texas resident. I donate to the Democratic Party, and I say so before anything else rather than in a footnote. The rule that picks which votes appear is published and runs identically on both caucuses, and every vote and count is in a file you can download and check.',

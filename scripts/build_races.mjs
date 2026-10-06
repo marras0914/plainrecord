@@ -242,7 +242,7 @@ const COPY = {
     whyBody: 'A vote is a choice between yes and no on one question, made at the same moment as 149 other people, and it can go either way. A signature is the last word on a bill that already passed, and a priority list names only bills somebody wanted. Printing them side by side as though they were one measurement would flatter whichever candidate you already preferred, so this page keeps them apart and says what each one is.',
     h2try: 'See where you land, before you see the party',
     tryBody: 'The site asks you about real votes with the party labels hidden, then shows you where you landed and how these members actually voted.',
-    tryCta: 'Take it in English',
+    tryCta: 'Take the quiz',
     discloseLabel: 'Who made this.',
     disclose: 'Marco Arras, a Texas resident. I donate to the Democratic Party, and I say so before anything else rather than in a footnote. The rule that picks which votes appear is published and runs identically on both caucuses, the party label is hidden until you answer, and every vote, count and score is in a file you can download and check, so none of this asks you to trust me.',
     sourceLabel: 'Sources.',
