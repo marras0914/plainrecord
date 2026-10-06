@@ -60,8 +60,11 @@ public/data/tx_flips_*.json
 raw/
 journals/
 
-# Single-file share build, generated from dist/ by scripts/build_artifact.mjs
-share/
+# Single-file share build, generated from dist/ by scripts/build_artifact.mjs.
+# Anchored to the root: a bare `share/` also matched public/share/, so the share
+# cards and their manifest were never committed, production 404'd every card,
+# and every page fell back to og.png from 24 September until 6 October 2026.
+/share/
 
 # Local scratch notes, not part of the project. Kept on disk, out of history.
 /vikki goodwin.txt
