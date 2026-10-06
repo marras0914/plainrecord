@@ -43,6 +43,7 @@
  */
 
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { cardsFresh, districtCard } from './_share_cards.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
@@ -254,7 +255,7 @@ function ballotBlock(m, lang) {
     if (x === inc) tags.push(c.ballotIncumbent);
     return `<li><b>${esc(ballotName(x.name))}</b> <span class="small">${esc(tags.join(' · '))}</span></li>`;
   }).join('');
-  return `<h2>${esc(c.h2ballot(m))}</h2>
+  return `<h2 id="ballot">${esc(c.h2ballot(m))}</h2>
   <p>${esc(inc ? c.ballotRunning(m) : c.ballotNotRunning(m))}${printed.length === 1 ? ` ${esc(c.ballotOnly)}` : ''}</p>
   <ul class="stand">${items}</ul>
   <p class="small">${esc(c.ballotNote(fetchedDate(lang)))} <a href="${esc(ballot._meta.source)}" rel="nofollow noopener" target="_blank">${esc(c.ballotSource)}</a></p>`;
@@ -302,7 +303,7 @@ function whereBlock(m, lang) {
     return `<li><b>${esc(x.name)}</b> <span class="small">${esc(c.whereOfDistrict(pct(x.shareOfDistrict)))} · ${esc(ofPlace)}${x.cdp ? ` · ${esc(c.whereCdp)}` : ''}</span></li>`;
   }).join('');
   const outside = pct(p.outsideAnyPlace);
-  return `<h2>${esc(c.h2where(m))}</h2>
+  return `<h2 id="where">${esc(c.h2where(m))}</h2>
   <p>${esc(c.whereCounties(m, counties, fmtN(p.pop)))}</p>
   ${mostlyUnincorporated(p) ? `<p>${esc(c.whereMostlyOutside(m, outside, counties))}</p>` : ''}
   ${items ? `<ul class="stand">${items}</ul>` : ''}
@@ -503,7 +504,7 @@ function render(m, lang) {
   // block repeated word for word across all 150 pages, and Google had declined
   // to index the set. Each label links to the bill's own page, which carries the
   // summary and every member's vote, so the reader is one tap from it.
-  const headBlock = `<h2>${esc(c.h2head)}</h2><p class="small">${esc(c.headNote)}</p><ul class="stand">${
+  const headBlock = `<h2 id="headline">${esc(c.h2head)}</h2><p class="small">${esc(c.headNote)}</p><ul class="stand">${
     HEADLINE.map((it) => {
       const st = standOn(it, m, lang);
       return `<li><span class="bill">${esc(it.billId)}</span> <b><a href="${SITE}/${billPath(it.billId, lang)}">${esc(labelFor(it, lang))}</a></b>`
@@ -562,7 +563,7 @@ function render(m, lang) {
   return document_({
     lang, otherLang: c.other, title: c.title(m), docTitle: fitTitle([c.docTitle, ...c.docTitleShorter].map((f) => f(m))), siteName: c.siteName,
     desc: c.desc(m, r, ballotLine(m.d)), canonical, altHref, altLabel: c.langSwitch,
-    ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
+    ogImage: cardsFresh() ? districtCard(m.d, lang) : `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
     jsonld, faces, kicker: c.kicker, body,
   });
 }

@@ -35,6 +35,10 @@ export const CARD_INPUTS = [
   'scripts/build_charts.mjs',
   'scripts/build_bill_pages.mjs',
   'scripts/build_share_cards.mjs',
+  // The district cards (6 October 2026) lift the ballot and the towns too.
+  'scripts/build_district_pages.mjs',
+  'data/ballot_2026_house.json',
+  'data/district_places_2020.json',
 ];
 
 export function inputsHash() {
@@ -65,4 +69,5 @@ export function cardsFresh() {
 const SITE = 'https://rightnleft.com';
 export const billCard = (slug, lang) => `${SITE}/share/bill-${slug}-${lang}.png`;
 export const chartsCard = (lang) => `${SITE}/share/charts-${lang}.png`;
+export const districtCard = (d, lang) => `${SITE}/share/district-${d}-${lang}.png`;
 export const chartDownload = (id, lang) => `/charts/img/${id}-${lang}.png`;
