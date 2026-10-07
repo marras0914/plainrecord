@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="es-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hoja de trabajo gratis sobre los votos de la Cámara de Texas para clases de Gobierno</title>
+<meta name="description" content="Una hoja de trabajo gratis de dos páginas para clases de Gobierno de Texas: sus estudiantes encuentran su distrito, anotan cómo votó su representante en 2025 y se preguntan si un cuestionario hecho con votos reales puede ser justo.">
+<link rel="canonical" href="https://rightnleft.com/maestros">
+<link rel="alternate" hreflang="es" href="https://rightnleft.com/maestros">
+<link rel="alternate" hreflang="en" href="https://rightnleft.com/classroom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="¿Cómo votó su representante en la Cámara de Texas? Una hoja de trabajo gratis para la clase">
+<meta property="og:description" content="Una hoja de trabajo gratis de dos páginas para clases de Gobierno de Texas: sus estudiantes encuentran su distrito, anotan cómo votó su representante en 2025 y se preguntan si un cuestionario hecho con votos reales puede ser justo.">
+<meta property="og:url" content="https://rightnleft.com/maestros">
+<meta property="og:image" content="https://rightnleft.com/og.es.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script src="/js/theme.js"></script>
+<script src="/_vercel/insights/script.js" defer></script>
+<link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/newsreader-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-ext-300-700.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-300-700.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-ext-400-600.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-400-600.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{--page:#faf7f1;--surface:#fffdf9;--ink:#1a1714;--ink-2:#57514a;--muted:#6f6a62;
+      --hair:#e6ded1;--rule:#cabfae;--blue:#1f66bd;--red:#c8352f;
+      /* Chart purples, one hue light to dark, validated --ordinal against both
+         the card and the page surface. --pbar is the single-series bar. */
+      --p1:#bda5da;--p2:#a583cc;--p3:#8e62bc;--p4:#7241a0;--p5:#54277c;--pbar:#8e62bc;}
+/* Dark by the quiz's rule, not the OS: light by default, dark only when the
+   reader chose it on the quiz. /js/theme.js sets data-theme before paint. These
+   pages used to follow prefers-color-scheme, which turned a light quiz into a
+   dark race page for anyone whose phone was set to dark. */
+:root[data-theme="dark"]{color-scheme:dark;
+  --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
+  --hair:#2c2c2a;--rule:#383835;--blue:#3987e5;--red:#e66767;
+  --p1:#684b88;--p2:#865eb1;--p3:#a377d3;--p4:#bc97e8;--p5:#d5b9f7;--pbar:#a377d3;}
+/* A crossfade between pages instead of a hard cut, using the browser's own
+   cross-document view transitions: CSS only, same-origin only, and ignored by
+   browsers without it. Off for anyone who asked for reduced motion. The quiz
+   carries the same rule in src/styles.css, so moving between them fades too. */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
+  font-size:17px;-webkit-text-size-adjust:100%}
+main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
+h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
+  line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}
+h2{font-size:clamp(1.25rem,4.4vw,1.5rem);margin:40px 0 10px}
+.kicker{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lede{font-size:1.1rem;color:var(--ink-2);margin:0 0 8px;text-wrap:pretty}
+p{margin:0 0 14px}
+.label{font-weight:600}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
+  padding:18px 18px 6px;margin:14px 0}
+ul{margin:0 0 14px;padding-left:1.1rem}
+li{margin:0 0 8px}
+.bill{font-variant-numeric:tabular-nums;font-weight:600}
+.small{font-size:13.5px;color:var(--muted)}
+/* The check-it-yourself link beside a bill. Deliberately quieter than the
+   summary it follows: it is there for the reader who doubts the line, not a
+   thing every reader is being sent to. */
+.hist{font-size:12.5px;white-space:nowrap}
+/* How a member stood on a headline bill. A word, not a colour: the page is read
+   by people who cannot distinguish red from green, and printed in black. */
+.dindex{list-style:none;padding:0;margin:14px 0 18px;columns:2;column-gap:26px}
+.dindex li{break-inside:avoid;padding:3px 0;font-size:15.5px}
+.dindex a{text-decoration:none}
+.dindex a:hover{text-decoration:underline}
+@media (max-width:520px){.dindex{columns:1}}
+.stand{list-style:none;padding:0;margin:0}
+.stand li{padding:9px 0;border-top:1px solid var(--hair)}
+.stand li:first-child{border-top:0}
+.vm{font-size:12.5px;padding:1px 8px;border-radius:999px;white-space:nowrap;
+    border:1px solid var(--rule);color:var(--ink-2)}
+.vm-none{opacity:.75}
+a{color:var(--blue)}
+.cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
+  background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
+hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+  font-size:13px;margin-bottom:22px}
+/* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
+   scrolling sideways on a phone; the current section is ink, not link blue. */
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sitenav a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}
+.sitenav a:hover{text-decoration:underline}
+.sitenav a[aria-current]{color:var(--ink);font-weight:600}
+.sitefoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px}
+.sitefoot ul{list-style:none;padding:0;margin:0}.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}.sitefoot a:hover{text-decoration:underline}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
+/* Charts, drawn by scripts/_charts.mjs. */
+.chart{margin:16px 0 10px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:inherit;fill:var(--ink-2);font-size:12px}
+.chart .tick{fill:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.chart .note{fill:var(--muted);font-size:11.5px}
+.chart .lab{fill:var(--ink);font-size:12.5px;font-weight:600}
+.chart .val{fill:var(--ink);font-size:12px;font-weight:600}
+.chart .grid,.chart .axis{stroke:var(--hair);stroke-width:1}
+.chart .axis{stroke:var(--rule)}
+.chart .med{stroke:var(--ink-2);stroke-width:1.5}
+.chart .lead{stroke:var(--muted);stroke-width:1}
+.chart .bar{fill:var(--pbar)}
+.chart .dot{stroke:var(--surface);stroke-width:2}
+.chart .D{fill:var(--blue)} .chart .R{fill:var(--red)}
+.chart .sq.none{opacity:.32}
+.chart .dist{stroke:var(--page);stroke-width:.6}
+.chart .p1{fill:var(--p1)} .chart .p2{fill:var(--p2)} .chart .p3{fill:var(--p3)}
+.chart .p4{fill:var(--p4)} .chart .p5{fill:var(--p5)} .chart .nodata{fill:var(--hair)}
+.chart .maplab{fill:var(--ink);font-size:11.5px;font-weight:600;paint-order:stroke;stroke:var(--page);stroke-width:3px;stroke-linejoin:round}
+.chart .inbox{fill:none;stroke:var(--ink-2);stroke-width:1}
+.chart a:hover .dist,.chart a:focus .dist{stroke:var(--ink);stroke-width:1.5}
+.chart a:hover .dot,.chart a:focus .dot{stroke:var(--ink)}
+/* A 608-wide viewBox drawn into a phone scales to about 0.56, which took 11px
+   labels to 6px. Larger type in viewBox units lands near 10px on screen. */
+@media (max-width:520px){.chart .tick,.chart .note,.chart .maplab{font-size:17px}.chart .lab,.chart .val{font-size:18px}}
+.legend{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;color:var(--ink-2)}
+.legend li{margin:0}.legend .sw{display:inline-block;width:14px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.legend .p1{background:var(--p1)}.legend .p2{background:var(--p2)}.legend .p3{background:var(--p3)}.legend .p4{background:var(--p4)}.legend .p5{background:var(--p5)}.legend .nodata{background:var(--hair)}.legend .D{background:var(--blue)}.legend .R{background:var(--red)}
+p.lab{font-weight:600;color:var(--ink);margin:14px 0 0}
+.insets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media (max-width:520px){.insets{grid-template-columns:1fr}}
+.inset{margin:0}.inset svg{border:1px solid var(--hair);border-radius:8px}
+details.table{margin:6px 0 18px}
+details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
+.chart-table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:8px}
+.chart-table th,.chart-table td{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--hair)}
+.chart-table td.num,.chart-table th.num{text-align:right;font-variant-numeric:tabular-nums}
+/* The ZIP box on /districts. 17px so iOS does not zoom the page on focus. */
+#ziplookup input{font:inherit;font-size:17px;padding:10px 12px;width:9.5rem;margin-top:6px;
+  border:1px solid var(--rule);border-radius:8px;background:var(--page);color:var(--ink)}
+#ziplookup .zipout p{margin:12px 0 6px}
+.zips{font-variant-numeric:tabular-nums;font-size:14px;color:var(--ink-2);
+  line-height:1.8;word-spacing:.15em}
+/* Printing. A district page is the thing someone takes to the kitchen table
+   before voting, so on paper it drops the navigation and the invitations, goes
+   black on white whatever theme was chosen, and ends with its own address so a
+   printed copy can be checked against the live one. */
+.printonly{display:none}
+@media print{
+  :root,:root[data-theme="dark"]{color-scheme:light;--page:#fff;--surface:#fff;--ink:#000;
+    --ink-2:#222;--muted:#444;--hair:#bbb;--rule:#888;--blue:#000;--red:#000}
+  body{font-size:11.5pt;line-height:1.4}
+  main{max-width:none;padding:0}
+  .top,.sitenav,.sitefoot,.noprint,.hist,.cta{display:none}
+  .printonly{display:block;font-size:10pt;color:var(--muted)}
+  h1{font-size:20pt;margin:0 0 10px}
+  h2{font-size:14pt;margin:18px 0 6px;break-after:avoid}
+  li,.stand li{break-inside:avoid}
+  .stand li{padding:5px 0}
+  a{color:inherit;text-decoration:none}
+  hr{margin:16px 0}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://rightnleft.com/maestros","url":"https://rightnleft.com/maestros","name":"¿Cómo votó su representante en la Cámara de Texas? Una hoja de trabajo gratis para la clase","description":"Una hoja de trabajo gratis de dos páginas para clases de Gobierno de Texas: sus estudiantes encuentran su distrito, anotan cómo votó su representante en 2025 y se preguntan si un cuestionario hecho con votos reales puede ser justo.","inLanguage":"es-US","isPartOf":{"@type":"WebSite","name":"The Purple Strip","url":"https://rightnleft.com"},"mainEntity":{"@id":"https://rightnleft.com/maestros#worksheet"}},{"@type":"LearningResource","@id":"https://rightnleft.com/maestros#worksheet","name":"¿Cómo votó su representante en la Cámara de Texas?","description":"Una hoja de trabajo gratis de dos páginas para clases de Gobierno de Texas: sus estudiantes encuentran su distrito, anotan cómo votó su representante en 2025 y se preguntan si un cuestionario hecho con votos reales puede ser justo.","url":"https://rightnleft.com/maestros","learningResourceType":"Worksheet","educationalLevel":["High school","College"],"timeRequired":"PT30M","inLanguage":"es-US","isAccessibleForFree":true,"license":"https://creativecommons.org/publicdomain/zero/1.0/","creator":{"@type":"Person","name":"Marco Arras","url":"https://rightnleft.com/"},"encoding":{"@type":"MediaObject","contentUrl":"https://rightnleft.com/maestros/hoja-de-trabajo.pdf","encodingFormat":"application/pdf"},"translationOfWork":{"@id":"https://rightnleft.com/classroom#worksheet"}}]}</script>
+</head>
+<body>
+<main>
+  <div class="top">
+    <span class="kicker">Para docentes · elección de 2026</span>
+    <a href="https://rightnleft.com/classroom">In English</a>
+  </div>
+  <nav class="sitenav" aria-label="Secciones del sitio"><a href="https://rightnleft.com/es">Cuestionario</a><a href="https://rightnleft.com/distritos">Su representante</a><a href="https://rightnleft.com/proyectos">Proyectos</a><a href="https://rightnleft.com/contiendas">Contiendas</a><a href="https://rightnleft.com/graficas">Gráficas</a></nav>
+
+  <h1>¿Cómo votó su representante en la Cámara de Texas? Una hoja de trabajo gratis para la clase</h1>
+  <p class="lede">Dos páginas para imprimir, para una clase de Gobierno de Texas o de educación cívica, unos 30 minutos. Sus estudiantes necesitan un teléfono o una computadora y un código postal. Gratis, de dominio público y sin registro.</p>
+  <p><a class="cta" href="https://rightnleft.com/maestros/hoja-de-trabajo.pdf">Descargue la hoja de trabajo</a> <span class="small">PDF, 109 KB, tamaño carta</span></p>
+
+  <h2>Qué hacen sus estudiantes</h2>
+  <ul><li>Encuentran su distrito de la Cámara de Texas con un código postal, y quién lo representa.</li><li>Ven quiénes están en la boleta del 3 de noviembre para ese escaño.</li><li>Anotan tres votos reales de 2025: qué hace cada proyecto, cómo votó su representante y cómo habrían votado en su lugar.</li><li>Buscan un voto en el que el miembro se apartó de su propio partido, y piensan por qué lo haría.</li><li>Hacen un cuestionario de siete preguntas con los partidos ocultos y comparan con alguien de su clase.</li></ul>
+
+  <h2>La página de discusión</h2>
+  <p>La segunda página hace una pregunta real: ¿puede ser injusto un cuestionario hecho solo con votos reales? Una legislatura solo vota lo que su mayoría deja llegar al pleno, así que los proyectos más conocidos de la sesión van en la dirección de la mayoría. En octubre de 2026, alguien que leyó este sitio mostró que su cuestionario corto no tenía ningún proyecto que los demócratas impulsaran con la oposición de los republicanos, y el sitio lo cambió. Sus estudiantes usan esa corrección para entender dónde está el poder en la Legislatura. La página termina con las fechas de la votación anticipada y de la elección, de la Secretaría de Estado de Texas.</p>
+
+  <h2>Para docentes</h2>
+  <ul>
+    <li>Sin cuentas, sin anuncios, sin cookies. Funciona en el teléfono, en inglés y en español, y la hoja de trabajo también está en los dos idiomas.</li><li>El sitio no respalda a nadie. Su autor dona al Partido Demócrata y lo dice en cada página; la regla que escoge qué votos aparecen está publicada y se aplica igual a los dos partidos, y cada voto enlaza al Diario oficial de la Cámara.</li><li>Estudiantes con el mismo código postal pueden estar en distritos distintos. Eso es real, no un error, y da pie a hablar de cómo se trazan los distritos.</li><li>El resultado del cuestionario nombra el partido con el que coincidieron las respuestas, así que los pasos del cuestionario y de la comparación pueden quedarse en privado en la hoja, u omitirse.</li>
+    <li>Para una actividad de datos o estadística, <a href="https://rightnleft.com/open-data">todos los votos de la Cámara en 2025 se pueden descargar gratis</a> (en inglés).</li>
+  </ul>
+  <p class="small">La hoja de trabajo es de dominio público (CC0): cópiela, imprímala y adáptela sin pedir permiso.</p>
+
+  <h2>Lo que usa la hoja de trabajo</h2>
+  <ul>
+    <li><a href="https://rightnleft.com/distritos">Encuentre a su representante</a>: los 150 distritos, con búsqueda por código postal</li>
+    <li><a href="https://rightnleft.com/es">El cuestionario</a></li>
+    <li><a href="https://rightnleft.com/hoja">Una hoja informativa de una página</a>, para imprimir y poner en un tablero</li>
+  </ul>
+  <hr>
+  <footer class="sitefoot" aria-label="Más en este sitio"><div><p class="foot-head">El sitio</p><ul><li><a href="https://rightnleft.com/es">El cuestionario</a></li><li><a href="https://rightnleft.com/distritos">Encuentre a su representante</a></li><li><a href="https://rightnleft.com/proyectos">Los proyectos</a></li><li><a href="https://rightnleft.com/contiendas">Las contiendas</a></li><li><a href="https://rightnleft.com/graficas">Gráficas</a></li><li><a href="https://rightnleft.com/hoja">Hoja informativa de una página</a></li><li><a href="https://rightnleft.com/open-data">Descargar los datos (en inglés)</a></li><li><a href="https://rightnleft.com/maestros">Para docentes: una hoja de trabajo gratis</a></li></ul></div><div><p class="foot-head">Los siete proyectos</p><ul><li><a href="https://rightnleft.com/proyecto/sb-2"><span class="bill">SB 2</span> Cuentas de ahorro educativo</a></li><li><a href="https://rightnleft.com/proyecto/sb-8"><span class="bill">SB 8</span> Aplicación de la ley migratoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-10"><span class="bill">SB 10</span> Los Diez Mandamientos en las aulas</a></li><li><a href="https://rightnleft.com/proyecto/sb-3"><span class="bill">SB 3</span> Prohibición del THC</a></li><li><a href="https://rightnleft.com/proyecto/sb-14"><span class="bill">SB 14</span> Revisión regulatoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-6"><span class="bill">SB 6</span> Red eléctrica y grandes consumidores</a></li><li><a href="https://rightnleft.com/proyecto/sb-5"><span class="bill">SB 5</span> Instituto de investigación sobre demencia</a></li></ul></div><div><p class="foot-head">Las tres contiendas</p><ul><li><a href="https://rightnleft.com/contienda/gobernador">Gobernador: Gina Hinojosa y Greg Abbott</a></li><li><a href="https://rightnleft.com/contienda/vicegobernador">Vicegobernador: Vikki Goodwin y Dan Patrick</a></li><li><a href="https://rightnleft.com/contienda/senado">Senado de Estados Unidos: James Talarico y Ken Paxton</a></li></ul></div></footer>
+</main>
+</body>
+</html>

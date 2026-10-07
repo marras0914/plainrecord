@@ -21,6 +21,9 @@ const SITE = 'https://rightnleft.com';
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url), 'utf8'));
 const quiz = read('public/data/quiz_89R.json');
 const sidecar = read('public/data/quiz_89R.es.json');
+// The classroom link text lives with the rest of the classroom copy, under the
+// same approval rule (build_classroom_page.mjs refuses unapproved Spanish).
+const classroom = read('i18n/classroom.json');
 
 export const billSlug = (billId) => billId.toLowerCase().replace(/\s+/g, '-');
 export const billPath = (billId, lang) => `${lang === 'es' ? 'proyecto' : 'bill'}/${billSlug(billId)}`;
@@ -98,7 +101,7 @@ const FOOT = {
     links: [
       ['/', 'The quiz'], ['/districts', 'Find your representative'], ['/bills', 'The bills'],
       ['/races', 'The races'], ['/charts', 'Charts'], ['/fact-sheet', 'One-page fact sheet'],
-      ['/open-data', 'Download the data'], ['/classroom', 'For teachers: a free worksheet'],
+      ['/open-data', 'Download the data'], ['/classroom', classroom['cls.footLink'].en],
     ],
   },
   es: {
@@ -106,7 +109,7 @@ const FOOT = {
     links: [
       ['/es', 'El cuestionario'], ['/distritos', 'Encuentre a su representante'], ['/proyectos', 'Los proyectos'],
       ['/contiendas', 'Las contiendas'], ['/graficas', 'Gráficas'], ['/hoja', 'Hoja informativa de una página'],
-      ['/open-data', 'Descargar los datos (en inglés)'],
+      ['/open-data', 'Descargar los datos (en inglés)'], ['/maestros', classroom['cls.footLink'].es],
     ],
   },
 };
