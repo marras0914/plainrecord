@@ -6,7 +6,7 @@
   "description": "How Texas legislators actually voted, and where the state stands because of it.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && node scripts/build_races.mjs && node scripts/build_bill_pages.mjs && node scripts/build_district_pages.mjs && node scripts/build_data_page.mjs && node scripts/build_charts.mjs && node scripts/build_hubs.mjs && node scripts/build_locales.mjs",
+    "build": "tsc --noEmit && node scripts/build_races.mjs && node scripts/build_bill_pages.mjs && node scripts/build_district_pages.mjs && node scripts/build_data_page.mjs && node scripts/build_classroom_page.mjs && node scripts/build_charts.mjs && node scripts/build_hubs.mjs && node scripts/build_locales.mjs",
     "build:artifact": "npm run build && node scripts/build_artifact.mjs",
     "build:og": "node scripts/build_og.mjs",
     "build:cards": "node scripts/build_share_cards.mjs",
@@ -21,6 +21,7 @@
     "data:acts": "tsx scripts/augment_acts.ts",
     "data:report": "tsx scripts/report_session.ts",
     "verify": "node scripts/verify_site.mjs",
+    "build:worksheet": "node scripts/build_worksheet_pdf.mjs",
     "verify:headers": "node scripts/verify_site.mjs --with-headers",
     "verify:a11y": "node scripts/check_a11y_tree.mjs",
     "tally": "tsx scripts/tally_report.ts",

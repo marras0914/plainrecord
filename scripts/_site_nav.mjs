@@ -98,7 +98,7 @@ const FOOT = {
     links: [
       ['/', 'The quiz'], ['/districts', 'Find your representative'], ['/bills', 'The bills'],
       ['/races', 'The races'], ['/charts', 'Charts'], ['/fact-sheet', 'One-page fact sheet'],
-      ['/open-data', 'Download the data'],
+      ['/open-data', 'Download the data'], ['/classroom', 'For teachers: a free worksheet'],
     ],
   },
   es: {
