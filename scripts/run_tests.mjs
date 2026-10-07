@@ -34,6 +34,7 @@ const SUITES = [
   'src/funnel.smoke.ts',
   'src/compare.smoke.ts',
   'src/election.smoke.ts',
+  'src/quiz-data.smoke.ts',
   'scripts/guards.smoke.ts',
 ];
 

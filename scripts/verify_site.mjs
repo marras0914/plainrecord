@@ -1633,8 +1633,8 @@ try {
       shareUrl.slice(0, 80));
 
     const urlPart = shareUrl.split(/\s+/).filter((w) => w.startsWith('http')).pop() ?? '';
-    check('invite: the link carries a c= fragment and nothing else',
-      /\/#c=[0-9a-z]{1,3}$/.test(urlPart), urlPart);
+    check('invite: the link carries a d= fragment and nothing else',
+      /\/#d=[0-9a-z]{1,3}$/.test(urlPart), urlPart);
     check('invite: no query string, so nothing reaches a server',
       urlPart.length > 0 && !urlPart.includes('?'), urlPart);
     check('invite: it carries no answer text, id or score',
@@ -1814,7 +1814,7 @@ try {
     check('native share: the text explains what the link is, not just the link',
       /answer the same 7|blind quiz/i.test(p0.text ?? ''), (p0.text ?? '').slice(0, 66));
     check('native share: and the link is INSIDE that text',
-      /#c=[0-9a-z]{1,3}/.test(p0.text ?? ''), (p0.text ?? '').slice(-38));
+      /#d=[0-9a-z]{1,3}/.test(p0.text ?? ''), (p0.text ?? '').slice(-38));
 
     // The bug itself. A separate url field is what a mail client latches onto
     // while discarding the text, so there must not be one.
@@ -1852,7 +1852,7 @@ try {
     // "all seven answered yes" — bits 0..6 set plus mask bits 7..13, base36.
     const ALL_YES = ((1 << 14) - 1).toString(36);
 
-    await freshHash(`#c=${ALL_YES}`);
+    await freshHash(`#d=${ALL_YES}`);
 
     const intro = await page.$eval('#shared-intro', (e) => ({ hidden: e.hidden, text: e.textContent.trim() }));
     check('invite: the opening screen says a challenge is waiting',
@@ -1937,7 +1937,7 @@ try {
     // above passes on whatever the card happens to say.
     // "all seven answered no": mask bits only.
     const ALL_NO = (((1 << 7) - 1) << 7).toString(36);
-    await freshHash(`#c=${ALL_NO}`);
+    await freshHash(`#d=${ALL_NO}`);
     await page.click('#start-btn');
     await page.waitForTimeout(150);
     await page.click('#guess-skip');
@@ -1948,6 +1948,21 @@ try {
     check('compare: an opposite sender reads as no agreement',
       /agreed on 0 of the 7/i.test(opposite), opposite.replace(/\s+/g, ' ').slice(0, 110));
     check('compare: the two comparisons genuinely differ', opposite !== compare);
+
+    // AN OLD LINK. Before 7 October 2026 invites used #c= over the original
+    // seven; the short quiz now asks a different seven, five of them shared. An
+    // old link must still open, and compare on exactly those five rather than
+    // inventing answers for the two it never carried.
+    await freshHash(`#c=${ALL_YES}`);
+    await page.click('#start-btn');
+    await page.waitForTimeout(150);
+    await page.click('#guess-skip');
+    await page.waitForTimeout(200);
+    await answerAll(page, 1);
+    await page.waitForTimeout(300);
+    const legacy = await page.$eval('#compare-card', (e) => e.textContent);
+    check('compare: an old #c= link compares on the five shared bills',
+      /every one of the 5|5 of the 5/i.test(legacy), legacy.replace(/\s+/g, ' ').slice(0, 110));
 
     // A visitor with no invite sees no compare at all.
     await page.goto('about:blank');

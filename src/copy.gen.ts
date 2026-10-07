@@ -91,6 +91,7 @@ export type CopyKey =
   | "mode.short"
   | "mode.full"
   | "mode.shortDesc"
+  | "mode.shortTilt"
   | "mode.fullDesc"
   | "cand.note"
   | "cand.raceLink"
@@ -215,6 +216,9 @@ export type CopyKey =
   | "method.who.lead"
   | "method.seven.lead"
   | "method.seven.body"
+  | "method.agenda.lead"
+  | "method.agenda.body"
+  | "q.whyRule"
   | "method.words.lead"
   | "method.words.body"
   | "method.check.lead"
@@ -437,7 +441,8 @@ export const EN: Record<CopyKey, string> = {
   "author.districtIndex": "Or browse <a href=\"https://rightnleft.com/districts\">all 150 Texas House districts</a>, one page per member.",
   "mode.short": "7 big issues",
   "mode.full": "All {n} votes",
-  "mode.shortDesc": "Seven of the session's biggest fights: the bills the Lieutenant Governor made priorities or the Governor vetoed. <b>Six of the seven split cleanly along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all {n} to find where you cross over.",
+  "mode.shortDesc": "Seven votes: the session's five biggest fights, all bills the Republican majority passed over Democratic opposition, and the two closest votes on bills Democrats backed over Republican opposition. <b>All seven split along party lines</b>, so this version can mostly only tell you which party you lean toward. Switch to all {n} to find where you cross over.",
+  "mode.shortTilt": "<b>Why these seven still lean one way.</b> {r} of them are bills Republicans backed over Democratic opposition and {d} are bills Democrats backed over Republican opposition. Saying no to a bill moves you away from the party that backed it, so this version still gives you more chances to move left than right. That comes from the Legislature: the majority decides which bills reach a vote, and a session's famous bills run the majority's way. The full {n} run the other way, with {fd} bills Democrats backed more and {fr} Republicans did.",
   "mode.fullDesc": "All {n} votes: one per bill, spread across 20 subject areas, including the ones where Republicans and Democrats agreed. Those are the votes that can show you crossing party lines.",
   "cand.note": "All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together. Where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
   "cand.raceLink": "What each of them has on the record",
@@ -466,7 +471,7 @@ export const EN: Record<CopyKey, string> = {
   "verdict.mildLean.caveat": "More of your answers matched that party than the other one.",
   "hdr.eyebrow": "PlainRecord · Texas House {session} · {n} real recorded votes",
   "prov.questions.label": "Questions",
-  "prov.questions.short": "the seven biggest fights of the session",
+  "prov.questions.short": "five big fights and two close votes",
   "prov.questions.full": "one per bill, across {cats} subjects",
   "prov.record.label": "Straight from the record",
   "prov.record.hint": "taken from the official House Journal, not a summary",
@@ -474,7 +479,7 @@ export const EN: Record<CopyKey, string> = {
   "prov.agreed.mostlyParty": "nearly all of these were party-line fights",
   "prov.agreed.notAFight": "these votes were not a party fight at all",
   "prov.picked.label": "Picked by",
-  "prov.picked.hand": "hand",
+  "prov.picked.hand": "hand and rule",
   "prov.picked.rule": "a written rule",
   "prov.picked.handHint": "each one shows why it was chosen",
   "prov.picked.ruleHint": "{rule}, max {perCat} per subject",
@@ -560,8 +565,11 @@ export const EN: Record<CopyKey, string> = {
   "method.notFights.lead": "Why some questions are not close fights.",
   "method.notFights.body": "About {reserve} out of every 100 spots are saved for votes where Republicans and Democrats <em>agreed</em>. We do that on purpose. If we only picked the big fights, every answer you gave would land at one end or the other, and nobody could ever come out purple. The rule we follow is written down and named {rule}, so you can check we did not change it to get a nicer answer.",
   "method.who.lead": "Who is on this page.",
-  "method.seven.lead": "The seven big ones.",
-  "method.seven.body": "We picked these by hand, but not by our own opinion. Each one is a bill the Lieutenant Governor called a top priority, or a bill the Governor vetoed. Those are their published lists, not ours. Each question shows why it made the list. Six of the seven split the two parties sharply, which is what a headline fight is.",
+  "method.seven.lead": "The seven.",
+  "method.seven.body": "Five are the session's biggest fights, picked from published lists rather than by our own opinion: bills the Lieutenant Governor called top priorities, or bills the Governor vetoed. All five are bills Republicans passed over Democratic opposition. The other two are picked by a rule: of the bills Democrats backed over Republican opposition, the two whose House vote came closest to an even split, from subjects the five do not cover. Until 7 October 2026 the seven had no such bill at all. A reader pointed that out, and the rule is the fix.",
+  "method.agenda.lead": "Why the questions lean.",
+  "method.agenda.body": "A legislature only votes on what its majority brings to the floor, so a set of real votes is never a neutral sample of opinion. We also weight each vote by how closely the House split, and in a House of 88 Republicans and 62 Democrats that makes party-line votes count most. Together, those mean the seven mostly test whether you agree with what the Republican majority passed: {r} of them are Republican-backed and {d} Democratic-backed. The full {n} come from a published rule that never looks at which party a vote favors, and they run the other way: {fd} bills Democrats backed more, {fr} Republicans did.",
+  "q.whyRule": "Chosen by rule: one of the two closest House votes on a bill Democrats backed over Republican opposition ({yeas} to {nays}).",
   "method.words.lead": "Where the words come from.",
   "method.words.body": "Every question is the bill's official summary, copied word for word. We did not rewrite it to sound better or worse. How each member voted comes from the official House Journal where we could match it (<span class=\"src\">journal</span>), and otherwise from a scrape (<span class=\"src\">scrape</span>). The table tells you which, for every vote.",
   "method.check.lead": "Check it yourself.",
@@ -769,7 +777,8 @@ export const ES: Record<CopyKey, string> = {
   "author.districtIndex": "O vea <a href=\"https://rightnleft.com/distritos\">los 150 distritos de la Cámara de Texas</a>, una página por cada legislador.",
   "mode.short": "7 temas grandes",
   "mode.full": "Los {n} votos",
-  "mode.shortDesc": "Siete de las peleas más grandes de la sesión: los proyectos que el Vicegobernador hizo prioridades o que el Gobernador vetó. <b>Seis de las siete dividieron limpiamente por línea partidista</b>, así que esta versión casi solo puede decirle hacia qué partido se inclina. Cambie a los {n} votos para encontrar dónde cruza.",
+  "mode.shortDesc": "Siete votos: las cinco peleas más grandes de la sesión, todos proyectos que la mayoría republicana aprobó con la oposición de los demócratas, y las dos votaciones más reñidas sobre proyectos que los demócratas impulsaron con la oposición de los republicanos. <b>Los siete dividieron a los partidos</b>, así que esta versión casi solo puede decirle hacia qué partido se inclina. Cambie a los {n} votos para encontrar dónde cruza.",
+  "mode.shortTilt": "<b>Por qué estos siete todavía se inclinan hacia un lado.</b> {r} de ellos son proyectos que los republicanos impulsaron con la oposición de los demócratas y {d} son proyectos que los demócratas impulsaron con la oposición de los republicanos. Decir que no a un proyecto le aleja del partido que lo impulsó, así que esta versión todavía le da más oportunidades de moverse hacia la izquierda que hacia la derecha. Eso viene de la Legislatura: la mayoría decide qué proyectos llegan a votación, y los proyectos famosos de una sesión van en la dirección de la mayoría. Los {n} votos completos van en sentido contrario: {fd} proyectos que los demócratas apoyaron más y {fr} que apoyaron más los republicanos.",
   "mode.fullDesc": "Los {n} votos: uno por proyecto, repartidos en 20 materias, incluidos aquellos en los que republicanos y demócratas estuvieron de acuerdo. Esos son los votos que pueden mostrarle cruzando líneas partidistas.",
   "cand.note": "Los tres estuvieron en la misma cámara y compiten por cargos distintos, así que estas son tres lecturas separadas, no una clasificación. Votaron juntos en la mayoría de los proyectos de línea partidista, así que espere que las cifras queden cerca; donde se separan es la parte interesante. Cobertura sobre estos {items} votos: {coverage}. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
   "cand.raceLink": "Qué tiene cada uno en el registro",
@@ -798,7 +807,7 @@ export const ES: Record<CopyKey, string> = {
   "verdict.mildLean.caveat": "Más de sus respuestas coincidieron con ese partido que con el otro.",
   "hdr.eyebrow": "PlainRecord · Cámara de Texas {session} · {n} votos reales registrados",
   "prov.questions.label": "Preguntas",
-  "prov.questions.short": "las siete peleas más grandes de la sesión",
+  "prov.questions.short": "cinco peleas grandes y dos votaciones reñidas",
   "prov.questions.full": "uno por proyecto, en {cats} materias",
   "prov.record.label": "Directo del registro",
   "prov.record.hint": "tomado del Diario oficial de la Cámara, no de un resumen",
@@ -806,7 +815,7 @@ export const ES: Record<CopyKey, string> = {
   "prov.agreed.mostlyParty": "casi todas fueron peleas de línea partidista",
   "prov.agreed.notAFight": "estos votos no fueron para nada una pelea entre partidos",
   "prov.picked.label": "Escogidas por",
-  "prov.picked.hand": "mano",
+  "prov.picked.hand": "mano y regla",
   "prov.picked.rule": "una regla escrita",
   "prov.picked.handHint": "cada una muestra por qué fue escogida",
   "prov.picked.ruleHint": "{rule}, máximo {perCat} por materia",
@@ -892,8 +901,11 @@ export const ES: Record<CopyKey, string> = {
   "method.notFights.lead": "Por qué algunas preguntas no son peleas cerradas.",
   "method.notFights.body": "Cerca de {reserve} de cada 100 lugares se reservan para votos en los que republicanos y demócratas <em>estuvieron de acuerdo</em>. Lo hacemos a propósito. Si solo escogiéramos las peleas grandes, cada respuesta que diera caería en un extremo o en el otro, y nadie podría salir morado. La regla que seguimos está escrita y se llama {rule}, así que puede comprobar que no la cambiamos para obtener una respuesta más agradable.",
   "method.who.lead": "Quién aparece en esta página.",
-  "method.seven.lead": "Las siete grandes.",
-  "method.seven.body": "Las escogimos a mano, pero no según nuestra propia opinión. Cada una es un proyecto que el Vicegobernador declaró prioridad, o que el Gobernador vetó. Esas son sus listas publicadas, no las nuestras. Cada pregunta muestra por qué entró en la lista. Seis de las siete dividieron a los dos partidos con claridad, y eso es lo que hace una pelea de portada.",
+  "method.seven.lead": "Las siete.",
+  "method.seven.body": "Cinco son las peleas más grandes de la sesión, escogidas de listas publicadas y no según nuestra opinión: proyectos que el Vicegobernador llamó prioridades, o proyectos que el Gobernador vetó. Los cinco son proyectos que los republicanos aprobaron con la oposición de los demócratas. Los otros dos los escoge una regla: de los proyectos que los demócratas impulsaron con la oposición de los republicanos, los dos cuya votación en la Cámara quedó más cerca de un empate, de materias que los cinco no cubren. Hasta el 7 de octubre de 2026 las siete no incluían ningún proyecto así. Un lector lo señaló, y la regla es la corrección.",
+  "method.agenda.lead": "Por qué las preguntas se inclinan.",
+  "method.agenda.body": "Una legislatura solo vota lo que su mayoría lleva al pleno, así que un conjunto de votos reales nunca es una muestra neutral de opiniones. Además, damos a cada voto un peso según lo dividida que estuvo la Cámara, y en una Cámara de 88 republicanos y 62 demócratas eso hace que los votos por línea partidista pesen más. Juntas, esas dos cosas hacen que las siete midan sobre todo si usted está de acuerdo con lo que aprobó la mayoría republicana: {r} de ellas son de impulso republicano y {d} de impulso demócrata. Los {n} votos completos salen de una regla publicada que nunca mira a qué partido favorece un voto, y van en sentido contrario: {fd} proyectos que los demócratas apoyaron más y {fr} que apoyaron más los republicanos.",
+  "q.whyRule": "Escogida por regla: una de las dos votaciones más reñidas de la Cámara sobre un proyecto que los demócratas impulsaron con la oposición de los republicanos ({yeas} a {nays}).",
   "method.words.lead": "De dónde vienen las palabras.",
   "method.words.body": "Cada pregunta es el resumen oficial del proyecto, copiado palabra por palabra. No lo reescribimos para que suene mejor ni peor. Cómo votó cada miembro viene del Diario oficial de la Cámara donde pudimos hacer la correspondencia (<span class=\"src\">journal</span>), y en los demás casos de una extracción automática (<span class=\"src\">scrape</span>). La tabla le dice cuál, en cada voto.",
   "method.check.lead": "Compruébelo usted mismo.",

@@ -19,7 +19,7 @@ import {
   MODES,
   REGIONS,
   DEPTH_BUCKETS,
-  RULE_VERSION,
+  INSTRUMENT,
   UNREADABLE_VERDICTS,
   VERDICTS,
   json,
@@ -215,7 +215,7 @@ async function tally(request: Request): Promise<Response> {
     byMode,
     depth,
     questions,
-    ruleVersion: RULE_VERSION,
+    ruleVersion: INSTRUMENT,
     note:
       'Self-selected: these are the people who chose to add their result, not a sample of anyone. ' +
       'Regions come from coarse edge geolocation, so "tx" is not "registered Texas voter". Not a poll. ' +

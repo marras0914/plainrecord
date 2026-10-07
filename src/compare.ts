@@ -35,7 +35,7 @@
  * must not do, and fourteen bits is still two or three characters.
  */
 
-import { HEADLINE_ITEMS, type AnswerMap } from './quiz-data.js';
+import { HEADLINE_ITEMS, SHORT_ITEMS, type AnswerMap } from './quiz-data.js';
 import { LOCALE, ES_PREFIX } from './i18n.js';
 
 /** How many votes a compare covers. The seven everybody is asked. */
@@ -64,19 +64,36 @@ export const COMPARE_N = 7;
  * here it is fixed: a bill keeps its position no matter how often the record it
  * points at is corrected, and a shared link outlives a data fix.
  */
-const COMPARE_BILLS: readonly string[] = [
+const LEGACY_BILLS: readonly string[] = [
   'SB 6', 'SB 10', 'SB 14', 'SB 8', 'SB 5', 'SB 2', 'SB 3',
 ];
 
-/** The seven ids, in the pinned bill order, so position 0 means the same
- *  QUESTION forever even when the vote behind it is corrected. */
-export const COMPARE_IDS: readonly string[] = COMPARE_BILLS.map((bill) => {
-  const item = HEADLINE_ITEMS.find((i) => i.billId === bill);
-  // A headline bill leaving the set has to be loud. Silently shortening this
-  // list would renumber every position after it and break the same links again.
-  if (!item) throw new Error(`compare: ${bill} is pinned but is not a headline item`);
-  return item.id;
-});
+/**
+ * THE SHORT QUIZ CHANGED ON 7 OCTOBER 2026 (quiz-data.ts, SHORT_ITEMS), so new
+ * invites carry the new seven under a DIFFERENT fragment key, #d=, while #c=
+ * keeps meaning the seven above forever. A code is only ever decoded against the
+ * list it was made from, so no link in circulation changes meaning. Someone
+ * opening an old #c= link now answers the new seven and is compared on the five
+ * bills the two sets share; everything else is excluded, never invented.
+ */
+const SHORT_BILLS: readonly string[] = [
+  'SB 2', 'SB 8', 'SB 10', 'SB 3', 'SB 14', 'HB 871', 'HB 2060',
+];
+
+const idsFor = (bills: readonly string[], from: readonly { id: string; billId: string }[], what: string) =>
+  bills.map((bill) => {
+    const item = from.find((i) => i.billId === bill);
+    // A pinned bill leaving its set has to be loud. Silently shortening a list
+    // would renumber every position after it and break links in circulation.
+    if (!item) throw new Error(`compare: ${bill} is pinned but is not a ${what} item`);
+    return item.id;
+  });
+
+/** The original seven, for #c= links made before 7 October 2026. */
+export const LEGACY_IDS: readonly string[] = idsFor(LEGACY_BILLS, HEADLINE_ITEMS, 'headline');
+/** The current short seven, for #d= links. Position 0 means the same QUESTION
+ *  forever, even when the vote behind it is corrected. */
+export const COMPARE_IDS: readonly string[] = idsFor(SHORT_BILLS, SHORT_ITEMS, 'short-quiz');
 
 const MASK_SHIFT = COMPARE_N;
 const MAX_CODE = (1 << (COMPARE_N * 2)) - 1; // 14 bits
@@ -85,12 +102,14 @@ export interface Shared {
   /** true agree, false disagree, null not answered. Indexed by COMPARE_IDS. */
   answers: (boolean | null)[];
   answered: number;
+  /** Which list the answers are indexed by: COMPARE_IDS or LEGACY_IDS. */
+  ids: readonly string[];
 }
 
 /** Pack the reader's answers to the seven into a short code. */
-export function encodeCompare(answers: AnswerMap): string {
+export function encodeCompare(answers: AnswerMap, ids: readonly string[] = COMPARE_IDS): string {
   let bits = 0;
-  COMPARE_IDS.forEach((id, i) => {
+  ids.forEach((id, i) => {
     const a = answers[id];
     if (a !== 1 && a !== -1) return;
     bits |= 1 << (MASK_SHIFT + i);
@@ -106,7 +125,7 @@ export function encodeCompare(answers: AnswerMap): string {
  * that decoded "as best it could" would produce a confident comparison against
  * a person who never existed.
  */
-export function decodeCompare(code: string): Shared | null {
+export function decodeCompare(code: string, ids: readonly string[] = COMPARE_IDS): Shared | null {
   if (!/^[0-9a-z]{1,4}$/i.test(code)) return null;
   const bits = parseInt(code, 36);
   if (!Number.isInteger(bits) || bits < 0 || bits > MAX_CODE) return null;
@@ -128,20 +147,21 @@ export function decodeCompare(code: string): Shared | null {
     if (answers[i] === null && (bits & (1 << i)) !== 0) return null;
   }
   if (answered === 0) return null;
-  return { answers, answered };
+  return { answers, answered, ids };
 }
 
 /** Where an invite should point, honouring the language being read. */
 export function inviteUrl(answers: AnswerMap, origin: string, locale: string = LOCALE): string {
   const base = origin.replace(/\/$/, '');
   const home = locale === 'es' ? `${base}${ES_PREFIX}/` : `${base}/`;
-  return `${home}#c=${encodeCompare(answers)}`;
+  return `${home}#d=${encodeCompare(answers)}`;
 }
 
 /** Read an incoming invite out of a fragment. Takes the hash so it is testable. */
 export function incomingFrom(hash: string): Shared | null {
-  const m = /(?:^|[#&])c=([0-9a-z]{1,4})(?:&|$)/i.exec(hash);
-  return m ? decodeCompare(m[1]) : null;
+  const m = /(?:^|[#&])([cd])=([0-9a-z]{1,4})(?:&|$)/i.exec(hash);
+  if (!m) return null;
+  return decodeCompare(m[2], m[1].toLowerCase() === 'd' ? COMPARE_IDS : LEGACY_IDS);
 }
 
 export function incoming(): Shared | null {
@@ -152,7 +172,7 @@ export function incoming(): Shared | null {
 /** Drop the invite fragment without a reload or a history entry. */
 export function clearIncoming(): void {
   if (typeof history === 'undefined' || typeof location === 'undefined') return;
-  if (!/(?:^|[#&])c=/.test(location.hash)) return;
+  if (!/(?:^|[#&])[cd]=/.test(location.hash)) return;
   history.replaceState(null, '', location.pathname + location.search);
 }
 
@@ -173,7 +193,7 @@ export interface Agreement {
 export function agreementWith(theirs: Shared, mine: AnswerMap): Agreement {
   let both = 0;
   let agreed = 0;
-  COMPARE_IDS.forEach((id, i) => {
+  theirs.ids.forEach((id, i) => {
     const t = theirs.answers[i];
     const m = mine[id];
     if (t === null || (m !== 1 && m !== -1)) return;
@@ -186,7 +206,7 @@ export function agreementWith(theirs: Shared, mine: AnswerMap): Agreement {
 /** Their answers as an AnswerMap, so the real estimator can place them. */
 export function toAnswerMap(theirs: Shared): AnswerMap {
   const out: AnswerMap = {};
-  COMPARE_IDS.forEach((id, i) => {
+  theirs.ids.forEach((id, i) => {
     const t = theirs.answers[i];
     if (t === null) return;
     out[id] = t ? 1 : -1;

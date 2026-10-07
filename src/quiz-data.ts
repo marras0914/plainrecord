@@ -194,7 +194,60 @@ export const DATA = payload as unknown as QuizPayload;
 export const RULE_VERSION: string = DATA.ruleVersion;
 
 export const ALL_ITEMS: QuizItem[] = DATA.items;
+/**
+ * The seven bills people have heard of. A RECORD, not the short quiz: the
+ * district, bill and race pages, their share cards and the original challenge
+ * links use these. Since 7 October 2026 the short quiz is SHORT_ITEMS below.
+ */
 export const HEADLINE_ITEMS: QuizItem[] = ALL_ITEMS.filter((i) => i.headline);
+
+/**
+ * The seven-question quiz, chosen by a rule rather than as "the biggest fights".
+ *
+ * WHY. A reader showed on 7 October 2026 that the headline seven gave no chance
+ * to move right: five were bills Republicans passed over Democratic opposition,
+ * two were cross-party, none ran the other way. Saying no to a bill moves you
+ * away from the party that backed it, so the default quiz could mostly only push
+ * a reader left. That is the agenda effect (the majority decides what reaches a
+ * vote), and the famous bills of a session all run the majority's way.
+ *
+ * THE RULE, chosen by Marco from three options (option b):
+ *   1. Keep every headline bill that is Republican-backed (valence at or above
+ *      the selection rule's partisan threshold): the bills people recognise.
+ *   2. Add the TWO Democratic-backed items (valence at or below minus the
+ *      threshold) whose House vote was closest to an even split, each from a
+ *      subject not already in the set. Ties break on bill id.
+ *   3. The two cross-party headline bills (SB 5, SB 6) leave the short quiz and
+ *      stay in the full one.
+ * It still leans five to two. That is disclosed on the page, not hidden by it.
+ *
+ * Computed from the payload so it cannot drift, and asserted by
+ * quiz-data.smoke.ts so a data change that alters it fails loudly.
+ */
+export const SHORT_SET_ID = 'short-2026-10-07.b';
+export const SHORT_ITEMS: QuizItem[] = (() => {
+  const t = DATA.rulePartisanThreshold;
+  const famous = HEADLINE_ITEMS.filter((i) => i.valence !== null && i.valence >= t);
+  const used = new Set(famous.map((i) => i.category));
+  const added: QuizItem[] = [];
+  const pool = ALL_ITEMS
+    .filter((i) => i.valence !== null && i.valence <= -t)
+    .sort((a, b) => Math.abs(a.p - 0.5) - Math.abs(b.p - 0.5) || a.billId.localeCompare(b.billId));
+  for (const i of pool) {
+    if (added.length === 2) break;
+    if (used.has(i.category)) continue;
+    used.add(i.category);
+    added.push(i);
+  }
+  return [...famous, ...added];
+})();
+
+/**
+ * The tally's namespace: the selection rule AND the short set. A reading is a
+ * different measurement if either changes, so counters under the previous short
+ * set are frozen, not mixed in.
+ */
+export const INSTRUMENT = `${RULE_VERSION}+${SHORT_SET_ID}`;
 export const OPPONENTS: Opponent[] = DATA.opponents ?? [];
 export const COMPARATORS: Comparator[] = DATA.comparators ?? [];
 export const CANDIDATES: QuizCandidate[] = DATA.candidates;

@@ -36,11 +36,11 @@ import { Redis } from '@upstash/redis';
 import { createHash } from 'node:crypto';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
-import { ALL_ITEMS, HEADLINE_ITEMS, adapt, profileOf, describe, POOLABLE_DEPTH, RULE_VERSION }
+import { ALL_ITEMS, SHORT_ITEMS, adapt, profileOf, describe, POOLABLE_DEPTH, RULE_VERSION, INSTRUMENT }
   from '../src/quiz-data.js';
 // Re-exported so the endpoint can tell a consumer which question set the
 // numbers belong to, rather than leaving them to assume it is the current one.
-export { RULE_VERSION };
+export { RULE_VERSION, INSTRUMENT };
 // Re-exported so a consumer of the tally sees one definition, not two.
 export { POOLABLE_DEPTH };
 import type { AnswerMap } from '../src/quiz-data.js';
@@ -164,7 +164,9 @@ const QID_RE = /^[A-Za-z0-9_./-]{1,64}$/;
  * which is the honest price and is exactly what should happen.
  */
 export function ns(): string {
-  return `${env()}:${RULE_VERSION}`;
+  // INSTRUMENT is the rule version plus the short set (7 October 2026), so
+  // readings under the previous short set stay frozen under their old key.
+  return `${env()}:${INSTRUMENT}`;
 }
 
 /**
@@ -278,7 +280,7 @@ export interface SharePayload {
 }
 
 export function itemsFor(mode: Mode) {
-  return mode === 'short' ? HEADLINE_ITEMS : ALL_ITEMS;
+  return mode === 'short' ? SHORT_ITEMS : ALL_ITEMS;
 }
 
 /**

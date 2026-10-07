@@ -231,6 +231,7 @@
   .modebar { display:flex; justify-content:space-between; align-items:center; gap:16px;
              flex-wrap:wrap; border:1px solid var(--hair); background:var(--surface); padding:13px 16px; }
   .mode-desc { font-size:13px; color:var(--ink-2); margin-top:3px; max-width:56ch; }
+  .mode-desc .tilt { display:block; margin-top:8px; }
   .modebtns { display:flex; gap:8px; }
   .modebtns button[aria-pressed="true"] { border-color:var(--ink); color:var(--ink); font-weight:600; }
   .headline-why { margin-top:10px; padding-top:10px; border-top:1px solid var(--hair);

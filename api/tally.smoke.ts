@@ -20,7 +20,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname, relative, resolve } from 'node:path';
 
-import { HEADLINE_ITEMS, ALL_ITEMS } from '../src/quiz-data.js';
+import { SHORT_ITEMS, ALL_ITEMS } from '../src/quiz-data.js';
 import { validate, derive, binOf, deltaBins, itemsFor, regionOf, originAllowed, KEYS, MODES, REGIONS, depthOf, DEPTH_BUCKETS, POOLABLE_DEPTH, RULE_VERSION } from './_tally.js';
 import type { SharePayload } from './_tally.js';
 
@@ -41,7 +41,7 @@ function check(name: string, ok: boolean, detail = ''): void {
 // The base body. Asserted valid before anything is broken.
 // ---------------------------------------------------------------------------
 
-const shortIds = HEADLINE_ITEMS.map((i) => i.id);
+const shortIds = SHORT_ITEMS.map((i) => i.id);
 const base = (): Record<string, unknown> => ({
   mode: 'short',
   guess: 0.2,
@@ -92,7 +92,7 @@ broken('a guess below -1', (b) => (b.guess = -2));
 broken('a non-numeric guess', (b) => (b.guess = 'left'));
 broken('a NaN guess', (b) => (b.guess = Number.NaN));
 broken('more answers than the mode has items', (b) => {
-  b.answers = Array.from({ length: HEADLINE_ITEMS.length + 1 }, (_, i) => ({
+  b.answers = Array.from({ length: SHORT_ITEMS.length + 1 }, (_, i) => ({
     qid: shortIds[i % shortIds.length],
     agree: true,
   }));

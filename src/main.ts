@@ -9,7 +9,7 @@
 import {
   DATA,
   ALL_ITEMS,
-  HEADLINE_ITEMS,
+  SHORT_ITEMS,
   CANDIDATES,
   COMPARATORS,
   OPPONENTS,
@@ -262,7 +262,7 @@ type ZipResult =
   | { kind: 'split'; zip: string; ds: rep.ZipDistrict[] };
 let repZipResult: ZipResult = { kind: 'none' };
 
-const activeItems = (): QuizItem[] => (mode === 'short' ? HEADLINE_ITEMS : ALL_ITEMS);
+const activeItems = (): QuizItem[] => (mode === 'short' ? SHORT_ITEMS : ALL_ITEMS);
 let adapted: Adapted = adapt(activeItems());
 let queue: QuizItem[] = [];
 
@@ -538,6 +538,28 @@ const hideTip = () => { el('tip').style.opacity = '0'; };
 // Panels
 // ---------------------------------------------------------------------------
 
+/**
+ * Which way the questions lean, by the rule's own partisan threshold: an item is
+ * Republican-backed when Republicans voted yea more than Democrats by at least
+ * the threshold, Democratic-backed the reverse, cross-party otherwise.
+ *
+ * Said on the page since 7 October 2026, after a reader pointed out that the
+ * seven-question set offers no chance to move right: saying no moves you away
+ * from the party that backed a bill, and all the partisan ones here are
+ * Republican-backed, because the majority decides what reaches a vote.
+ */
+function leanCounts(items: QuizItem[]): { r: number; d: number; x: number } {
+  const t = DATA.rulePartisanThreshold;
+  const r = items.filter((i) => i.valence !== null && i.valence >= t).length;
+  const d = items.filter((i) => i.valence !== null && i.valence <= -t).length;
+  return { r, d, x: items.length - r - d };
+}
+const tiltVars = (): Record<string, number> => {
+  const s = leanCounts(SHORT_ITEMS);
+  const f = leanCounts(ALL_ITEMS);
+  return { r: s.r, d: s.d, n: ALL_ITEMS.length, fd: f.d, fr: f.r };
+};
+
 function renderMode(): void {
   // Was `All <span id="full-count"></span> votes` with only the number filled
   // in, which put two English words in the markup that no locale could reach.
@@ -550,7 +572,7 @@ function renderMode(): void {
   el('mode-desc').innerHTML = t(
     mode === 'short' ? 'mode.shortDesc' : 'mode.fullDesc',
     { n: ALL_ITEMS.length },
-  );
+  ) + (mode === 'short' ? `<span class="tilt">${t('mode.shortTilt', tiltVars())}</span>` : '');
 }
 
 function renderProv(): void {
@@ -613,6 +635,9 @@ function renderProv(): void {
       esc(pes.prose('candidateProvenance', DATA.candidateProvenance))),
 
     para(t('method.seven.lead'), t('method.seven.body')),
+
+    // The agenda effect, said plainly. See leanCounts.
+    para(t('method.agenda.lead'), t('method.agenda.body', tiltVars())),
 
     // Sits next to the rule paragraphs because it is about the rule. A reader
     // who downloads the payload and recomputes the cross-cutting share gets a
@@ -1457,6 +1482,10 @@ function renderQuestion(): void {
     // which is to say beside the vote totals and the party, after the answer is
     // locked in and a cue can no longer do any harm.
     (it.why && answered ? `<p class="q-why">${esc(it.why)}</p>` : '') +
+    // The two short-quiz bills chosen by rule (SHORT_ITEMS) carry no hand-written
+    // reason, so they get the rule's own, with the vote that put them there.
+    (!it.why && answered && !it.headline && SHORT_ITEMS.includes(it)
+      ? `<p class="q-why">${esc(t('q.whyRule', { yeas: it.yeas, nays: it.nays }))}</p>` : '') +
 
     (answered
       ? ''

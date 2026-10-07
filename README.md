@@ -844,7 +844,7 @@ nothing labelling either.
 Recomputing the share over 67 would be the wrong repair. It is a diagnostic on
 the *selection rule* — `partisanByConstruction` trips below
 `PARTISAN_BY_CONSTRUCTION_THRESHOLD` — and the headline bills are hand-picked
-precisely because they are the big fights, six of the seven splitting the parties
+precisely because they are the big fights, five of the seven splitting the parties
 sharply. Folding them in would drag the share down and report the rule as
 partisan-by-construction on the strength of items the rule never chose. So the
 number stays and the denominator ships beside it, the exporter throws before
