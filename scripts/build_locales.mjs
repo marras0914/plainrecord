@@ -221,6 +221,10 @@ function structuredData(locale) {
       '@id': `${SITE}/#website`,
       url: selfUrl,
       name: value('intro.h1', locale),
+      // The domain's own name. Google takes a site name from this block on the
+      // homepage, and without it a search for "rightnleft" matches only URLs.
+      // Not translated: it is a name, the same in both languages.
+      alternateName: ['rightnleft', 'Right n Left', 'rightnleft.com'],
       description: value('page.description', locale),
       inLanguage: locale === 'es' ? 'es-US' : 'en-US',
     },
