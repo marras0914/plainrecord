@@ -1883,11 +1883,11 @@
     "status": "ok"
   },
   "page.title": {
-    "en": "Texas House voting records — Goodwin, Hinojosa, Talarico | The Purple Strip",
-    "es": "Historial de votos de la Cámara de Texas — Goodwin, Hinojosa, Talarico | La Franja Morada",
+    "en": "Texas House voting records: Goodwin, Hinojosa, Talarico | rightnleft",
+    "es": "Votos en la Cámara de Texas: Goodwin, Hinojosa, Talarico | rightnleft",
     "where": "Document <title> and the browser tab.",
     "vars": [],
-    "note": "Was \"The Purple Strip — PlainRecord\", which contains nothing anyone searches for: no Texas, no voting record, no candidate name. The brand stays in the h1 and og:title; the title element is for search.",
+    "note": "Was \"The Purple Strip — PlainRecord\", which contains nothing anyone searches for: no Texas, no voting record, no candidate name. The brand stays in the h1 and og:title; the title element is for search. Since 14 Oct 2026 it ends in the domain's name, so a search for \"rightnleft\" has a title to match, and both stay under 70 characters (Bing flagged the old ones at 75 and 89). The Spanish dropped \"Historial de votos de\" to fit; Marco approved the shorter form.",
     "status": "ok"
   },
   "page.description": {

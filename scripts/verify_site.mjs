@@ -2975,7 +2975,9 @@ try {
   } else {
     console.log('');
     check('es: document is lang="es"', esLang === 'es');
-    check('es: title is Spanish', /Franja Morada/.test(await esPage.title()), await esPage.title());
+    // "Cámara", not the brand: since 14 Oct both titles end in "rightnleft",
+    // and the English one says "Texas House", so this still fails on English.
+    check('es: title is Spanish', /Cámara/.test(await esPage.title()), await esPage.title());
     // No trailing slash: vercel.json sets trailingSlash:false, so /es/ 308s to
     // /es and a canonical with the slash would name a URL that redirects.
     const esCanonical = await esPage.$eval('link[rel=canonical]', (e) => e.getAttribute('href'));
