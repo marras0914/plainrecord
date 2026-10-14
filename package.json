@@ -6,7 +6,7 @@
   "description": "How Texas legislators actually voted, and where the state stands because of it.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && node scripts/build_races.mjs && node scripts/build_bill_pages.mjs && node scripts/build_district_pages.mjs && node scripts/build_data_page.mjs && node scripts/build_classroom_page.mjs && node scripts/build_charts.mjs && node scripts/build_hubs.mjs && node scripts/build_locales.mjs",
+    "build": "node scripts/check_election_dates.mjs && tsc --noEmit && node scripts/build_races.mjs && node scripts/build_bill_pages.mjs && node scripts/build_district_pages.mjs && node scripts/build_data_page.mjs && node scripts/build_classroom_page.mjs && node scripts/build_charts.mjs && node scripts/build_hubs.mjs && node scripts/build_locales.mjs",
     "build:artifact": "npm run build && node scripts/build_artifact.mjs",
     "build:og": "node scripts/build_og.mjs",
     "build:cards": "node scripts/build_share_cards.mjs",

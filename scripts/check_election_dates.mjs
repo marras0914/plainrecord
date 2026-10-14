@@ -80,10 +80,15 @@ if (d.election >= today) {
 //
 // WHY THIS LIVES HERE. scripts/build_factsheet.mjs derives its dates from this
 // same file and refuses to build a stale one, but that only helps if somebody
-// runs it, and nothing does: it is not in `npm run build` and never has been.
-// The sheets therefore sit on disk with whatever they said the last time a human
-// typed the command. This is the check that runs, so this is where the drift has
-// to be caught.
+// runs it, and nothing does: it is not in `npm run build`. The sheets therefore
+// sit on disk with whatever they said the last time a human typed the command.
+// THIS check is the first step of `npm run build` (since 14 Oct 2026, after the
+// sheets said "last day to register" for nine days past the deadline), so a
+// stale sheet stops the deploy rather than shipping quietly.
+//
+// What that blocks: on 4 November the election check fails hard, and every
+// deploy stops until public/data/election_tx.json describes the next election
+// or the sheets are retired.
 //
 // It reads the SHIPPED HTML rather than re-deriving anything, because the thing
 // worth knowing is what a reader is being handed today.
