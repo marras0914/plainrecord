@@ -249,7 +249,13 @@ const jsonldFor = (L) => JSON.stringify({
     {
       '@type': 'WebPage', '@id': L.canonical, url: L.canonical, name: L.title,
       inLanguage: L.lang === 'es' ? 'es-US' : 'en-US', description: L.meta,
-      isPartOf: { '@type': 'WebSite', url: `${SITE}/`, name: 'PlainRecord' },
+      // The same site the homepage declares, by its @id and its name in this
+      // language. It said "PlainRecord" until 14 Oct 2026, a third name no
+      // other page used.
+      isPartOf: {
+        '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`,
+        name: L.lang === 'es' ? 'La Franja Morada' : 'The Purple Strip',
+      },
       author: { '@type': 'Person', name: 'Marco Arras' },
     },
     // The corpus Dataset used to sit here too, with its url pointing at the
