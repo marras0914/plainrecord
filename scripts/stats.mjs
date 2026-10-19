@@ -181,6 +181,39 @@ for (const [dim, label] of DIMS) {
   console.log('      Progress steps began on 1 October 2026; earlier days have only guess, started and result.\n');
 }
 
+// The early-voting signs. Their QR codes were printed with plain /districts and
+// /distritos, no tag, and a camera scan sends no referrer, so a scan can only be
+// inferred: a PHONE landing on one of those pages. From 9 to 18 October 2026
+// neither page had a single visit, and one phone visit in the fortnight before,
+// so against that baseline a phone visit is very likely the sign. Likely, not
+// certain: a forwarded link looks the same, which is why the referrer split is
+// printed too. Retention is about 15 days, so read this before it ages out.
+{
+  const SIGN = [['/districts', 'English'], ['/distritos', 'Spanish']];
+  const filt = (expr) => `&filter=${encodeURIComponent(expr)}`;
+  const mobile = (p) => `requestPath eq '${p}' and deviceType eq 'mobile'`;
+  console.log('  Sign QR codes (phone visits to the pages the signs point at)');
+  let any = false;
+  for (const [p, lang] of SIGN) {
+    const r = api(`/v1/query/web-analytics/visits/aggregate?${base}&by=day${filt(mobile(p))}`);
+    if (r.error) { console.log(`      ${p}: (${r.error})`); continue; }
+    const days = (r.data ?? []).filter((x) => (x.visitors ?? 0) > 0);
+    const sum = days.reduce((a, x) => a + x.visitors, 0);
+    any ||= sum > 0;
+    console.log(`      ${`${p} (${lang})`.padEnd(34)} ${n(sum)} visitors`);
+    for (const x of days) console.log(`        ${String(x.timestamp).slice(0, 10).padEnd(32)} ${n(x.visitors)}`);
+  }
+  if (any) {
+    const r = api(`/v1/query/web-analytics/visits/aggregate?${base}&by=referrerHostname`
+      + filt(SIGN.map(([p]) => `(${mobile(p)})`).join(' or ')));
+    const withRef = (r.data ?? []).filter((x) => String(x.referrerHostname ?? '').trim());
+    console.log(withRef.length
+      ? `      of these, came with a referrer (so NOT a scan): ${withRef.map((x) => `${x.referrerHostname} ${x.visitors}`).join(', ')}`
+      : '      none came with a referrer, which is what a scan looks like');
+  }
+  console.log('      Baseline 9 to 18 Oct 2026: zero. Signs printed by 18 Oct; QR codes carry no tag.\n');
+}
+
 // The one thing this project is watching for. Named explicitly so it does not
 // have to be re-derived from the referrer table every time.
 const refs = Array.isArray(rows.referrerHostname) ? rows.referrerHostname : [];
