@@ -225,8 +225,9 @@ const COPY = {
       + `${r.rec.cast} recorded Texas House votes for ${r.cand.name}, and ${r.opp.evidence} for ${r.opp.name}. `
       + `Free, no sign-up, no cookies.`,
     kicker: 'Texas House · 2025 session',
-    // Past tense since 12 Nov 2026. DRAFT: the Spanish below needs Marco's
-    // review, and nothing but a person checks it (see the header).
+    // Past tense since 12 Nov 2026, with results and resultsLink. The Spanish
+    // below was approved by Marco the same day; nothing but a person checks it
+    // (see the header), so any later edit to it needs a person again.
     lede: (r) => `They ran for ${RUNNING_FOR_EN[r.cand.office]} in the election of November 3, 2026. Only one of them has cast a vote on the bills this site asks about, and that is a fact about the offices they have held rather than a judgement about either of them. This page says exactly what the record shows for each, and where the two kinds of record stop being comparable.`,
     h2dem: (r) => `What ${r.cand.name}'s record shows`,
     // No pronouns for the candidates anywhere on these pages. The three are not

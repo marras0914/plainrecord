@@ -344,7 +344,7 @@ const COPY = {
     whereNote: 'Counted from 2020 Census blocks. A city split between districts appears on each of their pages, and your street decides which one is yours.',
     // "Represented ... in the 89th Legislature" since 12 Nov 2026, so the page
     // stays true after the 90th is sworn in on 12 Jan 2027. The record is that
-    // session's, whoever holds the seat next. DRAFT Spanish below, pending review.
+    // session's, whoever holds the seat next. Spanish approved 12 Nov 2026.
     lede: (m, r) => `${m.n} represented Texas House District ${m.d} in the 89th Legislature (the 2025 session) and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
     // The index answers "who is my state rep", the question people actually type,
     // so the title, h1 and description say that and the ZIP box sits first.
@@ -426,8 +426,8 @@ const COPY = {
     indexVacant: (d) => `El Distrito ${d} no tiene página, porque nadie ocupaba el escaño cuando se preparó este registro. Nate Schatzline lo ocupaba y se fue el 29 de julio de 2026, después de emitir 3,283 votos que siguen siendo el registro de ese distrito.`,
     indexBack: 'Los 150 distritos',
     // The eight ballot strings below were approved on 30 September 2026, and
-    // put in the past tense on 12 Nov 2026 as a DRAFT pending review, along with
-    // lede, indexDesc, indexLede, indexVacant, results and resultsLink.
+    // put in the past tense on 12 Nov 2026, along with lede, indexDesc,
+    // indexLede, indexVacant, results and resultsLink; all approved that day.
     h2ballot: (m) => `En la boleta del 3 de noviembre de 2026 para el Distrito ${m.d}`,
     ballotRunning: (m) => `${m.n} ocupó este escaño en la 89.ª Legislatura y se postuló de nuevo, así que el historial de esta página es suyo.`,
     ballotNotRunning: (m) => `${m.n} ocupó este escaño en la 89.ª Legislatura y no apareció en la boleta de noviembre para este distrito. El historial de esta página es suyo, no de ninguna de las candidaturas.`,

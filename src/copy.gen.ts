@@ -1040,12 +1040,5 @@ export const ES: Record<CopyKey, string> = {
  * rather than presenting a machine draft as a translation.
  */
 export const ES_UNAPPROVED: readonly CopyKey[] = [
-  "bias.p1",
-  "bias.p3",
-  "author.races",
-  "cand.note",
-  "rev.compareNote",
-  "rep.lede",
-  "rep.noSuchDistrict",
-  "rep.excludedOne",
+
 ];

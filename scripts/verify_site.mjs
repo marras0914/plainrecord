@@ -741,8 +741,9 @@ try {
     repRows.every((r) => /voted (Yea|Nay)|no vote recorded/.test(r.vote)),
     repRows.map((r) => r.vote).join(' | '));
   const repNote = await page.$eval('.rep-note', (e) => e.textContent.replace(/\s+/g, ' ').trim());
-  check('the page says none of them is on the ballot and names the shared rule',
-    /is on the ballot/i.test(repNote) && /same rule on both sides/i.test(repNote),
+  // Past tense since 12 Nov 2026: "ran in the three races", not "is on the ballot".
+  check('the page says none of them ran in the three races and names the shared rule',
+    /none of these six ran in the three races/i.test(repNote) && /same rule on both sides/i.test(repNote),
     repNote.slice(0, 90));
   // And the candidates' own provenance must be stated, because it is NOT a rule.
   // A choice presented without comment reads as a measurement.
@@ -3102,6 +3103,10 @@ try {
       // Neither is a sentence, which is exactly why a prose-shaped leak list
       // missed them.
       'democratic-coded', 'republican-coded',
+      // The note under the three candidates. main.ts built it in English and
+      // never called cand.note, so the Spanish page showed it in English until
+      // 12 Nov 2026. The same failure as the statements card below.
+      'three separate readouts',
       // THE STATEMENTS CARD, WHICH RENDERED WHOLLY IN ENGLISH FOR WEEKS.
       //
       // stmt.heading and stmt.note were in copy.json, translated and approved,
