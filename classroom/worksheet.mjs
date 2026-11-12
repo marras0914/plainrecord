@@ -44,6 +44,15 @@ function day(lang, iso, withYear) {
   return d.toLocaleDateString(lang === 'es' ? 'es-MX' : 'en-GB', o).replace(/,/g, '');
 }
 
+/**
+ * Whether the election in election_tx.json is still ahead. Once it is not, the
+ * worksheet leaves out its voting box rather than printing a cycle that is
+ * over; scripts/check_election_dates.mjs asserts that it does.
+ */
+export function electionAhead(today = new Date().toISOString().slice(0, 10)) {
+  return ELECTION.election >= today;
+}
+
 export function dates(lang) {
   return {
     earlyStart: day(lang, ELECTION.earlyStart, false),
@@ -84,8 +93,9 @@ b{font-weight:600}
 ul{margin:3px 0 6px;padding-left:16px}
 li{margin:0 0 3px}`;
 
-export function worksheetHtml(lang) {
+export function worksheetHtml(lang, today) {
   const s = (key, vars) => t(lang, key, vars);
+  const ahead = electionAhead(today);
   const D = dates(lang);
   const blank = (w) => `<span class="blank"${w ? ` style="min-width:${w}"` : ''}></span>`;
   const line = '<span class="line"></span>';
@@ -134,14 +144,14 @@ ${s('ws.s5surprise')} ${line}</li>
 <li>${s('ws.q3')} ${line}${line}</li>
 </ol>
 
-<h2>${s('ws.voteHead')}</h2>
-<div class="box">
+${ahead ? `<h2>${s('ws.voteHead')}</h2>
+<div class="box" id="vote-box">
 ${s('ws.voteEarly', D)}<br>
 ${s('ws.voteDay', D)}<br>
 ${s('ws.voteMail', D)}<br>
 <span class="small">${s('ws.voteNote', D)}</span>
 </div>
-
+` : ''}
 <h2>${s('ws.teachHead')}</h2>
 <ul class="small" style="font-size:8.5pt;color:var(--ink-2)">
 ${['ws.t1', 'ws.t2', 'ws.t3', 'ws.t4', 'ws.t5'].map((k) => `<li>${s(k)}</li>`).join('\n')}

@@ -2213,6 +2213,17 @@ try {
     const dates = JSON.parse(readFileSync(join(ROOT, 'public/data/election_tx.json'), 'utf8'));
     const shown = (await ep.$eval('#election-card', (e) => e.innerText)).trim();
 
+    // AFTER THE ELECTION the block and the button down to it must both be gone,
+    // and none of the checks below apply. Asserted rather than skipped, so a
+    // block that outlives its election fails here as well as in the build check.
+    if (dates.election < new Date().toISOString().slice(0, 10)) {
+      check('vote: the election has passed, so the dates block is hidden',
+        await ep.$eval('#election-card', (e) => e.hidden && e.innerText.trim() === ''),
+        `election ${dates.election}`);
+      const jumpGone = await ep.locator('.result-actions button', { hasText: /voting in texas|votar en texas/i }).count();
+      check('vote: and nothing offers a way down to it', jumpGone === 0, `${jumpGone} button(s)`);
+      await ec.close();
+    } else {
     check('vote: the dates block is on the page', shown.length > 20, `${shown.length} chars`);
 
     // PLACEMENT IS A DECISION, so it is asserted rather than left to whoever
@@ -2278,6 +2289,7 @@ try {
       found.length === 0, found.join(', ') || `${URGING.length} phrases checked`);
 
     await ec.close();
+    }
   }
 
   // ---------------------------------------------------------------------------
