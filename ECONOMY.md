@@ -232,12 +232,32 @@ Pure, with no I/O, in the same spirit as `scoring.ts`.
 
 ## Payload: `scripts/export_econ.ts`
 
+**Built 12 Nov 2026** (`npm run data:econ`). Two decisions Marco made that
+day shape it:
+
+1. **Pages lead with the authors' lag** (one quarter), labeled as theirs. The
+   explorer still shows lags 0 to 4.
+2. **Shock notes appear on the reveal only**, never on a blind card, because
+   the rule puts twice as many on Republican terms as Democratic ones.
+
 Writes two files to `SHIP_DIR`:
 
-- `econ_blind.json` contains each term's metrics, baseline and shock notes,
-  keyed by an opaque ID (`term-a`). No years, names or parties.
-- `econ_terms.json` contains the full labeled record, for the reveal and the
-  explorer. CC0, served CORS-open like `quiz_89R.json`.
+- `econ_blind.json` (7 KB): each complete term's metrics and baseline at the
+  paper's lag, values only, under an opaque key (`term-a` to `term-s`) in a
+  fixed hashed order. No years, names, parties, fiscal-year labels or notes;
+  `scripts/export_econ.smoke.ts` scans every string and key in it, and proves
+  the scan catches a planted "FY1981". The term in progress is never in it.
+- `econ_terms.json` (94 KB): the labeled record for the reveal and the
+  explorer. Who held each office, the shock notes with sources, every metric at
+  lags 0 to 4, the groupings (the paper-sample reproduction, all complete
+  terms, unified versus divided, and the Fed grouping, which ships as a refusal
+  with its reason), and the key from `term-k` to a term. CC0, served CORS-open
+  like `quiz_89R.json`.
+
+**Blind is a property of the page, not the file.** The key is public, and
+some cards name themselves to anyone who knows the history: an average budget
+surplus is the late 1990s, and a null income is any term before 1984. The
+blind page must say so up front.
 
 ---
 
