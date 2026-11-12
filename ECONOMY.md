@@ -27,6 +27,12 @@ The page has to carry all three of those points together. Quoting the first
 without the second is the economy version of the causal claim that
 `outcomes.ts` exists to prevent.
 
+**Their numbers and ours stay apart.** The paper stops at 2012, and the site
+covers terms after that. Figures from the paper are quoted as the paper's,
+with its window. Figures we compute, including any party average that reaches
+past 2012, are labeled as the site's own arithmetic and never presented as
+extending the paper's finding.
+
 ---
 
 ## Data
@@ -65,21 +71,37 @@ export interface Term {
   start: string;                  // inauguration date, ISO
   end: string;
   president: { name: string; party: 'D' | 'R' };
-  congresses: {
-    number: number;
+  control: {                      // one entry per stretch of unchanged control
+    congress: number;
     start: string;
+    end: string;
     house: 'D' | 'R';
     senate: 'D' | 'R';
+    note: string | null;          // e.g. 'Senate 50-50, majority by VP tie-break'
     sourceUrl: string;            // history.house.gov / senate.gov party divisions
   }[];
   fedChairs: {
     name: string;
     start: string;
-    appointedBy: 'D' | 'R';       // party of the appointing president
+    end: string;
+    appointments: { date: string; by: 'D' | 'R' }[];  // first appointment and every reappointment as chair
     sourceUrl: string;            // federalreserve.gov history
   }[];
 }
 ```
+
+Two cases the obvious shape gets wrong:
+
+- **Control can change mid-Congress.** The Senate went from R to D in June
+  2001 when Jeffords left the Republican caucus. So control is recorded as
+  stretches with start and end dates, not one row per Congress. A 50-50
+  Senate is assigned to the Vice President's party, and the `note` says so,
+  because that's a fact a reader might dispute.
+- **Fed chairs are reappointed across party lines.** Greenspan was first
+  appointed by Reagan and reappointed by Clinton; Bernanke by Bush, then
+  Obama; Powell by Trump, then Biden. "The party that appointed the chair"
+  means the most recent appointment in force on a given date, and the record
+  keeps every appointment so the grouping can be audited.
 
 Every party flip and chair change is checked against the official page before
 it goes in. Recent entries need the most care, so mark the file with a
@@ -92,6 +114,13 @@ embargo, the 1979 oil shock, the 2001 recession, the 2008 financial crisis,
 COVID-19 and so on. **Say what happened, not who was at fault.** The notes
 show on the blind cards because the research says those shocks explain a
 large share of the gap.
+
+On a blind card a note is worded by kind, not by name or date ("an oil
+supply shock", "a global pandemic"). That doesn't make the card anonymous:
+"a global pandemic" points at one term, and so do double-digit inflation and
+unemployment together. **The blind round can't be fully blind for a reader
+who knows the history, and the page says so** rather than claiming otherwise
+(see the blind round below).
 
 ---
 
@@ -111,14 +140,18 @@ Pure, with no I/O, in the same spirit as `scoring.ts`.
 - **Inherited baseline:** each metric over the four quarters before the term,
   shown beside the term's own figure.
 - **Groupings:** by president's party, by unified versus divided government,
-  and by which party appointed the Fed chair. All are computed, but **only
+  and by the party of the Fed chair's most recent appointment, date by date.
+  All are computed, but **only
   shown after a reader has finished the blind round** (or on the explorer page,
   which says up front that it's labeled).
 
 ### `econ.smoke.ts` checks
 
 - Every quarter from 1949 to the latest data falls in exactly one term.
-- Every term has a president, at least one Congress and at least one Fed chair.
+- Every term has a president, at least one control stretch and at least one Fed chair.
+- Control stretches and chair tenures tile each term with no gaps or overlaps.
+- The blind payload contains every completed term and no others: none dropped,
+  and the term in progress left out.
 - Annualized growth recomputed by hand for two fixed terms matches.
 - Changing the lag moves the windows and changes nothing else.
 - Median income is `null` (not `0`) before 1984, and the page renders that as "no data."
@@ -147,15 +180,26 @@ Writes two files to `SHIP_DIR`:
 
 ### Blind round
 
-1. Show 8 to 10 terms, picked to cover both parties and a range of outcomes.
-   **The selection rule is written on the methodology page and enforced in a
-   smoke test,** the same way `selection.ts` governs the quiz items.
-2. Each card reads "Term A": its metrics, its inherited baseline, and any shock
+1. **Show every completed term since 1949, about 19 of them.** No selection,
+   so there's no choice to defend and none that could tilt the reveal. A term
+   that changed hands mid-way within one party (Kennedy to Johnson, Nixon to
+   Ford) counts as one term and the reveal names both presidents. Check how
+   Blinder and Watson split those two terms, and if we differ, say so on the
+   methodology page. The term in progress is left out until it ends;
+   the explorer shows it, labeled as incomplete.
+2. Cards come in a random order for each reader, so a reader who stops early
+   hasn't seen only one era. The reveal covers the terms they rated and says
+   how many that was.
+3. Each card reads "Term A": its metrics, its inherited baseline, and any shock
    note. No years, because years give the answer away.
-3. The reader rates each term from 1 to 5. Before starting, they can optionally
+4. Each card has an optional "I think I know which term this is" box. The
+   reveal reports ratings for recognized and unrecognized terms separately,
+   because a rating given to a term the reader recognized isn't a blind
+   judgment.
+5. The reader rates each term from 1 to 5. Before starting, they can optionally
    predict which party ran the economy better. Like the quiz's guess step, it's
    skippable and isn't counted until the marker moves.
-4. The reveal shows who held each office, then compares the reader's ratings
+6. The reveal shows who held each office, then compares the reader's ratings
    (and prediction, if given) with the record, and gives the research summary
    above.
 
@@ -169,7 +213,7 @@ Writes two files to `SHIP_DIR`:
 
 ### `verify_site.mjs` additions
 
-- `/economy` doesn't request `econ_terms.json` until the last rating is in.
+- `/economy` doesn't request `econ_terms.json` until the reader asks for the reveal.
 - No text on the blind cards matches a year, a president's name or a party name.
 - `/economy/explore` renders a chart with JS disabled.
 - No off-origin requests, as on every other page.

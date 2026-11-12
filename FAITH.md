@@ -2,11 +2,16 @@
 
 **Status: planning.** See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
 
-Readers weigh principles that Christian traditions teach, then see how those
-principles line up with each party's platform. **The site never decides what
+Readers pick a Christian tradition and see, issue by issue, what it officially
+teaches next to what each party's platform says. **The site never decides what
 "the Christian position" is.** It reports what each tradition officially says,
 what each platform says, and which verses each side cites, and it lets the
 reader close the gap.
+
+The module launches with that tradition lens only. A blind round, where
+readers match principles to unlabeled planks, is a later phase with its own
+rules (see "Later phase: the blind round" below), because its principles
+would be the site's own words.
 
 ---
 
@@ -87,8 +92,8 @@ reorganized or revised their statements in recent years.
 faith_positions.ts      issues, traditions, statements, planks, KNOWN_GAPS (hand-curated)
 faith_verses.ts         verses with WEB and RV1909 text and their citedBy sources
 scripts/export_faith.ts writes to SHIP_DIR:
-  faith_blind.json      principles and unlabeled planks, opaque IDs only
   faith.json            the full labeled record (CC0, CORS-open)
+                        (faith_blind.json arrives with the blind round, later)
 ```
 
 ```ts
@@ -119,7 +124,6 @@ interface Plank {
 - Every tradition has a statement or an explicit "no official statement" for every issue.
 - Every entry has a `sourceUrl`, and every excerpt is under 15 words.
 - Every verse has at least one `citedBy` with a URL.
-- `faith_blind.json` contains no party or tradition fields.
 - **`export_faith.ts` refuses to write** while any summary lacks reviewer
   sign-off, the same way the Spanish gate refuses unapproved strings.
 
@@ -129,11 +133,24 @@ interface Plank {
 
 | English | Spanish | What's on it |
 |---|---|---|
-| `/faith` | `/fe` | Blind round. Needs `public/js/faith-blind.js` |
-| `/faith/traditions` | `/fe/tradiciones` | Tradition lens. Static, works without JS |
+| `/faith` | `/fe` | Tradition lens. Static, works without JS |
 | `/faith/methodology` | `/fe/metodologia` | Sources, curation rules, reviewers, known gaps |
 
-### Blind round
+### Tradition lens
+
+Pick a tradition. For each issue, that tradition's own statement appears
+alongside each party's plank. **No alignment score is computed.** The reader
+draws the conclusion.
+
+Every word in the lens belongs to a source except the neutral summaries, and
+those are reviewed. No traditions-by-issue grid that could be read as a
+scoreboard: one tradition at a time.
+
+---
+
+## Later phase: the blind round
+
+Not part of the launch. The original design was:
 
 1. Show a principle in neutral wording, such as "Societies have a duty to
    welcome people fleeing danger." Which traditions teach it stays hidden.
@@ -142,11 +159,26 @@ interface Plank {
 4. The reveal shows which party wrote each plank, which traditions teach the
    principle, and the verses each side cites.
 
-### Tradition lens
+**Why it waits.** The principles in step 1 are the site's paraphrase, and the
+reader's result is decided by which principles we write and how. Put "welcome
+the stranger" on the immigration card and leave out a tradition's teaching on
+the rule of law, and the reader matches one party. That's the "more Christian"
+score this module forbids, computed in the reader's head and steered by our
+choices. The quiz has the same problem with item selection and solves it with
+a written rule; this needs one too.
 
-Pick a tradition. For each issue, that tradition's own statement appears
-alongside each party's plank. **No alignment score is computed.** The reader
-draws the conclusion.
+**Rules it must meet before it ships:**
+
+- A principle is an official statement's own excerpt, not our paraphrase.
+- Principles are chosen by rule, not by us: for each issue, one from every
+  launch tradition with a statement on it. If traditions pull in different
+  directions on an issue, the round shows that.
+- Each card shows every plank both parties have on that issue at that level,
+  not a subset we picked.
+- The reviewers sign off on the round as a whole, not just the entries in it,
+  because a set of individually fair cards can still add up to a slant.
+- `faith_blind.json` contains no party or tradition fields, and the page
+  doesn't request `faith.json` until the reveal.
 
 ---
 
@@ -177,3 +209,4 @@ draws the conclusion.
 - [ ] Reviewer sign-off on every summary, and `export_faith.ts` writes without refusing
 - [ ] Spanish approved in `i18n/faith.json`, scripture from RV1909
 - [ ] Methodology page published with reviewers and known gaps
+- [ ] The blind round is not part of this list; it gets its own when it's scheduled

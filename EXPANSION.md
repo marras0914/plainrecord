@@ -18,6 +18,33 @@ is not a causal claim, and a panel where every number indicts reads as advocacy.
 
 ---
 
+## Step 0: the site after the election
+
+Nothing in this plan can ship yet. The 3 November 2026 election has passed,
+so `scripts/check_election_dates.mjs`, the first step of `npm run build`,
+fails on every deploy, and has done since 4 November. That gate is right to
+fail: the dates block and the fact sheets tell people how to vote in an
+election that is over.
+
+Before any module work:
+
+1. **Retire the dates block** on the quiz result, and the `/fact-sheet` and
+   `/hoja` pages and PDFs, or replace them with an undated version. Remove
+   `check_election_dates.mjs` from the build in the same commit that removes
+   the last dated page, not before. The gate goes when its subject goes.
+2. **Race pages** become a record of a finished race: say the election is
+   over and link the official results. Don't leave pre-election wording up.
+3. **Plan the 90th Legislature.** It convenes 12 January 2027. The 89th
+   session's votes stay true as a record, but "Your rep" pages will name
+   people who no longer hold the seat. Decide whether those pages say "your
+   representative in the 89th Legislature" or follow the new members, before
+   January rather than after.
+
+Step 0 is upkeep of the existing site, not part of either module, but it sits
+first because a module that can't deploy hasn't launched.
+
+---
+
 ## The scope question comes first
 
 The site currently describes itself as "How Texas legislators actually voted."
@@ -54,7 +81,7 @@ quiz bundle, so the 36 KB quiz bundle doesn't grow.
 | Shipped payload | `scripts/export_quiz_data.ts` writing to `SHIP_DIR` | `scripts/export_econ.ts`, `scripts/export_faith.ts` |
 | Pages | `build_charts.mjs` + `_page_shell.mjs` `document_()` | `scripts/build_economy_pages.mjs`, `scripts/build_faith_pages.mjs` |
 | Charts | `_charts.mjs` SVG, rendered at build time | Same helpers, plus a timeline band chart |
-| Interactivity | `public/js/zip-lookup.js` passed as `scripts: [...]` | `public/js/econ-blind.js`, `public/js/faith-blind.js` |
+| Interactivity | `public/js/zip-lookup.js` passed as `scripts: [...]` | `public/js/econ-blind.js` (and `faith-blind.js` in the later faith phase) |
 | Tests | `*.smoke.ts` registered in `scripts/run_tests.mjs` | `econ.smoke.ts`, `faith.smoke.ts` |
 | Browser checks | `scripts/verify_site.mjs` | New assertions, listed below |
 | Spanish | `i18n/classroom.json` with per-string `status` | `i18n/economy.json`, `i18n/faith.json` |
@@ -62,9 +89,11 @@ quiz bundle, so the 36 KB quiz bundle doesn't grow.
 ### Rules that carry over unchanged
 
 - **`WORK_DIR` vs `SHIP_DIR`.** Raw FRED pulls go in `data/`. Only the export
-  scripts write to `public/data/`. `scripts/paths.ts` says
-  `export_quiz_data.ts` is the only writer to `SHIP_DIR`; update that comment
-  to name the two new exporters instead of quietly breaking it.
+  scripts write to `public/data/`. The header of `scripts/paths.ts` says
+  `public/data/` holds "only quiz_89R.json", which was already out of date
+  (`votes_89R.json` and `election_tx.json` ship from there too). Rewrite it to
+  list what ships and which script writes each file, the new exporters
+  included.
 - **The build never touches the network.** Fetched data is committed (as
   `public/og.png` is), so a Vercel deploy can't fail because FRED is down and
   the build doesn't need an API key.
@@ -94,6 +123,7 @@ file happens before then.
 
 ## Order of work
 
+0. [ ] Step 0 above: deploys work again, and the post-election pages are honest
 1. [ ] Decide the scope question above
 2. [ ] `scripts/fetch_fred.ts` and the committed raw pulls
 3. [ ] `econ_control.ts` and `econ_context.ts`, each checked against its primary source
@@ -105,15 +135,33 @@ file happens before then.
 9. [ ] Economy launch
 10. [ ] Recruit faith reviewers (start now, runs in parallel with 2 to 9)
 11. [ ] `faith_positions.ts` and `faith_verses.ts` (the source library)
-12. [ ] Faith pages, blind round and Spanish
+12. [ ] Faith tradition lens and methodology pages, and Spanish
 13. [ ] Faith launch, after reviewer sign-off
+14. [ ] Faith blind round, as its own later phase (see [FAITH.md](FAITH.md))
 
 The economy module goes first. Its data is official and mechanical, so the main
 risk is presentation. With the faith module, the main risk is curation.
 
+### Neither blind round may have a knob that sets the answer
+
+The quiz learned this the hard way: whatever we choose (which items, which
+wording, how answers are summarized) can produce the result we hope for, so
+the design has to be able to come out against that hope. In this plan that
+means:
+
+- **Economy:** the blind round shows **every completed term**, not a selection.
+  There's nothing to pick, so there's nothing to defend.
+- **Faith:** the blind round asks readers to match principles to planks, and
+  the principles are the site's own wording. Which principles get written,
+  and how, would decide which party readers end up matching. So the faith
+  module launches with the tradition lens only, where every word on the page
+  is a source's. The blind round comes later, under stricter rules.
+
 ## Open decisions
 
-1. **Scope and nav:** option A, B or C above.
+1. **Scope and nav:** option A, B or C above. Step 0 bears on this: once the
+   race pages are a record, "Races" may not earn its nav slot, which would
+   free one for the modules.
 2. **Faith traditions at launch:** see [FAITH.md](FAITH.md).
 3. **Faith reviewers:** whether 3 to 4 people from different traditions will
    sign off. If not, the faith module waits rather than shipping unreviewed.
