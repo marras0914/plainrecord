@@ -23,6 +23,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { WORK_DIR } from './paths';
 
 export const FRED_DIR = join(WORK_DIR, 'fred');
@@ -125,4 +126,8 @@ async function main(): Promise<void> {
   console.log(`\n  wrote ${out.length} series to ${FRED_DIR}/\n`);
 }
 
-main().catch((e) => { console.error(`\n  ${e.message}\n`); process.exitCode = 1; });
+// Only when run, never on import: export_econ.ts imports SERIES and FRED_DIR
+// from here, and an import must not call FRED.
+if (import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((e) => { console.error(`\n  ${e.message}\n`); process.exitCode = 1; });
+}
