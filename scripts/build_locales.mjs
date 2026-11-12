@@ -484,7 +484,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // The two district indexes. They are hubs rather than leaves: before they
   // existed every district page had exactly one crawlable inbound link, its own
   // translation, so the whole set was unreachable except through the sitemap.
-  for (const dir of ['districts', 'distritos', 'bills', 'proyectos', 'context', 'contexto', 'economy/explore', 'economia/explorar', 'economy/methodology', 'economia/metodologia', 'open-data', 'classroom', 'maestros', 'charts', 'graficas']) {
+  for (const dir of ['districts', 'distritos', 'bills', 'proyectos', 'context', 'contexto', 'economy', 'economia', 'economy/explore', 'economia/explorar', 'economy/methodology', 'economia/metodologia', 'open-data', 'classroom', 'maestros', 'charts', 'graficas']) {
     const shipped = await access(resolve(DIST, `${dir}/index.html`)).then(() => true, () => false);
     if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority: '0.9' });
   }
@@ -611,6 +611,8 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     if (path === '/maestros') return 'Free classroom worksheet for Texas Government, in Spanish';
     if (path === '/bills') return 'Index of the seven headline bills, in English';
     if (path === '/proyectos') return 'Index of the seven headline bills, in Spanish';
+    if (path === '/economy') return 'Rate the economy in every presidential term since 1949 with the parties hidden, in English';
+    if (path === '/economia') return 'Rate the economy in every presidential term since 1949 with the parties hidden, in Spanish';
     if (path === '/economy/explore') return 'The economy in every presidential term since 1949, labeled, in English';
     if (path === '/economia/explorar') return 'The economy in every presidential term since 1949, labeled, in Spanish';
     if (path === '/economy/methodology') return 'How the economy pages are measured, in English';

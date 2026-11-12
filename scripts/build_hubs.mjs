@@ -133,7 +133,7 @@ function page(lang, which, items) {
   const economy = `
   <h2>${et(lang, 'hub.h2')}</h2>
   <p>${et(lang, 'hub.lede')}</p>
-  <ul class="stand"><li><a href="${SITE}/${P.explore}"><b>${et(lang, 'exploreLink')}</b></a></li><li><a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></li></ul>`;
+  <ul class="stand"><li><a href="${SITE}/${P.blind}"><b>${et(lang, 'hub.blind')}</b></a></li><li><a href="${SITE}/${P.explore}">${et(lang, 'exploreLink')}</a></li><li><a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></li></ul>`;
   const main = which === 'context'
     ? `${economy}
   <h2>${esc(c.races.h1)}</h2>

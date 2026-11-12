@@ -23,7 +23,7 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_ } from './_page_shell.mjs';
-import { et, requireApprovedEcon, ECON_PATHS } from './_econ_copy.mjs';
+import { et, requireApprovedEcon, ECON_PATHS, ECON_COPY } from './_econ_copy.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -268,13 +268,73 @@ function methodPage(lang) {
   });
 }
 
+/**
+ * The blind round. The page ships no figures at all: public/js/econ-blind.js
+ * fetches econ_blind.json (values under opaque keys) to draw the cards, and
+ * fetches econ_terms.json, the labeled file, only when the reader asks for the
+ * reveal. verify_site.mjs asserts that order. Every word the script shows is
+ * written into data-strings here, from the same gated i18n/economy.json, so the
+ * script holds no copy in either language.
+ */
+function blindPage(lang) {
+  const P = ECON_PATHS[lang];
+  const other = lang === 'es' ? 'en' : 'es';
+  // Raw templates, placeholders intact: the script fills them. et() would
+  // demand the values now, so take them straight from the copy.
+  const strings = Object.fromEntries(Object.entries(ECON_COPY)
+    .filter(([k]) => /^(bl\.|m\.|D$|R$|noData$|termLabel$|termNow$|me\.research$|exploreLink$|methodLink$|ex\.source$)/.test(k))
+    .map(([k, e]) => [k, e[lang]]));
+  const config = {
+    lang: lang === 'es' ? 'es-US' : 'en-US',
+    blindUrl: '/data/econ_blind.json',
+    termsUrl: '/data/econ_terms.json',
+    exploreUrl: `/${P.explore}`,
+    methodUrl: `/${P.method}`,
+    metrics: METRICS,
+  };
+  // The round's controls, here rather than in the shared stylesheet so adding
+  // them does not rewrite the CSS inside every other page on the site. 44px
+  // targets for a thumb; the disabled Next is visibly disabled.
+  const style = `<style>
+  #econ-blind .choice{font:inherit;padding:10px 16px;border-radius:999px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);margin:4px 6px 4px 0;cursor:pointer;min-height:44px}
+  #econ-blind .linkish{font:inherit;font-size:14.5px;background:none;border:0;color:var(--blue);text-decoration:underline;padding:10px 0;cursor:pointer;min-height:44px}
+  #econ-blind button.cta{border:0;font:inherit;font-weight:600;cursor:pointer}
+  #econ-blind button.cta:disabled{opacity:.4;cursor:default}
+  #econ-blind fieldset.rate{border:0;padding:0;margin:16px 0 4px}
+  #econ-blind .scale{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+  #econ-blind .pick{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 6px;font-variant-numeric:tabular-nums;cursor:pointer}
+  #econ-blind h2{margin-top:6px}
+  </style>`;
+  const body = `${style}
+  <h1>${et(lang, 'bl.h1')}</h1>
+  <p class="lede">${et(lang, 'bl.lede')}</p>
+  <p class="small">${et(lang, 'bl.limits')} <a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></p>
+  <noscript><p>${et(lang, 'bl.noscript')} <a href="${SITE}/${P.explore}">${et(lang, 'exploreLink')}</a></p></noscript>
+  <div id="econ-blind" data-strings="${esc(JSON.stringify(strings))}" data-config="${esc(JSON.stringify(config))}"></div>
+  <p class="small"><a href="${SITE}/${P.explore}">${et(lang, 'exploreLink')}</a> · <a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></p>`;
+
+  return document_({
+    lang, otherLang: other, title: et(lang, 'bl.h1'), docTitle: et(lang, 'bl.docTitle'),
+    siteName: lang === 'es' ? 'La Franja Morada' : 'The Purple Strip',
+    desc: et(lang, 'bl.desc'), canonical: `${SITE}/${P.blind}`, altHref: `${SITE}/${ECON_PATHS[other].blind}`,
+    altLabel: et(lang, 'langSwitch'), kicker: et(lang, 'kicker'), faces, body,
+    ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
+    scripts: ['/js/econ-blind.js'],
+    jsonld: {
+      '@context': 'https://schema.org', '@type': 'WebPage', name: et(lang, 'bl.h1'), description: et(lang, 'bl.desc'),
+      inLanguage: lang === 'es' ? 'es-US' : 'en-US', url: `${SITE}/${P.blind}`,
+      isPartOf: { '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/` },
+    },
+  });
+}
+
 let n = 0;
 for (const lang of ['en', 'es']) {
-  for (const [slug, html] of [[ECON_PATHS[lang].explore, explorePage(lang)], [ECON_PATHS[lang].method, methodPage(lang)]]) {
+  for (const [slug, html] of [[ECON_PATHS[lang].blind, blindPage(lang)], [ECON_PATHS[lang].explore, explorePage(lang)], [ECON_PATHS[lang].method, methodPage(lang)]]) {
     const dir = resolve(ROOT, 'public', slug);
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 'index.html'), html, 'utf8');
     n++;
   }
 }
-console.log(`  ${n} economy pages written: /${ECON_PATHS.en.explore}, /${ECON_PATHS.en.method}, /${ECON_PATHS.es.explore}, /${ECON_PATHS.es.method}`);
+console.log(`  ${n} economy pages written: ${['en', 'es'].flatMap((l) => Object.values(ECON_PATHS[l]).map((p) => `/${p}`)).join(', ')}`);
