@@ -280,7 +280,16 @@ export function fedChairOn(date: string): FedChair | null {
  */
 export function fedAppointingParty(date: string): Party | null {
   const chair = fedChairOn(date);
-  if (!chair) return null;
+  return chair ? appointingPartyFor(chair, date) : null;
+}
+
+/**
+ * The same, for a named chair. Separate because a handover day belongs to two
+ * chairs in the Board's table (Powell's last day and Warsh's first are both 22
+ * May 2026), and a date lookup returns whichever is listed first: the Fed lane
+ * once showed Warsh under Biden's appointment of Powell because of it.
+ */
+export function appointingPartyFor(chair: FedChair, date: string): Party {
   const gap = UNSOURCED_REAPPOINTMENTS.find((u) => u.chair === chair.name && date >= u.from);
   if (gap) throw new Error(`unsourced: ${chair.name}'s reappointment from ${gap.from} (${KNOWN_GAPS[0]})`);
   const inForce = FED_APPOINTMENTS
@@ -293,6 +302,32 @@ export function fedAppointingParty(date: string): Party | null {
 /** The party of the president who FIRST appointed each chair, derived, not typed. */
 export function firstAppointedBy(chair: FedChair): Party {
   return presidentOn(chair.start).party;
+}
+
+/**
+ * The Fed chair as a lane on a timeline: stretches of one chair under one
+ * appointment, from WINDOW_START on. `party` is the appointing president's
+ * party, or null where that is unsourced; vacancies are left as gaps. Built
+ * from the same rules as fedAppointingParty(), so the lane and the grouping
+ * cannot disagree.
+ */
+export function fedSegments(today: string = new Date().toISOString().slice(0, 10)): { start: string; end: string; chair: string; party: Party | null }[] {
+  const out: { start: string; end: string; chair: string; party: Party | null }[] = [];
+  for (const c of FED_CHAIRS) {
+    const from = c.start < WINDOW_START ? WINDOW_START : c.start;
+    const to = c.end ?? today;
+    if (to < WINDOW_START) continue;
+    const cuts = new Set([from]);
+    for (const a of FED_APPOINTMENTS) if (a.chair === c.name && a.kind === 'reappointment' && a.confirmed && a.confirmed > from && a.confirmed <= to) cuts.add(a.confirmed);
+    for (const u of UNSOURCED_REAPPOINTMENTS) if (u.chair === c.name && u.from > from && u.from <= to) cuts.add(u.from);
+    const sorted = [...cuts].sort();
+    sorted.forEach((s, i) => {
+      let party: Party | null;
+      try { party = appointingPartyFor(c, s); } catch { party = null; }
+      out.push({ start: s, end: sorted[i + 1] ?? to, chair: c.name, party });
+    });
+  }
+  return out;
 }
 
 export function houseOn(date: string): Party {

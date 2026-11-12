@@ -16,7 +16,7 @@
 import {
   PRESIDENCIES, HOUSE, SENATE, FED_CHAIRS, FED_VACANCIES, KNOWN_GAPS, WINDOW_START,
   congressStart, buildTerms, presidentOn, houseOn, senateOn, fedChairOn,
-  firstAppointedBy, fedAppointingParty, FED_APPOINTMENTS, UNSOURCED_REAPPOINTMENTS,
+  firstAppointedBy, fedAppointingParty, FED_APPOINTMENTS, UNSOURCED_REAPPOINTMENTS, fedSegments,
   type Presidency, type FedChair, type Term, type Party,
 } from './econ_control';
 
@@ -220,6 +220,24 @@ for (const [d, what, want] of cases) {
   const got = party(d);
   check(`appointing party on ${d}: ${what}`, got === want, `got ${got}`);
 }
+const lane = fedSegments('2026-11-12');
+const laneAt = (d: string) => lane.find((s) => s.start <= d && d < s.end);
+check('the Fed lane agrees with the grouping: Greenspan under Clinton\'s appointment in 1998',
+  laneAt('1998-01-01')?.chair === 'Alan Greenspan' && laneAt('1998-01-01')?.party === 'D');
+check('the Fed lane shows Martin\'s unsourced years as unknown, not a party',
+  laneAt('1960-01-01')?.chair === 'William McChesney Martin Jr.' && laneAt('1960-01-01')?.party === null
+  && laneAt('1952-01-01')?.party === 'D');
+check('the Fed lane leaves the 1978 vacancy empty', laneAt('1978-02-15') === undefined);
+// The handover-day bug: Warsh once came out under Biden's appointment of Powell.
+check('every chair\'s first stretch is under the president who first appointed them',
+  FED_CHAIRS.every((c) => {
+    const first = lane.find((s) => s.chair === c.name);
+    return !first || first.party === firstAppointedBy(c);
+  }),
+  lane.filter((s) => s.chair === 'Kevin Warsh').map((s) => `Warsh ${s.party}`).join(''));
+check('the Fed lane runs in order without overlaps',
+  lane.every((s, i) => s.start < s.end && (i === 0 || lane[i - 1].end <= s.start)));
+
 check('the gap list names exactly the reappointments that refuse',
   KNOWN_GAPS.length === 1 && UNSOURCED_REAPPOINTMENTS.length === 2);
 

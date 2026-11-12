@@ -23,6 +23,9 @@ import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { HEADLINE_BILLS, RACES, billPath } from './_site_nav.mjs';
 import { actsLine } from './build_bill_pages.mjs';
+import { et, requireApprovedEcon, ECON_PATHS } from './_econ_copy.mjs';
+
+requireApprovedEcon('build_hubs');
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -124,8 +127,15 @@ function page(lang, which, items) {
   <ul class="stand">${list}</ul>
   <p>${esc(s.rest)}</p>
   <p><a class="cta" href="${c.quiz}">${esc(s.cta)}</a></p>`;
+  // The economy section's words come from i18n/economy.json, under its own
+  // approval gate (requireApprovedEcon above).
+  const P = ECON_PATHS[lang];
+  const economy = `
+  <h2>${et(lang, 'hub.h2')}</h2>
+  <p>${et(lang, 'hub.lede')}</p>
+  <ul class="stand"><li><a href="${SITE}/${P.explore}"><b>${et(lang, 'exploreLink')}</b></a></li><li><a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></li></ul>`;
   const main = which === 'context'
-    ? `
+    ? `${economy}
   <h2>${esc(c.races.h1)}</h2>
   <p>${esc(c.races.lede)}</p>${section(c.races, items)}`
     : section(h, items);
