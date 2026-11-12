@@ -122,10 +122,10 @@ const causalFor = (lang) => (lang === 'es' ? sidecar.causalNote : payload.causal
 //
 // THE PRINTED SHEET IS THE HARD CASE. Everything else here can be corrected by
 // deploying. A PDF somebody printed in September and put on a table in October
-// cannot be, and it carries no clue about its own age. Two things follow. The
-// build refuses to write a sheet for an election that has already happened, and
-// the block states when the dates were last confirmed with the state, so a sheet
-// found lying around says how old it is.
+// cannot be, and it carries no clue about its own age. Two things follow. A
+// sheet built after the election carries no dates at all, and the block states
+// when the dates were last confirmed with the state, so a sheet found lying
+// around says how old it is.
 const ELECTION = JSON.parse(readFileSync(resolve(ROOT, 'public/data/election_tx.json'), 'utf8'));
 // Overridable ONLY so the two wordings below can be exercised on a day that is
 // not the day they matter. A guard that has never been seen to fire is a guard
@@ -133,10 +133,17 @@ const ELECTION = JSON.parse(readFileSync(resolve(ROOT, 'public/data/election_tx.
 // too late to find out it was wrong.
 const TODAY = process.env.FACTSHEET_TODAY ?? new Date().toISOString().slice(0, 10);
 
-if (ELECTION.election < TODAY) {
-  console.error(`\n  election_tx.json describes an election on ${ELECTION.election}, which has passed.`
-    + '\n  Refresh it with: npm run data:election\n  Nothing written.\n');
-  process.exit(1);
+// ONCE THE ELECTION HAS PASSED THE SHEET DROPS ITS DATES, rather than refusing
+// to build. Until 12 Nov 2026 this exited 1, which was right while the only
+// choice was between correct dates and stale ones. After an election there is a
+// third answer, no dates at all, and everything else on the sheet (the votes,
+// the six figures, who made it) stays true. The sheet keeps its URL, so the
+// footer links and anything already pointing at it keep working. When the next
+// election is published in election_tx.json the block comes back by itself.
+const ELECTION_PASSED = ELECTION.election < TODAY;
+if (ELECTION_PASSED) {
+  console.log(`\n  The election in election_tx.json (${ELECTION.election}) has passed:`
+    + ' writing the sheets without a dates block.');
 }
 
 // Registration closing mid-cycle is normal and is NOT a build failure. What has
@@ -379,11 +386,11 @@ ${outcomesFor(L.lang).map((o) => `  <div class="out">
   </div>
 </div>
 
-<div class="dates">
+${ELECTION_PASSED ? '' : `<div class="dates">
   ${datesFor(L.lang).map(([d, w]) => `<div><b>${esc(d)}</b><span>${esc(w)}</span></div>`).join('')}
 </div>
 <p class="asof">${esc(asOfFor(L.lang))}</p>
-
+`}
 <div class="cta">
   ${qrSvg}
   <div class="url"><a href="${L.target}">${esc(L.urlLabel)}</a><span>${esc(L.urlSub)}</span></div>

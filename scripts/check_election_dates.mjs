@@ -11,14 +11,21 @@
  * about its markup or its shape changes when that happens. So the check is
  * against the clock.
  *
- * The election date passing is a HARD failure rather than a warning. A warning
- * is a thing a person has to notice, and the whole point is that this goes stale
- * while nobody is looking at it.
+ * WHAT FAILS. Until 12 Nov 2026 the election date passing was itself a hard
+ * failure, which blocked every deploy from 4 Nov. That was right while the only
+ * answers were correct dates or stale ones. After an election there is a third,
+ * no dates at all, and the quiz page already gives it (election.ts hides the
+ * block). So the rule is now about what a reader is SHOWN: once the election has
+ * passed, the build fails if any page or printable still carries its dates, and
+ * passes if none does. Before the election the checks are as they were. A stale
+ * dates block is still a hard failure rather than a warning, because the whole
+ * point is that it goes stale while nobody is looking.
  */
 
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { worksheetHtml } from '../classroom/worksheet.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -57,8 +64,11 @@ check('the sources are recorded',
 const today = new Date().toISOString().slice(0, 10);
 const days = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 86400000);
 
-check('the election this file describes has not already happened',
-  d.election >= today, `election ${d.election}, today ${today}`);
+const passed = d.election < today;
+if (passed) {
+  console.log(`  [ -- ] the election this file describes (${d.election}) has passed;`
+    + ' nothing below may still show its dates');
+}
 
 // Not a failure, because a deadline passing mid-cycle is normal and the page
 // keeps telling the truth by stating dates rather than issuing instructions.
@@ -86,9 +96,8 @@ if (d.election >= today) {
 // sheets said "last day to register" for nine days past the deadline), so a
 // stale sheet stops the deploy rather than shipping quietly.
 //
-// What that blocks: on 4 November the election check fails hard, and every
-// deploy stops until public/data/election_tx.json describes the next election
-// or the sheets are retired.
+// After the election the sheets must carry no dates block at all. Rebuilding
+// them with `npm run data:factsheet` does that by itself.
 //
 // It reads the SHIPPED HTML rather than re-deriving anything, because the thing
 // worth knowing is what a reader is being handed today.
@@ -105,6 +114,12 @@ for (const sheet of SHEETS) {
     continue;
   }
   const html = readFileSync(path, 'utf8');
+
+  if (passed) {
+    check(`${sheet.lang} sheet: it shows no dates for the election that has passed`,
+      !/class="(dates|asof)"/.test(html), 'rebuild with npm run data:factsheet');
+    continue;
+  }
 
   // By day number, with the month left to Intl. The day is the part a reader
   // acts on and the part a timezone bug moves. Same rule as verify_site.mjs.
@@ -126,9 +141,23 @@ for (const sheet of SHEETS) {
     /confirmed|confirmadas/.test(html));
 }
 
-if (d.registerBy < today || d.election < today) {
-  console.log('\n  The sheets are also PDFs that people print. Rebuild and redistribute:'
-    + '\n    npm run data:factsheet');
+// --- the classroom worksheet -------------------------------------------------
+//
+// Its PDFs are rendered by hand (scripts/build_worksheet_pdf.mjs) and Vercel has
+// no browser to rebuild them, so this checks the TEMPLATE the PDFs are rendered
+// from: if it would print a voting box for a passed election, so would they.
+// It does not prove the committed PDFs were re-rendered; that step is the
+// command printed below.
+
+for (const lang of ['en', 'es']) {
+  const box = /id="vote-box"/.test(worksheetHtml(lang, today));
+  check(`${lang} worksheet: ${passed ? 'no voting box for a passed election' : 'the voting box is there'}`,
+    passed ? !box : box);
+}
+
+if (d.registerBy < today || passed) {
+  console.log('\n  The sheets and the worksheet are also PDFs that people print. Rebuild them:'
+    + '\n    npm run data:factsheet\n    npm run build:worksheet');
 }
 
 // --- optional: ask the state again ------------------------------------------
@@ -149,7 +178,8 @@ if (online) {
   }
 }
 
-console.log(fails ? `\n  ${fails} problem(s)\n` : '\n  dates are current\n');
+console.log(fails ? `\n  ${fails} problem(s)\n`
+  : passed ? '\n  no page shows dates for the passed election\n' : '\n  dates are current\n');
 // exitCode rather than exit(): calling process.exit() while the --online fetch
 // still holds a handle aborts libuv on Windows and reports 127, which reads as
 // a crash rather than as a verdict. Setting the code lets Node leave normally.

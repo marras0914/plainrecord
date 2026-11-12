@@ -71,10 +71,15 @@ check('the shipped dates run in the right order',
   && ELECTION.earlyEnd <= ELECTION.election,
   `${ELECTION.registerBy} -> ${ELECTION.election}`);
 
-// The page would otherwise happily render a block for an election already held,
-// and the only thing standing between that and a reader is this comparison.
-check('the shipped election has not already happened',
-  stillCurrent(), `${ELECTION.election} vs today`);
+// Until 12 Nov 2026 this asserted that the shipped election had not happened,
+// which turned every test run red from 4 Nov. A passed election is allowed now:
+// the page hides the block (asserted above, at the boundary), and
+// scripts/check_election_dates.mjs fails the build if any printable still shows
+// the dates. What is asserted here is that today's answer agrees with the file.
+const today = new Date().toISOString().slice(0, 10);
+check('today the block shows exactly when the shipped election is still ahead',
+  stillCurrent() === (ELECTION.election >= today),
+  `${ELECTION.election} vs ${today}: ${stillCurrent() ? 'showing' : 'hidden'}`);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exitCode = fail === 0 ? 0 : 1;
