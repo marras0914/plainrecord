@@ -36,6 +36,21 @@ check('(the loaded-word check catches a planted one)', LOADED.test('Calls for dr
 const verbs = new Set(PLANKS.map((p) => p.summary.split(' ').slice(0, 2).join(' ')));
 check('every plank summary opens with the same verb', verbs.size === 1, [...verbs].join(' / '));
 
+// A thin summary for one party reads as dismissive even when it is accurate.
+// The RNC immigration plank had one clause against four or five for the
+// others until 12 Nov 2026, and this check would have caught it.
+const parity = (planks: { summary: string }[]) => {
+  const n = planks.map((p) => words(p.summary));
+  return Math.min(...n) / Math.max(...n);
+};
+for (const issue of FILLED_ISSUES) {
+  const r = parity(PLANKS.filter((p) => p.issueId === issue));
+  check(`${issue}: no plank summary is under half the length of the longest`, r >= 0.5, `ratio ${r.toFixed(2)}`);
+}
+check('(the parity check catches a one-clause summary)',
+  parity([{ summary: 'Calls for securing the border, deporting people in the country illegally, and reversing the previous administration\'s border policies.' },
+    ...PLANKS.filter((p) => p.issueId === 'immigration' && p.party === 'D')]) < 0.5);
+
 // --- rule 1: sourced and dated ---------------------------------------------
 
 check('every entry has a public https source', all.every((e) => /^https:\/\//.test(e.sourceUrl)));

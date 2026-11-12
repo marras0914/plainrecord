@@ -190,7 +190,7 @@ export const STATEMENTS: Statement[] = [
     traditionId: 'ame', issueId: 'immigration',
     title: 'Statement condemning immigrant family separation',
     body: 'Council of Bishops', sourceDate: '2018',
-    summary: 'Opposes the use of Romans 13 to justify separating immigrant children from their parents, supports the ecumenical Faith Leaders Statement on Family Separation, and asks why the situation of Dreamers remained unresolved.',
+    summary: 'Opposes the use of Romans 13 to justify separating immigrant children from their parents, supports the ecumenical Faith Leaders Statement on Family Separation, and says a positive resolution is needed for Dreamers.',
     excerpt: "justify and condone the U.S. government's separations of immigrant children from their parents",
     sourceUrl: SRC.ame2018, review: [],
   },
@@ -219,7 +219,10 @@ export const PLANKS: Plank[] = [
   },
   {
     party: 'R', level: 'national', platformYear: 2024, issueId: 'immigration',
-    summary: 'Calls for securing the border, deporting people in the country illegally, and reversing the previous administration\'s border policies.',
+    // Brought up to the detail of the other three planks on 12 Nov 2026: it had
+    // one clause where they had four or five, which reads as dismissive even
+    // when every word is accurate.
+    summary: 'Calls for sealing the border, carrying out what it calls the largest deportation operation in American history, strengthening ICE, raising penalties for illegal entry and visa overstays, and reinstating the Remain in Mexico policy.',
     excerpt: 'Republicans will secure the Border, deport Illegal Aliens',
     sourceUrl: SRC.rnc2024, review: [],
   },
