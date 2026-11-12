@@ -9,8 +9,13 @@
  * only home, and the bill pages sat three or four clicks from the homepage.
  *
  * FIVE ITEMS, one per kind of page a reader comes for: the quiz, their own
- * representative, the bills, the races, the charts. Each points at a hub, and
- * /bills and /races exist because the nav needed somewhere to point.
+ * representative, the bills, context, the charts. Each points at a hub, and
+ * /bills exists because the nav needed somewhere to point.
+ *
+ * "Context" replaced "Races" on 12 Nov 2026. The 2026 races were over, and the
+ * economy and faith modules needed a home that would not grow the nav past
+ * five (EXPANSION.md, option B). The race pages now sit inside /context, and
+ * /races redirects there (vercel.json). "Contexto" approved by Marco the same day.
  *
  * This module imports nothing from the shell, so the shell can import it.
  */
@@ -61,14 +66,14 @@ const NAV = {
     ['quiz', '/', 'Quiz'],
     ['rep', '/districts', 'Your rep'],
     ['bills', '/bills', 'Bills'],
-    ['races', '/races', 'Races'],
+    ['context', '/context', 'Context'],
     ['charts', '/charts', 'Charts'],
   ],
   es: [
     ['quiz', '/es', 'Cuestionario'],
     ['rep', '/distritos', 'Su representante'],
     ['bills', '/proyectos', 'Proyectos'],
-    ['races', '/contiendas', 'Contiendas'],
+    ['context', '/contexto', 'Contexto'],
     ['charts', '/graficas', 'Gráficas'],
   ],
 };
@@ -79,7 +84,7 @@ export function sectionOf(canonical) {
   if (path === '/' || path === '/es') return 'quiz';
   if (/^\/(districts|distritos|district|distrito)(\/|$)/.test(path)) return 'rep';
   if (/^\/(bills|proyectos|bill|proyecto)(\/|$)/.test(path)) return 'bills';
-  if (/^\/(races|contiendas|race|contienda)(\/|$)/.test(path)) return 'races';
+  if (/^\/(context|contexto|race|contienda)(\/|$)/.test(path)) return 'context';
   if (/^\/(charts|graficas)(\/|$)/.test(path)) return 'charts';
   return null;
 }
@@ -100,7 +105,7 @@ const FOOT = {
     label: 'More on this site', site: 'The site', bills: 'The seven bills', races: 'The three races',
     links: [
       ['/', 'The quiz'], ['/districts', 'Find your representative'], ['/bills', 'The bills'],
-      ['/races', 'The races'], ['/charts', 'Charts'], ['/fact-sheet', 'One-page fact sheet'],
+      ['/context', 'Context'], ['/charts', 'Charts'], ['/fact-sheet', 'One-page fact sheet'],
       ['/open-data', 'Download the data'], ['/classroom', classroom['cls.footLink'].en],
     ],
   },
@@ -108,7 +113,7 @@ const FOOT = {
     label: 'Más en este sitio', site: 'El sitio', bills: 'Los siete proyectos', races: 'Las tres contiendas',
     links: [
       ['/es', 'El cuestionario'], ['/distritos', 'Encuentre a su representante'], ['/proyectos', 'Los proyectos'],
-      ['/contiendas', 'Las contiendas'], ['/graficas', 'Gráficas'], ['/hoja', 'Hoja informativa de una página'],
+      ['/contexto', 'Contexto'], ['/graficas', 'Gráficas'], ['/hoja', 'Hoja informativa de una página'],
       ['/open-data', 'Descargar los datos (en inglés)'], ['/maestros', classroom['cls.footLink'].es],
     ],
   },
