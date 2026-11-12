@@ -223,7 +223,7 @@ export const FED_APPOINTMENTS: FedAppointment[] = [
 ];
 
 /**
- * Reappointments before 1981, which congress.gov does not cover. Each is the
+ * Redesignations before the 1977 Reform Act (see KNOWN_GAPS). Each is the
  * date its chair's previous four-year term ran out, from the Board's tenure
  * table: from that date on, which president's appointment was in force is
  * unknown until a primary source is read, and fedAppointingParty() throws.
@@ -239,12 +239,24 @@ export const UNSOURCED_REAPPOINTMENTS: { chair: string; from: string }[] = [
  * The party of the president who appointed the chair is the plan's third
  * grouping. A chair's FIRST appointment can be derived: the president in office
  * on the day the chair took office (checked for every chair in the smoke test).
- * Reappointments from 1981 on are in FED_APPOINTMENTS. Those before are not:
- * congress.gov stops at 1981, and the Fed's history site and FRASER both time
- * out for scripted requests.
+ * Reappointments from 1981 on are in FED_APPOINTMENTS. Those before are not.
+ *
+ * DO NOT LOOK FOR THEM IN THE SENATE'S RECORDS. Before the Federal Reserve
+ * Reform Act of 1977 the chair was DESIGNATED by the President from among the
+ * governors, without Senate confirmation (the Board's own membership page says
+ * so: the Banking Act of 1935 "required the President to designate one of the
+ * persons appointed as 'chairman'", and only the 1977 Act added "by and with
+ * the advice and consent of the Senate"). So Martin's and Burns's renewals are
+ * presidential designations, not nominations. This was learned the hard way:
+ * 34 Senate days of the bound Congressional Record around Martin's 1955
+ * renewal were searched on 12 Nov 2026 and held nothing, while the same search
+ * found an ordinary Board nomination (Shepardson, 18 Feb 1955), so the search
+ * itself worked. The source to read is the President's own papers (a
+ * designation announcement) or the Federal Reserve Bulletin; FRASER and the
+ * Fed's history site both time out for scripted requests.
  */
 export const KNOWN_GAPS: string[] = [
-  'Fed chair reappointments before 1981 (Martin from April 1955, Burns from February 1974): appointing president and date. Needs a primary source such as the bound Congressional Record.',
+  'Fed chair redesignations before the 1977 Reform Act (Martin from April 1955, Burns from February 1974): which president designated each, and when. These were presidential designations without Senate confirmation, so they are not in congress.gov or the Congressional Record as nominations; read the Public Papers of the Presidents or the Federal Reserve Bulletin.',
 ];
 
 /** The president in office on a date. */
