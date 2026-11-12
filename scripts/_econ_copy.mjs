@@ -41,6 +41,6 @@ export function et(lang, key, vars = {}) {
 }
 
 export const ECON_PATHS = {
-  en: { explore: 'economy/explore', method: 'economy/methodology' },
-  es: { explore: 'economia/explorar', method: 'economia/metodologia' },
+  en: { blind: 'economy', explore: 'economy/explore', method: 'economy/methodology' },
+  es: { blind: 'economia', explore: 'economia/explorar', method: 'economia/metodologia' },
 };

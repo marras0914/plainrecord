@@ -2198,6 +2198,66 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // The economy blind round, and the explorer without JavaScript
+  //
+  // The blind round is only blind if the labeled file stays off the wire until
+  // the reader asks for the reveal. Watched at the network, not inferred from
+  // the code, because a refactor that preloads "for speed" would pass every
+  // other check on this page.
+  // ---------------------------------------------------------------------------
+  {
+    const bc = await browser.newContext({ viewport: { width: 390, height: 860 } });
+    const bp = await bc.newPage();
+    const seen = [];
+    bp.on('request', (r) => seen.push(r.url()));
+    await bp.goto(new URL('/economy', URL_UNDER_TEST).href, { waitUntil: 'networkidle' });
+
+    const labeled = () => seen.filter((u) => /econ_terms\.json/.test(u)).length;
+    check('economy: the blind round loads the unlabeled file', seen.some((u) => /econ_blind\.json/.test(u)));
+
+    await bp.locator('#econ-blind button', { hasText: /skip|omitir/i }).click();
+    const cardText = [];
+    for (let i = 0; i < 3; i++) {
+      cardText.push(await bp.locator('#econ-blind section.card').innerText());
+      await bp.locator('#econ-blind input[name="rating"][value="3"]').check();
+      await bp.locator('#econ-blind button.cta').click();
+    }
+    check('economy: three cards rated and the labeled file still not requested', labeled() === 0, `${labeled()} request(s)`);
+
+    // The cards themselves: no year and no president's name, whatever order they
+    // came in. The row labels are set aside first: they are the same on every
+    // card, and one of them says "(from 1984)", which names a series' start, not
+    // a term. The first run of this check flagged exactly that.
+    const YEAR = /(?<!\d)(19[4-9]\d|20[0-2]\d)(?!\d)/;
+    const NAMES = /Truman|Eisenhower|Kennedy|Johnson|Nixon|Ford|Carter|Reagan|Bush|Clinton|Obama|Trump|Biden|Democrat|Republican/i;
+    const rowLabels = Object.entries(JSON.parse(await bp.locator('#econ-blind').getAttribute('data-strings')))
+      .filter(([k]) => k.startsWith('m.')).map(([, v]) => v);
+    const scrub = (t) => rowLabels.reduce((s, l) => s.split(l).join(''), t);
+    const leaked = cardText.map(scrub).filter((t) => YEAR.test(t) || NAMES.test(t));
+    check('economy: no card shows a year, a president or a party', leaked.length === 0, leaked[0]?.slice(0, 80) ?? `${cardText.length} cards`);
+
+    await bp.locator('#econ-blind button', { hasText: /stop here|parar aquí/i }).click();
+    await bp.waitForSelector('#econ-blind h2', { timeout: 5000 });
+    await bp.waitForTimeout(300);
+    check('economy: the reveal fetches the labeled file', labeled() === 1, `${labeled()} request(s)`);
+    const revealText = await bp.locator('#econ-blind').innerText();
+    check('economy: the reveal names the terms it showed', YEAR.test(revealText) && NAMES.test(revealText));
+    check('economy: the reveal reports the reader\'s ratings by party', /on average|en promedio/i.test(revealText));
+
+    const foreign = seen.filter((u) => !u.startsWith(new URL(URL_UNDER_TEST).origin) && !u.startsWith('data:'));
+    check('economy: nothing is requested from another origin', foreign.length === 0, foreign[0] ?? 'none');
+    await bc.close();
+
+    // The explorer is static: with scripts off it still has every chart.
+    const nc = await browser.newContext({ javaScriptEnabled: false });
+    const np = await nc.newPage();
+    await np.goto(new URL('/economy/explore', URL_UNDER_TEST).href, { waitUntil: 'load' });
+    const charts = await np.locator('figure.chart svg').count();
+    check('economy: the explorer draws its charts with JavaScript off', charts >= 8, `${charts} charts`);
+    await nc.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // The voting dates
   //
   // Checked against the DATA FILE rather than against expected text, so the page
