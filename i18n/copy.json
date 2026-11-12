@@ -542,14 +542,14 @@
     "status": "ok"
   },
   "bias.p1": {
-    "en": "It would, if we scored anyone else. So we don't. A score here needs one thing: the same bills, voted on by both of you. Only members of the Texas House have that. All {n} candidates above sit in the Texas House. Every one of the people they are running against does not:",
-    "es": "Lo haría, si calificáramos a alguien más. Por eso no lo hacemos. Una calificación aquí necesita una sola cosa: los mismos proyectos de ley, votados por ambos. Solo los miembros de la Cámara de Representantes de Texas tienen eso. Los {n} candidatos de arriba están en la Cámara de Texas. Ninguna de las personas contra las que compiten lo está:",
+    "en": "It would, if we scored anyone else. So we don't. A score here needs one thing: the same bills, voted on by both of you. Only members of the Texas House have that. All {n} candidates above sat in the Texas House in 2025. None of the people they ran against did:",
+    "es": "Lo haría, si calificáramos a alguien más. Por eso no lo hacemos. Una calificación aquí necesita una sola cosa: los mismos proyectos de ley, votados por ambos. Solo los miembros de la Cámara de Representantes de Texas tienen eso. Los {n} candidatos de arriba estuvieron en la Cámara de Texas en 2025. Ninguna de las personas contra las que compitieron lo estuvo:",
     "where": "Incumbency card, opening.",
     "vars": [
       "n"
     ],
-    "note": "{n} arrives as a spelled-out word in English ('three'). For Spanish it must arrive as 'tres'. Resolved: word() in src/i18n.ts has a per-locale numeral list, so {n} arrives already spelled out in the right language.",
-    "status": "ok"
+    "note": "{n} arrives as a spelled-out word in English ('three'). For Spanish it must arrive as 'tres'. Resolved: word() in src/i18n.ts has a per-locale numeral list, so {n} arrives already spelled out in the right language. Put in the past tense on 12 Nov 2026, after the 3 Nov election; DRAFT until reviewed.",
+    "status": "draft"
   },
   "bias.p2": {
     "en": "So they get no number at all, not a low one, not an estimate. Any score we printed for them would be votes we made up.",
@@ -559,8 +559,8 @@
     "status": "ok"
   },
   "bias.p3": {
-    "en": "What stops this being a page about {n} Democrats. Under every one of the {items} questions we also show {total} sitting House members: {reps} Republicans and {dems} Democrats.",
-    "es": "Lo que evita que esta sea una página sobre {n} demócratas. Debajo de cada una de las {items} preguntas mostramos también a {total} miembros en funciones de la Cámara: {reps} republicanos y {dems} demócratas.",
+    "en": "What stops this being a page about {n} Democrats. Under every one of the {items} questions we also show {total} House members from the same session: {reps} Republicans and {dems} Democrats.",
+    "es": "Lo que evita que esta sea una página sobre {n} demócratas. Debajo de cada una de las {items} preguntas mostramos también a {total} miembros de la Cámara de la misma sesión: {reps} republicanos y {dems} demócratas.",
     "where": "Incumbency card, the both-caucuses defence.",
     "vars": [
       "n",
@@ -569,8 +569,8 @@
       "reps",
       "dems"
     ],
-    "status": "ok",
-    "note": "Resolved: word() in src/i18n.ts has a per-locale numeral list, so {n} arrives already spelled out in the right language."
+    "status": "draft",
+    "note": "Resolved: word() in src/i18n.ts has a per-locale numeral list, so {n} arrives already spelled out in the right language. Put in the past tense on 12 Nov 2026, after the 3 Nov election; DRAFT until reviewed."
   },
   "bias.p3b": {
     "en": "They voted on the same bills you are answering ({lo}–{hi} of {items}), so they are scored the way the candidates are, on every question rather than a chosen few. If the Republican records land close to the Democratic ones on your answers, that is the finding, not a thumb on the scale.",
@@ -645,12 +645,12 @@
     "status": "ok"
   },
   "author.races": {
-    "en": "<b>As a fellow Texas resident, I picked these three races.</b> Governor, Lieutenant Governor and U.S. Senate. That is an editorial decision, not a measurement, and it is the choice most worth arguing with, but I believe they are three of the most important races for all Texans. I also picked them because all three Democratic candidates sit in the Texas House, which means their records can be checked against your answers vote for vote. Their opponents cannot be, so this page gives them no score at all rather than an invented one.",
-    "es": "<b>Como residente de Texas, yo escogí estas tres contiendas.</b> Gobernador, Vicegobernador y Senado de Estados Unidos. Esa es una decisión editorial, no una medición, y es la elección que más vale la pena discutir, pero creo que son tres de las contiendas más importantes para todo Texas. También las escogí porque los tres candidatos demócratas están en la Cámara de Texas, lo que significa que sus historiales se pueden comparar con sus respuestas voto por voto. Los de sus oponentes no, así que esta página no les da ninguna calificación en lugar de darles una inventada.",
+    "en": "<b>As a fellow Texas resident, I picked these three races.</b> Governor, Lieutenant Governor and U.S. Senate. That is an editorial decision, not a measurement, and it is the choice most worth arguing with, but I believe they are three of the most important races for all Texans. I also picked them because all three Democratic candidates sat in the Texas House, which means their records can be checked against your answers vote for vote. Their opponents cannot be, so this page gives them no score at all rather than an invented one.",
+    "es": "<b>Como residente de Texas, yo escogí estas tres contiendas.</b> Gobernador, Vicegobernador y Senado de Estados Unidos. Esa es una decisión editorial, no una medición, y es la elección que más vale la pena discutir, pero creo que son tres de las contiendas más importantes para todo Texas. También las escogí porque los tres candidatos demócratas estaban en la Cámara de Texas, lo que significa que sus historiales se pueden comparar con sus respuestas voto por voto. Los de sus oponentes no, así que esta página no les da ninguna calificación en lugar de darles una inventada.",
     "where": "Authorship card.",
     "vars": [],
-    "note": "'Lieutenant Governor' as 'Vicegobernador' is the standard Texas Spanish rendering. Confirm against the Texas SOS Spanish ballot language.",
-    "status": "ok"
+    "note": "'Lieutenant Governor' as 'Vicegobernador' is the standard Texas Spanish rendering. Confirm against the Texas SOS Spanish ballot language. Put in the past tense on 12 Nov 2026, after the 3 Nov election; DRAFT until reviewed.",
+    "status": "draft"
   },
   "author.why": {
     "en": "<b>Why I made it.</b> Almost everything that reaches people about how their state is actually governed arrives pre-framed by someone who wants something. The votes themselves are public, tedious, and genuinely hard to get at. I wanted a way to see the record before seeing the label, and to hand over the entire file so that anyone can check the record is what I say it is.",
@@ -734,14 +734,15 @@
     "status": "ok"
   },
   "cand.note": {
-    "en": "All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together. Where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
-    "es": "Los tres estuvieron en la misma cámara y compiten por cargos distintos, así que estas son tres lecturas separadas, no una clasificación. Votaron juntos en la mayoría de los proyectos de línea partidista, así que espere que las cifras queden cerca; donde se separan es la parte interesante. Cobertura sobre estos {items} votos: {coverage}. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
+    "en": "All three sat in the same chamber and ran for different offices in November 2026, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together. Where they diverge is the interesting part. Coverage over these {items} votes: {coverage}. A vote they missed is dropped for them alone, not counted against them.",
+    "es": "Los tres estuvieron en la misma cámara y compitieron por cargos distintos en noviembre de 2026, así que estas son tres lecturas separadas, no una clasificación. Votaron juntos en la mayoría de los proyectos de línea partidista, así que espere que las cifras queden cerca; donde se separan es la parte interesante. Cobertura sobre estos {items} votos: {coverage}. Un voto que no emitieron se descarta solo para ellos, no se cuenta en su contra.",
     "where": "Under the three candidate score cards.",
     "vars": [
       "items",
       "coverage"
     ],
-    "status": "ok"
+    "status": "draft",
+    "note": "Put in the past tense on 12 Nov 2026, after the 3 Nov election; DRAFT until reviewed."
   },
   "cand.raceLink": {
     "en": "What each of them has on the record",
@@ -1389,11 +1390,12 @@
     "status": "ok"
   },
   "rev.compareNote": {
-    "en": "None of these six is on the ballot. From each caucus: the most party-line member, the median, and the one who most often broke ranks. The same rule on both sides, recomputed every build, so the comparison is not a pick of names.",
-    "es": "Ninguno de estos seis está en la boleta. De cada bancada: el miembro más de línea partidista, el mediano y el que más veces rompió filas; la misma regla en los dos lados, recalculada en cada compilación, para que la comparación no sea una selección de nombres.",
+    "en": "None of these six ran in the three races above. From each caucus: the most party-line member, the median, and the one who most often broke ranks. The same rule on both sides, recomputed every build, so the comparison is not a pick of names.",
+    "es": "Ninguno de estos seis compitió en las tres contiendas de arriba. De cada bancada: el miembro más de línea partidista, el mediano y el que más veces rompió filas; la misma regla en los dos lados, recalculada en cada compilación, para que la comparación no sea una selección de nombres.",
     "where": "Comparator note.",
     "vars": [],
-    "status": "ok"
+    "status": "draft",
+    "note": "Put in the past tense on 12 Nov 2026, after the 3 Nov election; DRAFT until reviewed."
   },
   "rev.oppHead": {
     "en": "What their opponents did on this bill",
@@ -2161,12 +2163,12 @@
     "status": "ok"
   },
   "rep.lede": {
-    "en": "The three above are running for offices that affect every Texan. This is the person who actually represents you in the Texas House, scored the same way and on the same votes you answered.",
-    "es": "Los tres de arriba se postulan para cargos que afectan a todos los texanos. Esta es la persona que de verdad le representa en la Cámara de Texas, calificada igual y sobre los mismos votos que usted respondió.",
+    "en": "The three above ran for offices that affect every Texan. This is the person who represented your district in the Texas House in the 89th Legislature, scored the same way and on the same votes you answered.",
+    "es": "Los tres de arriba compitieron por cargos que afectan a todos los texanos. Esta es la persona que representó a su distrito en la Cámara de Texas en la 89.ª Legislatura, calificada igual y sobre los mismos votos que usted respondió.",
     "where": "Under the heading.",
     "vars": [],
-    "note": "Deliberately carries NO item count. It used to interpolate activeItems().length, which contradicted the coverage line beneath it in 7-issue mode. The first clause said the three were \"running for other offices\", which read as a dismissal — as if the reason to care about your own member is that these three have moved on. They have not moved on: Governor, Lt. Governor and U.S. Senate are all offices every Texan votes on, so the honest contrast is reach, not relevance. Those three races reach the whole state; your member is the one who answers for your part of it. Spanish approved by Marco Arras (fluent) on 5 September 2026, who chose \"se postulan para\" over \"compiten por\" as the register US Spanish-language civic material uses for running for office.",
-    "status": "ok"
+    "note": "Deliberately carries NO item count. It used to interpolate activeItems().length, which contradicted the coverage line beneath it in 7-issue mode. The first clause said the three were \"running for other offices\", which read as a dismissal — as if the reason to care about your own member is that these three have moved on. They have not moved on: Governor, Lt. Governor and U.S. Senate are all offices every Texan votes on, so the honest contrast is reach, not relevance. Those three races reach the whole state; your member is the one who answers for your part of it. Spanish approved by Marco Arras (fluent) on 5 September 2026, who chose \"se postulan para\" over \"compiten por\" as the register US Spanish-language civic material uses for running for office. Put in the past tense on 12 Nov 2026, after the 3 Nov election; DRAFT until reviewed.",
+    "status": "draft"
   },
   "rep.districtLabel": {
     "en": "Or your district number",
@@ -2270,13 +2272,14 @@
     "status": "ok"
   },
   "rep.noSuchDistrict": {
-    "en": "District {d} has no sitting member in this record. 149 of the 150 seats are filled.",
-    "es": "El distrito {d} no tiene miembro en funciones en este registro. 149 de los 150 escaños están ocupados.",
+    "en": "District {d} has no member in this record. 149 of the 150 seats were filled when it was built.",
+    "es": "El distrito {d} no tiene miembro en este registro. 149 de los 150 escaños estaban ocupados cuando se preparó.",
     "where": "Shown for an empty district.",
     "vars": [
       "d"
     ],
-    "status": "ok"
+    "status": "draft",
+    "note": "Put in the past tense on 12 Nov 2026, after the 3 Nov election; DRAFT until reviewed."
   },
   "rep.outOfRange": {
     "en": "The Texas House has districts 1 to 150.",
@@ -2343,16 +2346,16 @@
     "status": "ok"
   },
   "rep.excludedOne": {
-    "en": "{name} also represented district {district} this session, casting {votes} votes before leaving the House. They are not in this lookup, which answers who represents a district now, so district {district} shows its current member with a partial record.",
-    "es": "{name} también representó al distrito {district} en esta sesión y emitió {votes} votos antes de dejar la Cámara. No aparece en esta búsqueda, que responde quién representa un distrito ahora, así que el distrito {district} muestra a su representante actual con un historial parcial.",
+    "en": "{name} also represented district {district} this session, casting {votes} votes before leaving the House. They are not in this lookup, which shows one member per district, the last to hold the seat in the 89th Legislature, so district {district} shows that member with a partial record.",
+    "es": "{name} también representó al distrito {district} en esta sesión y emitió {votes} votos antes de dejar la Cámara. No aparece en esta búsqueda, que muestra un solo miembro por distrito, el último en ocupar el escaño en la 89.ª Legislatura, así que el distrito {district} muestra a esa persona con un historial parcial.",
     "where": "Replaces rep.excluded when exactly one session voter is missing from the lookup.",
     "vars": [
       "name",
       "district",
       "votes"
     ],
-    "note": "NAMES the former member, which only became possible on 10 September 2026 when an Open States maintainer pointed at the retired roster in the openstates/people repository. Before that this string could only say that somebody was missing. It is worth naming because the reader most affected is the one looking up that exact district and seeing a partial record with no explanation. Still singular-only: rep.excluded covers two or more and cannot name them without becoming a list.",
-    "status": "ok"
+    "note": "NAMES the former member, which only became possible on 10 September 2026 when an Open States maintainer pointed at the retired roster in the openstates/people repository. Before that this string could only say that somebody was missing. It is worth naming because the reader most affected is the one looking up that exact district and seeing a partial record with no explanation. Still singular-only: rep.excluded covers two or more and cannot name them without becoming a list. Put in the past tense on 12 Nov 2026, after the 3 Nov election; DRAFT until reviewed.",
+    "status": "draft"
   },
   "rep.district": {
     "en": "District {d}",

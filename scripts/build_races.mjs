@@ -51,7 +51,7 @@
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
-import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
+import { SITE, RESULTS_URL, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -225,12 +225,16 @@ const COPY = {
       + `${r.rec.cast} recorded Texas House votes for ${r.cand.name}, and ${r.opp.evidence} for ${r.opp.name}. `
       + `Free, no sign-up, no cookies.`,
     kicker: 'Texas House · 2025 session',
-    lede: (r) => `They are running for ${RUNNING_FOR_EN[r.cand.office]}. Only one of them has cast a vote on the bills this site asks about, and that is a fact about the offices they have held rather than a judgement about either of them. This page says exactly what the record shows for each, and where the two kinds of record stop being comparable.`,
+    // Past tense since 12 Nov 2026. DRAFT: the Spanish below needs Marco's
+    // review, and nothing but a person checks it (see the header).
+    lede: (r) => `They ran for ${RUNNING_FOR_EN[r.cand.office]} in the election of November 3, 2026. Only one of them has cast a vote on the bills this site asks about, and that is a fact about the offices they have held rather than a judgement about either of them. This page says exactly what the record shows for each, and where the two kinds of record stop being comparable.`,
     h2dem: (r) => `What ${r.cand.name}'s record shows`,
     // No pronouns for the candidates anywhere on these pages. The three are not
     // the same gender, the payload does not record pronouns, and a name is not
     // evidence of them. Surname plus "they" reads naturally and cannot be wrong.
-    demBody: (r) => `${r.cand.name} sits in the Texas House, so there is a roll call on these bills. Of the ${r.rec.total} votes this site asks about, ${r.cand.name} cast ${r.rec.cast}. On the ${r.rec.divisive} of those where the two parties took opposite sides, they voted against their own party's majority ${r.rec.crossed} ${r.rec.crossed === 1 ? 'time' : 'times'}.`,
+    results: 'Who won is on the Texas Secretary of State’s results page. This site reports voting records, not election results.',
+    resultsLink: 'Official results',
+    demBody: (r) => `${r.cand.name} sat in the Texas House in 2025, so there is a roll call on these bills. Of the ${r.rec.total} votes this site asks about, ${r.cand.name} cast ${r.rec.cast}. On the ${r.rec.divisive} of those where the two parties took opposite sides, they voted against their own party's majority ${r.rec.crossed} ${r.rec.crossed === 1 ? 'time' : 'times'}.`,
     crossHead: 'Where they broke with their own party',
     h2opp: (r) => `What ${r.opp.name}'s record shows`,
     noVotesLabel: 'Why there are no votes.',
@@ -258,9 +262,11 @@ const COPY = {
       + `${r.rec.cast} votos registrados en la Cámara de Texas para ${r.cand.name}, y ${r.esOpp.evidence} para ${r.opp.name}. `
       + `Gratis, sin registro y sin cookies.`,
     kicker: 'Cámara de Texas · Sesión de 2025',
-    lede: (r) => `Compiten por ${RUNNING_FOR_ES[r.cand.office]}. Solo una de las dos personas ha emitido votos sobre los proyectos de ley que este sitio consulta, y eso es un hecho sobre los cargos que han ocupado, no un juicio sobre ninguna de ellas. Esta página dice exactamente qué muestra el registro de cada una, y dónde los dos tipos de registro dejan de ser comparables.`,
+    lede: (r) => `Compitieron por ${RUNNING_FOR_ES[r.cand.office]} en la elección del 3 de noviembre de 2026. Solo una de las dos personas ha emitido votos sobre los proyectos de ley que este sitio consulta, y eso es un hecho sobre los cargos que han ocupado, no un juicio sobre ninguna de ellas. Esta página dice exactamente qué muestra el registro de cada una, y dónde los dos tipos de registro dejan de ser comparables.`,
     h2dem: (r) => `Qué muestra el historial de ${r.cand.name}`,
-    demBody: (r) => `${r.cand.name} ocupa una curul en la Cámara de Texas, así que existe una votación nominal suya sobre estos proyectos. De los ${r.rec.total} votos que consulta este sitio, emitió ${r.rec.cast}. En los ${r.rec.divisive} en los que los dos partidos tomaron lados opuestos, votó en contra de la mayoría de su propio partido ${r.rec.crossed} ${r.rec.crossed === 1 ? 'vez' : 'veces'}.`,
+    results: 'Quién ganó aparece en la página de resultados de la Secretaría de Estado de Texas. Este sitio informa sobre historiales de votación, no sobre resultados electorales.',
+    resultsLink: 'Resultados oficiales',
+    demBody: (r) => `${r.cand.name} ocupaba una curul en la Cámara de Texas en 2025, así que existe una votación nominal suya sobre estos proyectos. De los ${r.rec.total} votos que consulta este sitio, emitió ${r.rec.cast}. En los ${r.rec.divisive} en los que los dos partidos tomaron lados opuestos, votó en contra de la mayoría de su propio partido ${r.rec.crossed} ${r.rec.crossed === 1 ? 'vez' : 'veces'}.`,
     crossHead: 'Dónde se apartó de su propio partido',
     h2opp: (r) => `Qué muestra el historial de ${r.opp.name}`,
     noVotesLabel: 'Por qué no hay votos.',
@@ -356,6 +362,7 @@ function render(race, lang) {
     body: `
   <h1>${esc(c.title(race))}</h1>
   <p class="lede">${esc(c.lede(race))}</p>
+  <p class="small">${esc(c.results)} <a href="${RESULTS_URL}" rel="noopener" target="_blank">${esc(c.resultsLink)}</a></p>
 
   <h2>${esc(c.h2dem(race))}</h2>
   <p>${esc(c.demBody(race))}</p>

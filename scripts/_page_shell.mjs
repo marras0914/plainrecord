@@ -24,6 +24,18 @@ import { navHtml, footerHtml } from './_site_nav.mjs';
 export const SITE = 'https://rightnleft.com';
 
 /**
+ * Where a reader finds who won. THE SITE NAMES NO WINNER (decided 12 Nov 2026):
+ * it reports voting records, not outcomes, so it never has to correct one, and
+ * nothing on it waits for the state canvass.
+ *
+ * The Secretary of State's results index, not the election-night app it links
+ * to. That app shows whichever election is current, so a link to it would
+ * quietly start showing a different election; the index carries the current
+ * returns and the archive of past ones. Verified reachable 12 Nov 2026.
+ */
+export const RESULTS_URL = 'https://www.sos.state.tx.us/elections/historical/index.shtml';
+
+/**
  * The visit count, the same Vercel Web Analytics the quiz loads through
  * inject(): no cookie, a visitor hash that resets daily, a page view and a
  * referrer. Without it, the 300-odd pages built for search were invisible to
