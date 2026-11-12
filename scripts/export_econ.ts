@@ -38,7 +38,7 @@ import {
   computeTerms, pooledGrowth, byPresident, byGovernment, byFedAppointer,
   PAPER_LAG_QUARTERS, LAGS, type SeriesSet, type SeriesId, type Metrics, type Value,
 } from '../econ';
-import { SENATE, HOUSE_SOURCE, FED_CHAIRS, KNOWN_GAPS } from '../econ_control';
+import { SENATE, HOUSE_SOURCE, FED_CHAIRS, KNOWN_GAPS, fedSegments } from '../econ_control';
 import { CONTEXT, notesForTerm } from '../econ_context';
 import { SHIP_DIR } from './paths';
 import { FRED_DIR, SERIES } from './fetch_fred';
@@ -113,9 +113,16 @@ export function buildEconPayloads(series: SeriesSet, meta: FredMeta[], today?: s
       })),
     })),
     groupings,
+    /** The Fed chair over time, with the appointing party (null where unsourced). */
+    fedLane: fedSegments(today),
     contextRule: 'A note for every outside shock Blinder and Watson name, and for every NBER recession after their sample ends in 2012. See econ_context.ts.',
     contextCount: CONTEXT.length,
   };
+  // How the notes fall by party, counted here so a page states the number the
+  // data gives rather than one typed into its copy.
+  const notesByParty = { D: 0, R: 0 };
+  for (const t of terms.terms) notesByParty[t.party] += t.notes.length;
+  Object.assign(terms, { contextByParty: notesByParty });
 
   return { blind, terms };
 }
