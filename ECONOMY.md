@@ -123,11 +123,28 @@ it goes in. Recent entries need the most care, so mark the file with a
 
 ### Hand-curated: `econ_context.ts`
 
-One short, neutral, sourced note per major outside shock: the 1973 oil
-embargo, the 1979 oil shock, the 2001 recession, the 2008 financial crisis,
-COVID-19 and so on. **Say what happened, not who was at fault.** The notes
-show on the blind cards because the research says those shocks explain a
-large share of the gap.
+One short, neutral, sourced note per major outside shock. **Say what happened,
+not who was at fault.** The notes show on the blind cards because the research
+says those shocks explain a large share of the gap.
+
+**Built 12 Nov 2026, and nobody picks the shocks.** Choosing them would be a
+knob that tilts the cards, so a rule decides: a note for every outside shock
+Blinder and Watson name (OPEC I, OPEC II, the 1990 oil spike, oil tripling in
+2005 to 2008, the 2008 financial crisis, and the wars they count as defense
+"luck": Korea, Vietnam, the Gulf, Iraq and Afghanistan), plus every NBER
+recession that starts after their sample ends in 2012 (only 2020, in the NBER
+committee's words). Ten notes. Each carries a verbatim quote, and
+`npm run data:econ:quotes` checks every quote against the downloaded source,
+with a control quote that has to fail. The war notes land on exactly the terms
+the paper lists for each war.
+
+**The rule is not even-handed in its effect, and the page has to say so.**
+Ten notes fall on Republican terms (7 of 11) and five on Democratic terms (4
+of 9). That is the paper's own finding, that Democratic presidents drew "more
+benign oil shocks", carried through by a rule nobody tuned. But it means a
+blind card more often shows a shock beside a Republican term's numbers. The
+methodology page must state the count and the reason rather than leave a
+reader to notice it.
 
 On a blind card a note is worded by kind, not by name or date ("an oil
 supply shock", "a global pandemic"). That doesn't make the card anonymous:
