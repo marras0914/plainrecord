@@ -59,6 +59,19 @@ Endpoint: `https://api.stlouisfed.org/fred/series/observations?series_id=<ID>&ap
 start date and copyright line. Don't add a series you haven't opened, the same
 rule `outcomes.ts` sets.
 
+**Pulled 12 Nov 2026** (`npm run data:fred`, committed under `data/fred/`).
+The script refuses to write unless FRED's metadata matches the table above on
+frequency, start date and seasonal adjustment; all seven passed, and none has
+a copyright line in its notes. Two things the computation has to handle:
+
+- **October 2025 is missing** from both CPIAUCSL and UNRATE (FRED returns "."
+  for that month, stored as `null`). FRED's notes give no reason. `econ.ts`
+  must treat it as missing, never as zero, and the methodology page should
+  explain it from a BLS source rather than from memory.
+- **USREC marks recessions from the month after the peak through the trough**
+  (its FRED title says so). Recession months per term are counted on that
+  convention, and the methodology page says which one it is.
+
 ### Hand-curated: `econ_control.ts`
 
 **Built 12 Nov 2026.** Who held each office from Truman's elected term (1949)
@@ -94,10 +107,20 @@ party), not from seat counts. In the 83rd Congress Democrats at times held more
 seats while Republicans kept control, and the header order on the Senate's own
 party-division page does not reliably list the majority first.
 
-**Not built: the appointing-party grouping.** A chair's first appointment is
-derived (the president in office on the day the chair took office). The
-reappointments are not on any page read so far, so they are in `KNOWN_GAPS`
-and `fedAppointingParty()` throws until each one is sourced.
+**The appointing-party grouping, partly built.** A chair's first appointment
+is derived (the president in office on the day the chair took office). Every
+appointment from 1981 on is in `FED_APPOINTMENTS`, read from congress.gov's
+nomination records: who sent it (the president in office on the day the
+Senate received it) and when the Senate confirmed it, which is when it counts
+as in force. That settles the cross-party renewals: Volcker by Reagan (1983),
+Greenspan by Clinton (1996, 2000) and Bush (1992, 2004), Bernanke by Obama
+(2010), Powell by Biden (2022). Two renewals before 1981 are still unsourced,
+Martin from April 1955 and Burns from February 1974, and
+`fedAppointingParty()` throws for dates after either until they are. Before
+the Federal Reserve Reform Act of 1977 the President designated the chair
+without Senate confirmation, so these are not in the Senate's records at all
+(34 days of the 1955 Congressional Record were searched to be sure). The
+source to read is the President's papers or the Federal Reserve Bulletin.
 
 Two cases the obvious shape gets wrong:
 

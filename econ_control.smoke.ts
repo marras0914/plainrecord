@@ -16,8 +16,8 @@
 import {
   PRESIDENCIES, HOUSE, SENATE, FED_CHAIRS, FED_VACANCIES, KNOWN_GAPS, WINDOW_START,
   congressStart, buildTerms, presidentOn, houseOn, senateOn, fedChairOn,
-  firstAppointedBy, fedAppointingParty,
-  type Presidency, type FedChair, type Term,
+  firstAppointedBy, fedAppointingParty, FED_APPOINTMENTS, UNSOURCED_REAPPOINTMENTS,
+  type Presidency, type FedChair, type Term, type Party,
 } from './econ_control';
 
 let pass = 0;
@@ -180,10 +180,48 @@ check('first appointments derive from the president in office on the start date'
   firsts.join(' ') === 'McCabe:D Martin:D Burns:R Miller:D Volcker:D Greenspan:R Bernanke:R Yellen:D Powell:R Warsh:R',
   firsts.join(' '));
 
-let refused = false;
-try { fedAppointingParty('1996-07-01'); } catch { refused = true; }
-check('the appointing-party grouping refuses while reappointments are unsourced',
-  KNOWN_GAPS.length > 0 && refused, KNOWN_GAPS.length ? 'refused' : 'KNOWN_GAPS is empty');
+// Who appointed is derived from the received date; the name written in the
+// record has to agree with it, so a typo in either is caught.
+const wrongPresident = FED_APPOINTMENTS.filter((a) => presidentOn(a.received).name !== a.president);
+check('every appointment names the president in office when the Senate received it',
+  wrongPresident.length === 0, wrongPresident.map((a) => a.citation).join(', ') || `${FED_APPOINTMENTS.length} records`);
+const chairNames = new Set(FED_CHAIRS.map((c) => c.name));
+check('every appointment is of a chair in the Board\'s table',
+  FED_APPOINTMENTS.every((a) => chairNames.has(a.chair)));
+const outside = FED_APPOINTMENTS.filter((a) => {
+  const c = FED_CHAIRS.find((x) => x.name === a.chair)!;
+  return a.kind === 'reappointment' && a.confirmed !== null && (a.confirmed < c.start || (c.end !== null && a.confirmed > c.end));
+});
+check('every reappointment was confirmed while that chair was serving',
+  outside.length === 0, outside.map((a) => a.citation).join(', ') || 'all inside');
+const firstMismatch = FED_APPOINTMENTS.filter((a) => a.kind === 'first'
+  && presidentOn(a.received).party !== firstAppointedBy(FED_CHAIRS.find((c) => c.name === a.chair)!));
+check('each recorded first appointment agrees with the derived one',
+  firstMismatch.length === 0, firstMismatch.map((a) => a.citation).join(', ') || 'agree');
+
+const party = (d: string) => { try { return fedAppointingParty(d); } catch { return 'REFUSED'; } };
+const cases: [string, string, Party | null | 'REFUSED'][] = [
+  ['1952-01-01', 'Martin, first appointed by Truman', 'D'],
+  ['1960-01-01', 'Martin after April 1955: unsourced, so refused', 'REFUSED'],
+  ['1972-01-01', 'Burns, first appointed by Nixon', 'R'],
+  ['1975-01-01', 'Burns after February 1974: unsourced, so refused', 'REFUSED'],
+  ['1978-02-15', 'no chair', null],
+  ['1983-07-20', 'Volcker before the Senate confirmed Reagan\'s reappointment', 'D'],
+  ['1983-07-27', 'Volcker on the day it was confirmed', 'R'],
+  ['1996-05-01', 'Greenspan pro tempore, Bush\'s appointment still in force', 'R'],
+  ['1996-06-20', 'Greenspan once Clinton\'s reappointment was confirmed', 'D'],
+  ['2005-01-01', 'Greenspan after Bush\'s 2004 reappointment', 'R'],
+  ['2010-06-01', 'Bernanke after Obama\'s reappointment', 'D'],
+  ['2021-01-01', 'Powell, first appointed by Trump', 'R'],
+  ['2022-06-01', 'Powell after Biden\'s reappointment', 'D'],
+  ['2026-06-01', 'Warsh, appointed by Trump', 'R'],
+];
+for (const [d, what, want] of cases) {
+  const got = party(d);
+  check(`appointing party on ${d}: ${what}`, got === want, `got ${got}`);
+}
+check('the gap list names exactly the reappointments that refuse',
+  KNOWN_GAPS.length === 1 && UNSOURCED_REAPPOINTMENTS.length === 2);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exitCode = fail === 0 ? 0 : 1;

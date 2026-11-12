@@ -1,0 +1,186 @@
+{
+ "id": "MEHOINUSA672N",
+ "what": "Real median household income",
+ "title": "Real Median Household Income in the United States",
+ "units": "2025 C-CPI-U Dollars",
+ "frequency": "Annual",
+ "seasonalAdjustment": "Not Seasonally Adjusted",
+ "observationStart": "1984-01-01",
+ "observationEnd": "2025-01-01",
+ "lastUpdated": "2026-09-16 15:39:42-05",
+ "notes": "Income in 2025 C-CPI-U (2000-2025) and R-CPI-U-RS (pre-2000) adjusted dollars. ",
+ "copyrightInNotes": false,
+ "sourceUrl": "https://fred.stlouisfed.org/series/MEHOINUSA672N",
+ "citation": "Federal Reserve Bank of St. Louis, FRED, series MEHOINUSA672N",
+ "fetched": "2026-11-12T18:25:58.887Z",
+ "observations": [
+  {
+   "date": "1984-01-01",
+   "value": 61910
+  },
+  {
+   "date": "1985-01-01",
+   "value": 63090
+  },
+  {
+   "date": "1986-01-01",
+   "value": 65430
+  },
+  {
+   "date": "1987-01-01",
+   "value": 66250
+  },
+  {
+   "date": "1988-01-01",
+   "value": 66740
+  },
+  {
+   "date": "1989-01-01",
+   "value": 67880
+  },
+  {
+   "date": "1990-01-01",
+   "value": 67050
+  },
+  {
+   "date": "1991-01-01",
+   "value": 65100
+  },
+  {
+   "date": "1992-01-01",
+   "value": 64560
+  },
+  {
+   "date": "1993-01-01",
+   "value": 64240
+  },
+  {
+   "date": "1994-01-01",
+   "value": 64930
+  },
+  {
+   "date": "1995-01-01",
+   "value": 66990
+  },
+  {
+   "date": "1996-01-01",
+   "value": 67980
+  },
+  {
+   "date": "1997-01-01",
+   "value": 69390
+  },
+  {
+   "date": "1998-01-01",
+   "value": 71930
+  },
+  {
+   "date": "1999-01-01",
+   "value": 73760
+  },
+  {
+   "date": "2000-01-01",
+   "value": 73560
+  },
+  {
+   "date": "2001-01-01",
+   "value": 72350
+  },
+  {
+   "date": "2002-01-01",
+   "value": 71770
+  },
+  {
+   "date": "2003-01-01",
+   "value": 71810
+  },
+  {
+   "date": "2004-01-01",
+   "value": 71700
+  },
+  {
+   "date": "2005-01-01",
+   "value": 72810
+  },
+  {
+   "date": "2006-01-01",
+   "value": 73620
+  },
+  {
+   "date": "2007-01-01",
+   "value": 74810
+  },
+  {
+   "date": "2008-01-01",
+   "value": 72260
+  },
+  {
+   "date": "2009-01-01",
+   "value": 71790
+  },
+  {
+   "date": "2010-01-01",
+   "value": 70110
+  },
+  {
+   "date": "2011-01-01",
+   "value": 69070
+  },
+  {
+   "date": "2012-01-01",
+   "value": 69070
+  },
+  {
+   "date": "2013-01-01",
+   "value": 71670
+  },
+  {
+   "date": "2014-01-01",
+   "value": 70760
+  },
+  {
+   "date": "2015-01-01",
+   "value": 74590
+  },
+  {
+   "date": "2016-01-01",
+   "value": 77230
+  },
+  {
+   "date": "2017-01-01",
+   "value": 78600
+  },
+  {
+   "date": "2018-01-01",
+   "value": 79620
+  },
+  {
+   "date": "2019-01-01",
+   "value": 85320
+  },
+  {
+   "date": "2020-01-01",
+   "value": 83590
+  },
+  {
+   "date": "2021-01-01",
+   "value": 83270
+  },
+  {
+   "date": "2022-01-01",
+   "value": 81460
+  },
+  {
+   "date": "2023-01-01",
+   "value": 84730
+  },
+  {
+   "date": "2024-01-01",
+   "value": 85210
+  },
+  {
+   "date": "2025-01-01",
+   "value": 87460
+  }
+ ]
+}
