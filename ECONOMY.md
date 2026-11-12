@@ -182,12 +182,29 @@ who knows the history, and the page says so** rather than claiming otherwise
 
 Pure, with no I/O, in the same spirit as `scoring.ts`.
 
-- **Measurement window.** Blinder and Watson count growth from the first
-  quarter after inauguration to the quarter of the next inauguration.
-  Document the convention in the module header and use it everywhere.
-- **Lag:** 0, 1 or 2 years, defaulting to 0. Shifts every term's window. The
-  explorer renders all three, so the reader can see how much the picture
-  depends on this choice.
+**Built 12 Nov 2026.** The definitions of every metric are in the header of
+`econ.ts`.
+
+- **Measurement window, from the paper.** "In our main results, the first
+  quarter of each president's term is attributed to the previous president",
+  so Reagan's first term is 1981Q2 to 1985Q1. The lag is in quarters, not
+  years as this plan first said.
+- **The lag is a knob, and the paper says which way it turns.** Its authors
+  tried lags of 0 to 4 quarters, and every lag other than their default of
+  one "lead[s] to smaller estimated D-R gaps". Reproduced here: over the
+  paper's 16 terms the gap is 1.41, **1.76**, 1.58, 1.34 and 0.94 points at
+  lags 0 to 4. The explorer renders all five and says which one the paper
+  uses. Which lag a page leads with is an open decision.
+- **The paper's headline reproduces.** With its terms and its lag, today's
+  data gives 4.33% (Democratic) and 2.57% (Republican) against the paper's
+  4.35% and 2.54%, a gap of 1.76 against 1.80. The difference is BEA's
+  revisions since. `econ.smoke.ts` fails if either moves by 0.3 or more.
+- **Past the paper, the numbers are the site's own.** Over all 19 complete
+  terms (Truman to Biden) the gap at the paper's lag is 1.37 points, and 0.58
+  to 1.17 at the others. That includes 2020's two quarters of roughly -28%
+  and +35% annualized, which weigh heavily in a mean of quarters. Any page
+  showing these must label them as the site's arithmetic, never as the
+  paper's finding extended.
 - **Per term:** annualized real GDP growth, annualized job growth, change in
   unemployment, average inflation, average deficit, change in median income
   (where available), and recession months.
