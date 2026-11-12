@@ -53,6 +53,7 @@
     "data:election": "node scripts/build_election_dates.mjs",
     "data:election:check": "node scripts/check_election_dates.mjs",
     "data:factsheet": "node scripts/build_factsheet.mjs",
+    "data:fred": "tsx scripts/fetch_fred.ts",
     "prefix:accuracy": "tsx scripts/prefix_accuracy.ts",
     "data:boundaries": "node scripts/build_boundaries.mjs",
     "data:boundaries:check": "node --experimental-strip-types --no-warnings scripts/check_boundaries.mjs",

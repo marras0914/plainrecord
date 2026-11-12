@@ -47,6 +47,11 @@ dist/
 # reader they live in the wrong district would not run on a fresh clone.
 !/data/district_points.fixture.json
 
+# ...and the economy module's FRED pulls (scripts/fetch_fred.ts). Committed so
+# the build never calls FRED and never needs the key, and so a revision to a
+# series shows up as a diff someone reviews. Seven series, a few hundred KB.
+!/data/fred/
+
 # Belt and braces: these used to live in the ship dir before the WORK_DIR split,
 # so a stale script or an old checkout can still drop them there.
 public/data/tx_bills_*.json

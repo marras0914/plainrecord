@@ -179,19 +179,72 @@ export const FED_VACANCIES: { start: string; end: string }[] = [
 ];
 
 /**
+ * Every Senate-confirmed appointment of a Fed chair that is on congress.gov
+ * (its nomination records begin with the 97th Congress, 1981), read through the
+ * congress.gov API on 12 Nov 2026.
+ *
+ * WHO APPOINTED is not typed: it is the president in office on the day the
+ * Senate received the nomination, and the smoke test checks that against the
+ * name written here. IN FORCE FROM is the day the Senate confirmed it. Until
+ * then the previous appointment stands, which is how a chair serving "pro
+ * tempore" between terms (Greenspan, March to June 1996) is counted.
+ *
+ * Where a nomination was returned to the President at a session's end and sent
+ * again, the record is the one that was confirmed, and the returned one is
+ * named in `note`.
+ */
+export interface FedAppointment {
+  chair: string;
+  president: string;
+  received: string;
+  /** null when congress.gov records no confirmation yet. */
+  confirmed: string | null;
+  kind: 'first' | 'reappointment';
+  citation: string;
+  note: string | null;
+  sourceUrl: string;
+}
+
+const PN = (congress: string, n: number) => `https://www.congress.gov/nomination/${congress}-congress/${n}`;
+
+export const FED_APPOINTMENTS: FedAppointment[] = [
+  { chair: 'Paul A. Volcker', president: 'Ronald Reagan', received: '1983-07-08', confirmed: '1983-07-27', kind: 'reappointment', citation: 'PN360, 98th Congress', note: 'Confirmed 84-16.', sourceUrl: PN('98th', 360) },
+  { chair: 'Alan Greenspan', president: 'Ronald Reagan', received: '1987-07-15', confirmed: '1987-08-03', kind: 'first', citation: 'PN510, 100th Congress', note: 'Confirmed 91-2.', sourceUrl: PN('100th', 510) },
+  { chair: 'Alan Greenspan', president: 'George H.W. Bush', received: '1991-10-17', confirmed: '1992-02-27', kind: 'reappointment', citation: 'PN708, 102nd Congress', note: 'A recess appointment preceded this nomination ("to which position he was appointed during the last recess of the Senate"); its date is not in the record. An earlier nomination, PN503 (received 1991-07-19), had no action. Same president either way.', sourceUrl: PN('102nd', 708) },
+  { chair: 'Alan Greenspan', president: 'William J. Clinton', received: '1996-03-15', confirmed: '1996-06-20', kind: 'reappointment', citation: 'PN951, 104th Congress', note: 'Confirmed 91-7.', sourceUrl: PN('104th', 951) },
+  { chair: 'Alan Greenspan', president: 'William J. Clinton', received: '2000-01-24', confirmed: '2000-02-03', kind: 'reappointment', citation: 'PN729, 106th Congress', note: 'Confirmed 89-4.', sourceUrl: PN('106th', 729) },
+  { chair: 'Alan Greenspan', president: 'George W. Bush', received: '2004-05-18', confirmed: '2004-06-17', kind: 'reappointment', citation: 'PN1642, 108th Congress', note: 'Confirmed by voice vote.', sourceUrl: PN('108th', 1642) },
+  { chair: 'Ben S. Bernanke', president: 'George W. Bush', received: '2005-11-01', confirmed: '2006-01-31', kind: 'first', citation: 'PN1026, 109th Congress', note: 'Confirmed by voice vote.', sourceUrl: PN('109th', 1026) },
+  { chair: 'Ben S. Bernanke', president: 'Barack Obama', received: '2009-09-17', confirmed: '2010-01-28', kind: 'reappointment', citation: 'PN959, 111th Congress', note: 'Confirmed 70-30.', sourceUrl: PN('111th', 959) },
+  { chair: 'Janet L. Yellen', president: 'Barack Obama', received: '2013-10-09', confirmed: '2014-01-06', kind: 'first', citation: 'PN921, 113th Congress', note: 'Confirmed 56-26.', sourceUrl: PN('113th', 921) },
+  { chair: 'Jerome H. Powell', president: 'Donald J. Trump', received: '2018-01-08', confirmed: '2018-01-23', kind: 'first', citation: 'PN1353, 115th Congress', note: 'Confirmed 84-13. First sent as PN1201 (received 2017-11-02), returned at the end of the session.', sourceUrl: PN('115th', 1353) },
+  { chair: 'Jerome H. Powell', president: 'Joseph R. Biden Jr.', received: '2022-01-04', confirmed: '2022-05-12', kind: 'reappointment', citation: 'PN1522, 117th Congress', note: 'Confirmed 80-19. First sent as PN1435 (received 2021-12-02), returned at the end of the session.', sourceUrl: PN('117th', 1522) },
+  { chair: 'Kevin Warsh', president: 'Donald J. Trump', received: '2026-03-04', confirmed: null, kind: 'first', citation: 'PN855-1, 119th Congress', note: 'congress.gov showed no actions on this record on 12 Nov 2026, though the Board lists Warsh as chair from 22 May 2026.', sourceUrl: PN('119th', 855) },
+];
+
+/**
+ * Reappointments before 1981, which congress.gov does not cover. Each is the
+ * date its chair's previous four-year term ran out, from the Board's tenure
+ * table: from that date on, which president's appointment was in force is
+ * unknown until a primary source is read, and fedAppointingParty() throws.
+ */
+export const UNSOURCED_REAPPOINTMENTS: { chair: string; from: string }[] = [
+  { chair: 'William McChesney Martin Jr.', from: '1955-04-02' },
+  { chair: 'Arthur F. Burns', from: '1974-02-01' },
+];
+
+/**
  * What could not be sourced, and what refuses to compute because of it.
  *
  * The party of the president who appointed the chair is the plan's third
  * grouping. A chair's FIRST appointment can be derived: the president in office
  * on the day the chair took office (checked for every chair in the smoke test).
- * REAPPOINTMENTS cannot. Several crossed party lines, which is the whole reason
- * the grouping is interesting, and the Board's table records tenure, not who
- * renewed it. The Fed's history site says only that Greenspan "was appointed
- * chairman by four different presidents", without naming them. Until a primary
- * source for each renewal is read, fedAppointingParty() throws.
+ * Reappointments from 1981 on are in FED_APPOINTMENTS. Those before are not:
+ * congress.gov stops at 1981, and the Fed's history site and FRASER both time
+ * out for scripted requests.
  */
 export const KNOWN_GAPS: string[] = [
-  'Fed chair reappointments (dates and appointing president) for every chair who served more than one four-year term: Martin, Burns, Volcker, Greenspan, Bernanke, Powell. Needs a primary source, e.g. Senate confirmation records.',
+  'Fed chair reappointments before 1981 (Martin from April 1955, Burns from February 1974): appointing president and date. Needs a primary source such as the bound Congressional Record.',
 ];
 
 /** The president in office on a date. */
@@ -206,9 +259,23 @@ export function fedChairOn(date: string): FedChair | null {
   return FED_CHAIRS.find((c) => c.start <= date && (c.end === null || date <= c.end)) ?? null;
 }
 
-/** Party of the president whose appointment of the chair was in force. Not yet sourceable. */
-export function fedAppointingParty(_date: string): Party {
-  throw new Error(`fedAppointingParty is not available: ${KNOWN_GAPS[0]}`);
+/**
+ * Party of the president whose appointment of the chair was in force on a
+ * date: the most recent confirmed appointment of the sitting chair, or, before
+ * any is on record, the chair's first appointment (derived). null on a
+ * vacancy. THROWS for a date that falls after an unsourced reappointment could
+ * have taken effect, rather than guessing.
+ */
+export function fedAppointingParty(date: string): Party | null {
+  const chair = fedChairOn(date);
+  if (!chair) return null;
+  const gap = UNSOURCED_REAPPOINTMENTS.find((u) => u.chair === chair.name && date >= u.from);
+  if (gap) throw new Error(`unsourced: ${chair.name}'s reappointment from ${gap.from} (${KNOWN_GAPS[0]})`);
+  const inForce = FED_APPOINTMENTS
+    .filter((a) => a.chair === chair.name && a.kind === 'reappointment' && a.confirmed !== null && a.confirmed <= date)
+    .sort((a, b) => a.confirmed!.localeCompare(b.confirmed!))
+    .at(-1);
+  return inForce ? presidentOn(inForce.received).party : firstAppointedBy(chair);
 }
 
 /** The party of the president who FIRST appointed each chair, derived, not typed. */
