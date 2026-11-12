@@ -33,6 +33,7 @@
     "build:locales": "node scripts/build_locales.mjs",
     "data:econ:quotes": "tsx scripts/check_econ_quotes.ts",
     "data:econ": "tsx scripts/export_econ.ts",
+    "data:faith:quotes": "tsx scripts/check_faith_quotes.ts",
     "i18n:sidecar": "node scripts/check_sidecar.mjs",
     "stats": "node scripts/stats.mjs",
     "data:members": "node --max-old-space-size=4096 scripts/build_members.mjs",

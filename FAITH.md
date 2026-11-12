@@ -1,6 +1,33 @@
 # Faith module
 
-**Status: planning.** See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
+**Status: building, pilot issue (immigration) done, 12 Nov 2026.** See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
+
+## Decisions made 12 November 2026
+
+These override the plan below where they differ.
+
+1. **Ship before reviewers are found, labeled.** Marco has not yet found
+   reviewers and chose to publish without them, with every faith page saying
+   plainly that its entries have not been reviewed by members of the
+   traditions they describe. Reviewer sign-offs are added as reviewers come.
+   This reverses the original launch gate ("nothing ships until reviewers ...
+   have signed off").
+2. **Five traditions:** Catholic (USCCB), Southern Baptist, United Methodist
+   (chosen over the ELCA: larger in Texas, and its Social Principles were
+   revised in 2024), African Methodist Episcopal (chosen over the National
+   Baptist Convention: more formal positions to cite), and Assemblies of God.
+3. **Every qualifying statement, newest first,** not just the latest. What
+   qualifies is written per tradition in `TRADITIONS[].official` in
+   `faith_positions.ts` and applies to every issue: the body that speaks for
+   the tradition, not its staff, agencies or officers' columns. On immigration
+   this shows the SBC's position moving across four resolutions (2011, 2018,
+   2023, 2026).
+
+Built so far: `faith_positions.ts` (rules, traditions, the immigration pilot:
+ten statements and four planks), `faith.smoke.ts`, and
+`npm run data:faith:quotes`, which checks every excerpt against the downloaded
+source with a control that must fail. Qualifying documents not yet read are in
+`TO_READ`, so a gap is listed rather than forgotten.
 
 Readers pick a Christian tradition and see, issue by issue, what it officially
 teaches next to what each party's platform says. **The site never decides what
