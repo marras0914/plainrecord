@@ -1,10 +1,11 @@
 /**
- * PlainRecord — the two hubs the site nav points at: /bills and /races
+ * PlainRecord — the two hubs the site nav points at: /bills and /context
  *
  *   node scripts/build_hubs.mjs
  *
- * Writes /bills and /proyectos (the seven headline bills) and /races and
- * /contiendas (the three statewide races). Before these, neither set had an
+ * Writes /bills and /proyectos (the seven headline bills) and /context and
+ * /contexto (background: today the three 2026 races, which were the /races hub
+ * until 12 Nov 2026; /races redirects here). Before these, neither set had an
  * index: the bill pages were three or four clicks from the homepage and the race
  * pages could only be reached from a link the quiz draws after a reader has
  * answered something. The nav needed somewhere to point.
@@ -55,12 +56,19 @@ const COPY = {
       rest: 'The other 60 votes are in the quiz, with the party labels hidden until you answer.',
       cta: 'Take the quiz',
     },
+    // The Context hub (12 Nov 2026). The race section below is the old /races
+    // hub moved in whole; only h1, docTitle, desc and lede here are new, and
+    // the race lede is in the past tense now that the election is over.
+    context: {
+      slug: 'context', otherSlug: 'contexto',
+      docTitle: 'Context: the 2026 Texas races and other background',
+      h1: 'Context',
+      desc: 'Background to the Texas House voting records on this site, starting with what the public record showed about both candidates in three 2026 Texas races: Governor, Lieutenant Governor and U.S. Senate.',
+      lede: 'Background to the voting records on this site.',
+    },
     races: {
-      slug: 'races', otherSlug: 'contiendas',
-      docTitle: '2026 Texas races: Governor, Lt. Governor, U.S. Senate',
       h1: 'Three 2026 races, and what the record shows',
-      desc: 'What the public record shows about both candidates in three 2026 Texas races: Governor, Lieutenant Governor and U.S. Senate.',
-      lede: 'In each race, one candidate sits in the Texas House and has votes on these bills, and the other does not. Each page says exactly what the record shows for both, and where the two kinds of record stop being comparable.',
+      lede: 'In each race, one candidate sat in the Texas House in 2025 and has votes on these bills, and the other did not. Each page says exactly what the record shows for both, and where the two kinds of record stop being comparable.',
       noVotes: (r) => `Why ${r.opp} has no votes here:`,
       open: (r) => `What the record shows for both`,
       rest: 'The quiz shows how all three House candidates voted on each bill once you have answered it.',
@@ -82,12 +90,17 @@ const COPY = {
       rest: 'Los otros 60 votos están en el cuestionario, con las etiquetas de partido ocultas hasta que usted responda.',
       cta: 'Haga el cuestionario',
     },
+    // context.* and the reworded races.lede: approved by Marco, 12 Nov 2026.
+    context: {
+      slug: 'contexto', otherSlug: 'context',
+      docTitle: 'Contexto: las contiendas de Texas de 2026 y otros antecedentes',
+      h1: 'Contexto',
+      desc: 'Antecedentes de los historiales de votación de la Cámara de Texas en este sitio, empezando por lo que mostraba el registro público sobre ambos candidatos en tres contiendas de Texas en 2026: gobernador, vicegobernador y Senado de Estados Unidos.',
+      lede: 'Antecedentes de los historiales de votación de este sitio.',
+    },
     races: {
-      slug: 'contiendas', otherSlug: 'races',
-      docTitle: 'Contiendas de Texas en 2026: gobernador, vicegobernador y Senado',
       h1: 'Tres contiendas de 2026 y lo que muestra el historial',
-      desc: 'Lo que muestra el registro público sobre ambos candidatos en tres contiendas de Texas en 2026: gobernador, vicegobernador y Senado de Estados Unidos.',
-      lede: 'En cada contienda, una de las dos personas ocupa una curul en la Cámara de Texas y tiene votos sobre estos proyectos, y la otra no. Cada página dice exactamente qué muestra el registro de cada una, y dónde los dos tipos de registro dejan de ser comparables.',
+      lede: 'En cada contienda, una de las dos personas ocupaba una curul en la Cámara de Texas en 2025 y tiene votos sobre estos proyectos, y la otra no. Cada página dice exactamente qué muestra el registro de cada una, y dónde los dos tipos de registro dejan de ser comparables.',
       noVotes: (r) => `Por qué ${r.opp} no tiene votos aquí:`,
       open: () => 'Lo que muestra el historial de cada una',
       rest: 'El cuestionario muestra cómo votaron las tres personas candidatas de la Cámara en cada proyecto, una vez que usted responde.',
@@ -98,16 +111,27 @@ const COPY = {
   },
 };
 
+/**
+ * A hub page. `which` is 'bills', or 'context', whose body is a list of
+ * sections: today only the races, and the economy and faith modules join as
+ * they ship. Each section is the old hub's heading, lede, list and closing line.
+ */
 function page(lang, which, items) {
   const c = COPY[lang];
   const h = c[which];
   const canonical = `${SITE}/${h.slug}`;
+  const section = (s, list) => `
+  <ul class="stand">${list}</ul>
+  <p>${esc(s.rest)}</p>
+  <p><a class="cta" href="${c.quiz}">${esc(s.cta)}</a></p>`;
+  const main = which === 'context'
+    ? `
+  <h2>${esc(c.races.h1)}</h2>
+  <p>${esc(c.races.lede)}</p>${section(c.races, items)}`
+    : section(h, items);
   const body = `
   <h1>${esc(h.h1)}</h1>
-  <p class="lede">${esc(h.lede)}</p>
-  <ul class="stand">${items}</ul>
-  <p>${esc(h.rest)}</p>
-  <p><a class="cta" href="${c.quiz}">${esc(h.cta)}</a></p>
+  <p class="lede">${esc(h.lede)}</p>${main}
   <p class="small">${sheetLine(lang)}</p>
   <hr>
   <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>`;
@@ -136,11 +160,11 @@ for (const lang of ['en', 'es']) {
   const raceItems = RACES.map((r) => `<li><a href="${SITE}/${r.slug[lang]}"><b>${esc(r.title[lang])}</b></a><br>`
     + `<span class="small">${esc(c.races.noVotes(r))} ${esc(whyNoVotes(r.opp, lang))}</span><br>`
     + `<a class="small" href="${SITE}/${r.slug[lang]}">${esc(c.races.open(r))}</a></li>`).join('');
-  for (const [which, items] of [['bills', billItems], ['races', raceItems]]) {
+  for (const [which, items] of [['bills', billItems], ['context', raceItems]]) {
     const dir = resolve(ROOT, 'public', c[which].slug);
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 'index.html'), page(lang, which, items), 'utf8');
     n++;
   }
 }
-console.log(`  ${n} hub pages written: /bills, /proyectos, /races, /contiendas`);
+console.log(`  ${n} hub pages written: /bills, /proyectos, /context, /contexto`);
