@@ -1656,10 +1656,13 @@ function renderCands(): void {
       `<div class="cand-n">n = ${r.n}${r.n && r.n < 10 ? ' · heavily shrunk' : ''}</div>` +
       link + `</div>`;
   }).join('');
-  el('cand-note').innerHTML =
-    `All three sat in the same chamber and are running for different offices, so these are three separate readouts, not a ranking. They voted together on most party-line bills, so expect the numbers to sit close together — where they diverge is the interesting part. Coverage over these ${ALL_ITEMS.length} votes: ` +
-    CANDIDATES.map((c) => `${c.name.split(' ').slice(-1)[0]} ${c.voted}`).join(', ') +
-    `. A vote they missed is dropped for them alone, not counted against them.`;
+  // Through t() since 12 Nov 2026. It was built here in English, so the Spanish
+  // page showed this note in English while cand.note sat approved and unused:
+  // the gate checks that a string is approved, not that anything renders it.
+  el('cand-note').innerHTML = t('cand.note', {
+    items: String(ALL_ITEMS.length),
+    coverage: CANDIDATES.map((c) => `${c.name.split(' ').slice(-1)[0]} ${c.voted}`).join(', '),
+  });
 }
 
 /**

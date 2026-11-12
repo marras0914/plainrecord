@@ -68,7 +68,7 @@ const FILES = [
   },
   {
     f: 'members_89R.json', name: 'Members and their votes on the 67 selected items',
-    what: `The ${roster.members.length} sitting members, with district and party, and how each voted on the ${roster.itemOrder.length} items the site asks about.`,
+    what: `The ${roster.members.length} members of the 89th Legislature in this record, with district and party, and how each voted on the ${roster.itemOrder.length} items the site asks about.`,
   },
   {
     f: 'quiz_89R.json', name: `The ${quiz.items.length} items the site asks about`,

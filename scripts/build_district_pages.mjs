@@ -46,7 +46,7 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { cardsFresh, districtCard } from './_share_cards.mjs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
-import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
+import { SITE, RESULTS_URL, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { billPath } from './build_bill_pages.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -258,7 +258,8 @@ function ballotBlock(m, lang) {
   return `<h2 id="ballot">${esc(c.h2ballot(m))}</h2>
   <p>${esc(inc ? c.ballotRunning(m) : c.ballotNotRunning(m))}${printed.length === 1 ? ` ${esc(c.ballotOnly)}` : ''}</p>
   <ul class="stand">${items}</ul>
-  <p class="small">${esc(c.ballotNote(fetchedDate(lang)))} <a href="${esc(ballot._meta.source)}" rel="nofollow noopener" target="_blank">${esc(c.ballotSource)}</a></p>`;
+  <p class="small">${esc(c.ballotNote(fetchedDate(lang)))} <a href="${esc(ballot._meta.source)}" rel="nofollow noopener" target="_blank">${esc(c.ballotSource)}</a></p>
+  <p class="small">${esc(c.results)} <a href="${RESULTS_URL}" rel="noopener" target="_blank">${esc(c.resultsLink)}</a></p>`;
 }
 
 // --- where the district is ---------------------------------------------------
@@ -341,25 +342,30 @@ const COPY = {
     whereCdp: 'unincorporated community',
     whereOutside: (share) => `The other ${share} of the district lives outside any city or named community.`,
     whereNote: 'Counted from 2020 Census blocks. A city split between districts appears on each of their pages, and your street decides which one is yours.',
-    lede: (m, r) => `${m.n} represents Texas House District ${m.d} and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
+    // "Represented ... in the 89th Legislature" since 12 Nov 2026, so the page
+    // stays true after the 90th is sworn in on 12 Jan 2027. The record is that
+    // session's, whoever holds the seat next. Spanish approved 12 Nov 2026.
+    lede: (m, r) => `${m.n} represented Texas House District ${m.d} in the 89th Legislature (the 2025 session) and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
     // The index answers "who is my state rep", the question people actually type,
     // so the title, h1 and description say that and the ZIP box sits first.
     indexDocTitle: 'Who is my Texas state representative? Find yours by ZIP code',
     indexTitle: 'Find your Texas House representative',
-    indexDesc: 'Type a ZIP code to see which Texas House district you are in, who represents it, and how they voted in 2025. All 150 districts, free, no cookies.',
+    indexDesc: 'Type a ZIP code to see which Texas House district you are in, who represented it in the 89th Legislature, and how they voted in 2025. All 150 districts, free, no cookies.',
     indexListHead: 'All 150 districts',
     indexCharts: 'See every House vote in three charts',
-    indexLede: 'One page per sitting member, showing how they voted on the bills that drew the most attention and where they broke with their own party.',
+    indexLede: 'One page per member of the 89th Legislature, showing how they voted on the bills that drew the most attention and where they broke with their own party.',
     indexKey: 'The pair after each name is how often that member voted against their own party, out of the votes where the two parties took opposite sides.',
-    indexVacant: (d) => `District ${d} has no sitting member and so has no page. Nate Schatzline held it and left on 29 July 2026, after casting 3,283 votes that are still the record for that district.`,
+    indexVacant: (d) => `District ${d} has no page, because nobody held the seat when this record was built. Nate Schatzline held it and left on 29 July 2026, after casting 3,283 votes that are still the record for that district.`,
     indexBack: 'All 150 districts',
-    h2ballot: (m) => `On the November 3 ballot for District ${m.d}`,
-    ballotRunning: (m) => `${m.n} holds this seat now and is running again, so the record on this page is theirs.`,
-    ballotNotRunning: (m) => `${m.n} holds this seat now and is not on the November ballot for it. The record on this page is theirs, not any candidate's.`,
-    ballotOnly: 'Only one candidate is on the ballot for this seat.',
-    ballotIncumbent: 'holds the seat now',
+    h2ballot: (m) => `On the November 3, 2026 ballot for District ${m.d}`,
+    ballotRunning: (m) => `${m.n} held this seat in the 89th Legislature and ran again, so the record on this page is theirs.`,
+    ballotNotRunning: (m) => `${m.n} held this seat in the 89th Legislature and was not on the November ballot for it. The record on this page is theirs, not any candidate's.`,
+    ballotOnly: 'Only one candidate was on the ballot for this seat.',
+    ballotIncumbent: 'held the seat in the 89th Legislature',
     ballotWriteIn: 'declared write-in, name not printed on the ballot',
-    ballotNote: (date) => `As certified by the Texas Secretary of State, retrieved ${date}. This site has voting records only for current House members. Your ballot has many other races, and your county's sample ballot shows all of them.`,
+    ballotNote: (date) => `As certified by the Texas Secretary of State, retrieved ${date}. This site has voting records only for members of the 89th Legislature. Your ballot had many other races, and your county's sample ballot showed all of them.`,
+    results: 'Who won is on the Texas Secretary of State’s results page. This site reports voting records, not election results.',
+    resultsLink: 'Official results',
     ballotSource: 'The state’s candidate list',
     printUrl: (m) => `rightnleft.com/district/${m.d}`,
     h2head: 'How they voted on the bills people have heard of',
@@ -409,25 +415,29 @@ const COPY = {
     whereCdp: 'comunidad no incorporada',
     whereOutside: (share) => `El ${share} restante del distrito vive fuera de cualquier ciudad o comunidad con nombre.`,
     whereNote: 'Contado a partir de los bloques del censo de 2020. Una ciudad repartida entre distritos aparece en la página de cada uno, y su calle decide cuál le corresponde.',
-    lede: (m, r) => `${m.n} representa al Distrito ${m.d} de la Cámara de Texas y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
+    lede: (m, r) => `${m.n} representó al Distrito ${m.d} de la Cámara de Texas en la 89.ª Legislatura (la sesión de 2025) y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
     indexDocTitle: '¿Quién es mi representante estatal en Texas? Búsqueda por código postal',
     indexTitle: 'Encuentre a su representante en la Cámara de Texas',
-    indexDesc: 'Escriba su código postal para ver qué distrito de la Cámara de Texas le corresponde, quién representa ese distrito y cómo votó en 2025. Los 150 distritos, gratis y sin cookies.',
+    indexDesc: 'Escriba su código postal para ver qué distrito de la Cámara de Texas le corresponde, quién representó a ese distrito en la 89.ª Legislatura y cómo votó en 2025. Los 150 distritos, gratis y sin cookies.',
     indexListHead: 'Los 150 distritos',
     indexCharts: 'Vea todos los votos de la Cámara en tres gráficas',
-    indexLede: 'Una página por cada legislador en funciones, con cómo votó en los proyectos de ley que más atención recibieron y dónde se apartó de su propio partido.',
+    indexLede: 'Una página por cada miembro de la 89.ª Legislatura, con cómo votó en los proyectos de ley que más atención recibieron y dónde se apartó de su propio partido.',
     indexKey: 'El par que sigue a cada nombre es cuántas veces esa persona votó en contra de su propio partido, de los votos en los que los dos partidos tomaron lados opuestos.',
-    indexVacant: (d) => `El Distrito ${d} no tiene legislador en funciones, así que no tiene página. Nate Schatzline lo ocupaba y se fue el 29 de julio de 2026, después de emitir 3,283 votos que siguen siendo el registro de ese distrito.`,
+    indexVacant: (d) => `El Distrito ${d} no tiene página, porque nadie ocupaba el escaño cuando se preparó este registro. Nate Schatzline lo ocupaba y se fue el 29 de julio de 2026, después de emitir 3,283 votos que siguen siendo el registro de ese distrito.`,
     indexBack: 'Los 150 distritos',
-    // The eight ballot strings below were approved on 30 September 2026.
-    h2ballot: (m) => `En la boleta del 3 de noviembre para el Distrito ${m.d}`,
-    ballotRunning: (m) => `${m.n} ocupa este escaño ahora y se postula de nuevo, así que el historial de esta página es suyo.`,
-    ballotNotRunning: (m) => `${m.n} ocupa este escaño ahora y no aparece en la boleta de noviembre para este distrito. El historial de esta página es suyo, no de ninguna de las candidaturas.`,
-    ballotOnly: 'Solo hay una candidatura en la boleta para este escaño.',
-    ballotIncumbent: 'ocupa el escaño ahora',
+    // The eight ballot strings below were approved on 30 September 2026, and
+    // put in the past tense on 12 Nov 2026, along with lede, indexDesc,
+    // indexLede, indexVacant, results and resultsLink; all approved that day.
+    h2ballot: (m) => `En la boleta del 3 de noviembre de 2026 para el Distrito ${m.d}`,
+    ballotRunning: (m) => `${m.n} ocupó este escaño en la 89.ª Legislatura y se postuló de nuevo, así que el historial de esta página es suyo.`,
+    ballotNotRunning: (m) => `${m.n} ocupó este escaño en la 89.ª Legislatura y no apareció en la boleta de noviembre para este distrito. El historial de esta página es suyo, no de ninguna de las candidaturas.`,
+    ballotOnly: 'Solo hubo una candidatura en la boleta para este escaño.',
+    ballotIncumbent: 'ocupó el escaño en la 89.ª Legislatura',
     ballotWriteIn: 'candidatura declarada por voto escrito; el nombre no aparece impreso en la boleta',
-    ballotNote: (date) => `Según la certificación de la Secretaría de Estado de Texas, consultada el ${date}. Este sitio solo tiene historial de votos de los miembros actuales de la Cámara. Su boleta incluye muchas otras contiendas, y la boleta de muestra de su condado las muestra todas.`,
+    ballotNote: (date) => `Según la certificación de la Secretaría de Estado de Texas, consultada el ${date}. Este sitio solo tiene historial de votos de los miembros de la 89.ª Legislatura. Su boleta incluía muchas otras contiendas, y la boleta de muestra de su condado las mostraba todas.`,
     ballotSource: 'La lista de candidatos del estado',
+    results: 'Quién ganó aparece en la página de resultados de la Secretaría de Estado de Texas. Este sitio informa sobre historiales de votación, no sobre resultados electorales.',
+    resultsLink: 'Resultados oficiales',
     printUrl: (m) => `rightnleft.com/distrito/${m.d}`,
     h2head: 'Cómo votó en los proyectos de ley de los que sí se habló',
     headNote: 'Estos siete fueron los que más atención recibieron de los 67 que publica este sitio. De cada uno hay una posición registrada para cada legislador, sea cual sea.',
