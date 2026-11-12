@@ -26,6 +26,7 @@ const SUITES = [
   'econ_control.smoke.ts',
   'econ_context.smoke.ts',
   'econ.smoke.ts',
+  'faith.smoke.ts',
   'scripts/export_econ.smoke.ts',
   'evidence.smoke.ts',
   'selection.smoke.ts',
