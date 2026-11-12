@@ -15,7 +15,7 @@
  * "Context" replaced "Races" on 12 Nov 2026. The 2026 races were over, and the
  * economy and faith modules needed a home that would not grow the nav past
  * five (EXPANSION.md, option B). The race pages now sit inside /context, and
- * /races redirects there (vercel.json).
+ * /races redirects there (vercel.json). "Contexto" approved by Marco the same day.
  *
  * This module imports nothing from the shell, so the shell can import it.
  */

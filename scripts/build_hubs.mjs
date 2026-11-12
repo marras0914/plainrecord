@@ -90,7 +90,7 @@ const COPY = {
       rest: 'Los otros 60 votos están en el cuestionario, con las etiquetas de partido ocultas hasta que usted responda.',
       cta: 'Haga el cuestionario',
     },
-    // DRAFT Spanish for context.* and the reworded races.lede, pending review.
+    // context.* and the reworded races.lede: approved by Marco, 12 Nov 2026.
     context: {
       slug: 'contexto', otherSlug: 'context',
       docTitle: 'Contexto: las contiendas de Texas de 2026 y otros antecedentes',
