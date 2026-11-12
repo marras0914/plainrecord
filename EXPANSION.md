@@ -64,6 +64,12 @@ is, so decide this deliberately:
 
 Option B is the recommended starting point. It's the cheapest to undo.
 
+**Decided 12 Nov 2026: option B.** "Context" took the Races slot, so the nav
+stays at five. `/context` launched holding the three 2026 race pages as
+background, since the races are over, and the economy and faith sections join
+it as they ship. `/races` and `/contiendas` redirect permanently to `/context`
+and `/contexto`.
+
 ---
 
 ## How a module fits this repo
@@ -159,9 +165,7 @@ means:
 
 ## Open decisions
 
-1. **Scope and nav:** option A, B or C above. Step 0 bears on this: once the
-   race pages are a record, "Races" may not earn its nav slot, which would
-   free one for the modules.
+1. ~~**Scope and nav**~~: decided, option B (see above).
 2. **Faith traditions at launch:** see [FAITH.md](FAITH.md).
 3. **Faith reviewers:** whether 3 to 4 people from different traditions will
    sign off. If not, the faith module waits rather than shipping unreviewed.
