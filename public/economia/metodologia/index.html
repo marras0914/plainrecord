@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cómo se miden las páginas de economía</title>
+<meta name="description" content="Las fuentes, definiciones y decisiones detrás de las páginas de economía de este sitio: datos de FRED, quién ocupaba cada cargo, el desfase de medición, las notas sobre choques externos y lo que todavía falta.">
+<link rel="canonical" href="https://rightnleft.com/economia/metodologia">
+<link rel="alternate" hreflang="es" href="https://rightnleft.com/economia/metodologia">
+<link rel="alternate" hreflang="en" href="https://rightnleft.com/economy/methodology">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cómo se miden las páginas de economía">
+<meta property="og:description" content="Las fuentes, definiciones y decisiones detrás de las páginas de economía de este sitio: datos de FRED, quién ocupaba cada cargo, el desfase de medición, las notas sobre choques externos y lo que todavía falta.">
+<meta property="og:url" content="https://rightnleft.com/economia/metodologia">
+<meta property="og:image" content="https://rightnleft.com/og.es.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script src="/js/theme.js"></script>
+<script src="/_vercel/insights/script.js" defer></script>
+<link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/newsreader-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-ext-300-700.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-300-700.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-ext-400-600.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-400-600.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{--page:#faf7f1;--surface:#fffdf9;--ink:#1a1714;--ink-2:#57514a;--muted:#6f6a62;
+      --hair:#e6ded1;--rule:#cabfae;--blue:#1f66bd;--red:#c8352f;
+      /* Chart purples, one hue light to dark, validated --ordinal against both
+         the card and the page surface. --pbar is the single-series bar. */
+      --p1:#bda5da;--p2:#a583cc;--p3:#8e62bc;--p4:#7241a0;--p5:#54277c;--pbar:#8e62bc;}
+/* Dark by the quiz's rule, not the OS: light by default, dark only when the
+   reader chose it on the quiz. /js/theme.js sets data-theme before paint. These
+   pages used to follow prefers-color-scheme, which turned a light quiz into a
+   dark race page for anyone whose phone was set to dark. */
+:root[data-theme="dark"]{color-scheme:dark;
+  --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
+  --hair:#2c2c2a;--rule:#383835;--blue:#3987e5;--red:#e66767;
+  --p1:#684b88;--p2:#865eb1;--p3:#a377d3;--p4:#bc97e8;--p5:#d5b9f7;--pbar:#a377d3;}
+/* A crossfade between pages instead of a hard cut, using the browser's own
+   cross-document view transitions: CSS only, same-origin only, and ignored by
+   browsers without it. Off for anyone who asked for reduced motion. The quiz
+   carries the same rule in src/styles.css, so moving between them fades too. */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
+  font-size:17px;-webkit-text-size-adjust:100%}
+main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
+h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
+  line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}
+h2{font-size:clamp(1.25rem,4.4vw,1.5rem);margin:40px 0 10px}
+.kicker{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lede{font-size:1.1rem;color:var(--ink-2);margin:0 0 8px;text-wrap:pretty}
+p{margin:0 0 14px}
+.label{font-weight:600}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
+  padding:18px 18px 6px;margin:14px 0}
+ul{margin:0 0 14px;padding-left:1.1rem}
+li{margin:0 0 8px}
+.bill{font-variant-numeric:tabular-nums;font-weight:600}
+.small{font-size:13.5px;color:var(--muted)}
+/* The check-it-yourself link beside a bill. Deliberately quieter than the
+   summary it follows: it is there for the reader who doubts the line, not a
+   thing every reader is being sent to. */
+.hist{font-size:12.5px;white-space:nowrap}
+/* How a member stood on a headline bill. A word, not a colour: the page is read
+   by people who cannot distinguish red from green, and printed in black. */
+.dindex{list-style:none;padding:0;margin:14px 0 18px;columns:2;column-gap:26px}
+.dindex li{break-inside:avoid;padding:3px 0;font-size:15.5px}
+.dindex a{text-decoration:none}
+.dindex a:hover{text-decoration:underline}
+@media (max-width:520px){.dindex{columns:1}}
+.stand{list-style:none;padding:0;margin:0}
+.stand li{padding:9px 0;border-top:1px solid var(--hair)}
+.stand li:first-child{border-top:0}
+.vm{font-size:12.5px;padding:1px 8px;border-radius:999px;white-space:nowrap;
+    border:1px solid var(--rule);color:var(--ink-2)}
+.vm-none{opacity:.75}
+a{color:var(--blue)}
+.cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
+  background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
+hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+  font-size:13px;margin-bottom:22px}
+/* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
+   scrolling sideways on a phone; the current section is ink, not link blue. */
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sitenav a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}
+.sitenav a:hover{text-decoration:underline}
+.sitenav a[aria-current]{color:var(--ink);font-weight:600}
+.sitefoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px}
+.sitefoot ul{list-style:none;padding:0;margin:0}.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}.sitefoot a:hover{text-decoration:underline}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
+/* Charts, drawn by scripts/_charts.mjs. */
+.chart{margin:16px 0 10px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:inherit;fill:var(--ink-2);font-size:12px}
+.chart .tick{fill:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.chart .note{fill:var(--muted);font-size:11.5px}
+.chart .lab{fill:var(--ink);font-size:12.5px;font-weight:600}
+.chart .val{fill:var(--ink);font-size:12px;font-weight:600}
+.chart .grid,.chart .axis{stroke:var(--hair);stroke-width:1}
+.chart .axis{stroke:var(--rule)}
+.chart .med{stroke:var(--ink-2);stroke-width:1.5}
+.chart .lead{stroke:var(--muted);stroke-width:1}
+.chart .bar{fill:var(--pbar)}
+.chart .dot{stroke:var(--surface);stroke-width:2}
+.chart .D{fill:var(--blue)} .chart .R{fill:var(--red)}
+.chart .sq.none{opacity:.32}
+.chart .dist{stroke:var(--page);stroke-width:.6}
+.chart .p1{fill:var(--p1)} .chart .p2{fill:var(--p2)} .chart .p3{fill:var(--p3)}
+.chart .p4{fill:var(--p4)} .chart .p5{fill:var(--p5)} .chart .nodata{fill:var(--hair)}
+.chart .maplab{fill:var(--ink);font-size:11.5px;font-weight:600;paint-order:stroke;stroke:var(--page);stroke-width:3px;stroke-linejoin:round}
+.chart .inbox{fill:none;stroke:var(--ink-2);stroke-width:1}
+.chart a:hover .dist,.chart a:focus .dist{stroke:var(--ink);stroke-width:1.5}
+.chart a:hover .dot,.chart a:focus .dot{stroke:var(--ink)}
+/* A 608-wide viewBox drawn into a phone scales to about 0.56, which took 11px
+   labels to 6px. Larger type in viewBox units lands near 10px on screen. */
+@media (max-width:520px){.chart .tick,.chart .note,.chart .maplab{font-size:17px}.chart .lab,.chart .val{font-size:18px}}
+.legend{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;color:var(--ink-2)}
+.legend li{margin:0}.legend .sw{display:inline-block;width:14px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.legend .p1{background:var(--p1)}.legend .p2{background:var(--p2)}.legend .p3{background:var(--p3)}.legend .p4{background:var(--p4)}.legend .p5{background:var(--p5)}.legend .nodata{background:var(--hair)}.legend .D{background:var(--blue)}.legend .R{background:var(--red)}
+p.lab{font-weight:600;color:var(--ink);margin:14px 0 0}
+.insets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media (max-width:520px){.insets{grid-template-columns:1fr}}
+.inset{margin:0}.inset svg{border:1px solid var(--hair);border-radius:8px}
+details.table{margin:6px 0 18px}
+details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
+.chart-table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:8px}
+.chart-table th,.chart-table td{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--hair)}
+.chart-table td.num,.chart-table th.num{text-align:right;font-variant-numeric:tabular-nums}
+/* The ZIP box on /districts. 17px so iOS does not zoom the page on focus. */
+#ziplookup input{font:inherit;font-size:17px;padding:10px 12px;width:9.5rem;margin-top:6px;
+  border:1px solid var(--rule);border-radius:8px;background:var(--page);color:var(--ink)}
+#ziplookup .zipout p{margin:12px 0 6px}
+.zips{font-variant-numeric:tabular-nums;font-size:14px;color:var(--ink-2);
+  line-height:1.8;word-spacing:.15em}
+/* Printing. A district page is the thing someone takes to the kitchen table
+   before voting, so on paper it drops the navigation and the invitations, goes
+   black on white whatever theme was chosen, and ends with its own address so a
+   printed copy can be checked against the live one. */
+.printonly{display:none}
+@media print{
+  :root,:root[data-theme="dark"]{color-scheme:light;--page:#fff;--surface:#fff;--ink:#000;
+    --ink-2:#222;--muted:#444;--hair:#bbb;--rule:#888;--blue:#000;--red:#000}
+  body{font-size:11.5pt;line-height:1.4}
+  main{max-width:none;padding:0}
+  .top,.sitenav,.sitefoot,.noprint,.hist,.cta{display:none}
+  .printonly{display:block;font-size:10pt;color:var(--muted)}
+  h1{font-size:20pt;margin:0 0 10px}
+  h2{font-size:14pt;margin:18px 0 6px;break-after:avoid}
+  li,.stand li{break-inside:avoid}
+  .stand li{padding:5px 0}
+  a{color:inherit;text-decoration:none}
+  hr{margin:16px 0}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Cómo se miden las páginas de economía","description":"Las fuentes, definiciones y decisiones detrás de las páginas de economía de este sitio: datos de FRED, quién ocupaba cada cargo, el desfase de medición, las notas sobre choques externos y lo que todavía falta.","inLanguage":"es-US","url":"https://rightnleft.com/economia/metodologia","isPartOf":{"@type":"WebSite","@id":"https://rightnleft.com/#website","url":"https://rightnleft.com/"}}</script>
+</head>
+<body>
+<main>
+  <div class="top">
+    <span class="kicker">La economía · de 1949 a hoy</span>
+    <a href="https://rightnleft.com/economy/methodology">In English</a>
+  </div>
+  <nav class="sitenav" aria-label="Secciones del sitio"><a href="https://rightnleft.com/es">Cuestionario</a><a href="https://rightnleft.com/distritos">Su representante</a><a href="https://rightnleft.com/proyectos">Proyectos</a><a href="https://rightnleft.com/contexto" aria-current="true">Contexto</a><a href="https://rightnleft.com/graficas">Gráficas</a></nav>
+
+  <h1>Cómo se miden las páginas de economía</h1>
+  <p class="lede">Aquí está por escrito cada decisión que podría mover una cifra, incluidas las que no favorecen una historia sencilla.</p>
+  <p><a href="https://rightnleft.com/economia/explorar">Cada periodo, con su nombre</a></p>
+
+  <h2>Qué encuentra la investigación</h2>
+  <p>Blinder y Watson (<em>American Economic Review</em>, 2016) encontraron que el PIB real creció cerca de 1.8 puntos más al año con presidentes demócratas, de 1949 a 2013. Encontraron que los choques petroleros, la productividad, la economía mundial y quizá las expectativas de los consumidores explican cerca de la mitad de esa brecha, y que no la explica una política fiscal o monetaria más expansiva con los demócratas, ni el partido que tenía el Congreso. Al resto lo llaman inexplicado. Este sitio presenta los tres hallazgos juntos, porque el primero sin el segundo es una afirmación que el estudio no hace.</p>
+
+  <h2>Fuentes</h2>
+  <p>Datos económicos de FRED, del Banco de la Reserva Federal de St. Louis, guardados con su fecha de consulta, así que el sitio nunca consulta FRED mientras usted lo lee:</p>
+  <ul><li><a href="https://fred.stlouisfed.org/series/GDPC1">Real Gross Domestic Product</a> (GDPC1), actualizada por FRED el 2026-10-29</li><li><a href="https://fred.stlouisfed.org/series/PAYEMS">All Employees, Total Nonfarm</a> (PAYEMS), actualizada por FRED el 2026-11-06</li><li><a href="https://fred.stlouisfed.org/series/UNRATE">Unemployment Rate</a> (UNRATE), actualizada por FRED el 2026-11-06</li><li><a href="https://fred.stlouisfed.org/series/CPIAUCSL">Consumer Price Index for All Urban Consumers: All Items in U.S. City Average</a> (CPIAUCSL), actualizada por FRED el 2026-11-10</li><li><a href="https://fred.stlouisfed.org/series/FYFSGDA188S">Federal Surplus or Deficit [-] as Percent of Gross Domestic Product</a> (FYFSGDA188S), actualizada por FRED el 2026-10-28</li><li><a href="https://fred.stlouisfed.org/series/MEHOINUSA672N">Real Median Household Income in the United States</a> (MEHOINUSA672N), actualizada por FRED el 2026-09-16</li><li><a href="https://fred.stlouisfed.org/series/USREC">NBER based Recession Indicators for the United States from the Period following the Peak through the Trough</a> (USREC), actualizada por FRED el 2026-11-02</li></ul>
+  <p>Quién ocupaba cada cargo, copiado a mano de las páginas oficiales y comprobado con pruebas automáticas:</p>
+  <ul><li><a href="https://history.house.gov/Institution/Party-Divisions/Party-Divisions/">Mayorías en la Cámara: la Oficina del Historiador de la Cámara</a></li><li><a href="https://www.senate.gov/senators/majority-minority-leaders.htm">Control del Senado: la Oficina Histórica del Senado</a></li><li><a href="https://www.federalreserve.gov/aboutthefed/bios/board/boardmembership.htm">Presidencias de la Reserva Federal: la Junta de la Reserva Federal</a></li><li><a href="https://www.nber.org/papers/w20324">La investigación: Blinder y Watson, documento de trabajo 20324 de la NBER</a></li></ul>
+
+  <h2>Qué es cada cifra</h2>
+  <ul><li><b>Crecimiento del PIB real, % anual.</b> PIB real (GDPC1), del trimestre anterior al periodo a su último trimestre, a tasa anual.</li><li><b>Crecimiento del empleo, % anual.</b> Empleo no agrícola (PAYEMS), del último mes antes del periodo a su último mes, a tasa anual.</li><li><b>Cambio en la tasa de desempleo, en puntos.</b> La tasa de desempleo (UNRATE) en el último mes del periodo, menos la tasa del mes anterior a su inicio.</li><li><b>Inflación, % anual.</b> Precios al consumidor (CPIAUCSL), medidos como el empleo, a tasa anual.</li><li><b>Superávit o déficit federal, % del PIB (promedio).</b> El promedio de la serie FYFSGDA188S de FRED en los años fiscales cuyo punto medio cae dentro del periodo. El Banco de la Reserva Federal de St. Louis construye esa serie dividiendo el déficit del año fiscal entre el PIB del año calendario.</li><li><b>Ingreso mediano real de los hogares, % anual (desde 1984).</b> Ingreso mediano real de los hogares (MEHOINUSA672N), a tasa anual. La serie empieza en 1984, así que los periodos anteriores aparecen sin datos, nunca en cero.</li><li><b>Meses en recesión.</b> Meses marcados como recesión en USREC, que la NBER fecha desde el mes posterior a un pico hasta el punto más bajo.</li></ul>
+  <p>Cada cifra viene también con la misma medida en los cuatro trimestres anteriores al inicio del periodo: lo que el periodo heredó.</p>
+
+  <h2>El desfase, y hacia dónde inclina</h2>
+  <p>El primer trimestre de un periodo se le atribuye al presidente anterior, como en el estudio. Es una decisión, y el estudio dice hacia dónde inclina: cualquier otro desfase que probaron sus autores da una brecha menor. Recalculada aquí con los periodos del estudio, la brecha es de 1.41, 1.76, 1.58, 1.34, 0.94 puntos con desfases de 0 a 4 trimestres. Este sitio usa primero el desfase del estudio para que sus cifras se puedan comparar con el estudio, lo identifica como de ellos, y muestra los otros cuatro al lado.</p>
+  <p>Cuando la presidencia cambió de manos dentro de un periodo, el periodo se mantiene entero y nombra a los dos presidentes (Kennedy y Johnson, Nixon y Ford), como los cuenta el estudio.</p>
+
+  <h2>Las notas sobre choques externos</h2>
+  <p>Qué choques llevan nota podría inclinar el juicio de quien lee, así que nadie los escoge. Hay una nota por cada choque externo que nombran Blinder y Watson (dos choques petroleros de la OPEP, el alza del petróleo de 1990, la triplicación de su precio de 2005 a 2008, la crisis financiera de 2008 y las guerras que cuentan como gasto de defensa fuera del control de un presidente), y por cada recesión de la NBER que empezó después del final de su muestra, que hasta ahora es solo la de 2020. Cada nota cita su fuente. La regla pone 10 notas en periodos republicanos y 5 en demócratas. Eso es el propio hallazgo del estudio, aplicado tal cual, y por eso las notas aparecen solo después de calificar los periodos, nunca en las tarjetas sin nombre.</p>
+
+  <h2>Lo que la ronda sin nombres no puede ocultar</h2>
+  <p>Las tarjetas sin nombre no llevan años, nombres ni partidos, pero las cifras pueden delatar un periodo para quien conoce la historia. Un superávit presupuestario promedio solo puede ser de finales de los noventa. Una inflación de dos dígitos apunta a finales de los setenta. Una tarjeta sin datos de ingreso es de antes de 1984. El registro con nombres de donde salen esas tarjetas es público. La ronda es una forma de ver las cifras antes que los nombres, no un secreto.</p>
+
+  <h2>Lo que falta</h2>
+  <ul><li>Quién renovó a dos personas en la presidencia de la Reserva Federal. Hasta la Ley de Reforma de la Reserva Federal de 1977, el Presidente designaba a quien la presidía sin confirmación del Senado, así que las renovaciones de William McChesney Martin Jr. desde 1955 y la de Arthur Burns en 1974 no están en los registros del Senado. Mientras no tengan fuente, el sitio no agrupa el crecimiento según el partido que hizo el nombramiento.</li><li>Octubre de 2025 falta en las series de precios al consumidor y de desempleo de FRED. Ninguna cifra de estas páginas necesita ese mes, y no se rellena ninguna.</li><li>El ingreso mediano de los hogares antes de 1984, que la serie de FRED no cubre.</li></ul>
+
+  <h2>Lo que estas páginas no dicen</h2>
+  <p>No dicen qué partido es mejor para la economía. Una diferencia que ocurrió mientras un partido gobernaba no es prueba de que ese partido la causó, y la investigación de arriba dice que cerca de la mitad de esta se debe a cosas que ningún presidente controla. Se muestran todas las cifras, incluidas las que no favorecen a ninguno de los dos lados.</p>
+  <footer class="sitefoot" aria-label="Más en este sitio"><div><p class="foot-head">El sitio</p><ul><li><a href="https://rightnleft.com/es">El cuestionario</a></li><li><a href="https://rightnleft.com/distritos">Encuentre a su representante</a></li><li><a href="https://rightnleft.com/proyectos">Los proyectos</a></li><li><a href="https://rightnleft.com/contexto">Contexto</a></li><li><a href="https://rightnleft.com/graficas">Gráficas</a></li><li><a href="https://rightnleft.com/hoja">Hoja informativa de una página</a></li><li><a href="https://rightnleft.com/open-data">Descargar los datos (en inglés)</a></li><li><a href="https://rightnleft.com/maestros">Para docentes: una hoja de trabajo gratis</a></li></ul></div><div><p class="foot-head">Los siete proyectos</p><ul><li><a href="https://rightnleft.com/proyecto/sb-2"><span class="bill">SB 2</span> Cuentas de ahorro educativo</a></li><li><a href="https://rightnleft.com/proyecto/sb-8"><span class="bill">SB 8</span> Aplicación de la ley migratoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-10"><span class="bill">SB 10</span> Los Diez Mandamientos en las aulas</a></li><li><a href="https://rightnleft.com/proyecto/sb-3"><span class="bill">SB 3</span> Prohibición del THC</a></li><li><a href="https://rightnleft.com/proyecto/sb-14"><span class="bill">SB 14</span> Revisión regulatoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-6"><span class="bill">SB 6</span> Red eléctrica y grandes consumidores</a></li><li><a href="https://rightnleft.com/proyecto/sb-5"><span class="bill">SB 5</span> Instituto de investigación sobre demencia</a></li></ul></div><div><p class="foot-head">Las tres contiendas</p><ul><li><a href="https://rightnleft.com/contienda/gobernador">Gobernador: Gina Hinojosa y Greg Abbott</a></li><li><a href="https://rightnleft.com/contienda/vicegobernador">Vicegobernador: Vikki Goodwin y Dan Patrick</a></li><li><a href="https://rightnleft.com/contienda/senado">Senado de Estados Unidos: James Talarico y Ken Paxton</a></li></ul></div></footer>
+</main>
+</body>
+</html>
