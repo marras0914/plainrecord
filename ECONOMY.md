@@ -61,34 +61,43 @@ rule `outcomes.ts` sets.
 
 ### Hand-curated: `econ_control.ts`
 
-Who held each office, one record per presidential term, from Truman's elected
-term (1949) to the present. Typed, at the root, and sourced line by line, like
+**Built 12 Nov 2026.** Who held each office from Truman's elected term (1949)
+to the present. Typed, at the root, and sourced line by line, like
 `stated_positions.ts`.
+
+It holds four base tables, each transcribed from one official page, and
+derives the per-term view from them with `buildTerms()`, so nothing is typed
+twice:
+
+| Table | Source |
+|---|---|
+| `PRESIDENCIES` | House Historian, presidents and coinciding Congresses |
+| `HOUSE` (majority by Congress) | House Historian, party divisions |
+| `SENATE` (stretches of control) | Senate Historical Office, majority and minority leaders, with its footnotes |
+| `FED_CHAIRS`, `FED_VACANCIES` | Federal Reserve Board, board membership, 1914 to present |
 
 ```ts
 export interface Term {
-  id: string;                     // '1981-reagan-1'
+  id: string;                     // '1981-reagan-1', '1973-nixon-ford'
   start: string;                  // inauguration date, ISO
-  end: string;
-  president: { name: string; party: 'D' | 'R' };
-  control: {                      // one entry per stretch of unchanged control
-    congress: number;
-    start: string;
-    end: string;
-    house: 'D' | 'R';
-    senate: 'D' | 'R';
-    note: string | null;          // e.g. 'Senate 50-50, majority by VP tie-break'
-    sourceUrl: string;            // history.house.gov / senate.gov party divisions
-  }[];
-  fedChairs: {
-    name: string;
-    start: string;
-    end: string;
-    appointments: { date: string; by: 'D' | 'R' }[];  // first appointment and every reappointment as chair
-    sourceUrl: string;            // federalreserve.gov history
-  }[];
+  end: string | null;             // exclusive; null for the term in progress
+  presidents: { name: string; party: 'D' | 'R'; start: string }[];  // two when the office changed hands
+  party: 'D' | 'R';
+  control: { start: string; end: string | null; house: 'D' | 'R'; senate: 'D' | 'R'; note: string | null }[];
+  fedChairs: { name: string; start: string; end: string | null }[];
+  complete: boolean;
 }
 ```
+
+Senate control is taken from who organized the chamber (the majority leader's
+party), not from seat counts. In the 83rd Congress Democrats at times held more
+seats while Republicans kept control, and the header order on the Senate's own
+party-division page does not reliably list the majority first.
+
+**Not built: the appointing-party grouping.** A chair's first appointment is
+derived (the president in office on the day the chair took office). The
+reappointments are not on any page read so far, so they are in `KNOWN_GAPS`
+and `fedAppointingParty()` throws until each one is sourced.
 
 Two cases the obvious shape gets wrong:
 
@@ -101,7 +110,12 @@ Two cases the obvious shape gets wrong:
   appointed by Reagan and reappointed by Clinton; Bernanke by Bush, then
   Obama; Powell by Trump, then Biden. "The party that appointed the chair"
   means the most recent appointment in force on a given date, and the record
-  keeps every appointment so the grouping can be audited.
+  keeps every appointment so the grouping can be audited. (These examples are
+  from memory and are exactly what still needs a primary source; see above.)
+- **The Fed chair can be empty.** The Board's table shows four gaps inside the
+  window, the longest from 1 February to 7 March 1978 between Burns and Miller.
+  They are listed in `FED_VACANCIES` and the smoke test fails if the table and
+  the list disagree.
 
 Every party flip and chair change is checked against the official page before
 it goes in. Recent entries need the most care, so mark the file with a

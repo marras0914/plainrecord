@@ -23,6 +23,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 const SUITES = [
   'valence.smoke.ts',
+  'econ_control.smoke.ts',
   'evidence.smoke.ts',
   'selection.smoke.ts',
   'scripts/ingest_legiscan.smoke.ts',
