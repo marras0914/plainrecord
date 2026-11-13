@@ -1,6 +1,6 @@
 # Faith module
 
-**Status: building, pilot issue (immigration) done, 12 Nov 2026.** See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
+**Status: the source library is complete for all eight issues (13 Nov 2026); the pages and their Spanish come next.** See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
 
 ## Decisions made 12 November 2026
 
