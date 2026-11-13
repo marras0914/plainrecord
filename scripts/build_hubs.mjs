@@ -24,8 +24,10 @@ import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { HEADLINE_BILLS, RACES, billPath } from './_site_nav.mjs';
 import { actsLine } from './build_bill_pages.mjs';
 import { et, requireApprovedEcon, ECON_PATHS } from './_econ_copy.mjs';
+import { ft, requireApprovedFaith, FAITH_PATHS } from './_faith_copy.mjs';
 
 requireApprovedEcon('build_hubs');
+requireApprovedFaith('build_hubs');
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -134,8 +136,15 @@ function page(lang, which, items) {
   <h2>${et(lang, 'hub.h2')}</h2>
   <p>${et(lang, 'hub.lede')}</p>
   <ul class="stand"><li><a href="${SITE}/${P.blind}"><b>${et(lang, 'hub.blind')}</b></a></li><li><a href="${SITE}/${P.explore}">${et(lang, 'exploreLink')}</a></li><li><a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></li></ul>`;
+  // The faith section, from i18n/faith.json under its own gate.
+  const F = FAITH_PATHS[lang];
+  const faith = `
+  <h2>${ft(lang, 'hub.h2')}</h2>
+  <p>${ft(lang, 'hub.lede')}</p>
+  <p class="small">${ft(lang, 'notice')}</p>
+  <ul class="stand"><li><a href="${SITE}/${F.home}"><b>${ft(lang, 'hub.open')}</b></a></li><li><a href="${SITE}/${F.method}">${ft(lang, 'methodLink')}</a></li></ul>`;
   const main = which === 'context'
-    ? `${economy}
+    ? `${economy}${faith}
   <h2>${esc(c.races.h1)}</h2>
   <p>${esc(c.races.lede)}</p>${section(c.races, items)}`
     : section(h, items);

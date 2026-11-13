@@ -84,7 +84,7 @@ export function sectionOf(canonical) {
   if (path === '/' || path === '/es') return 'quiz';
   if (/^\/(districts|distritos|district|distrito)(\/|$)/.test(path)) return 'rep';
   if (/^\/(bills|proyectos|bill|proyecto)(\/|$)/.test(path)) return 'bills';
-  if (/^\/(context|contexto|race|contienda|economy|economia)(\/|$)/.test(path)) return 'context';
+  if (/^\/(context|contexto|race|contienda|economy|economia|faith|fe)(\/|$)/.test(path)) return 'context';
   if (/^\/(charts|graficas)(\/|$)/.test(path)) return 'charts';
   return null;
 }

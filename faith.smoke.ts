@@ -7,7 +7,11 @@
  * This checks the rules in faith_positions.ts that need no download.
  */
 
-import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, sbcOnIssue } from './faith_positions';
+import { readFileSync } from 'node:fs';
+import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue } from './faith_positions';
+import { buildFaithPayload, PLATFORMS } from './scripts/export_faith';
+// @ts-expect-error: a plain .mjs module, shared with the page builder
+import { KEY } from './scripts/_faith_copy.mjs';
 
 let pass = 0;
 let fail = 0;
@@ -88,6 +92,38 @@ check('every earlier entry has a link and a date', EARLIER.every((e) => /^https:
 const sbcImm = EARLIER.filter((e) => e.traditionId === 'sbc' && e.issueId === 'immigration').map((e) => e.date.slice(0, 4));
 check('immigration: the SBC\'s earlier resolutions are listed, newest first',
   sbcImm.join(',') === '2023,2018,2011,2006,1979', sbcImm.join(','));
+
+// --- the shipped file and its Spanish -----------------------------------------
+
+// The pages read only public/data/faith.json. If faith_positions.ts changes and
+// nobody re-runs npm run data:faith, the pages would quietly show the old text.
+const shipped = JSON.parse(readFileSync(new URL('./public/data/faith.json', import.meta.url), 'utf8'));
+check('public/data/faith.json is what npm run data:faith writes today',
+  JSON.stringify(shipped) === JSON.stringify(buildFaithPayload()), 're-run npm run data:faith if this fails');
+
+// Every sentence the pages show from the record has its Spanish, translated
+// from the English as it stands now. The builder refuses the same things; this
+// catches them in npm test, before a build.
+const COPY = JSON.parse(readFileSync(new URL('./i18n/faith.json', import.meta.url), 'utf8'));
+const recordKeys: [string, string][] = [
+  ...ISSUES.flatMap((i) => [[KEY.issueName(i), i.name], [KEY.issueDesc(i), i.description]] as [string, string][]),
+  ...TRADITIONS.flatMap((t) => [[KEY.tradName(t), t.name], [KEY.tradFamily(t), t.family], [KEY.tradOfficial(t), t.official]] as [string, string][]),
+  ...Object.entries(PLATFORMS).map(([k, p]) => [KEY.platform(k), p.name] as [string, string]),
+  ...STATEMENTS.flatMap((s) => [[KEY.body(s), s.body], [KEY.statement(s), s.summary]] as [string, string][]),
+  ...NO_STATEMENT.map((n) => [KEY.noStatement(n), n.note] as [string, string]),
+  ...PLANKS.map((p) => [KEY.plank(p), p.summary] as [string, string]),
+  ...NO_PLANK.map((n) => [KEY.noPlank(n), n.note] as [string, string]),
+  ...TO_READ.map((r, i) => [KEY.toRead(r, i), r.what] as [string, string]),
+];
+const untranslated = recordKeys.filter(([k]) => typeof COPY[k]?.es !== 'string').map(([k]) => k);
+const staleOf = (pairs: [string, string][]) => pairs.filter(([k, en]) => typeof COPY[k]?.es === 'string' && COPY[k].en !== en).map(([k]) => k);
+const stale = staleOf(recordKeys);
+check('every sentence the faith pages show has a Spanish translation', untranslated.length === 0, untranslated.slice(0, 3).join(', ') || `${recordKeys.length} sentences`);
+check('no Spanish translates an English sentence that has since changed', stale.length === 0, stale.slice(0, 3).join(', ') || 'none');
+check('(the staleness check catches an edited summary)',
+  staleOf([[KEY.plank(PLANKS[0]), `${PLANKS[0].summary} Edited.`]]).length === 1);
+const esVerbs = new Set(PLANKS.map((p) => COPY[KEY.plank(p)]?.es?.split(' ')[0]));
+check('every Spanish plank summary opens with the same verb', esVerbs.size === 1, [...esVerbs].join(' / '));
 
 // --- not yet reviewed -------------------------------------------------------
 

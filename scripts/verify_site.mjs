@@ -2258,6 +2258,54 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // The faith pages
+  //
+  // Decided 12 Nov 2026: published before reviewers from the traditions were
+  // found, so every page must say so, with the count from the data. And one
+  // tradition at a time: a tradition's page must carry no other tradition's
+  // statements, or it starts to become the scoreboard FAITH.md forbids.
+  // Checked with JavaScript off, because the pages have none.
+  // ---------------------------------------------------------------------------
+  {
+    const faith = JSON.parse(readFileSync(join(ROOT, 'public/data/faith.json'), 'utf8'));
+    const SLUG = {
+      catholic: ['catholic', 'catolica'], sbc: ['southern-baptist', 'bautista-del-sur'], umc: ['united-methodist', 'metodista-unida'],
+      ame: ['ame', 'ame'], ag: ['assemblies-of-god', 'asambleas-de-dios'],
+    };
+    const pages = [['/faith', null], ['/fe', null], ['/faith/methodology', null], ['/fe/metodologia', null],
+      ...Object.entries(SLUG).flatMap(([id, [en, es]]) => [[`/faith/${en}`, id], [`/fe/${es}`, id]])];
+    const fc = await browser.newContext({ javaScriptEnabled: false });
+    const fp = await fc.newPage();
+    const noticeOn = async (path) => {
+      const res = await fp.goto(new URL(path, URL_UNDER_TEST).href, { waitUntil: 'load' });
+      const note = await fp.locator('[role="note"]').allInnerTexts();
+      return res.ok() && note.some((t) => /Not yet reviewed|Todavía sin revisar/.test(t) && t.includes(`${faith.reviewed.entries} `) && t.includes(` ${faith.reviewed.of}`));
+    };
+    check('(faith: the notice check fails on a page without the notice)', !(await noticeOn('/economy/explore')));
+    const missing = [];
+    const crossed = [];
+    const shape = [];
+    for (const [path, id] of pages) {
+      if (!(await noticeOn(path))) missing.push(path);
+      if (!id) continue;
+      const hrefs = new Set(await fp.locator('a[href]').evaluateAll((as) => as.map((a) => a.getAttribute('href'))));
+      const foreign = faith.statements.filter((s) => s.traditionId !== id && hrefs.has(s.sourceUrl));
+      if (foreign.length) crossed.push(`${path}: ${foreign[0].traditionId}`);
+      // The same lookup must find the page's own statements, or the line above
+      // could pass by finding nothing at all.
+      const own = faith.statements.filter((s) => s.traditionId === id && hrefs.has(s.sourceUrl));
+      if (own.length === 0) crossed.push(`${path}: not even its own statements found`);
+      const issues = await fp.locator('main h2[id]').count();
+      const platformCards = await fp.locator('main h4 + .card, main h4 + .card + .card').count();
+      if (issues !== faith.issues.length || platformCards !== faith.issues.length * 4) shape.push(`${path}: ${issues} issues, ${platformCards} platform cards`);
+    }
+    check('faith: every page says it is not yet reviewed, with the count from the data', missing.length === 0, missing.join(', ') || `${pages.length} pages`);
+    check('faith: no tradition page carries another tradition\'s statements', crossed.length === 0, crossed.join(', ') || '10 tradition pages');
+    check('faith: every tradition page has every issue, and all four platforms on each', shape.length === 0, shape.join(' | ') || `${faith.issues.length} issues x 4 platforms`);
+    await fc.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // The voting dates
   //
   // Checked against the DATA FILE rather than against expected text, so the page

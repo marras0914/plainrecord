@@ -35,6 +35,21 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { footerHtml } from './_site_nav.mjs';
+import { FAITH_PATHS, TRADITION_SLUG, traditionPath } from './_faith_copy.mjs';
+
+// The faith pages, with what each is, for the sitemap and llms.txt.
+const FAITH_TRADITION_EN = {
+  catholic: 'the Catholic Church in the United States', sbc: 'the Southern Baptist Convention',
+  umc: 'The United Methodist Church', ame: 'the African Methodist Episcopal Church', ag: 'the Assemblies of God',
+};
+const FAITH_LABELS = Object.fromEntries(['en', 'es'].flatMap((lang) => {
+  const inLang = lang === 'es' ? 'in Spanish' : 'in English';
+  return [
+    [`/${FAITH_PATHS[lang].home}`, `What five Christian traditions officially say on eight issues, beside the Texas and national party platforms, ${inLang}`],
+    [`/${FAITH_PATHS[lang].method}`, `How the faith pages were made, ${inLang}`],
+    ...Object.keys(TRADITION_SLUG).map((id) => [`/${traditionPath(id, lang)}`, `What ${FAITH_TRADITION_EN[id]} officially says on eight issues, beside the party platforms, ${inLang}`]),
+  ];
+}));
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -484,7 +499,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // The two district indexes. They are hubs rather than leaves: before they
   // existed every district page had exactly one crawlable inbound link, its own
   // translation, so the whole set was unreachable except through the sitemap.
-  for (const dir of ['districts', 'distritos', 'bills', 'proyectos', 'context', 'contexto', 'economy', 'economia', 'economy/explore', 'economia/explorar', 'economy/methodology', 'economia/metodologia', 'open-data', 'classroom', 'maestros', 'charts', 'graficas']) {
+  for (const dir of ['districts', 'distritos', 'bills', 'proyectos', 'context', 'contexto', 'economy', 'economia', 'economy/explore', 'economia/explorar', 'economy/methodology', 'economia/metodologia', ...Object.keys(FAITH_LABELS).map((p) => p.slice(1)), 'open-data', 'classroom', 'maestros', 'charts', 'graficas']) {
     const shipped = await access(resolve(DIST, `${dir}/index.html`)).then(() => true, () => false);
     if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority: '0.9' });
   }
@@ -617,6 +632,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     if (path === '/economia/explorar') return 'The economy in every presidential term since 1949, labeled, in Spanish';
     if (path === '/economy/methodology') return 'How the economy pages are measured, in English';
     if (path === '/economia/metodologia') return 'How the economy pages are measured, in Spanish';
+    if (FAITH_LABELS[path]) return FAITH_LABELS[path];
     if (path === '/context') return 'Background to the voting records, starting with the three 2026 statewide races, in English';
     if (path === '/contexto') return 'Background to the voting records, starting with the three 2026 statewide races, in Spanish';
     if (path === '/charts') return 'Every House vote in three charts, in English';
