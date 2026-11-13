@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
     "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
     "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. Verse strings and book names added 13 Nov 2026 as drafts."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago."
   },
   "kicker": {
     "en": "Faith and the platforms",
@@ -1010,226 +1010,226 @@
   "tr.versesSummary": {
     "en": "Bible passages this statement cites: {n}",
     "es": "Pasajes bíblicos que cita esta declaración: {n}",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.versesNote": {
     "en": "In the order the statement cites them, in the World English Bible. A passage of more than eight verses, or a whole chapter, is a link instead.",
     "es": "En el orden en que los cita la declaración, en la Reina-Valera 1909. Un pasaje de más de ocho versículos, o un capítulo completo, aparece como enlace.",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.versesSection": {
     "en": "This document covers several issues, so only the passages it cites in its section on this one are listed.",
     "es": "Este documento trata varios temas, así que solo aparecen los pasajes que cita en su sección sobre este.",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.noVersesWhole": {
     "en": "This statement cites no Bible passage.",
     "es": "Esta declaración no cita ningún pasaje bíblico.",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.noVersesSection": {
     "en": "No Bible passage is cited in this document's section on this issue.",
     "es": "En la sección de este documento sobre este tema no se cita ningún pasaje bíblico.",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.wholeChapter": {
     "en": "the whole chapter",
     "es": "el capítulo completo",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.longPassage": {
     "en": "{n} verses",
     "es": "{n} versículos",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.notInBible": {
     "en": "The statement cites verse {verses}, but {chapter} has {n} verses.",
     "es": "La declaración cita el versículo {verses}, pero {chapter} tiene {n} versículos.",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.platformsNoVerses": {
     "en": "None of the four platforms cites a Bible passage anywhere in its text.",
     "es": "Ninguna de las cuatro plataformas cita un pasaje bíblico en ninguna parte de su texto.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.h2verses": {
     "en": "Bible passages",
     "es": "Pasajes bíblicos",
-    "status": "draft"
+    "status": "ok"
   },
   "me.verses": {
     "en": "The site picks no verses. A passage appears only where a statement on these pages cites it, found by a program that reads each statement's own text. A document about one issue counts whole. In a document that covers several issues, such as the bishops' Forming Consciences, only passages cited in the same section as the quoted excerpt count, so a passage the bishops cite on the Church's role in public life is not listed under any one issue. Passages of more than eight verses, and whole chapters, are linked rather than printed.",
     "es": "El sitio no escoge ningún versículo. Un pasaje aparece solo donde lo cita una declaración de estas páginas, y lo encuentra un programa que lee el texto de cada declaración. Un documento sobre un solo tema cuenta completo. En un documento que trata varios temas, como Forming Consciences de los obispos, solo cuentan los pasajes citados en la misma sección que la cita textual, así que un pasaje que los obispos citan sobre el papel de la Iglesia en la vida pública no aparece bajo ningún tema. Los pasajes de más de ocho versículos, y los capítulos completos, aparecen como enlaces en lugar de impresos.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.versesAsWritten": {
     "en": "References are shown as the churches wrote them. The Southern Baptist resolution of 2006 cites Genesis 1:32, a verse that does not exist (the chapter has 31), and the page says so rather than correcting it.",
     "es": "Las referencias aparecen tal como las escribieron las iglesias. La resolución bautista del sur de 2006 cita Génesis 1:32, un versículo que no existe (el capítulo tiene 31), y la página lo dice en lugar de corregirlo.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.versesFixes": {
     "en": "Two references were garbled when their text was taken from a PDF, and are shown as the printed page has them: {list}.",
     "es": "Dos referencias se alteraron al extraer el texto de un PDF, y aparecen como las muestra la página impresa: {list}.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.versesPlatforms": {
     "en": "The same program finds no Bible reference in any of the four platforms.",
     "es": "El mismo programa no encuentra ninguna referencia bíblica en ninguna de las cuatro plataformas.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.bibles": {
     "en": "Verse text: the World English Bible in English and the Reina-Valera 1909 in Spanish, both public domain, from eBible.org.",
     "es": "Texto de los versículos: la World English Bible en inglés y la Reina-Valera 1909 en español, ambas de dominio público, de eBible.org.",
-    "status": "draft"
+    "status": "ok"
   },
   "book.GEN": {
     "en": "Genesis",
     "es": "Génesis",
-    "status": "draft"
+    "status": "ok"
   },
   "book.EXO": {
     "en": "Exodus",
     "es": "Éxodo",
-    "status": "draft"
+    "status": "ok"
   },
   "book.LEV": {
     "en": "Leviticus",
     "es": "Levítico",
-    "status": "draft"
+    "status": "ok"
   },
   "book.NUM": {
     "en": "Numbers",
     "es": "Números",
-    "status": "draft"
+    "status": "ok"
   },
   "book.DEU": {
     "en": "Deuteronomy",
     "es": "Deuteronomio",
-    "status": "draft"
+    "status": "ok"
   },
   "book.2SA": {
     "en": "2 Samuel",
     "es": "2 Samuel",
-    "status": "draft"
+    "status": "ok"
   },
   "book.2CH": {
     "en": "2 Chronicles",
     "es": "2 Crónicas",
-    "status": "draft"
+    "status": "ok"
   },
   "book.JOB": {
     "en": "Job",
     "es": "Job",
-    "status": "draft"
+    "status": "ok"
   },
   "book.PSA": {
     "en": "Psalm",
     "es": "Salmo",
-    "status": "draft"
+    "status": "ok"
   },
   "book.PRO": {
     "en": "Proverbs",
     "es": "Proverbios",
-    "status": "draft"
+    "status": "ok"
   },
   "book.ISA": {
     "en": "Isaiah",
     "es": "Isaías",
-    "status": "draft"
+    "status": "ok"
   },
   "book.JER": {
     "en": "Jeremiah",
     "es": "Jeremías",
-    "status": "draft"
+    "status": "ok"
   },
   "book.AMO": {
     "en": "Amos",
     "es": "Amós",
-    "status": "draft"
+    "status": "ok"
   },
   "book.MIC": {
     "en": "Micah",
     "es": "Miqueas",
-    "status": "draft"
+    "status": "ok"
   },
   "book.ZEC": {
     "en": "Zechariah",
     "es": "Zacarías",
-    "status": "draft"
+    "status": "ok"
   },
   "book.MAT": {
     "en": "Matthew",
     "es": "Mateo",
-    "status": "draft"
+    "status": "ok"
   },
   "book.LUK": {
     "en": "Luke",
     "es": "Lucas",
-    "status": "draft"
+    "status": "ok"
   },
   "book.JOH": {
     "en": "John",
     "es": "Juan",
-    "status": "draft"
+    "status": "ok"
   },
   "book.ACT": {
     "en": "Acts",
     "es": "Hechos",
-    "status": "draft"
+    "status": "ok"
   },
   "book.ROM": {
     "en": "Romans",
     "es": "Romanos",
-    "status": "draft"
+    "status": "ok"
   },
   "book.1CO": {
     "en": "1 Corinthians",
     "es": "1 Corintios",
-    "status": "draft"
+    "status": "ok"
   },
   "book.2CO": {
     "en": "2 Corinthians",
     "es": "2 Corintios",
-    "status": "draft"
+    "status": "ok"
   },
   "book.GAL": {
     "en": "Galatians",
     "es": "Gálatas",
-    "status": "draft"
+    "status": "ok"
   },
   "book.EPH": {
     "en": "Ephesians",
     "es": "Efesios",
-    "status": "draft"
+    "status": "ok"
   },
   "book.COL": {
     "en": "Colossians",
     "es": "Colosenses",
-    "status": "draft"
+    "status": "ok"
   },
   "book.1TI": {
     "en": "1 Timothy",
     "es": "1 Timoteo",
-    "status": "draft"
+    "status": "ok"
   },
   "book.HEB": {
     "en": "Hebrews",
     "es": "Hebreos",
-    "status": "draft"
+    "status": "ok"
   },
   "book.JAM": {
     "en": "James",
     "es": "Santiago",
-    "status": "draft"
+    "status": "ok"
   },
   "book.1PE": {
     "en": "1 Peter",
     "es": "1 Pedro",
-    "status": "draft"
+    "status": "ok"
   },
   "book.REV": {
     "en": "Revelation",
     "es": "Apocalipsis",
-    "status": "draft"
+    "status": "ok"
   }
 }
