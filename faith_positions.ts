@@ -55,7 +55,7 @@ export const ISSUES: { id: IssueId; name: string; description: string }[] = [
 ];
 
 /** Issues whose entries are complete. The pilot fills immigration first. */
-export const FILLED_ISSUES: IssueId[] = ['immigration', 'abortion', 'death-penalty', 'guns'];
+export const FILLED_ISSUES: IssueId[] = ['immigration', 'abortion', 'death-penalty', 'guns', 'poverty', 'environment'];
 
 export type TraditionId = 'catholic' | 'sbc' | 'umc' | 'ame' | 'ag';
 
@@ -126,7 +126,8 @@ export const ISSUE_TITLE_TERMS: Record<IssueId, RegExp> = {
   // SBC's latest abortion statement. The cost is that two resolutions titled
   // only "Sanctity of Human Life" (1991, 2015) are not listed.
   abortion: /abortion|pro-?life|roe v|planned parenthood|hyde/i,
-  poverty: /poverty|\bpoor\b|welfare|hunger|minimum wage/i,
+  // Not "spiritual welfare" (an SBC resolution on evangelism, 1978).
+  poverty: /poverty|\bpoor\b|(?<!spiritual )welfare|hunger|minimum wage/i,
   'death-penalty': /death penalty|capital punishment|execution/i,
   // Not "weapon": it matches resolutions on nuclear and other weapons of war.
   guns: /\bgun|firearm/i,
@@ -163,6 +164,10 @@ const SRC = {
   sbcGuns2018: 'https://www.sbc.net/resource-library/resolutions/on-gun-violence-and-mass-shootings/',
   umcPolitical: 'https://www.umc.org/en/content/social-principles-the-political-community',
   umcGuns3428: 'https://www.umc.org/en/content/book-of-resolutions-our-call-to-end-gun-violence',
+  sbcPoverty2014: 'https://www.sbc.net/resource-library/resolutions/on-global-hunger-relief/',
+  sbcEnvironment2006: 'https://www.sbc.net/resource-library/resolutions/on-environmentalism-and-evangelicals/',
+  umcEconomic: 'https://www.umc.org/en/content/social-principles-the-economic-community',
+  umcNatural: 'https://www.umc.org/en/content/social-principles-the-natural-world',
   rpt2024: 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf',
   tdp2024: 'https://txdem.co/24-Platform',
   rnc2024: 'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform',
@@ -336,6 +341,75 @@ STATEMENTS.push(
   },
 );
 
+STATEMENTS.push(
+  // --- poverty ------------------------------------------------------------
+  {
+    traditionId: 'catholic', issueId: 'poverty',
+    title: 'Introductory Note to Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops', sourceDate: '2023-11-15',
+    summary: 'Names lack of justice for the poor among the grave concerns Catholics bring to public life, and calls on them to serve the poor and the needy.',
+    excerpt: 'lack of justice for the poor',
+    sourceUrl: SRC.usccb2023, review: [],
+  },
+  {
+    traditionId: 'catholic', issueId: 'poverty',
+    title: 'Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops (2015 text, reissued 2019)', sourceDate: '2019',
+    summary: 'Calls for helping families and children overcome poverty through access to education, decent work at fair, living wages and adequate assistance for the vulnerable, and for more development aid, fairer trade and debt relief for the poorest countries.',
+    excerpt: 'decent work at fair, living wages and adequate assistance for the vulnerable',
+    sourceUrl: SRC.usccb2019, review: [],
+  },
+  {
+    traditionId: 'sbc', issueId: 'poverty',
+    title: 'On Global Hunger Relief',
+    body: 'Resolution adopted at the SBC Annual Meeting, Baltimore', sourceDate: '2014-06',
+    summary: 'Encourages Southern Baptists and their churches to support the convention\'s Global Hunger Relief offering through giving and an annual World Hunger Sunday. It addresses church giving rather than public policy.',
+    excerpt: 'embrace and support the new Global Hunger Relief initiative',
+    sourceUrl: SRC.sbcPoverty2014, review: [],
+  },
+  {
+    traditionId: 'umc', issueId: 'poverty',
+    title: 'Social Principles: The Economic Community',
+    body: 'Adopted by the General Conference (2024 revision)', sourceDate: '2024',
+    summary: 'Pledges to work toward eradicating the roots and effects of poverty, rejects teaching that treats wealth as a sign of God\'s favor and poverty as a sign of disfavor, and endorses policies that guarantee workers fair compensation, sometimes called a living wage.',
+    excerpt: 'work toward the eradication of the roots and effects of poverty',
+    sourceUrl: SRC.umcEconomic, review: [],
+  },
+  // --- the environment ----------------------------------------------------
+  {
+    traditionId: 'catholic', issueId: 'environment',
+    title: 'Introductory Note to Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops', sourceDate: '2023-11-15',
+    summary: 'Calls for hearing both the cry of the earth and the cry of the poor, and for responding to climate change with actions that better protect creation for present and future generations.',
+    excerpt: 'respond to climate change with actions to better protect creation',
+    sourceUrl: SRC.usccb2023, review: [],
+  },
+  {
+    traditionId: 'catholic', issueId: 'environment',
+    title: 'Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops (2015 text, reissued 2019)', sourceDate: '2019',
+    summary: 'Calls for urgently finding ways to care better for creation, especially for the poor, who are most affected by climate change.',
+    excerpt: 'care better for God’s creation, especially those most impacted by climate change',
+    sourceUrl: SRC.usccb2019, review: [],
+  },
+  {
+    traditionId: 'sbc', issueId: 'environment',
+    title: 'On Environmentalism and Evangelicals',
+    body: 'Resolution adopted at the SBC Annual Meeting, Greensboro', sourceDate: '2006-06',
+    summary: 'Supports conserving natural resources while respecting property rights, and public policy and private efforts to improve the environment based on sound science; opposes alliances with environmental groups whose positions it considers contrary to biblical principles, and solutions it calls scientifically questionable that restrict access to natural resources and economic development.',
+    excerpt: 'encourage public policy and private enterprise efforts that seek to improve the environment',
+    sourceUrl: SRC.sbcEnvironment2006, review: [],
+  },
+  {
+    traditionId: 'umc', issueId: 'environment',
+    title: 'Social Principles: The Natural World',
+    body: 'Adopted by the General Conference (2024 revision)', sourceDate: '2024',
+    summary: 'Says global warming and climate change already threaten all life on earth and that burning fossil fuels is the greatest single contributor to greenhouse gases, and urges cooperation to end poaching and protect endangered species and their habitats.',
+    excerpt: 'Global warming and climate change are already creating extreme conditions',
+    sourceUrl: SRC.umcNatural, review: [],
+  },
+);
+
 /**
  * "No official statement" (rule 4): a tradition with no qualifying statement
  * on an issue, shown on the page as such rather than left blank.
@@ -346,15 +420,68 @@ export const NO_STATEMENT: { traditionId: TraditionId; issueId: IssueId; note: s
   { traditionId: 'ame', issueId: 'guns', note: 'No General Conference resolution or Council of Bishops statement on guns was found on ame-church.com or elsewhere.' },
   { traditionId: 'ag', issueId: 'death-penalty', note: 'There is no position paper on the death penalty. The 2015 position paper Church Mission and Peacemaking refers to a "perspective paper" on capital punishment, but no such paper is published on ag.org.' },
   { traditionId: 'ag', issueId: 'guns', note: 'There is no position paper or official statement on guns.' },
+  { traditionId: 'ame', issueId: 'poverty', note: 'No General Conference resolution or Council of Bishops statement on poverty or public assistance was found on ame-church.com or elsewhere.' },
+  { traditionId: 'ame', issueId: 'environment', note: 'No General Conference resolution or Council of Bishops statement on the environment was found on ame-church.com or elsewhere.' },
+  { traditionId: 'ag', issueId: 'poverty', note: 'There is no position paper or official statement on poverty or public assistance.' },
+  { traditionId: 'ag', issueId: 'environment', note: 'There is no position paper on the environment. The 2015 position paper Church Mission and Peacemaking refers to a "perspective paper" on environmental protection, but no such paper is published on ag.org.' },
 ];
 
 /** A platform that says nothing on an issue: stated on the page, not left blank. */
 export const NO_PLANK: { party: 'D' | 'R'; level: 'texas' | 'national'; issueId: IssueId; note: string }[] = [
   { party: 'R', level: 'national', issueId: 'death-penalty', note: 'The 2024 RNC platform does not mention the death penalty.' },
   { party: 'D', level: 'national', issueId: 'death-penalty', note: 'The 2024 DNC platform does not mention the death penalty.' },
+  { party: 'R', level: 'national', issueId: 'poverty', note: 'The 2024 RNC platform has no plank on poverty or public assistance. Its nearest commitments are no cuts to Social Security and Medicare, and making permanent the 2017 tax law, including its larger Child Tax Credit.' },
 ];
 
 export const PLANKS: Plank[] = [
+  // --- poverty ------------------------------------------------------------
+  {
+    party: 'R', level: 'texas', platformYear: 2024, issueId: 'poverty',
+    summary: 'Calls for abolishing all federal welfare programs, as not an appropriate role for the federal government, and for repealing minimum wage and prevailing wage laws.',
+    excerpt: 'We support the abolition of all federal welfare programs',
+    sourceUrl: SRC.rpt2024, review: [],
+  },
+  {
+    party: 'D', level: 'texas', platformYear: 2024, issueId: 'poverty',
+    summary: 'Calls for a living wage indexed to inflation for all Texas workers, including tipped workers, and for removing outside work requirements for SNAP benefits.',
+    excerpt: 'All Texas workers should receive a living wage indexed to inflation',
+    sourceUrl: SRC.tdp2024, review: [],
+  },
+  {
+    party: 'D', level: 'national', platformYear: 2024, issueId: 'poverty',
+    summary: 'Calls for raising the federal minimum wage to at least $15 an hour and restoring the expanded Child Tax Credit and Earned Income Tax Credit.',
+    excerpt: 'We\'ll work to finally raise the federal minimum wage to at least $15-an-hour',
+    sourceUrl: SRC.dnc2024, review: [],
+  },
+  // --- the environment ----------------------------------------------------
+  {
+    party: 'R', level: 'texas', platformYear: 2024, issueId: 'environment',
+    summary: 'Calls for opposing climate change initiatives that obstruct business interests and private property use, including Executive Order 14008, the 30x30 conservation initiative, Net Zero mandates and declarations of a climate emergency.',
+    excerpt: 'We oppose environmentalism, or “climate change” initiatives',
+    sourceUrl: SRC.rpt2024, review: [],
+  },
+  {
+    party: 'D', level: 'texas', platformYear: 2024, issueId: 'environment',
+    summary: 'Calls for reducing greenhouse gas emissions through clean energy, alternative fuel vehicles and efficient buildings, rapid decarbonization, and a stronger EPA that sets and meets a net zero carbon emissions goal, and states that climate change is real.',
+    excerpt: 'Reduce greenhouse gas emissions by supporting policies that develop clean energy resources',
+    sourceUrl: SRC.tdp2024, review: [],
+  },
+  {
+    party: 'R', level: 'national', platformYear: 2024, issueId: 'environment',
+    // An earlier draft ended "the platform does not otherwise address the
+    // environment", which a count of the text disproved: it also pledges to
+    // preserve natural treasures and restore conservation. Claims of absence
+    // get checked like any other.
+    summary: 'Calls for lifting restrictions on oil and gas production, ending the Green New Deal, canceling the electric vehicle mandate and cutting regulations, and pledges to preserve the nation\'s natural treasures and restore what it calls genuine conservation efforts.',
+    excerpt: 'We will DRILL, BABY, DRILL and we will become Energy Independent',
+    sourceUrl: SRC.rnc2024, review: [],
+  },
+  {
+    party: 'D', level: 'national', platformYear: 2024, issueId: 'environment',
+    summary: 'Calls for continuing the clean energy investments of the Inflation Reduction Act, faster permitting for clean energy, more clean energy on public lands, electrified ports and zero-emissions freight, and lower emissions from buildings and heavy industry.',
+    excerpt: 'We\'ll keep pushing to reduce emissions from America\'s buildings and heavy industry',
+    sourceUrl: SRC.dnc2024, review: [],
+  },
   // --- the death penalty --------------------------------------------------
   {
     party: 'R', level: 'texas', platformYear: 2024, issueId: 'death-penalty',

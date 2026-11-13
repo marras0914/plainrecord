@@ -19,7 +19,7 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { STATEMENTS, PLANKS } from '../faith_positions';
+import { STATEMENTS, PLANKS, NO_PLANK } from '../faith_positions';
 import { WORK_DIR } from './paths';
 
 const DIR = join(WORK_DIR, 'faith_sources');
@@ -42,6 +42,10 @@ const FILES: Record<string, { file: string; lineNumbers?: boolean }> = {
   'https://www.sbc.net/resource-library/resolutions/on-gun-violence-and-mass-shootings/': { file: 'sbc_guns_2018.txt' },
   'https://www.umc.org/en/content/social-principles-the-political-community': { file: 'umc_sp_the-political-community.txt' },
   'https://www.umc.org/en/content/book-of-resolutions-our-call-to-end-gun-violence': { file: 'umc_bor_3428.txt' },
+  'https://www.sbc.net/resource-library/resolutions/on-global-hunger-relief/': { file: 'sbc_poverty_2014.txt' },
+  'https://www.sbc.net/resource-library/resolutions/on-environmentalism-and-evangelicals/': { file: 'sbc_environment_2006.txt' },
+  'https://www.umc.org/en/content/social-principles-the-economic-community': { file: 'umc_sp_the-economic-community.txt' },
+  'https://www.umc.org/en/content/social-principles-the-natural-world': { file: 'umc_sp_the-natural-world.txt' },
   'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf': { file: 'rpt_2024.txt' },
   'https://txdem.co/24-Platform': { file: 'tdp_2024.txt' },
   'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform': { file: 'rnc_2024.txt' },
@@ -90,5 +94,32 @@ for (const e of entries) {
   if (!ok) fails++;
   console.log(`  [${ok ? 'PASS' : 'FAIL'}] ${e.label}: ${t === undefined ? 'no downloaded source mapped' : ok ? 'found' : 'NOT found'}`);
 }
-console.log(fails ? `\n  ${fails} excerpt(s) not found\n` : `\n  all ${entries.length} excerpts found in their sources\n`);
+// --- recorded silences ------------------------------------------------------
+//
+// A NO_PLANK entry says a platform does not address an issue. That is a claim
+// about the source like any excerpt, and the easier one to get wrong: a draft
+// RNC summary said the platform "does not otherwise address the environment"
+// until a count found its conservation pledge. So every recorded silence is
+// checked: none of the issue's words may appear in that platform's text.
+const SILENCE_TERMS: Partial<Record<string, RegExp>> = {
+  'death-penalty': /death penalty|capital punishment|\bexecutions?\b/i,
+  poverty: /\bpoverty\b|\bwelfare\b|public assistance|food stamps|\bSNAP\b|low-income|low income/i,
+};
+const PLATFORM_URL = {
+  'R-texas': 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf',
+  'D-texas': 'https://txdem.co/24-Platform',
+  'R-national': 'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform',
+  'D-national': 'https://www.presidency.ucsb.edu/documents/2024-democratic-party-platform',
+} as const;
+for (const n of NO_PLANK) {
+  const terms = SILENCE_TERMS[n.issueId];
+  const src = FILES[PLATFORM_URL[`${n.party}-${n.level}`]];
+  const raw = readFileSync(join(DIR, src.file), 'utf8');
+  const hit = terms ? raw.match(terms) : null;
+  const ok = terms !== undefined && hit === null;
+  if (!ok) fails++;
+  console.log(`  [${ok ? 'PASS' : 'FAIL'}] silence ${n.party}-${n.level} ${n.issueId}: ${terms === undefined ? 'no terms defined for this issue' : hit ? `mentions "${hit[0]}"` : 'no mention'}`);
+}
+
+console.log(fails ? `\n  ${fails} problem(s)\n` : `\n  all ${entries.length} excerpts found in their sources, and ${NO_PLANK.length} recorded silences confirmed\n`);
 process.exitCode = fails ? 1 : 0;
