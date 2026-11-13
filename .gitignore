@@ -52,6 +52,11 @@ dist/
 # series shows up as a diff someone reviews. Seven series, a few hundred KB.
 !/data/fred/
 
+# ...and every SBC resolution's title, date and link
+# (scripts/fetch_sbc_resolutions.ts), which the faith module lists earlier
+# statements from. Committed so the build never calls sbc.net.
+!/data/faith/
+
 # Belt and braces: these used to live in the ship dir before the WORK_DIR split,
 # so a stale script or an old checkout can still drop them there.
 public/data/tx_bills_*.json

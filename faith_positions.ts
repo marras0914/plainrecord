@@ -37,6 +37,8 @@
  * Last reviewed: 2026-11-12 (pilot: immigration only).
  */
 
+import { readFileSync } from 'node:fs';
+
 export type IssueId =
   | 'immigration' | 'abortion' | 'poverty' | 'death-penalty'
   | 'guns' | 'environment' | 'healthcare' | 'criminal-justice';
@@ -93,6 +95,45 @@ export interface Statement {
   review: Review[];
 }
 
+/**
+ * An earlier or further qualifying statement, listed by title, date and link
+ * under the current one, with no summary or excerpt. Decided 13 Nov 2026:
+ * long histories (the SBC has about 25 resolutions mainly on abortion) show
+ * the current statement in full and list every other qualifying one, so
+ * nothing is hidden and nothing is chosen. A reader follows the link for the
+ * text.
+ */
+export interface Earlier {
+  traditionId: TraditionId;
+  issueId: IssueId;
+  title: string;
+  /** ISO date or year, as the source gives it. */
+  date: string;
+  url: string;
+}
+
+/**
+ * Which statements are "on" an issue, for the listed history: a title that
+ * contains one of these words. Mechanical, so the list is the same whoever
+ * builds it; a statement about an issue that does not name it in its title is
+ * not listed, and that is the rule's cost.
+ */
+export const ISSUE_TITLE_TERMS: Record<IssueId, RegExp> = {
+  // Not "refugee" or "border": those titles include persecution abroad (North
+  // Korean refugees in China), which is not U.S. immigration policy.
+  immigration: /immigra|migrant|sojourner/i,
+  // Not "sanctity of life": it made a 2026 resolution on assisted suicide the
+  // SBC's latest abortion statement. The cost is that two resolutions titled
+  // only "Sanctity of Human Life" (1991, 2015) are not listed.
+  abortion: /abortion|pro-?life|roe v|planned parenthood|hyde/i,
+  poverty: /poverty|\bpoor\b|welfare|hunger|minimum wage/i,
+  'death-penalty': /death penalty|capital punishment|execution/i,
+  guns: /\bgun|firearm|weapon/i,
+  environment: /environment|creation care|climate|pollution|stewardship of creation|ecolog/i,
+  healthcare: /health ?care|health insurance|medicaid|medicare/i,
+  'criminal-justice': /criminal justice|prison|incarcerat|sentenc|policing|police/i,
+};
+
 export interface Plank {
   party: 'D' | 'R';
   level: 'texas' | 'national';
@@ -147,43 +188,11 @@ export const STATEMENTS: Statement[] = [
     sourceUrl: SRC.sbc2026, review: [],
   },
   {
-    traditionId: 'sbc', issueId: 'immigration',
-    title: 'On Wisely Engaging Immigration',
-    body: 'Resolution adopted at the SBC Annual Meeting, New Orleans', sourceDate: '2023-06',
-    summary: 'Calls for avenues for valid asylum claims and legal pathways to permanent status for immigrants who are here through no fault of their own, prioritizing family unity, and for measures that secure the border.',
-    excerpt: 'create legal pathways to permanent status for immigrants who are in our communities',
-    sourceUrl: SRC.sbc2023, review: [],
-  },
-  {
-    traditionId: 'sbc', issueId: 'immigration',
-    title: 'On Immigration',
-    body: 'Resolution adopted at the SBC Annual Meeting, Dallas', sourceDate: '2018-06',
-    summary: 'Calls for reform that secures the borders and provides a pathway to legal status with restitution, keeping families together, and says nativism, mistreatment and exploitation are inconsistent with the gospel.',
-    excerpt: 'securing our borders and providing a pathway to legal status with appropriate restitutionary measures',
-    sourceUrl: SRC.sbc2018, review: [],
-  },
-  {
-    traditionId: 'sbc', issueId: 'immigration',
-    title: 'On Immigration and the Gospel',
-    body: 'Resolution adopted at the SBC Annual Meeting, Phoenix', sourceDate: '2011-06',
-    summary: 'Calls for securing the borders and holding employers accountable, then, with the borders secured, a path to legal status with restitution for undocumented immigrants already here, and states that this is not support for amnesty.',
-    excerpt: 'a just and compassionate path to legal status, with appropriate restitutionary measures',
-    sourceUrl: SRC.sbc2011, review: [],
-  },
-  {
     traditionId: 'umc', issueId: 'immigration',
     title: 'Social Principles, as quoted by the church',
     body: 'Adopted by the General Conference (2024 revision)', sourceDate: '2024',
     summary: 'Affirms the dignity and rights of migrants, immigrants and refugees, urges congregations to welcome them, and opposes laws that criminalize or punish people for their migration status and detention in inhumane conditions.',
     excerpt: 'We affirm the dignity, worth, and rights of migrants, immigrants, and refugees',
-    sourceUrl: SRC.umc, review: [],
-  },
-  {
-    traditionId: 'umc', issueId: 'immigration',
-    title: 'Welcoming the Migrant to the U.S. (Book of Resolutions 4271), as quoted by the church',
-    body: 'Adopted by the General Conference (Book of Resolutions 2020/2024)', sourceDate: '2024',
-    summary: 'Says refusing to welcome migrants, or staying silent while families are separated, is complicity in sin, and urges churches to build relationships with migrants in their communities.',
-    excerpt: 'To refuse to welcome migrants to this country',
     sourceUrl: SRC.umc, review: [],
   },
   {
@@ -232,6 +241,37 @@ export const PLANKS: Plank[] = [
     excerpt: 'secure the border, reform the asylum system, expand legal immigration',
     sourceUrl: SRC.dnc2024, review: [],
   },
+];
+
+// --- earlier statements ------------------------------------------------------
+
+/** Every SBC resolution's title, date and link (scripts/fetch_sbc_resolutions.ts). */
+export const SBC_RESOLUTIONS: { title: string; date: string; url: string }[] =
+  JSON.parse(readFileSync(new URL('./data/faith/sbc_resolutions.json', import.meta.url), 'utf8')).resolutions;
+
+/** The SBC resolutions on an issue by title, newest first. */
+export const sbcOnIssue = (issue: IssueId) => SBC_RESOLUTIONS
+  .filter((r) => ISSUE_TITLE_TERMS[issue].test(r.title))
+  .sort((a, b) => b.date.localeCompare(a.date));
+
+/** Listed by hand where a tradition has no machine-readable library. */
+const HAND_EARLIER: Earlier[] = [
+  { traditionId: 'umc', issueId: 'immigration', title: 'Welcoming the Migrant to the U.S. (Book of Resolutions 4271)', date: '2024', url: 'https://www.umc.org/en/content/book-of-resolutions-welcoming-the-migrant-to-the-us' },
+  { traditionId: 'umc', issueId: 'immigration', title: 'Global Migration and the Quest for Justice (Book of Resolutions 4273)', date: '2024', url: 'https://www.umc.org/en/content/book-of-resolutions-global-migration-and-the-quest-for-justice' },
+];
+
+/**
+ * Every other qualifying statement, listed under the current one: for the SBC
+ * every title match except the current resolution, computed; for the others
+ * the hand list above.
+ */
+export const EARLIER: Earlier[] = [
+  ...FILLED_ISSUES.flatMap((issue) => {
+    const current = new Set(STATEMENTS.filter((s) => s.traditionId === 'sbc' && s.issueId === issue).map((s) => s.sourceUrl));
+    return sbcOnIssue(issue).filter((r) => !current.has(r.url))
+      .map((r) => ({ traditionId: 'sbc' as const, issueId: issue, title: r.title, date: r.date, url: r.url }));
+  }),
+  ...HAND_EARLIER,
 ];
 
 /**
