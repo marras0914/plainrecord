@@ -7,7 +7,7 @@
  * This checks the rules in faith_positions.ts that need no download.
  */
 
-import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS } from './faith_positions';
+import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, sbcOnIssue } from './faith_positions';
 
 let pass = 0;
 let fail = 0;
@@ -61,8 +61,9 @@ check('every statement names the body that adopted it', STATEMENTS.every((s) => 
 
 for (const issue of FILLED_ISSUES) {
   const missingT = TRADITIONS.filter((t) => !STATEMENTS.some((s) => s.issueId === issue && s.traditionId === t.id)
-    && !KNOWN_GAPS.some((g) => g.issueId === issue && g.who === t.id));
-  check(`${issue}: every tradition has a statement or a listed gap`, missingT.length === 0, missingT.map((t) => t.id).join(', ') || `${TRADITIONS.length} traditions`);
+    && !KNOWN_GAPS.some((g) => g.issueId === issue && g.who === t.id)
+    && !NO_STATEMENT.some((g) => g.issueId === issue && g.traditionId === t.id));
+  check(`${issue}: every tradition has a statement, a listed gap or "no official statement"`, missingT.length === 0, missingT.map((t) => t.id).join(', ') || `${TRADITIONS.length} traditions`);
   const missingP = (['D', 'R'] as const).flatMap((party) => (['texas', 'national'] as const)
     .filter((level) => !PLANKS.some((p) => p.issueId === issue && p.party === party && p.level === level))
     .map((level) => `${party}-${level}`));
@@ -70,6 +71,22 @@ for (const issue of FILLED_ISSUES) {
 }
 check('every filled issue is on the fixed list', FILLED_ISSUES.every((i) => ISSUES.some((x) => x.id === i)));
 check('nothing is filed under an issue that is not finished', all.every((e) => FILLED_ISSUES.includes(e.issueId)));
+
+// --- current in full, earlier listed (decided 13 Nov 2026) ------------------
+
+for (const issue of FILLED_ISSUES) {
+  const full = STATEMENTS.filter((s) => s.traditionId === 'sbc' && s.issueId === issue);
+  const newest = sbcOnIssue(issue)[0];
+  check(`${issue}: the SBC statement in full is its newest resolution on the issue`,
+    full.length === 1 && newest !== undefined && full[0].sourceUrl === newest.url,
+    `${full.map((s) => s.title).join(', ')} vs newest ${newest?.title ?? 'none'}`);
+}
+const fullUrls = new Set(STATEMENTS.map((s) => s.sourceUrl));
+check('nothing is both in full and in the earlier list', EARLIER.every((e) => !fullUrls.has(e.url)));
+check('every earlier entry has a link and a date', EARLIER.every((e) => /^https:\/\//.test(e.url) && /^\d{4}/.test(e.date)));
+const sbcImm = EARLIER.filter((e) => e.traditionId === 'sbc' && e.issueId === 'immigration').map((e) => e.date.slice(0, 4));
+check('immigration: the SBC\'s earlier resolutions are listed, newest first',
+  sbcImm.join(',') === '2023,2018,2011,2006,1979', sbcImm.join(','));
 
 // --- not yet reviewed -------------------------------------------------------
 
