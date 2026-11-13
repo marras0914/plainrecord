@@ -64,6 +64,10 @@ const STYLE = `<style>
   h4{font-size:.95rem;margin:16px 0 4px;color:var(--ink-2);font-weight:600}
   .card p.small{margin-bottom:6px}
   .none{font-weight:600}
+  details.verses{margin:0 0 12px}
+  details.verses summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
+  .vtext{font-family:"Newsreader",Georgia,serif;font-size:1rem;margin:4px 0 0}
+  .vtext sup{font-family:"Lexend",system-ui,sans-serif;font-size:.65em;color:var(--muted);margin:0 2px 0 4px}
   details.earlier{margin:6px 0 14px}
   details.earlier summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
   .jump{display:flex;flex-wrap:wrap;gap:2px 14px;list-style:none;padding:0;font-size:14.5px}
@@ -99,12 +103,51 @@ function wrap(lang, { path, otherPath, title, docTitle, desc, body, type = 'WebP
 // One tradition, issue by issue
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// The Bible passages a statement cites (npm run data:faith:verses)
+// ---------------------------------------------------------------------------
+
+const V = data.verses;
+// Said on the page only while the data says it: if a platform ever cites a
+// verse, the sentence disappears rather than going stale.
+const platformsCiteNothing = Object.values(V.platformReferenceCounts).every((n) => n === 0);
+const bookName = (lang, code) => tx(lang, KEY.book(code), V.books[code]);
+const rangeText = (ranges) => ranges.map(([a, b]) => (a === b ? `${a}` : `${a}–${b}`)).join(', ');
+const refLabel = (lang, r) => `${bookName(lang, r.code)} ${r.chapter}${r.ranges.length ? `:${rangeText(r.ranges)}` : ''}`;
+
+function refItem(lang, r) {
+  const T = V.translations[lang === 'es' ? 'rv1909' : 'web'];
+  const href = `${T.chapterUrl}${r.chapterPage}`;
+  const label = esc(refLabel(lang, r));
+  const missing = r.notInBible.length
+    ? `<p class="small">${ft(lang, 'tr.notInBible', { verses: r.notInBible.map((k) => k.split(':')[1]).join(', '), chapter: `${bookName(lang, r.code)} ${r.chapter}`, n: r.chapterLength })}</p>`
+    : '';
+  if (!r.verseKeys.length) {
+    const what = r.ranges.length ? ft(lang, 'tr.longPassage', { n: r.verseCount }) : ft(lang, 'tr.wholeChapter');
+    return `<li><a href="${esc(href)}"><b>${label}</b></a> <span class="small">(${what})</span>${missing}</li>`;
+  }
+  const text = r.verseKeys.map((k) => `<sup>${k.split(':')[1]}</sup>${esc(V.text[k][lang === 'es' ? 'rv1909' : 'web'])}`).join(' ');
+  return `<li><a href="${esc(href)}"><b>${label}</b></a><p class="vtext">${text}</p>${missing}</li>`;
+}
+
+function versesBlock(lang, s) {
+  const c = V.byStatement[`${s.traditionId}.${s.issueId}.${s.sourceDate}`];
+  if (!c) throw new Error(`build_faith_pages: no verse record for ${s.traditionId} ${s.issueId} ${s.sourceDate}; run npm run data:faith:verses`);
+  const section = c.scope !== 'whole document';
+  if (!c.refs.length) return `<p class="small">${ft(lang, section ? 'tr.noVersesSection' : 'tr.noVersesWhole')}</p>`;
+  return `<details class="verses"><summary>${ft(lang, 'tr.versesSummary', { n: c.refs.length })}</summary>
+        <p class="small">${ft(lang, 'tr.versesNote')}${section ? ` ${ft(lang, 'tr.versesSection')}` : ''}</p>
+        <ul class="stand" lang="${lang === 'es' ? 'es' : 'en'}">${c.refs.map((r) => refItem(lang, r)).join('')}</ul>
+      </details>`;
+}
+
 function statementCard(lang, s) {
   return `<div class="card">
       <p class="small">${tx(lang, KEY.body(s), s.body)}, ${esc(fmtDate(lang, s.sourceDate))}</p>
       <p><a href="${esc(s.sourceUrl)}"><b lang="en">${esc(s.title)}</b></a></p>
       <p>${tx(lang, KEY.statement(s), s.summary)}</p>
       ${quote(s.excerpt)}
+      ${versesBlock(lang, s)}
     </div>`;
 }
 
@@ -163,6 +206,7 @@ function traditionPage(lang, t) {
   ${notice(lang)}
   <p><span class="label">${ft(lang, 'tr.official')}</span> ${tx(lang, KEY.tradOfficial(t), t.official)} <a class="hist" href="${esc(t.libraryUrl)}">${ft(lang, 'tr.fullText')}</a></p>
   <p class="small">${ft(lang, 'tr.quotes')}</p>
+  ${platformsCiteNothing ? `<p class="small">${ft(lang, 'tr.platformsNoVerses')}</p>` : ''}
   <p class="small">${ft(lang, 'tr.jump')}</p>
   <ul class="jump">${data.issues.map((i) => `<li><a href="#${i.id}">${issueName(lang, i)}</a></li>`).join('')}</ul>
   ${data.issues.map((i) => issueSection(lang, t, i)).join('\n')}
@@ -233,6 +277,13 @@ function methodPage(lang) {
 
   <h2>${ft(lang, 'me.h2earlier')}</h2>
   <p>${ft(lang, 'me.earlier', { n: data.sbcResolutionsSearched.toLocaleString(MONTH[lang]) })}</p>
+
+  <h2>${ft(lang, 'me.h2verses')}</h2>
+  <p>${ft(lang, 'me.verses')}</p>
+  <p>${ft(lang, 'me.versesAsWritten')}</p>
+  <p>${ft(lang, 'me.versesFixes', { list: V.fixes.map((f) => `${f.garbled} → ${f.fixed}`).join('; ') })}</p>
+  ${platformsCiteNothing ? `<p>${ft(lang, 'me.versesPlatforms')}</p>` : ''}
+  <p class="small">${ft(lang, 'me.bibles')}</p>
 
   <h2>${ft(lang, 'me.h2checks')}</h2>
   <p>${ft(lang, 'me.checks', { n: data.statements.length + data.planks.length })}</p>

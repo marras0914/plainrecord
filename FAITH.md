@@ -1,6 +1,6 @@
 # Faith module
 
-**Status: the source library is complete for all eight issues (13 Nov 2026); the pages and their Spanish come next.** See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
+**Status: live since 13 Nov 2026** (PR #21): `/faith`, `/fe`, a page per tradition and the methodology, labeled not yet reviewed. **Verses** (13 Nov, `npm run data:faith:verses`): every Bible reference in each statement shown in full, found by a program, never picked; see "Scripture" below. See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
 
 ## Decisions made 12 November 2026
 
@@ -110,6 +110,17 @@ reorganized or revised their statements in recent years.
 - **Spanish:** Reina-Valera 1909 (public domain).
 - A verse goes in only when a documented source on that side has cited it on
   that issue. The citation is stored with it.
+- How that is applied (`scripts/extract_faith_verses.ts`, output committed as
+  `data/faith/verses.json`): only statements shown in full count. A document
+  the record cites for one issue counts whole; one cited for several issues
+  counts only in the section holding that issue's excerpt (web-page headings
+  and named anchors, numbered paragraphs in the 2019 USCCB guide, indented
+  paragraphs in the 2023 note). Passages over eight verses and whole chapters
+  are linked, not printed. References are shown as written (the SBC's 2006
+  resolution cites Genesis 1:32, which does not exist, and the page says so);
+  two PDF text-layer garbles are fixed in `FIXES` with reasons. Result, 13 Nov
+  2026: 126 references in 16 of 34 statements; none in any of the four
+  platforms; no Catholic statement cites a verse in its section on an issue.
 
 ---
 

@@ -2299,6 +2299,16 @@ try {
       const platformCards = await fp.locator('main h4 + .card, main h4 + .card + .card').count();
       if (issues !== faith.issues.length || platformCards !== faith.issues.length * 4) shape.push(`${path}: ${issues} issues, ${platformCards} platform cards`);
     }
+    // The verses: each language shows its own Bible. Leviticus 19:34 is cited
+    // by the SBC's immigration resolution.
+    const lev = faith.verses.text['LEV 19:34'];
+    const vtext = async (path) => { await fp.goto(new URL(path, URL_UNDER_TEST).href, { waitUntil: 'load' }); return (await fp.locator('.vtext').allTextContents()).join(' '); }; // textContent: the verses sit in a closed <details>, where innerText is empty
+    const enV = await vtext('/faith/southern-baptist');
+    const esV = await vtext('/fe/bautista-del-sur');
+    check('faith: the English page prints the World English Bible and not the Reina-Valera',
+      enV.includes(lev.web.slice(0, 40)) && !enV.includes(lev.rv1909.slice(0, 40)));
+    check('faith: the Spanish page prints the Reina-Valera and not the World English Bible',
+      esV.includes(lev.rv1909.slice(0, 40)) && !esV.includes(lev.web.slice(0, 40)));
     check('faith: every page says it is not yet reviewed, with the count from the data', missing.length === 0, missing.join(', ') || `${pages.length} pages`);
     check('faith: no tradition page carries another tradition\'s statements', crossed.length === 0, crossed.join(', ') || '10 tradition pages');
     check('faith: every tradition page has every issue, and all four platforms on each', shape.length === 0, shape.join(' | ') || `${faith.issues.length} issues x 4 platforms`);

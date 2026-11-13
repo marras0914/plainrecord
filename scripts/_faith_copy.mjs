@@ -85,6 +85,7 @@ export const KEY = {
   plank: (p) => `plank.${p.party}-${p.level}.${p.issueId}`,
   noPlank: (n) => `silent.${n.party}-${n.level}.${n.issueId}`,
   toRead: (r, i) => `toread.${r.traditionId}.${r.issueId}.${i}`,
+  book: (code) => `book.${code}`,
 };
 
 export const FAITH_PATHS = {
