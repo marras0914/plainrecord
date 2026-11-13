@@ -1,0 +1,1010 @@
+{
+  "_meta": {
+    "what": "Every word of the faith pages (scripts/build_faith_pages.mjs) in Spanish: the pages' own words (kicker through hub.*), then the Spanish of every sentence in faith_positions.ts that the pages show (issue.* through toread.*).",
+    "why": "The same gate as economy.json: the builder refuses to write anything while any entry is not status ok, which fails the build. FAITH_DRAFT=1 lifts that for a local look and must never be set on Vercel. A record entry also keeps the English it translates, and the builder refuses one whose English has since changed in faith_positions.ts.",
+    "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
+    "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
+    "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
+    "status": "Drafted 13 Nov 2026. Not yet reviewed."
+  },
+  "kicker": {
+    "en": "Faith and the platforms",
+    "es": "La fe y las plataformas",
+    "status": "draft"
+  },
+  "langSwitch": {
+    "en": "En español",
+    "es": "In English",
+    "status": "draft"
+  },
+  "notice": {
+    "en": "<b>Not yet reviewed.</b> No one from the traditions on these pages has reviewed what they say. Every summary is this site's own, and each one links to the full text so you can check it.",
+    "es": "<b>Todavía sin revisar.</b> Nadie de las tradiciones que aparecen en estas páginas ha revisado lo que dicen. Cada resumen es de este sitio, y cada uno lleva al texto completo para que usted lo verifique.",
+    "status": "draft"
+  },
+  "reviewedCount": {
+    "en": "Entries reviewed so far: {n} of {of}.",
+    "es": "Entradas revisadas hasta ahora: {n} de {of}.",
+    "status": "draft"
+  },
+  "methodLink": {
+    "en": "How these pages were made",
+    "es": "Cómo se hicieron estas páginas",
+    "status": "draft"
+  },
+  "dataLink": {
+    "en": "Download the whole record (faith.json, CC0)",
+    "es": "Descargue el registro completo (faith.json, CC0)",
+    "status": "draft"
+  },
+  "homeLink": {
+    "en": "All five traditions",
+    "es": "Las cinco tradiciones",
+    "status": "draft"
+  },
+  "home.docTitle": {
+    "en": "What five churches teach, beside the party platforms",
+    "es": "Lo que enseñan cinco iglesias, junto a las plataformas de los partidos",
+    "status": "draft"
+  },
+  "home.h1": {
+    "en": "What the churches say, and what the platforms say",
+    "es": "Lo que dicen las iglesias y lo que dicen las plataformas",
+    "status": "draft"
+  },
+  "home.desc": {
+    "en": "Pick a Christian tradition and see what it has officially said on eight issues, beside the Texas and national Republican and Democratic platforms. Sourced, with no score.",
+    "es": "Escoja una tradición cristiana y vea lo que ha dicho oficialmente sobre ocho temas, junto a las plataformas republicanas y demócratas de Texas y nacionales. Con fuentes y sin puntaje.",
+    "status": "draft"
+  },
+  "home.lede": {
+    "en": "Pick a Christian tradition. For each of eight issues, you will see what its official bodies have said, beside what the Texas and national Republican and Democratic platforms say. The site computes no score and does not say which party is closer to any church.",
+    "es": "Escoja una tradición cristiana. En cada uno de ocho temas verá lo que han dicho sus órganos oficiales, junto a lo que dicen las plataformas republicanas y demócratas de Texas y nacionales. El sitio no calcula ningún puntaje ni dice qué partido está más cerca de cada iglesia.",
+    "status": "draft"
+  },
+  "home.h2pick": {
+    "en": "Pick a tradition",
+    "es": "Escoja una tradición",
+    "status": "draft"
+  },
+  "home.oneAtATime": {
+    "en": "One tradition at a time, on purpose: a grid of every church against every issue would read as a scoreboard.",
+    "es": "Una tradición a la vez, a propósito: una tabla de todas las iglesias contra todos los temas se leería como un marcador.",
+    "status": "draft"
+  },
+  "home.range": {
+    "en": "Members of every tradition hold a range of views, and many disagree with their own church's official positions. These pages report what each church's official bodies have said, not what its members believe.",
+    "es": "Los miembros de cada tradición tienen opiniones diversas, y muchos no están de acuerdo con las posturas oficiales de su propia iglesia. Estas páginas informan lo que han dicho los órganos oficiales de cada iglesia, no lo que creen sus miembros.",
+    "status": "draft"
+  },
+  "home.h2issues": {
+    "en": "The eight issues",
+    "es": "Los ocho temas",
+    "status": "draft"
+  },
+  "tr.docTitle": {
+    "en": "{name}: official statements beside the party platforms",
+    "es": "{name}: declaraciones oficiales junto a las plataformas de los partidos",
+    "status": "draft"
+  },
+  "tr.desc": {
+    "en": "{name}: what its official bodies have said on immigration, abortion, poverty, the death penalty, guns, the environment, healthcare and criminal justice, beside the Texas and national party platforms.",
+    "es": "{name}: lo que han dicho sus órganos oficiales sobre inmigración, aborto, pobreza, pena de muerte, armas de fuego, medio ambiente, atención médica y justicia penal, junto a las plataformas de los partidos de Texas y nacionales.",
+    "status": "draft"
+  },
+  "tr.official": {
+    "en": "What counts as official here:",
+    "es": "Qué cuenta como oficial aquí:",
+    "status": "draft"
+  },
+  "tr.jump": {
+    "en": "Issues on this page:",
+    "es": "Temas en esta página:",
+    "status": "draft"
+  },
+  "tr.h3church": {
+    "en": "Official statements",
+    "es": "Declaraciones oficiales",
+    "status": "draft"
+  },
+  "tr.none": {
+    "en": "No official statement",
+    "es": "Ninguna declaración oficial",
+    "status": "draft"
+  },
+  "tr.earlierOne": {
+    "en": "1 earlier statement on this issue",
+    "es": "1 declaración anterior sobre este tema",
+    "status": "draft"
+  },
+  "tr.earlierMany": {
+    "en": "{n} earlier statements on this issue",
+    "es": "{n} declaraciones anteriores sobre este tema",
+    "status": "draft"
+  },
+  "tr.earlierNote": {
+    "en": "Listed by title, newest first. Follow a link for the text.",
+    "es": "Por título, de la más reciente a la más antigua. Siga un enlace para leer el texto.",
+    "status": "draft"
+  },
+  "tr.h3platforms": {
+    "en": "The party platforms",
+    "es": "Las plataformas de los partidos",
+    "status": "draft"
+  },
+  "tr.texas": {
+    "en": "Texas",
+    "es": "Texas",
+    "status": "draft"
+  },
+  "tr.national": {
+    "en": "National",
+    "es": "Nacional",
+    "status": "draft"
+  },
+  "tr.platformLine": {
+    "en": "{name}, {year} platform",
+    "es": "{name}, plataforma de {year}",
+    "status": "draft"
+  },
+  "tr.fullText": {
+    "en": "Full text",
+    "es": "Texto completo",
+    "status": "draft"
+  },
+  "tr.quotes": {
+    "en": "Quotes are word for word and link to the full text.",
+    "es": "Las citas son textuales, en su inglés original, y llevan al texto completo.",
+    "status": "draft"
+  },
+  "tr.h2others": {
+    "en": "The other traditions",
+    "es": "Las otras tradiciones",
+    "status": "draft"
+  },
+  "me.docTitle": {
+    "en": "How the faith pages were made",
+    "es": "Cómo se hicieron las páginas sobre la fe",
+    "status": "draft"
+  },
+  "me.h1": {
+    "en": "How the faith pages were made",
+    "es": "Cómo se hicieron las páginas sobre la fe",
+    "status": "draft"
+  },
+  "me.desc": {
+    "en": "The rules behind the faith pages: which statements count as official for each church, which platforms are quoted, how every quote is checked, and what is missing.",
+    "es": "Las reglas detrás de las páginas sobre la fe: qué declaraciones cuentan como oficiales para cada iglesia, qué plataformas se citan, cómo se verifica cada cita y qué falta.",
+    "status": "draft"
+  },
+  "me.lede": {
+    "en": "These pages report what five Christian traditions have officially said and what the parties' platforms say. They never decide what \"the Christian position\" is.",
+    "es": "Estas páginas informan lo que cinco tradiciones cristianas han dicho oficialmente y lo que dicen las plataformas de los partidos. Nunca deciden cuál es “la postura cristiana”.",
+    "status": "draft"
+  },
+  "me.h2review": {
+    "en": "Not yet reviewed",
+    "es": "Todavía sin revisar",
+    "status": "draft"
+  },
+  "me.review": {
+    "en": "The plan was to publish only after people from several traditions, from conservative and progressive congregations, had checked that their own tradition is described fairly. Reviewers have not been found yet, and the pages are published without them, saying so on every page. Reviewers will be named here as they sign off, unless they ask not to be.",
+    "es": "El plan era publicar solo después de que personas de varias tradiciones, de congregaciones conservadoras y progresistas, verificaran que su propia tradición está descrita con justicia. Todavía no se han encontrado revisores, y las páginas se publican sin ellos, y lo dicen en cada página. Los revisores aparecerán aquí a medida que den su visto bueno, salvo que pidan no aparecer.",
+    "status": "draft"
+  },
+  "me.corrections": {
+    "en": "A correction is made the same way as any other on this site: a change to the public record, with a better source. {repoHtml}",
+    "es": "Una corrección se hace igual que cualquier otra en este sitio: un cambio en el registro público, con una mejor fuente. {repoHtml}",
+    "status": "draft"
+  },
+  "me.repo": {
+    "en": "The record and its history are on GitHub.",
+    "es": "El registro y su historial están en GitHub.",
+    "status": "draft"
+  },
+  "me.h2rules": {
+    "en": "The rules",
+    "es": "Las reglas",
+    "status": "draft"
+  },
+  "me.r1": {
+    "en": "Every entry links to a public source and gives its date.",
+    "es": "Cada entrada lleva a una fuente pública y da su fecha.",
+    "status": "draft"
+  },
+  "me.r2": {
+    "en": "One fixed list of eight issues, and every tradition and both parties, in Texas and nationally, are placed on every one.",
+    "es": "Una lista fija de ocho temas, y cada tradición y los dos partidos, en Texas y a nivel nacional, aparecen en cada uno.",
+    "status": "draft"
+  },
+  "me.r3": {
+    "en": "A position is reported only where the source states one. Mentioning an issue is not taking a position on it.",
+    "es": "Una postura se informa solo cuando la fuente la expresa. Mencionar un tema no es tomar una postura sobre él.",
+    "status": "draft"
+  },
+  "me.r4": {
+    "en": "\"No official statement\" is shown as an entry, not left blank, and so is a platform that says nothing on an issue.",
+    "es": "“Ninguna declaración oficial” aparece como una entrada, no como un espacio en blanco, y lo mismo una plataforma que no dice nada sobre un tema.",
+    "status": "draft"
+  },
+  "me.r5": {
+    "en": "Quotes are word for word and under 15 words. Summaries describe and do not characterize: every plank summary starts with the same verb, and none uses words like \"extreme\" or \"common sense\" in the site's own voice.",
+    "es": "Las citas son textuales y de menos de 15 palabras. Los resúmenes describen y no califican: todos los resúmenes de las plataformas empiezan con el mismo verbo, y ninguno usa palabras como “extremo” o “sentido común” con la voz del propio sitio.",
+    "status": "draft"
+  },
+  "me.r6": {
+    "en": "Each tradition's current statement on an issue is shown in full, and every earlier one is listed by title, date and link, so a position that has moved shows the movement.",
+    "es": "La declaración actual de cada tradición sobre un tema aparece completa, y cada una de las anteriores aparece por título, fecha y enlace, para que una postura que ha cambiado muestre el cambio.",
+    "status": "draft"
+  },
+  "me.h2official": {
+    "en": "What counts as official, tradition by tradition",
+    "es": "Qué cuenta como oficial, tradición por tradición",
+    "status": "draft"
+  },
+  "me.officialNote": {
+    "en": "The rule is fixed per tradition and is the same for every issue: the body that speaks for the tradition, not its staff, its agencies or its leaders' columns.",
+    "es": "La regla es fija para cada tradición y es la misma en todos los temas: el órgano que habla por la tradición, no su personal, sus agencias ni las columnas de sus líderes.",
+    "status": "draft"
+  },
+  "me.h2why": {
+    "en": "Why these five",
+    "es": "Por qué estas cinco",
+    "status": "draft"
+  },
+  "me.why": {
+    "en": "One from each of five large families of churches: Catholic, Baptist, mainline Protestant, historically Black and Pentecostal. The United Methodist Church was chosen over the Evangelical Lutheran Church in America because it is larger in Texas and revised its Social Principles in 2024; the African Methodist Episcopal Church over the National Baptist Convention because it publishes more formal positions.",
+    "es": "Una de cada una de cinco grandes familias de iglesias: católica, bautista, protestante histórica, históricamente afroamericana y pentecostal. Se escogió la Iglesia Metodista Unida en lugar de la Iglesia Evangélica Luterana en América porque es más grande en Texas y revisó sus Principios Sociales en 2024, y la Iglesia Metodista Episcopal Africana en lugar de la Convención Bautista Nacional porque publica más posturas formales.",
+    "status": "draft"
+  },
+  "me.h2platforms": {
+    "en": "The platforms",
+    "es": "Las plataformas",
+    "status": "draft"
+  },
+  "me.platforms": {
+    "en": "The most recent platform of each party, in Texas and nationally. Planks are quoted in English on the Spanish pages too, the same way the official bill captions are.",
+    "es": "La plataforma más reciente de cada partido, en Texas y a nivel nacional. Las citas de las plataformas están en inglés también en las páginas en español, igual que los títulos oficiales de los proyectos de ley.",
+    "status": "draft"
+  },
+  "me.h2earlier": {
+    "en": "How earlier statements are found",
+    "es": "Cómo se encuentran las declaraciones anteriores",
+    "status": "draft"
+  },
+  "me.earlier": {
+    "en": "For the Southern Baptist Convention, all {n} of its resolutions are downloaded from its own library, and a resolution is listed under an issue when its title contains one of a fixed set of words for that issue. The rule is mechanical, so the list is the same whoever builds it; its cost is that a resolution about an issue that does not name it in its title is not listed. The words for each issue are in the downloadable record. For the other traditions, earlier statements are listed by hand.",
+    "es": "Para la Convención Bautista del Sur, se descargan sus {n} resoluciones de su propia biblioteca, y una resolución aparece bajo un tema cuando su título contiene una de un conjunto fijo de palabras para ese tema. La regla es mecánica, así que la lista es la misma sin importar quién la haga; su costo es que no aparece una resolución sobre un tema que no lo nombra en su título. Las palabras de cada tema están en el registro descargable. Para las otras tradiciones, las declaraciones anteriores se anotan a mano.",
+    "status": "draft"
+  },
+  "me.h2checks": {
+    "en": "How every quote is checked",
+    "es": "Cómo se verifica cada cita",
+    "status": "draft"
+  },
+  "me.checks": {
+    "en": "Every source is downloaded and read as text. A script checks every quote, all {n} of them, against that text word for word, and checks that a quote with one word changed is not found, so the check is known to be able to fail. Every claim that a platform says nothing on an issue is checked the same way: none of the issue's words may appear in the platform. That check was added after a draft summary wrongly said the national Republican platform did not otherwise address the environment.",
+    "es": "Cada fuente se descarga y se lee como texto. Un programa compara cada cita, las {n}, palabra por palabra con ese texto, y comprueba que una cita con una palabra cambiada no se encuentra, para saber que la verificación puede fallar. Cada afirmación de que una plataforma no dice nada sobre un tema se verifica de la misma manera: ninguna de las palabras del tema puede aparecer en la plataforma. Esa verificación se agregó después de que un borrador de resumen dijo, por error, que la plataforma republicana nacional no trataba el medio ambiente en ningún otro punto.",
+    "status": "draft"
+  },
+  "me.h2missing": {
+    "en": "What is missing",
+    "es": "Qué falta",
+    "status": "draft"
+  },
+  "me.missingAme": {
+    "en": "The African Methodist Episcopal Church: no General Conference resolution or Council of Bishops statement was found on any issue except immigration. Its website offers no searchable archive.",
+    "es": "La Iglesia Metodista Episcopal Africana: no se encontró ninguna resolución de la Conferencia General ni declaración del Consejo de Obispos sobre ningún tema, salvo la inmigración. Su sitio web no ofrece un archivo en el que se pueda buscar.",
+    "status": "draft"
+  },
+  "me.missingAg": {
+    "en": "The Assemblies of God: its position papers cover immigration and abortion only. Two papers it refers to, on capital punishment and on environmental protection, are not published.",
+    "es": "Las Asambleas de Dios: sus documentos de posición tratan solo la inmigración y el aborto. Dos documentos que menciona, sobre la pena capital y sobre la protección del medio ambiente, no están publicados.",
+    "status": "draft"
+  },
+  "me.toRead": {
+    "en": "Qualifying documents not yet read:",
+    "es": "Documentos que cumplen la regla y todavía no se han leído:",
+    "status": "draft"
+  },
+  "me.h2not": {
+    "en": "What these pages do not do",
+    "es": "Lo que estas páginas no hacen",
+    "status": "draft"
+  },
+  "me.not": {
+    "en": "They do not score any party or any church, on the page, on a share card or in the data. They do not say which party is \"more Christian\", and they do not interpret scripture. Where traditions disagree with each other, the pages show the disagreement. And members of every tradition hold a range of views.",
+    "es": "No le dan puntaje a ningún partido ni a ninguna iglesia, ni en la página, ni en una tarjeta para compartir, ni en los datos. No dicen qué partido es “más cristiano” ni interpretan las Escrituras. Donde las tradiciones no están de acuerdo entre sí, las páginas muestran el desacuerdo. Y los miembros de cada tradición tienen opiniones diversas.",
+    "status": "draft"
+  },
+  "me.h2data": {
+    "en": "The data",
+    "es": "Los datos",
+    "status": "draft"
+  },
+  "me.data": {
+    "en": "Everything on these pages is in one file, free to reuse (CC0).",
+    "es": "Todo lo que aparece en estas páginas está en un solo archivo, de uso libre (CC0).",
+    "status": "draft"
+  },
+  "discloseLabel": {
+    "en": "Who made this.",
+    "es": "Quién lo hizo.",
+    "status": "draft"
+  },
+  "disclose": {
+    "en": "Marco Arras, a Texas resident. I donate to the Democratic Party, and I say so before anything else rather than in a footnote. The rule that picks which votes appear is published and runs identically on both caucuses, and every vote and count is in a file you can download and check.",
+    "es": "Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar.",
+    "status": "draft"
+  },
+  "discloseFaith": {
+    "en": "On these pages the same holds for the churches: what counts as official is a written rule for each tradition, applied the same way on every issue.",
+    "es": "En estas páginas pasa lo mismo con las iglesias: lo que cuenta como oficial es una regla escrita para cada tradición, que se aplica igual en todos los temas.",
+    "status": "draft"
+  },
+  "hub.h2": {
+    "en": "Faith and the party platforms",
+    "es": "La fe y las plataformas de los partidos",
+    "status": "draft"
+  },
+  "hub.lede": {
+    "en": "What five Christian traditions have officially said on eight issues, beside what the Texas and national party platforms say. One tradition at a time, sourced, with no score.",
+    "es": "Lo que cinco tradiciones cristianas han dicho oficialmente sobre ocho temas, junto a lo que dicen las plataformas de los partidos de Texas y nacionales. Una tradición a la vez, con fuentes y sin puntaje.",
+    "status": "draft"
+  },
+  "hub.open": {
+    "en": "Pick a tradition",
+    "es": "Escoja una tradición",
+    "status": "draft"
+  },
+  "issue.immigration.name": {
+    "en": "Immigration",
+    "es": "Inmigración",
+    "status": "draft"
+  },
+  "issue.immigration.desc": {
+    "en": "Who may come to and stay in the United States, and how the law is enforced at the border and within it.",
+    "es": "Quién puede venir a Estados Unidos y quedarse, y cómo se aplica la ley en la frontera y dentro del país.",
+    "status": "draft"
+  },
+  "issue.abortion.name": {
+    "en": "Abortion",
+    "es": "Aborto",
+    "status": "draft"
+  },
+  "issue.abortion.desc": {
+    "en": "Whether and when the law permits ending a pregnancy.",
+    "es": "Si la ley permite interrumpir un embarazo, y cuándo.",
+    "status": "draft"
+  },
+  "issue.poverty.name": {
+    "en": "Poverty and welfare",
+    "es": "Pobreza y asistencia pública",
+    "status": "draft"
+  },
+  "issue.poverty.desc": {
+    "en": "Public assistance for people with low incomes.",
+    "es": "La asistencia pública para personas de bajos ingresos.",
+    "status": "draft"
+  },
+  "issue.death-penalty.name": {
+    "en": "The death penalty",
+    "es": "La pena de muerte",
+    "status": "draft"
+  },
+  "issue.death-penalty.desc": {
+    "en": "Whether the state may execute people convicted of crimes.",
+    "es": "Si el Estado puede ejecutar a personas condenadas por delitos.",
+    "status": "draft"
+  },
+  "issue.guns.name": {
+    "en": "Guns",
+    "es": "Armas de fuego",
+    "status": "draft"
+  },
+  "issue.guns.desc": {
+    "en": "Who may own firearms and how the law regulates them.",
+    "es": "Quién puede tener armas de fuego y cómo las regula la ley.",
+    "status": "draft"
+  },
+  "issue.environment.name": {
+    "en": "Creation care and the environment",
+    "es": "El cuidado de la creación y el medio ambiente",
+    "status": "draft"
+  },
+  "issue.environment.desc": {
+    "en": "Pollution, conservation and climate.",
+    "es": "La contaminación, la conservación y el clima.",
+    "status": "draft"
+  },
+  "issue.healthcare.name": {
+    "en": "Healthcare",
+    "es": "Atención médica",
+    "status": "draft"
+  },
+  "issue.healthcare.desc": {
+    "en": "Who pays for medical care and how people get access to it.",
+    "es": "Quién paga la atención médica y cómo la gente tiene acceso a ella.",
+    "status": "draft"
+  },
+  "issue.criminal-justice.name": {
+    "en": "Criminal justice",
+    "es": "Justicia penal",
+    "status": "draft"
+  },
+  "issue.criminal-justice.desc": {
+    "en": "Policing, sentencing and prisons.",
+    "es": "La policía, las condenas y las prisiones.",
+    "status": "draft"
+  },
+  "trad.catholic.name": {
+    "en": "Catholic Church in the United States",
+    "es": "Iglesia católica en Estados Unidos",
+    "status": "draft"
+  },
+  "trad.catholic.family": {
+    "en": "Catholic",
+    "es": "Católica",
+    "status": "draft"
+  },
+  "trad.catholic.official": {
+    "en": "Statements approved by the full body of U.S. bishops (USCCB), Forming Consciences for Faithful Citizenship first. Not staff, committee or diocesan letters.",
+    "es": "Las declaraciones aprobadas por el pleno de los obispos de Estados Unidos (USCCB), empezando por Forming Consciences for Faithful Citizenship. No cuentan las cartas del personal, de comités ni de diócesis.",
+    "status": "draft"
+  },
+  "trad.sbc.name": {
+    "en": "Southern Baptist Convention",
+    "es": "Convención Bautista del Sur",
+    "status": "draft"
+  },
+  "trad.sbc.family": {
+    "en": "Baptist",
+    "es": "Bautista",
+    "status": "draft"
+  },
+  "trad.sbc.official": {
+    "en": "Resolutions adopted by the messengers at an SBC Annual Meeting. Not entity or agency statements.",
+    "es": "Las resoluciones adoptadas por los mensajeros en una Reunión Anual de la Convención. No cuentan las declaraciones de sus entidades ni agencias.",
+    "status": "draft"
+  },
+  "trad.umc.name": {
+    "en": "The United Methodist Church",
+    "es": "Iglesia Metodista Unida",
+    "status": "draft"
+  },
+  "trad.umc.family": {
+    "en": "Mainline Protestant",
+    "es": "Protestante histórica",
+    "status": "draft"
+  },
+  "trad.umc.official": {
+    "en": "The Social Principles and the Book of Resolutions, as adopted by the General Conference (2024 revision). The Social Principles are shown in full where they address the issue; otherwise the Book of Resolutions entry on it.",
+    "es": "Los Principios Sociales y el Libro de Resoluciones, tal como los adoptó la Conferencia General (revisión de 2024). Aparecen completos los Principios Sociales cuando tratan el tema; si no, la entrada del Libro de Resoluciones sobre él.",
+    "status": "draft"
+  },
+  "trad.ame.name": {
+    "en": "African Methodist Episcopal Church",
+    "es": "Iglesia Metodista Episcopal Africana",
+    "status": "draft"
+  },
+  "trad.ame.family": {
+    "en": "Historically Black church",
+    "es": "Iglesia históricamente afroamericana",
+    "status": "draft"
+  },
+  "trad.ame.official": {
+    "en": "General Conference resolutions, then statements of the Council of Bishops.",
+    "es": "Las resoluciones de la Conferencia General y, después, las declaraciones del Consejo de Obispos.",
+    "status": "draft"
+  },
+  "trad.ag.name": {
+    "en": "Assemblies of God (USA)",
+    "es": "Asambleas de Dios (EE. UU.)",
+    "status": "draft"
+  },
+  "trad.ag.family": {
+    "en": "Pentecostal",
+    "es": "Pentecostal",
+    "status": "draft"
+  },
+  "trad.ag.official": {
+    "en": "Position papers and official statements of the General Council or its Executive Presbytery. Not columns by its officers.",
+    "es": "Los documentos de posición y las declaraciones oficiales del Concilio General o de su Presbiterio Ejecutivo. No cuentan las columnas de sus dirigentes.",
+    "status": "draft"
+  },
+  "platform.R-texas": {
+    "en": "Republican Party of Texas",
+    "es": "Partido Republicano de Texas",
+    "status": "draft"
+  },
+  "platform.D-texas": {
+    "en": "Texas Democratic Party",
+    "es": "Partido Demócrata de Texas",
+    "status": "draft"
+  },
+  "platform.R-national": {
+    "en": "Republican National Committee",
+    "es": "Comité Nacional Republicano",
+    "status": "draft"
+  },
+  "platform.D-national": {
+    "en": "Democratic National Committee",
+    "es": "Comité Nacional Demócrata",
+    "status": "draft"
+  },
+  "body.resolution-adopted-at-the-sbc-annual-meeting-orlando": {
+    "en": "Resolution adopted at the SBC Annual Meeting, Orlando",
+    "es": "Resolución adoptada en la Reunión Anual de la Convención Bautista del Sur, Orlando",
+    "status": "draft"
+  },
+  "body.resolution-adopted-at-the-sbc-annual-meeting-dallas": {
+    "en": "Resolution adopted at the SBC Annual Meeting, Dallas",
+    "es": "Resolución adoptada en la Reunión Anual de la Convención Bautista del Sur, Dallas",
+    "status": "draft"
+  },
+  "body.adopted-by-the-general-conference-2024-revision": {
+    "en": "Adopted by the General Conference (2024 revision)",
+    "es": "Adoptado por la Conferencia General (revisión de 2024)",
+    "status": "draft"
+  },
+  "body.adopted-by-the-general-conference-2016-readopted-2024": {
+    "en": "Adopted by the General Conference (2016, readopted 2024)",
+    "es": "Adoptado por la Conferencia General (en 2016, y de nuevo en 2024)",
+    "status": "draft"
+  },
+  "body.approved-by-the-u-s-bishops": {
+    "en": "Approved by the U.S. bishops",
+    "es": "Aprobado por los obispos de Estados Unidos",
+    "status": "draft"
+  },
+  "body.approved-by-the-u-s-bishops-2015-text-reissued-2019": {
+    "en": "Approved by the U.S. bishops (2015 text, reissued 2019)",
+    "es": "Aprobado por los obispos de Estados Unidos (texto de 2015, reeditado en 2019)",
+    "status": "draft"
+  },
+  "body.council-of-bishops": {
+    "en": "Council of Bishops",
+    "es": "Consejo de Obispos",
+    "status": "draft"
+  },
+  "body.resolution-adopted-at-the-sbc-annual-meeting-baltimore": {
+    "en": "Resolution adopted at the SBC Annual Meeting, Baltimore",
+    "es": "Resolución adoptada en la Reunión Anual de la Convención Bautista del Sur, Baltimore",
+    "status": "draft"
+  },
+  "body.resolution-adopted-at-the-sbc-annual-meeting-houston": {
+    "en": "Resolution adopted at the SBC Annual Meeting, Houston",
+    "es": "Resolución adoptada en la Reunión Anual de la Convención Bautista del Sur, Houston",
+    "status": "draft"
+  },
+  "body.position-paper-adopted-by-the-general-presbytery": {
+    "en": "Position paper adopted by the General Presbytery",
+    "es": "Documento de posición adoptado por el Presbiterio General",
+    "status": "draft"
+  },
+  "body.the-general-council-of-the-assemblies-of-god": {
+    "en": "The General Council of the Assemblies of God",
+    "es": "El Concilio General de las Asambleas de Dios",
+    "status": "draft"
+  },
+  "body.resolution-adopted-at-the-sbc-annual-meeting-greensboro": {
+    "en": "Resolution adopted at the SBC Annual Meeting, Greensboro",
+    "es": "Resolución adoptada en la Reunión Anual de la Convención Bautista del Sur, Greensboro",
+    "status": "draft"
+  },
+  "st.sbc.immigration.2026-06": {
+    "en": "Calls for enforcing immigration law justly, humanely and with due process, including removing people the government prioritizes for deportation; rejects amnesty without accountability; rejects nativism and ethnic hostility; and asks for particular care for children and families.",
+    "es": "Pide aplicar la ley migratoria con justicia, humanidad y debido proceso, incluida la deportación de las personas a quienes el gobierno da prioridad; rechaza la amnistía sin rendición de cuentas; rechaza el nativismo y la hostilidad étnica, y pide un cuidado especial para los niños y las familias.",
+    "status": "draft"
+  },
+  "st.sbc.abortion.2025-06": {
+    "en": "Calls for revoking FDA approval of mifepristone, laws banning the manufacture, sale and distribution of abortion drugs, enforcing the Comstock Act against mailing abortion pills, and equal protection under the Constitution for the unborn so that all abortion ends, and commits to supporting pregnancy centers, adoption and maternal health care.",
+    "es": "Pide revocar la aprobación de la mifepristona por la FDA, leyes que prohíban fabricar, vender y distribuir fármacos abortivos, aplicar la Ley Comstock contra el envío de píldoras abortivas por correo, e igual protección constitucional para los no nacidos para que termine todo aborto, y se compromete a apoyar los centros de embarazo, la adopción y la atención de la salud materna.",
+    "status": "draft"
+  },
+  "st.umc.immigration.2024": {
+    "en": "Affirms the dignity and rights of migrants, immigrants and refugees, urges congregations to welcome them, and opposes laws that criminalize or punish people for their migration status and detention in inhumane conditions.",
+    "es": "Afirma la dignidad y los derechos de los migrantes, los inmigrantes y los refugiados, insta a las congregaciones a recibirlos, y se opone a las leyes que criminalizan o castigan a las personas por su situación migratoria y a la detención en condiciones inhumanas.",
+    "status": "draft"
+  },
+  "st.umc.abortion.2024": {
+    "en": "Affirms the sanctity of the life of both the unborn child and the mother, says abortion may be justified in tragic conflicts of life with life, supports the legal availability of medically supervised abortion, and rejects abortion as birth control, for sex selection, and late in pregnancy except in specified cases.",
+    "es": "Afirma la santidad de la vida tanto del niño no nacido como de la madre, dice que el aborto puede justificarse en trágicos conflictos de vida contra vida, apoya la disponibilidad legal del aborto con supervisión médica, y rechaza el aborto como método anticonceptivo, para elegir el sexo y en etapas avanzadas del embarazo salvo en casos especificados.",
+    "status": "draft"
+  },
+  "st.umc.death-penalty.2024": {
+    "en": "Opposes capital punishment, saying it compounds the loss of life and falls disproportionately on people who are poor, uneducated, from marginalized racial and ethnic communities, or mentally impaired.",
+    "es": "Se opone a la pena capital y dice que agrava la pérdida de vidas y recae de manera desproporcionada en personas pobres, sin educación, de comunidades raciales y étnicas marginadas o con discapacidad mental.",
+    "status": "draft"
+  },
+  "st.umc.guns.2024": {
+    "en": "Calls on congregations to advocate at the local and national level for laws that prevent or reduce gun violence, and to form partnerships with communities that have experienced it.",
+    "es": "Pide a las congregaciones abogar, a nivel local y nacional, por leyes que prevengan o reduzcan la violencia con armas de fuego, y formar alianzas con las comunidades que la han sufrido.",
+    "status": "draft"
+  },
+  "st.umc.poverty.2024": {
+    "en": "Pledges to work toward eradicating the roots and effects of poverty, rejects teaching that treats wealth as a sign of God's favor and poverty as a sign of disfavor, and endorses policies that guarantee workers fair compensation, sometimes called a living wage.",
+    "es": "Se compromete a trabajar para erradicar las raíces y los efectos de la pobreza, rechaza la enseñanza que trata la riqueza como señal del favor de Dios y la pobreza como señal de su desaprobación, y respalda políticas que garanticen a los trabajadores una remuneración justa, a veces llamada salario digno.",
+    "status": "draft"
+  },
+  "st.umc.environment.2024": {
+    "en": "Says global warming and climate change already threaten all life on earth and that burning fossil fuels is the greatest single contributor to greenhouse gases, and urges cooperation to end poaching and protect endangered species and their habitats.",
+    "es": "Dice que el calentamiento global y el cambio climático ya amenazan toda la vida en la tierra y que la quema de combustibles fósiles es la mayor fuente individual de gases de efecto invernadero, e insta a cooperar para acabar con la caza furtiva y proteger las especies en peligro y sus hábitats.",
+    "status": "draft"
+  },
+  "st.umc.healthcare.2024": {
+    "en": "Affirms health care as a basic human right, vows to work toward expanded access to preventive, therapeutic and palliative care, and urges United Methodists to join efforts to create systems that provide comprehensive health protections for all.",
+    "es": "Afirma la atención médica como un derecho humano básico, se compromete a trabajar por un mayor acceso a la atención preventiva, terapéutica y paliativa, e insta a los metodistas unidos a sumarse a los esfuerzos para crear sistemas que brinden protección integral de la salud para todos.",
+    "status": "draft"
+  },
+  "st.umc.criminal-justice.2024": {
+    "en": "Urges governments to develop systems that emphasize restorative justice, calls for monitoring criminal justice systems for prejudice and bias, and encourages churches to minister to people who are incarcerated and to advocate for criminal justice reform.",
+    "es": "Insta a los gobiernos a crear sistemas que pongan el énfasis en la justicia restaurativa, pide vigilar los sistemas de justicia penal para detectar prejuicios y sesgos, y anima a las iglesias a ministrar a las personas encarceladas y a abogar por la reforma de la justicia penal.",
+    "status": "draft"
+  },
+  "st.catholic.immigration.2023-11-15": {
+    "en": "Calls for comprehensive immigration reform that offers a path to citizenship, treats immigrant workers fairly, keeps families together, maintains the integrity of the borders, respects the rule of law, and addresses why people leave their countries.",
+    "es": "Pide una reforma migratoria integral que ofrezca un camino a la ciudadanía, trate con justicia a los trabajadores inmigrantes, mantenga unidas a las familias, mantenga la integridad de las fronteras, respete el Estado de derecho y atienda las razones por las que la gente deja su país.",
+    "status": "draft"
+  },
+  "st.catholic.abortion.2023-11-15": {
+    "en": "Calls the threat of abortion the bishops' pre-eminent priority, because it directly attacks the most vulnerable and ends more than a million lives a year in the United States, and pairs protecting children in the womb with solidarity with mothers.",
+    "es": "Llama a la amenaza del aborto la prioridad preeminente de los obispos, porque ataca directamente a los más vulnerables y pone fin a más de un millón de vidas al año en Estados Unidos, y une la protección de los niños en el vientre con la solidaridad con las madres.",
+    "status": "draft"
+  },
+  "st.catholic.death-penalty.2023-11-15": {
+    "en": "Lists the death penalty among grave threats to the life and dignity of the human person, alongside euthanasia, gun violence, terrorism and human trafficking.",
+    "es": "Incluye la pena de muerte entre las amenazas graves a la vida y la dignidad de la persona humana, junto con la eutanasia, la violencia con armas de fuego, el terrorismo y la trata de personas.",
+    "status": "draft"
+  },
+  "st.catholic.guns.2023-11-15": {
+    "en": "Supports measures to reduce gun violence, which it lists among grave threats to the life and dignity of the human person.",
+    "es": "Apoya medidas para reducir la violencia con armas de fuego, que incluye entre las amenazas graves a la vida y la dignidad de la persona humana.",
+    "status": "draft"
+  },
+  "st.catholic.poverty.2023-11-15": {
+    "en": "Names lack of justice for the poor among the grave concerns Catholics bring to public life, and calls on them to serve the poor and the needy.",
+    "es": "Incluye la falta de justicia para los pobres entre las preocupaciones graves que los católicos llevan a la vida pública, y los llama a servir a los pobres y los necesitados.",
+    "status": "draft"
+  },
+  "st.catholic.environment.2023-11-15": {
+    "en": "Calls for hearing both the cry of the earth and the cry of the poor, and for responding to climate change with actions that better protect creation for present and future generations.",
+    "es": "Pide escuchar tanto el clamor de la tierra como el clamor de los pobres, y responder al cambio climático con acciones que protejan mejor la creación para las generaciones presentes y futuras.",
+    "status": "draft"
+  },
+  "st.catholic.healthcare.2023-11-15": {
+    "en": "Names the need for greater access to healthcare among the concerns Catholics bring to public life, and calls for supporting parents through work, training and help with childcare, healthcare, housing and transportation.",
+    "es": "Incluye la necesidad de un mayor acceso a la atención médica entre las preocupaciones que los católicos llevan a la vida pública, y pide apoyar a los padres con trabajo, capacitación y ayuda con el cuidado infantil, la atención médica, la vivienda y el transporte.",
+    "status": "draft"
+  },
+  "st.catholic.criminal-justice.2023-11-15": {
+    "en": "Calls for continued reform of the criminal justice system and an end to the use of the death penalty.",
+    "es": "Pide continuar la reforma del sistema de justicia penal y poner fin al uso de la pena de muerte.",
+    "status": "draft"
+  },
+  "st.catholic.immigration.2019": {
+    "en": "Calls for reform that includes a broad legalization program with a path to citizenship, worker protections, family reunification, due process and refuge for people fleeing persecution, and says a nation's right to control its borders should be recognized but pursued justly and humanely.",
+    "es": "Pide una reforma que incluya un programa amplio de legalización con un camino a la ciudadanía, protecciones laborales, reunificación familiar, debido proceso y refugio para quienes huyen de la persecución, y dice que debe reconocerse el derecho de una nación a controlar sus fronteras, pero ejercerlo con justicia y humanidad.",
+    "status": "draft"
+  },
+  "st.catholic.abortion.2019": {
+    "en": "Calls abortion the preeminent priority among threats to human life and dignity, because it directly attacks life itself, takes place within the family, and ends so many lives.",
+    "es": "Llama al aborto la prioridad preeminente entre las amenazas a la vida y la dignidad humanas, porque ataca directamente la vida misma, ocurre dentro de la familia y pone fin a tantas vidas.",
+    "status": "draft"
+  },
+  "st.catholic.death-penalty.2019": {
+    "en": "Calls for ending the use of the death penalty, saying the nation's continued reliance on it cannot be justified, while noting the Church accepted it in the past for egregious crimes when no alternative was available.",
+    "es": "Pide poner fin al uso de la pena de muerte y dice que no puede justificarse que el país siga recurriendo a ella, aunque señala que en el pasado la Iglesia la aceptó para crímenes atroces cuando no había otra alternativa.",
+    "status": "draft"
+  },
+  "st.catholic.guns.2019": {
+    "en": "Calls for addressing gun violence among the issues that affect human life and dignity.",
+    "es": "Pide atender la violencia con armas de fuego entre los temas que afectan la vida y la dignidad humanas.",
+    "status": "draft"
+  },
+  "st.catholic.poverty.2019": {
+    "en": "Calls for helping families and children overcome poverty through access to education, decent work at fair, living wages and adequate assistance for the vulnerable, and for more development aid, fairer trade and debt relief for the poorest countries.",
+    "es": "Pide ayudar a las familias y los niños a salir de la pobreza mediante el acceso a la educación, trabajo digno con salarios justos y suficientes para vivir y asistencia adecuada para los vulnerables, y más ayuda al desarrollo, comercio más justo y alivio de la deuda para los países más pobres.",
+    "status": "draft"
+  },
+  "st.catholic.environment.2019": {
+    "en": "Calls for urgently finding ways to care better for creation, especially for the poor, who are most affected by climate change.",
+    "es": "Pide buscar con urgencia maneras de cuidar mejor la creación, sobre todo a favor de los pobres, que son los más afectados por el cambio climático.",
+    "status": "draft"
+  },
+  "st.catholic.healthcare.2019": {
+    "en": "Calls for providing health care while respecting human life, human dignity and religious freedom, and counts access to health care among the things every person has a right to.",
+    "es": "Pide brindar atención médica respetando la vida humana, la dignidad humana y la libertad religiosa, y cuenta el acceso a la atención médica entre las cosas a las que toda persona tiene derecho.",
+    "status": "draft"
+  },
+  "st.ame.immigration.2018": {
+    "en": "Opposes the use of Romans 13 to justify separating immigrant children from their parents, supports the ecumenical Faith Leaders Statement on Family Separation, and says a positive resolution is needed for Dreamers.",
+    "es": "Se opone al uso de Romanos 13 para justificar la separación de niños inmigrantes de sus padres, apoya la declaración ecuménica de líderes religiosos sobre la separación de familias (Faith Leaders Statement on Family Separation) y dice que hace falta una solución favorable para los Dreamers.",
+    "status": "draft"
+  },
+  "st.sbc.guns.2018-06": {
+    "en": "Calls on governments to examine what drives gun violence and to adopt preventive measures that reduce gun violence and mass shootings in accordance with the Second Amendment, says gun ownership carries great responsibility, and names the human heart as the source of the violence and the gospel as its answer.",
+    "es": "Pide a los gobiernos examinar las causas de la violencia con armas de fuego y adoptar medidas preventivas que reduzcan esa violencia y los tiroteos masivos de acuerdo con la Segunda Enmienda, dice que tener armas conlleva una gran responsabilidad, y señala al corazón humano como el origen de la violencia y al evangelio como su respuesta.",
+    "status": "draft"
+  },
+  "st.sbc.poverty.2014-06": {
+    "en": "Encourages Southern Baptists and their churches to support the convention's Global Hunger Relief offering through giving and an annual World Hunger Sunday. It addresses church giving rather than public policy.",
+    "es": "Anima a los bautistas del sur y a sus iglesias a apoyar la ofrenda Global Hunger Relief de la Convención con donaciones y un Domingo Mundial contra el Hambre cada año. Trata de las donaciones de las iglesias, no de políticas públicas.",
+    "status": "draft"
+  },
+  "st.sbc.healthcare.2013-06": {
+    "en": "Opposes any public policy that might discriminate against the elderly in their access to quality healthcare, and encourages ministry to senior adults. It does not address health care more broadly.",
+    "es": "Se opone a cualquier política pública que pueda discriminar a las personas mayores en su acceso a una atención médica de calidad, y anima a ministrar a los adultos mayores. No trata la atención médica de manera más amplia.",
+    "status": "draft"
+  },
+  "st.sbc.criminal-justice.2013-06": {
+    "en": "Supports legislation to reduce high incarceration rates without jeopardizing public safety, probation and parole as alternatives to long incarceration for some nonviolent offenders, and programs that help released prisoners reintegrate into society.",
+    "es": "Apoya leyes para reducir las altas tasas de encarcelamiento sin poner en riesgo la seguridad pública, la libertad a prueba y la libertad condicional como alternativas al encarcelamiento prolongado para algunos delincuentes no violentos, y programas que ayuden a las personas liberadas a reintegrarse a la sociedad.",
+    "status": "draft"
+  },
+  "st.ag.abortion.2010-08": {
+    "en": "Holds that human life from conception is to be protected, denies that a legal right to abortion confers a moral right, says historic Christian faith has usually favored the mother's life where childbirth would likely cause her death, and calls on Christians to seek legislative and judicial redress.",
+    "es": "Sostiene que la vida humana debe protegerse desde la concepción, niega que un derecho legal al aborto otorgue un derecho moral, dice que la fe cristiana histórica por lo general ha favorecido la vida de la madre cuando el parto probablemente le causaría la muerte, y llama a los cristianos a buscar remedio legislativo y judicial.",
+    "status": "draft"
+  },
+  "st.ag.immigration.2006-08-14": {
+    "en": "Says the borders should be secure so that immigration conforms to the law, supports comprehensive immigration reform reflecting human dignity, compassion and justice, and says ministry to everyone living or working in the country stands apart from questions of jurisdiction.",
+    "es": "Dice que las fronteras deben ser seguras para que la inmigración se ajuste a la ley, apoya una reforma migratoria integral que refleje la dignidad humana, la compasión y la justicia, y dice que el ministerio a toda persona que vive o trabaja en el país es independiente de las cuestiones de jurisdicción.",
+    "status": "draft"
+  },
+  "st.sbc.environment.2006-06": {
+    "en": "Supports conserving natural resources while respecting property rights, and public policy and private efforts to improve the environment based on sound science; opposes alliances with environmental groups whose positions it considers contrary to biblical principles, and solutions it calls scientifically questionable that restrict access to natural resources and economic development.",
+    "es": "Apoya conservar los recursos naturales respetando los derechos de propiedad, y las políticas públicas y los esfuerzos privados que buscan mejorar el medio ambiente con base en ciencia sólida; se opone a alianzas con grupos ambientalistas cuyas posturas considera contrarias a los principios bíblicos, y a soluciones que llama científicamente dudosas que restringen el acceso a los recursos naturales y el desarrollo económico.",
+    "status": "draft"
+  },
+  "st.sbc.death-penalty.2000-06": {
+    "en": "Supports the fair and equitable use of capital punishment for murder or treasonous acts that result in death, only on clear and overwhelming evidence of guilt, and calls for vigilance, justice and equity in the criminal justice system.",
+    "es": "Apoya el uso justo y equitativo de la pena capital por asesinato o por actos de traición que causen muertes, solo con pruebas claras y abrumadoras de culpabilidad, y pide vigilancia, justicia y equidad en el sistema de justicia penal.",
+    "status": "draft"
+  },
+  "none.ame.abortion": {
+    "en": "No General Conference resolution or Council of Bishops statement on abortion was found. Statements from the church's International Health Commission do not qualify under the rule for this tradition.",
+    "es": "No se encontró ninguna resolución de la Conferencia General ni declaración del Consejo de Obispos sobre el aborto. Las declaraciones de la Comisión Internacional de Salud de la iglesia no cuentan según la regla de esta tradición.",
+    "status": "draft"
+  },
+  "none.ame.death-penalty": {
+    "en": "No General Conference resolution or Council of Bishops statement on the death penalty was found on ame-church.com or elsewhere.",
+    "es": "No se encontró ninguna resolución de la Conferencia General ni declaración del Consejo de Obispos sobre la pena de muerte, ni en ame-church.com ni en otro lugar.",
+    "status": "draft"
+  },
+  "none.ame.guns": {
+    "en": "No General Conference resolution or Council of Bishops statement on guns was found on ame-church.com or elsewhere.",
+    "es": "No se encontró ninguna resolución de la Conferencia General ni declaración del Consejo de Obispos sobre las armas de fuego, ni en ame-church.com ni en otro lugar.",
+    "status": "draft"
+  },
+  "none.ag.death-penalty": {
+    "en": "There is no position paper on the death penalty. The 2015 position paper Church Mission and Peacemaking refers to a \"perspective paper\" on capital punishment, but no such paper is published on ag.org.",
+    "es": "No hay ningún documento de posición sobre la pena de muerte. El documento de posición de 2015 Church Mission and Peacemaking menciona un “documento de perspectiva” sobre la pena capital, pero ese documento no está publicado en ag.org.",
+    "status": "draft"
+  },
+  "none.ag.guns": {
+    "en": "There is no position paper or official statement on guns.",
+    "es": "No hay ningún documento de posición ni declaración oficial sobre las armas de fuego.",
+    "status": "draft"
+  },
+  "none.ame.poverty": {
+    "en": "No General Conference resolution or Council of Bishops statement on poverty or public assistance was found on ame-church.com or elsewhere.",
+    "es": "No se encontró ninguna resolución de la Conferencia General ni declaración del Consejo de Obispos sobre la pobreza o la asistencia pública, ni en ame-church.com ni en otro lugar.",
+    "status": "draft"
+  },
+  "none.ame.environment": {
+    "en": "No General Conference resolution or Council of Bishops statement on the environment was found on ame-church.com or elsewhere.",
+    "es": "No se encontró ninguna resolución de la Conferencia General ni declaración del Consejo de Obispos sobre el medio ambiente, ni en ame-church.com ni en otro lugar.",
+    "status": "draft"
+  },
+  "none.ag.poverty": {
+    "en": "There is no position paper or official statement on poverty or public assistance.",
+    "es": "No hay ningún documento de posición ni declaración oficial sobre la pobreza o la asistencia pública.",
+    "status": "draft"
+  },
+  "none.ame.healthcare": {
+    "en": "No General Conference resolution or Council of Bishops statement on healthcare was found on ame-church.com or elsewhere.",
+    "es": "No se encontró ninguna resolución de la Conferencia General ni declaración del Consejo de Obispos sobre la atención médica, ni en ame-church.com ni en otro lugar.",
+    "status": "draft"
+  },
+  "none.ame.criminal-justice": {
+    "en": "No General Conference resolution or Council of Bishops statement on criminal justice was found on ame-church.com or elsewhere.",
+    "es": "No se encontró ninguna resolución de la Conferencia General ni declaración del Consejo de Obispos sobre la justicia penal, ni en ame-church.com ni en otro lugar.",
+    "status": "draft"
+  },
+  "none.ag.healthcare": {
+    "en": "There is no position paper or official statement on healthcare policy.",
+    "es": "No hay ningún documento de posición ni declaración oficial sobre las políticas de atención médica.",
+    "status": "draft"
+  },
+  "none.ag.criminal-justice": {
+    "en": "There is no position paper or official statement on criminal justice.",
+    "es": "No hay ningún documento de posición ni declaración oficial sobre la justicia penal.",
+    "status": "draft"
+  },
+  "none.ag.environment": {
+    "en": "There is no position paper on the environment. The 2015 position paper Church Mission and Peacemaking refers to a \"perspective paper\" on environmental protection, but no such paper is published on ag.org.",
+    "es": "No hay ningún documento de posición sobre el medio ambiente. El documento de posición de 2015 Church Mission and Peacemaking menciona un “documento de perspectiva” sobre la protección del medio ambiente, pero ese documento no está publicado en ag.org.",
+    "status": "draft"
+  },
+  "plank.R-texas.healthcare": {
+    "en": "Calls for building state reserves sufficient for Texas to exit the federal Medicaid program, directing budget surpluses to a Texas Health Savings Account until then, and opposing mandates for treatment, vaccination or masks and health insurance surcharges.",
+    "es": "Pide crear reservas estatales suficientes para que Texas salga del programa federal Medicaid, destinar mientras tanto los superávits del presupuesto a una Cuenta de Ahorros de Salud de Texas, y oponerse a la obligatoriedad de tratamientos, vacunas o mascarillas y a los recargos en los seguros médicos.",
+    "status": "draft"
+  },
+  "plank.D-texas.healthcare": {
+    "en": "Calls for expanding Medicaid, protecting Medicare benefits, making prescription drugs affordable for all, and helping small businesses afford health insurance for their employees.",
+    "es": "Pide ampliar Medicaid, proteger los beneficios de Medicare, hacer que los medicamentos recetados sean asequibles para todos, y ayudar a las pequeñas empresas a pagar el seguro médico de sus empleados.",
+    "status": "draft"
+  },
+  "plank.R-national.healthcare": {
+    "en": "Calls for more transparency, choice and competition in health care, expanded access to affordable health care and prescription drug options, and protecting Medicare with no cuts.",
+    "es": "Pide más transparencia, opciones y competencia en la atención médica, ampliar el acceso a atención médica y medicamentos recetados asequibles, y proteger Medicare sin recortes.",
+    "status": "draft"
+  },
+  "plank.D-national.healthcare": {
+    "en": "Calls for protecting and expanding the Affordable Care Act, extending Medicaid-like coverage in states that have not expanded Medicaid, lowering drug prices through more transparency from pharmacy benefit managers, and ending the waiting list for Medicaid home- and community-based services.",
+    "es": "Pide proteger y ampliar la Ley de Cuidado de Salud Asequible, extender una cobertura similar a Medicaid en los estados que no han ampliado Medicaid, bajar los precios de los medicamentos con más transparencia de los administradores de beneficios de farmacia, y acabar con la lista de espera de los servicios de Medicaid en el hogar y la comunidad.",
+    "status": "draft"
+  },
+  "plank.R-texas.criminal-justice": {
+    "en": "Calls for basing bail only on a person's danger to society, risk of flight and criminal history, enforcing laws uniformly with punishment that fits the crime, and never using law enforcement to target people for political purposes.",
+    "es": "Pide que la fianza se base solo en el peligro que una persona representa para la sociedad, el riesgo de fuga y sus antecedentes penales, aplicar las leyes de manera uniforme con castigos proporcionales al delito, y no usar nunca a las fuerzas del orden para perseguir a personas con fines políticos.",
+    "status": "draft"
+  },
+  "plank.D-texas.criminal-justice": {
+    "en": "Calls for ending the use of criminal statutes and incarceration to punish problems such as addiction and homelessness, addressing bias in the justice system, and training police to build trust in diverse communities.",
+    "es": "Pide dejar de usar leyes penales y el encarcelamiento para castigar problemas como la adicción y la falta de vivienda, atender los sesgos del sistema de justicia, y capacitar a la policía para generar confianza en comunidades diversas.",
+    "status": "draft"
+  },
+  "plank.R-national.criminal-justice": {
+    "en": "Calls for replenishing police departments, protecting officers from lawsuits it calls frivolous, locking up violent offenders, and cutting federal funding to sanctuary jurisdictions.",
+    "es": "Pide reforzar las plantillas de los departamentos de policía, proteger a los agentes de las demandas que llama frívolas, encarcelar a los delincuentes violentos, y quitar los fondos federales a las jurisdicciones santuario.",
+    "status": "draft"
+  },
+  "plank.D-national.criminal-justice": {
+    "en": "Calls for passing the George Floyd Justice in Policing Act, ending state-level use of private prisons, restricting solitary confinement and chokeholds, automatically sealing juvenile records, and supporting rehabilitation and reentry.",
+    "es": "Pide aprobar la Ley George Floyd de Justicia en la Policía, acabar con el uso de prisiones privadas a nivel estatal, restringir el confinamiento solitario y las llaves de estrangulamiento, sellar automáticamente los antecedentes juveniles, y apoyar la rehabilitación y la reinserción.",
+    "status": "draft"
+  },
+  "plank.R-texas.poverty": {
+    "en": "Calls for abolishing all federal welfare programs, as not an appropriate role for the federal government, and for repealing minimum wage and prevailing wage laws.",
+    "es": "Pide abolir todos los programas federales de asistencia social, por no ser una función apropiada del gobierno federal, y derogar las leyes de salario mínimo y de salario prevaleciente.",
+    "status": "draft"
+  },
+  "plank.D-texas.poverty": {
+    "en": "Calls for a living wage indexed to inflation for all Texas workers, including tipped workers, and for removing outside work requirements for SNAP benefits.",
+    "es": "Pide un salario digno ajustado a la inflación para todos los trabajadores de Texas, incluidos los que reciben propinas, y eliminar los requisitos de trabajo externo para los beneficios de SNAP.",
+    "status": "draft"
+  },
+  "plank.D-national.poverty": {
+    "en": "Calls for raising the federal minimum wage to at least $15 an hour and restoring the expanded Child Tax Credit and Earned Income Tax Credit.",
+    "es": "Pide subir el salario mínimo federal a por lo menos 15 dólares por hora y restablecer la ampliación del Crédito Tributario por Hijos y del Crédito Tributario por Ingreso del Trabajo.",
+    "status": "draft"
+  },
+  "plank.R-texas.environment": {
+    "en": "Calls for opposing climate change initiatives that obstruct business interests and private property use, including Executive Order 14008, the 30x30 conservation initiative, Net Zero mandates and declarations of a climate emergency.",
+    "es": "Pide oponerse a las iniciativas sobre el cambio climático que obstaculizan los intereses empresariales y el uso de la propiedad privada, entre ellas la Orden Ejecutiva 14008, la iniciativa de conservación 30x30, las obligaciones de cero emisiones netas y las declaraciones de emergencia climática.",
+    "status": "draft"
+  },
+  "plank.D-texas.environment": {
+    "en": "Calls for reducing greenhouse gas emissions through clean energy, alternative fuel vehicles and efficient buildings, rapid decarbonization, and a stronger EPA that sets and meets a net zero carbon emissions goal, and states that climate change is real.",
+    "es": "Pide reducir las emisiones de gases de efecto invernadero con energía limpia, vehículos de combustibles alternativos y edificios eficientes, una descarbonización rápida, y una EPA más fuerte que fije y cumpla una meta de cero emisiones netas de carbono, y afirma que el cambio climático es real.",
+    "status": "draft"
+  },
+  "plank.R-national.environment": {
+    "en": "Calls for lifting restrictions on oil and gas production, ending the Green New Deal, canceling the electric vehicle mandate and cutting regulations, and pledges to preserve the nation's natural treasures and restore what it calls genuine conservation efforts.",
+    "es": "Pide levantar las restricciones a la producción de petróleo y gas, acabar con el Green New Deal, cancelar la obligación de vehículos eléctricos y recortar regulaciones, y promete preservar los tesoros naturales del país y restablecer lo que llama esfuerzos genuinos de conservación.",
+    "status": "draft"
+  },
+  "plank.D-national.environment": {
+    "en": "Calls for continuing the clean energy investments of the Inflation Reduction Act, faster permitting for clean energy, more clean energy on public lands, electrified ports and zero-emissions freight, and lower emissions from buildings and heavy industry.",
+    "es": "Pide continuar las inversiones en energía limpia de la Ley de Reducción de la Inflación, agilizar los permisos para energía limpia, más energía limpia en tierras públicas, puertos electrificados y transporte de carga sin emisiones, y menos emisiones de los edificios y la industria pesada.",
+    "status": "draft"
+  },
+  "plank.R-texas.death-penalty": {
+    "en": "Calls for capital punishment that is properly applied and reasonably swift, while respecting due process.",
+    "es": "Pide que la pena capital se aplique correctamente y con razonable rapidez, respetando el debido proceso.",
+    "status": "draft"
+  },
+  "plank.D-texas.death-penalty": {
+    "en": "Calls for abolishing the death penalty and declaring a moratorium on executions.",
+    "es": "Pide abolir la pena de muerte y declarar una moratoria de las ejecuciones.",
+    "status": "draft"
+  },
+  "plank.R-texas.guns": {
+    "en": "Calls for repealing or nullifying the National Firearms Act and the Gun Control Act, unrestricted constitutional carry, aligning the Texas Constitution with the Second Amendment's language, and making businesses that bar licensed carriers liable for their safety.",
+    "es": "Pide derogar o anular la Ley Nacional de Armas de Fuego y la Ley de Control de Armas, el porte constitucional sin restricciones, alinear la Constitución de Texas con el texto de la Segunda Enmienda, y hacer responsables de la seguridad de los portadores con licencia a los negocios que les prohíben entrar armados.",
+    "status": "draft"
+  },
+  "plank.D-texas.guns": {
+    "en": "Calls for preserving Second Amendment rights while adding safeguards against suicide, mass murder, accidents and interpersonal violence, including background checks for gun-show and private sales, and lifting limits on federal research into gun violence.",
+    "es": "Pide preservar los derechos de la Segunda Enmienda y añadir salvaguardas contra el suicidio, los asesinatos masivos, los accidentes y la violencia interpersonal, incluida la verificación de antecedentes en las ferias de armas y las ventas privadas, y levantar los límites a la investigación federal sobre la violencia con armas de fuego.",
+    "status": "draft"
+  },
+  "plank.R-national.guns": {
+    "en": "Calls for defending the right to keep and bear arms, as one of the constitutional freedoms in the platform's list of 20 commitments; the platform has no other plank on guns.",
+    "es": "Pide defender el derecho a poseer y portar armas, como una de las libertades constitucionales de la lista de 20 compromisos de la plataforma; la plataforma no tiene otro apartado sobre armas de fuego.",
+    "status": "draft"
+  },
+  "plank.D-national.guns": {
+    "en": "Calls for universal background checks, a renewed ban on assault weapons and high-capacity magazines, and required safe storage, and cites the administration's red flag laws, narrowing of the \"boyfriend loophole\" and action on ghost guns.",
+    "es": "Pide la verificación universal de antecedentes, renovar la prohibición de armas de asalto y cargadores de alta capacidad, y exigir el almacenamiento seguro, y cita las leyes de alerta roja del gobierno, el cierre parcial del “vacío legal del novio” y sus medidas contra las armas fantasma.",
+    "status": "draft"
+  },
+  "plank.R-texas.abortion": {
+    "en": "Calls for legislation to abolish abortion by giving the unborn equal protection of the law from fertilization, and for barring public funds for elective abortion and the transport of women across state lines to obtain one, with a private right of action against those who help.",
+    "es": "Pide leyes que abolan el aborto dando a los no nacidos igual protección de la ley desde la fecundación, y prohibir el uso de fondos públicos para el aborto electivo y para trasladar a mujeres a otro estado para abortar, con un derecho de acción privada contra quienes ayuden.",
+    "status": "draft"
+  },
+  "plank.D-texas.abortion": {
+    "en": "Calls for reinstating the right to an abortion, repealing the Hyde Amendment, protecting IVF, requiring emergency rooms to provide stabilizing care including abortion when medically necessary, and barring penalties on people who travel for an abortion or help them.",
+    "es": "Pide restablecer el derecho al aborto, derogar la Enmienda Hyde, proteger la FIV, exigir que las salas de emergencia den atención de estabilización, incluido el aborto cuando sea médicamente necesario, y prohibir sanciones contra quienes viajen para abortar o les ayuden.",
+    "status": "draft"
+  },
+  "plank.R-national.abortion": {
+    "en": "Calls for opposing late-term abortion, says the 14th Amendment guarantees that no person can be denied life without due process and that the states are free to pass laws protecting that right, and supports mothers, prenatal care, access to birth control and IVF.",
+    "es": "Pide oponerse al aborto en etapas avanzadas del embarazo, dice que la Enmienda 14 garantiza que a ninguna persona se le puede privar de la vida sin el debido proceso y que los estados son libres de aprobar leyes que protejan ese derecho, y apoya a las madres, la atención prenatal, el acceso a los anticonceptivos y la FIV.",
+    "status": "draft"
+  },
+  "plank.D-national.abortion": {
+    "en": "Calls for national legislation to make Roe the law of the land again, repealing the Hyde Amendment, and protecting access to contraception and IVF, and describes the administration's position that federal emergency-care law preempts state abortion bans.",
+    "es": "Pide una ley nacional que vuelva a hacer de Roe la ley del país, derogar la Enmienda Hyde y proteger el acceso a los anticonceptivos y la FIV, y describe la postura del gobierno de que la ley federal de atención de emergencia prevalece sobre las prohibiciones estatales del aborto.",
+    "status": "draft"
+  },
+  "plank.R-texas.immigration": {
+    "en": "Calls for securing the border by whatever means necessary, including barriers and a wall, a state Border Protection Unit with authority to repel crossings and deport, faster final rulings and deportation for people in the country illegally, and deportation of non-citizens arrested in violent protests.",
+    "es": "Pide asegurar la frontera por todos los medios necesarios, incluidas barreras y un muro, una Unidad de Protección Fronteriza estatal con autoridad para repeler los cruces y deportar, fallos definitivos y deportaciones más rápidos para quienes están en el país ilegalmente, y la deportación de los no ciudadanos arrestados en protestas violentas.",
+    "status": "draft"
+  },
+  "plank.D-texas.immigration": {
+    "en": "Calls for comprehensive immigration reform with an attainable path to citizenship, keeping the Texas DREAM Act and passing a federal one, more family and employment visas, and fewer limits on asylum and Temporary Protected Status, and says being in the country without authorization is a civil offense, not a crime.",
+    "es": "Pide una reforma migratoria integral con un camino alcanzable a la ciudadanía, mantener el DREAM Act de Texas y aprobar uno federal, más visas familiares y de empleo, y menos límites al asilo y al Estatus de Protección Temporal, y dice que estar en el país sin autorización es una falta civil, no un delito.",
+    "status": "draft"
+  },
+  "plank.R-national.immigration": {
+    "en": "Calls for sealing the border, carrying out what it calls the largest deportation operation in American history, strengthening ICE, raising penalties for illegal entry and visa overstays, and reinstating the Remain in Mexico policy.",
+    "es": "Pide sellar la frontera, llevar a cabo lo que llama la mayor operación de deportación de la historia de Estados Unidos, fortalecer a ICE, aumentar las penas por entrada ilegal y por quedarse más allá de la visa, y restablecer la política Quédate en México.",
+    "status": "draft"
+  },
+  "plank.D-national.immigration": {
+    "en": "Calls for legislation that secures the border, reforms the asylum system, expands legal immigration, keeps families together with a pathway for long-term undocumented residents, and secures the future of the DACA program.",
+    "es": "Pide leyes que aseguren la frontera, reformen el sistema de asilo, amplíen la inmigración legal, mantengan unidas a las familias con un camino para los residentes indocumentados de largo plazo, y aseguren el futuro del programa DACA.",
+    "status": "draft"
+  },
+  "silent.R-national.death-penalty": {
+    "en": "The 2024 RNC platform does not mention the death penalty.",
+    "es": "La plataforma republicana nacional de 2024 no menciona la pena de muerte.",
+    "status": "draft"
+  },
+  "silent.D-national.death-penalty": {
+    "en": "The 2024 DNC platform does not mention the death penalty.",
+    "es": "La plataforma demócrata nacional de 2024 no menciona la pena de muerte.",
+    "status": "draft"
+  },
+  "silent.R-national.poverty": {
+    "en": "The 2024 RNC platform has no plank on poverty or public assistance. Its nearest commitments are no cuts to Social Security and Medicare, and making permanent the 2017 tax law, including its larger Child Tax Credit.",
+    "es": "La plataforma republicana nacional de 2024 no tiene ningún apartado sobre la pobreza ni la asistencia pública. Sus compromisos más cercanos son no recortar el Seguro Social ni Medicare, y hacer permanente la ley tributaria de 2017, incluido su Crédito Tributario por Hijos ampliado.",
+    "status": "draft"
+  },
+  "toread.umc.immigration.0": {
+    "en": "Book of Resolutions 4273 (Global Migration and the Quest for Justice) and 4275 (Concerning Immigration), in full; only quotations on umc.org have been read.",
+    "es": "Los textos completos del Libro de Resoluciones 4273 (Global Migration and the Quest for Justice) y 4275 (Concerning Immigration); solo se han leído las citas que aparecen en umc.org.",
+    "status": "draft"
+  },
+  "toread.umc.immigration.1": {
+    "en": "The Social Principles text itself (2024 revision), rather than the church's page quoting it.",
+    "es": "El texto mismo de los Principios Sociales (revisión de 2024), en lugar de la página de la iglesia que lo cita.",
+    "status": "draft"
+  },
+  "toread.catholic.immigration.2": {
+    "en": "Other statements approved by the full body of bishops on immigration (for example Strangers No Longer, 2003, with the Mexican bishops).",
+    "es": "Otras declaraciones sobre la inmigración aprobadas por el pleno de los obispos (por ejemplo, Strangers No Longer, de 2003, con los obispos de México).",
+    "status": "draft"
+  },
+  "toread.ame.immigration.3": {
+    "en": "AME General Conference resolutions, which outrank the Council of Bishops; none found online so far.",
+    "es": "Las resoluciones de la Conferencia General de la Iglesia AME, que tienen más autoridad que el Consejo de Obispos; hasta ahora no se ha encontrado ninguna en internet.",
+    "status": "draft"
+  }
+}
