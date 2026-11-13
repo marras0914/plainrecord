@@ -55,7 +55,7 @@ export const ISSUES: { id: IssueId; name: string; description: string }[] = [
 ];
 
 /** Issues whose entries are complete. The pilot fills immigration first. */
-export const FILLED_ISSUES: IssueId[] = ['immigration', 'abortion'];
+export const FILLED_ISSUES: IssueId[] = ['immigration', 'abortion', 'death-penalty', 'guns'];
 
 export type TraditionId = 'catholic' | 'sbc' | 'umc' | 'ame' | 'ag';
 
@@ -67,7 +67,7 @@ export const TRADITIONS: { id: TraditionId; name: string; family: string; offici
     official: 'Resolutions adopted by the messengers at an SBC Annual Meeting. Not entity or agency statements.',
     libraryUrl: 'https://www.sbc.net/resource-library/resolutions/' },
   { id: 'umc', name: 'The United Methodist Church', family: 'Mainline Protestant',
-    official: 'The Social Principles and the Book of Resolutions, as adopted by the General Conference (2024 revision).',
+    official: 'The Social Principles and the Book of Resolutions, as adopted by the General Conference (2024 revision). The Social Principles are shown in full where they address the issue; otherwise the Book of Resolutions entry on it.',
     libraryUrl: 'https://www.umc.org/en/what-we-believe/social-principles' },
   { id: 'ame', name: 'African Methodist Episcopal Church', family: 'Historically Black church',
     official: 'General Conference resolutions, then statements of the Council of Bishops.',
@@ -128,7 +128,8 @@ export const ISSUE_TITLE_TERMS: Record<IssueId, RegExp> = {
   abortion: /abortion|pro-?life|roe v|planned parenthood|hyde/i,
   poverty: /poverty|\bpoor\b|welfare|hunger|minimum wage/i,
   'death-penalty': /death penalty|capital punishment|execution/i,
-  guns: /\bgun|firearm|weapon/i,
+  // Not "weapon": it matches resolutions on nuclear and other weapons of war.
+  guns: /\bgun|firearm/i,
   environment: /environment|creation care|climate|pollution|stewardship of creation|ecolog/i,
   healthcare: /health ?care|health insurance|medicaid|medicare/i,
   'criminal-justice': /criminal justice|prison|incarcerat|sentenc|policing|police/i,
@@ -158,6 +159,10 @@ const SRC = {
   sbcAbortion2025: 'https://www.sbc.net/resource-library/resolutions/on-standing-against-the-moral-evils-and-medical-dangers-of-chemical-abortion-pills/',
   umcAbortion: 'https://www.umc.org/en/content/ask-the-umc-valuing-life-abortion-adoption',
   agAbortion2010: 'https://ag.org/Beliefs/Position-Papers/Sanctity-of-Human-Life-Abortion',
+  sbcDeath2000: 'https://www.sbc.net/resource-library/resolutions/on-capital-punishment/',
+  sbcGuns2018: 'https://www.sbc.net/resource-library/resolutions/on-gun-violence-and-mass-shootings/',
+  umcPolitical: 'https://www.umc.org/en/content/social-principles-the-political-community',
+  umcGuns3428: 'https://www.umc.org/en/content/book-of-resolutions-our-call-to-end-gun-violence',
   rpt2024: 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf',
   tdp2024: 'https://txdem.co/24-Platform',
   rnc2024: 'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform',
@@ -260,15 +265,134 @@ STATEMENTS.push(
   },
 );
 
+STATEMENTS.push(
+  // --- the death penalty --------------------------------------------------
+  {
+    traditionId: 'catholic', issueId: 'death-penalty',
+    title: 'Introductory Note to Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops', sourceDate: '2023-11-15',
+    summary: 'Lists the death penalty among grave threats to the life and dignity of the human person, alongside euthanasia, gun violence, terrorism and human trafficking.',
+    excerpt: 'include euthanasia, gun violence, terrorism, the death penalty, and human trafficking',
+    sourceUrl: SRC.usccb2023, review: [],
+  },
+  {
+    traditionId: 'catholic', issueId: 'death-penalty',
+    title: 'Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops (2015 text, reissued 2019)', sourceDate: '2019',
+    summary: 'Calls for ending the use of the death penalty, saying the nation\'s continued reliance on it cannot be justified, while noting the Church accepted it in the past for egregious crimes when no alternative was available.',
+    excerpt: 'our nation’s continued reliance on the death penalty cannot be justified',
+    sourceUrl: SRC.usccb2019, review: [],
+  },
+  {
+    traditionId: 'sbc', issueId: 'death-penalty',
+    title: 'On Capital Punishment',
+    body: 'Resolution adopted at the SBC Annual Meeting, Orlando', sourceDate: '2000-06',
+    summary: 'Supports the fair and equitable use of capital punishment for murder or treasonous acts that result in death, only on clear and overwhelming evidence of guilt, and calls for vigilance, justice and equity in the criminal justice system.',
+    excerpt: 'support the fair and equitable use of capital punishment by civil magistrates',
+    sourceUrl: SRC.sbcDeath2000, review: [],
+  },
+  {
+    traditionId: 'umc', issueId: 'death-penalty',
+    title: 'Social Principles: The Political Community',
+    body: 'Adopted by the General Conference (2024 revision)', sourceDate: '2024',
+    summary: 'Opposes capital punishment, saying it compounds the loss of life and falls disproportionately on people who are poor, uneducated, from marginalized racial and ethnic communities, or mentally impaired.',
+    excerpt: 'compels us to oppose capital punishment and the imposition of the death penalty',
+    sourceUrl: SRC.umcPolitical, review: [],
+  },
+  // --- guns ---------------------------------------------------------------
+  {
+    traditionId: 'catholic', issueId: 'guns',
+    title: 'Introductory Note to Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops', sourceDate: '2023-11-15',
+    summary: 'Supports measures to reduce gun violence, which it lists among grave threats to the life and dignity of the human person.',
+    excerpt: 'We support common sense measures to reduce gun violence',
+    sourceUrl: SRC.usccb2023, review: [],
+  },
+  {
+    traditionId: 'catholic', issueId: 'guns',
+    title: 'Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops (2015 text, reissued 2019)', sourceDate: '2019',
+    summary: 'Calls for addressing gun violence among the issues that affect human life and dignity.',
+    excerpt: 'We must work to address gun violence',
+    sourceUrl: SRC.usccb2019, review: [],
+  },
+  {
+    traditionId: 'sbc', issueId: 'guns',
+    title: 'On Gun Violence and Mass Shootings',
+    body: 'Resolution adopted at the SBC Annual Meeting, Dallas', sourceDate: '2018-06',
+    summary: 'Calls on governments to examine what drives gun violence and to adopt preventive measures that reduce gun violence and mass shootings in accordance with the Second Amendment, says gun ownership carries great responsibility, and names the human heart as the source of the violence and the gospel as its answer.',
+    excerpt: 'implement preventative measures that would reduce gun violence and mass shootings',
+    sourceUrl: SRC.sbcGuns2018, review: [],
+  },
+  {
+    // The 2024 Social Principles do not address guns, so under the UMC rule the
+    // Book of Resolutions entry on the issue is shown in full instead.
+    traditionId: 'umc', issueId: 'guns',
+    title: 'Our Call to End Gun Violence (Book of Resolutions 3428)',
+    body: 'Adopted by the General Conference (2016, readopted 2024)', sourceDate: '2024',
+    summary: 'Calls on congregations to advocate at the local and national level for laws that prevent or reduce gun violence, and to form partnerships with communities that have experienced it.',
+    excerpt: 'laws that prevent or reduce gun violence',
+    sourceUrl: SRC.umcGuns3428, review: [],
+  },
+);
+
 /**
  * "No official statement" (rule 4): a tradition with no qualifying statement
  * on an issue, shown on the page as such rather than left blank.
  */
 export const NO_STATEMENT: { traditionId: TraditionId; issueId: IssueId; note: string }[] = [
   { traditionId: 'ame', issueId: 'abortion', note: 'No General Conference resolution or Council of Bishops statement on abortion was found. Statements from the church\'s International Health Commission do not qualify under the rule for this tradition.' },
+  { traditionId: 'ame', issueId: 'death-penalty', note: 'No General Conference resolution or Council of Bishops statement on the death penalty was found on ame-church.com or elsewhere.' },
+  { traditionId: 'ame', issueId: 'guns', note: 'No General Conference resolution or Council of Bishops statement on guns was found on ame-church.com or elsewhere.' },
+  { traditionId: 'ag', issueId: 'death-penalty', note: 'There is no position paper on the death penalty. The 2015 position paper Church Mission and Peacemaking refers to a "perspective paper" on capital punishment, but no such paper is published on ag.org.' },
+  { traditionId: 'ag', issueId: 'guns', note: 'There is no position paper or official statement on guns.' },
+];
+
+/** A platform that says nothing on an issue: stated on the page, not left blank. */
+export const NO_PLANK: { party: 'D' | 'R'; level: 'texas' | 'national'; issueId: IssueId; note: string }[] = [
+  { party: 'R', level: 'national', issueId: 'death-penalty', note: 'The 2024 RNC platform does not mention the death penalty.' },
+  { party: 'D', level: 'national', issueId: 'death-penalty', note: 'The 2024 DNC platform does not mention the death penalty.' },
 ];
 
 export const PLANKS: Plank[] = [
+  // --- the death penalty --------------------------------------------------
+  {
+    party: 'R', level: 'texas', platformYear: 2024, issueId: 'death-penalty',
+    summary: 'Calls for capital punishment that is properly applied and reasonably swift, while respecting due process.',
+    excerpt: 'Properly applied capital punishment is legitimate and should be reasonably swift',
+    sourceUrl: SRC.rpt2024, review: [],
+  },
+  {
+    party: 'D', level: 'texas', platformYear: 2024, issueId: 'death-penalty',
+    summary: 'Calls for abolishing the death penalty and declaring a moratorium on executions.',
+    excerpt: 'Abolish the death penalty and declare a moratorium on executions',
+    sourceUrl: SRC.tdp2024, review: [],
+  },
+  // --- guns ---------------------------------------------------------------
+  {
+    party: 'R', level: 'texas', platformYear: 2024, issueId: 'guns',
+    summary: 'Calls for repealing or nullifying the National Firearms Act and the Gun Control Act, unrestricted constitutional carry, aligning the Texas Constitution with the Second Amendment\'s language, and making businesses that bar licensed carriers liable for their safety.',
+    excerpt: 'Repeal and/or nullify the National Firearms Act of 1934',
+    sourceUrl: SRC.rpt2024, review: [],
+  },
+  {
+    party: 'D', level: 'texas', platformYear: 2024, issueId: 'guns',
+    summary: 'Calls for preserving Second Amendment rights while adding safeguards against suicide, mass murder, accidents and interpersonal violence, including background checks for gun-show and private sales, and lifting limits on federal research into gun violence.',
+    excerpt: 'supports the right of law-abiding Americans to own and bear arms',
+    sourceUrl: SRC.tdp2024, review: [],
+  },
+  {
+    party: 'R', level: 'national', platformYear: 2024, issueId: 'guns',
+    summary: 'Calls for defending the right to keep and bear arms, as one of the constitutional freedoms in the platform\'s list of 20 commitments; the platform has no other plank on guns.',
+    excerpt: 'THE RIGHT TO KEEP AND BEAR ARMS',
+    sourceUrl: SRC.rnc2024, review: [],
+  },
+  {
+    party: 'D', level: 'national', platformYear: 2024, issueId: 'guns',
+    summary: 'Calls for universal background checks, a renewed ban on assault weapons and high-capacity magazines, and required safe storage, and cites the administration\'s red flag laws, narrowing of the "boyfriend loophole" and action on ghost guns.',
+    excerpt: 'We will once again ban assault weapons and high-capacity magazines',
+    sourceUrl: SRC.dnc2024, review: [],
+  },
   {
     party: 'R', level: 'texas', platformYear: 2024, issueId: 'abortion',
     summary: 'Calls for legislation to abolish abortion by giving the unborn equal protection of the law from fertilization, and for barring public funds for elective abortion and the transport of women across state lines to obtain one, with a private right of action against those who help.',
