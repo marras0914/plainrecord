@@ -7,7 +7,7 @@
  * This checks the rules in faith_positions.ts that need no download.
  */
 
-import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, sbcOnIssue } from './faith_positions';
+import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, sbcOnIssue } from './faith_positions';
 
 let pass = 0;
 let fail = 0;
@@ -65,9 +65,10 @@ for (const issue of FILLED_ISSUES) {
     && !NO_STATEMENT.some((g) => g.issueId === issue && g.traditionId === t.id));
   check(`${issue}: every tradition has a statement, a listed gap or "no official statement"`, missingT.length === 0, missingT.map((t) => t.id).join(', ') || `${TRADITIONS.length} traditions`);
   const missingP = (['D', 'R'] as const).flatMap((party) => (['texas', 'national'] as const)
-    .filter((level) => !PLANKS.some((p) => p.issueId === issue && p.party === party && p.level === level))
+    .filter((level) => !PLANKS.some((p) => p.issueId === issue && p.party === party && p.level === level)
+      && !NO_PLANK.some((n) => n.issueId === issue && n.party === party && n.level === level))
     .map((level) => `${party}-${level}`));
-  check(`${issue}: both parties have a plank at both levels`, missingP.length === 0, missingP.join(', ') || '4 planks');
+  check(`${issue}: both parties have a plank or a recorded silence at both levels`, missingP.length === 0, missingP.join(', ') || '4 platforms');
 }
 check('every filled issue is on the fixed list', FILLED_ISSUES.every((i) => ISSUES.some((x) => x.id === i)));
 check('nothing is filed under an issue that is not finished', all.every((e) => FILLED_ISSUES.includes(e.issueId)));
