@@ -10,6 +10,7 @@
 import { readFileSync } from 'node:fs';
 import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue } from './faith_positions';
 import { buildFaithPayload, PLATFORMS } from './scripts/export_faith';
+import { findRefs, statementKey } from './scripts/extract_faith_verses';
 // @ts-expect-error: a plain .mjs module, shared with the page builder
 import { KEY } from './scripts/_faith_copy.mjs';
 
@@ -114,6 +115,7 @@ const recordKeys: [string, string][] = [
   ...PLANKS.map((p) => [KEY.plank(p), p.summary] as [string, string]),
   ...NO_PLANK.map((n) => [KEY.noPlank(n), n.note] as [string, string]),
   ...TO_READ.map((r, i) => [KEY.toRead(r, i), r.what] as [string, string]),
+  ...Object.entries(shipped.verses.books as Record<string, string>).map(([code, en]) => [KEY.book(code), en] as [string, string]),
 ];
 const untranslated = recordKeys.filter(([k]) => typeof COPY[k]?.es !== 'string').map(([k]) => k);
 const staleOf = (pairs: [string, string][]) => pairs.filter(([k, en]) => typeof COPY[k]?.es === 'string' && COPY[k].en !== en).map(([k]) => k);
@@ -124,6 +126,33 @@ check('(the staleness check catches an edited summary)',
   staleOf([[KEY.plank(PLANKS[0]), `${PLANKS[0].summary} Edited.`]]).length === 1);
 const esVerbs = new Set(PLANKS.map((p) => COPY[KEY.plank(p)]?.es?.split(' ')[0]));
 check('every Spanish plank summary opens with the same verb', esVerbs.size === 1, [...esVerbs].join(' / '));
+
+// --- Bible passages -----------------------------------------------------------
+
+// The parser, on the forms the sources actually print. Each line here was a
+// real miss or a real mis-read while building it.
+const refs = (t: string) => findRefs(t).map((r) => `${r.code} ${r.chapter}${r.ranges.length ? ':' + r.ranges.map(([a, b]) => (a === b ? a : `${a}-${b}`)).join(',') : ''}`).join(' | ');
+const PARSE: [string, string][] = [
+  ['(Deuteronomy 10: 18-19)', 'DEU 10:18-19'],                       // AME, space after the colon
+  ['commenting on Exodus 21:22,23: “The fetus', 'EXO 21:22,23'],    // AG, a colon that is punctuation
+  ['(Matthew 4:23; 9:35–38; 14:14–21)', 'MAT 4:23 | MAT 9:35-38 | MAT 14:14-21'], // SBC, one book, three chapters
+  ['(See Mt 10:40-42, 20:25; Mk 10:42-45)', 'MAT 10:40-42 | MAT 20:25 | MAR 10:42-45'], // USCCB
+  ['(Genesis 1:4, 10, 12, 18, 21, 32)', 'GEN 1:4,10,12,18,21,32'],
+  ['the temptation of Jesus (Luke 4).', 'LUK 4'],                     // a whole chapter
+  ['a Job 2 offer, Acts 3 of the law, and Mark 5 times', ''],         // ordinary words, not scripture
+];
+for (const [text, want] of PARSE) check(`verses: "${text.slice(0, 40)}" reads as ${want || 'nothing'}`, refs(text) === want, refs(text) || 'nothing');
+
+const VJ = JSON.parse(readFileSync(new URL('./data/faith/verses.json', import.meta.url), 'utf8'));
+const noRecord = STATEMENTS.filter((s) => !VJ.citations.some((c: { statement: string }) => c.statement === statementKey(s)));
+check('every statement shown in full has a verse record (re-run npm run data:faith:verses if not)', noRecord.length === 0, noRecord.map(statementKey).join(', ') || `${STATEMENTS.length} statements`);
+const allRefs = VJ.citations.flatMap((c: { refs: { verseKeys: string[]; verseCount: number; ranges: unknown[] }[] }) => c.refs);
+const textless = allRefs.filter((r: { verseKeys: string[]; verseCount: number; ranges: unknown[] }) => !r.verseKeys.length && r.ranges.length && r.verseCount <= VJ.maxVersesWithText);
+check('a passage is printed unless it is a whole chapter or longer than the limit', textless.length === 0, `${allRefs.length} references`);
+const blank = Object.entries(VJ.verses as Record<string, { web: string; rv1909: string }>).filter(([, v]) => !v.web || !v.rv1909).map(([k]) => k);
+check('every printed verse has its English and its Spanish text', blank.length === 0, blank.join(', ') || `${Object.keys(VJ.verses).length} verses`);
+const platformRefs = Object.values(VJ.platformReferenceCounts as Record<string, number>);
+check('the platforms were searched, all four', platformRefs.length === 4, platformRefs.join(', '));
 
 // --- not yet reviewed -------------------------------------------------------
 

@@ -35,6 +35,7 @@
     "data:econ": "tsx scripts/export_econ.ts",
     "data:faith:quotes": "tsx scripts/check_faith_quotes.ts",
     "data:faith": "tsx scripts/export_faith.ts",
+    "data:faith:verses": "tsx scripts/extract_faith_verses.ts",
     "i18n:sidecar": "node scripts/check_sidecar.mjs",
     "stats": "node scripts/stats.mjs",
     "data:members": "node --max-old-space-size=4096 scripts/build_members.mjs",

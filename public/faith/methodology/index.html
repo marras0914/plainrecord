@@ -205,6 +205,10 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   h4{font-size:.95rem;margin:16px 0 4px;color:var(--ink-2);font-weight:600}
   .card p.small{margin-bottom:6px}
   .none{font-weight:600}
+  details.verses{margin:0 0 12px}
+  details.verses summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
+  .vtext{font-family:"Newsreader",Georgia,serif;font-size:1rem;margin:4px 0 0}
+  .vtext sup{font-family:"Lexend",system-ui,sans-serif;font-size:.65em;color:var(--muted);margin:0 2px 0 4px}
   details.earlier{margin:6px 0 14px}
   details.earlier summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
   .jump{display:flex;flex-wrap:wrap;gap:2px 14px;list-style:none;padding:0;font-size:14.5px}
@@ -234,6 +238,13 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
 
   <h2>How earlier statements are found</h2>
   <p>For the Southern Baptist Convention, all 1,257 of its resolutions are downloaded from its own library, and a resolution is listed under an issue when its title contains one of a fixed set of words for that issue. The rule is mechanical, so the list is the same whoever builds it; its cost is that a resolution about an issue that does not name it in its title is not listed. The words for each issue are in the downloadable record. For the other traditions, earlier statements are listed by hand.</p>
+
+  <h2>Bible passages</h2>
+  <p>The site picks no verses. A passage appears only where a statement on these pages cites it, found by a program that reads each statement's own text. A document about one issue counts whole. In a document that covers several issues, such as the bishops' Forming Consciences, only passages cited in the same section as the quoted excerpt count, so a passage the bishops cite on the Church's role in public life is not listed under any one issue. Passages of more than eight verses, and whole chapters, are linked rather than printed.</p>
+  <p>References are shown as the churches wrote them. The Southern Baptist resolution of 2006 cites Genesis 1:32, a verse that does not exist (the chapter has 31), and the page says so rather than correcting it.</p>
+  <p>Two references were garbled when their text was taken from a PDF, and are shown as the printed page has them: Eph. 4:2947 32 → Eph. 4:29-32; Lk 6:3638 → Lk 6:36-38.</p>
+  <p>The same program finds no Bible reference in any of the four platforms.</p>
+  <p class="small">Verse text: the World English Bible in English and the Reina-Valera 1909 in Spanish, both public domain, from eBible.org.</p>
 
   <h2>How every quote is checked</h2>
   <p>Every source is downloaded and read as text. A script checks every quote, all 63 of them, against that text word for word, and checks that a quote with one word changed is not found, so the check is known to be able to fail. Every claim that a platform says nothing on an issue is checked the same way: none of the issue's words may appear in the platform. That check was added after a draft summary wrongly said the national Republican platform did not otherwise address the environment.</p>

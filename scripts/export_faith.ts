@@ -18,7 +18,8 @@
  * No date stamp in the file: the same data always writes the same bytes.
  */
 
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, readFileSync } from 'node:fs';
+import { BOOKS, VERSES_FILE } from './extract_faith_verses';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
@@ -40,6 +41,21 @@ export function buildFaithPayload() {
   const statements = [...STATEMENTS].sort((a, b) => byDateDesc(a.sourceDate, b.sourceDate));
   const earlier = [...EARLIER].sort((a, b) => byDateDesc(a.date, b.date));
   const all = [...STATEMENTS, ...PLANKS];
+  // The verses each statement cites, from npm run data:faith:verses (which
+  // needs the downloaded sources, so its output is committed).
+  const v = JSON.parse(readFileSync(VERSES_FILE, 'utf8'));
+  const used = new Set<string>(v.citations.flatMap((c: { refs: { code: string }[] }) => c.refs.map((r) => r.code)));
+  const verses = {
+    translations: v.translations,
+    maxVersesWithText: v.maxVersesWithText,
+    fixes: v.fixes,
+    /** Book code to English name, for the books cited. */
+    books: Object.fromEntries(BOOKS.filter((b) => used.has(b.code)).map((b) => [b.code, b.en])),
+    /** By statement: `${traditionId}.${issueId}.${sourceDate}`. */
+    byStatement: Object.fromEntries(v.citations.map((c: { statement: string; scope: string; refs: unknown[] }) => [c.statement, { scope: c.scope, refs: c.refs }])),
+    text: v.verses,
+    platformReferenceCounts: v.platformReferenceCounts,
+  };
   return {
     about: 'What five Christian traditions officially say, and what the Texas and national party platforms say, on eight issues, with sources. Not yet reviewed by members of the traditions described. CC0.',
     license: 'CC0-1.0',
@@ -57,6 +73,7 @@ export function buildFaithPayload() {
     noPlank: NO_PLANK,
     knownGaps: KNOWN_GAPS,
     toRead: TO_READ,
+    verses,
   };
 }
 
