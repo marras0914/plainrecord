@@ -55,7 +55,8 @@ export const ISSUES: { id: IssueId; name: string; description: string }[] = [
 ];
 
 /** Issues whose entries are complete. The pilot fills immigration first. */
-export const FILLED_ISSUES: IssueId[] = ['immigration', 'abortion', 'death-penalty', 'guns', 'poverty', 'environment'];
+/** Every issue, as of 13 Nov 2026. */
+export const FILLED_ISSUES: IssueId[] = ['immigration', 'abortion', 'death-penalty', 'guns', 'poverty', 'environment', 'healthcare', 'criminal-justice'];
 
 export type TraditionId = 'catholic' | 'sbc' | 'umc' | 'ame' | 'ag';
 
@@ -168,6 +169,8 @@ const SRC = {
   sbcEnvironment2006: 'https://www.sbc.net/resource-library/resolutions/on-environmentalism-and-evangelicals/',
   umcEconomic: 'https://www.umc.org/en/content/social-principles-the-economic-community',
   umcNatural: 'https://www.umc.org/en/content/social-principles-the-natural-world',
+  sbcHealth2013: 'https://www.sbc.net/resource-library/resolutions/on-the-danger-of-age-discrimination-in-healthcare-rationing/',
+  sbcPrison2013: 'https://www.sbc.net/resource-library/resolutions/on-americas-growing-prison-population/',
   rpt2024: 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf',
   tdp2024: 'https://txdem.co/24-Platform',
   rnc2024: 'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform',
@@ -410,6 +413,67 @@ STATEMENTS.push(
   },
 );
 
+STATEMENTS.push(
+  // --- healthcare ---------------------------------------------------------
+  {
+    traditionId: 'catholic', issueId: 'healthcare',
+    title: 'Introductory Note to Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops', sourceDate: '2023-11-15',
+    summary: 'Names the need for greater access to healthcare among the concerns Catholics bring to public life, and calls for supporting parents through work, training and help with childcare, healthcare, housing and transportation.',
+    excerpt: 'the need for greater access to healthcare and education',
+    sourceUrl: SRC.usccb2023, review: [],
+  },
+  {
+    traditionId: 'catholic', issueId: 'healthcare',
+    title: 'Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops (2015 text, reissued 2019)', sourceDate: '2019',
+    summary: 'Calls for providing health care while respecting human life, human dignity and religious freedom, and counts access to health care among the things every person has a right to.',
+    excerpt: 'Provide health care while respecting human life, human dignity, and religious freedom',
+    sourceUrl: SRC.usccb2019, review: [],
+  },
+  {
+    traditionId: 'sbc', issueId: 'healthcare',
+    title: 'On the Danger of Age Discrimination in Healthcare Rationing',
+    body: 'Resolution adopted at the SBC Annual Meeting, Houston', sourceDate: '2013-06',
+    summary: 'Opposes any public policy that might discriminate against the elderly in their access to quality healthcare, and encourages ministry to senior adults. It does not address health care more broadly.',
+    excerpt: 'discriminate against the elderly in their access to quality healthcare',
+    sourceUrl: SRC.sbcHealth2013, review: [],
+  },
+  {
+    traditionId: 'umc', issueId: 'healthcare',
+    title: 'Social Principles: The Political Community',
+    body: 'Adopted by the General Conference (2024 revision)', sourceDate: '2024',
+    summary: 'Affirms health care as a basic human right, vows to work toward expanded access to preventive, therapeutic and palliative care, and urges United Methodists to join efforts to create systems that provide comprehensive health protections for all.',
+    excerpt: 'We affirm health care as a basic human right',
+    sourceUrl: SRC.umcPolitical, review: [],
+  },
+  // --- criminal justice ---------------------------------------------------
+  {
+    traditionId: 'catholic', issueId: 'criminal-justice',
+    title: 'Introductory Note to Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops', sourceDate: '2023-11-15',
+    summary: 'Calls for continued reform of the criminal justice system and an end to the use of the death penalty.',
+    excerpt: 'We continue to seek reform of the criminal justice system',
+    sourceUrl: SRC.usccb2023, review: [],
+  },
+  {
+    traditionId: 'sbc', issueId: 'criminal-justice',
+    title: 'On America\'s Growing Prison Population',
+    body: 'Resolution adopted at the SBC Annual Meeting, Houston', sourceDate: '2013-06',
+    summary: 'Supports legislation to reduce high incarceration rates without jeopardizing public safety, probation and parole as alternatives to long incarceration for some nonviolent offenders, and programs that help released prisoners reintegrate into society.',
+    excerpt: 'legislative policies that seek to reduce high incarceration rates without jeopardizing public safety',
+    sourceUrl: SRC.sbcPrison2013, review: [],
+  },
+  {
+    traditionId: 'umc', issueId: 'criminal-justice',
+    title: 'Social Principles: The Political Community',
+    body: 'Adopted by the General Conference (2024 revision)', sourceDate: '2024',
+    summary: 'Urges governments to develop systems that emphasize restorative justice, calls for monitoring criminal justice systems for prejudice and bias, and encourages churches to minister to people who are incarcerated and to advocate for criminal justice reform.',
+    excerpt: 'urge governments to develop systems that emphasize restorative justice',
+    sourceUrl: SRC.umcPolitical, review: [],
+  },
+);
+
 /**
  * "No official statement" (rule 4): a tradition with no qualifying statement
  * on an issue, shown on the page as such rather than left blank.
@@ -423,6 +487,10 @@ export const NO_STATEMENT: { traditionId: TraditionId; issueId: IssueId; note: s
   { traditionId: 'ame', issueId: 'poverty', note: 'No General Conference resolution or Council of Bishops statement on poverty or public assistance was found on ame-church.com or elsewhere.' },
   { traditionId: 'ame', issueId: 'environment', note: 'No General Conference resolution or Council of Bishops statement on the environment was found on ame-church.com or elsewhere.' },
   { traditionId: 'ag', issueId: 'poverty', note: 'There is no position paper or official statement on poverty or public assistance.' },
+  { traditionId: 'ame', issueId: 'healthcare', note: 'No General Conference resolution or Council of Bishops statement on healthcare was found on ame-church.com or elsewhere.' },
+  { traditionId: 'ame', issueId: 'criminal-justice', note: 'No General Conference resolution or Council of Bishops statement on criminal justice was found on ame-church.com or elsewhere.' },
+  { traditionId: 'ag', issueId: 'healthcare', note: 'There is no position paper or official statement on healthcare policy.' },
+  { traditionId: 'ag', issueId: 'criminal-justice', note: 'There is no position paper or official statement on criminal justice.' },
   { traditionId: 'ag', issueId: 'environment', note: 'There is no position paper on the environment. The 2015 position paper Church Mission and Peacemaking refers to a "perspective paper" on environmental protection, but no such paper is published on ag.org.' },
 ];
 
@@ -434,6 +502,56 @@ export const NO_PLANK: { party: 'D' | 'R'; level: 'texas' | 'national'; issueId:
 ];
 
 export const PLANKS: Plank[] = [
+  // --- healthcare ---------------------------------------------------------
+  {
+    party: 'R', level: 'texas', platformYear: 2024, issueId: 'healthcare',
+    summary: 'Calls for building state reserves sufficient for Texas to exit the federal Medicaid program, directing budget surpluses to a Texas Health Savings Account until then, and opposing mandates for treatment, vaccination or masks and health insurance surcharges.',
+    excerpt: 'enabling the state to develop reserves sufficient to exit the federal Medicaid program',
+    sourceUrl: SRC.rpt2024, review: [],
+  },
+  {
+    party: 'D', level: 'texas', platformYear: 2024, issueId: 'healthcare',
+    summary: 'Calls for expanding Medicaid, protecting Medicare benefits, making prescription drugs affordable for all, and helping small businesses afford health insurance for their employees.',
+    excerpt: 'We must expand Medicaid, protect Medicare benefits, and make prescription drugs affordable for all',
+    sourceUrl: SRC.tdp2024, review: [],
+  },
+  {
+    party: 'R', level: 'national', platformYear: 2024, issueId: 'healthcare',
+    summary: 'Calls for more transparency, choice and competition in health care, expanded access to affordable health care and prescription drug options, and protecting Medicare with no cuts.',
+    excerpt: 'expand access to new Affordable Healthcare and prescription drug options',
+    sourceUrl: SRC.rnc2024, review: [],
+  },
+  {
+    party: 'D', level: 'national', platformYear: 2024, issueId: 'healthcare',
+    summary: 'Calls for protecting and expanding the Affordable Care Act, extending Medicaid-like coverage in states that have not expanded Medicaid, lowering drug prices through more transparency from pharmacy benefit managers, and ending the waiting list for Medicaid home- and community-based services.',
+    excerpt: 'protect and expand the Affordable Care Act',
+    sourceUrl: SRC.dnc2024, review: [],
+  },
+  // --- criminal justice ---------------------------------------------------
+  {
+    party: 'R', level: 'texas', platformYear: 2024, issueId: 'criminal-justice',
+    summary: 'Calls for basing bail only on a person\'s danger to society, risk of flight and criminal history, enforcing laws uniformly with punishment that fits the crime, and never using law enforcement to target people for political purposes.',
+    excerpt: 'ensure bail in Texas is based only on a person’s danger to society',
+    sourceUrl: SRC.rpt2024, review: [],
+  },
+  {
+    party: 'D', level: 'texas', platformYear: 2024, issueId: 'criminal-justice',
+    summary: 'Calls for ending the use of criminal statutes and incarceration to punish problems such as addiction and homelessness, addressing bias in the justice system, and training police to build trust in diverse communities.',
+    excerpt: 'End the punishment of social problems such as addiction and homelessness',
+    sourceUrl: SRC.tdp2024, review: [],
+  },
+  {
+    party: 'R', level: 'national', platformYear: 2024, issueId: 'criminal-justice',
+    summary: 'Calls for replenishing police departments, protecting officers from lawsuits it calls frivolous, locking up violent offenders, and cutting federal funding to sanctuary jurisdictions.',
+    excerpt: 'restore safety in our neighborhoods by replenishing Police Departments',
+    sourceUrl: SRC.rnc2024, review: [],
+  },
+  {
+    party: 'D', level: 'national', platformYear: 2024, issueId: 'criminal-justice',
+    summary: 'Calls for passing the George Floyd Justice in Policing Act, ending state-level use of private prisons, restricting solitary confinement and chokeholds, automatically sealing juvenile records, and supporting rehabilitation and reentry.',
+    excerpt: 'Democrats will end state-level use of private prisons and detention centers',
+    sourceUrl: SRC.dnc2024, review: [],
+  },
   // --- poverty ------------------------------------------------------------
   {
     party: 'R', level: 'texas', platformYear: 2024, issueId: 'poverty',

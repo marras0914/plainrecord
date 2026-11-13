@@ -46,6 +46,8 @@ const FILES: Record<string, { file: string; lineNumbers?: boolean }> = {
   'https://www.sbc.net/resource-library/resolutions/on-environmentalism-and-evangelicals/': { file: 'sbc_environment_2006.txt' },
   'https://www.umc.org/en/content/social-principles-the-economic-community': { file: 'umc_sp_the-economic-community.txt' },
   'https://www.umc.org/en/content/social-principles-the-natural-world': { file: 'umc_sp_the-natural-world.txt' },
+  'https://www.sbc.net/resource-library/resolutions/on-the-danger-of-age-discrimination-in-healthcare-rationing/': { file: 'sbc_health_2013.txt' },
+  'https://www.sbc.net/resource-library/resolutions/on-americas-growing-prison-population/': { file: 'sbc_prison_2013.txt' },
   'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf': { file: 'rpt_2024.txt' },
   'https://txdem.co/24-Platform': { file: 'tdp_2024.txt' },
   'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform': { file: 'rnc_2024.txt' },
