@@ -55,7 +55,7 @@ export const ISSUES: { id: IssueId; name: string; description: string }[] = [
 ];
 
 /** Issues whose entries are complete. The pilot fills immigration first. */
-export const FILLED_ISSUES: IssueId[] = ['immigration'];
+export const FILLED_ISSUES: IssueId[] = ['immigration', 'abortion'];
 
 export type TraditionId = 'catholic' | 'sbc' | 'umc' | 'ame' | 'ag';
 
@@ -155,6 +155,9 @@ const SRC = {
   umc: 'https://www.umc.org/content/what-the-umc-believes-about-immigrants-and-migrants',
   ame2018: 'https://www.ame-church.com/news/cob-statement-re-condemning-immigrant-family-separation/',
   ag2006: 'https://ethnicrelations.ag.org/About',
+  sbcAbortion2025: 'https://www.sbc.net/resource-library/resolutions/on-standing-against-the-moral-evils-and-medical-dangers-of-chemical-abortion-pills/',
+  umcAbortion: 'https://www.umc.org/en/content/ask-the-umc-valuing-life-abortion-adoption',
+  agAbortion2010: 'https://ag.org/Beliefs/Position-Papers/Sanctity-of-Human-Life-Abortion',
   rpt2024: 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf',
   tdp2024: 'https://txdem.co/24-Platform',
   rnc2024: 'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform',
@@ -213,7 +216,83 @@ export const STATEMENTS: Statement[] = [
   },
 ];
 
+STATEMENTS.push(
+  // --- abortion -----------------------------------------------------------
+  {
+    traditionId: 'catholic', issueId: 'abortion',
+    title: 'Introductory Note to Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops', sourceDate: '2023-11-15',
+    summary: 'Calls the threat of abortion the bishops\' pre-eminent priority, because it directly attacks the most vulnerable and ends more than a million lives a year in the United States, and pairs protecting children in the womb with solidarity with mothers.',
+    excerpt: 'The threat of abortion remains our pre-eminent priority',
+    sourceUrl: SRC.usccb2023, review: [],
+  },
+  {
+    traditionId: 'catholic', issueId: 'abortion',
+    title: 'Forming Consciences for Faithful Citizenship',
+    body: 'Approved by the U.S. bishops (2015 text, reissued 2019)', sourceDate: '2019',
+    summary: 'Calls abortion the preeminent priority among threats to human life and dignity, because it directly attacks life itself, takes place within the family, and ends so many lives.',
+    excerpt: 'The threat of abortion remains our preeminent priority because it directly attacks life itself',
+    sourceUrl: SRC.usccb2019, review: [],
+  },
+  {
+    traditionId: 'sbc', issueId: 'abortion',
+    title: 'On Standing Against the Moral Evils and Medical Dangers of Chemical Abortion Pills',
+    body: 'Resolution adopted at the SBC Annual Meeting, Dallas', sourceDate: '2025-06',
+    summary: 'Calls for revoking FDA approval of mifepristone, laws banning the manufacture, sale and distribution of abortion drugs, enforcing the Comstock Act against mailing abortion pills, and equal protection under the Constitution for the unborn so that all abortion ends, and commits to supporting pregnancy centers, adoption and maternal health care.',
+    excerpt: 'pray and labor for the abolition of all forms of abortion',
+    sourceUrl: SRC.sbcAbortion2025, review: [],
+  },
+  {
+    traditionId: 'umc', issueId: 'abortion',
+    title: 'Social Principles, as explained by the church',
+    body: 'Adopted by the General Conference (2024 revision)', sourceDate: '2024',
+    summary: 'Affirms the sanctity of the life of both the unborn child and the mother, says abortion may be justified in tragic conflicts of life with life, supports the legal availability of medically supervised abortion, and rejects abortion as birth control, for sex selection, and late in pregnancy except in specified cases.',
+    excerpt: 'tragic conflicts of life with life',
+    sourceUrl: SRC.umcAbortion, review: [],
+  },
+  {
+    traditionId: 'ag', issueId: 'abortion',
+    title: 'Sanctity of Human Life: Abortion and Reproductive Issues',
+    body: 'Position paper adopted by the General Presbytery', sourceDate: '2010-08',
+    summary: 'Holds that human life from conception is to be protected, denies that a legal right to abortion confers a moral right, says historic Christian faith has usually favored the mother\'s life where childbirth would likely cause her death, and calls on Christians to seek legislative and judicial redress.',
+    excerpt: 'from conception through death, is therefore to be valued, respected, nurtured, and protected',
+    sourceUrl: SRC.agAbortion2010, review: [],
+  },
+);
+
+/**
+ * "No official statement" (rule 4): a tradition with no qualifying statement
+ * on an issue, shown on the page as such rather than left blank.
+ */
+export const NO_STATEMENT: { traditionId: TraditionId; issueId: IssueId; note: string }[] = [
+  { traditionId: 'ame', issueId: 'abortion', note: 'No General Conference resolution or Council of Bishops statement on abortion was found. Statements from the church\'s International Health Commission do not qualify under the rule for this tradition.' },
+];
+
 export const PLANKS: Plank[] = [
+  {
+    party: 'R', level: 'texas', platformYear: 2024, issueId: 'abortion',
+    summary: 'Calls for legislation to abolish abortion by giving the unborn equal protection of the law from fertilization, and for barring public funds for elective abortion and the transport of women across state lines to obtain one, with a private right of action against those who help.',
+    excerpt: 'We urge lawmakers to enact legislation to abolish abortion',
+    sourceUrl: SRC.rpt2024, review: [],
+  },
+  {
+    party: 'D', level: 'texas', platformYear: 2024, issueId: 'abortion',
+    summary: 'Calls for reinstating the right to an abortion, repealing the Hyde Amendment, protecting IVF, requiring emergency rooms to provide stabilizing care including abortion when medically necessary, and barring penalties on people who travel for an abortion or help them.',
+    excerpt: 'Expand access to contraception and reinstate the right to an abortion',
+    sourceUrl: SRC.tdp2024, review: [],
+  },
+  {
+    party: 'R', level: 'national', platformYear: 2024, issueId: 'abortion',
+    summary: 'Calls for opposing late-term abortion, says the 14th Amendment guarantees that no person can be denied life without due process and that the states are free to pass laws protecting that right, and supports mothers, prenatal care, access to birth control and IVF.',
+    excerpt: 'We will oppose Late Term Abortion',
+    sourceUrl: SRC.rnc2024, review: [],
+  },
+  {
+    party: 'D', level: 'national', platformYear: 2024, issueId: 'abortion',
+    summary: 'Calls for national legislation to make Roe the law of the land again, repealing the Hyde Amendment, and protecting access to contraception and IVF, and describes the administration\'s position that federal emergency-care law preempts state abortion bans.',
+    excerpt: 'we will pass national legislation to make Roe the law of the land again',
+    sourceUrl: SRC.dnc2024, review: [],
+  },
   {
     party: 'R', level: 'texas', platformYear: 2024, issueId: 'immigration',
     summary: 'Calls for securing the border by whatever means necessary, including barriers and a wall, a state Border Protection Unit with authority to repel crossings and deport, faster final rulings and deportation for people in the country illegally, and deportation of non-citizens arrested in violent protests.',

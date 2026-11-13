@@ -7,7 +7,7 @@
  * This checks the rules in faith_positions.ts that need no download.
  */
 
-import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, sbcOnIssue } from './faith_positions';
+import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, sbcOnIssue } from './faith_positions';
 
 let pass = 0;
 let fail = 0;
@@ -61,8 +61,9 @@ check('every statement names the body that adopted it', STATEMENTS.every((s) => 
 
 for (const issue of FILLED_ISSUES) {
   const missingT = TRADITIONS.filter((t) => !STATEMENTS.some((s) => s.issueId === issue && s.traditionId === t.id)
-    && !KNOWN_GAPS.some((g) => g.issueId === issue && g.who === t.id));
-  check(`${issue}: every tradition has a statement or a listed gap`, missingT.length === 0, missingT.map((t) => t.id).join(', ') || `${TRADITIONS.length} traditions`);
+    && !KNOWN_GAPS.some((g) => g.issueId === issue && g.who === t.id)
+    && !NO_STATEMENT.some((g) => g.issueId === issue && g.traditionId === t.id));
+  check(`${issue}: every tradition has a statement, a listed gap or "no official statement"`, missingT.length === 0, missingT.map((t) => t.id).join(', ') || `${TRADITIONS.length} traditions`);
   const missingP = (['D', 'R'] as const).flatMap((party) => (['texas', 'national'] as const)
     .filter((level) => !PLANKS.some((p) => p.issueId === issue && p.party === party && p.level === level))
     .map((level) => `${party}-${level}`));
