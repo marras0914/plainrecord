@@ -2352,7 +2352,7 @@ try {
     };
     const HOUSE = { en: 'texas-house', es: 'camara-de-texas' };
     const housePages = faith.houseVotes.flatMap((h) => [[`/faith/${SLUG[h.traditionId][0]}/${HOUSE.en}`, h], [`/fe/${SLUG[h.traditionId][1]}/${HOUSE.es}`, h]]);
-    const pages = [['/faith', null], ['/fe', null], ['/faith/methodology', null], ['/fe/metodologia', null],
+    const pages = [['/faith', null], ['/fe', null], ['/faith/methodology', null], ['/fe/metodologia', null], ['/faith/sides', null], ['/fe/posturas', null],
       ...Object.entries(SLUG).flatMap(([id, [en, es]]) => [[`/faith/${en}`, id], [`/fe/${es}`, id]]),
       ...housePages.map(([p]) => [p, null])];
     const fc = await browser.newContext({ javaScriptEnabled: false });
@@ -2393,6 +2393,31 @@ try {
     check('faith: every page says it is not yet reviewed, with the count from the data', missing.length === 0, missing.join(', ') || `${pages.length} pages`);
     check('faith: no tradition page carries another tradition\'s statements', crossed.length === 0, crossed.join(', ') || '10 tradition pages');
     check('faith: every tradition page has every issue, and all four platforms on each', shape.length === 0, shape.join(' | ') || `${faith.issues.length} issues x 4 platforms`);
+
+    // Which side each church takes (decided 15 Nov 2026). Every grid cell is
+    // the data's: the party whose platform is on the church's side, or no mark.
+    // And no total: the grid carries no number, and the page no count of marks.
+    const expectMark = (issueId, tradId) => {
+      const pt = faith.sidePoints.find((p) => p.issueId === issueId);
+      const q = pt?.churches[tradId];
+      if (!q) return '';
+      return ['D', 'R'].find((p) => pt.platforms[`${p}-${pt.levels[0]}`].side === q.side);
+    };
+    const sideProblems = [];
+    for (const path of ['/faith/sides', '/fe/posturas']) {
+      await fp.goto(new URL(path, URL_UNDER_TEST).href, { waitUntil: 'load' });
+      const grid = fp.locator('table.sides');
+      const cells = await grid.locator('tbody tr').evaluateAll((trs) => trs.map((tr) => [...tr.querySelectorAll('td')].map((td) => td.querySelector('.mk.D') ? 'D' : td.querySelector('.mk.R') ? 'R' : '')));
+      const want = faith.issues.map((i) => faith.traditions.map((t) => expectMark(i.id, t.id)));
+      if (JSON.stringify(cells) !== JSON.stringify(want)) sideProblems.push(`${path}: grid differs from the data`);
+      if (!want.flat().includes('D') || !want.flat().includes('R')) sideProblems.push(`${path}: the data has no D or no R mark, so the comparison proves nothing`);
+      const gridText = await grid.innerText();
+      if (/\d/.test(gridText)) sideProblems.push(`${path}: the grid carries a number`);
+      const text = await fp.locator('main').innerText();
+      const tally = text.match(/\b\d+\s+(of|de)\s+(the\s+|los\s+)?\d*\s*(issues|temas)\b/i);
+      if (tally) sideProblems.push(`${path}: looks like a count of issues ("${tally[0]}")`);
+    }
+    check('faith: the sides grid is the data, cell by cell, with no number and no count', sideProblems.length === 0, sideProblems.join(' | ') || '2 pages');
 
     // The House-votes pages (decided 13 Nov 2026): only bills the church itself
     // took a side on, every counted bill shown, no bill the bishops' documents

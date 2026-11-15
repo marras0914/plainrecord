@@ -49,6 +49,7 @@ const FAITH_LABELS = Object.fromEntries(['en', 'es'].flatMap((lang) => {
   return [
     [`/${FAITH_PATHS[lang].home}`, `What five Christian traditions officially say on eight issues, beside the Texas and national party platforms, ${inLang}`],
     [`/${FAITH_PATHS[lang].method}`, `How the faith pages were made, ${inLang}`],
+    [`/${FAITH_PATHS[lang].sides}`, `Which side five churches' official statements take on each issue the party platforms split on, with no total, ${inLang}`],
     ...Object.keys(TRADITION_SLUG).map((id) => [`/${traditionPath(id, lang)}`, `What ${FAITH_TRADITION_EN[id]} officially says on eight issues, beside the party platforms, ${inLang}`]),
     [`/${houseVotesPath('catholic', lang)}`, `How each party in the Texas House voted in 2025 on the bills the Texas Catholic bishops supported or opposed, ${inLang}`],
   ];

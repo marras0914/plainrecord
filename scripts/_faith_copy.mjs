@@ -86,11 +86,15 @@ export const KEY = {
   noPlank: (n) => `silent.${n.party}-${n.level}.${n.issueId}`,
   toRead: (r, i) => `toread.${r.traditionId}.${r.issueId}.${i}`,
   book: (code) => `book.${code}`,
+  sideQ: (p) => `side.${p.issueId}.q`,
+  sideA: (p) => `side.${p.issueId}.a`,
+  sideB: (p) => `side.${p.issueId}.b`,
+  noSide: (n) => `noside.${n.issueId}`,
 };
 
 export const FAITH_PATHS = {
-  en: { home: 'faith', method: 'faith/methodology' },
-  es: { home: 'fe', method: 'fe/metodologia' },
+  en: { home: 'faith', method: 'faith/methodology', sides: 'faith/sides' },
+  es: { home: 'fe', method: 'fe/metodologia', sides: 'fe/posturas' },
 };
 
 /** One page per tradition. The ids are the record's; the slugs are the reader's. */

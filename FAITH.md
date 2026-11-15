@@ -309,6 +309,27 @@ a written rule; this needs one too.
 - Corrections from readers go in a public changelog, the same way a wrong
   position in `stated_positions.ts` is fixed with a PR and a better source.
 
+## Which side each church takes (decided 15 Nov 2026)
+
+Marco asked for a grid of what each church actually lines up with, issue by
+issue, without saying what it "should" do. `/faith/sides` and `/fe/posturas`,
+from `SIDE_POINTS` in `faith_positions.ts`:
+
+- The question on each issue is one where the D and R platforms at a level
+  take opposite sides in their own words, so the parties set it, not us. A
+  level where they don't is not compared; criminal justice has no such point
+  and is not compared at all (`NO_SIDE_POINT`).
+- A church is placed only where one of its statements shown in full takes a
+  side in its own words, with that quote shown. Otherwise "Doesn't say".
+- Every quote is checked against its source by `data:faith:quotes`.
+- **No total**, on the page or in the data: which issues are listed would
+  decide it. `faith.smoke.ts` and `verify_site.mjs` both check this.
+- Three judgment calls (SBC environment: doesn't say; UMC healthcare: widen;
+  Catholic environment: act) were Marco's, and the page lists them.
+
+This replaces the earlier "one tradition at a time, no grid" rule. The
+guardrail below against a "which party is more Christian" score stands.
+
 ## Guardrails
 
 - No "which party is more Christian" score anywhere: not on the page, not on a
