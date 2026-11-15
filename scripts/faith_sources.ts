@@ -20,6 +20,9 @@ export const FAITH_SOURCE_DIR = join(WORK_DIR, 'faith_sources');
 export const FAITH_SOURCE_FILES: Record<string, { file: string; lineNumbers?: boolean; html?: string }> = {
   'https://www.usccb.org/resources/2023-Nov-15%20FCFC%20action%20item%20text%20final.pdf': { file: 'usccb_fcfc_2023_action.txt', lineNumbers: true },
   'https://www.usccb.org/resources/forming-consciences-for-faithful-citizenship-2019.pdf': { file: 'usccb_fcfc_2019.txt' },
+  // The page links the PDF (USCCB%20Special%20Message%20on%20Immigration.pdf),
+  // read with `pdftotext -enc UTF-8` (no -layout: its pull quote splits the text).
+  'https://www.usccb.org/resources/special-pastoral-message-immigration-november-12-2025': { file: 'usccb_special_message_2025.txt' },
   'https://www.sbc.net/resource-library/resolutions/on-immigration-human-dignity-and-the-rule-of-law/': { file: 'sbc_2026_immigration.txt' },
   'https://www.sbc.net/resource-library/resolutions/on-wisely-engaging-immigration/': { file: 'sbc_wisely_engaging.txt' },
   'https://www.sbc.net/resource-library/resolutions/on-immigration/': { file: 'sbc_on_immigration_2018.txt' },

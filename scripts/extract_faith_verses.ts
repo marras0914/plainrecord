@@ -142,6 +142,7 @@ export function findRefs(text: string): Ref[] {
 export const FIXES: { file: string; garbled: string; fixed: string; why: string }[] = [
   { file: 'usccb_fcfc_2023_action.txt', garbled: 'Eph. 4:2947 32', fixed: 'Eph. 4:29-32', why: 'The PDF prints line number 47 inside the reference and its text layer drops the hyphen.' },
   { file: 'usccb_fcfc_2019.txt', garbled: 'Lk 6:3638', fixed: 'Lk 6:36-38', why: 'The PDF text layer drops the hyphen in "6:36-38".' },
+  { file: 'usccb_special_message_2025.txt', garbled: 'Luke 10:30– 37', fixed: 'Luke 10:30-37', why: 'The PDF breaks "10:30-37" across two lines of a narrow column.' },
 ];
 
 // --- the Bibles ------------------------------------------------------------
