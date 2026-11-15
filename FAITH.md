@@ -187,6 +187,30 @@ scoreboard: one tradition at a time.
 
 ---
 
+## The to-read list, worked through 14 Nov 2026
+
+- **UMC, done.** The immigration entry now quotes the 2024 Social Principles
+  themselves (The Political Community, section G, "Migrants, Immigrants and
+  Refugees"), not the church's explainer page. The section adds family
+  separation and for-profit detention to the summary. Book of Resolutions 4271,
+  4273 and 4275 and "The United Methodist Church Is a Sanctuary Church" were
+  read in full and are listed under it. 4275 is printed whole only on the
+  explainer page, so that page is its link. The section cites no scripture,
+  so the entry now shows no verses.
+- **Catholic, partly.** The search found the 2025 Special Pastoral Message on
+  Immigration: its own text says "approved by the general membership of
+  bishops" (vote 216-5-3). It is the newest full-body statement and is shown
+  in full. It is read from its PDF with `pdftotext -enc UTF-8` (not
+  `-layout`), with a FIXES entry for "Luke 10:30-37", which the PDF breaks
+  across lines. *Strangers No Longer* (2003) and *Welcoming the Stranger Among
+  Us* (2000) stay on the list: usccb.org returns 403 to scripts and to the
+  fetch tool on both pages, so their approval notes are unseen. Secondary
+  sources say the 2000 one was approved by the full body. That is not enough
+  under the rule.
+- **AME, still open.** No General Conference resolution on immigration has
+  been found online. The *Christian Recorder*'s summary of the 2024 General
+  Conference legislation names none.
+
 ## Texas House votes on bills a church took a side on
 
 `/faith/catholic/texas-house`, `/fe/catolica/camara-de-texas`. Marco asked on

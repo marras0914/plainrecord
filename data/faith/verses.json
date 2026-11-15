@@ -26,9 +26,157 @@
    "garbled": "Lk 6:3638",
    "fixed": "Lk 6:36-38",
    "why": "The PDF text layer drops the hyphen in \"6:36-38\"."
+  },
+  {
+   "file": "usccb_special_message_2025.txt",
+   "garbled": "Luke 10:30– 37",
+   "fixed": "Luke 10:30-37",
+   "why": "The PDF breaks \"10:30-37\" across two lines of a narrow column."
   }
  ],
  "citations": [
+  {
+   "statement": "catholic.immigration.2025-11-12",
+   "scope": "whole document",
+   "refs": [
+    {
+     "asWritten": "Genesis 1:27",
+     "code": "GEN",
+     "chapter": 1,
+     "ranges": [
+      [
+       27,
+       27
+      ]
+     ],
+     "chapterPage": "GEN01.htm",
+     "verseKeys": [
+      "GEN 1:27"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "Zechariah 7:10",
+     "code": "ZEC",
+     "chapter": 7,
+     "ranges": [
+      [
+       10,
+       10
+      ]
+     ],
+     "chapterPage": "ZEC07.htm",
+     "verseKeys": [
+      "ZEC 7:10"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "2 Corinthians 8:9",
+     "code": "2CO",
+     "chapter": 8,
+     "ranges": [
+      [
+       9,
+       9
+      ]
+     ],
+     "chapterPage": "2CO08.htm",
+     "verseKeys": [
+      "2CO 8:9"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "Luke 10:30-37",
+     "code": "LUK",
+     "chapter": 10,
+     "ranges": [
+      [
+       30,
+       37
+      ]
+     ],
+     "chapterPage": "LUK10.htm",
+     "verseKeys": [
+      "LUK 10:30",
+      "LUK 10:31",
+      "LUK 10:32",
+      "LUK 10:33",
+      "LUK 10:34",
+      "LUK 10:35",
+      "LUK 10:36",
+      "LUK 10:37"
+     ],
+     "verseCount": 8,
+     "notInBible": []
+    },
+    {
+     "asWritten": "Matthew 25",
+     "code": "MAT",
+     "chapter": 25,
+     "ranges": [],
+     "chapterPage": "MAT25.htm",
+     "verseKeys": [],
+     "verseCount": 0,
+     "notInBible": []
+    },
+    {
+     "asWritten": "John 13:34",
+     "code": "JOH",
+     "chapter": 13,
+     "ranges": [
+      [
+       34,
+       34
+      ]
+     ],
+     "chapterPage": "JHN13.htm",
+     "verseKeys": [
+      "JOH 13:34"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "1 Corinthians 12:26",
+     "code": "1CO",
+     "chapter": 12,
+     "ranges": [
+      [
+       26,
+       26
+      ]
+     ],
+     "chapterPage": "1CO12.htm",
+     "verseKeys": [
+      "1CO 12:26"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "Romans 5:5",
+     "code": "ROM",
+     "chapter": 5,
+     "ranges": [
+      [
+       5,
+       5
+      ]
+     ],
+     "chapterPage": "ROM05.htm",
+     "verseKeys": [
+      "ROM 5:5"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    }
+   ]
+  },
   {
    "statement": "catholic.immigration.2023-11-15",
    "scope": "same section as the excerpt",
@@ -406,43 +554,8 @@
   },
   {
    "statement": "umc.immigration.2024",
-   "scope": "whole document",
-   "refs": [
-    {
-     "asWritten": "Deuteronomy 10:17-19",
-     "code": "DEU",
-     "chapter": 10,
-     "ranges": [
-      [
-       17,
-       19
-      ]
-     ],
-     "chapterPage": "DEU10.htm",
-     "verseKeys": [
-      "DEU 10:17",
-      "DEU 10:18",
-      "DEU 10:19"
-     ],
-     "verseCount": 3,
-     "notInBible": []
-    },
-    {
-     "asWritten": "Matthew 25:31-40",
-     "code": "MAT",
-     "chapter": 25,
-     "ranges": [
-      [
-       31,
-       40
-      ]
-     ],
-     "chapterPage": "MAT25.htm",
-     "verseKeys": [],
-     "verseCount": 10,
-     "notInBible": []
-    }
-   ]
+   "scope": "same section as the excerpt",
+   "refs": []
   },
   {
    "statement": "ame.immigration.2018",
@@ -2532,13 +2645,65 @@
   }
  ],
  "verses": {
-  "GEN 1:26": {
-   "web": "God said, “Let’s make man in our image, after our likeness. Let them have dominion over the fish of the sea, and over the birds of the sky, and over the livestock, and over all the earth, and over every creeping thing that creeps on the earth.”",
-   "rv1909": "Y dijo Dios: Hagamos al hombre á nuestra imagen, conforme á nuestra semejanza; y señoree en los peces de la mar, y en las aves de los cielos, y en las bestias, y en toda la tierra, y en todo animal que anda arrastrando sobre la tierra."
-  },
   "GEN 1:27": {
    "web": "God created man in his own image. In God’s image he created him; male and female he created them.",
    "rv1909": "Y crió Dios al hombre á su imagen, á imagen de Dios lo crió; varón y hembra los crió."
+  },
+  "ZEC 7:10": {
+   "web": "Don’t oppress the widow, the fatherless, the foreigner, nor the poor; and let none of you devise evil against his brother in your heart.’",
+   "rv1909": "No agraviéis á la viuda, ni al huérfano, ni al extranjero, ni al pobre; ni ninguno piense mal en su corazón contra su hermano."
+  },
+  "2CO 8:9": {
+   "web": "For you know the grace of our Lord Jesus Christ, that though he was rich, yet for your sakes he became poor, that you through his poverty might become rich.",
+   "rv1909": "Porque ya sabéis la gracia de nuestro Señor Jesucristo, que por amor de vosotros se hizo pobre, siendo rico; para que vosotros con su pobreza fueseis enriquecidos."
+  },
+  "LUK 10:30": {
+   "web": "Jesus answered, “A certain man was going down from Jerusalem to Jericho, and he fell among robbers, who both stripped him and beat him, and departed, leaving him half dead.",
+   "rv1909": "Y respondiendo Jesús, dijo: Un hombre descendía de Jerusalem á Jericó, y cayó en [manos de] ladrones, los cuales le despojaron; é hiriéndole, se fueron, dejándole medio muerto."
+  },
+  "LUK 10:31": {
+   "web": "By chance a certain priest was going down that way. When he saw him, he passed by on the other side.",
+   "rv1909": "Y aconteció, que descendió un sacerdote por aquel camino, y viéndole, se pasó de un lado."
+  },
+  "LUK 10:32": {
+   "web": "In the same way a Levite also, when he came to the place and saw him, passed by on the other side.",
+   "rv1909": "Y asimismo un Levita, llegando cerca de aquel lugar, y viéndole, se pasó de un lado."
+  },
+  "LUK 10:33": {
+   "web": "But a certain Samaritan, as he traveled, came where he was. When he saw him, he was moved with compassion,",
+   "rv1909": "Mas un Samaritano que transitaba, viniendo cerca de él, y viéndole, fué movido á misericordia;"
+  },
+  "LUK 10:34": {
+   "web": "came to him, and bound up his wounds, pouring on oil and wine. He set him on his own animal, brought him to an inn, and took care of him.",
+   "rv1909": "Y llegándose, vendó sus heridas, echándo[les] aceite y vino; y poniéndole sobre su cabalgadura, llevóle al mesón, y cuidó de él."
+  },
+  "LUK 10:35": {
+   "web": "On the next day, when he departed, he took out two denarii, gave them to the host, and said to him, ‘Take care of him. Whatever you spend beyond that, I will repay you when I return.’",
+   "rv1909": "Y otro día al partir, sacó dos denarios, y diólos al huésped, y le dijo: Cuídamele; y todo lo que de más gastares, yo cuando vuelva te [lo] pagaré."
+  },
+  "LUK 10:36": {
+   "web": "Now which of these three do you think seemed to be a neighbor to him who fell among the robbers?”",
+   "rv1909": "¿Quién, pues, de estos tres te parece que fué el prójimo de aquél que cayó en [manos de] los ladrones?"
+  },
+  "LUK 10:37": {
+   "web": "He said, “He who showed mercy on him.” Then Jesus said to him, “Go and do likewise.”",
+   "rv1909": "Y él dijo: El que usó con él de misericordia. Entonces Jesús le dijo: Ve, y haz tú lo mismo."
+  },
+  "JOH 13:34": {
+   "web": "A new commandment I give to you, that you love one another. Just as I have loved you, you also love one another.",
+   "rv1909": "Un mandamiento nuevo os doy: Que os améis unos á otros: como os he amado, que también [os] améis los unos á los otros."
+  },
+  "1CO 12:26": {
+   "web": "When one member suffers, all the members suffer with it. When one member is honored, all the members rejoice with it.",
+   "rv1909": "Por manera que si un miembro padece, todos los miembros á una se duelen; y si un miembro es honrado, todos los miembros á una se gozan."
+  },
+  "ROM 5:5": {
+   "web": "and hope doesn’t disappoint us, because God’s love has been poured into our hearts through the Holy Spirit who was given to us.",
+   "rv1909": "Y la esperanza no avergüenza; porque el amor de Dios está derramado en nuestros corazones por el Espíritu Santo que nos es dado."
+  },
+  "GEN 1:26": {
+   "web": "God said, “Let’s make man in our image, after our likeness. Let them have dominion over the fish of the sea, and over the birds of the sky, and over the livestock, and over all the earth, and over every creeping thing that creeps on the earth.”",
+   "rv1909": "Y dijo Dios: Hagamos al hombre á nuestra imagen, conforme á nuestra semejanza; y señoree en los peces de la mar, y en las aves de los cielos, y en las bestias, y en toda la tierra, y en todo animal que anda arrastrando sobre la tierra."
   },
   "DEU 10:18": {
    "web": "He executes justice for the fatherless and widow and loves the foreigner in giving him food and clothing.",
@@ -2652,10 +2817,6 @@
    "web": "“Thus has Yahweh of Armies spoken, saying, ‘Execute true judgment, and show kindness and compassion every man to his brother.",
    "rv1909": "Así habló Jehová de los ejércitos, diciendo: Juzgad juicio verdadero, y haced misericordia y piedad cada cual con su hermano:"
   },
-  "ZEC 7:10": {
-   "web": "Don’t oppress the widow, the fatherless, the foreigner, nor the poor; and let none of you devise evil against his brother in your heart.’",
-   "rv1909": "No agraviéis á la viuda, ni al huérfano, ni al extranjero, ni al pobre; ni ninguno piense mal en su corazón contra su hermano."
-  },
   "JER 29:7": {
    "web": "Seek the peace of the city where I have caused you to be carried away captive, and pray to Yahweh for it; for in its peace you will have peace.”",
    "rv1909": "Y procurad la paz de la ciudad á la cual os hice traspasar, y rogad por ella á Jehová; porque en su paz tendréis vosotros paz."
@@ -2691,10 +2852,6 @@
   "MAT 19:14": {
    "web": "But Jesus said, “Allow the little children, and don’t forbid them to come to me; for the Kingdom of Heaven belongs to ones like these.”",
    "rv1909": "Y Jesús dijo: Dejad á los niños, y no les impidáis de venir á mí; porque de los tales es el reino de los cielos."
-  },
-  "DEU 10:17": {
-   "web": "For Yahweh your God, he is God of gods and Lord of lords, the great God, the mighty, and the awesome, who doesn’t respect persons or take bribes.",
-   "rv1909": "Porque Jehová vuestro Dios es Dios de dioses, y Señor de señores, Dios grande, poderoso, y terrible, que no acepta persona, ni toma cohecho;"
   },
   "PRO 3:31": {
    "web": "Don’t envy the man of violence. Choose none of his ways.",

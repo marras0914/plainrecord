@@ -151,6 +151,7 @@ export interface Plank {
 const SRC = {
   usccb2023: 'https://www.usccb.org/resources/2023-Nov-15%20FCFC%20action%20item%20text%20final.pdf',
   usccb2019: 'https://www.usccb.org/resources/forming-consciences-for-faithful-citizenship-2019.pdf',
+  usccb2025: 'https://www.usccb.org/resources/special-pastoral-message-immigration-november-12-2025',
   sbc2026: 'https://www.sbc.net/resource-library/resolutions/on-immigration-human-dignity-and-the-rule-of-law/',
   sbc2023: 'https://www.sbc.net/resource-library/resolutions/on-wisely-engaging-immigration/',
   sbc2018: 'https://www.sbc.net/resource-library/resolutions/on-immigration/',
@@ -180,6 +181,17 @@ const SRC = {
 export const STATEMENTS: Statement[] = [
   // --- immigration --------------------------------------------------------
   {
+    // Found 14 Nov 2026 while working through TO_READ: a full-body statement
+    // newer than the 2023 note. Its own text: "approved by the general
+    // membership of bishops" at the Fall Plenary Assembly (vote 216-5-3).
+    traditionId: 'catholic', issueId: 'immigration',
+    title: 'Special Pastoral Message on Immigration',
+    body: 'Approved by the U.S. bishops', sourceDate: '2025-11-12',
+    summary: 'Opposes the indiscriminate mass deportation of people and calls for meaningful immigration reform, says nations have a responsibility to regulate their borders, and voices concern about detention conditions, immigrants losing legal status, and enforcement near churches, hospitals and schools.',
+    excerpt: 'We oppose the indiscriminate mass deportation of people.',
+    sourceUrl: SRC.usccb2025, review: [],
+  },
+  {
     traditionId: 'catholic', issueId: 'immigration',
     title: 'Introductory Note to Forming Consciences for Faithful Citizenship',
     body: 'Approved by the U.S. bishops', sourceDate: '2023-11-15',
@@ -205,11 +217,13 @@ export const STATEMENTS: Statement[] = [
   },
   {
     traditionId: 'umc', issueId: 'immigration',
-    title: 'Social Principles, as quoted by the church',
+    // Read from the Social Principles themselves on 14 Nov 2026 (section G of
+    // The Political Community), no longer from the church's page quoting them.
+    title: 'Social Principles: The Political Community',
     body: 'Adopted by the General Conference (2024 revision)', sourceDate: '2024',
-    summary: 'Affirms the dignity and rights of migrants, immigrants and refugees, urges congregations to welcome them, and opposes laws that criminalize or punish people for their migration status and detention in inhumane conditions.',
-    excerpt: 'We affirm the dignity, worth, and rights of migrants, immigrants, and refugees',
-    sourceUrl: SRC.umc, review: [],
+    summary: 'Affirms the dignity and rights of migrants, immigrants and refugees, urges congregations to welcome them, and opposes laws that criminalize or punish people for their migration status, detention in inhumane conditions, the separation of families, and for-profit detention centers.',
+    excerpt: 'We affirm the dignity, worth and rights of migrants, immigrants and refugees',
+    sourceUrl: SRC.umcPolitical, review: [],
   },
   {
     traditionId: 'ame', issueId: 'immigration',
@@ -706,6 +720,10 @@ export const sbcOnIssue = (issue: IssueId) => SBC_RESOLUTIONS
 const HAND_EARLIER: Earlier[] = [
   { traditionId: 'umc', issueId: 'immigration', title: 'Welcoming the Migrant to the U.S. (Book of Resolutions 4271)', date: '2024', url: 'https://www.umc.org/en/content/book-of-resolutions-welcoming-the-migrant-to-the-us' },
   { traditionId: 'umc', issueId: 'immigration', title: 'Global Migration and the Quest for Justice (Book of Resolutions 4273)', date: '2024', url: 'https://www.umc.org/en/content/book-of-resolutions-global-migration-and-the-quest-for-justice' },
+  // Read in full 14 Nov 2026. 4275 is printed whole only on the church's
+  // explainer page, which is therefore its link.
+  { traditionId: 'umc', issueId: 'immigration', title: 'Concerning Immigration (Book of Resolutions 4275)', date: '2024', url: SRC.umc },
+  { traditionId: 'umc', issueId: 'immigration', title: 'The United Methodist Church Is a Sanctuary Church (Book of Resolutions)', date: '2024', url: 'https://www.umc.org/en/content/book-of-resolutions-the-united-methodist-church-is-a-sanctuary-church' },
 ];
 
 /**
@@ -727,10 +745,11 @@ export const EARLIER: Earlier[] = [
  * so they are not in STATEMENTS. Listed so the gap is visible, not forgotten.
  */
 export const TO_READ: { traditionId: TraditionId; issueId: IssueId; what: string }[] = [
-  { traditionId: 'umc', issueId: 'immigration', what: 'Book of Resolutions 4273 (Global Migration and the Quest for Justice) and 4275 (Concerning Immigration), in full; only quotations on umc.org have been read.' },
-  { traditionId: 'umc', issueId: 'immigration', what: 'The Social Principles text itself (2024 revision), rather than the church\'s page quoting it.' },
-  { traditionId: 'catholic', issueId: 'immigration', what: 'Other statements approved by the full body of bishops on immigration (for example Strangers No Longer, 2003, with the Mexican bishops).' },
-  { traditionId: 'ame', issueId: 'immigration', what: 'AME General Conference resolutions, which outrank the Council of Bishops; none found online so far.' },
+  // 14 Nov 2026: the two UMC items were read (Social Principles section G,
+  // Book of Resolutions 4271, 4273, 4275 and the sanctuary resolution) and
+  // are done. The Catholic search found the 2025 Special Pastoral Message.
+  { traditionId: 'catholic', issueId: 'immigration', what: 'Strangers No Longer (2003, with the Mexican bishops) and Welcoming the Stranger Among Us (2000): whether the full body of U.S. bishops approved them. The bishops\' website refuses automated reading of both pages, so their approval notes have not been seen.' },
+  { traditionId: 'ame', issueId: 'immigration', what: 'AME General Conference resolutions, which outrank the Council of Bishops. None found online; the church paper\'s summary of the 2024 General Conference legislation names none on immigration.' },
 ];
 
 /** Positions emphasized without a stated direction (rule 3). Empty so far. */
