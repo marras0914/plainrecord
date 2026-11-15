@@ -84,6 +84,38 @@ export function sectionOf(canonical) {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+/**
+ * The logo, option A "the purple strip" (Marco, 14 Nov 2026): the word with
+ * "right" on a red bar, the n on a purple one and "left" on a blue one, red for
+ * the right and blue for the left as on every chart here, purple where they
+ * meet. Live text in the self-hosted Lexend, so it is sharp in both themes and
+ * needs no image. A link home on every page. Styled by .brand in
+ * _page_shell.mjs and src/styles.css, which must stay in step.
+ */
+export function brandHtml(lang) {
+  const L = lang === 'es' ? 'es' : 'en';
+  const home = L === 'es' ? `${SITE}/es` : `${SITE}/`;
+  const label = L === 'es' ? 'rightnleft, página de inicio' : 'rightnleft, home page';
+  return `<a class="brand" href="${home}" aria-label="${label}"><span class="b-r">right</span><span class="b-n">n</span><span class="b-l">left</span></a>`;
+}
+
+/**
+ * The logo's icon is the strip alone: red | purple | blue (public/favicon.svg,
+ * and public/apple-touch-icon.png rendered from it by build_icons.mjs). It
+ * replaced a plain purple dot.
+ */
+export const ICON_LINKS = '<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">';
+
+/** The logo's CSS, shared word for word by the static pages and the quiz. */
+export const BRAND_CSS = '.brand{--b-r:#c8352f;--b-n:#7d5ba6;--b-l:#1f66bd;display:inline-flex;font-family:"Lexend",system-ui,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1.1;color:inherit;text-decoration:none;padding-bottom:7px}'
+  + ':root[data-theme="dark"] .brand{--b-r:#e66767;--b-n:#a377d3;--b-l:#3987e5}'
+  + '.brand span{background:no-repeat 0 100%/calc(100% - 2px) 5px;padding-bottom:5px;margin-bottom:-7px}'
+  + '.brand .b-r{background-image:linear-gradient(var(--b-r),var(--b-r))}'
+  + '.brand .b-n{color:var(--b-n);background-image:linear-gradient(var(--b-n),var(--b-n))}'
+  + '.brand .b-l{background-image:linear-gradient(var(--b-l),var(--b-l))}'
+  + '.brand:hover{text-decoration:none}.brand:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}'
+  + '@media print{.brand{--b-r:#000;--b-n:#000;--b-l:#000}}';
+
 export function navHtml(lang, canonical) {
   const here = sectionOf(canonical);
   const hub = (href) => canonical === `${SITE}${href}`;

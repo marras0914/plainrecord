@@ -56,6 +56,7 @@ const MIME = {
   '.css': 'text/css; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
   '.svg': 'image/svg+xml',
+  '.png': 'image/png',
   '.txt': 'text/plain; charset=utf-8',
   '.xml': 'application/xml',
   '.ico': 'image/x-icon',
@@ -2429,6 +2430,26 @@ try {
     // Each page marks its own space in the nav, and the front page marks none.
     const current = async (p) => { await sp.goto(at(p), { waitUntil: 'load' }); return (await sp.locator('nav.sitenav a[aria-current]').allTextContents()).join('|'); };
     const marks = { '/district/31': await current('/district/31'), '/faith/catholic': await current('/faith/catholic'), '/economy/explore': await current('/economy/explore'), '/': await current('/') };
+    // The logo (option A, 14 Nov 2026): on every kind of page, the quiz
+    // included, a link home in the page's own language, with its three bars;
+    // and the icon it replaced the purple dot with is really served.
+    const brandOn = [];
+    for (const [p, home] of [['/', '/'], ['/es', '/es'], ['/quiz', '/'], ['/es/cuestionario', '/es'], ['/faith/catholic', '/'], ['/economia', '/es'], ['/district/31', '/'], ['/policy', '/']]) {
+      await sp.goto(at(p), { waitUntil: 'load' });
+      const b = await sp.$eval('a.brand', (a) => ({ href: new URL(a.href).pathname, text: a.textContent, bars: [...a.querySelectorAll('span')].map((s) => getComputedStyle(s).backgroundImage) })).catch(() => null);
+      const icon = await sp.$eval('link[rel=icon]', (l) => l.getAttribute('href')).catch(() => null);
+      if (!b || b.href !== home || b.text !== 'rightnleft' || b.bars.length !== 3 || b.bars.some((g) => !g.includes('gradient')) || icon !== '/favicon.svg') {
+        brandOn.push(`${p}: ${b ? `${b.href} "${b.text}" ${b.bars.filter((g) => g.includes('gradient')).length} bars` : 'no brand'}, icon ${icon}`);
+      }
+    }
+    check('logo: every kind of page, the quiz included, carries the wordmark linking home in its language, and the strip icon',
+      brandOn.length === 0, brandOn.join(' | ') || '8 pages');
+    const svgIcon = await fetch(at('/favicon.svg'));
+    const touch = await fetch(at('/apple-touch-icon.png'));
+    check('logo: the icons are served as an SVG and a PNG',
+      svgIcon.ok && (svgIcon.headers.get('content-type') ?? '').includes('svg') && touch.ok && (touch.headers.get('content-type') ?? '').includes('png'),
+      `${svgIcon.status} ${svgIcon.headers.get('content-type')} / ${touch.status} ${touch.headers.get('content-type')}`);
+
     check('spaces: each page marks its own space in the nav, and the front page none',
       marks['/district/31'] === 'Policy' && marks['/faith/catholic'] === 'Religion' && marks['/economy/explore'] === 'Economics' && marks['/'] === '',
       JSON.stringify(marks));

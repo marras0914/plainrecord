@@ -16,6 +16,8 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <script src="/js/theme.js"></script>
 <script src="/_vercel/insights/script.js" defer></script>
 <link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
@@ -111,8 +113,10 @@ a{color:var(--blue)}
 .cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
   background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
 hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
-  font-size:13px;margin-bottom:22px}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;
+  font-size:13px;margin-bottom:14px}
+.kicker-line{margin:0 0 16px}
+.brand{--b-r:#c8352f;--b-n:#7d5ba6;--b-l:#1f66bd;display:inline-flex;font-family:"Lexend",system-ui,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1.1;color:inherit;text-decoration:none;padding-bottom:7px}:root[data-theme="dark"] .brand{--b-r:#e66767;--b-n:#a377d3;--b-l:#3987e5}.brand span{background:no-repeat 0 100%/calc(100% - 2px) 5px;padding-bottom:5px;margin-bottom:-7px}.brand .b-r{background-image:linear-gradient(var(--b-r),var(--b-r))}.brand .b-n{color:var(--b-n);background-image:linear-gradient(var(--b-n),var(--b-n))}.brand .b-l{background-image:linear-gradient(var(--b-l),var(--b-l))}.brand:hover{text-decoration:none}.brand:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}@media print{.brand{--b-r:#000;--b-n:#000;--b-l:#000}}
 /* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
    scrolling sideways on a phone; the current section is ink, not link blue. */
 .sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
@@ -193,9 +197,10 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
 <body>
 <main>
   <div class="top">
-    <span class="kicker">La fe y las plataformas</span>
+    <a class="brand" href="https://rightnleft.com/es" aria-label="rightnleft, página de inicio"><span class="b-r">right</span><span class="b-n">n</span><span class="b-l">left</span></a>
     <a href="https://rightnleft.com/faith/catholic/texas-house">In English</a>
   </div>
+  <p class="kicker kicker-line">La fe y las plataformas</p>
   <nav class="sitenav" aria-label="Secciones del sitio"><a href="https://rightnleft.com/politica">Política</a><a href="https://rightnleft.com/fe" aria-current="true">Religión</a><a href="https://rightnleft.com/economia">Economía</a></nav>
 <style>
   .notice{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--ink-2);border-radius:8px;padding:12px 14px;margin:14px 0 18px;font-size:15.5px}

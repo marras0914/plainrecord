@@ -625,7 +625,8 @@
   /* Language switch and the unofficial-translation notice.
      The switch names the OTHER language in that other language, because the
      person who needs it cannot read the one they are looking at. */
-  .topbar { padding-top:14px; }
+  .topbar { padding-top:14px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:4px 12px; }
+  .topbar .brand { margin-bottom:10px; }
   .langswitch { margin-bottom:10px; display:flex; gap:8px; align-items:center; }
 
   /* The three top-bar controls are ONE control, drawn three times.
@@ -777,3 +778,7 @@
 /* Crossfade between pages, matching the static pages' rule in _page_shell.mjs.
    Cross-document view transitions: CSS only, and ignored where unsupported. */
 @media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+
+/* The logo, option A (14 Nov 2026). Generated from BRAND_CSS in scripts/_site_nav.mjs;
+   build_locales.mjs refuses to build if this line and that constant differ. */
+.brand{--b-r:#c8352f;--b-n:#7d5ba6;--b-l:#1f66bd;display:inline-flex;font-family:"Lexend",system-ui,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1.1;color:inherit;text-decoration:none;padding-bottom:7px}:root[data-theme="dark"] .brand{--b-r:#e66767;--b-n:#a377d3;--b-l:#3987e5}.brand span{background:no-repeat 0 100%/calc(100% - 2px) 5px;padding-bottom:5px;margin-bottom:-7px}.brand .b-r{background-image:linear-gradient(var(--b-r),var(--b-r))}.brand .b-n{color:var(--b-n);background-image:linear-gradient(var(--b-n),var(--b-n))}.brand .b-l{background-image:linear-gradient(var(--b-l),var(--b-l))}.brand:hover{text-decoration:none}.brand:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}@media print{.brand{--b-r:#000;--b-n:#000;--b-l:#000}}
