@@ -1,0 +1,133 @@
+{
+  "_meta": {
+    "what": "The words of the three-space structure (decided by Marco, 14 Nov 2026): the nav and footer labels (scripts/_site_nav.mjs), the front page at / and /es (scripts/build_home.mjs), and the Policy hub at /policy and /politica (scripts/build_hubs.mjs).",
+    "why": "The same gate as faith.json and economy.json: nothing builds while any entry is not status ok. HOME_DRAFT=1 lifts that for a local look and must never be set on Vercel.",
+    "register": "usted, plain rather than formal, as in copy.json.",
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 14 November 2026, all 25 strings, no corrections."
+  },
+  "nav.policy": {
+    "en": "Policy",
+    "es": "Política",
+    "status": "ok"
+  },
+  "nav.religion": {
+    "en": "Religion",
+    "es": "Religión",
+    "status": "ok"
+  },
+  "nav.economics": {
+    "en": "Economics",
+    "es": "Economía",
+    "status": "ok"
+  },
+  "foot.home": {
+    "en": "Home",
+    "es": "Inicio",
+    "status": "ok"
+  },
+  "foot.quiz": {
+    "en": "The quiz",
+    "es": "El cuestionario",
+    "status": "ok"
+  },
+  "home.docTitle": {
+    "en": "Policy, religion and economics, from the public record",
+    "es": "Política, religión y economía, según el registro público",
+    "status": "ok"
+  },
+  "home.h1": {
+    "en": "Policy, religion and economics, from the public record",
+    "es": "Política, religión y economía, según el registro público",
+    "status": "ok"
+  },
+  "home.desc": {
+    "en": "How the Texas House voted in 2025, what five Christian traditions officially say beside the party platforms, and the economy under each party since 1949. Every page shows its sources, and the data is free to download.",
+    "es": "Cómo votó la Cámara de Texas en 2025, lo que cinco tradiciones cristianas dicen oficialmente junto a las plataformas de los partidos, y la economía con cada partido desde 1949. Cada página muestra sus fuentes, y los datos se pueden descargar gratis.",
+    "status": "ok"
+  },
+  "home.lede": {
+    "en": "Three places to start. Every page shows its sources, and the data behind it is free to download.",
+    "es": "Tres lugares para empezar. Cada página muestra sus fuentes, y los datos detrás de ella se pueden descargar gratis.",
+    "status": "ok"
+  },
+  "home.policy": {
+    "en": "How the Texas House voted in 2025: a quiz that hides the party labels until you answer, your own representative’s record, and the bills that drew the most attention.",
+    "es": "Cómo votó la Cámara de Texas en 2025: un cuestionario que oculta las etiquetas de partido hasta que usted responde, el historial de su propio representante y los proyectos de ley que más atención recibieron.",
+    "status": "ok"
+  },
+  "home.go": {
+    "en": "Go to {space}",
+    "es": "Ir a {space}",
+    "status": "ok"
+  },
+  "home.quiz": {
+    "en": "Or go straight to the quiz.",
+    "es": "O vaya directo al cuestionario.",
+    "status": "ok"
+  },
+  "policy.docTitle": {
+    "en": "Policy: how the Texas House voted in 2025",
+    "es": "Política: cómo votó la Cámara de Texas en 2025",
+    "status": "ok"
+  },
+  "policy.desc": {
+    "en": "How the Texas House voted in 2025: the quiz, every member’s record by district, the seven bills that drew the most attention, the session in charts, and the 2026 races.",
+    "es": "Cómo votó la Cámara de Texas en 2025: el cuestionario, el historial de cada miembro por distrito, los siete proyectos que más atención recibieron, la sesión en gráficas y las contiendas de 2026.",
+    "status": "ok"
+  },
+  "policy.lede": {
+    "en": "How the Texas House voted in the 2025 session, from the House Journal.",
+    "es": "Cómo votó la Cámara de Texas en la sesión de 2025, según el Diario de la Cámara.",
+    "status": "ok"
+  },
+  "policy.quizH2": {
+    "en": "The quiz",
+    "es": "El cuestionario",
+    "status": "ok"
+  },
+  "policy.quiz": {
+    "en": "Say how you would have voted on the bills the House voted on, with the party labels hidden until you answer, then see how your representatives voted.",
+    "es": "Diga cómo habría votado usted en los proyectos que votó la Cámara, con las etiquetas de partido ocultas hasta que responda, y luego vea cómo votaron sus representantes.",
+    "status": "ok"
+  },
+  "policy.repH2": {
+    "en": "Your representative",
+    "es": "Su representante",
+    "status": "ok"
+  },
+  "policy.rep": {
+    "en": "Find your Texas House district and see how your member voted.",
+    "es": "Encuentre su distrito de la Cámara de Texas y vea cómo votó su representante.",
+    "status": "ok"
+  },
+  "policy.repLink": {
+    "en": "Find your representative",
+    "es": "Encuentre a su representante",
+    "status": "ok"
+  },
+  "policy.billsLink": {
+    "en": "How every member voted on each of the seven",
+    "es": "Cómo votó cada integrante en cada uno de los siete",
+    "status": "ok"
+  },
+  "policy.chartsH2": {
+    "en": "The session in charts",
+    "es": "La sesión en gráficas",
+    "status": "ok"
+  },
+  "policy.charts": {
+    "en": "Every recorded House vote of 2025, drawn: how often the parties agreed and who crossed over.",
+    "es": "Cada votación nominal de la Cámara en 2025, en gráficas: con qué frecuencia coincidieron los partidos y quién cruzó la línea.",
+    "status": "ok"
+  },
+  "policy.chartsLink": {
+    "en": "See the charts",
+    "es": "Vea las gráficas",
+    "status": "ok"
+  },
+  "policy.dataLink": {
+    "en": "Download the data",
+    "es": "Descargar los datos (en inglés)",
+    "status": "ok"
+  }
+}

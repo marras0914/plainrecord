@@ -35,6 +35,8 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { footerHtml } from './_site_nav.mjs';
+import { QUIZ_PATH, HOME_PATH, POLICY_PATH } from './_home_copy.mjs';
+import { homePage } from './build_home.mjs';
 import { FAITH_PATHS, TRADITION_SLUG, traditionPath, houseVotesPath } from './_faith_copy.mjs';
 
 // The faith pages, with what each is, for the sitemap and llms.txt.
@@ -176,8 +178,10 @@ function head(html, locale) {
   // and /es/ therefore 308s to /es. A canonical or an hreflang that points at a
   // redirect is a canonical pointing at the wrong URL. The root is exempt: "/"
   // is the canonical form of itself and redirects nowhere.
-  const selfUrl = locale === 'es' ? `${SITE}${ES_PREFIX}` : `${SITE}/`;
-  const altUrl = locale === 'es' ? `${SITE}/` : `${SITE}${ES_PREFIX}`;
+  // The quiz has lived at /quiz and /es/cuestionario since 14 Nov 2026; the
+  // front page took / and /es.
+  const selfUrl = `${SITE}${QUIZ_PATH[locale]}`;
+  const altUrl = `${SITE}${QUIZ_PATH[locale === 'es' ? 'en' : 'es']}`;
 
   let out = html
     .replace(/<html lang="[^"]*">/, `<html lang="${locale}">`)
@@ -198,9 +202,9 @@ function head(html, locale) {
   // hreflang, both directions plus x-default. Search engines need each page to
   // point at every version INCLUDING itself, or the pair is ignored.
   const alternates =
-    `  <link rel="alternate" hreflang="en" href="${SITE}/">\n` +
-    `  <link rel="alternate" hreflang="es" href="${SITE}${ES_PREFIX}">\n` +
-    `  <link rel="alternate" hreflang="x-default" href="${SITE}/">\n` +
+    `  <link rel="alternate" hreflang="en" href="${SITE}${QUIZ_PATH.en}">\n` +
+    `  <link rel="alternate" hreflang="es" href="${SITE}${QUIZ_PATH.es}">\n` +
+    `  <link rel="alternate" hreflang="x-default" href="${SITE}${QUIZ_PATH.en}">\n` +
     `  <meta property="og:locale" content="${locale === 'es' ? 'es_US' : 'en_US'}">\n`;
   out = out.replace(/(\s*<link rel="canonical")/, `\n${alternates}$1`);
 
@@ -230,6 +234,7 @@ function head(html, locale) {
  * made in prose, and a wrong one here is quoted back by a machine.
  */
 function structuredData(locale) {
+  // The WebSite is the site, so its url is the front page, not the quiz.
   const selfUrl = locale === 'es' ? `${SITE}${ES_PREFIX}` : `${SITE}/`;
   const graph = [
     {
@@ -293,7 +298,7 @@ function structuredData(locale) {
 function langSwitch(locale) {
   // Same reason as the canonical: `${ES_PREFIX}/` would send every reader who
   // clicks the switch through a redirect.
-  const href = locale === 'es' ? '/' : ES_PREFIX;
+  const href = QUIZ_PATH[locale === 'es' ? 'en' : 'es'];
   // Look up the CURRENT locale, not the other one. page.langSwitch is already
   // stored reversed — its `en` value is the Spanish words "En español", because
   // the reader who needs the link cannot read the page they are on. Fetching the
@@ -424,10 +429,8 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
   // preceding everything.
   fill('<!--TRANSLATION_NOTICE-->', translationNotice(locale));
 
-  const target = locale === 'es'
-    ? resolve(DIST, 'es', 'index.html')
-    : resolve(DIST, 'index.html');
-  if (locale === 'es') await mkdir(resolve(DIST, 'es'), { recursive: true });
+  const target = resolve(DIST, QUIZ_PATH[locale].slice(1), 'index.html');
+  await mkdir(dirname(target), { recursive: true });
   await writeFile(target, html, 'utf8');
 
   // A key never contains a space. If one does, a substitution wrote a SENTENCE
@@ -441,8 +444,17 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
     clobbered.length ? `clobbered: "${clobbered[0].slice(0, 48)}…"` : '');
 
   const left = [...html.matchAll(/data-i18n(?:-content)?="([^"]+)"/g)].length;
-  say(true, `wrote ${locale === 'es' ? 'dist/es/index.html' : 'dist/index.html'}`,
+  say(true, `wrote dist${QUIZ_PATH[locale]}/index.html`,
     `${left} slots kept for reference`);
+}
+
+// The front page, over vite's dist/index.html (the quiz, now copied to /quiz).
+// /es is the Spanish front page only once the Spanish quiz exists to link to.
+for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
+  const target = resolve(DIST, HOME_PATH[locale].slice(1), 'index.html');
+  await mkdir(dirname(target), { recursive: true });
+  await writeFile(target, homePage(locale), 'utf8');
+  say(true, `wrote the ${locale} front page`, `dist${HOME_PATH[locale] === '/' ? '' : HOME_PATH[locale]}/index.html`);
 }
 
 say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
@@ -459,14 +471,15 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
 // ---------------------------------------------------------------------------
 
 {
-  const urls = emitSpanish
-    ? [{ loc: `${SITE}/`, locale: 'en' }, { loc: `${SITE}${ES_PREFIX}`, locale: 'es' }]
-    : [{ loc: `${SITE}/`, locale: 'en' }];
-
-  const alternates = urls
-    .map((u) => `      <xhtml:link rel="alternate" hreflang="${u.locale}" href="${u.loc}"/>`)
-    .concat(`      <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}/"/>`)
-    .join('\n');
+  // Two pairs since 14 Nov 2026: the front page and the quiz, each with its
+  // Spanish twin and its own alternates.
+  const langs = emitSpanish ? ['en', 'es'] : ['en'];
+  const pairs = [HOME_PATH, QUIZ_PATH].map((P) => langs.map((locale) => ({
+    loc: `${SITE}${P[locale] === '/' ? '/' : P[locale]}`, locale,
+    alternates: langs.map((l) => `      <xhtml:link rel="alternate" hreflang="${l}" href="${SITE}${P[l] === '/' ? '/' : P[l]}"/>`)
+      .concat(`      <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${P.en}"/>`).join('\n'),
+  })));
+  const urls = pairs.flat();
 
   // The Spanish fact sheet is a standalone document rather than a locale of the
   // app, so it carries no hreflang alternates: there is no English twin of it,
@@ -500,7 +513,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // The two district indexes. They are hubs rather than leaves: before they
   // existed every district page had exactly one crawlable inbound link, its own
   // translation, so the whole set was unreachable except through the sitemap.
-  for (const dir of ['districts', 'distritos', 'bills', 'proyectos', 'context', 'contexto', 'economy', 'economia', 'economy/explore', 'economia/explorar', 'economy/methodology', 'economia/metodologia', ...Object.keys(FAITH_LABELS).map((p) => p.slice(1)), 'open-data', 'classroom', 'maestros', 'charts', 'graficas']) {
+  for (const dir of ['districts', 'distritos', 'bills', 'proyectos', POLICY_PATH.en.slice(1), POLICY_PATH.es.slice(1), 'economy', 'economia', 'economy/explore', 'economia/explorar', 'economy/methodology', 'economia/metodologia', ...Object.keys(FAITH_LABELS).map((p) => p.slice(1)), 'open-data', 'classroom', 'maestros', 'charts', 'graficas']) {
     const shipped = await access(resolve(DIST, `${dir}/index.html`)).then(() => true, () => false);
     if (shipped) docs.push({ loc: `${SITE}/${dir}`, priority: '0.9' });
   }
@@ -561,7 +574,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     urls.map((u) =>
       '  <url>\n' +
       `    <loc>${u.loc}</loc>\n` +
-      `${alternates}\n` +
+      `${u.alternates}\n` +
       '    <changefreq>weekly</changefreq>\n' +
       `    <priority>${u.locale === 'en' ? '1.0' : '0.9'}</priority>\n` +
       '  </url>').join('\n') + '\n' +
@@ -634,8 +647,8 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     if (path === '/economy/methodology') return 'How the economy pages are measured, in English';
     if (path === '/economia/metodologia') return 'How the economy pages are measured, in Spanish';
     if (FAITH_LABELS[path]) return FAITH_LABELS[path];
-    if (path === '/context') return 'Background to the voting records, starting with the three 2026 statewide races, in English';
-    if (path === '/contexto') return 'Background to the voting records, starting with the three 2026 statewide races, in Spanish';
+    if (path === POLICY_PATH.en) return 'Policy: how the Texas House voted in 2025 (the quiz, every district, the headline bills, charts, the 2026 races), in English';
+    if (path === POLICY_PATH.es) return 'Policy: how the Texas House voted in 2025 (the quiz, every district, the headline bills, charts, the 2026 races), in Spanish';
     if (path === '/charts') return 'Every House vote in three charts, in English';
     if (path === '/graficas') return 'Every House vote in three charts, in Spanish';
     const race = RACE_TITLE[path.slice(1)];
@@ -655,8 +668,10 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   };
 
   const lines = [
-    '- [The quiz, in English](' + SITE + '/)',
-    '- [The quiz, in Spanish](' + SITE + '/es)',
+    '- [Front page: policy, religion and economics, in English](' + SITE + '/)',
+    '- [Front page: policy, religion and economics, in Spanish](' + SITE + '/es)',
+    '- [The quiz, in English](' + SITE + QUIZ_PATH.en + ')',
+    '- [The quiz, in Spanish](' + SITE + QUIZ_PATH.es + ')',
     ...docs.map((d) => {
       const pdf = d.loc.endsWith('/fact-sheet') ? `${d.loc}/rightnleft-en.pdf`
         : d.loc.endsWith('/hoja') ? `${d.loc}/rightnleft-es.pdf` : null;
@@ -680,8 +695,8 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
 // still render correctly.
 if (emitSpanish) {
   const bundleOf = (html) => (/src="(\/assets\/index-[\w-]+\.js)"/.exec(html) ?? [])[1];
-  const enHtml = await readFile(resolve(DIST, 'index.html'), 'utf8');
-  const esHtml = await readFile(resolve(DIST, 'es', 'index.html'), 'utf8');
+  const enHtml = await readFile(resolve(DIST, QUIZ_PATH.en.slice(1), 'index.html'), 'utf8');
+  const esHtml = await readFile(resolve(DIST, QUIZ_PATH.es.slice(1), 'index.html'), 'utf8');
   const a = bundleOf(enHtml);
   const b = bundleOf(esHtml);
   say(Boolean(a && b && a !== b), 'the two pages load DIFFERENT bundles',

@@ -126,7 +126,7 @@ export function actsLine(it, lang) {
 
 const COPY = {
   en: {
-    other: 'es', siteName: 'The Purple Strip', target: `${SITE}/`,
+    other: 'es', siteName: 'The Purple Strip', target: `${SITE}/quiz`,
     kicker: 'Texas House · 2025 session',
     docTitle: (it) => `${it.billId}, ${it.label}: Texas House vote`,
     h1: (it) => `How every Texas House member voted on ${it.billId}`,
@@ -157,7 +157,7 @@ const COPY = {
     langSwitch: 'En español',
   },
   es: {
-    other: 'en', siteName: 'La Franja Morada', target: `${SITE}/es`,
+    other: 'en', siteName: 'La Franja Morada', target: `${SITE}/es/cuestionario`,
     kicker: 'Cámara de Texas · Sesión de 2025',
     docTitle: (it) => `${it.billId}, ${es(it, 'label')}: votación en la Cámara de Texas`,
     h1: (it) => `Cómo votó cada integrante de la Cámara de Texas sobre el proyecto ${it.billId}`,

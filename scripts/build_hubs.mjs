@@ -1,11 +1,12 @@
 /**
- * PlainRecord — the two hubs the site nav points at: /bills and /context
+ * PlainRecord — the hubs: /policy and /bills
  *
  *   node scripts/build_hubs.mjs
  *
- * Writes /bills and /proyectos (the seven headline bills) and /context and
- * /contexto (background: today the three 2026 races, which were the /races hub
- * until 12 Nov 2026; /races redirects here). Before these, neither set had an
+ * Writes /bills and /proyectos (the seven headline bills) and /policy and
+ * /politica, the Policy space (14 Nov 2026): the quiz, representatives, the
+ * bills, charts, and the three 2026 races, which sat in /context from 12 Nov
+ * 2026 until it was retired. Before these hubs, neither set had an
  * index: the bill pages were three or four clicks from the homepage and the race
  * pages could only be reached from a link the quiz draws after a reader has
  * answered something. The nav needed somewhere to point.
@@ -23,11 +24,9 @@ import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { HEADLINE_BILLS, RACES, billPath } from './_site_nav.mjs';
 import { actsLine } from './build_bill_pages.mjs';
-import { et, requireApprovedEcon, ECON_PATHS } from './_econ_copy.mjs';
-import { ft, requireApprovedFaith, FAITH_PATHS } from './_faith_copy.mjs';
+import { ht, HOME_COPY, requireApprovedHome, QUIZ_PATH, POLICY_PATH } from './_home_copy.mjs';
 
-requireApprovedEcon('build_hubs');
-requireApprovedFaith('build_hubs');
+requireApprovedHome('build_hubs');
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -49,7 +48,7 @@ const whyNoVotes = (name, lang) => {
 
 const COPY = {
   en: {
-    other: 'es', siteName: 'The Purple Strip', kicker: 'Texas House · 2025 session', langSwitch: 'En español', quiz: `${SITE}/`,
+    other: 'es', siteName: 'The Purple Strip', kicker: 'Texas House · 2025 session', langSwitch: 'En español', quiz: `${SITE}${QUIZ_PATH.en}`,
     bills: {
       slug: 'bills', otherSlug: 'proyectos',
       docTitle: 'How the Texas House voted on the biggest 2025 bills',
@@ -61,15 +60,10 @@ const COPY = {
       rest: 'The other 60 votes are in the quiz, with the party labels hidden until you answer.',
       cta: 'Take the quiz',
     },
-    // The Context hub (12 Nov 2026). The race section below is the old /races
-    // hub moved in whole; only h1, docTitle, desc and lede here are new, and
-    // the race lede is in the past tense now that the election is over.
-    context: {
-      slug: 'context', otherSlug: 'contexto',
-      docTitle: 'Context: the 2026 Texas races and other background',
-      h1: 'Context',
-      desc: 'Background to the Texas House voting records on this site, starting with what the public record showed about both candidates in three 2026 Texas races: Governor, Lieutenant Governor and U.S. Senate.',
-      lede: 'Background to the voting records on this site.',
+    // The Policy hub (14 Nov 2026), its words in i18n/home.json.
+    policy: {
+      slug: POLICY_PATH.en.slice(1), otherSlug: POLICY_PATH.es.slice(1),
+      docTitle: HOME_COPY['policy.docTitle'].en, h1: HOME_COPY['nav.policy'].en, desc: HOME_COPY['policy.desc'].en,
     },
     races: {
       h1: 'Three 2026 races, and what the record shows',
@@ -83,7 +77,7 @@ const COPY = {
     disclose: 'Marco Arras, a Texas resident. I donate to the Democratic Party, and I say so before anything else rather than in a footnote. The rule that picks which votes appear is published and runs identically on both caucuses, and every vote and count is in a file you can download and check.',
   },
   es: {
-    other: 'en', siteName: 'La Franja Morada', kicker: 'Cámara de Texas · Sesión de 2025', langSwitch: 'In English', quiz: `${SITE}/es`,
+    other: 'en', siteName: 'La Franja Morada', kicker: 'Cámara de Texas · Sesión de 2025', langSwitch: 'In English', quiz: `${SITE}${QUIZ_PATH.es}`,
     bills: {
       slug: 'proyectos', otherSlug: 'bills',
       docTitle: 'Cómo votó la Cámara de Texas en los grandes proyectos de 2025',
@@ -95,13 +89,9 @@ const COPY = {
       rest: 'Los otros 60 votos están en el cuestionario, con las etiquetas de partido ocultas hasta que usted responda.',
       cta: 'Haga el cuestionario',
     },
-    // context.* and the reworded races.lede: approved by Marco, 12 Nov 2026.
-    context: {
-      slug: 'contexto', otherSlug: 'context',
-      docTitle: 'Contexto: las contiendas de Texas de 2026 y otros antecedentes',
-      h1: 'Contexto',
-      desc: 'Antecedentes de los historiales de votación de la Cámara de Texas en este sitio, empezando por lo que mostraba el registro público sobre ambos candidatos en tres contiendas de Texas en 2026: gobernador, vicegobernador y Senado de Estados Unidos.',
-      lede: 'Antecedentes de los historiales de votación de este sitio.',
+    policy: {
+      slug: POLICY_PATH.es.slice(1), otherSlug: POLICY_PATH.en.slice(1),
+      docTitle: HOME_COPY['policy.docTitle'].es, h1: HOME_COPY['nav.policy'].es, desc: HOME_COPY['policy.desc'].es,
     },
     races: {
       h1: 'Tres contiendas de 2026 y lo que muestra el historial',
@@ -117,9 +107,8 @@ const COPY = {
 };
 
 /**
- * A hub page. `which` is 'bills', or 'context', whose body is a list of
- * sections: today only the races, and the economy and faith modules join as
- * they ship. Each section is the old hub's heading, lede, list and closing line.
+ * A hub page. `which` is 'bills', or 'policy', whose body is a section for
+ * each part of the Policy space, the races last.
  */
 function page(lang, which, items) {
   const c = COPY[lang];
@@ -129,28 +118,29 @@ function page(lang, which, items) {
   <ul class="stand">${list}</ul>
   <p>${esc(s.rest)}</p>
   <p><a class="cta" href="${c.quiz}">${esc(s.cta)}</a></p>`;
-  // The economy section's words come from i18n/economy.json, under its own
-  // approval gate (requireApprovedEcon above).
-  const P = ECON_PATHS[lang];
-  const economy = `
-  <h2>${et(lang, 'hub.h2')}</h2>
-  <p>${et(lang, 'hub.lede')}</p>
-  <ul class="stand"><li><a href="${SITE}/${P.blind}"><b>${et(lang, 'hub.blind')}</b></a></li><li><a href="${SITE}/${P.explore}">${et(lang, 'exploreLink')}</a></li><li><a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></li></ul>`;
-  // The faith section, from i18n/faith.json under its own gate.
-  const F = FAITH_PATHS[lang];
-  const faith = `
-  <h2>${ft(lang, 'hub.h2')}</h2>
-  <p>${ft(lang, 'hub.lede')}</p>
-  <p class="small">${ft(lang, 'notice')}</p>
-  <ul class="stand"><li><a href="${SITE}/${F.home}"><b>${ft(lang, 'hub.open')}</b></a></li><li><a href="${SITE}/${F.method}">${ft(lang, 'methodLink')}</a></li></ul>`;
-  const main = which === 'context'
-    ? `${economy}${faith}
+  // The Policy hub (14 Nov 2026) replaced Context: economy and faith became
+  // their own spaces, and the legislature's pages gathered here.
+  const go = (href, text) => `<p><a href="${href}">${text}</a></p>`;
+  const policy = `
+  <h2>${ht(lang, 'policy.quizH2')}</h2>
+  <p>${ht(lang, 'policy.quiz')}</p>
+  <p><a class="cta" href="${c.quiz}">${esc(c.bills.cta)}</a></p>
+  <h2>${ht(lang, 'policy.repH2')}</h2>
+  <p>${ht(lang, 'policy.rep')}</p>
+  ${go(`${SITE}/${lang === 'es' ? 'distritos' : 'districts'}`, ht(lang, 'policy.repLink'))}
+  <h2>${esc(c.bills.h1)}</h2>
+  <p>${esc(c.bills.lede)}</p>
+  ${go(`${SITE}/${c.bills.slug}`, ht(lang, 'policy.billsLink'))}
+  <h2>${ht(lang, 'policy.chartsH2')}</h2>
+  <p>${ht(lang, 'policy.charts')}</p>
+  ${go(`${SITE}/${lang === 'es' ? 'graficas' : 'charts'}`, ht(lang, 'policy.chartsLink'))}
   <h2>${esc(c.races.h1)}</h2>
-  <p>${esc(c.races.lede)}</p>${section(c.races, items)}`
-    : section(h, items);
+  <p>${esc(c.races.lede)}</p>${section(c.races, items)}
+  ${go(`${SITE}/open-data`, ht(lang, 'policy.dataLink'))}`;
+  const main = which === 'policy' ? policy : section(h, items);
   const body = `
-  <h1>${esc(h.h1)}</h1>
-  <p class="lede">${esc(h.lede)}</p>${main}
+  <h1>${which === 'policy' ? ht(lang, 'nav.policy') : esc(h.h1)}</h1>
+  <p class="lede">${which === 'policy' ? ht(lang, 'policy.lede') : esc(h.lede)}</p>${main}
   <p class="small">${sheetLine(lang)}</p>
   <hr>
   <p class="small"><span class="label">${esc(c.discloseLabel)}</span> ${esc(c.disclose)}</p>`;
@@ -179,11 +169,11 @@ for (const lang of ['en', 'es']) {
   const raceItems = RACES.map((r) => `<li><a href="${SITE}/${r.slug[lang]}"><b>${esc(r.title[lang])}</b></a><br>`
     + `<span class="small">${esc(c.races.noVotes(r))} ${esc(whyNoVotes(r.opp, lang))}</span><br>`
     + `<a class="small" href="${SITE}/${r.slug[lang]}">${esc(c.races.open(r))}</a></li>`).join('');
-  for (const [which, items] of [['bills', billItems], ['context', raceItems]]) {
+  for (const [which, items] of [['bills', billItems], ['policy', raceItems]]) {
     const dir = resolve(ROOT, 'public', c[which].slug);
     mkdirSync(dir, { recursive: true });
     writeFileSync(join(dir, 'index.html'), page(lang, which, items), 'utf8');
     n++;
   }
 }
-console.log(`  ${n} hub pages written: /bills, /proyectos, /context, /contexto`);
+console.log(`  ${n} hub pages written: /bills, /proyectos, ${POLICY_PATH.en}, ${POLICY_PATH.es}`);

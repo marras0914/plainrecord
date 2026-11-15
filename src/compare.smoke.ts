@@ -148,10 +148,12 @@ check('refuses an answer bit set for an unanswered question',
 // ---------------------------------------------------------------------------
 
 const url = inviteUrl(full, 'https://rightnleft.com', 'en');
-check('an invite points at the site root with a d= fragment',
-  /^https:\/\/rightnleft\.com\/#d=[0-9a-z]{1,3}$/.test(url), url);
+// The quiz moved to /quiz on 14 Nov 2026; invites go straight to it. Older
+// invites to /#d= are passed on by public/js/home.js (verify_site checks it).
+check('an invite points at the quiz with a d= fragment',
+  /^https:\/\/rightnleft\.com\/quiz#d=[0-9a-z]{1,3}$/.test(url), url);
 check('a Spanish invite keeps the reader in Spanish',
-  inviteUrl(full, 'https://rightnleft.com', 'es').startsWith('https://rightnleft.com/es/#d='),
+  inviteUrl(full, 'https://rightnleft.com', 'es').startsWith('https://rightnleft.com/es/cuestionario#d='),
   inviteUrl(full, 'https://rightnleft.com', 'es'));
 
 // THE OLD LINKS. A #c= code made before 7 October 2026 must still decode against

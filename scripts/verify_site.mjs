@@ -75,8 +75,18 @@ if (withHeaders) {
   const toRe = (src) => new RegExp('^' + src.replace(/\(\.\*\)/g, '.*') + '$');
   const rules = cfg.headers.map((r) => ({ re: toRe(r.source), headers: r.headers }));
 
+  // The plain redirects (no `has` condition, no pattern), as Vercel would send
+  // them, so the retired /context is checked to land somewhere rather than
+  // falling through to the front page by accident.
+  const redirects = new Map((cfg.redirects ?? []).filter((r) => !r.has && !/[(:*]/.test(r.source)).map((r) => [r.source, r]));
   server = createServer((req, res) => {
     const path = decodeURIComponent(req.url.split('?')[0]);
+    const redirect = redirects.get(path);
+    if (redirect) {
+      res.writeHead(redirect.permanent ? 308 : 307, { Location: redirect.destination });
+      res.end();
+      return;
+    }
     let file = join(dist, path);
     // A directory serves ITS OWN index.html, the way a static host does. Falling
     // straight through to dist/index.html would serve the English page for /es/
@@ -126,6 +136,9 @@ if (withHeaders) {
  * answer cannot drift later in the file.
  */
 const LOCAL_TARGET = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?(\/|$)/.test(URL_UNDER_TEST);
+
+// The quiz has lived at /quiz since 14 Nov 2026; the front page took the root.
+const QUIZ_URL = new URL('quiz', URL_UNDER_TEST).href;
 if (!LOCAL_TARGET) {
   console.log(`\n  REMOTE TARGET ${URL_UNDER_TEST} — checks that write are skipped`);
 }
@@ -295,7 +308,7 @@ const isInsightsNoise = (e) =>
   (/Failed to load resource/.test(e) || /Refused to execute script/.test(e));
 
 try {
-  await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+  await page.goto(QUIZ_URL, { waitUntil: 'networkidle' });
   await page.waitForTimeout(600);
 
   // Snapshot taken HERE, before a single click. The previous version asserted
@@ -433,7 +446,7 @@ try {
   // Clicking Next would leave the run on question two, and every later check
   // here is written against the voucher bill. Five of them failed that way
   // before this line existed.
-  await beginQuiz(page, URL_UNDER_TEST);
+  await beginQuiz(page, QUIZ_URL);
 
   // --- quiet text still has to be readable ----------------------------------
   //
@@ -623,7 +636,7 @@ try {
 
   // An absence is a fact about the record, not a position. It must never be
   // counted as disagreement, and it must not enter the denominator.
-  await toResult(page, URL_UNDER_TEST);
+  await toResult(page, QUIZ_URL);
   await page.click('#mode-full');
   await page.waitForTimeout(400);
   let absence = null;
@@ -659,7 +672,7 @@ try {
   // FIRST screen: the same label sat on the question card for a while, which
   // meant finding the exit required entering. Tested on a fresh load so the
   // start screen is genuinely the start screen.
-  await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+  await page.goto(QUIZ_URL, { waitUntil: 'networkidle' });
   const lookVisible = await page.isVisible('#start-look');
   check('the opening screen offers a way past the quiz', lookVisible,
     lookVisible ? await page.$eval('#start-look', (e) => e.textContent.trim()) : 'no #start-look');
@@ -680,7 +693,7 @@ try {
   // #mode-short from the result does nothing when the mode has not changed —
   // setMode returns early — which would leave the run stranded on the result
   // view with no question to answer.
-  await beginQuiz(page, URL_UNDER_TEST);
+  await beginQuiz(page, QUIZ_URL);
 
   // --- balance: both parties, and the opponents ------------------------------
   // Three Democrats alone made the reveal read as a panel. The caucus split is
@@ -826,7 +839,7 @@ try {
     // from there finds no veto and the check failed for a reason that was
     // correct behaviour. Reaching the result without answering anything gets to
     // the mode switch with nothing carried.
-    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await page.click('#start-look');
     await page.waitForTimeout(300);
     await page.click('#mode-full');
@@ -990,7 +1003,7 @@ try {
   await page.waitForTimeout(200);
   // The profile presets are result-view controls, so the run has to be on the
   // result before it can click one.
-  await toResult(page, URL_UNDER_TEST);
+  await toResult(page, QUIZ_URL);
 
   for (const [name, want] of Object.entries(EXPECT)) {
     await page.click(`[data-preset="${name}"]`);
@@ -1012,7 +1025,7 @@ try {
   }
 
   // Clear now returns to the opening screen; the mode switch is in the result.
-  await toResult(page, URL_UNDER_TEST);
+  await toResult(page, QUIZ_URL);
   await page.click('#mode-full');
   await page.waitForTimeout(400);
   const fullMeta = await page.$eval('.q-count', (e) => e.textContent.trim());
@@ -1067,7 +1080,7 @@ try {
   {
     const oc = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
     const op = await oc.newPage();
-    await beginQuiz(op, URL_UNDER_TEST);
+    await beginQuiz(op, QUIZ_URL);
 
     // The question is mapped back to its category through the payload, because
     // ".q-cat" renders the item's LABEL when it has one ("School vouchers"),
@@ -1221,7 +1234,7 @@ try {
   // ---------------------------------------------------------------------------
 
   {
-    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await page.waitForTimeout(400);
 
     // Nothing fetched before it is asked for. The record is 10.7 KB gzipped and
@@ -1233,7 +1246,7 @@ try {
       performance.getEntriesByType('resource').some((r) => /zips_89R/.test(r.name)));
     check('rep: the ZIP crosswalk is not fetched on load', !earlyZips);
 
-    await toResult(page, URL_UNDER_TEST);
+    await toResult(page, QUIZ_URL);
     await page.click('#mode-full');
     await page.waitForTimeout(300);
     for (let i = 0; i < 15; i++) {
@@ -1549,7 +1562,7 @@ try {
     // Start from a clean page so load-time asset requests are not counted,
     // then press Start: a reload lands on the opening screen, and answering
     // nothing is exactly how this check goes vacuously green.
-    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await page.waitForTimeout(400);
     await page.click('#start-btn');
     await page.waitForTimeout(150);
@@ -1617,7 +1630,7 @@ try {
       out.push(`${r.method()} ${u}`);
     };
 
-    await beginQuizWithGuess(page, URL_UNDER_TEST, -0.6);
+    await beginQuizWithGuess(page, QUIZ_URL, -0.6);
     await answerAll(page, 1);
     await page.waitForTimeout(300);
 
@@ -1635,7 +1648,7 @@ try {
 
     const urlPart = shareUrl.split(/\s+/).filter((w) => w.startsWith('http')).pop() ?? '';
     check('invite: the link carries a d= fragment and nothing else',
-      /\/#d=[0-9a-z]{1,3}$/.test(urlPart), urlPart);
+      /\/quiz#d=[0-9a-z]{1,3}$/.test(urlPart), urlPart);
     check('invite: no query string, so nothing reaches a server',
       urlPart.length > 0 && !urlPart.includes('?'), urlPart);
     check('invite: it carries no answer text, id or score',
@@ -1645,8 +1658,8 @@ try {
     // THE POINT OF THE FRAGMENT. A server, and therefore any link preview,
     // sees only the site root. Asserted rather than assumed, because the whole
     // blind design rests on it.
-    check('invite: everything before the # is just the site root',
-      urlPart.split('#')[0] === new URL('/', URL_UNDER_TEST).href,
+    check('invite: everything before the # is just the quiz page',
+      urlPart.split('#')[0] === QUIZ_URL,
       urlPart.split('#')[0]);
 
     const targets = await page.$$eval('.share-targets a', (as) =>
@@ -1691,7 +1704,7 @@ try {
     const fp = await ctx.newPage();
     fp.on('request', watch);
 
-    await fp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await fp.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await fp.waitForTimeout(400);
     await fp.click('#start-btn');
     await fp.waitForTimeout(300);
@@ -1786,7 +1799,7 @@ try {
     });
     const np = await ctx.newPage();
 
-    await np.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await np.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await np.click('#start-btn');
     await np.waitForTimeout(150);
     await np.click('#guess-skip');
@@ -1846,7 +1859,7 @@ try {
     // the module never re-runs. about:blank first forces a real load.
     const freshHash = async (hash) => {
       await page.goto('about:blank');
-      await page.goto(`${URL_UNDER_TEST}${hash}`, { waitUntil: 'networkidle' });
+      await page.goto(`${QUIZ_URL}${hash}`, { waitUntil: 'networkidle' });
       await page.waitForTimeout(350);
     };
 
@@ -1967,7 +1980,7 @@ try {
 
     // A visitor with no invite sees no compare at all.
     await page.goto('about:blank');
-    await toResult(page, URL_UNDER_TEST);
+    await toResult(page, QUIZ_URL);
     await page.waitForTimeout(300);
     check('compare: a plain visitor sees no compare card',
       await page.$eval('#compare-card', (e) => e.hidden));
@@ -1997,7 +2010,7 @@ try {
   // ---------------------------------------------------------------------------
 
   {
-    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await page.waitForTimeout(300);
     await page.click('#start-btn');
     await page.waitForTimeout(200);
@@ -2028,7 +2041,7 @@ try {
       (await page.$eval('#guess-slider', (e) => e.getAttribute('aria-valuetext'))) ?? 'absent');
 
     // Skipping.
-    await page.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await page.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await page.click('#start-btn');
     await page.waitForTimeout(150);
     await page.click('#guess-skip');
@@ -2045,7 +2058,7 @@ try {
       !/guessed/i.test(skippedReadout));
 
     // Predicted: marker, legend, sentence.
-    await beginQuizWithGuess(page, URL_UNDER_TEST, -0.8);
+    await beginQuizWithGuess(page, QUIZ_URL, -0.8);
     await answerAll(page, 1);
     check('guess: predicted, so the legend describes the marker',
       !(await page.$eval('#legend-guess', (e) => e.hidden)));
@@ -2096,7 +2109,7 @@ try {
       else other.push(`${r.method()} ${u}`);
     };
 
-    await beginQuizWithGuess(page, URL_UNDER_TEST, 0.4);
+    await beginQuizWithGuess(page, QUIZ_URL, 0.4);
     await answerAll(page, 1);
     await page.waitForTimeout(300);
 
@@ -2348,6 +2361,81 @@ try {
   }
 
   // ---------------------------------------------------------------------------
+  // The three spaces (Marco, 14 Nov 2026)
+  //
+  // The front page is a door to Policy, Religion and Economics, and the quiz
+  // moved to /quiz. Old invite links put the answers after a # on the front
+  // page, which no server sees, so /js/home.js must pass them on; a link
+  // without one must stay put, or the front page could never be read.
+  // ---------------------------------------------------------------------------
+  {
+    const sc = await browser.newContext();
+    const sp = await sc.newPage();
+    const at = (p) => new URL(p, URL_UNDER_TEST).href;
+    const doors = {};
+    for (const [path, want] of [['/', ['/policy', '/faith', '/economy', '/quiz']], ['/es', ['/politica', '/fe', '/economia', '/es/cuestionario']]]) {
+      const res = await sp.goto(at(path), { waitUntil: 'load' });
+      const hrefs = new Set((await sp.locator('main a[href]').evaluateAll((as) => as.map((a) => new URL(a.href).pathname))));
+      const nav = await sp.locator('nav.sitenav a').allTextContents();
+      doors[path] = { ok: res?.ok() ?? false, missing: want.filter((w) => !hrefs.has(w)), nav };
+    }
+    check('spaces: the front page in each language opens a door to Policy, Religion, Economics and the quiz',
+      Object.values(doors).every((d) => d.ok && d.missing.length === 0),
+      Object.entries(doors).map(([p, d]) => `${p}: ${d.missing.length ? `missing ${d.missing.join(', ')}` : 'ok'}`).join(' | '));
+    check('spaces: the nav is the three spaces, in each language',
+      doors['/'].nav.join('|') === 'Policy|Religion|Economics' && doors['/es'].nav.join('|') === 'Política|Religión|Economía',
+      `${doors['/'].nav.join('|')} / ${doors['/es'].nav.join('|')}`);
+
+    // Old invites are forwarded, fragment intact; anything else stays.
+    // The quiz reads the invite and then clears the fragment from the address
+    // bar (by design), so "the answers arrived" is the challenge notice showing.
+    const ALL_YES = ((1 << 14) - 1).toString(36);
+    const landOn = async (p) => {
+      await sp.goto(at(p), { waitUntil: 'networkidle' });
+      await sp.waitForTimeout(400);
+      const u = new URL(sp.url());
+      const invited = await sp.$eval('#shared-intro', (e) => !e.hidden).catch(() => false);
+      return `${u.pathname}${u.hash}${invited ? ' (invite shown)' : ''}`;
+    };
+    const fwdEn = await landOn(`/#d=${ALL_YES}`);
+    const fwdEs = await landOn(`/es#d=${ALL_YES}`);
+    const stay = await landOn('/#policy');
+    check('spaces: an old invite to /#d= opens the quiz with its answers', fwdEn === '/quiz (invite shown)', fwdEn);
+    check('spaces: an old Spanish invite to /es#d= opens the Spanish quiz with its answers', fwdEs === '/es/cuestionario (invite shown)', fwdEs);
+    check('(spaces: a front-page link without an invite stays on the front page)', stay === '/#policy', stay);
+
+    // The quiz itself, at its new address, in both languages.
+    for (const [p, lang] of [['/quiz', 'en'], ['/es/cuestionario', 'es']]) {
+      await sp.goto(at(p), { waitUntil: 'networkidle' });
+      const l = await sp.$eval('html', (e) => e.lang);
+      const canon = await sp.$eval('link[rel=canonical]', (e) => e.getAttribute('href'));
+      check(`spaces: the ${lang} quiz is at ${p}, in ${lang}, with that canonical`, l === lang && canon === `https://rightnleft.com${p}`, `${l} ${canon}`);
+    }
+
+    // The retired Context hub sends readers to the front page.
+    const ctx = await fetch(at('/context'), { redirect: 'manual' });
+    const ctxEs = await fetch(at('/contexto'), { redirect: 'manual' });
+    check('spaces: /context and /contexto redirect to the front page',
+      ctx.status === 308 && ctx.headers.get('location') === '/' && ctxEs.status === 308 && ctxEs.headers.get('location') === '/es',
+      `${ctx.status} ${ctx.headers.get('location')} / ${ctxEs.status} ${ctxEs.headers.get('location')}`);
+
+    // The Policy hub reaches everything the old nav did.
+    await sp.goto(at('/policy'), { waitUntil: 'load' });
+    const ph = new Set(await sp.locator('main a[href]').evaluateAll((as) => as.map((a) => new URL(a.href).pathname)));
+    const wantPolicy = ['/quiz', '/districts', '/bills', '/charts', '/race/governor', '/race/lieutenant-governor', '/race/us-senate'];
+    check('spaces: the Policy hub links the quiz, representatives, bills, charts and the races',
+      wantPolicy.every((w) => ph.has(w)), wantPolicy.filter((w) => !ph.has(w)).join(', ') || `${wantPolicy.length} links`);
+
+    // Each page marks its own space in the nav, and the front page marks none.
+    const current = async (p) => { await sp.goto(at(p), { waitUntil: 'load' }); return (await sp.locator('nav.sitenav a[aria-current]').allTextContents()).join('|'); };
+    const marks = { '/district/31': await current('/district/31'), '/faith/catholic': await current('/faith/catholic'), '/economy/explore': await current('/economy/explore'), '/': await current('/') };
+    check('spaces: each page marks its own space in the nav, and the front page none',
+      marks['/district/31'] === 'Policy' && marks['/faith/catholic'] === 'Religion' && marks['/economy/explore'] === 'Economics' && marks['/'] === '',
+      JSON.stringify(marks));
+    await sc.close();
+  }
+
+  // ---------------------------------------------------------------------------
   // The voting dates
   //
   // Checked against the DATA FILE rather than against expected text, so the page
@@ -2357,7 +2445,7 @@ try {
   {
     const ec = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
     const ep = await ec.newPage();
-    await ep.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await ep.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await ep.click('#start-look');
     await ep.waitForTimeout(400);
 
@@ -2455,7 +2543,7 @@ try {
   {
     const mc = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
     const mp = await mc.newPage();
-    await beginQuiz(mp, URL_UNDER_TEST);
+    await beginQuiz(mp, QUIZ_URL);
     await answerAll(mp, 1);
     await mp.waitForTimeout(400);
 
@@ -2559,7 +2647,7 @@ try {
       try { return r.postData() ?? ''; } catch { return ''; }
     })() }));
 
-    const landing = await lp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    const landing = await lp.goto(QUIZ_URL, { waitUntil: 'networkidle' });
 
     // THE HEADER THAT TURNED THIS FEATURE OFF IN PRODUCTION WHILE EVERY LOCAL
     // CHECK PASSED. vercel.json sent `geolocation=()`, which disables the API
@@ -2690,7 +2778,7 @@ try {
     // Refusing permission is a normal choice and must be handled as one.
     const dc = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
     const dp = await dc.newPage();
-    await dp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await dp.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await dp.context().clearPermissions();
     await dp.click('#start-look');
     await dp.waitForTimeout(400);
@@ -2720,7 +2808,7 @@ try {
   {
     const ec2 = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
     const ep2 = await ec2.newPage();
-    await beginQuiz(ep2, URL_UNDER_TEST);
+    await beginQuiz(ep2, QUIZ_URL);
 
     let found = null;
     for (let i = 0; i < 12 && !found; i++) {
@@ -2785,7 +2873,7 @@ try {
   {
     const gCtx = await browser.newContext({ viewport: { width: 1180, height: 1200 } });
     const gp = await gCtx.newPage();
-    await gp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await gp.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await gp.click('#start-look');
     await gp.waitForTimeout(600);
 
@@ -2834,7 +2922,7 @@ try {
   {
     const lc = await browser.newContext({ viewport: { width: 1180, height: 1200 } });
     const lp = await lc.newPage();
-    await beginQuiz(lp, URL_UNDER_TEST);
+    await beginQuiz(lp, QUIZ_URL);
     await answerAll(lp, 1);
     await lp.waitForTimeout(600);
 
@@ -2924,7 +3012,7 @@ try {
       if (u.startsWith('data:') || u.startsWith('blob:')) return;
       if (!u.startsWith(origin)) offsite.push(r.method() + ' ' + u.slice(0, 100));
     });
-    await tp.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await tp.goto(QUIZ_URL, { waitUntil: 'networkidle' });
     await tp.waitForTimeout(2500);
 
     check('privacy: a bare page load requests nothing off this origin',
@@ -2957,7 +3045,7 @@ try {
   {
     const a11yCtx = await browser.newContext({ viewport: { width: 1180, height: 1000 } });
     const ap = await a11yCtx.newPage();
-    await ap.goto(URL_UNDER_TEST, { waitUntil: 'networkidle' });
+    await ap.goto(QUIZ_URL, { waitUntil: 'networkidle' });
 
     // --- 1. Every colour used for text, measured from the tokens -------------
     //
@@ -3104,7 +3192,7 @@ try {
   // asserted absent, rather than trusting that the wiring caught them all.
   // ---------------------------------------------------------------------------
 
-  const esUrl = new URL('es/', URL_UNDER_TEST).href;
+  const esUrl = new URL('es/cuestionario', URL_UNDER_TEST).href;
   const esPage = await (await browser.newContext({ viewport: { width: 1180, height: 1000 } })).newPage();
   const esErrs = [];
   esPage.on('pageerror', (e) => esErrs.push('PAGEERROR ' + e.message));
@@ -3144,8 +3232,8 @@ try {
     // No trailing slash: vercel.json sets trailingSlash:false, so /es/ 308s to
     // /es and a canonical with the slash would name a URL that redirects.
     const esCanonical = await esPage.$eval('link[rel=canonical]', (e) => e.getAttribute('href'));
-    check('es: canonical is /es with no trailing slash',
-      esCanonical === 'https://rightnleft.com/es', esCanonical);
+    check('es: canonical is the Spanish quiz, /es/cuestionario, with no trailing slash',
+      esCanonical === 'https://rightnleft.com/es/cuestionario', esCanonical);
     const esAlt = await esPage.$$eval('link[rel=alternate]',
       (ls) => ls.map((l) => l.getAttribute('href')));
     check('es: no hreflang names a URL that would redirect',
@@ -3156,8 +3244,8 @@ try {
       ['en', 'es', 'x-default'].every((h) => alts.includes(h)), alts.join(', '));
 
     const sw = await esPage.$eval('.langswitch a', (e) => ({ text: e.textContent.trim(), href: e.getAttribute('href') }));
-    check('es: language switch offers English and links to /',
-      /english/i.test(sw.text) && sw.href === '/', `"${sw.text}" -> ${sw.href}`);
+    check('es: language switch offers English and links to the English quiz',
+      /english/i.test(sw.text) && sw.href === '/quiz', `"${sw.text}" -> ${sw.href}`);
 
     // Present, and NOT above the title. It used to render directly under the
     // language switch, so on a phone the first thing a Spanish reader saw was a
@@ -3313,7 +3401,7 @@ try {
       await pg.click('#table-toggle').catch(() => {});
       await pg.waitForTimeout(200);
     };
-    await expose(page, URL_UNDER_TEST);
+    await expose(page, QUIZ_URL);
     await expose(esPage, esUrl);
 
     const enBody = await bodyOf(page);

@@ -134,5 +134,15 @@ check('the English root resolves to English', detect('/') === 'en');
 check('a path that only starts with the letters es is English',
   detect('/estimates') === 'en');
 
+// The quiz moved to /quiz and /es/cuestionario on 14 Nov 2026. Each must still
+// resolve to its own language, and the two places that name the paths (the
+// app's i18n.ts and the builders' _home_copy.mjs) must agree.
+check('the Spanish quiz path resolves to Spanish', detect('/es/cuestionario') === 'es');
+check('the English quiz path resolves to English', detect('/quiz') === 'en');
+const homeCopy = readFileSync('scripts/_home_copy.mjs', 'utf8');
+check('the app and the builders name the same quiz paths',
+  /QUIZ_PATH[^=]*=\s*\{\s*en:\s*'\/quiz',\s*es:\s*`\$\{ES_PREFIX\}\/cuestionario`\s*\}/.test(i18n)
+  && /QUIZ_PATH\s*=\s*\{\s*en:\s*'\/quiz',\s*es:\s*'\/es\/cuestionario'\s*\}/.test(homeCopy));
+
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);
