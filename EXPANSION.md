@@ -139,10 +139,10 @@ file happens before then.
 7. [ ] `public/js/econ-blind.js`: the blind round
 8. [ ] `i18n/economy.json` and Spanish review
 9. [ ] Economy launch
-10. [ ] Recruit faith reviewers (start now, runs in parallel with 2 to 9)
+10. ~~Recruit faith reviewers~~ (dropped 15 Nov 2026, see [FAITH.md](FAITH.md))
 11. [ ] `faith_positions.ts` and `faith_verses.ts` (the source library)
 12. [ ] Faith tradition lens and methodology pages, and Spanish
-13. [ ] Faith launch, after reviewer sign-off
+13. [ ] Faith launch (shipped 13 Nov 2026 without reviewers, labeled)
 14. [ ] Faith blind round, as its own later phase (see [FAITH.md](FAITH.md))
 
 The economy module goes first. Its data is official and mechanical, so the main
@@ -167,8 +167,8 @@ means:
 
 1. ~~**Scope and nav**~~: decided, option B (see above).
 2. **Faith traditions at launch:** see [FAITH.md](FAITH.md).
-3. **Faith reviewers:** whether 3 to 4 people from different traditions will
-   sign off. If not, the faith module waits rather than shipping unreviewed.
+3. ~~**Faith reviewers**~~: decided 15 Nov 2026, none. The module shipped
+   labeled as not reviewed and stays that way.
 4. **Spanish for the faith module:** this needs a public-domain Spanish Bible
    (the Reina-Valera 1909 is one), plus a Spanish reviewer comfortable with
    religious vocabulary.

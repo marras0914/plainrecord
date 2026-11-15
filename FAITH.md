@@ -12,6 +12,11 @@ These override the plan below where they differ.
    traditions they describe. Reviewer sign-offs are added as reviewers come.
    This reverses the original launch gate ("nothing ships until reviewers ...
    have signed off").
+   **15 Nov 2026: reviewers dropped.** Marco decided not to recruit them.
+   Every entry is the tradition's own document, quoted and linked, and
+   qualifies only if its own text shows the top body approved it, so a
+   reviewer would add a trust signal rather than catch errors. The
+   not-reviewed notice and the invitation to send corrections stay.
 2. **Five traditions:** Catholic (USCCB), Southern Baptist, United Methodist
    (chosen over the ELCA: larger in Texas, and its Social Principles were
    revised in 2024), African Methodist Episcopal (chosen over the National
@@ -291,14 +296,19 @@ a written rule; this needs one too.
   directions on an issue, the round shows that.
 - Each card shows every plank both parties have on that issue at that level,
   not a subset we picked.
-- The reviewers sign off on the round as a whole, not just the entries in it,
-  because a set of individually fair cards can still add up to a slant.
+- The round as a whole is checked, not just the entries in it, because a set
+  of individually fair cards can still add up to a slant. This was the
+  reviewers' job; with reviewers dropped (15 Nov 2026), the check must be
+  settled when the round is scheduled.
 - `faith_blind.json` contains no party or tradition fields, and the page
   doesn't request `faith.json` until the reveal.
 
 ---
 
-## Reviewers (the launch gate)
+## Reviewers (dropped 15 Nov 2026)
+
+Kept for the record; none of this is planned. Reader corrections still go in
+a public changelog, as below.
 
 - 3 to 4 reviewers from different traditions. Include people from
   conservative and progressive congregations, not just different
@@ -324,7 +334,7 @@ a written rule; this needs one too.
 
 - [ ] All issues covered for both parties and every launch tradition, or listed in `KNOWN_GAPS`
 - [ ] `npm test` passes with `faith.smoke.ts` registered
-- [ ] Reviewer sign-off on every summary, and `export_faith.ts` writes without refusing
+- ~~Reviewer sign-off on every summary~~ (dropped 15 Nov 2026)
 - [ ] Spanish approved in `i18n/faith.json`, scripture from RV1909
-- [ ] Methodology page published with reviewers and known gaps
+- [ ] Methodology page published with known gaps
 - [ ] The blind round is not part of this list; it gets its own when it's scheduled
