@@ -114,13 +114,16 @@ nomination records: who sent it (the president in office on the day the
 Senate received it) and when the Senate confirmed it, which is when it counts
 as in force. That settles the cross-party renewals: Volcker by Reagan (1983),
 Greenspan by Clinton (1996, 2000) and Bush (1992, 2004), Bernanke by Obama
-(2010), Powell by Biden (2022). Two renewals before 1981 are still unsourced,
-Martin from April 1955 and Burns from February 1974, and
-`fedAppointingParty()` throws for dates after either until they are. Before
-the Federal Reserve Reform Act of 1977 the President designated the chair
-without Senate confirmation, so these are not in the Senate's records at all
-(34 days of the 1955 Congressional Record were searched to be sure). The
-source to read is the President's papers or the Federal Reserve Bulletin.
+(2010), Powell by Biden (2022). Before the Federal Reserve Reform Act of 1977
+the President designated the chair by Order, without Senate confirmation, so
+the earlier renewals are not in the Senate's records at all (34 days of the
+1955 Congressional Record were searched to be sure). They come from the
+Board's own announcements in the Federal Reserve Bulletin, read on FRASER on
+14 Nov 2026 (`FED_DESIGNATIONS` in `econ_control.ts`): Martin by Eisenhower
+(Orders of 11 March 1955 and 12 March 1959), by Kennedy (March 1963) and by
+Johnson (Order of 30 March 1967); Burns by Nixon (Order of 28 January 1974).
+FRASER times out for scripts, so it was read in a browser. With these, no
+renewal is unsourced and the Fed grouping computes over every term.
 
 Two cases the obvious shape gets wrong:
 

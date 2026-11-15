@@ -92,8 +92,13 @@ check('the paper\'s sample is the paper\'s 16 terms', PAPER_TERMS.length === 16
 const g = terms.groupings[PAPER_LAG_QUARTERS];
 check('the labeled file carries the paper-sample reproduction', Math.abs(g.paperSample.D.mean - 4.35) < 0.3,
   `D ${g.paperSample.D.mean}, R ${g.paperSample.R.mean}`);
-check('the Fed grouping ships as a refusal with its reason, not partial numbers',
-  g.fedAppointer.ok === false && 'reason' in g.fedAppointer);
+// It shipped as a refusal until 14 Nov 2026, when the five pre-1977
+// redesignations were sourced from the Federal Reserve Bulletin.
+check('the Fed grouping ships complete: both parties, with the vacancy quarter kept apart',
+  g.fedAppointer.ok === true && 'appointed by D' in g.fedAppointer.result && 'appointed by R' in g.fedAppointer.result
+  && Object.keys(g.fedAppointer.result).every((k) => /^appointed by (D|R|none \(vacancy\))$/.test(k)),
+  g.fedAppointer.ok ? Object.keys(g.fedAppointer.result).join(', ') : g.fedAppointer.reason);
+check('no known gap ships in the economy data', Array.isArray(terms.knownGaps) && terms.knownGaps.length === 0);
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exitCode = fail === 0 ? 0 : 1;
