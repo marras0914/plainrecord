@@ -173,6 +173,7 @@ interface Plank {
 |---|---|---|
 | `/faith` | `/fe` | Tradition lens. Static, works without JS |
 | `/faith/methodology` | `/fe/metodologia` | Sources, curation rules, reviewers, known gaps |
+| `/faith/catholic/texas-house` | `/fe/catolica/camara-de-texas` | Texas House votes on the bills the Texas Catholic bishops took a side on |
 
 ### Tradition lens
 
@@ -183,6 +184,55 @@ draws the conclusion.
 Every word in the lens belongs to a source except the neutral summaries, and
 those are reviewed. No traditions-by-issue grid that could be read as a
 scoreboard: one tradition at a time.
+
+---
+
+## Texas House votes on bills a church took a side on
+
+`/faith/catholic/texas-house`, `/fe/catolica/camara-de-texas`. Marco asked on
+13 Nov 2026 to "align a party's actions with whether or not they are
+Christian values". There is no single "Christian values" yardstick, so that
+question can't be answered, and building one would make the site the judge.
+What can be answered without our judgment is narrower, and it's what was
+built. **Decided 13 Nov 2026:**
+
+1. **Only bills the church itself took a side on.** The site never decides
+   which way a church's teaching points on a bill. In Texas, only the Catholic
+   bishops publish a bill-by-bill list. No list was found for the other four
+   churches, and their pages say so.
+2. **The Texas Catholic Conference of Bishops (TCCB) counts as Catholic,** and
+   is labeled TCCB, not USCCB.
+3. **The vote is the House's recorded vote on final passage** (third reading),
+   as the bill's history on Texas Legislature Online lists it.
+4. **A per-bill list plus a count per party** ("voted the bishops' way" = the
+   party's majority of yea/nay voters did what the bishops asked). It covers
+   one church only, is never combined across churches, and is never a
+   "Christian" score. This is the one count on the faith pages, and
+   `me.not` says so.
+
+Pipeline, each step writing a committed file:
+
+- `npm run data:faith:tccb` (`extract_tccb_positions.ts`) reads the bishops'
+  two bill-position pages and the Sine Die Report, all three saved in
+  `data/faith_sources/`. It writes `data/faith/tccb_89_positions.json`. Where
+  the bishops' documents disagree, the bill is a **conflict**: it isn't
+  counted, and the page lists it with the bishops' own words. The causes
+  found: icon vs sentence, a link pointing to a different bill than its text,
+  the pages vs the report, or one source giving both positions.
+- `npm run data:faith:passage` (`fetch_house_passage.ts`) reads each bill's
+  TLO history (cached in `data/cache/history/`) and writes
+  `data/faith/house_passage_89R.json`.
+- `faith_house_votes.ts` joins those to `public/data/votes_89R.json` by bill
+  and House Journal record number, inside `npm run data:faith`.
+
+Traps found on the way:
+
+- About 225 of the bishops' links are lowercase (`sB00256`).
+- Ten point to `HB 0`, so the written bill number is the one used.
+- The Sine Die Report names numbers that don't exist in 89(R) (TLO: "The bill
+  number does not exist").
+- `votes_89R.json` has no motion text, which is why each bill's history is
+  read.
 
 ---
 
@@ -234,7 +284,9 @@ a written rule; this needs one too.
 ## Guardrails
 
 - No "which party is more Christian" score anywhere: not on the page, not on a
-  share card, not in the payload.
+  share card, not in the payload. The House-votes count (above) is one
+  church's own bill positions against one chamber's votes, and is never
+  combined or presented as more than that.
 - Where traditions disagree with each other, the page shows the disagreement.
 - The methodology page says plainly that individual believers in every
   tradition hold a range of views.

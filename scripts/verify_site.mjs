@@ -2272,8 +2272,11 @@ try {
       catholic: ['catholic', 'catolica'], sbc: ['southern-baptist', 'bautista-del-sur'], umc: ['united-methodist', 'metodista-unida'],
       ame: ['ame', 'ame'], ag: ['assemblies-of-god', 'asambleas-de-dios'],
     };
+    const HOUSE = { en: 'texas-house', es: 'camara-de-texas' };
+    const housePages = faith.houseVotes.flatMap((h) => [[`/faith/${SLUG[h.traditionId][0]}/${HOUSE.en}`, h], [`/fe/${SLUG[h.traditionId][1]}/${HOUSE.es}`, h]]);
     const pages = [['/faith', null], ['/fe', null], ['/faith/methodology', null], ['/fe/metodologia', null],
-      ...Object.entries(SLUG).flatMap(([id, [en, es]]) => [[`/faith/${en}`, id], [`/fe/${es}`, id]])];
+      ...Object.entries(SLUG).flatMap(([id, [en, es]]) => [[`/faith/${en}`, id], [`/fe/${es}`, id]]),
+      ...housePages.map(([p]) => [p, null])];
     const fc = await browser.newContext({ javaScriptEnabled: false });
     const fp = await fc.newPage();
     const noticeOn = async (path) => {
@@ -2312,6 +2315,35 @@ try {
     check('faith: every page says it is not yet reviewed, with the count from the data', missing.length === 0, missing.join(', ') || `${pages.length} pages`);
     check('faith: no tradition page carries another tradition\'s statements', crossed.length === 0, crossed.join(', ') || '10 tradition pages');
     check('faith: every tradition page has every issue, and all four platforms on each', shape.length === 0, shape.join(' | ') || `${faith.issues.length} issues x 4 platforms`);
+
+    // The House-votes pages (decided 13 Nov 2026): only bills the church itself
+    // took a side on, every counted bill shown, no bill the bishops' documents
+    // disagree about shown as counted, and the count on the page is the data's.
+    const houseProblems = [];
+    for (const [path, h] of housePages) {
+      await fp.goto(new URL(path, URL_UNDER_TEST).href, { waitUntil: 'load' });
+      const cardBills = new Set(await fp.locator('main .card > p:first-child > a > b').allTextContents());
+      const missingBills = h.bills.filter((b) => !cardBills.has(b.bill));
+      const strays = [...cardBills].filter((b) => !h.bills.some((x) => x.bill === b));
+      const conflicted = h.conflicts.filter((c) => cardBills.has(c.bill));
+      if (cardBills.size === 0) houseProblems.push(`${path}: no bill cards found`);
+      if (missingBills.length) houseProblems.push(`${path}: ${missingBills.length} counted bills not shown (${missingBills[0].bill})`);
+      if (strays.length) houseProblems.push(`${path}: cards for bills not in the data (${strays[0]})`);
+      if (conflicted.length) houseProblems.push(`${path}: a conflicted bill shown as counted (${conflicted[0].bill})`);
+      const rows = await fp.locator('table.hv').first().locator('tbody tr').allTextContents();
+      const T = h.total;
+      if (!(rows[0]?.includes(`${T.R.with} `) && rows[1]?.includes(`${T.D.with} `))) houseProblems.push(`${path}: the count table does not show ${T.R.with} and ${T.D.with}`);
+    }
+    check('faith: each House-votes page shows every counted bill, none of the conflicted ones, and the data\'s count',
+      houseProblems.length === 0, houseProblems.join(' | ') || `${housePages.length} pages, ${faith.houseVotes[0]?.bills.length} bills`);
+    // Only a church with its own bill list links to such a page.
+    const linkers = [];
+    for (const [id, [en]] of Object.entries(SLUG)) {
+      await fp.goto(new URL(`/faith/${en}`, URL_UNDER_TEST).href, { waitUntil: 'load' });
+      if (await fp.locator(`a[href$="/${en}/${HOUSE.en}"]`).count()) linkers.push(id);
+    }
+    const want = faith.houseVotes.map((h) => h.traditionId).sort().join(',');
+    check('faith: only the traditions with their own bill positions link to a House-votes page', linkers.sort().join(',') === want, `${linkers.join(',') || 'none'} (want ${want})`);
     await fc.close();
   }
 

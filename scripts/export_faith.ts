@@ -26,6 +26,7 @@ import {
   ISSUES, TRADITIONS, STATEMENTS, EARLIER, NO_STATEMENT, NO_PLANK, PLANKS, KNOWN_GAPS, TO_READ, ISSUE_TITLE_TERMS, SBC_RESOLUTIONS,
 } from '../faith_positions';
 import { SHIP_DIR } from './paths';
+import { buildHouseVotes } from './faith_house_votes';
 
 export const PLATFORMS = {
   'R-texas': { name: 'Republican Party of Texas', year: 2024, url: 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf' },
@@ -57,7 +58,7 @@ export function buildFaithPayload() {
     platformReferenceCounts: v.platformReferenceCounts,
   };
   return {
-    about: 'What five Christian traditions officially say, and what the Texas and national party platforms say, on eight issues, with sources. Not yet reviewed by members of the traditions described. CC0.',
+    about: 'What five Christian traditions officially say, and what the Texas and national party platforms say, on eight issues, with sources; and, where a church took a side on specific Texas bills, how each party in the Texas House voted on them. Not yet reviewed by members of the traditions described. CC0.',
     license: 'CC0-1.0',
     source: 'https://rightnleft.com/faith/methodology',
     reviewed: { entries: all.filter((e) => e.review.length > 0).length, of: all.length },
@@ -74,6 +75,11 @@ export function buildFaithPayload() {
     knownGaps: KNOWN_GAPS,
     toRead: TO_READ,
     verses,
+    /**
+     * How each party in the Texas House voted on the bills a church itself
+     * took a side on. Only the Catholic bishops publish such a list in Texas.
+     */
+    houseVotes: [buildHouseVotes()],
   };
 }
 

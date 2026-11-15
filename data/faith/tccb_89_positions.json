@@ -1,0 +1,9550 @@
+{
+ "about": "Every bill of the 89th Texas Legislature (2025) on which the Texas Catholic Conference of Bishops took a side, from its two bill-position pages and its Sine Die Report, with a link to the entry. Bills whose entries contradict each other are listed under conflicts and not counted.",
+ "saved": "2026-11-13",
+ "pages": {
+  "byArea": {
+   "url": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+   "sha256": "3e08437d38d20c8d087415d0c2fea54176c92d502d50ca98cefee546fa28f0d1",
+   "entries": 505
+  },
+  "byNumber": {
+   "url": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "sha256": "36026eb38b89c974641a4d12e15886dfe13670d97db66e1fd8dfa8c9c8e312b8",
+   "entries": 494
+  },
+  "sineDie": {
+   "url": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "sha256": "c287ddaa6bb974452810a4a8a2fe00b81c2ecac9c26fd0eea75c86ff72cd6268",
+   "entries": 297
+  }
+ },
+ "caveat": "The TCCB does not take positions on all bills in any legislative session. The analysis of the bills is made at various phases of the legislative process and may not accurately reflect the final status of the bill.",
+ "counts": {
+  "supports": 466,
+  "opposes": 113,
+  "conflicts": 14,
+  "fromReportOnly": 85,
+  "fromIconOnly": 17
+ },
+ "positions": [
+  {
+   "bill": "HB 2",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 7",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 16",
+   "position": "supports",
+   "areas": [
+    "Creation"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 21",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 867"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 24",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 844"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 37",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2058"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 38",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 555"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 44",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 60",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 207",
+    "HB 574"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 115",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 123",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 2252"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 140",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1502",
+    "SB 425"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 158",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 160",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 163",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 164",
+   "position": "supports",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [
+    "SB 243"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 183",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 187",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 196",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 197",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 726",
+    "HB 807",
+    "HB 1423",
+    "SB 45",
+    "SB 637"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 200",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 207",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 211",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1836"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 212",
+   "position": "opposes",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 221",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 239",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 240"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 246",
+   "position": "supports",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 247",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1291",
+    "SB 141"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 257",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 256"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 262",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 814",
+    "HB 2939",
+    "SB 45",
+    "SB 638"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 267",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 947",
+    "HB 1434",
+    "SB 242",
+    "SB 412"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 270",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1222"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 277",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 165"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 284",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 286",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 864"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 297",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 314",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 321",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 238"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 322",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 59"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 327",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice",
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "HB 372"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 344",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 350",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 353",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 1602"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 354",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 361",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 624",
+    "SB 1462"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 371",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 372",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 380",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 381",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 688"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 395",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 257"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 411",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 421",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 424",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 232",
+    "HB 979",
+    "HB 1324",
+    "HB 1815",
+    "HB 2535"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 432",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 353"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 444",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 451",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 941"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 454",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 651",
+    "HB 2237",
+    "SB 343"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 476",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 478",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 655"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 488",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 489",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 169"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 491",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "SB 430",
+    "SB 1385"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 507",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 514",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 539",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 544",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 2195",
+    "HB 956",
+    "HB 2650"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 549",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 552",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1774",
+    "HB 571",
+    "HB 858",
+    "HB 869",
+    "HB 3327"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 555",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 38"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 566",
+   "position": "supports",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 571",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1774",
+    "HB 552",
+    "HB 858",
+    "HB 869",
+    "HB 3327"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 574",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 207",
+    "HB 60"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 578",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1094"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 589",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 610"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 615",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 618",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 619",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 624",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1462"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 647",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 360",
+    "HB 1161",
+    "SB 2465"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 651",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 454",
+    "HB 2237",
+    "SB 343"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 655",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 478"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 688",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 711",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 793"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 726",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 197",
+    "HB 807",
+    "HB 1423",
+    "SB 45",
+    "SB 637"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 742",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 748",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1587"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 752",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 3451"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 754",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 768",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 773",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 775",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "SB 401"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 778",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 780",
+   "position": "supports",
+   "areas": [],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 791",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 807",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 197",
+    "HB 726",
+    "HB 1423",
+    "SB 45",
+    "SB 637"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 814",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 262",
+    "HB 2939",
+    "SB 45",
+    "SB 638"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 833",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 838",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1207",
+    "SB 676",
+    "SB 833"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 847",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 856",
+   "position": "opposes",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 857",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 858",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1774",
+    "HB 552",
+    "HB 571",
+    "HB 869",
+    "HB 3327"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 859",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": false,
+   "with": [
+    "HB 2535",
+    "HB 1117",
+    "HB 232",
+    "HB 424",
+    "HB 979",
+    "HB 1324",
+    "HB 1815"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 864",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 869",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1774",
+    "HB 552",
+    "HB 571",
+    "HB 858",
+    "HB 3327"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 890",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 895",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 2627"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 905",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 833"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 909",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 773",
+    "HJR 60"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 927",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 929",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 2649"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 935",
+   "position": "supports",
+   "areas": [
+    "Creation"
+   ],
+   "stated": false,
+   "with": [
+    "HB 3217"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 947",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 267",
+    "HB 1434",
+    "SB 242",
+    "SB 412"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 956",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2650",
+    "SB 2195"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 965",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 979",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 232",
+    "HB 424",
+    "HB 1324",
+    "HB 1815",
+    "HB 2535"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 995",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 89"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1029",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 847"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1044",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1047",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1073",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1083",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2834",
+    "SB 364"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1092",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1098",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 359"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1106",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1117",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": false,
+   "with": [
+    "HB 2535",
+    "HB 859",
+    "HB 232",
+    "HB 424",
+    "HB 979",
+    "HB 1324",
+    "HB 1815"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1137",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "SB 204"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1158",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 87",
+    "SB 371"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1161",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 360"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1162",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1176",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 1303",
+    "HB 2565",
+    "SB 366"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1183",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1194",
+   "position": "supports",
+   "areas": [
+    "Creation"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1230"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1207",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 833"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1213",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 489",
+    "HB 1315",
+    "HB 2997",
+    "HB 3443",
+    "SB 169"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1219",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 350"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1220",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1222",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1224",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 1742"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1230",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1254",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1256",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3637",
+    "SB 1633"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1291",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1303",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1315",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1324",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 232",
+    "HB 424",
+    "HB 979",
+    "HB 1815",
+    "HB 2535"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1350",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1354",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2682",
+    "SB 327"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1355",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 638"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1362",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 2055"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1365",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 168"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1387",
+   "position": "supports",
+   "areas": [
+    "Creation"
+   ],
+   "stated": false,
+   "with": [
+    "HB 3043"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1400",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 718"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1423",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 197",
+    "HB 726",
+    "HB 807",
+    "SB 45",
+    "SB 637"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1434",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 267",
+    "HB 947",
+    "SB 242",
+    "SB 412"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1457",
+   "position": "supports",
+   "areas": [],
+   "stated": false,
+   "with": [
+    "SB 453"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1478",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 2586",
+    "SB 1685"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1490",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1219",
+    "SB 203",
+    "SB 350"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1491",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1502",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 140",
+    "SB 425"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1512",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1536",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 513"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1539",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 4620"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1551",
+   "position": "supports",
+   "areas": [],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1578",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1628",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1655",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1679",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1365",
+    "SB 439",
+    "SB 168"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1686",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1975",
+    "SB 836"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1700",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1726",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1774",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3327"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1805",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1806",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 33",
+    "SB 730"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1815",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 232",
+    "HB 424",
+    "HB 979",
+    "HB 1324",
+    "HB 2535"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1816",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 1823",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2082"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1852",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1881",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1491"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1902",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1969",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1975",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1686",
+    "SB 836"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1980",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 942"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1986",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1987"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 1987",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1986"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2055",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2057",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2058",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 37"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2067",
+   "position": "supports",
+   "areas": [
+    "Social Concerns",
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1006"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2076",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 711",
+    "SB 1172",
+    "SB 793"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2108",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1083",
+    "HB 2834",
+    "SB 364"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2138",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life",
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2265"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2158",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2197",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2200",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2202",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1031"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2206",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1224"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2234",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1306"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2237",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 454",
+    "HB 651",
+    "SB 343"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2251",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2256",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1350"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2283",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1619"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2291",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 406"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2318",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2331",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2342",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 810"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2361",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2378",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2384",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "SB 325"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2456",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2498",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1053"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2507",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 814"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2525",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "SB 1237"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2535",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 232",
+    "HB 424",
+    "HB 979",
+    "HB 1324",
+    "HB 1815"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2556",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2565",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 1303",
+    "HB 1176",
+    "SB 366"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2566",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2581",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2585",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 1303"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2586",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1685"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2604",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2627",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 895"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2649",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2650",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 956",
+    "SB 2195"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2651",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2674",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2682",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1354",
+    "SB 327"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2684",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1233"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2704",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2735",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1316"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2761",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2435"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2772",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1278"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2776",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 703"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2777",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2789",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1149"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2801",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2834",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1083",
+    "SB 364"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2836",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "HB 314",
+    "SB 1685"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2846",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 86"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 2896",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2939",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 262",
+    "HB 814",
+    "SB 45",
+    "SB 638"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2995",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 1325"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 2997",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3020",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3029",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 1174"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3043",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3132",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2447"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3166",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3172",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 854"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3175",
+   "position": "supports",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": false,
+   "with": [
+    "HB 566"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3191",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3216",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3217",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3232",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3276",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Restorative Justice",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1437"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3284",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3304",
+   "position": "opposes",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3327",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1774"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3330",
+   "position": "opposes",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "SB 1124"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3338",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3347",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3360",
+   "position": "opposes",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1727"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3397",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "SB 920"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3404",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 840"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3410",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3443",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3451",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3482",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3548",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 983"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3629",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3635",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 1654"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3637",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1256",
+    "SB 1633"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3653",
+   "position": "opposes",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3683",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 895"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3728",
+   "position": "supports",
+   "areas": [
+    "Creation"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3772",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "SB 610",
+    "HB 589"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3792",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3795",
+   "position": "opposes",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3847",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 89",
+    "HB 995",
+    "SB 395"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3858",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3882",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1728"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3885",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 3008"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 3919",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 15"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3938",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 857"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 3991",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4002",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2846",
+    "SB 86"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4122",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4126",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4189",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4198",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4209",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4212",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4224",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "SB 639",
+    "HB 5160",
+    "SB 75"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4226",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4238",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4264",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": false,
+   "with": [
+    "SB 865",
+    "HB 3450"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4276",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4298",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4339",
+   "position": "opposes",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "SB 1906"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4392",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1238"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4435",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2357"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4452",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life",
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4485",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1302"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4488",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 2138",
+    "SB 2265"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4547",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4595",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4620",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4655",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 602"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4668",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": false,
+   "with": [
+    "HB 371",
+    "SB 923"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4684",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 3450",
+    "SB 865"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4701",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4707",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4721",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 51"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4730",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4761",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4771",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4788",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4816",
+   "position": "supports",
+   "areas": [
+    "Immigration",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4832",
+   "position": "supports",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4852",
+   "position": "opposes",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2340"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4886",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4910",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4911",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1621"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4914",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "SB 2304"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4918",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1120"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 4919",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 2304"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 4969",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5037",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5056",
+   "position": "opposes",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5058",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5072",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2741"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5100",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1207"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5148",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 5160",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "SB 639",
+    "HB 4224",
+    "SB 75"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5187",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2477"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5207",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "SB 1663"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5237",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2961"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5251",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": false,
+   "with": [
+    "SB 207",
+    "SB 1101"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5254",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5278",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 2721"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 5285",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 1388"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 5302",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5310",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5344",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 2244"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 5389",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SB 2023"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5462",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5541",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5580",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SB 8"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HB 5583",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HB 5728",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 2721"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HCR 14",
+   "position": "supports",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 21",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HJR 61",
+    "HJR 69",
+    "HJR 100",
+    "HJR 131",
+    "SJR 6",
+    "SJR 32"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HJR 33",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SJR 20"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 52",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [
+    "HJR 136"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 60",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HJR 148"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 61",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 726",
+    "HB 197",
+    "HB 807",
+    "HB 1423",
+    "SB 45",
+    "SB 637"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HJR 62",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HJR 33",
+    "SJR 20"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 69",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HJR 21",
+    "HJR 61",
+    "HJR 100",
+    "HJR 131",
+    "SJR 6",
+    "SJR 32"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HJR 80",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 88",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "SJR 60"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 91",
+   "position": "opposes",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 100",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HJR 21",
+    "HJR 61",
+    "HJR 69",
+    "HJR 131",
+    "SJR 6",
+    "SJR 32"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HJR 112",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "SJR 34"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 113",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 130",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 131",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HJR 21",
+    "HJR 61",
+    "HJR 69",
+    "HJR 100",
+    "SJR 6",
+    "SJR 32"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HJR 136",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [
+    "HJR 52"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 148",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HJR 60"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "HJR 155",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "SJR 12"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "HJR 204",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 8",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [
+    "HB 5580"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 15",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3919"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 20",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 31",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 33",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1806",
+    "SB 730"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 41",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 45",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 197",
+    "HB 726",
+    "HB 807",
+    "HB 1423",
+    "SB 637"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 51",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 4721"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 59",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 322"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 75",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "SB 639",
+    "HB 4224",
+    "HB 5160"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 86",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2846"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 87",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1158",
+    "SB 371"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 89",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 995"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 112",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 134",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2390"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 141",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1291",
+    "HB 247"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 165",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 277"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 168",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1365"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 169",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 489"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 193",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 203",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1219",
+    "HB 1490",
+    "SB 350"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 204",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1137"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 205",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 207",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 212",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 232",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 238",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 321"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 242",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 267",
+    "HB 947",
+    "HB 1434",
+    "SB 412"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 243",
+   "position": "supports",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [
+    "HB 164"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 255",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 256",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 257"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 257",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 395"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 308",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 316",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 325",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2384"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 327",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1354",
+    "HB 2682"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 343",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 454",
+    "HB 651",
+    "HB 2237"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 350",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1219"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 353",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 432"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 359",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1098"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 360",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1161"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 364",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1083",
+    "HB 2834"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 366",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 1303",
+    "HB 1176",
+    "HB 2565"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 371",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1158",
+    "SB 87"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 395",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 89",
+    "HB 3847",
+    "HB 995"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 397",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 400",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 401",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 775"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 406",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2291"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 412",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 267",
+    "HB 947",
+    "HB 1434",
+    "SB 242"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 416",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 425",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 140",
+    "HB 1502"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 430",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 432",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 439",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1365",
+    "HB 1679",
+    "SB 168"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 453",
+   "position": "supports",
+   "areas": [],
+   "stated": false,
+   "with": [
+    "HB 1457"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 456",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 464",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 466",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 513",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 1536"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 571",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 583",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 599",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 602",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 4655"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 610",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 589"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 611",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 619",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2816"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 633",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 637",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 197",
+    "HB 726",
+    "HB 807",
+    "HB 1423",
+    "SB 45"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 638",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 262",
+    "HB 814",
+    "HB 2939",
+    "SB 45"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 639",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 657",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 658",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 673",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 676",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1207",
+    "HB 838",
+    "SB 833"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 686",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 703",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2776"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 718",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1400"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 730",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 33",
+    "HB 1806"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 753",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 763",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 784",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 793",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 711"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 810",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2342"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 814",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2507"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 833",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1207"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 835",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 748",
+    "SB 1587"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 836",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1686",
+    "HB 1975"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 837",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 840",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3404"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 844",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 24"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 854",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3172"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 867",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 21"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 885",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 895",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 3683"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 920",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3397"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 923",
+   "position": "opposes",
+   "areas": [
+    "Immigration",
+    "Education"
+   ],
+   "stated": false,
+   "with": [
+    "HB 371",
+    "HB 4668"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 941",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 451"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 942",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1980"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 981",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Education"
+   ],
+   "stated": false,
+   "with": [
+    "SB 204",
+    "HB 1137"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 983",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3548"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 990",
+   "position": "opposes",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1006",
+   "position": "supports",
+   "areas": [
+    "Social Concerns",
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2067"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1031",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2202"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1053",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2498"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1073",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1094",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 578"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1101",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": false,
+   "with": [
+    "SB 207",
+    "HB 5251"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1120",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 4918"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1124",
+   "position": "opposes",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "HB 3330"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1149",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2789"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1172",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 711",
+    "HB 2076",
+    "SB 793"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1174",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 3029"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1175",
+   "position": "supports",
+   "areas": [
+    "Creation"
+   ],
+   "stated": false,
+   "with": [
+    "SB 885"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1205",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1207",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 5100"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1224",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2206"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1233",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2684"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1237",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "HB 2525"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1238",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 4392"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1257",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1278",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2772"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1282",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1302",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "HB 4485"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1303",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2585"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1306",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2234"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1315",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1316",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2735"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1325",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 2995"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1327",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1374",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1385",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": false,
+   "with": [
+    "SB 430",
+    "HB 491"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1388",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 5285"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1428",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1437",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Restorative Justice",
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3276"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1462",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 624"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1481",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": false,
+   "with": [
+    "SB 316"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1521",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1558",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1587",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 748"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1602",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 353"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1619",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2283"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1621",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 4911"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1633",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1256",
+    "HB 3637"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1654",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 3635"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1663",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "HB 5207"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1682",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 2586"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1727",
+   "position": "opposes",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3360"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1728",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3882"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1742",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 1224"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1798",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1828",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "HB 754"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1829",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "HB 742"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1836",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 211"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1860",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1889",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 1906",
+   "position": "opposes",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": false,
+   "with": [
+    "HB 4339"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 1999",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2018",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 3232"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2023",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 5389"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2082",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1823"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2101",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2187",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2195",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 956",
+    "HB 2650"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2244",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 5344"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2252",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 123"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2275",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2304",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 4919"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2305",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 478",
+    "HB 655"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2338",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2340",
+   "position": "opposes",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [
+    "HB 4852"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2352",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2357",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 4435"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2392",
+   "position": "supports",
+   "areas": [],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2414",
+   "position": "supports",
+   "areas": [
+    "Education"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2674"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2435",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 2761"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2447",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 3132"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2456",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2465",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "SB 360",
+    "HB 647",
+    "HB 1161"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2477",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [
+    "HB 5187"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2560",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 1354",
+    "HB 2682",
+    "SB 327"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2574",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2601",
+   "position": "supports",
+   "areas": [
+    "Immigration",
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2618",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2626",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2678",
+   "position": "opposes",
+   "areas": [
+    "Immigration"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2715",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2721",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 5278"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2727",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2741",
+   "position": "supports",
+   "areas": [
+    "Restorative Justice"
+   ],
+   "stated": true,
+   "with": [
+    "HB 5072"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2749",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HB 1106"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2768",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2789",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2913",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2943",
+   "position": "supports",
+   "areas": [
+    "Religious Liberty"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 2961",
+   "position": "opposes",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 5237"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SB 2973",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 3000",
+   "position": "supports",
+   "areas": [
+    "Social Concerns"
+   ],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SB 3008",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HB 3885"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SCR 42",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SJR 6",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HJR 21",
+    "HJR 61",
+    "HJR 69",
+    "HJR 100",
+    "HJR 131",
+    "SJR 32"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SJR 12",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HJR 155"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SJR 20",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HJR 33"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SJR 32",
+   "position": "supports",
+   "areas": [],
+   "stated": true,
+   "with": [
+    "HJR 21",
+    "HJR 61",
+    "HJR 69",
+    "HJR 100",
+    "HJR 131",
+    "SJR 6"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber"
+   ]
+  },
+  {
+   "bill": "SJR 34",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": true,
+   "with": [
+    "HJR 112"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SJR 60",
+   "position": "supports",
+   "areas": [
+    "Life and Family Life",
+    "Creation"
+   ],
+   "stated": true,
+   "with": [
+    "HJR 88"
+   ],
+   "source": "https://txcatholic.org/bill-positions-89th-legislature/",
+   "in": [
+    "byArea",
+    "byNumber",
+    "sineDie"
+   ]
+  },
+  {
+   "bill": "SR 2961",
+   "position": "opposes",
+   "areas": [
+    "Life and Family Life"
+   ],
+   "stated": false,
+   "with": [
+    "HB 5237"
+   ],
+   "source": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+   "in": [
+    "sineDie"
+   ]
+  }
+ ],
+ "conflicts": [
+  {
+   "bill": "HB 4",
+   "kind": "link",
+   "other": "HB 2816",
+   "why": "the bishops wrote HB 4, but the link goes to HB 2816",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "HB 31",
+   "kind": "link",
+   "other": "HB 3",
+   "why": "the bishops wrote HB 31, but the link goes to HB 3",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "HB 232",
+   "kind": "link",
+   "other": "HB 638",
+   "why": "the bishops wrote HB 232, but the link goes to HB 638",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "opposes",
+     "words": null
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "opposes",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "HB 2043",
+   "kind": "pagesVsReport",
+   "why": "the bill-position pages say opposes, the Sine Die Report says supports",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "HB 2390",
+   "kind": "pages",
+   "why": "the bill-position pages give it both positions",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "opposes",
+     "words": null
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "opposes",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "HB 2816",
+   "kind": "link",
+   "other": "HB 4",
+   "why": "the bishops wrote HB 2816, but the link goes to HB 4",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "HB 3450",
+   "kind": "pagesVsReport",
+   "why": "the bill-position pages say opposes, the Sine Die Report says supports",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "HB 5622",
+   "kind": "words",
+   "other": "prohibits",
+   "why": "icon says supports, words say \"prohibits\"",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "prohibits"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "prohibits"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "supports",
+     "words": "prohibits"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "SB 240",
+   "kind": "link",
+   "other": "SB 238",
+   "why": "the bishops wrote SB 240, but the link goes to SB 238",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "supports",
+     "words": "supports"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "supports",
+     "words": "supports"
+    }
+   ]
+  },
+  {
+   "bill": "SB 865",
+   "kind": "pagesVsReport",
+   "why": "the bill-position pages say opposes, the Sine Die Report says supports",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "SB 938",
+   "kind": "pagesVsReport",
+   "why": "the bill-position pages say opposes, the Sine Die Report says supports",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "SB 1685",
+   "kind": "report",
+   "why": "the Sine Die Report gives it both positions",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "opposes",
+     "words": null
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "SB 2265",
+   "kind": "report",
+   "why": "the Sine Die Report gives it both positions",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/public-policy-2/89th-legislature-bill-positions/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/bill-positions-89th-legislature/",
+     "icon": "opposes",
+     "words": "opposes"
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "opposes",
+     "words": null
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    }
+   ]
+  },
+  {
+   "bill": "SB 2624",
+   "kind": "report",
+   "why": "the Sine Die Report gives it both positions",
+   "entries": [
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "supports",
+     "words": null
+    },
+    {
+     "page": "https://txcatholic.org/wp-content/uploads/2025/07/89th-FULL-Sine-Die-Report.pdf",
+     "icon": "opposes",
+     "words": null
+    }
+   ]
+  }
+ ]
+}

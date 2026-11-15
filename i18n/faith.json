@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
     "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
     "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections."
   },
   "kicker": {
     "en": "Faith and the platforms",
@@ -313,8 +313,8 @@
     "status": "ok"
   },
   "me.not": {
-    "en": "They do not score any party or any church, on the page, on a share card or in the data. They do not say which party is \"more Christian\", and they do not interpret scripture. Where traditions disagree with each other, the pages show the disagreement. And members of every tradition hold a range of views.",
-    "es": "No le dan puntaje a ningún partido ni a ninguna iglesia, ni en la página, ni en una tarjeta para compartir, ni en los datos. No dicen qué partido es “más cristiano” ni interpretan las Escrituras. Donde las tradiciones no están de acuerdo entre sí, las páginas muestran el desacuerdo. Y los miembros de cada tradición tienen opiniones diversas.",
+    "en": "They give no party and no church a score or a ranking, on the page, on a share card or in the data. The one count on these pages is on the Texas House page: on bills the Texas Catholic bishops themselves took a side on, how often each party’s majority voted their way. It covers that one church, is never combined with another, and is not a verdict on which party is “more Christian”. The pages do not interpret scripture. Where traditions disagree with each other, the pages show the disagreement. And members of every tradition hold a range of views.",
+    "es": "No le dan a ningún partido ni a ninguna iglesia un puntaje ni una clasificación, ni en la página, ni en una tarjeta para compartir, ni en los datos. El único conteo de estas páginas está en la página de la Cámara de Texas: en los proyectos de ley sobre los que los propios obispos católicos de Texas tomaron postura, cuántas veces la mayoría de cada partido votó como ellos pedían. Abarca esa sola iglesia, nunca se combina con otra y no es un veredicto sobre qué partido es “más cristiano”. Las páginas no interpretan las Escrituras. Donde las tradiciones no están de acuerdo entre sí, las páginas muestran el desacuerdo. Y los miembros de cada tradición tienen opiniones diversas.",
     "status": "ok"
   },
   "me.h2data": {
@@ -348,13 +348,363 @@
     "status": "ok"
   },
   "hub.lede": {
-    "en": "What five Christian traditions have officially said on eight issues, beside what the Texas and national party platforms say. One tradition at a time, sourced, with no score.",
-    "es": "Lo que cinco tradiciones cristianas han dicho oficialmente sobre ocho temas, junto a lo que dicen las plataformas de los partidos de Texas y nacionales. Una tradición a la vez, con fuentes y sin puntaje.",
+    "en": "What five Christian traditions have officially said on eight issues, beside what the Texas and national party platforms say, one tradition at a time and sourced. Where a church took a side on specific Texas bills, how each party in the Texas House voted on them.",
+    "es": "Lo que cinco tradiciones cristianas han dicho oficialmente sobre ocho temas, junto a lo que dicen las plataformas de los partidos de Texas y nacionales, una tradición a la vez y con fuentes. Donde una iglesia tomó postura sobre proyectos de ley específicos de Texas, cómo votó cada partido en la Cámara de Texas.",
     "status": "ok"
   },
   "hub.open": {
     "en": "Pick a tradition",
     "es": "Escoja una tradición",
+    "status": "ok"
+  },
+  "tr.houseLink": {
+    "en": "The Texas House and the bishops’ bills, 2025",
+    "es": "La Cámara de Texas y los proyectos de ley de los obispos, 2025",
+    "status": "ok"
+  },
+  "tr.houseLinkNote": {
+    "en": "How each party in the Texas House voted on the bills the Texas Catholic bishops supported or opposed.",
+    "es": "Cómo votó cada partido en la Cámara de Representantes de Texas sobre los proyectos de ley que los obispos católicos de Texas apoyaron o rechazaron.",
+    "status": "ok"
+  },
+  "tr.noBillList": {
+    "en": "We have not found a list of this church’s positions on specific Texas bills, so there is no comparison of Texas House votes for it. If you know of one, tell us.",
+    "es": "No hemos encontrado una lista de las posturas de esta iglesia sobre proyectos de ley específicos de Texas, así que no hay una comparación con los votos de la Cámara de Texas para ella. Si usted conoce una, avísenos.",
+    "status": "ok"
+  },
+  "hv.docTitle": {
+    "en": "How the Texas House voted on the bills the Catholic bishops took a side on",
+    "es": "Cómo votó la Cámara de Texas sobre los proyectos de ley en los que los obispos católicos tomaron postura",
+    "status": "ok"
+  },
+  "hv.h1": {
+    "en": "The Texas House and the Catholic bishops’ bills, 2025",
+    "es": "La Cámara de Texas y los proyectos de ley de los obispos católicos, 2025",
+    "status": "ok"
+  },
+  "hv.desc": {
+    "en": "Every bill the Texas Catholic bishops supported or opposed in 2025 that passed the Texas House by recorded vote, and how Republicans and Democrats voted on it.",
+    "es": "Cada proyecto de ley que los obispos católicos de Texas apoyaron o rechazaron en 2025 y que la Cámara de Texas aprobó en votación nominal, y cómo votaron los republicanos y los demócratas.",
+    "status": "ok"
+  },
+  "hv.lede": {
+    "en": "On each bill the Texas Catholic bishops supported or opposed in the 2025 session that passed the Texas House by recorded vote: how each party voted.",
+    "es": "Sobre cada proyecto de ley que los obispos católicos de Texas apoyaron o rechazaron en la sesión de 2025 y que la Cámara de Texas aprobó en votación nominal: cómo votó cada partido.",
+    "status": "ok"
+  },
+  "hv.whose": {
+    "en": "The positions are the bishops’ own, from the Texas Catholic Conference of Bishops’ two bill-position pages and its end-of-session report, as they read on {date}. This site does not decide which way Catholic teaching points on any bill. The bishops add:",
+    "es": "Las posturas son de los propios obispos, tomadas de las dos páginas de posturas sobre proyectos de ley de la Conferencia de Obispos Católicos de Texas y de su informe de fin de sesión, tal como aparecían el {date}. Este sitio no decide hacia dónde apunta la enseñanza católica sobre ningún proyecto de ley. Los obispos añaden:",
+    "status": "ok"
+  },
+  "hv.h2count": {
+    "en": "The count",
+    "es": "El conteo",
+    "status": "ok"
+  },
+  "hv.countIntro": {
+    "en": "Of the {total} bills the bishops took a side on, {n} passed the House by a recorded vote that this site has member by member. The rest are listed further down. On those {n}:",
+    "es": "De los {total} proyectos de ley en los que los obispos tomaron postura, {n} fueron aprobados por la Cámara en una votación nominal que este sitio tiene miembro por miembro. Los demás aparecen más abajo. En esos {n}:",
+    "status": "ok"
+  },
+  "hv.th.party": {
+    "en": "Party",
+    "es": "Partido",
+    "status": "ok"
+  },
+  "hv.th.with": {
+    "en": "Voted the bishops’ way",
+    "es": "Votó como pidieron los obispos",
+    "status": "ok"
+  },
+  "hv.th.against": {
+    "en": "Voted the other way",
+    "es": "Votó en sentido contrario",
+    "status": "ok"
+  },
+  "hv.th.split": {
+    "en": "Evenly split",
+    "es": "Empate",
+    "status": "ok"
+  },
+  "hv.R": {
+    "en": "Republicans",
+    "es": "Republicanos",
+    "status": "ok"
+  },
+  "hv.D": {
+    "en": "Democrats",
+    "es": "Demócratas",
+    "status": "ok"
+  },
+  "hv.wayDef": {
+    "en": "A party voted the bishops’ way when most of its members who voted yea or nay did what the bishops asked: yea on a bill they supported, nay on one they opposed. Members who did not vote are left out.",
+    "es": "Un partido votó como pidieron los obispos cuando la mayoría de sus miembros que votaron a favor o en contra hizo lo que pedían los obispos: a favor de un proyecto que apoyaban, en contra de uno que rechazaban. Los miembros que no votaron no se cuentan.",
+    "status": "ok"
+  },
+  "hv.differ": {
+    "en": "The two parties’ majorities voted differently on {d} of the {n} bills. On the rest, both voted the same way.",
+    "es": "Las mayorías de los dos partidos votaron distinto en {d} de los {n} proyectos de ley. En los demás, ambos votaron igual.",
+    "status": "ok"
+  },
+  "hv.scope": {
+    "en": "This count covers one church’s positions and one chamber’s final votes. It is not added to anything else, and it does not measure which party is more Catholic or more Christian. The bishops’ list holds the bills they chose to weigh in on, and a final-passage vote is on the bill as amended, which the bishops may have judged at an earlier stage.",
+    "es": "Este conteo abarca las posturas de una sola iglesia y las votaciones finales de una sola cámara. No se suma a nada más, y no mide qué partido es más católico ni más cristiano. La lista de los obispos contiene los proyectos de ley sobre los que decidieron opinar, y una votación de aprobación final es sobre el proyecto con sus enmiendas, que los obispos pudieron haber evaluado en una etapa anterior.",
+    "status": "ok"
+  },
+  "hv.h2areas": {
+    "en": "By the bishops’ priority area",
+    "es": "Por área prioritaria de los obispos",
+    "status": "ok"
+  },
+  "hv.th.area": {
+    "en": "Area",
+    "es": "Área",
+    "status": "ok"
+  },
+  "hv.th.bills": {
+    "en": "Bills",
+    "es": "Proyectos",
+    "status": "ok"
+  },
+  "hv.th.rWith": {
+    "en": "Republicans voted the bishops’ way",
+    "es": "Republicanos votaron como pidieron los obispos",
+    "status": "ok"
+  },
+  "hv.th.dWith": {
+    "en": "Democrats voted the bishops’ way",
+    "es": "Demócratas votaron como pidieron los obispos",
+    "status": "ok"
+  },
+  "hv.th.differ": {
+    "en": "Parties voted differently",
+    "es": "Los partidos votaron distinto",
+    "status": "ok"
+  },
+  "hv.areaNote": {
+    "en": "The areas are the bishops’ own. A bill they list in two areas counts in each row here, and once in the count above.",
+    "es": "Las áreas son de los propios obispos. Un proyecto que ellos incluyen en dos áreas cuenta en cada fila aquí, y una sola vez en el conteo de arriba.",
+    "status": "ok"
+  },
+  "hv.h2bills": {
+    "en": "Bill by bill",
+    "es": "Proyecto por proyecto",
+    "status": "ok"
+  },
+  "hv.billsNote": {
+    "en": "In each area, the bills on which the two parties voted differently come first.",
+    "es": "En cada área aparecen primero los proyectos en los que los dos partidos votaron distinto.",
+    "status": "ok"
+  },
+  "hv.supported": {
+    "en": "The bishops supported it.",
+    "es": "Los obispos lo apoyaron.",
+    "status": "ok"
+  },
+  "hv.opposed": {
+    "en": "The bishops opposed it.",
+    "es": "Los obispos lo rechazaron.",
+    "status": "ok"
+  },
+  "hv.companions": {
+    "en": "· Listed by the bishops together with {list}.",
+    "es": "· Los obispos lo incluyen junto con {list}.",
+    "status": "ok"
+  },
+  "hv.theirEntry": {
+    "en": "The bishops’ entry",
+    "es": "La entrada de los obispos",
+    "status": "ok"
+  },
+  "hv.voteLine": {
+    "en": "House final passage, {date}, record vote {rv}: {yeas} yea, {nays} nay.",
+    "es": "Aprobación final en la Cámara, {date}, votación nominal {rv}: {yeas} a favor, {nays} en contra.",
+    "status": "ok"
+  },
+  "hv.partyLine": {
+    "en": "{party}: {yea} yea, {nay} nay, {wayHtml}",
+    "es": "{party}: {yea} a favor, {nay} en contra, {wayHtml}",
+    "status": "ok"
+  },
+  "hv.way.with": {
+    "en": "the bishops’ way",
+    "es": "como pidieron los obispos",
+    "status": "ok"
+  },
+  "hv.way.against": {
+    "en": "the other way",
+    "es": "en sentido contrario",
+    "status": "ok"
+  },
+  "hv.way.split": {
+    "en": "evenly split",
+    "es": "empatados",
+    "status": "ok"
+  },
+  "hv.h2notVoted": {
+    "en": "Bills that did not pass the House by recorded vote",
+    "es": "Proyectos que la Cámara no aprobó en votación nominal",
+    "status": "ok"
+  },
+  "hv.nv.notPassed": {
+    "en": "{n} never passed the House.",
+    "es": "{n} nunca fueron aprobados por la Cámara.",
+    "status": "ok"
+  },
+  "hv.nv.noRecord": {
+    "en": "{n} passed the House without a recorded vote:",
+    "es": "{n} fueron aprobados por la Cámara sin votación nominal:",
+    "status": "ok"
+  },
+  "hv.nv.notInFile": {
+    "en": "{n} passed on a recorded vote that took up several bills at once, and this site’s vote file does not have how each member voted on it: {list}.",
+    "es": "{n} fueron aprobados en una votación nominal que abarcó varios proyectos a la vez, y el archivo de votaciones de este sitio no tiene cómo votó cada miembro en ella: {list}.",
+    "status": "ok"
+  },
+  "hv.nv.noSuch": {
+    "en": "{n} are numbers for which the Legislature lists no bill in the 2025 regular session: {list}.",
+    "es": "{n} son números para los que la Legislatura no registra ningún proyecto en la sesión ordinaria de 2025: {list}.",
+    "status": "ok"
+  },
+  "hv.nv.note": {
+    "en": "None of these is counted, because there is no recorded House vote on passage to compare.",
+    "es": "Ninguno de estos se cuenta, porque no hay una votación nominal de aprobación en la Cámara con la cual comparar.",
+    "status": "ok"
+  },
+  "hv.h2conflicts": {
+    "en": "Left out: where the bishops’ own documents disagree",
+    "es": "Excluidos: donde los propios documentos de los obispos no coinciden",
+    "status": "ok"
+  },
+  "hv.conflictsNote": {
+    "en": "These {n} bills are not counted, because the bishops’ documents give two answers. Each one links to the documents, so you can see why.",
+    "es": "Estos {n} proyectos no se cuentan, porque los documentos de los obispos dan dos respuestas. Cada uno lleva a los documentos, para que usted vea por qué.",
+    "status": "ok"
+  },
+  "hv.c.link": {
+    "en": "the bishops wrote {bill}, but their link goes to {other}.",
+    "es": "los obispos escribieron {bill}, pero su enlace lleva a {other}.",
+    "status": "ok"
+  },
+  "hv.c.words": {
+    "en": "the icon says the bishops support it, but the sentence says the TCCB “{other}” it.",
+    "es": "el ícono dice que los obispos lo apoyan, pero la frase dice que la TCCB lo “{other}”.",
+    "status": "ok"
+  },
+  "hv.c.pages": {
+    "en": "the bill-position pages list it as both supported and opposed.",
+    "es": "las páginas de posturas lo presentan como apoyado y como rechazado.",
+    "status": "ok"
+  },
+  "hv.c.report": {
+    "en": "read by its own definitions of a win and a loss, the end-of-session report gives it both positions.",
+    "es": "leído según sus propias definiciones de victoria y derrota, el informe de fin de sesión le da las dos posturas.",
+    "status": "ok"
+  },
+  "hv.c.pagesVsReport": {
+    "en": "the bill-position pages give one position, and the end-of-session report, read by its own definitions, gives the other.",
+    "es": "las páginas de posturas dan una postura, y el informe de fin de sesión, leído según sus propias definiciones, da la otra.",
+    "status": "ok"
+  },
+  "hv.h2method": {
+    "en": "How this was put together",
+    "es": "Cómo se armó",
+    "status": "ok"
+  },
+  "hv.m1": {
+    "en": "<b>Which bills.</b> Every bill the bishops mark as supported or opposed on either bill-position page, and every bill in their end-of-session report whose position follows from the report’s own definitions: a win is a supported bill passing or an opposed bill failing, a loss the reverse. The bill number is the one the bishops wrote.",
+    "es": "<b>Qué proyectos.</b> Cada proyecto que los obispos marcan como apoyado o rechazado en cualquiera de las dos páginas de posturas, y cada proyecto de su informe de fin de sesión cuya postura se deduce de las propias definiciones del informe: una victoria es que se apruebe un proyecto apoyado o que fracase uno rechazado, y una derrota es lo contrario. El número de proyecto es el que escribieron los obispos.",
+    "status": "ok"
+  },
+  "hv.m2": {
+    "en": "<b>Which vote.</b> The House’s recorded vote on final passage (third reading), as the bill’s history on Texas Legislature Online lists it. Not amendments, not procedural motions, and not later votes to accept the Senate’s changes.",
+    "es": "<b>Qué votación.</b> La votación nominal de la Cámara sobre la aprobación final (tercera lectura), tal como la registra el historial del proyecto en Texas Legislature Online. No las enmiendas, ni las mociones de procedimiento, ni las votaciones posteriores para aceptar los cambios del Senado.",
+    "status": "ok"
+  },
+  "hv.m3": {
+    "en": "<b>Who voted how.</b> Each member’s vote comes from the House Journal, through the same file the rest of this site uses: {dataHtml}. On a few bills the two parties’ counts add up to one fewer than the official total, because the source misspells one member’s name on that vote, so the file records the vote but cannot say whose it was. Only the House: this site does not yet have the Senate’s votes.",
+    "es": "<b>Quién votó cómo.</b> El voto de cada miembro viene del Diario de la Cámara, a través del mismo archivo que usa el resto de este sitio: {dataHtml}. En algunos proyectos, los conteos de los dos partidos suman uno menos que el total oficial, porque la fuente escribe mal el nombre de un miembro en esa votación, así que el archivo registra el voto pero no puede decir de quién fue. Solo la Cámara: este sitio todavía no tiene los votos del Senado.",
+    "status": "ok"
+  },
+  "hv.votesFile": {
+    "en": "every Texas House vote of 2025",
+    "es": "todas las votaciones de la Cámara de Texas de 2025",
+    "status": "ok"
+  },
+  "hv.sources": {
+    "en": "The bishops’ documents:",
+    "es": "Los documentos de los obispos:",
+    "status": "ok"
+  },
+  "hv.h2others": {
+    "en": "The other four churches",
+    "es": "Las otras cuatro iglesias",
+    "status": "ok"
+  },
+  "hv.others": {
+    "en": "We have not found a list of positions on specific Texas bills from the Southern Baptists, the United Methodists, the AME Church or the Assemblies of God, so there is no page like this one for them. If you know of one, tell us.",
+    "es": "No hemos encontrado una lista de posturas sobre proyectos de ley específicos de Texas de los bautistas del sur, los metodistas unidos, la Iglesia AME ni las Asambleas de Dios, así que no hay una página como esta para ellas. Si usted conoce una, avísenos.",
+    "status": "ok"
+  },
+  "hv.back": {
+    "en": "Back to {name}",
+    "es": "Volver a {name}",
+    "status": "ok"
+  },
+  "hv.area.life-and-family-life": {
+    "en": "Life and family life",
+    "es": "Vida y vida familiar",
+    "status": "ok"
+  },
+  "hv.area.immigration": {
+    "en": "Immigration",
+    "es": "Inmigración",
+    "status": "ok"
+  },
+  "hv.area.restorative-justice": {
+    "en": "Restorative justice",
+    "es": "Justicia restaurativa",
+    "status": "ok"
+  },
+  "hv.area.education": {
+    "en": "Education",
+    "es": "Educación",
+    "status": "ok"
+  },
+  "hv.area.healthcare": {
+    "en": "Healthcare",
+    "es": "Atención médica",
+    "status": "ok"
+  },
+  "hv.area.social-concerns": {
+    "en": "Social concerns",
+    "es": "Asuntos sociales",
+    "status": "ok"
+  },
+  "hv.area.religious-liberty": {
+    "en": "Religious liberty",
+    "es": "Libertad religiosa",
+    "status": "ok"
+  },
+  "hv.area.creation": {
+    "en": "Creation",
+    "es": "La creación",
+    "status": "ok"
+  },
+  "hv.area.none": {
+    "en": "Not placed in an area by the bishops",
+    "es": "Sin área asignada por los obispos",
+    "status": "ok"
+  },
+  "me.h2house": {
+    "en": "Votes on bills a church took a side on",
+    "es": "Votaciones sobre proyectos de ley en los que una iglesia tomó postura",
+    "status": "ok"
+  },
+  "me.house": {
+    "en": "Where a church has itself said it supports or opposes a specific Texas bill, a page shows how each party in the Texas House voted on that bill when it passed. The site never decides which way a church’s teaching points on a bill. Of the five churches, only the Texas Catholic bishops publish such a list, so there is one such page: {linkHtml}. Its count is for that one church and is not added to anything else.",
+    "es": "Donde una iglesia ha dicho por sí misma que apoya o rechaza un proyecto de ley específico de Texas, una página muestra cómo votó cada partido en la Cámara de Texas sobre ese proyecto cuando fue aprobado. El sitio nunca decide hacia dónde apunta la enseñanza de una iglesia sobre un proyecto. De las cinco iglesias, solo los obispos católicos de Texas publican una lista así, de modo que hay una sola página de este tipo: {linkHtml}. Su conteo es de esa sola iglesia y no se suma a nada más.",
     "status": "ok"
   },
   "issue.immigration.name": {

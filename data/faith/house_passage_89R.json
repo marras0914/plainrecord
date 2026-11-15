@@ -1,0 +1,3186 @@
+{
+ "about": "For each bill the Texas Catholic bishops took a side on, the record vote by which the Texas House passed it (third reading), from the bill history on Texas Legislature Online.",
+ "rule": "The record vote listed with the House \"Passed\" (or \"Adopted\") action, same date and journal page. Not second reading, amendments, procedural motions, concurrence or conference reports.",
+ "counts": {
+  "record": 94,
+  "noRecordVote": 0,
+  "notPassed": 482,
+  "noSuchBill": 3
+ },
+ "bills": {
+  "HB 2": {
+   "status": "record",
+   "rv": 303,
+   "date": "04/17/2025",
+   "journalPage": "1670",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2",
+   "caption": "Relating to public education and public school finance."
+  },
+  "HB 3": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3",
+   "caption": "Relating to the establishment of an education savings account program."
+  },
+  "HB 7": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB7",
+   "caption": "Relating to parental rights in public education, to the creation of the office of inspector general at the Texas Education Agency, and to the reporting of certain misconduct and child abuse and neglect; creating a criminal offense."
+  },
+  "HB 16": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB16",
+   "caption": "Relating to the oversight and financing of certain water infrastructure matters under the jurisdiction of the Texas Water Development Board."
+  },
+  "HB 21": {
+   "status": "record",
+   "rv": 2047,
+   "date": "05/10/2025",
+   "journalPage": "3935",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB21",
+   "caption": "Relating to housing finance corporations; authorizing a fee."
+  },
+  "HB 24": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB24",
+   "caption": "Relating to procedures for changes to a zoning regulation or district boundary."
+  },
+  "HB 37": {
+   "status": "record",
+   "rv": 469,
+   "date": "04/24/2025",
+   "journalPage": "1854",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB37",
+   "caption": "Relating to perinatal bereavement care provided by certain hospitals, a perinatal bereavement care initiative, and a perinatal bereavement care hospital recognition program."
+  },
+  "HB 38": {
+   "status": "record",
+   "rv": 1366,
+   "date": "05/05/2025",
+   "journalPage": "2999",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB38",
+   "caption": "Relating to improvements to the Texas Information and Referral Network."
+  },
+  "HB 44": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB44",
+   "caption": "Relating to exceptions to otherwise prohibited abortions based on a physician's reasonable medical judgment."
+  },
+  "HB 60": {
+   "status": "no-such-bill",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB60"
+  },
+  "HB 115": {
+   "status": "record",
+   "rv": 2625,
+   "date": "05/15/2025",
+   "journalPage": "4787",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB115",
+   "caption": "Relating to postconviction applications for a writ of habeas corpus."
+  },
+  "HB 123": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB123",
+   "caption": "Relating to measures to support kindergarten readiness and early literacy and numeracy skills for public school students and to funding to support those measures."
+  },
+  "HB 140": {
+   "status": "record",
+   "rv": 552,
+   "date": "04/25/2025",
+   "journalPage": "1969",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB140",
+   "caption": "Relating to advisory bodies for the Department of Family and Protective Services, including the creation of the child protective investigations advisory committee and the abolition of the Family and Protective Services Council."
+  },
+  "HB 158": {
+   "status": "record",
+   "rv": 2871,
+   "date": "05/16/2025",
+   "journalPage": "5098",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB158",
+   "caption": "Relating to a study on the use of surplus government property to provide housing to veterans."
+  },
+  "HB 160": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB160",
+   "caption": "Relating to the enrollment, including resident status and tuition rates, of certain persons, including persons not authorized to be present in the United States, in public institutions of higher education."
+  },
+  "HB 163": {
+   "status": "record",
+   "rv": 1014,
+   "date": "04/30/2025",
+   "journalPage": "2490",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB163",
+   "caption": "Relating to the possession and administration of epinephrine delivery systems by certain entities."
+  },
+  "HB 164": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB164",
+   "caption": "Relating to the regulation of migrant labor housing facilities; changing the amount of a civil penalty."
+  },
+  "HB 183": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB183",
+   "caption": "Relating to the regulation and the review of certain library materials included in public school libraries."
+  },
+  "HB 187": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB187",
+   "caption": "Relating to requiring a man determined by adjudication or acknowledgment to be a child's father to pay retroactive child support beginning on the first day of the calendar month in which the child's conception occurred."
+  },
+  "HB 196": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB196",
+   "caption": "Relating to the inclusion of instruction regarding the beginning of human life in the health curriculum for public school students."
+  },
+  "HB 197": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB197",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 200": {
+   "status": "record",
+   "rv": 1787,
+   "date": "05/08/2025",
+   "journalPage": "3563",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB200",
+   "caption": "Relating to jury instructions regarding parole eligibility and the release on parole of certain inmates convicted of an offense committed when younger than 18 years of age; changing parole eligibility."
+  },
+  "HB 207": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB207",
+   "caption": "Relating to the prosecution of certain criminal offenses prohibiting sexually explicit visual material involving an anatomically correct doll, mannequin, or robot that has the features of a child."
+  },
+  "HB 211": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB211",
+   "caption": "Relating to the evaluation of applications for certain financial assistance administered by the Texas Department of Housing and Community Affairs."
+  },
+  "HB 212": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB212",
+   "caption": "Relating to the establishment of a parental empowerment program administered by the comptroller of public accounts."
+  },
+  "HB 221": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB221",
+   "caption": "Relating to eliminating certain state-required assessment instruments and certain end-of-course assessment instruments not required by federal law."
+  },
+  "HB 239": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB239",
+   "caption": "Relating to regulations and policies for entering or using certain private spaces; authorizing a civil penalty."
+  },
+  "HB 246": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB246",
+   "caption": "Relating to a border crime property damage compensation program."
+  },
+  "HB 247": {
+   "status": "record",
+   "rv": 1443,
+   "date": "05/06/2025",
+   "journalPage": "3145",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB247",
+   "caption": "Relating to an exemption from ad valorem taxation of the amount of the appraised value of real property located in certain counties that arises from the installation or construction on the property of border security infrastructure and related improvements and to the consideration of the price paid by certain governmental entities for a parcel of or easement in real property purchased for the purpose of installing or constructing such infrastructure when appraising other real property."
+  },
+  "HB 257": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB257",
+   "caption": "Relating to exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "HB 262": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB262",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 267": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB267",
+   "caption": "Relating to defenses to prosecution for certain offenses involving material or conduct that is obscene or otherwise harmful to children."
+  },
+  "HB 270": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB270",
+   "caption": "Relating to civil liability for discriminatory false reports to law enforcement agencies or emergency service providers."
+  },
+  "HB 277": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB277",
+   "caption": "Relating to the measures to encourage eligible students to claim certain tuition and fee exemptions at public institutions of higher education for students who are or have been in foster or other residential care."
+  },
+  "HB 284": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB284",
+   "caption": "Relating to the establishment of an ombudsman for parents of children enrolled in public school."
+  },
+  "HB 286": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB286",
+   "caption": "Relating to a study by the Department of Public Safety on stolen firearms."
+  },
+  "HB 297": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB297",
+   "caption": "Relating to eliminating certain state-required end-of-course assessment instruments not required by federal law and eliminating graduation requirements based on satisfactory performance on certain end-of-course assessment instruments."
+  },
+  "HB 314": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB314",
+   "caption": "Relating to eligibility for supplemental nutrition assistance program benefits."
+  },
+  "HB 321": {
+   "status": "record",
+   "rv": 2022,
+   "date": "05/10/2025",
+   "journalPage": "3912",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB321",
+   "caption": "Relating to implementing an express lane option under Medicaid and the child health plan program."
+  },
+  "HB 322": {
+   "status": "record",
+   "rv": 771,
+   "date": "04/29/2025",
+   "journalPage": "2213",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB322",
+   "caption": "Relating to the use of funds awarded under the Jobs and Education for Texans (JET) Grant Program."
+  },
+  "HB 327": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB327",
+   "caption": "Relating to an exemption from certain zoning requirements for developments receiving certain financial assistance administered by the Texas Department of Housing and Community Affairs."
+  },
+  "HB 344": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB344",
+   "caption": "Relating to a prohibition on instruction and certain activities regarding sexual orientation or gender identity provided or allowed by a public school."
+  },
+  "HB 350": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB350",
+   "caption": "Relating to the use of glucagon medication on certain public and private school campuses."
+  },
+  "HB 353": {
+   "status": "record",
+   "rv": 1128,
+   "date": "05/01/2025",
+   "journalPage": "2670",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB353",
+   "caption": "Relating to creating the criminal offense of trespass on or near school or day-care center property."
+  },
+  "HB 354": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB354",
+   "caption": "Relating to measures to ensure the safety and welfare of the border region of this state, including protection from ongoing criminal activity and public health threats and the establishment of the Border Protection Unit; creating a criminal offense; creating a civil penalty."
+  },
+  "HB 361": {
+   "status": "record",
+   "rv": 1988,
+   "date": "05/10/2025",
+   "journalPage": "3876",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB361",
+   "caption": "Relating to the authority of the chief appraiser of certain appraisal districts to consider a property to be a comparable property when using the market data comparison method of appraisal to determine the market value of a residence homestead for ad valorem tax purposes."
+  },
+  "HB 371": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB371",
+   "caption": "Relating to the admission to public schools of children unlawfully present in the United States and the eligibility of those children for the benefits of the available school fund and Foundation School Program."
+  },
+  "HB 372": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB372",
+   "caption": "Relating to the affirmative defense to prosecution for a criminal offense for persons acting under duress."
+  },
+  "HB 380": {
+   "status": "record",
+   "rv": 975,
+   "date": "04/30/2025",
+   "journalPage": "2449",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB380",
+   "caption": "Relating to certain statutes of limitations for criminal offenses, including the statute of limitations for the offense of improper relationship between educator and student, and to the applicability of sex offender registration requirements for the offense of improper relationship between educator and student."
+  },
+  "HB 381": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB381",
+   "caption": "Relating to a pilot program awarding grants for the provision of personalized treatment protocols for veterans diagnosed with post-traumatic stress disorder."
+  },
+  "HB 395": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB395",
+   "caption": "Relating to exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "HB 411": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB411",
+   "caption": "Relating to the repeal of the prohibition against certain municipal or county regulation of the rental or leasing of housing accommodations."
+  },
+  "HB 421": {
+   "status": "record",
+   "rv": 756,
+   "date": "04/29/2025",
+   "journalPage": "2201",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB421",
+   "caption": "Relating to the creation of certain explicit deep fake material; providing a private cause of action."
+  },
+  "HB 424": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB424",
+   "caption": "Relating to the determination of resident status of students by public institutions of higher education."
+  },
+  "HB 432": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB432",
+   "caption": "Relating to requiring a national instant criminal background check in connection with private firearm transfers; creating a criminal offense."
+  },
+  "HB 444": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB444",
+   "caption": "Relating to an application for a writ of habeas corpus based on certain relevant scientific evidence that was not available at the applicant's trial."
+  },
+  "HB 451": {
+   "status": "record",
+   "rv": 225,
+   "date": "04/16/2025",
+   "journalPage": "1484",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB451",
+   "caption": "Relating to a screening for the risk of commercial sexual exploitation of certain children."
+  },
+  "HB 454": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB454",
+   "caption": "Relating to abolishing the death penalty."
+  },
+  "HB 476": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB476",
+   "caption": "Relating to the maximum permitted rate of interest, sum of fees, and other amounts that may be charged in connection with deferred presentment transactions; creating a criminal offense."
+  },
+  "HB 478": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB478",
+   "caption": "Relating to extreme risk protective orders; creating criminal offenses."
+  },
+  "HB 488": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB488",
+   "caption": "Relating to Medicaid coverage and reimbursement for functional family therapy services."
+  },
+  "HB 489": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB489",
+   "caption": "Relating to the temperature at which a facility operated by the Texas Department of Criminal Justice is maintained."
+  },
+  "HB 491": {
+   "status": "record",
+   "rv": 561,
+   "date": "04/25/2025",
+   "journalPage": "1977",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB491",
+   "caption": "Relating to certain civil penalties collected for violations of laws regulating massage therapy."
+  },
+  "HB 507": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB507",
+   "caption": "Relating to policies and standards for providing legal representation to indigent defendants in certain capital felony cases."
+  },
+  "HB 514": {
+   "status": "record",
+   "rv": 1447,
+   "date": "05/06/2025",
+   "journalPage": "3148",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB514",
+   "caption": "Relating to a maternal health care workforce campaign."
+  },
+  "HB 539": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB539",
+   "caption": "Relating to orders of nondisclosure for certain victims of trafficking of persons or compelling prostitution."
+  },
+  "HB 544": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB544",
+   "caption": "Relating to the imposition of consecutive sentences for more than one criminal offense of injury to a child, elderly individual, or disabled individual arising out of the same criminal episode."
+  },
+  "HB 549": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB549",
+   "caption": "Relating to the availability and use of airway clearance devices at public school campuses and to contracts for medication for respiratory distress and training at public schools."
+  },
+  "HB 552": {
+   "status": "record",
+   "rv": 980,
+   "date": "04/30/2025",
+   "journalPage": "2453",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB552",
+   "caption": "Relating to a study by the Texas A&M AgriLife Extension Service to determine standards for the appraisal for ad valorem tax purposes of certain agricultural land used to raise or keep bees."
+  },
+  "HB 555": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB555",
+   "caption": "Relating to improvements to the Texas Information and Referral Network."
+  },
+  "HB 566": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB566",
+   "caption": "Relating to required proof of lawful presence in the United States for issuance of a driver's license."
+  },
+  "HB 571": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB571",
+   "caption": "Relating to the use by a political subdivision of public funds for lobbying and certain other activities."
+  },
+  "HB 574": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB574",
+   "caption": "Relating to the use of adaptive model data analytics software by the independent organization certified to manage the ERCOT power region."
+  },
+  "HB 578": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB578",
+   "caption": "Relating to certain sentencing procedures in a capital case."
+  },
+  "HB 589": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB589",
+   "caption": "Relating to combating human trafficking by the Texas Department of Licensing and Regulation."
+  },
+  "HB 615": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB615",
+   "caption": "Relating to policies and procedures regarding a public school student who knowingly produced or distributed certain intimate videos or images depicting another student."
+  },
+  "HB 618": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB618",
+   "caption": "Relating to health benefit plan coverage of certain in vitro fertilization procedures for certain governmental employees and retirees."
+  },
+  "HB 619": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB619",
+   "caption": "Relating to the transfer for an athletic participation purpose of a student from the school district of the student's residence to another district."
+  },
+  "HB 624": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB624",
+   "caption": "Relating to the placement on community supervision, including deferred adjudication community supervision, of a defendant who is the primary caretaker of a child."
+  },
+  "HB 647": {
+   "status": "record",
+   "rv": 110,
+   "date": "04/10/2025",
+   "journalPage": "1105",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB647",
+   "caption": "Relating to the removal of certain restrictions imposed on driver's licenses; authorizing a fee."
+  },
+  "HB 651": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB651",
+   "caption": "Relating to abolishing the death penalty."
+  },
+  "HB 655": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB655",
+   "caption": "Relating to extreme risk protective orders; creating criminal offenses."
+  },
+  "HB 688": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB688",
+   "caption": "Relating to the applicability of the death penalty to a capital offense committed by a person with an intellectual disability."
+  },
+  "HB 711": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB711",
+   "caption": "Relating to the prohibition on the possession of a firearm by a person following the person's conviction of certain family violence misdemeanors."
+  },
+  "HB 726": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB726",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 742": {
+   "status": "record",
+   "rv": 476,
+   "date": "04/24/2025",
+   "journalPage": "1863",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB742",
+   "caption": "Relating to human trafficking prevention, including training for first responders, disclosure of human trafficking information by certain health care facilities, and protection for facility employees who report human trafficking."
+  },
+  "HB 748": {
+   "status": "record",
+   "rv": 97,
+   "date": "04/09/2025",
+   "journalPage": "1079",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB748",
+   "caption": "Relating to the enforceability of certain nondisclosure or confidentiality provisions with respect to an act of sexual abuse."
+  },
+  "HB 752": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB752",
+   "caption": "Relating to a grant program for the preservation and restoration of, and education regarding, certain landmarks and buildings important to African American history in this state."
+  },
+  "HB 754": {
+   "status": "record",
+   "rv": 477,
+   "date": "04/24/2025",
+   "journalPage": "1863",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB754",
+   "caption": "Relating to human trafficking prevention, including training for medical assistants, disclosure of human trafficking information by certain health care facilities, and protection for facility employees who report human trafficking."
+  },
+  "HB 768": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB768",
+   "caption": "Relating to credit services organizations and extensions of consumer credit facilitated by credit services organizations; increasing a criminal penalty."
+  },
+  "HB 773": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB773",
+   "caption": "Relating to the authority of a court to grant a commutation of punishment to certain individuals serving a term of imprisonment."
+  },
+  "HB 775": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB775",
+   "caption": "Relating to the participation by non-enrolled students in University Interscholastic League-sponsored activities."
+  },
+  "HB 778": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB778",
+   "caption": "Relating to required health benefit plan coverage for gender transition adverse effects and reversals."
+  },
+  "HB 780": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB780",
+   "caption": "Relating to the period of continuous eligibility for the medical assistance program."
+  },
+  "HB 791": {
+   "status": "record",
+   "rv": 1021,
+   "date": "04/30/2025",
+   "journalPage": "2497",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB791",
+   "caption": "Relating to the issuance of Central Catholic High School specialty license plates."
+  },
+  "HB 807": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB807",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 814": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB814",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 833": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB833",
+   "caption": "Relating to credit toward a defendant's sentence for time confined in jail or prison before sentencing."
+  },
+  "HB 838": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB838",
+   "caption": "Relating to the interconnection of the ERCOT power grid to grids outside the ERCOT power region."
+  },
+  "HB 847": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB847",
+   "caption": "Relating to a prohibition on funding for gender reassignment."
+  },
+  "HB 856": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB856",
+   "caption": "Relating to a policy regarding the maintenance, administration, and disposal of medication for respiratory distress by public and private schools."
+  },
+  "HB 857": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB857",
+   "caption": "Relating to requiring certain persons prohibited by law from owning, possessing, or controlling a firearm to dispose of firearms owned, possessed, or controlled by the person."
+  },
+  "HB 858": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB858",
+   "caption": "Relating to the date on which certain persons placed on deferred adjudication community supervision are eligible to file a petition for an order of nondisclosure of criminal history record information."
+  },
+  "HB 859": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB859",
+   "caption": "Relating to the establishment of the Texas Environmental Justice Advisory Council."
+  },
+  "HB 864": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB864",
+   "caption": "Relating to the procedure for an application for a writ of habeas corpus based on certain new evidence."
+  },
+  "HB 869": {
+   "status": "record",
+   "rv": 773,
+   "date": "04/29/2025",
+   "journalPage": "2214",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB869",
+   "caption": "Relating to the review and revision by the state's classification officer of information in the position classification plan regarding state information technology positions."
+  },
+  "HB 890": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB890",
+   "caption": "Relating to the administration of assessment instruments to public school students."
+  },
+  "HB 895": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB895",
+   "caption": "Relating to the development and implementation of the Live Well Texas program and the expansion of Medicaid eligibility to provide health benefit coverage to certain individuals; imposing penalties."
+  },
+  "HB 905": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB905",
+   "caption": "Relating to the imposition of tolls on Fairmont Parkway in Harris County."
+  },
+  "HB 909": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB909",
+   "caption": "Relating to law enforcement misconduct and law enforcement interactions with certain detained or arrested individuals and other members of the public, to public entity liability for those interactions, and to the confinement, conviction, or release of detained or arrested individuals."
+  },
+  "HB 927": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB927",
+   "caption": "Relating to the interpretation of certain laws protecting the free exercise of religion."
+  },
+  "HB 929": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB929",
+   "caption": "Relating to prohibiting a school district from procuring training, insurance products and risk pool participation, good or supplies from a buy board, and any investment or professional services from certain nonprofit associations or organizations."
+  },
+  "HB 935": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB935",
+   "caption": "Relating to the employment of certain executive heads of state agencies and employees reporting to those executive heads."
+  },
+  "HB 947": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB947",
+   "caption": "Relating to affirmative defenses to prosecution for certain offenses involving material or conduct that is obscene or otherwise harmful to children."
+  },
+  "HB 956": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB956",
+   "caption": "Relating to the reporting of certain orders and convictions to the Department of Public Safety and Federal Bureau of Investigation for use with the National Instant Criminal Background Check System for the transfer of firearms."
+  },
+  "HB 965": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB965",
+   "caption": "Relating to exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "HB 979": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB979",
+   "caption": "Relating to the determination of resident status of students by public institutions of higher education."
+  },
+  "HB 995": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB995",
+   "caption": "Relating to defenses to prosecution for certain criminal offenses involving material or conduct that may be obscene or is otherwise harmful to children."
+  },
+  "HB 1029": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1029",
+   "caption": "Relating to the installation of highway signs for certain cultural attractions by the Texas Department of Transportation."
+  },
+  "HB 1044": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1044",
+   "caption": "Relating to persons authorized to conduct a marriage ceremony."
+  },
+  "HB 1047": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1047",
+   "caption": "Relating to the designation of certain optional holidays."
+  },
+  "HB 1073": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1073",
+   "caption": "Relating to the academic assessment of public school students."
+  },
+  "HB 1083": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1083",
+   "caption": "Relating to eligibility for tuition and fee exemptions at public institutions of higher education for certain students who were under the conservatorship of the Department of Family and Protective Services."
+  },
+  "HB 1092": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1092",
+   "caption": "Relating to the unlawful production or distribution of sexually explicit images or videos using deep fake technology; increasing a criminal penalty."
+  },
+  "HB 1098": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1098",
+   "caption": "Relating to the coverage and provision of abortion, contraception, and sterilization under Medicaid and certain health benefit plans."
+  },
+  "HB 1106": {
+   "status": "record",
+   "rv": 2458,
+   "date": "05/14/2025",
+   "journalPage": "4555",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1106",
+   "caption": "Relating to the definitions of child abuse and neglect."
+  },
+  "HB 1117": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1117",
+   "caption": "Relating to an exemption to the fishing license requirement for certain residents engaged in fishing in public waters."
+  },
+  "HB 1137": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1137",
+   "caption": "Relating to a handbook on parental rights in education and training requirements on parental rights in education for a member of the board of trustees of a school district."
+  },
+  "HB 1158": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1158",
+   "caption": "Relating to parental approval for a student's participation in human sexuality instruction in public schools."
+  },
+  "HB 1161": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1161",
+   "caption": "Relating to an advance directive and do-not-resuscitate order of a pregnant woman and information provided for an advance directive."
+  },
+  "HB 1162": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1162",
+   "caption": "Relating to the eligibility of certain production companies for a grant award under the moving image industry incentive program."
+  },
+  "HB 1176": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1176",
+   "caption": "Relating to the approval of open-enrollment charter schools."
+  },
+  "HB 1183": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1183",
+   "caption": "Relating to county and municipal authority to prohibit the operation of e-cigarette retailers near primary or secondary schools."
+  },
+  "HB 1194": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1194",
+   "caption": "Relating to the period during which an order for emergency protection remains in effect."
+  },
+  "HB 1207": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1207",
+   "caption": "Relating to conditions applicable to health benefit plan coverage of in vitro fertilization procedures."
+  },
+  "HB 1213": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1213",
+   "caption": "Relating to the issuance of a transcript by a postsecondary educational institution to a student who is in default on certain student loans."
+  },
+  "HB 1219": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1219",
+   "caption": "Relating to prioritization of a pregnant individual's health when providing health care treatments; authorizing an administrative penalty."
+  },
+  "HB 1220": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1220",
+   "caption": "Relating to exceptions to laws prohibiting abortion."
+  },
+  "HB 1222": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1222",
+   "caption": "Relating to postconviction forensic DNA testing."
+  },
+  "HB 1224": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1224",
+   "caption": "Relating to required instruction in the Success Sequence for students in public schools."
+  },
+  "HB 1230": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1230",
+   "caption": "Relating to the requirement of a public hearing on certain applications for a permit to drill an oil or gas well."
+  },
+  "HB 1254": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1254",
+   "caption": "Related to expanding the exemptions of abortions and Texas women's access to reproductive healthcare including in vitro fertilization."
+  },
+  "HB 1256": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1256",
+   "caption": "Relating to the authority of a county commissioners court to adopt an exemption from ad valorem taxation by each taxing unit that taxes the property of the portion of the appraised value of a person's property that is attributable to the installation in or on the property of certain water conservation systems."
+  },
+  "HB 1291": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1291",
+   "caption": "Relating to the consideration of a subsequent writ of habeas corpus in certain felony cases."
+  },
+  "HB 1303": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1303",
+   "caption": "Relating to certain criminal offenses involving illegal entry into or illegal presence in this state by a person who is an alien, including the enforcement of those offenses; increasing criminal penalties."
+  },
+  "HB 1315": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1315",
+   "caption": "Relating to air conditioning requirements at facilities operated by the Texas Department of Criminal Justice."
+  },
+  "HB 1324": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1324",
+   "caption": "Relating to the determination of resident status of students by public institutions of higher education."
+  },
+  "HB 1350": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1350",
+   "caption": "Relating to a restriction on total charges charged for extensions of consumer credit that a credit services organization obtains for a consumer or assists a consumer in obtaining."
+  },
+  "HB 1354": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1354",
+   "caption": "Relating to the establishment of the Texas Adoption Assistance Program."
+  },
+  "HB 1355": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1355",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 1362": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1362",
+   "caption": "Relating to eligibility for unemployment compensation for employees who leave the workplace due to sexual harassment."
+  },
+  "HB 1365": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1365",
+   "caption": "Relating to unprofessional conduct by mental health providers who attempt to change the sexual orientation of a child."
+  },
+  "HB 1387": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1387",
+   "caption": "Relating to a person's eligibility to sit for the examination for a license to practice law in this state."
+  },
+  "HB 1400": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1400",
+   "caption": "Relating to creation of the groundwater science, research, and innovation fund to be administered by the Texas Water Development Board."
+  },
+  "HB 1423": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1423",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 1434": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1434",
+   "caption": "Relating to affirmative defenses to prosecution for certain offenses involving material or conduct that is obscene or otherwise harmful to children."
+  },
+  "HB 1457": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1457",
+   "caption": "Relating to the inclusion of a course on modern conflicts in the curriculum requirements for public high school students."
+  },
+  "HB 1478": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1478",
+   "caption": "Relating to the failure of a voter registrar to comply with voter registration laws."
+  },
+  "HB 1490": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1490",
+   "caption": "Relating to creating a criminal offense for certain conduct involving the unauthorized use of a vehicle."
+  },
+  "HB 1491": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1491",
+   "caption": "Relating to agreements between counties and United States Immigration and Customs Enforcement to enforce federal immigration law."
+  },
+  "HB 1502": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1502",
+   "caption": "Relating to the creation of the child and adult protective investigations advisory committee in the Department of Family and Protective Services."
+  },
+  "HB 1512": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1512",
+   "caption": "Relating to reporting the number of children known or reasonably believed to not be citizens of the United States enrolled in a public school and to requesting reimbursement from the United States government for the cost of educating those children."
+  },
+  "HB 1536": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1536",
+   "caption": "Relating to a rural community-based care pilot program."
+  },
+  "HB 1539": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1539",
+   "caption": "Relating to seeking a waiver under Medicaid to provide a continuous period of eligibility under the program for certain children."
+  },
+  "HB 1551": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1551",
+   "caption": "Relating to the notification of parents of students enrolled in public school regarding certain alleged criminal conduct by an employee."
+  },
+  "HB 1578": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1578",
+   "caption": "Relating to exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "HB 1628": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1628",
+   "caption": "Relating to the transfer of certain public school students who are children of peace officers."
+  },
+  "HB 1655": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1655",
+   "caption": "Relating to a policy prohibiting public school employees from assisting a student with social transitioning; authorizing a civil penalty; authorizing injunctive relief."
+  },
+  "HB 1679": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1679",
+   "caption": "Relating to a study by the Texas Education Agency regarding recommended standards for school district facility maintenance and custodial services."
+  },
+  "HB 1686": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1686",
+   "caption": "Relating to victims of sex offenses, sex-based human trafficking offenses, or acts of a sexual nature, to the confidentiality of or restrictions on the availability of certain property, material, or information regarding those victims, offenses, or acts, and to the duties of peace officers regarding interactions with those victims."
+  },
+  "HB 1700": {
+   "status": "record",
+   "rv": 313,
+   "date": "04/17/2025",
+   "journalPage": "1679",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1700",
+   "caption": "Relating to certain records of a health professional providing a telemedicine medical service, teledentistry dental service, or telehealth service."
+  },
+  "HB 1726": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1726",
+   "caption": "Relating to who may request a public hearing from the Texas Commission on Environmental Quality related to the construction of a concrete plant."
+  },
+  "HB 1774": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1774",
+   "caption": "Relating to repealing the affirmative defense to prosecution for the criminal offense of sale, distribution, or display of harmful material to a minor."
+  },
+  "HB 1805": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1805",
+   "caption": "Relating to the creation of the Religious Freedom Commission."
+  },
+  "HB 1806": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1806",
+   "caption": "Relating to certain prohibited transactions and logistical support between a governmental entity and an abortion assistance entity or abortion provider for the procurement of an abortion or related services."
+  },
+  "HB 1815": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1815",
+   "caption": "Relating to the determination of resident status of students by public institutions of higher education."
+  },
+  "HB 1816": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1816",
+   "caption": "Relating to county and municipal authority to prohibit the operation of e-cigarette retailers near public primary or secondary schools."
+  },
+  "HB 1823": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1823",
+   "caption": "Relating to the operation of a concrete crushing facility near a hospital."
+  },
+  "HB 1852": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1852",
+   "caption": "Relating to authority of a court to reduce or modify a defendant's sentence."
+  },
+  "HB 1881": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1881",
+   "caption": "Relating to a study regarding establishing a public medical school as a professional school of Texas Southern University."
+  },
+  "HB 1902": {
+   "status": "record",
+   "rv": 1625,
+   "date": "05/07/2025",
+   "journalPage": "3361",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1902",
+   "caption": "Relating to creating the criminal offense of jugging."
+  },
+  "HB 1969": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1969",
+   "caption": "Relating to providing inmates with certain documents on release or discharge; changing a fee."
+  },
+  "HB 1975": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1975",
+   "caption": "Relating to victims of sex offenses, sex-based human trafficking offenses, or acts of a sexual nature and to the confidentiality of or restrictions on the availability of certain property, material, or information regarding those victims, offenses, or acts."
+  },
+  "HB 1980": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1980",
+   "caption": "Relating to a court order for retroactive child support, including for retroactive child support beginning on the date of the child's conception."
+  },
+  "HB 1986": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1986",
+   "caption": "Relating to the regulation of abortion, including abortion complication reporting and the repeal of certain laws prohibiting abortion."
+  },
+  "HB 1987": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB1987",
+   "caption": "Relating to the regulation of abortion, including abortion complication reporting and the repeal of certain laws prohibiting abortion."
+  },
+  "HB 2055": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2055",
+   "caption": "Relating to the punishment for a capital felony committed by an individual younger than 21 years of age."
+  },
+  "HB 2057": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2057",
+   "caption": "Relating to designating October 15 as Pregnancy and Infant Loss Remembrance Day."
+  },
+  "HB 2058": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2058",
+   "caption": "Relating to perinatal palliative care provided by certain hospitals, a perinatal palliative care grant program, and a perinatal palliative care hospital recognition program."
+  },
+  "HB 2067": {
+   "status": "record",
+   "rv": 569,
+   "date": "04/25/2025",
+   "journalPage": "1986",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2067",
+   "caption": "Relating to declination, cancellation, or nonrenewal of insurance policies."
+  },
+  "HB 2076": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2076",
+   "caption": "Relating to health benefit plan coverage of anxiety and pain management in connection with insertion or removal of prescription contraceptive devices."
+  },
+  "HB 2108": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2108",
+   "caption": "Relating to the components of a school district's enrichment tax rate and the calculation of the guaranteed yield under the Foundation School Program."
+  },
+  "HB 2138": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2138",
+   "caption": "Relating to preventing discrimination in foster care."
+  },
+  "HB 2158": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2158",
+   "caption": "Relating to an exception to certain laws prohibiting abortion."
+  },
+  "HB 2197": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2197",
+   "caption": "Relating to the protection of an unborn child's rights and criminal liability and justification for prohibited conduct."
+  },
+  "HB 2200": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2200",
+   "caption": "Relating to the cremation of human remains by natural organic reduction."
+  },
+  "HB 2202": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2202",
+   "caption": "Relating to eligibility for and benefits under the supplemental nutrition assistance program."
+  },
+  "HB 2206": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2206",
+   "caption": "Relating to the reporting of certain public school employee misconduct to local law enforcement."
+  },
+  "HB 2234": {
+   "status": "record",
+   "rv": 2892,
+   "date": "05/16/2025",
+   "journalPage": "5121",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2234",
+   "caption": "Relating to the age of criminal responsibility and to certain substantive and procedural matters related to that age."
+  },
+  "HB 2237": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2237",
+   "caption": "Relating to abolishing the death penalty."
+  },
+  "HB 2251": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2251",
+   "caption": "Relating to exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "HB 2256": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2256",
+   "caption": "Relating to financial security requirements for operators of oil and gas wells."
+  },
+  "HB 2283": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2283",
+   "caption": "Relating to the use of an epinephrine delivery device by certain entities."
+  },
+  "HB 2291": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2291",
+   "caption": "Relating to the required inclusion of a person's sex on a birth certificate and prohibited change of sex on the birth certificate of certain persons."
+  },
+  "HB 2318": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2318",
+   "caption": "Relating to the establishment of a statewide human trafficking data repository within the office of the attorney general and to reporting of human trafficking data to the office of the attorney general and by the attorney general."
+  },
+  "HB 2331": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2331",
+   "caption": "Relating to the prosecution of the offense of smuggling of persons."
+  },
+  "HB 2342": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2342",
+   "caption": "Relating to protection for a public school employee's use of terms consistent with biological sex."
+  },
+  "HB 2361": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2361",
+   "caption": "Relating to agreements between local law enforcement agencies and United States Immigration and Customs Enforcement to enforce federal immigration law."
+  },
+  "HB 2378": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2378",
+   "caption": "Relating to certain misconduct committed by an employee or security personnel of a public school or certain other educational entities, including the criminal offense of improper relationship with a student."
+  },
+  "HB 2384": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2384",
+   "caption": "Relating to county regulation of subdivisions and approval of subdivision plans or plats."
+  },
+  "HB 2456": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2456",
+   "caption": "Relating to the flying and display of flags by public schools."
+  },
+  "HB 2498": {
+   "status": "record",
+   "rv": 1306,
+   "date": "05/02/2025",
+   "journalPage": "2898",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2498",
+   "caption": "Relating to the consequences of a criminal conviction on a person's eligibility for an occupational license."
+  },
+  "HB 2507": {
+   "status": "record",
+   "rv": 2864,
+   "date": "05/16/2025",
+   "journalPage": "5091",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2507",
+   "caption": "Relating to automatic orders of nondisclosure of criminal history record information for certain misdemeanor defendants following successful completion of a period of deferred adjudication community supervision."
+  },
+  "HB 2525": {
+   "status": "record",
+   "rv": 409,
+   "date": "04/23/2025",
+   "journalPage": "1790",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2525",
+   "caption": "Relating to the exemption from ad valorem taxation of certain property owned by a charitable organization that is engaged in providing housing and related facilities and services to persons who are at least 62 years of age."
+  },
+  "HB 2535": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2535",
+   "caption": "Relating to the determination of resident status of students by public institutions of higher education."
+  },
+  "HB 2556": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2556",
+   "caption": "Relating to certain health care transaction fees and payment claims; providing an administrative penalty."
+  },
+  "HB 2565": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2565",
+   "caption": "Relating to prohibiting certain additives from being included in food and drinks provided by school districts."
+  },
+  "HB 2566": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2566",
+   "caption": "Relating to the enforcement of state and federal immigration laws by state agencies, local entities, and peace officers; creating a civil penalty."
+  },
+  "HB 2581": {
+   "status": "record",
+   "rv": 2831,
+   "date": "05/16/2025",
+   "journalPage": "5052",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2581",
+   "caption": "Relating to the information required for payment of services provided through the Thriving Texas Families Program."
+  },
+  "HB 2585": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2585",
+   "caption": "Relating to the capacity of minors to consent to contraception-related examination or medical treatment."
+  },
+  "HB 2586": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2586",
+   "caption": "Relating to minimum standards for pregnancy resource centers."
+  },
+  "HB 2604": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2604",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 2627": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2627",
+   "caption": "Relating to the development and implementation of the Live Well Texas program and the expansion of Medicaid eligibility to provide health benefit coverage to certain individuals; imposing penalties."
+  },
+  "HB 2649": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2649",
+   "caption": "Relating to the extent of a defendant's criminal responsibility for the conduct of a coconspirator in a capital murder case."
+  },
+  "HB 2650": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2650",
+   "caption": "Relating to the reporting of certain orders and convictions to the Department of Public Safety and Federal Bureau of Investigation for use with the National Instant Criminal Background Check System for the transfer of firearms."
+  },
+  "HB 2651": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2651",
+   "caption": "Relating to an exemption from abortion restrictions for unemancipated minors and the repeal of provisions regarding notice and consent to those abortions."
+  },
+  "HB 2674": {
+   "status": "record",
+   "rv": 2314,
+   "date": "05/13/2025",
+   "journalPage": "4318",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2674",
+   "caption": "Relating to prohibiting the regulation of home school programs."
+  },
+  "HB 2682": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2682",
+   "caption": "Relating to the establishment of the Texas Adoption Assistance Program."
+  },
+  "HB 2684": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2684",
+   "caption": "Relating to information regarding perinatal palliative care; creating an administrative penalty."
+  },
+  "HB 2704": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2704",
+   "caption": "Relating to general definitions regarding biological sex and the designation and use of certain spaces according to biological sex; authorizing a civil right of action."
+  },
+  "HB 2735": {
+   "status": "record",
+   "rv": 552,
+   "date": "04/25/2025",
+   "journalPage": "1970",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2735",
+   "caption": "Relating to a prohibition on e-cigarette advertising in certain locations."
+  },
+  "HB 2761": {
+   "status": "record",
+   "rv": 2131,
+   "date": "05/12/2025",
+   "journalPage": "4025",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2761",
+   "caption": "Relating to the prosecution of the offenses of trafficking of persons, continuous trafficking of persons, and compelling prostitution."
+  },
+  "HB 2772": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2772",
+   "caption": "Relating to an affirmative defense to prosecution for victims of certain offenses."
+  },
+  "HB 2776": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2776",
+   "caption": "Relating to the criminal and licensing consequences for the commission of certain offenses by massage establishments, massage schools, massage therapists, and massage therapy instructors."
+  },
+  "HB 2777": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2777",
+   "caption": "Relating to the applicability of the death penalty to a capital offense committed by a person with severe mental illness."
+  },
+  "HB 2789": {
+   "status": "record",
+   "rv": 719,
+   "date": "04/29/2025",
+   "journalPage": "2168",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2789",
+   "caption": "Relating to the regulation of child welfare, including licensure, community-based care contractors, family homes, and child-care facilities."
+  },
+  "HB 2801": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2801",
+   "caption": "Relating to the definition of an epinephrine delivery device and the use of those devices in public and private schools."
+  },
+  "HB 2834": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2834",
+   "caption": "Relating to eligibility for tuition and fee exemptions at public institutions of higher education for certain students who were under the conservatorship of the Department of Family and Protective Services."
+  },
+  "HB 2836": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2836",
+   "caption": "Relating to the minimum wage."
+  },
+  "HB 2846": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2846",
+   "caption": "Relating to parental rights in public education and prohibiting instruction regarding sexual orientation or gender identity for public school students."
+  },
+  "HB 2896": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2896",
+   "caption": "Relating to insurance coverage for the disposition of embryonic and fetal tissue remains."
+  },
+  "HB 2939": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2939",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 2995": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2995",
+   "caption": "Relating to the provision of medication for respiratory distress in public and private schools."
+  },
+  "HB 2997": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB2997",
+   "caption": "Relating to the temperature at which certain facilities operated by the Texas Department of Criminal Justice are maintained."
+  },
+  "HB 3020": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3020",
+   "caption": "Relating to statewide standing orders prescribing epinephrine auto-injectors, medication for respiratory distress, and opioid antagonists to public and private schools."
+  },
+  "HB 3029": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3029",
+   "caption": "Relating to the administration of nonprescription medications to certain public and private school students."
+  },
+  "HB 3043": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3043",
+   "caption": "Relating to the persons entitled to request a public hearing from the Texas Commission on Environmental Quality related to the construction of a concrete plant."
+  },
+  "HB 3132": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3132",
+   "caption": "Relating to reporting requirements for assisted reproductive technology, including in vitro fertilization."
+  },
+  "HB 3166": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3166",
+   "caption": "Relating to the authority of a court to grant a commutation of punishment to certain individuals serving a term of imprisonment and to victims' rights regarding a motion to grant a commutation."
+  },
+  "HB 3172": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3172",
+   "caption": "Relating to municipal regulation of multifamily and mixed-use development on religious land."
+  },
+  "HB 3175": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3175",
+   "caption": "Relating to a statewide order issued by the commissioner of state health services authorizing a pharmacist to dispense ivermectin."
+  },
+  "HB 3191": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3191",
+   "caption": "Relating to a franchise tax credit for taxable entities that make certain employer child-care contributions and a study on access to and availability of child care in this state."
+  },
+  "HB 3216": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3216",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain working parents for whom federal matching money is available."
+  },
+  "HB 3217": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3217",
+   "caption": "Relating to public comments on matters subject to a hearing under the jurisdiction of the Texas Commission on Environmental Quality."
+  },
+  "HB 3232": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3232",
+   "caption": "Relating to the strong families credit against certain taxes for entities that contribute to certain organizations."
+  },
+  "HB 3276": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3276",
+   "caption": "Relating to the eligibility of certain individuals for certification as certain juvenile officers or employees of a juvenile facility."
+  },
+  "HB 3284": {
+   "status": "record",
+   "rv": 2449,
+   "date": "05/14/2025",
+   "journalPage": "4534",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3284",
+   "caption": "Relating to the creation of the Texas Commission on Marriage and Family."
+  },
+  "HB 3304": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3304",
+   "caption": "Relating to a prohibition on vaccination mandates."
+  },
+  "HB 3327": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3327",
+   "caption": "Relating to repealing the affirmative defense to prosecution for the criminal offense of sale, distribution, or display of harmful material to a minor."
+  },
+  "HB 3330": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3330",
+   "caption": "Relating to discovery in a criminal case."
+  },
+  "HB 3338": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3338",
+   "caption": "Relating to the permitting of certain concrete plants located in an area of a municipality not subject to zoning regulations."
+  },
+  "HB 3347": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3347",
+   "caption": "Relating to person not eligible for employment in public schools and to measures to ensure publics schools do not employ those persons."
+  },
+  "HB 3360": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3360",
+   "caption": "Relating to the protection and detention of a juvenile who engages in delinquent conduct or commits a felony offense while committed to the custody of the Texas Juvenile Justice Department; changing the eligibility for community supervision; redefining habitual felony conduct."
+  },
+  "HB 3397": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3397",
+   "caption": "Relating to the administration of medication by open-enrollment charter schools, private schools, and school employees."
+  },
+  "HB 3404": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3404",
+   "caption": "Relating to certain municipal and county regulation of certain multifamily and mixed-use residential development projects and conversion of certain commercial buildings to mixed-use and multifamily residential occupancy."
+  },
+  "HB 3410": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3410",
+   "caption": "Relating to the regulation of abortion and related matters and to the repeal of certain laws prohibiting abortion."
+  },
+  "HB 3443": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3443",
+   "caption": "Relating to the temperature at which a facility operated by the Texas Department of Criminal Justice is maintained."
+  },
+  "HB 3451": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3451",
+   "caption": "Relating to a change of name and sex for certain persons and the issuance of associated birth records and documentation; authorizing a fee."
+  },
+  "HB 3482": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3482",
+   "caption": "Relating to the authority of the Lower Colorado River Authority to issue permits for certain quarries and mines."
+  },
+  "HB 3548": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3548",
+   "caption": "Relating to local school health advisory councils and instruction regarding human sexuality, sexual orientation, and gender identity provided by public schools."
+  },
+  "HB 3629": {
+   "status": "record",
+   "rv": 2666,
+   "date": "05/15/2025",
+   "journalPage": "4829",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3629",
+   "caption": "Relating to prohibiting a person required to register as a sex offender from serving as a member of the board of trustees of an independent school district."
+  },
+  "HB 3635": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3635",
+   "caption": "Relating to definition of abuse of a child, the reporting of child abuse and neglect, and certain required notifications about reports of child abuse and neglect."
+  },
+  "HB 3637": {
+   "status": "record",
+   "rv": 2436,
+   "date": "05/14/2025",
+   "journalPage": "4519",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3637",
+   "caption": "Relating to the authority of a county commissioners court to adopt an exemption from ad valorem taxation by each taxing unit that taxes the property of the portion of the appraised value of a person's property that is attributable to the installation in or on the property of certain water conservation systems."
+  },
+  "HB 3653": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3653",
+   "caption": "Relating to the prosecution and punishment of certain trafficking of persons offenses; increasing criminal penalties; changing parole eligibility."
+  },
+  "HB 3683": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3683",
+   "caption": "Relating to a student's eligibility to participate in the Financial Aid for Swift Transfer (FAST) program."
+  },
+  "HB 3728": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3728",
+   "caption": "Relating to the adoption by the Texas Commission on Environmental Quality of salinity requirements for bays and estuaries."
+  },
+  "HB 3772": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3772",
+   "caption": "Relating to the sale of certain e-cigarettes in this state and a directory of e-cigarette manufacturers and their products; authorizing fees; authorizing administrative and civil penalties; creating a criminal offense."
+  },
+  "HB 3792": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3792",
+   "caption": "Relating to the identification, use, and taxation of surplus state property suitable for the development of affordable housing."
+  },
+  "HB 3795": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3795",
+   "caption": "Relating to applicability of reporting requirements to private schools and other entities providing education services in this state that accept students with vouchers, education savings accounts, tax credit scholarships, or certain other funding."
+  },
+  "HB 3847": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3847",
+   "caption": "Relating to certain construction defect litigation."
+  },
+  "HB 3858": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3858",
+   "caption": "Relating to the required approval of the proposed location of county or municipal temporary housing or emergency shelter for disaster victims."
+  },
+  "HB 3882": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3882",
+   "caption": "Relating to the participation of certain juvenile justice entities in the Jobs and Education for Texans (JET) Grant Program."
+  },
+  "HB 3885": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3885",
+   "caption": "Relating to the transfer of public school students who are children of certain public servants."
+  },
+  "HB 3919": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3919",
+   "caption": "Relating to size and density requirements for residential lots in certain municipalities; authorizing a fee."
+  },
+  "HB 3938": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3938",
+   "caption": "Relating to the formation of a public education scholarship program."
+  },
+  "HB 3991": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB3991",
+   "caption": "Relating to misconduct by public school employees and to persons who must be listed in the registry of persons not eligible for employment in public schools."
+  },
+  "HB 4002": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4002",
+   "caption": "Relating to parental rights in public education and prohibiting instruction regarding sexual orientation or gender identity for public school students."
+  },
+  "HB 4122": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4122",
+   "caption": "Relating to the provision of certain information about Medicaid benefits for certain postpartum women."
+  },
+  "HB 4126": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4126",
+   "caption": "Relating to the transfer of public school students who are children of certain public servants."
+  },
+  "HB 4189": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4189",
+   "caption": "Relating to content filters provided by Internet service providers."
+  },
+  "HB 4198": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4198",
+   "caption": "Relating to the standards for a school district's library collection development policies; providing a civil penalty."
+  },
+  "HB 4209": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4209",
+   "caption": "Relating to a report of child abuse or neglect made by an employee of a school district or an open-enrollment charter school."
+  },
+  "HB 4212": {
+   "status": "record",
+   "rv": 2635,
+   "date": "05/15/2025",
+   "journalPage": "4797",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4212",
+   "caption": "Relating to the establishment, administration, and use of the Texas land, water, and wildlife conservation account."
+  },
+  "HB 4224": {
+   "status": "record",
+   "rv": 1456,
+   "date": "05/06/2025",
+   "journalPage": "3157",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4224",
+   "caption": "Relating to information regarding consumer access to health care records."
+  },
+  "HB 4226": {
+   "status": "record",
+   "rv": 1806,
+   "date": "05/08/2025",
+   "journalPage": "3594",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4226",
+   "caption": "Relating to exemptions from the taxes imposed on the sale, use, or rental of a motor vehicle for a vehicle purchased, used, or rented by a nonprofit food bank or a provider of housing and related services."
+  },
+  "HB 4238": {
+   "status": "record",
+   "rv": 1059,
+   "date": "04/30/2025",
+   "journalPage": "2534",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4238",
+   "caption": "Relating to the collection of consumer debt incurred by certain individuals as a result of identity theft."
+  },
+  "HB 4264": {
+   "status": "record",
+   "rv": 1322,
+   "date": "05/02/2025",
+   "journalPage": "2914",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4264",
+   "caption": "Relating to creation of a grant program for certain peace officers who hold a master proficiency certificate."
+  },
+  "HB 4276": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4276",
+   "caption": "Relating to eligibility for the Preparation for Adult Living Program for former foster youth."
+  },
+  "HB 4298": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4298",
+   "caption": "Relating to parental controls and filters for certain explicit material on electronic devices; providing a civil penalty."
+  },
+  "HB 4339": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4339",
+   "caption": "Relating to increasing the interest rate of certain consumer loans."
+  },
+  "HB 4392": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4392",
+   "caption": "Relating to prohibited insurance discrimination on the basis of an insured's marital status following the death of the insured's spouse."
+  },
+  "HB 4435": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4435",
+   "caption": "Relating to a maternal health training program for certain health care providers."
+  },
+  "HB 4452": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4452",
+   "caption": "Relating to the protection of the rights of conscience for child welfare services providers."
+  },
+  "HB 4485": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4485",
+   "caption": "Relating to eligibility for a general permit to discharge waste into or adjacent to waters in this state."
+  },
+  "HB 4488": {
+   "status": "record",
+   "rv": 1616,
+   "date": "05/07/2025",
+   "journalPage": "3353",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4488",
+   "caption": "Relating to the creation and re-creation of funds and accounts, the dedication and rededication of revenue and allocation of accrued interest on dedicated revenue, and the exemption of unappropriated money from use for general governmental purposes."
+  },
+  "HB 4547": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4547",
+   "caption": "Relating to certain actions by a state agency that burden certain constitutional rights of an applicant for or holder of an occupational license."
+  },
+  "HB 4595": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4595",
+   "caption": "Relating to prohibition of transporting or funding the transportation of an unemancipated minor for an abortion; providing a civil penalty; creating a criminal offense."
+  },
+  "HB 4620": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4620",
+   "caption": "Relating to program accessibility for female inmates of the Texas Department of Criminal Justice."
+  },
+  "HB 4655": {
+   "status": "record",
+   "rv": 1573,
+   "date": "05/07/2025",
+   "journalPage": "3311",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4655",
+   "caption": "Relating to the Preparation for Adult Living Program and other services for foster children transitioning to independent living."
+  },
+  "HB 4668": {
+   "status": "record",
+   "rv": 1461,
+   "date": "05/06/2025",
+   "journalPage": "3162",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4668",
+   "caption": "Relating to the authority of the Public Utility Commission of Texas to retain assistance for regional proceedings affecting certain electric utilities and consumers."
+  },
+  "HB 4684": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4684",
+   "caption": "Relating to instruction in cardiopulmonary resuscitation and the use of automated external defibrillators for school district, private school, and open-enrollment charter school employees and volunteers."
+  },
+  "HB 4701": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4701",
+   "caption": "Relating to college entrance examinations considered for admission to certain public institutions of higher education."
+  },
+  "HB 4707": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4707",
+   "caption": "Relating to the admission to public schools of children unlawfully present in the United States and the eligibility of those children for the benefits of the available school fund and Foundation School Program."
+  },
+  "HB 4721": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4721",
+   "caption": "Relating to the licensing of marriage and family therapists, marriage and family therapist associates, professional counselors, professional counselor associates, and social workers, including certain out-of-state applicants."
+  },
+  "HB 4730": {
+   "status": "record",
+   "rv": 1818,
+   "date": "05/08/2025",
+   "journalPage": "3604",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4730",
+   "caption": "Relating to the voluntary relinquishment of parental rights, adoption, and the regulation of child-placing agencies."
+  },
+  "HB 4761": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4761",
+   "caption": "Relating to the summer electronic benefits transfer for children program."
+  },
+  "HB 4771": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4771",
+   "caption": "Relating to the citizenship status of and birth certificates for certain children born in this state."
+  },
+  "HB 4788": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4788",
+   "caption": "Relating to prohibiting public and private institutions of higher education from accepting federal funding for embryonic or fetal stem cell research."
+  },
+  "HB 4816": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4816",
+   "caption": "Relating to the punishment for certain criminal conduct involving trafficking of persons, the human trafficking prevention coordinating council and the human trafficking prevention task force; increasing criminal penalties."
+  },
+  "HB 4832": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4832",
+   "caption": "Relating to the deposit of federal reimbursements for border security operations into the general revenue fund and the funding of services and programs in the border region."
+  },
+  "HB 4852": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4852",
+   "caption": "Relating to examination of the records of filing entities and foreign filing entities by the attorney general; creating a criminal offense."
+  },
+  "HB 4886": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4886",
+   "caption": "Relating to reporting on students not lawfully present in the United States enrolled in a public school."
+  },
+  "HB 4910": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4910",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HB 4911": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4911",
+   "caption": "Relating to prosecution and punishment of certain criminal offenses prohibiting sexually explicit visual material involving depictions of children, computer-generated children, or other persons; creating criminal offenses; increasing criminal penalties."
+  },
+  "HB 4914": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4914",
+   "caption": "Relating to the organization, powers, and authority of the Texas State Guard, including the powers and authority of the adjutant general and governor relating to the Texas State Guard."
+  },
+  "HB 4918": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4918",
+   "caption": "Relating to rights of a victim, guardian of a victim, or close relative of a deceased victim in certain criminal cases involving family violence, sexual or assaultive offenses, stalking, or a violation of a protective order or condition of bond."
+  },
+  "HB 4919": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4919",
+   "caption": "Relating to the age at which a juvenile court may exercise jurisdiction over a child and to the minimum age of criminal responsibility."
+  },
+  "HB 4969": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB4969",
+   "caption": "Relating to remedies for a cause of action brought by a child welfare services provider for an adverse action taken against the provider in violation of the provider's rights of conscience."
+  },
+  "HB 5037": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5037",
+   "caption": "Relating to payments made to certain foster parents."
+  },
+  "HB 5056": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5056",
+   "caption": "Relating to human sexuality education in public schools."
+  },
+  "HB 5058": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5058",
+   "caption": "Relating to the extent of a defendant's criminal responsibility for the conduct of a coconspirator in a capital murder case and the review of certain convictions by the Board of Pardons and Paroles."
+  },
+  "HB 5072": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5072",
+   "caption": "Relating to the appointment of counsel for indigent defendants or juveniles in certain capital felony cases."
+  },
+  "HB 5100": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5100",
+   "caption": "Relating to instruction on adoption in the parenting and paternity awareness program in public schools."
+  },
+  "HB 5148": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5148",
+   "caption": "Relating to municipal regulation of stairway requirements in certain multifamily residential buildings."
+  },
+  "HB 5160": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5160",
+   "caption": "Relating to eligibility for supplemental nutrition assistance program benefits."
+  },
+  "HB 5187": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5187",
+   "caption": "Relating to certain municipal regulation of conversion of certain office buildings to mixed-use and multifamily residential occupancy."
+  },
+  "HB 5207": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5207",
+   "caption": "Relating to notification procedures concerning groundwater contamination."
+  },
+  "HB 5237": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5237",
+   "caption": "Relating to wrongful death actions arising from the death of an unborn child resulting from an abortion."
+  },
+  "HB 5251": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5251",
+   "caption": "Relating to excused absences from public school for certain students to attend mental health care appointments."
+  },
+  "HB 5254": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5254",
+   "caption": "Relating to a claim of actual innocence by a person convicted of a criminal offense; creating the Texas Innocence Inquiry Commission."
+  },
+  "HB 5278": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5278",
+   "caption": "Relating to the licensing and regulation of persons who provide services in relation to the deceased; creating a criminal offense and increasing the punishment for an existing criminal offense; expanding the application of a fee."
+  },
+  "HB 5285": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5285",
+   "caption": "Relating to family support services provided under a Health and Human Services Commission program."
+  },
+  "HB 5302": {
+   "status": "record",
+   "rv": 2896,
+   "date": "05/16/2025",
+   "journalPage": "5126",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5302",
+   "caption": "Relating to the establishment of the Texas Post-adoption Assistance Program."
+  },
+  "HB 5310": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5310",
+   "caption": "Relating to the repeal of certain laws regulating abortion and the construction of abortion statutes."
+  },
+  "HB 5344": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5344",
+   "caption": "Relating to the eligibility of certain persons to provide services as an employee, volunteer, or contractor for certain agencies, including public school contractors, and access to the registry of persons who are not eligible for employment at public schools."
+  },
+  "HB 5389": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5389",
+   "caption": "Relating to the establishment of a grant program to support the disposition of deceased paupers' bodies."
+  },
+  "HB 5462": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5462",
+   "caption": "Relating to the regulation of earned income access providers and earned income access transactions; requiring an occupational license; authorizing fees; providing an administrative penalty; creating a criminal offense."
+  },
+  "HB 5541": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5541",
+   "caption": "Relating to discrimination by a state agency against an applicant for or holder of an occupational license."
+  },
+  "HB 5580": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5580",
+   "caption": "Relating to agreements between sheriffs and the United States Immigration and Customs Enforcement to enforce federal immigration law."
+  },
+  "HB 5583": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5583",
+   "caption": "Relating to Medicaid coverage and reimbursement of doula services."
+  },
+  "HB 5728": {
+   "status": "no-such-bill",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5728"
+  },
+  "HCR 14": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HCR14",
+   "caption": "Urging the federal government to declare foreign drug cartels as foreign terrorist organizations."
+  },
+  "HJR 21": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR21",
+   "caption": "Proposing a constitutional amendment requiring the state to expand eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HJR 33": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR33",
+   "caption": "Proposing a constitutional amendment establishing an individual's right to personal reproductive autonomy."
+  },
+  "HJR 52": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR52",
+   "caption": "Proposing a constitutional amendment protecting private schools from state and local regulation."
+  },
+  "HJR 60": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR60",
+   "caption": "Proposing a constitutional amendment authorizing the legislature to enact laws providing for a court to grant a commutation of punishment to certain individuals serving a term of imprisonment."
+  },
+  "HJR 61": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR61",
+   "caption": "Proposing a constitutional amendment requiring the state to expand eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HJR 62": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR62",
+   "caption": "Proposing a constitutional amendment requiring this state to observe daylight saving time year-round."
+  },
+  "HJR 69": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR69",
+   "caption": "Proposing a constitutional amendment requiring the state to expand eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HJR 80": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR80",
+   "caption": "Proposing a constitutional amendment guaranteeing the rights to an abortion and to assisted reproductive technology treatments and procedures, including in vitro fertilization."
+  },
+  "HJR 88": {
+   "status": "record",
+   "rv": 1899,
+   "date": "05/09/2025",
+   "journalPage": "3739",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR88",
+   "caption": "Proposing a constitutional amendment to authorize the commissioners court of a county to exempt from ad valorem taxation by each political subdivision that taxes the property the portion of the assessed value of a person's property that is attributable to the installation in or on the property of a rainwater harvesting or graywater system."
+  },
+  "HJR 91": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR91",
+   "caption": "Proposing a constitutional amendment recognizing the right of an individual to refuse a vaccination."
+  },
+  "HJR 100": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR100",
+   "caption": "Proposing a constitutional amendment requiring the state to expand eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HJR 112": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR112",
+   "caption": "Proposing a constitutional amendment protecting the right of parents to raise their children."
+  },
+  "HJR 113": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR113",
+   "caption": "Proposing a constitutional amendment authorizing the legislature to enact laws providing for a district court to reduce or modify a sentence imposing a term of imprisonment for a person who has served not less than 10 years of the term."
+  },
+  "HJR 130": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR130",
+   "caption": "Proposing a constitutional amendment establishing an individual's right to personal reproductive autonomy."
+  },
+  "HJR 131": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR131",
+   "caption": "Proposing a constitutional amendment requiring the state to expand eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "HJR 136": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR136",
+   "caption": "Proposing a constitutional amendment protecting private schools from state and local regulation."
+  },
+  "HJR 148": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR148",
+   "caption": "Proposing a constitutional amendment authorizing the legislature to enact laws providing for a court to grant a commutation of punishment to certain individuals serving a term of imprisonment."
+  },
+  "HJR 155": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR155",
+   "caption": "Proposing a constitutional amendment establishing a parent's right to direct a child's education."
+  },
+  "HJR 204": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HJR204",
+   "caption": "Proposing a constitutional amendment prohibiting the legislature from restricting an individual's access to abortion and related health care."
+  },
+  "SB 2": {
+   "status": "record",
+   "rv": 300,
+   "date": "04/17/2025",
+   "journalPage": "1667",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2",
+   "caption": "Relating to the establishment of an education savings account program."
+  },
+  "SB 8": {
+   "status": "record",
+   "rv": 3502,
+   "date": "05/25/2025",
+   "journalPage": "6084",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB8",
+   "caption": "Relating to agreements between certain sheriffs and the United States Immigration and Customs Enforcement to enforce federal immigration law and a grant program to cover the costs of implementing those agreements."
+  },
+  "SB 15": {
+   "status": "record",
+   "rv": 3837,
+   "date": "05/28/2025",
+   "journalPage": "6686",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB15",
+   "caption": "Relating to size and density requirements for residential lots in certain municipalities; authorizing a fee."
+  },
+  "SB 20": {
+   "status": "record",
+   "rv": 3236,
+   "date": "05/22/2025",
+   "journalPage": "5633",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB20",
+   "caption": "Relating to the creation of the criminal offense of possession, promotion, or production of certain obscene visual material appearing to depict a child."
+  },
+  "SB 31": {
+   "status": "record",
+   "rv": 3194,
+   "date": "05/22/2025",
+   "journalPage": "5582",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB31",
+   "caption": "Relating to exceptions to otherwise prohibited abortions based on a physician's reasonable medical judgment."
+  },
+  "SB 33": {
+   "status": "record",
+   "rv": 3195,
+   "date": "05/22/2025",
+   "journalPage": "5584",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB33",
+   "caption": "Relating to certain prohibited transactions and logistical support between a governmental entity and an abortion assistance entity or abortion provider for the procurement of an abortion or related services."
+  },
+  "SB 41": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB41",
+   "caption": "Relating to prohibiting certain transfers, purchases, and possession of assault weapons; creating criminal offenses."
+  },
+  "SB 45": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB45",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "SB 51": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB51",
+   "caption": "Relating to the licensing of marriage and family therapists, marriage and family therapist associates, professional counselors, professional counselor associates, and social workers, including certain out-of-state applicants."
+  },
+  "SB 59": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB59",
+   "caption": "Relating to the use of funds awarded under the Jobs and Education for Texans (JET) Grant Program."
+  },
+  "SB 75": {
+   "status": "record",
+   "rv": 3137,
+   "date": "05/21/2025",
+   "journalPage": "5465",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB75",
+   "caption": "Relating to the resilience of the electric grid and certain municipalities."
+  },
+  "SB 86": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB86",
+   "caption": "Relating to parental rights in public education and prohibiting instruction regarding sexual orientation or gender identity for public school students."
+  },
+  "SB 87": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB87",
+   "caption": "Relating to parental approval for a student's participation in human sexuality instruction in public schools."
+  },
+  "SB 89": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB89",
+   "caption": "Relating to defenses to prosecution for certain criminal offenses involving material or conduct that may be obscene or is otherwise harmful to children."
+  },
+  "SB 112": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB112",
+   "caption": "Relating to parental rights in public education."
+  },
+  "SB 134": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB134",
+   "caption": "Relating to agreements between municipalities and counties and United States Immigration and Customs Enforcement to enforce federal immigration law."
+  },
+  "SB 141": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB141",
+   "caption": "Relating to the authority of a municipality or a property owners' association to regulate the raising or keeping of chickens."
+  },
+  "SB 165": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB165",
+   "caption": "Relating to the measures to encourage eligible students to claim certain tuition and fee exemptions at public institutions of higher education for students who are or have been in foster or other residential care."
+  },
+  "SB 168": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB168",
+   "caption": "Relating to unprofessional conduct by mental health providers who attempt to change the sexual orientation of a child."
+  },
+  "SB 169": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB169",
+   "caption": "Relating to the temperature at which a facility operated by the Texas Department of Criminal Justice is maintained."
+  },
+  "SB 193": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB193",
+   "caption": "Relating to a model suicide prevention policy, suicide prevention and intervention strategies incorporated into a state agency crisis or disaster plan, suicide death information maintained by the Department of State Health Services, and the Texas Violent Death Reporting System."
+  },
+  "SB 203": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB203",
+   "caption": "Relating to the disclosure of a public school student's numerical class rank."
+  },
+  "SB 204": {
+   "status": "record",
+   "rv": 3832,
+   "date": "05/28/2025",
+   "journalPage": "6671",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB204",
+   "caption": "Relating to a handbook on parental rights in education and training requirements on parental rights in education for a member of the board of trustees of a school district."
+  },
+  "SB 205": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB205",
+   "caption": "Relating to fetal development instruction included as part of the public school health curriculum in certain grade levels."
+  },
+  "SB 207": {
+   "status": "record",
+   "rv": 3025,
+   "date": "05/20/2025",
+   "journalPage": "5315",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB207",
+   "caption": "Relating to excused absences from public school for certain students to attend mental health care appointments."
+  },
+  "SB 212": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB212",
+   "caption": "Relating to certain public meetings and public hearings concerning permits issued by the Texas Commission on Environmental Quality."
+  },
+  "SB 232": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB232",
+   "caption": "Relating to the development and implementation of the Live Well Texas program and the expansion of Medicaid eligibility to provide health benefit coverage to certain individuals; imposing penalties."
+  },
+  "SB 238": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB238",
+   "caption": "Relating to implementing an express lane option under Medicaid and the child health plan program."
+  },
+  "SB 242": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB242",
+   "caption": "Relating to affirmative defenses to prosecution for certain criminal offenses involving material or conduct that may be obscene or is otherwise harmful to children."
+  },
+  "SB 243": {
+   "status": "record",
+   "rv": 3198,
+   "date": "05/22/2025",
+   "journalPage": "5588",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB243",
+   "caption": "Relating to the regulation of migrant labor housing facilities; changing the amount of a civil penalty."
+  },
+  "SB 255": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB255",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "SB 256": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB256",
+   "caption": "Relating to exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "SB 257": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB257",
+   "caption": "Relating to exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "SB 308": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB308",
+   "caption": "Relating to the repeal of certain laws prohibiting abortion."
+  },
+  "SB 316": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB316",
+   "caption": "Relating to the exercise of eminent domain authority by the Texas Facilities Commission to build a wall along this state's international border."
+  },
+  "SB 325": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB325",
+   "caption": "Relating to county regulation of subdivisions and approval of subdivision plans or plats."
+  },
+  "SB 327": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB327",
+   "caption": "Relating to the establishment of the Texas Adoption Assistance Program."
+  },
+  "SB 343": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB343",
+   "caption": "Relating to abolishing the death penalty."
+  },
+  "SB 350": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB350",
+   "caption": "Relating to prioritization of a pregnant individual's health when providing health care treatments; authorizing an administrative penalty."
+  },
+  "SB 353": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB353",
+   "caption": "Relating to requiring a national instant criminal background check in connection with private firearm transfers; creating a criminal offense."
+  },
+  "SB 359": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB359",
+   "caption": "Relating to the coverage and provision of abortion, contraception, and sterilization under Medicaid and certain health benefit plans."
+  },
+  "SB 360": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB360",
+   "caption": "Relating to an advance directive and do-not-resuscitate order of a pregnant woman and information provided for an advance directive."
+  },
+  "SB 364": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB364",
+   "caption": "Relating to eligibility for tuition and fee exemptions at public institutions of higher education for certain students who were under the conservatorship of the Department of Family and Protective Services."
+  },
+  "SB 366": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB366",
+   "caption": "Relating to the consideration of ownership interests of certain persons in determining whether a business is a historically underutilized business for purposes of state contracting."
+  },
+  "SB 371": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB371",
+   "caption": "Relating to parental approval for a student's participation in human sexuality instruction in public schools."
+  },
+  "SB 395": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB395",
+   "caption": "Relating to the authority of a political subdivision to establish and operate a guaranteed income program."
+  },
+  "SB 397": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB397",
+   "caption": "Relating to rules regarding the provision by a health professional of a telemedicine medical service, teledentistry dental service, or telehealth service."
+  },
+  "SB 400": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB400",
+   "caption": "Relating to requiring parental consent for psychological or psychiatric examination, testing, or treatment conducted by a school district employee."
+  },
+  "SB 401": {
+   "status": "record",
+   "rv": 3674,
+   "date": "05/27/2025",
+   "journalPage": "6435",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB401",
+   "caption": "Relating to participation by non-enrolled students in University Interscholastic League-sponsored activities."
+  },
+  "SB 406": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB406",
+   "caption": "Relating to the required inclusion of a person's sex on a birth certificate and prohibited change of sex on the birth certificate of certain persons."
+  },
+  "SB 412": {
+   "status": "record",
+   "rv": 1343,
+   "date": "05/02/2025",
+   "journalPage": "2961",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB412",
+   "caption": "Relating to defenses to prosecution for certain offenses involving material or conduct that is obscene or otherwise harmful to children."
+  },
+  "SB 416": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB416",
+   "caption": "Relating to proof of United States citizenship for the issuance or renewal of a personal automobile insurance policy."
+  },
+  "SB 425": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB425",
+   "caption": "Relating to the creation of the child and adult protective investigations advisory committee in the Department of Family and Protective Services."
+  },
+  "SB 430": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB430",
+   "caption": "Relating to the age of a child at which a juvenile court may exercise jurisdiction over the child and to the minimum age of criminal responsibility."
+  },
+  "SB 432": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB432",
+   "caption": "Relating to the applicability of the death penalty to a capital offense committed by a person with an intellectual disability."
+  },
+  "SB 439": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB439",
+   "caption": "Relating to approval by the commissioner of education of certain contracts entered into by a school district during the pendency of certain special investigations."
+  },
+  "SB 453": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB453",
+   "caption": "Relating to the inclusion of a course on modern conflicts in the curriculum requirements for public high school students."
+  },
+  "SB 456": {
+   "status": "record",
+   "rv": 3873,
+   "date": "05/28/2025",
+   "journalPage": "6720",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB456",
+   "caption": "Relating to the purchase or sale of human organs; increasing a criminal penalty."
+  },
+  "SB 464": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB464",
+   "caption": "Relating to the operation near a public or private primary or secondary school of a retail establishment selling cigarettes, e-cigarettes, vaping apparatuses, or tobacco products; creating a criminal offense."
+  },
+  "SB 466": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB466",
+   "caption": "Relating to the definition of fetal death certificate."
+  },
+  "SB 513": {
+   "status": "record",
+   "rv": 787,
+   "date": "04/29/2025",
+   "journalPage": "2226",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB513",
+   "caption": "Relating to a rural community-based care pilot program."
+  },
+  "SB 571": {
+   "status": "record",
+   "rv": 3841,
+   "date": "05/28/2025",
+   "journalPage": "6691",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB571",
+   "caption": "Relating to the reporting and investigation of certain misconduct and child abuse and neglect; creating a criminal offense."
+  },
+  "SB 583": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB583",
+   "caption": "Relating to lists of public real property suitable for use or to be developed for use as affordable housing by certain municipalities and counties."
+  },
+  "SB 599": {
+   "status": "record",
+   "rv": 955,
+   "date": "04/30/2025",
+   "journalPage": "2423",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB599",
+   "caption": "Relating to the authority of a political subdivision to regulate a licensed, registered, or listed group day-care home or family home."
+  },
+  "SB 602": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB602",
+   "caption": "Relating to the Preparation for Adult Living Program and other services for foster children transitioning to independent living."
+  },
+  "SB 610": {
+   "status": "record",
+   "rv": 1475,
+   "date": "05/06/2025",
+   "journalPage": "3173",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB610",
+   "caption": "Relating to combating human trafficking by the Texas Department of Licensing and Regulation."
+  },
+  "SB 611": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB611",
+   "caption": "Relating to a statewide standing order prescribing epinephrine auto-injectors to public and private schools."
+  },
+  "SB 619": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB619",
+   "caption": "Relating to protection of persons from participation in a health care service for reasons of conscience; providing a civil remedy; authorizing disciplinary action."
+  },
+  "SB 633": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB633",
+   "caption": "Relating to certain offenses associated with possessing, carrying, exhibiting, or using a firearm on or within 1,000 feet of school property."
+  },
+  "SB 637": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB637",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "SB 638": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB638",
+   "caption": "Relating to the expansion of eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "SB 639": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB639",
+   "caption": "Relating to eligibility for supplemental nutrition assistance program benefits."
+  },
+  "SB 657": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB657",
+   "caption": "Relating to the expansion of eligibility for Medicaid to all individuals for whom federal matching money is available."
+  },
+  "SB 658": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB658",
+   "caption": "Relating to agreements between sheriffs and the United States Immigration and Customs Enforcement to enforce federal immigration law."
+  },
+  "SB 673": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB673",
+   "caption": "Relating to municipal and county regulation of accessory dwelling units; authorizing a fee."
+  },
+  "SB 676": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB676",
+   "caption": "Relating to the award of good conduct time to inmates."
+  },
+  "SB 686": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB686",
+   "caption": "Relating to the transfer of students between public schools."
+  },
+  "SB 703": {
+   "status": "record",
+   "rv": 1750,
+   "date": "05/08/2025",
+   "journalPage": "3531",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB703",
+   "caption": "Relating to the criminal and licensing consequences for the commission of certain offenses by massage establishments, massage schools, massage therapists, and massage therapy instructors."
+  },
+  "SB 718": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB718",
+   "caption": "Relating to creation of the groundwater science, research, and innovation fund to be administered by the Texas Water Development Board."
+  },
+  "SB 730": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB730",
+   "caption": "Relating to certain prohibited transactions and logistical support between a governmental entity and an abortion assistance entity or abortion provider for the procurement of an abortion or related services."
+  },
+  "SB 753": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB753",
+   "caption": "Relating to prohibiting certain conduct by physicians and health care providers involving gender transitioning and gender reassignment procedures and treatments for children; creating a criminal offense."
+  },
+  "SB 763": {
+   "status": "record",
+   "rv": 3887,
+   "date": "05/28/2025",
+   "journalPage": "6735",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB763",
+   "caption": "Relating to standard permits for certain concrete plants."
+  },
+  "SB 784": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB784",
+   "caption": "Relating to the transfer of certain public school students who are children of peace officers."
+  },
+  "SB 793": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB793",
+   "caption": "Relating to the prohibition on the possession of a firearm by a person following the person's conviction of certain family violence misdemeanors."
+  },
+  "SB 810": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB810",
+   "caption": "Relating to protection for a public school employee's use of terms consistent with biological sex."
+  },
+  "SB 814": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB814",
+   "caption": "Relating to automatic orders of nondisclosure of criminal history record information for certain misdemeanor defendants following successful completion of a period of deferred adjudication community supervision."
+  },
+  "SB 833": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB833",
+   "caption": "Relating to conditions applicable to health benefit plan coverage of in vitro fertilization procedures."
+  },
+  "SB 835": {
+   "status": "record",
+   "rv": 3543,
+   "date": "05/26/2025",
+   "journalPage": "6186",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB835",
+   "caption": "Relating to the enforceability of certain nondisclosure or confidentiality provisions with respect to an act of sexual abuse."
+  },
+  "SB 836": {
+   "status": "record",
+   "rv": 792,
+   "date": "04/29/2025",
+   "journalPage": "2230",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB836",
+   "caption": "Relating to victims of sex offenses, sex-based human trafficking offenses, or acts of a sexual nature and to the confidentiality of or restrictions on the availability of certain property, material, or information regarding those victims, offenses, or acts."
+  },
+  "SB 837": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB837",
+   "caption": "Relating to a family preservation services program."
+  },
+  "SB 840": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB840",
+   "caption": "Relating to certain municipal regulation of certain mixed-use and multifamily residential development projects and conversion of certain commercial buildings to mixed-use and multifamily residential occupancy."
+  },
+  "SB 844": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB844",
+   "caption": "Relating to procedures for changes to a zoning regulation or district boundary."
+  },
+  "SB 854": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB854",
+   "caption": "Relating to municipal regulation of multifamily and mixed-use development on religious land."
+  },
+  "SB 867": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB867",
+   "caption": "Relating to housing finance corporations; authorizing a fee."
+  },
+  "SB 885": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB885",
+   "caption": "Relating to who may request a public hearing from the Texas Commission on Environmental Quality related to the construction of a concrete plant."
+  },
+  "SB 895": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB895",
+   "caption": "Relating to a student's eligibility to participate in the Financial Aid for Swift Transfer (FAST) program."
+  },
+  "SB 920": {
+   "status": "record",
+   "rv": 3048,
+   "date": "05/20/2025",
+   "journalPage": "5331",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB920",
+   "caption": "Relating to the administration of nonprescription medications to certain public and private school students."
+  },
+  "SB 923": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB923",
+   "caption": "Relating to fiscal impact statements for legislation imposing mandates on health benefit plan issuers."
+  },
+  "SB 941": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB941",
+   "caption": "Relating to a screening for the risk of commercial sexual exploitation of certain children."
+  },
+  "SB 942": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB942",
+   "caption": "Relating to a court order for retroactive child support, including for retroactive child support beginning on the date of the child's conception."
+  },
+  "SB 981": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB981",
+   "caption": "Relating to the use of school buses by public schools."
+  },
+  "SB 983": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB983",
+   "caption": "Relating to local school health advisory councils and instruction regarding human sexuality, sexual orientation, and gender identity provided by public schools."
+  },
+  "SB 990": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB990",
+   "caption": "Relating to increasing the punishment for certain conduct constituting the offense of murder."
+  },
+  "SB 1006": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1006",
+   "caption": "Relating to declination, cancellation, or nonrenewal of insurance policies."
+  },
+  "SB 1031": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1031",
+   "caption": "Relating to eligibility for and benefits under the supplemental nutrition assistance program."
+  },
+  "SB 1053": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1053",
+   "caption": "Relating to the consequences of a criminal conviction on a person's eligibility for an occupational license."
+  },
+  "SB 1073": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1073",
+   "caption": "Relating to discrimination against or burdening certain constitutional rights of an applicant for or holder of a license to practice law in this state."
+  },
+  "SB 1094": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1094",
+   "caption": "Relating to certain sentencing procedures in a capital case."
+  },
+  "SB 1101": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1101",
+   "caption": "Relating to the prosecution of the offense of smuggling of persons."
+  },
+  "SB 1120": {
+   "status": "record",
+   "rv": 3318,
+   "date": "05/23/2025",
+   "journalPage": "5762",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1120",
+   "caption": "Relating to rights of a victim, guardian of a victim, or close relative of a deceased victim in certain criminal cases involving family violence, sexual or assaultive offenses, stalking, or a violation of a protective order or condition of bond and to the duration of certain protective orders."
+  },
+  "SB 1124": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1124",
+   "caption": "Relating to discovery in a criminal case."
+  },
+  "SB 1149": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1149",
+   "caption": "Relating to the regulation of child welfare, including licensure, community-based care contractors, family homes, and child-care facilities."
+  },
+  "SB 1172": {
+   "status": "record",
+   "rv": 1369,
+   "date": "05/05/2025",
+   "journalPage": "3003",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1172",
+   "caption": "Relating to exempting certain transactions from regulation by the Texas Real Estate Commission."
+  },
+  "SB 1174": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1174",
+   "caption": "Relating to the administration of nonprescription medications to certain public and private school students."
+  },
+  "SB 1175": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1175",
+   "caption": "Relating to the biennial adjustment of certain towing fees and maximum charges."
+  },
+  "SB 1205": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1205",
+   "caption": "Relating to the provision of certain public benefits and services to persons not lawfully present in the United States."
+  },
+  "SB 1207": {
+   "status": "record",
+   "rv": 3832,
+   "date": "05/28/2025",
+   "journalPage": "6671",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1207",
+   "caption": "Relating to instruction on adoption in the parenting and paternity awareness program in public schools."
+  },
+  "SB 1224": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1224",
+   "caption": "Relating to the reporting of certain public or private school employee misconduct to local law enforcement."
+  },
+  "SB 1233": {
+   "status": "record",
+   "rv": 3925,
+   "date": "05/28/2025",
+   "journalPage": "6798",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1233",
+   "caption": "Relating to information regarding perinatal palliative care; creating an administrative penalty."
+  },
+  "SB 1237": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1237",
+   "caption": "Relating to the exemption from ad valorem taxation of certain property owned by a charitable organization that is engaged in providing housing and related facilities and services to persons who are at least 62 years of age."
+  },
+  "SB 1238": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1238",
+   "caption": "Relating to prohibited insurance discrimination on the basis of an insured's marital status following the death of the insured's spouse."
+  },
+  "SB 1257": {
+   "status": "record",
+   "rv": 2153,
+   "date": "05/12/2025",
+   "journalPage": "4044",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1257",
+   "caption": "Relating to required health benefit plan coverage for gender transition adverse effects and reversals."
+  },
+  "SB 1278": {
+   "status": "record",
+   "rv": 3356,
+   "date": "05/23/2025",
+   "journalPage": "5801",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1278",
+   "caption": "Relating to an affirmative defense to prosecution for victims of trafficking of persons or compelling prostitution."
+  },
+  "SB 1282": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1282",
+   "caption": "Relating to authorizing adoption assistance agreements for certain children after a final adoption order is rendered."
+  },
+  "SB 1302": {
+   "status": "record",
+   "rv": 3918,
+   "date": "05/28/2025",
+   "journalPage": "6769",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1302",
+   "caption": "Relating to eligibility to use a general permit to discharge waste into or adjacent to waters in this state."
+  },
+  "SB 1303": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1303",
+   "caption": "Relating to the capacity of minors to consent to contraception-related examination or medical treatment."
+  },
+  "SB 1306": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1306",
+   "caption": "Relating to the age of criminal responsibility and to certain substantive and procedural matters related to that age."
+  },
+  "SB 1315": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1315",
+   "caption": "Relating to county and municipal authority to prohibit the sale of cigarettes, e-cigarettes, or tobacco products near certain locations."
+  },
+  "SB 1316": {
+   "status": "record",
+   "rv": 1573,
+   "date": "05/07/2025",
+   "journalPage": "3310",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1316",
+   "caption": "Relating to a prohibition on e-cigarette advertising in certain locations."
+  },
+  "SB 1325": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1325",
+   "caption": "Relating to contracting by public and private schools for the provision of medication for respiratory distress and training in administering that medication."
+  },
+  "SB 1327": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1327",
+   "caption": "Relating to the cremation of human remains by alkaline hydrolysis."
+  },
+  "SB 1374": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1374",
+   "caption": "Relating to the administration of epinephrine medication by public and private schools."
+  },
+  "SB 1385": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1385",
+   "caption": "Relating to the unlawful acquisition of certain weapons; creating a criminal offense."
+  },
+  "SB 1388": {
+   "status": "record",
+   "rv": 3038,
+   "date": "05/20/2025",
+   "journalPage": "5324",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1388",
+   "caption": "Relating to family support services provided under a Health and Human Services Commission program."
+  },
+  "SB 1428": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1428",
+   "caption": "Relating to persons not eligible for employment in public schools and to measures to ensure public schools do not employ those persons."
+  },
+  "SB 1437": {
+   "status": "record",
+   "rv": 790,
+   "date": "04/29/2025",
+   "journalPage": "2228",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1437",
+   "caption": "Relating to the eligibility of certain individuals for certification as certain juvenile officers or employees of a juvenile facility."
+  },
+  "SB 1462": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1462",
+   "caption": "Relating to the placement on community supervision, including deferred adjudication community supervision, of a defendant who is the primary caretaker of a child."
+  },
+  "SB 1481": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1481",
+   "caption": "Relating to the treatment for ad valorem tax purposes of land and equipment used for hydroponic farming."
+  },
+  "SB 1521": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1521",
+   "caption": "Relating to the regulation of abortion and related matters, including the repeal of certain abortion laws, a deposition request before filing certain civil actions, and municipal or county authority to prohibit movement."
+  },
+  "SB 1558": {
+   "status": "record",
+   "rv": 3884,
+   "date": "05/28/2025",
+   "journalPage": "6732",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1558",
+   "caption": "Relating to the liability of nonprofit entities contracted with the Department of Family and Protective Services or with a single source continuum contractor to provide community-based care or child welfare services."
+  },
+  "SB 1587": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1587",
+   "caption": "Relating to the enforceability of certain nondisclosure or confidentiality provisions with respect to an act of sexual abuse committed against a child."
+  },
+  "SB 1602": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1602",
+   "caption": "Relating to creating the criminal offense of trespass on or near school or day-care center property."
+  },
+  "SB 1619": {
+   "status": "record",
+   "rv": 959,
+   "date": "04/30/2025",
+   "journalPage": "2426",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1619",
+   "caption": "Relating to the use of an epinephrine delivery system by certain entities."
+  },
+  "SB 1621": {
+   "status": "record",
+   "rv": 3372,
+   "date": "05/23/2025",
+   "journalPage": "5814",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1621",
+   "caption": "Relating to prosecution and punishment of certain criminal offenses prohibiting sexually explicit visual material involving depictions of children, computer-generated children, or other persons; creating criminal offenses; increasing criminal penalties."
+  },
+  "SB 1633": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1633",
+   "caption": "Relating to the authority of a county commissioners court to adopt an exemption from ad valorem taxation by each taxing unit that taxes the property of the portion of the appraised value of a person's property that is attributable to the installation in or on the property of certain water conservation systems."
+  },
+  "SB 1654": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1654",
+   "caption": "Relating to definition of abuse of a child, the reporting of child abuse and neglect, and certain required notifications about reports of child abuse and neglect."
+  },
+  "SB 1663": {
+   "status": "record",
+   "rv": 3656,
+   "date": "05/27/2025",
+   "journalPage": "6417",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1663",
+   "caption": "Relating to notification procedures concerning groundwater contamination."
+  },
+  "SB 1682": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1682",
+   "caption": "Relating to exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "SB 1727": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1727",
+   "caption": "Relating to procedures related to juvenile justice proceedings, the adjudication and disposition of cases involving delinquent conduct, and certain offenses or conduct committed by a child or by a person placed in or committed to certain juvenile facilities; changing the eligibility for community supervision."
+  },
+  "SB 1728": {
+   "status": "record",
+   "rv": 3134,
+   "date": "05/21/2025",
+   "journalPage": "5462",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1728",
+   "caption": "Relating to the participation of certain juvenile justice entities in the Jobs and Education for Texans (JET) Grant Program."
+  },
+  "SB 1742": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1742",
+   "caption": "Relating to required instruction in the Success Sequence for students in public schools."
+  },
+  "SB 1798": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1798",
+   "caption": "Relating to the resident status, tuition rates, certain financial support, and certain documentation requirements for students enrolled at public institutions of higher education, including students not lawfully present in the United States."
+  },
+  "SB 1828": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1828",
+   "caption": "Relating to human trafficking prevention, including training for medical assistants, disclosure of human trafficking information by certain health care facilities, and protection for facility employees who report human trafficking."
+  },
+  "SB 1829": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1829",
+   "caption": "Relating to human trafficking prevention, including training for first responders, disclosure of human trafficking information by certain health care facilities, and protection for facility employees who report human trafficking."
+  },
+  "SB 1836": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1836",
+   "caption": "Relating to the evaluation of applications for certain financial assistance administered by the Texas Department of Housing and Community Affairs."
+  },
+  "SB 1860": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1860",
+   "caption": "Relating to the applicability of laws protecting minors from harmful material on digital services."
+  },
+  "SB 1889": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1889",
+   "caption": "Relating to vision screenings for students in public or private school, including vision screening information reporting for public school students and the creation of a matching grant program for visual devices for certain students."
+  },
+  "SB 1906": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1906",
+   "caption": "Relating to increasing the interest rate of certain consumer loans."
+  },
+  "SB 1999": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB1999",
+   "caption": "Relating to protection for a public employee's or student's use of terms consistent with biological sex."
+  },
+  "SB 2018": {
+   "status": "record",
+   "rv": 3931,
+   "date": "05/28/2025",
+   "journalPage": "6809",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2018",
+   "caption": "Relating to the strong families credit against certain taxes for entities that contribute to certain organizations."
+  },
+  "SB 2023": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2023",
+   "caption": "Relating to the establishment of a grant program to support the disposition of deceased paupers' bodies."
+  },
+  "SB 2082": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2082",
+   "caption": "Relating to the operation of a concrete crushing facility near a hospital."
+  },
+  "SB 2101": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2101",
+   "caption": "Relating to the prohibition of access by minors to sexually explicit materials in municipal public library collections; providing a civil penalty."
+  },
+  "SB 2187": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2187",
+   "caption": "Relating to the administration of assessment instruments to public school students."
+  },
+  "SB 2195": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2195",
+   "caption": "Relating to the reporting of certain orders and convictions to the Department of Public Safety and Federal Bureau of Investigation for use with the National Instant Criminal Background Check System for the transfer of firearms."
+  },
+  "SB 2244": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2244",
+   "caption": "Relating to the eligibility of certain persons to provide services as an employee, volunteer, or contractor for certain agencies, including public school contractors, and access to the registry of persons who are not eligible for employment at public schools."
+  },
+  "SB 2252": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2252",
+   "caption": "Relating to measures to support kindergarten readiness and early literacy and numeracy skills for public school students, including an early childhood parental support program and prekindergarten programs in public schools, and to funding under the Foundation School Program for certain school districts and to support those measures."
+  },
+  "SB 2275": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2275",
+   "caption": "Relating to the submission of public comments regarding air, waste, or water permits issued by the Texas Commission on Environmental Quality."
+  },
+  "SB 2304": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2304",
+   "caption": "Relating to the age at which a juvenile court may exercise jurisdiction over a child and to the minimum age of criminal responsibility."
+  },
+  "SB 2305": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2305",
+   "caption": "Relating to extreme risk protective orders; creating criminal offenses."
+  },
+  "SB 2338": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2338",
+   "caption": "Relating to the award of work-for-time credits to certain persons released on parole or to mandatory supervision."
+  },
+  "SB 2340": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2340",
+   "caption": "Relating to examination of the records of filing entities and foreign filing entities by the attorney general; creating a criminal offense."
+  },
+  "SB 2352": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2352",
+   "caption": "Relating to prohibiting transporting or funding the transportation of an unemancipated minor for an abortion; providing a civil penalty; creating a criminal offense."
+  },
+  "SB 2357": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2357",
+   "caption": "Relating to a maternal health training program for certain health care providers."
+  },
+  "SB 2392": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2392",
+   "caption": "Relating to notice to local law enforcement of certain offenses occurring on public or private school property or at school-sponsored or school-related activities; providing a civil penalty."
+  },
+  "SB 2414": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2414",
+   "caption": "Relating to prohibiting the regulation of homeschool programs."
+  },
+  "SB 2435": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2435",
+   "caption": "Relating to the prosecution of the offenses of trafficking of persons and continuous trafficking of persons."
+  },
+  "SB 2447": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2447",
+   "caption": "Relating to reporting requirements for assisted reproductive technology, including in vitro fertilization."
+  },
+  "SB 2456": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2456",
+   "caption": "Relating to religious programs and activities available to inmates of the Texas Department of Criminal Justice."
+  },
+  "SB 2465": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2465",
+   "caption": "Relating to a study by the Texas Education Agency and Texas Higher Education Coordinating Board regarding standardizing transcripts for public schools."
+  },
+  "SB 2477": {
+   "status": "record",
+   "rv": 3848,
+   "date": "05/28/2025",
+   "journalPage": "6697",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2477",
+   "caption": "Relating to certain municipal regulation of conversion of certain office buildings to mixed-use and multifamily residential occupancy."
+  },
+  "SB 2560": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2560",
+   "caption": "Relating to the issuance of a warrant authorizing the use of a no-knock entry by a peace officer."
+  },
+  "SB 2574": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2574",
+   "caption": "Relating to preserving religious liberty from nativist jurisprudence."
+  },
+  "SB 2601": {
+   "status": "record",
+   "rv": 3373,
+   "date": "05/23/2025",
+   "journalPage": "5815",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2601",
+   "caption": "Relating to the landowner compensation program."
+  },
+  "SB 2618": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2618",
+   "caption": "Relating to an education savings account program."
+  },
+  "SB 2626": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2626",
+   "caption": "Relating to ectopic pregnancies and continuing education for certain physicians and nurses regarding treatment of certain pregnancy-related conditions."
+  },
+  "SB 2678": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2678",
+   "caption": "Relating to the determination of resident status of students by public institutions of higher education."
+  },
+  "SB 2715": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2715",
+   "caption": "Relating to sexual abuse and assault prevention training for employees of amusement ride operators."
+  },
+  "SB 2721": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2721",
+   "caption": "Relating to the deceased, including requirements for donating or claiming bodies or anatomical specimens, the licensing and regulation of persons who provide services or conduct education or research in relation to the deceased, and responsibilities of political subdivisions for certain bodies after death; creating criminal offenses; authorizing administrative penalties; requiring occupational licenses; authorizing fees."
+  },
+  "SB 2727": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2727",
+   "caption": "Relating to the regulation of abortion and related matters, including infant supportive palliative care and exceptions to and the repeal of certain laws prohibiting abortion."
+  },
+  "SB 2741": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2741",
+   "caption": "Relating to the appointment of counsel for indigent defendants or juveniles in certain capital felony cases."
+  },
+  "SB 2749": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2749",
+   "caption": "Relating to the definition of abuse or neglect of a child."
+  },
+  "SB 2768": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2768",
+   "caption": "Relating to certain health care services, increasing access to health care, and repealing or replacing medically unnecessary and outdated health care restrictions."
+  },
+  "SB 2789": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2789",
+   "caption": "Relating to the prosecution of and punishment for the criminal offense of invasive visual recording and the applicability of sex offender registration requirements to that offense; increasing a criminal penalty."
+  },
+  "SB 2913": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2913",
+   "caption": "Relating to air quality permits for certain cement kilns."
+  },
+  "SB 2943": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2943",
+   "caption": "Relating to the prohibition of certain actions by a state agency against an applicant for or holder of an occupational license."
+  },
+  "SB 2961": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2961",
+   "caption": "Relating to wrongful death actions arising from the death of an unborn child resulting from an abortion."
+  },
+  "SB 2973": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB2973",
+   "caption": "Relating to the exemption from ad valorem taxation of property owned by certain nonprofit corporations and used to promote agriculture, support youth, and provide educational support in the community."
+  },
+  "SB 3000": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB3000",
+   "caption": "Relating to consumer protections for earned wage access products."
+  },
+  "SB 3008": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SB3008",
+   "caption": "Relating to the transfer of public school students who are children of certain public servants."
+  },
+  "SCR 42": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SCR42",
+   "caption": "Urging the state to adopt the policy to recognize two sexes, male and female."
+  },
+  "SJR 6": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SJR6",
+   "caption": "Proposing a constitutional amendment requiring the state to expand eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "SJR 12": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SJR12",
+   "caption": "Proposing a constitutional amendment establishing a parent's right to direct a child's education."
+  },
+  "SJR 20": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SJR20",
+   "caption": "Proposing a constitutional amendment establishing an individual's right to personal reproductive autonomy."
+  },
+  "SJR 32": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SJR32",
+   "caption": "Proposing a constitutional amendment requiring the state to expand eligibility for Medicaid to certain individuals under the federal Patient Protection and Affordable Care Act."
+  },
+  "SJR 34": {
+   "status": "record",
+   "rv": 2494,
+   "date": "05/14/2025",
+   "journalPage": "4603",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SJR34",
+   "caption": "Proposing a constitutional amendment affirming the rights and responsibilities of parents."
+  },
+  "SJR 60": {
+   "status": "not-passed",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SJR60",
+   "caption": "Proposing a constitutional amendment to authorize the commissioners court of a county to exempt from ad valorem taxation by each political subdivision that taxes the property the portion of the assessed value of a person's property that is attributable to the installation in or on the property of a rainwater harvesting or graywater system."
+  },
+  "SR 2961": {
+   "status": "no-such-bill",
+   "url": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=SR2961"
+  }
+ }
+}

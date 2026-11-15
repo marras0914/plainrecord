@@ -213,6 +213,14 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   details.earlier summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
   .jump{display:flex;flex-wrap:wrap;gap:2px 14px;list-style:none;padding:0;font-size:14.5px}
   .jump li{margin:0}.jump a{display:inline-block;min-height:32px;padding:4px 0}
+  .tablewrap{overflow-x:auto;margin:8px 0}
+  table.hv{border-collapse:collapse;font-size:15px;min-width:100%}
+  table.hv th,table.hv td{padding:6px 10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  table.hv td{font-variant-numeric:tabular-nums}
+  ul.tally{list-style:none;padding:0;margin:4px 0 6px;font-size:15px}
+  ul.tally li{margin:2px 0}
+  .way{font-weight:600}
+  p.caption{font-family:"Newsreader",Georgia,serif;font-size:1.02rem;color:var(--ink-2);margin:2px 0 6px}
   </style>
   <h1>How the faith pages were made</h1>
   <p class="lede">These pages report what five Christian traditions have officially said and what the parties' platforms say. They never decide what "the Christian position" is.</p>
@@ -246,6 +254,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   <p>The same program finds no Bible reference in any of the four platforms.</p>
   <p class="small">Verse text: the World English Bible in English and the Reina-Valera 1909 in Spanish, both public domain, from eBible.org.</p>
 
+  <h2>Votes on bills a church took a side on</h2>
+  <p>Where a church has itself said it supports or opposes a specific Texas bill, a page shows how each party in the Texas House voted on that bill when it passed. The site never decides which way a church’s teaching points on a bill. Of the five churches, only the Texas Catholic bishops publish such a list, so there is one such page: <a href="https://rightnleft.com/faith/catholic/texas-house">The Texas House and the Catholic bishops’ bills, 2025</a>. Its count is for that one church and is not added to anything else.</p>
+
   <h2>How every quote is checked</h2>
   <p>Every source is downloaded and read as text. A script checks every quote, all 63 of them, against that text word for word, and checks that a quote with one word changed is not found, so the check is known to be able to fail. Every claim that a platform says nothing on an issue is checked the same way: none of the issue's words may appear in the platform. That check was added after a draft summary wrongly said the national Republican platform did not otherwise address the environment.</p>
 
@@ -255,7 +266,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   <ul><li>The United Methodist Church: Book of Resolutions 4273 (Global Migration and the Quest for Justice) and 4275 (Concerning Immigration), in full; only quotations on umc.org have been read.</li><li>The United Methodist Church: The Social Principles text itself (2024 revision), rather than the church's page quoting it.</li><li>Catholic Church in the United States: Other statements approved by the full body of bishops on immigration (for example Strangers No Longer, 2003, with the Mexican bishops).</li><li>African Methodist Episcopal Church: AME General Conference resolutions, which outrank the Council of Bishops; none found online so far.</li></ul>
 
   <h2>What these pages do not do</h2>
-  <p>They do not score any party or any church, on the page, on a share card or in the data. They do not say which party is "more Christian", and they do not interpret scripture. Where traditions disagree with each other, the pages show the disagreement. And members of every tradition hold a range of views.</p>
+  <p>They give no party and no church a score or a ranking, on the page, on a share card or in the data. The one count on these pages is on the Texas House page: on bills the Texas Catholic bishops themselves took a side on, how often each party’s majority voted their way. It covers that one church, is never combined with another, and is not a verdict on which party is “more Christian”. The pages do not interpret scripture. Where traditions disagree with each other, the pages show the disagreement. And members of every tradition hold a range of views.</p>
 
   <h2>The data</h2>
   <p>Everything on these pages is in one file, free to reuse (CC0). <a href="/data/faith.json">Download the whole record (faith.json, CC0)</a></p>

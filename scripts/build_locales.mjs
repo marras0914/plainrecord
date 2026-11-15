@@ -35,7 +35,7 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { footerHtml } from './_site_nav.mjs';
-import { FAITH_PATHS, TRADITION_SLUG, traditionPath } from './_faith_copy.mjs';
+import { FAITH_PATHS, TRADITION_SLUG, traditionPath, houseVotesPath } from './_faith_copy.mjs';
 
 // The faith pages, with what each is, for the sitemap and llms.txt.
 const FAITH_TRADITION_EN = {
@@ -48,6 +48,7 @@ const FAITH_LABELS = Object.fromEntries(['en', 'es'].flatMap((lang) => {
     [`/${FAITH_PATHS[lang].home}`, `What five Christian traditions officially say on eight issues, beside the Texas and national party platforms, ${inLang}`],
     [`/${FAITH_PATHS[lang].method}`, `How the faith pages were made, ${inLang}`],
     ...Object.keys(TRADITION_SLUG).map((id) => [`/${traditionPath(id, lang)}`, `What ${FAITH_TRADITION_EN[id]} officially says on eight issues, beside the party platforms, ${inLang}`]),
+    [`/${houseVotesPath('catholic', lang)}`, `How each party in the Texas House voted in 2025 on the bills the Texas Catholic bishops supported or opposed, ${inLang}`],
   ];
 }));
 
