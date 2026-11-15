@@ -5,7 +5,7 @@
     "register": "usted, as in copy.json, plain rather than formal. The worksheet speaks to students, so tu would also be defensible; that is a deliberate choice for the reviewer, not a drift.",
     "placeholders": "Names in {braces} are filled by the builder: dates come from public/data/election_tx.json, formatted per language, so a moved date cannot leave a stale one in either PDF.",
     "markup": "Inline <b> and <i> only. The template owns the blanks, tables and layout.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 7 October 2026, all 70 strings, no corrections. Kept as drafted: usted with students, the /maestros slug alongside the neutral \"Para docentes\", \"no partidista\" for nonpartisan, and \"alguien que lo leyó\" for the reader who caught the lean."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 7 October 2026, all 70 strings, no corrections. Kept as drafted: usted with students, the /maestros slug alongside the neutral \"Para docentes\", \"no partidista\" for nonpartisan, and \"alguien que lo leyó\" for the reader who caught the lean. cls.docTitle (Spanish) shortened for search results, approved by Marco on 14 November 2026, no corrections."
   },
 
   "ws.kicker": { "en": "Texas Government · student worksheet · about 30 minutes", "es": "Gobierno de Texas · hoja de trabajo · unos 30 minutos", "status": "ok" },
@@ -54,7 +54,7 @@
   "ws.t5": { "en": "All 3,546 House floor votes from 2025 are free to download (rightnleft.com/open-data) for a data or statistics extension.", "es": "Los 3,546 votos de la Cámara en 2025 se pueden descargar gratis (rightnleft.com/open-data, en inglés) para una actividad de datos o estadística.", "status": "ok" },
   "ws.foot2": { "en": "Made by Marco Arras, McKinney, Texas · Public domain (CC0): copy, print and adapt freely · rightnleft.com/classroom", "es": "Hecho por Marco Arras, McKinney, Texas · Dominio público (CC0): cópiela, imprímala y adáptela con libertad · rightnleft.com/maestros", "status": "ok" },
 
-  "cls.docTitle": { "en": "Free Texas House voting worksheet for Texas Government classes", "es": "Hoja de trabajo gratis sobre los votos de la Cámara de Texas para clases de Gobierno", "status": "ok" },
+  "cls.docTitle": { "en": "Free Texas House voting worksheet for Texas Government classes", "es": "Hoja gratis para clases de Gobierno: votos de la Cámara de Texas", "status": "ok" },
   "cls.kicker": { "en": "For teachers · 2026 election", "es": "Para docentes · elección de 2026", "status": "ok" },
   "cls.title": { "en": "How did your Texas House member vote? A free classroom worksheet", "es": "¿Cómo votó su representante en la Cámara de Texas? Una hoja de trabajo gratis para la clase", "status": "ok" },
   "cls.desc": { "en": "A free two-page worksheet for Texas Government classes: students find their House district, chart how their representative voted in 2025, and ask whether a quiz built from real votes can be fair.", "es": "Una hoja de trabajo gratis de dos páginas para clases de Gobierno de Texas: sus estudiantes encuentran su distrito, anotan cómo votó su representante en 2025 y se preguntan si un cuestionario hecho con votos reales puede ser justo.", "status": "ok" },

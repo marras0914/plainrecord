@@ -3,7 +3,7 @@
     "what": "The words of the three-space structure (decided by Marco, 14 Nov 2026): the nav and footer labels (scripts/_site_nav.mjs), the front page at / and /es (scripts/build_home.mjs), and the Policy hub at /policy and /politica (scripts/build_hubs.mjs).",
     "why": "The same gate as faith.json and economy.json: nothing builds while any entry is not status ok. HOME_DRAFT=1 lifts that for a local look and must never be set on Vercel.",
     "register": "usted, plain rather than formal, as in copy.json.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 14 November 2026, all 25 strings, no corrections."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 14 November 2026, all 25 strings, no corrections. home.desc shortened for search results, approved by Marco on 14 November 2026, no corrections."
   },
   "nav.policy": {
     "en": "Policy",
@@ -41,8 +41,8 @@
     "status": "ok"
   },
   "home.desc": {
-    "en": "How the Texas House voted in 2025, what five Christian traditions officially say beside the party platforms, and the economy under each party since 1949. Every page shows its sources, and the data is free to download.",
-    "es": "Cómo votó la Cámara de Texas en 2025, lo que cinco tradiciones cristianas dicen oficialmente junto a las plataformas de los partidos, y la economía con cada partido desde 1949. Cada página muestra sus fuentes, y los datos se pueden descargar gratis.",
+    "en": "How the Texas House voted in 2025, what five Christian traditions say beside the party platforms, and the economy under each party since 1949.",
+    "es": "Cómo votó la Cámara de Texas en 2025, lo que dicen cinco tradiciones cristianas junto a las plataformas, y la economía con cada partido desde 1949.",
     "status": "ok"
   },
   "home.lede": {

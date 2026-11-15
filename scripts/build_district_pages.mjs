@@ -237,14 +237,6 @@ function fetchedDate(lang) {
 const seatOf = (d) => [...(ballot.seats[d] ?? [])]
   .sort((a, b) => a.writeIn - b.writeIn || PARTY_ORDER.indexOf(a.party) - PARTY_ORDER.indexOf(b.party));
 
-/**
- * "Brad Bailey (R), Moniqua' S. Scott (D), Jessi Cowart (L)", for the search
- * description. Printed candidates only: a write-in's name is not on the ballot,
- * and the description is the line a searcher reads before deciding to click.
- */
-const ballotLine = (d) => seatOf(d).filter((x) => !x.writeIn)
-  .map((x) => `${ballotName(x.name)} (${x.party})`).join(', ');
-
 function ballotBlock(m, lang) {
   const c = COPY[lang];
   const seat = seatOf(m.d);
@@ -278,22 +270,28 @@ const andList = (xs, and) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).j
 // list of 1% slivers would describe a district that does not exist.
 const mostlyUnincorporated = (p) => p.outsideAnyPlace >= 0.5;
 
-/** The short form for the search description: three places, and the counties. */
-function whereShort(d, lang) {
+
+/**
+ * The places for the search description, shortest useful form: the three
+ * largest places in the district, or, where most of it lies outside any
+ * place, its counties. From data/district_places_2020.json, like the page's
+ * own "Where District N is" section.
+ */
+function placesShort(d, lang) {
   const p = places[d];
-  const cs = p.counties.map((c) => c.name);
   const top = p.places.slice(0, 3).map((x) => x.name);
-  const L = lang === 'es'
-    ? { and: 'y', some: 'Incluye todo o parte de', mostly: 'Sobre todo zonas no incorporadas',
-      one: (c) => `condado de ${c}`, many: (xs) => `${cs.length > 3 ? 'sobre todo los ' : ''}condados de ${andList(xs, 'y')}` }
-    : { and: 'and', some: 'Takes in all or part of', mostly: 'Mostly unincorporated',
-      one: (c) => `${c} County`, many: (xs) => `${cs.length > 3 ? 'mainly ' : ''}${andList(xs, 'and')} counties` };
-  const county = cs.length === 1 ? L.one(cs[0]) : L.many(cs.slice(0, 3));
+  const cs = p.counties.slice(0, 3).map((c) => c.name);
   if (mostlyUnincorporated(p) || !top.length) {
-    return lang === 'es' ? `${L.mostly} del ${county}.` : `${L.mostly} ${county}.`;
+    return lang === 'es'
+      ? (cs.length === 1 ? `condado de ${cs[0]}` : `condados de ${andList(cs, 'y')}`)
+      : (cs.length === 1 ? `${cs[0]} County` : `${andList(cs, 'and')} counties`);
   }
-  return `${L.some} ${andList(top, L.and)} (${county}).`;
+  return andList(top, lang === 'es' ? 'y' : 'and');
 }
+
+/** The first description that fits what a search result shows, else the shortest. */
+const DESC_MAX = 160;
+const fitDesc = (forms) => forms.find((t) => [...t].length <= DESC_MAX) ?? forms.at(-1);
 
 function whereBlock(m, lang) {
   const c = COPY[lang];
@@ -317,20 +315,24 @@ const COPY = {
     other: 'es', siteName: 'The Purple Strip', target: `${SITE}/quiz`,
     kicker: 'Texas House · 2025 session',
     title: (m) => `${m.n}, Texas House District ${m.d}`,
-    // The search-result title. Until the election, the district and "candidates
-    // 2026" lead, because that is the search a voter types and on the 24 open
-    // seats the member's name is not one any candidate carries. The member's
-    // record follows, for the "<name> voting record" search the page began with.
-    // Same pattern on every page, whoever holds the seat.
-    docTitle: (m) => `Texas House District ${m.d} candidates 2026 · ${m.n} voting record`,
+    // The search-result title. From 30 Sep to the 3 Nov 2026 election it led
+    // with "candidates 2026", the search a voter typed then. After the election
+    // (changed 14 Nov 2026) it is back to the member's record, the title Marco
+    // approved before that: "<name> voting record" is how people search a rep.
+    docTitle: (m) => `${m.n} voting record, Texas House District ${m.d}`,
     // Shorter forms, used in order only when the one before runs past 70
-    // characters. Bing's site scan flagged 185 titles over 70 on 6 October 2026,
-    // and search results cut them off. Each drops words from the end, never adds
-    // any, so the district and "candidates 2026" always lead.
-    docTitleShorter: [(m) => `Texas House District ${m.d} candidates 2026 · ${m.n}`],
-    // The candidates are named so a search for a challenger can find the page.
-    desc: (m, r, line) => `On the November 3, 2026 ballot for Texas House District ${m.d}: ${line}. `
-      + `${whereShort(m.d, 'en')} Plus how ${m.n} voted on 67 recorded House votes from 2025. Free, no cookies.`,
+    // characters (Bing flags titles over 70, and results cut them off). Each
+    // drops words from the end, never adds any.
+    docTitleShorter: [(m) => `${m.n} voting record`],
+    // The search description, led by the record and the places the district
+    // takes in (people search a town, not a district number). It named the 2026
+    // ballot until the election; the ballot stays on the page. Fitted to the
+    // ~160 characters a result shows, dropping from the end (fitDesc).
+    desc: (m) => fitDesc([
+      `How ${m.n} voted on 67 recorded Texas House votes in 2025, as the member for District ${m.d} (${placesShort(m.d, 'en')}). Free, no cookies.`,
+      `How ${m.n} voted on 67 recorded Texas House votes in 2025, as the member for District ${m.d} (${placesShort(m.d, 'en')}).`,
+      `How ${m.n} voted on 67 recorded Texas House votes in 2025, as the member for District ${m.d}.`,
+    ]),
     h2where: (m) => `Where District ${m.d} is`,
     whereCounties: (m, cs, pop) => (cs.length === 1
       ? `District ${m.d} is in ${cs[0].name} County, and ${pop} people lived in it at the 2020 Census.`
@@ -392,17 +394,16 @@ const COPY = {
     other: 'en', siteName: 'La Franja Morada', target: `${SITE}/es/cuestionario`,
     kicker: 'Cámara de Texas · Sesión de 2025',
     title: (m) => `${m.n}, Distrito ${m.d} de la Cámara de Texas`,
-    // Approved 30 September 2026. "candidatos" rather than the page's
-    // "candidaturas" on purpose: it is the word people type into a search box.
-    docTitle: (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026 · historial de ${m.n}`,
-    // The approved title with words taken off the end, nothing new written.
-    docTitleShorter: [
-      (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026 · ${m.n}`,
-      (m) => `Distrito ${m.d} de la Cámara de Texas: candidatos 2026`,
-    ],
-    desc: (m, r, line) => `En la boleta del 3 de noviembre de 2026 para el Distrito ${m.d} de la Cámara de Texas: ${line}. `
-      + `${whereShort(m.d, 'es')} Además, cómo votó ${m.n} en 67 votos registrados de la Cámara en 2025. Gratis y sin cookies.`,
-    // The ten "where" strings and whereShort's Spanish were written and
+    // Back to the title approved before the 2026 election (changed 14 Nov 2026),
+    // with words taken off the end when it runs past 70, nothing new written.
+    docTitle: (m) => `${m.n}: historial de votos, Distrito ${m.d} de la Cámara de Texas`,
+    docTitleShorter: [(m) => `${m.n}: historial de votos, Distrito ${m.d}`],
+    desc: (m) => fitDesc([
+      `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, como representante del Distrito ${m.d} (${placesShort(m.d, 'es')}). Gratis y sin cookies.`,
+      `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, como representante del Distrito ${m.d} (${placesShort(m.d, 'es')}).`,
+      `Cómo votó ${m.n} en 67 votos registrados de la Cámara de Texas en 2025, como representante del Distrito ${m.d}.`,
+    ]),
+    // The ten "where" strings were written and
     // approved on 5 October 2026.
     h2where: (m) => `Dónde queda el Distrito ${m.d}`,
     whereCounties: (m, cs, pop) => (cs.length === 1
@@ -559,7 +560,7 @@ function render(m, lang) {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     name: c.title(m),
-    description: c.desc(m, r, ballotLine(m.d)),
+    description: c.desc(m),
     inLanguage: lang === 'es' ? 'es-US' : 'en-US',
     url: canonical,
     isPartOf: { '@type': 'WebSite', name: c.siteName, url: SITE },
@@ -572,7 +573,7 @@ function render(m, lang) {
 
   return document_({
     lang, otherLang: c.other, title: c.title(m), docTitle: fitTitle([c.docTitle, ...c.docTitleShorter].map((f) => f(m))), siteName: c.siteName,
-    desc: c.desc(m, r, ballotLine(m.d)), canonical, altHref, altLabel: c.langSwitch,
+    desc: c.desc(m), canonical, altHref, altLabel: c.langSwitch,
     ogImage: cardsFresh() ? districtCard(m.d, lang) : `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
     jsonld, faces, kicker: c.kicker, body,
   });
