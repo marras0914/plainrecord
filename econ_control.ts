@@ -223,15 +223,57 @@ export const FED_APPOINTMENTS: FedAppointment[] = [
 ];
 
 /**
- * Redesignations before the 1977 Reform Act (see KNOWN_GAPS). Each is the
- * date its chair's previous four-year term ran out, from the Board's tenure
- * table: from that date on, which president's appointment was in force is
- * unknown until a primary source is read, and fedAppointingParty() throws.
+ * Redesignations before the 1977 Reform Act, each from the Board's own
+ * announcement in the Federal Reserve Bulletin, read on FRASER on 14 Nov 2026
+ * (through a browser: FRASER times out for scripts). Before 1977 the President
+ * designated the chair by Order, without the Senate, so these are not in
+ * congress.gov or the Congressional Record (see the note on KNOWN_GAPS).
+ *
+ * WHO is written as the Bulletin names or dates it, and the smoke test checks
+ * it against the president in office on the Order's date. FROM is the start of
+ * the four-year term the Order names; until then the previous designation
+ * stands.
  */
-export const UNSOURCED_REAPPOINTMENTS: { chair: string; from: string }[] = [
-  { chair: 'William McChesney Martin Jr.', from: '1955-04-02' },
-  { chair: 'Arthur F. Burns', from: '1974-02-01' },
+export interface FedDesignation {
+  chair: string;
+  president: string;
+  /** The date of the President's Order, or null where the source gives only the month. */
+  ordered: string | null;
+  from: string;
+  quote: string;
+  sourceUrl: string;
+}
+
+const BULLETIN = (issue: string, page: number) => `https://fraser.stlouisfed.org/title/federal-reserve-bulletin-62/${issue}?page=${page}`;
+
+export const FED_DESIGNATIONS: FedDesignation[] = [
+  { chair: 'William McChesney Martin Jr.', president: 'Dwight D. Eisenhower', ordered: '1955-03-11', from: '1955-04-01',
+    quote: 'The President of the United States on March 11, 1955, issued an Order redesignating Mr. Wm. McC. Martin, Jr., as Chairman of the Board of Governors of the Federal Reserve System, to serve as such for a term of four years from April 1, 1955',
+    sourceUrl: BULLETIN('march-1955-21243', 30) },
+  { chair: 'William McChesney Martin Jr.', president: 'Dwight D. Eisenhower', ordered: '1959-03-12', from: '1959-04-01',
+    quote: 'The President of the United States on March 12, 1959, issued an Order redesignating Mr. Wm. McC. Martin, Jr., as Chairman of the Board of Governors of the Federal Reserve System, to serve as such for a term of four years from April 1, 1959',
+    sourceUrl: BULLETIN('march-1959-21291', 19) },
+  // The Order's day is not in hand: the April 1967 Bulletin names the month
+  // and the President, and Kennedy announced it at his news conference of
+  // 7 February 1963 (presidency.ucsb.edu/documents/the-presidents-news-conference-157).
+  { chair: 'William McChesney Martin Jr.', president: 'John F. Kennedy', ordered: null, from: '1963-04-01',
+    quote: 'Mr. Martin was again designated Chairman of the Board in March 1959 by President Eisenhower and in March 1963 by President Kennedy.',
+    sourceUrl: BULLETIN('april-1967-21388', 93) },
+  { chair: 'William McChesney Martin Jr.', president: 'Lyndon B. Johnson', ordered: '1967-03-30', from: '1967-04-01',
+    quote: 'The President of the United States on March 30, 1967, issued an Order redesignating Mr. William McChesney Martin, Jr., as Chairman of the Board of Governors of the Federal Reserve System, to serve as such for a term of 4 years from April 1, 1967',
+    sourceUrl: BULLETIN('april-1967-21388', 93) },
+  { chair: 'Arthur F. Burns', president: 'Richard M. Nixon', ordered: '1974-01-28', from: '1974-02-01',
+    quote: 'The President of the United States on January 28, 1974, issued an Order redesignating Arthur F. Burns as Chairman of the Board of Governors of the Federal Reserve System, to serve as such for a term of 4 years from February 1, 1974',
+    sourceUrl: BULLETIN('february-1974-21470', 100) },
 ];
+
+/**
+ * Redesignations still unsourced, by the date the chair's previous term ran
+ * out: from then on, fedAppointingParty() throws rather than guess. Empty
+ * since 14 Nov 2026, when the Bulletin supplied all five; kept so a future
+ * gap is recorded the same way.
+ */
+export const UNSOURCED_REAPPOINTMENTS: { chair: string; from: string }[] = [];
 
 /**
  * What could not be sourced, and what refuses to compute because of it.
@@ -255,14 +297,19 @@ export const UNSOURCED_REAPPOINTMENTS: { chair: string; from: string }[] = [
  * designation announcement) or the Federal Reserve Bulletin; FRASER and the
  * Fed's history site both time out for scripted requests.
  */
-export const KNOWN_GAPS: string[] = [
-  'Fed chair redesignations before the 1977 Reform Act (Martin from April 1955, Burns from February 1974): which president designated each, and when. These were presidential designations without Senate confirmation, so they are not in congress.gov or the Congressional Record as nominations; read the Public Papers of the Presidents or the Federal Reserve Bulletin.',
-];
+export const KNOWN_GAPS: string[] = [];
 
 /** The president in office on a date. */
 export function presidentOn(date: string): Presidency {
   const p = PRESIDENCIES.find((x) => x.start <= date && (x.end === null || date < x.end));
   if (!p) throw new Error(`no president on ${date}`);
+  return p;
+}
+
+/** A presidency by the name written in PRESIDENCIES. */
+export function presidentByName(name: string): Presidency {
+  const p = PRESIDENCIES.find((x) => x.name === name);
+  if (!p) throw new Error(`no president named ${name}`);
   return p;
 }
 
@@ -291,12 +338,18 @@ export function fedAppointingParty(date: string): Party | null {
  */
 export function appointingPartyFor(chair: FedChair, date: string): Party {
   const gap = UNSOURCED_REAPPOINTMENTS.find((u) => u.chair === chair.name && date >= u.from);
-  if (gap) throw new Error(`unsourced: ${chair.name}'s reappointment from ${gap.from} (${KNOWN_GAPS[0]})`);
-  const inForce = FED_APPOINTMENTS
-    .filter((a) => a.chair === chair.name && a.kind === 'reappointment' && a.confirmed !== null && a.confirmed <= date)
-    .sort((a, b) => a.confirmed!.localeCompare(b.confirmed!))
-    .at(-1);
-  return inForce ? presidentOn(inForce.received).party : firstAppointedBy(chair);
+  if (gap) throw new Error(`unsourced: ${chair.name}'s reappointment from ${gap.from}`);
+  // The latest renewal in force: a Senate-confirmed reappointment (1981 on) or
+  // a presidential designation (before 1977), whichever took effect last.
+  const renewals = [
+    ...FED_APPOINTMENTS
+      .filter((a) => a.chair === chair.name && a.kind === 'reappointment' && a.confirmed !== null && a.confirmed <= date)
+      .map((a) => ({ from: a.confirmed!, party: presidentOn(a.received).party })),
+    ...FED_DESIGNATIONS
+      .filter((d) => d.chair === chair.name && d.from <= date)
+      .map((d) => ({ from: d.from, party: presidentByName(d.president).party })),
+  ].sort((a, b) => a.from.localeCompare(b.from));
+  return renewals.length ? renewals[renewals.length - 1].party : firstAppointedBy(chair);
 }
 
 /** The party of the president who FIRST appointed each chair, derived, not typed. */
@@ -319,6 +372,7 @@ export function fedSegments(today: string = new Date().toISOString().slice(0, 10
     if (to < WINDOW_START) continue;
     const cuts = new Set([from]);
     for (const a of FED_APPOINTMENTS) if (a.chair === c.name && a.kind === 'reappointment' && a.confirmed && a.confirmed > from && a.confirmed <= to) cuts.add(a.confirmed);
+    for (const d of FED_DESIGNATIONS) if (d.chair === c.name && d.from > from && d.from <= to) cuts.add(d.from);
     for (const u of UNSOURCED_REAPPOINTMENTS) if (u.chair === c.name && u.from > from && u.from <= to) cuts.add(u.from);
     const sorted = [...cuts].sort();
     sorted.forEach((s, i) => {

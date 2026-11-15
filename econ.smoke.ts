@@ -122,8 +122,11 @@ const gov = pooledGrowth(series, 1, [...PAPER_D, ...PAPER_R], byGovernment(1));
 check('unified and divided government each get quarters', Object.keys(gov).length >= 3,
   Object.entries(gov).map(([k, v]) => `${k}: ${v.mean}% over ${v.quarters}q`).join('; '));
 const fedAll = byFedAppointer(series, 1, [...PAPER_D, ...PAPER_R]);
-check('the Fed grouping refuses over terms with unsourced redesignations', !fedAll.ok,
-  fedAll.ok ? 'it answered' : fedAll.reason.slice(0, 80));
+// It refused until 14 Nov 2026, when the Federal Reserve Bulletin supplied the
+// five pre-1977 redesignations (FED_DESIGNATIONS in econ_control.ts).
+check('the Fed grouping answers over every term of the paper, both parties', fedAll.ok
+  && Object.keys(fedAll.result).some((k) => /D$/.test(k)) && Object.keys(fedAll.result).some((k) => /R$/.test(k)),
+  fedAll.ok ? Object.entries(fedAll.result).map(([k, v]) => `${k}: ${v.mean}% over ${v.quarters}q`).join('; ') : fedAll.reason.slice(0, 80));
 const fedRecent = byFedAppointer(series, 1, ['1981-reagan-1', '1985-reagan-2', '1989-bush', '1993-clinton-1', '1997-clinton-2', '2001-bush-1', '2005-bush-2', '2009-obama-1']);
 check('and answers where every appointment is sourced (1981 on)', fedRecent.ok,
   fedRecent.ok ? Object.entries(fedRecent.result).map(([k, v]) => `${k}: ${v.quarters}q`).join('; ') : fedRecent.reason);

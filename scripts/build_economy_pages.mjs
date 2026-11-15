@@ -162,7 +162,15 @@ function explorePage(lang) {
   const complete = data.terms.filter((t) => t.complete);
   const current = data.terms.find((t) => !t.complete);
   const govLabel = (k) => (k === 'unified D' ? et(lang, 'g.unifiedD') : k === 'unified R' ? et(lang, 'g.unifiedR') : et(lang, 'g.divided'));
-  const notes = data.terms.filter((t) => t.notes.length).map((t) => `<li><b>${esc(termLabel(lang, t))}</b><ul>${t.notes.map((n) => `<li>${esc(n.text)} <a class="hist" href="${esc(n.source.url)}">${et(lang, 'ex.source')}</a></li>`).join('')}</ul></li>`).join('');
+  // The third grouping, shown since 14 Nov 2026, when the five pre-1977 Fed
+  // chair redesignations were sourced (FED_DESIGNATIONS in econ_control.ts).
+  // It refused to compute until then, and the page must not quietly drop it
+  // if it ever refuses again. The vacancy quarter (1978) is left out and said so.
+  if (!g.fedAppointer.ok) throw new Error(`build_economy_pages: the Fed grouping refused: ${g.fedAppointer.reason}`);
+  const fedGroups = Object.fromEntries(Object.entries(g.fedAppointer.result).filter(([k]) => /^appointed by [DR]$/.test(k)));
+  const fedVacancyQuarters = Object.entries(g.fedAppointer.result).filter(([k]) => !/^appointed by [DR]$/.test(k)).reduce((s, [, v]) => s + v.quarters, 0);
+  if (Object.keys(fedGroups).length !== 2) throw new Error('build_economy_pages: the Fed grouping lacks a party');
+  const notes =data.terms.filter((t) => t.notes.length).map((t) => `<li><b>${esc(termLabel(lang, t))}</b><ul>${t.notes.map((n) => `<li>${esc(n.text)} <a class="hist" href="${esc(n.source.url)}">${et(lang, 'ex.source')}</a></li>`).join('')}</ul></li>`).join('');
 
   const body = `
   <h1>${et(lang, 'ex.h1')}</h1>
@@ -187,7 +195,9 @@ function explorePage(lang) {
   ${groupTable(lang, g.allComplete, (k) => partyName(lang, k))}
   <p class="lab">${et(lang, 'ex.govHead')}</p>
   ${groupTable(lang, g.government, govLabel)}
-  <p class="small">${et(lang, 'ex.fedRefused')}</p>
+  <p class="lab">${et(lang, 'ex.fedHead')}</p>
+  ${groupTable(lang, fedGroups, (k) => et(lang, k.endsWith(' D') ? 'g.fedD' : 'g.fedR'))}
+  <p class="small">${et(lang, 'ex.fedNote', { n: fedVacancyQuarters })}</p>
 
   <h2>${et(lang, 'ex.h2notes')}</h2>
   <p class="small">${et(lang, 'ex.notesNote', { r: data.contextByParty.R, d: data.contextByParty.D })}</p>
@@ -252,7 +262,7 @@ function methodPage(lang) {
   <p>${et(lang, 'me.blind')}</p>
 
   <h2>${et(lang, 'me.h2missing')}</h2>
-  <ul><li>${et(lang, 'me.missingFed')}</li><li>${et(lang, 'me.missingOct')}</li><li>${et(lang, 'me.missingIncome')}</li></ul>
+  <ul><li>${et(lang, 'me.missingOct')}</li><li>${et(lang, 'me.missingIncome')}</li></ul>
 
   <h2>${et(lang, 'me.h2not')}</h2>
   <p>${et(lang, 'me.not')}</p>`;

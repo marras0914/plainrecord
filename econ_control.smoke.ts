@@ -17,6 +17,7 @@ import {
   PRESIDENCIES, HOUSE, SENATE, FED_CHAIRS, FED_VACANCIES, KNOWN_GAPS, WINDOW_START,
   congressStart, buildTerms, presidentOn, houseOn, senateOn, fedChairOn,
   firstAppointedBy, fedAppointingParty, FED_APPOINTMENTS, UNSOURCED_REAPPOINTMENTS, fedSegments,
+  FED_DESIGNATIONS, presidentByName,
   type Presidency, type FedChair, type Term, type Party,
 } from './econ_control';
 
@@ -202,9 +203,13 @@ check('each recorded first appointment agrees with the derived one',
 const party = (d: string) => { try { return fedAppointingParty(d); } catch { return 'REFUSED'; } };
 const cases: [string, string, Party | null | 'REFUSED'][] = [
   ['1952-01-01', 'Martin, first appointed by Truman', 'D'],
-  ['1960-01-01', 'Martin after April 1955: unsourced, so refused', 'REFUSED'],
+  ['1955-03-31', 'Martin the day before Eisenhower\'s 1955 Order took effect: still Truman\'s', 'D'],
+  ['1955-04-01', 'Martin from April 1955, redesignated by Eisenhower', 'R'],
+  ['1960-01-01', 'Martin from April 1959, redesignated by Eisenhower', 'R'],
+  ['1964-01-01', 'Martin from April 1963, redesignated by Kennedy', 'D'],
+  ['1968-01-01', 'Martin from April 1967, redesignated by Johnson', 'D'],
   ['1972-01-01', 'Burns, first appointed by Nixon', 'R'],
-  ['1975-01-01', 'Burns after February 1974: unsourced, so refused', 'REFUSED'],
+  ['1975-01-01', 'Burns from February 1974, redesignated by Nixon', 'R'],
   ['1978-02-15', 'no chair', null],
   ['1983-07-20', 'Volcker before the Senate confirmed Reagan\'s reappointment', 'D'],
   ['1983-07-27', 'Volcker on the day it was confirmed', 'R'],
@@ -224,9 +229,11 @@ const lane = fedSegments('2026-11-12');
 const laneAt = (d: string) => lane.find((s) => s.start <= d && d < s.end);
 check('the Fed lane agrees with the grouping: Greenspan under Clinton\'s appointment in 1998',
   laneAt('1998-01-01')?.chair === 'Alan Greenspan' && laneAt('1998-01-01')?.party === 'D');
-check('the Fed lane shows Martin\'s unsourced years as unknown, not a party',
-  laneAt('1960-01-01')?.chair === 'William McChesney Martin Jr.' && laneAt('1960-01-01')?.party === null
-  && laneAt('1952-01-01')?.party === 'D');
+check('the Fed lane follows Martin\'s redesignations: Truman, then Eisenhower, then Kennedy and Johnson',
+  laneAt('1952-01-01')?.party === 'D' && laneAt('1957-01-01')?.party === 'R' && laneAt('1960-01-01')?.party === 'R'
+  && laneAt('1964-01-01')?.party === 'D' && laneAt('1968-01-01')?.party === 'D' && laneAt('1975-01-01')?.party === 'R');
+check('no stretch of the Fed lane is unknown any more', lane.every((s) => s.party !== null),
+  lane.filter((s) => s.party === null).map((s) => `${s.chair} from ${s.start}`).join(', ') || `${lane.length} stretches`);
 check('the Fed lane leaves the 1978 vacancy empty', laneAt('1978-02-15') === undefined);
 // The handover-day bug: Warsh once came out under Biden's appointment of Powell.
 check('every chair\'s first stretch is under the president who first appointed them',
@@ -238,8 +245,25 @@ check('every chair\'s first stretch is under the president who first appointed t
 check('the Fed lane runs in order without overlaps',
   lane.every((s, i) => s.start < s.end && (i === 0 || lane[i - 1].end <= s.start)));
 
-check('the gap list names exactly the reappointments that refuse',
-  KNOWN_GAPS.length === 1 && UNSOURCED_REAPPOINTMENTS.length === 2);
+check('no reappointment is unsourced, and the gap list says so',
+  KNOWN_GAPS.length === 0 && UNSOURCED_REAPPOINTMENTS.length === 0);
+
+// The pre-1977 designations (Federal Reserve Bulletin, 14 Nov 2026).
+const wrongDesignator = FED_DESIGNATIONS.filter((d) => d.ordered !== null && presidentOn(d.ordered).name !== d.president);
+check('each dated Order was issued by the president it names', wrongDesignator.length === 0,
+  wrongDesignator.map((d) => `${d.chair} ${d.ordered}`).join(', ') || `${FED_DESIGNATIONS.filter((d) => d.ordered).length} dated`);
+const undated = FED_DESIGNATIONS.filter((d) => d.ordered === null);
+check('an undated designation still falls inside its president\'s term',
+  undated.every((d) => { const p = presidentByName(d.president); return p.start <= d.from && (p.end === null || d.from < p.end); }),
+  undated.map((d) => `${d.chair} from ${d.from}`).join(', '));
+check('each designation quotes its source and the quote names its president or its date',
+  FED_DESIGNATIONS.every((d) => d.quote.length > 40 && /^https:\/\/fraser\.stlouisfed\.org\//.test(d.sourceUrl)
+    && (d.quote.includes(d.president.split(' ').pop()!) || (d.ordered !== null && d.quote.includes(String(Number(d.ordered.slice(8)))))
+)));
+check('each designation starts while its chair was chair',
+  FED_DESIGNATIONS.every((d) => { const c = FED_CHAIRS.find((x) => x.name === d.chair)!; return c.start <= d.from && (c.end === null || d.from <= c.end); }));
+// Prove the president check can fail: a 1959 Order put under Kennedy.
+check('(the president check catches a wrong name)', presidentOn('1959-03-12').name !== 'John F. Kennedy');
 
 console.log(`\n${pass} passed, ${fail} failed`);
 process.exitCode = fail === 0 ? 0 : 1;
