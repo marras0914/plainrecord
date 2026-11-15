@@ -76,6 +76,18 @@ body{margin:0;background:var(--page);color:var(--ink);
   font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
   font-size:17px;-webkit-text-size-adjust:100%}
 main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
+/* Laptops and wider (Marco, 14 Nov 2026: "a lot of wasted space"). The column
+   grows to the quiz's width; running text keeps a readable line, and the room
+   goes to what can use it: side-by-side cards, tables and charts. */
+@media (min-width:1024px){
+  main{max-width:62rem;padding:48px 32px 80px}
+  main p,main li,main blockquote,main dd{max-width:72ch}
+  main .card p,main .card li,main .card blockquote{max-width:none}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:start}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px;align-items:start}
+  .duo>.hubcard{align-self:stretch}
+}
+.hubcard h2{margin:2px 0 8px}
 h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
   line-height:1.15;text-wrap:balance}
 h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}

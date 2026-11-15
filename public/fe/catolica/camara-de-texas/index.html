@@ -78,6 +78,18 @@ body{margin:0;background:var(--page);color:var(--ink);
   font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
   font-size:17px;-webkit-text-size-adjust:100%}
 main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
+/* Laptops and wider (Marco, 14 Nov 2026: "a lot of wasted space"). The column
+   grows to the quiz's width; running text keeps a readable line, and the room
+   goes to what can use it: side-by-side cards, tables and charts. */
+@media (min-width:1024px){
+  main{max-width:62rem;padding:48px 32px 80px}
+  main p,main li,main blockquote,main dd{max-width:72ch}
+  main .card p,main .card li,main .card blockquote{max-width:none}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:start}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px;align-items:start}
+  .duo>.hubcard{align-self:stretch}
+}
+.hubcard h2{margin:2px 0 8px}
 h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
   line-height:1.15;text-wrap:balance}
 h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}
@@ -254,7 +266,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   <h2>Proyecto por proyecto</h2>
   <p class="small">En cada área aparecen primero los proyectos en los que los dos partidos votaron distinto.</p>
   <h3 id="life-and-family-life">Vida y vida familiar</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB514"><b>HB 514</b></a> · Los obispos lo apoyaron.</p>
       <p class="caption" lang="en">Relating to a maternal health care workforce campaign.</p>
       <p class="small">Aprobación final en la Cámara, 6 de mayo de 2025, votación nominal 1447: 85 a favor, 57 en contra.</p>
@@ -583,9 +595,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Demócratas: 32 a favor, 22 en contra, <span class="way way-with">como pidieron los obispos</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">La entrada de los obispos</a> · Los obispos lo incluyen junto con HJR 112.</p>
-    </div>
+    </div></div>
   <h3 id="immigration">Inmigración</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=SB8"><b>SB 8</b></a> · Los obispos lo rechazaron.</p>
       <p class="caption" lang="en">Relating to agreements between certain sheriffs and the United States Immigration and Customs Enforcement to enforce federal immigration law and a grant program to cover the costs of implementing those agreements.</p>
       <p class="small">Aprobación final en la Cámara, 25 de mayo de 2025, votación nominal 3502: 86 a favor, 47 en contra.</p>
@@ -624,9 +636,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Demócratas: 58 a favor, 0 en contra, <span class="way way-with">como pidieron los obispos</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">La entrada de los obispos</a></p>
-    </div>
+    </div></div>
   <h3 id="restorative-justice">Justicia restaurativa</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB200"><b>HB 200</b></a> · Los obispos lo apoyaron.</p>
       <p class="caption" lang="en">Relating to jury instructions regarding parole eligibility and the release on parole of certain inmates convicted of an offense committed when younger than 18 years of age; changing parole eligibility.</p>
       <p class="small">Aprobación final en la Cámara, 8 de mayo de 2025, votación nominal 1787: 102 a favor, 45 en contra.</p>
@@ -785,9 +797,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Demócratas: 58 a favor, 0 en contra, <span class="way way-with">como pidieron los obispos</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">La entrada de los obispos</a></p>
-    </div>
+    </div></div>
   <h3 id="education">Educación</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB2674"><b>HB 2674</b></a> · Los obispos lo apoyaron.</p>
       <p class="caption" lang="en">Relating to prohibiting the regulation of home school programs.</p>
       <p class="small">Aprobación final en la Cámara, 13 de mayo de 2025, votación nominal 2314: 103 a favor, 41 en contra.</p>
@@ -916,9 +928,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Demócratas: 57 a favor, 0 en contra, <span class="way way-with">como pidieron los obispos</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">La entrada de los obispos</a> · Los obispos lo incluyen junto con HB 2283.</p>
-    </div>
+    </div></div>
   <h3 id="social-concerns">Asuntos sociales</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB38"><b>HB 38</b></a> · Los obispos lo apoyaron.</p>
       <p class="caption" lang="en">Relating to improvements to the Texas Information and Referral Network.</p>
       <p class="small">Aprobación final en la Cámara, 5 de mayo de 2025, votación nominal 1366: 96 a favor, 42 en contra.</p>
@@ -1167,9 +1179,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Demócratas: 38 a favor, 17 en contra, <span class="way way-with">como pidieron los obispos</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">La entrada de los obispos</a> · Los obispos lo incluyen junto con HB 5187.</p>
-    </div>
+    </div></div>
   <h3 id="religious-liberty">Libertad religiosa</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB2067"><b>HB 2067</b></a> · Los obispos lo apoyaron.</p>
       <p class="caption" lang="en">Relating to declination, cancellation, or nonrenewal of insurance policies.</p>
       <p class="small">Aprobación final en la Cámara, 25 de abril de 2025, votación nominal 569: 123 a favor, 2 en contra.</p>
@@ -1188,9 +1200,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Demócratas: 56 a favor, 0 en contra, <span class="way way-with">como pidieron los obispos</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">La entrada de los obispos</a></p>
-    </div>
+    </div></div>
   <h3 id="creation">La creación</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB3637"><b>HB 3637</b></a> · Los obispos lo apoyaron.</p>
       <p class="caption" lang="en">Relating to the authority of a county commissioners court to adopt an exemption from ad valorem taxation by each taxing unit that taxes the property of the portion of the appraised value of a person's property that is attributable to the installation in or on the property of certain water conservation systems.</p>
       <p class="small">Aprobación final en la Cámara, 14 de mayo de 2025, votación nominal 2436: 95 a favor, 43 en contra.</p>
@@ -1249,9 +1261,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Demócratas: 56 a favor, 0 en contra, <span class="way way-with">como pidieron los obispos</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">La entrada de los obispos</a> · Los obispos lo incluyen junto con HB 5207.</p>
-    </div>
+    </div></div>
   <h3 id="none">Sin área asignada por los obispos</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB321"><b>HB 321</b></a> · Los obispos lo apoyaron.</p>
       <p class="caption" lang="en">Relating to implementing an express lane option under Medicaid and the child health plan program.</p>
       <p class="small">Aprobación final en la Cámara, 10 de mayo de 2025, votación nominal 2022: 83 a favor, 50 en contra.</p>
@@ -1310,7 +1322,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Demócratas: 61 a favor, 0 en contra, <span class="way way-with">como pidieron los obispos</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">La entrada de los obispos</a> · Los obispos lo incluyen junto con HB 1536.</p>
-    </div>
+    </div></div>
 
   <h2>Proyectos que la Cámara no aprobó en votación nominal</h2>
   <ul>

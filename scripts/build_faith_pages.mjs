@@ -191,8 +191,9 @@ function issueSection(lang, t, issue) {
       <p class="small">${ft(lang, 'tr.earlierNote')}</p>
       <ul class="stand">${earlier.map((e) => `<li><a href="${esc(e.url)}" lang="en">${esc(e.title)}</a> <span class="small">${esc(fmtDate(lang, e.date))}</span></li>`).join('')}</ul>
     </details>` : '';
+  // Side by side on a laptop (.duo in _page_shell.mjs), one above the other on a phone.
   const platforms = LEVELS.map((level) => `<h4>${ft(lang, `tr.${level}`)}</h4>
-    ${PARTIES.map((party) => plankCard(lang, party, level, issue.id)).join('\n    ')}`).join('\n    ');
+    <div class="duo">${PARTIES.map((party) => plankCard(lang, party, level, issue.id)).join('\n    ')}</div>`).join('\n    ');
   return `
   <h2 id="${issue.id}">${issueName(lang, issue)}</h2>
   <p class="small">${tx(lang, KEY.issueDesc(issue), issue.description)}</p>
@@ -274,7 +275,7 @@ function houseVotesPage(lang, t, hv) {
   const sections = hv.byArea.map((a) => {
     const list = hv.bills.filter((b) => (a.area === null ? b.areas.length === 0 : b.areas.includes(a.area))).sort(differFirst);
     return `<h3 id="${areaKey(a.area).slice(8)}">${ft(lang, areaKey(a.area))}</h3>
-    ${list.map((b) => hvBillCard(lang, b)).join('\n    ')}`;
+    <div class="duo">${list.map((b) => hvBillCard(lang, b)).join('\n    ')}</div>`;
   }).join('\n  ');
   const nv = hv.notVoted;
   const total = hv.bills.length + Object.values(nv).reduce((s, l) => s + l.length, 0);
