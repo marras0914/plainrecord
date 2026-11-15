@@ -152,6 +152,45 @@ function lagTable(lang, metric) {
 // ---------------------------------------------------------------------------
 
 const partyName = (lang, p) => et(lang, p);
+
+/**
+ * A grouping as bars (Marco, 14 Nov 2026: the tables alone were hard to read).
+ * HTML, not SVG: the labels run long, in Spanish especially, and SVG text
+ * cannot wrap, so on a phone a scaled-down SVG clipped them and ran the figure
+ * into the quarter count. Here each label wraps, and a bar is a percentage of
+ * its track. Every grouping shares one scale, `span`, so a bar in one chart is
+ * the same length as the same growth in another. Colour by party: blue D, red
+ * R, the site's purple for divided government.
+ */
+function groupBars(lang, g, labelOf, classOf, span) {
+  if (span.lo < 0) throw new Error('build_economy_pages: a grouping mean is negative; groupBars draws from zero only');
+  const quarters = et(lang, 'ex.colQuarters').toLowerCase();
+  const rows = Object.entries(g).map(([k, v]) => {
+    const w = Math.max(0.5, (v.mean / (span.hi || 1)) * 100);
+    return `<li><span class="gl">${labelOf(k)}</span>`
+      + `<span class="gt"><span class="gtr"><span class="gb ${classOf(k)}" style="width:${w.toFixed(1)}%"></span></span>`
+      + `<span class="gv"><b>${esc(num(lang, v.mean))}%</b> <span class="small">${v.quarters} ${esc(quarters)}</span></span></span></li>`;
+  }).join('');
+  return `<ul class="gbars">${rows}</ul>`;
+}
+
+// The grouping bars' rules, page-local like the round's, so the shared
+// stylesheet inside every other page does not change.
+const GBAR_STYLE = `<style>
+  .gbars{list-style:none;padding:0;margin:8px 0 4px}
+  .gbars li{margin:0 0 12px}
+  .gbars .gl{display:block;font-weight:600;font-size:15px;line-height:1.35;margin-bottom:4px}
+  .gbars .gt{display:flex;align-items:center;gap:10px}
+  .gbars .gtr{flex:1 1 auto;min-width:0}
+  .gbars .gb{display:block;height:16px;border-radius:2px}
+  .gbars .gb.D{background:var(--blue)} .gbars .gb.R{background:var(--red)} .gbars .gb.bar{background:var(--pbar)}
+  .gbars .gv{flex:0 0 auto;min-width:8.5em;font-variant-numeric:tabular-nums}
+  @media print{.gbars .gb{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  </style>`;
+
+/** The bars, with the exact table a click away for anyone who wants the numbers. */
+const groupChart = (lang, g, labelOf, classOf, span) => groupBars(lang, g, labelOf, classOf, span)
+  + `<details class="table"><summary>${et(lang, 'ex.asTable')}</summary>${groupTable(lang, g, labelOf)}</details>`;
 const groupTable = (lang, g, labelOf) => `<table class="chart-table"><tr><th>${et(lang, 'ex.colGroup')}</th><th class="num">${et(lang, 'ex.colGrowth')}</th><th class="num">${et(lang, 'ex.colQuarters')}</th></tr>`
   + Object.entries(g).map(([k, v]) => `<tr><td>${labelOf(k)}</td><td class="num">${esc(num(lang, v.mean))}%</td><td class="num">${v.quarters}</td></tr>`).join('') + '</table>';
 
@@ -170,9 +209,13 @@ function explorePage(lang) {
   const fedGroups = Object.fromEntries(Object.entries(g.fedAppointer.result).filter(([k]) => /^appointed by [DR]$/.test(k)));
   const fedVacancyQuarters = Object.entries(g.fedAppointer.result).filter(([k]) => !/^appointed by [DR]$/.test(k)).reduce((s, [, v]) => s + v.quarters, 0);
   if (Object.keys(fedGroups).length !== 2) throw new Error('build_economy_pages: the Fed grouping lacks a party');
-  const notes =data.terms.filter((t) => t.notes.length).map((t) => `<li><b>${esc(termLabel(lang, t))}</b><ul>${t.notes.map((n) => `<li>${esc(n.text)} <a class="hist" href="${esc(n.source.url)}">${et(lang, 'ex.source')}</a></li>`).join('')}</ul></li>`).join('');
+  // One scale for every grouping chart, from zero to the largest mean (or the
+  // smallest, if any is negative), so bars compare across charts.
+  const means = [g.paperSample, g.allComplete, g.government, fedGroups].flatMap((x) => Object.values(x).map((v) => v.mean));
+  const span = { lo: Math.min(0, ...means), hi: Math.max(0, ...means) };
+  const notes = data.terms.filter((t) => t.notes.length).map((t) => `<li><b>${esc(termLabel(lang, t))}</b><ul>${t.notes.map((n) => `<li>${esc(n.text)} <a class="hist" href="${esc(n.source.url)}">${et(lang, 'ex.source')}</a></li>`).join('')}</ul></li>`).join('');
 
-  const body = `
+  const body = `${GBAR_STYLE}
   <h1>${et(lang, 'ex.h1')}</h1>
   <p class="lede">${et(lang, 'ex.lede')}</p>
   <p><a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></p>
@@ -190,13 +233,13 @@ function explorePage(lang) {
   <h2>${et(lang, 'ex.h2groups')}</h2>
   <p class="small">${et(lang, 'ex.groupsNote')}</p>
   <p>${et(lang, 'ex.paperRow')}</p>
-  ${groupTable(lang, g.paperSample, (k) => partyName(lang, k))}
+  ${groupChart(lang, g.paperSample, (k) => partyName(lang, k), (k) => PARTY_CLASS[k], span)}
   <p>${et(lang, 'ex.allRow', { n: complete.length, end: year(complete.at(-1).end), fall: FALL_2020, rise: RISE_2020 })}</p>
-  ${groupTable(lang, g.allComplete, (k) => partyName(lang, k))}
+  ${groupChart(lang, g.allComplete, (k) => partyName(lang, k), (k) => PARTY_CLASS[k], span)}
   <p class="lab">${et(lang, 'ex.govHead')}</p>
-  ${groupTable(lang, g.government, govLabel)}
+  ${groupChart(lang, g.government, govLabel, (k) => (k === 'unified D' ? 'D' : k === 'unified R' ? 'R' : 'bar'), span)}
   <p class="lab">${et(lang, 'ex.fedHead')}</p>
-  ${groupTable(lang, fedGroups, (k) => et(lang, k.endsWith(' D') ? 'g.fedD' : 'g.fedR'))}
+  ${groupChart(lang, fedGroups, (k) => et(lang, k.endsWith(' D') ? 'g.fedD' : 'g.fedR'), (k) => (k.endsWith(' D') ? 'D' : 'R'), span)}
   <p class="small">${et(lang, 'ex.fedNote', { n: fedVacancyQuarters })}</p>
 
   <h2>${et(lang, 'ex.h2notes')}</h2>
