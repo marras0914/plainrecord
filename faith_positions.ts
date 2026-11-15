@@ -724,6 +724,13 @@ const HAND_EARLIER: Earlier[] = [
   // explainer page, which is therefore its link.
   { traditionId: 'umc', issueId: 'immigration', title: 'Concerning Immigration (Book of Resolutions 4275)', date: '2024', url: SRC.umc },
   { traditionId: 'umc', issueId: 'immigration', title: 'The United Methodist Church Is a Sanctuary Church (Book of Resolutions)', date: '2024', url: 'https://www.umc.org/en/content/book-of-resolutions-the-united-methodist-church-is-a-sanctuary-church' },
+  // Approval notes read 15 Nov 2026 in a browser (usccb.org refuses scripts).
+  // 2003: "approved simultaneously by the full bodies of U.S. Catholic bishops
+  // and the Mexican bishops at their November 2002 General Meetings".
+  // 2000: "approved by the full body of bishops at their November 2000
+  // general meeting".
+  { traditionId: 'catholic', issueId: 'immigration', title: 'Strangers No Longer: Together on the Journey of Hope (with the Mexican bishops)', date: '2003-01-22', url: 'https://www.usccb.org/issues-and-action/human-life-and-dignity/immigration/strangers-no-longer-together-on-the-journey-of-hope' },
+  { traditionId: 'catholic', issueId: 'immigration', title: 'Welcoming the Stranger Among Us: Unity in Diversity', date: '2000-11-15', url: 'https://www.usccb.org/committees/pastoral-care-migrants-refugees-travelers/welcoming-stranger-among-us-unity-diversity' },
 ];
 
 /**
@@ -748,7 +755,7 @@ export const TO_READ: { traditionId: TraditionId; issueId: IssueId; what: string
   // 14 Nov 2026: the two UMC items were read (Social Principles section G,
   // Book of Resolutions 4271, 4273, 4275 and the sanctuary resolution) and
   // are done. The Catholic search found the 2025 Special Pastoral Message.
-  { traditionId: 'catholic', issueId: 'immigration', what: 'Strangers No Longer (2003, with the Mexican bishops) and Welcoming the Stranger Among Us (2000): whether the full body of U.S. bishops approved them. The bishops\' website refuses automated reading of both pages, so their approval notes have not been seen.' },
+  // 15 Nov 2026: both older Catholic statements were full-body; now EARLIER.
   { traditionId: 'ame', issueId: 'immigration', what: 'AME General Conference resolutions, which outrank the Council of Bishops. None found online; the church paper\'s summary of the 2024 General Conference legislation names none on immigration.' },
 ];
 
