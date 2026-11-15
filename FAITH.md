@@ -203,10 +203,14 @@ scoreboard: one tradition at a time.
   in full. It is read from its PDF with `pdftotext -enc UTF-8` (not
   `-layout`), with a FIXES entry for "Luke 10:30-37", which the PDF breaks
   across lines. *Strangers No Longer* (2003) and *Welcoming the Stranger Among
-  Us* (2000) stay on the list: usccb.org returns 403 to scripts and to the
-  fetch tool on both pages, so their approval notes are unseen. Secondary
-  sources say the 2000 one was approved by the full body. That is not enough
-  under the rule.
+  Us* (2000) were held back because usccb.org returns 403 to scripts and to
+  the fetch tool, so their approval notes were unseen.
+- **Catholic, done 15 Nov 2026.** Both approval notes were read in Marco's
+  browser. *Strangers No Longer* was "approved simultaneously by the full
+  bodies" of the U.S. and Mexican bishops at their November 2002 meetings;
+  *Welcoming the Stranger Among Us* was "approved by the full body of bishops"
+  in November 2000. Both are listed under the 2025 message as earlier
+  statements.
 - **AME, still open.** No General Conference resolution on immigration has
   been found online. The *Christian Recorder*'s summary of the 2024 General
   Conference legislation names none.
