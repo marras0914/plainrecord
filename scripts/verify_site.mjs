@@ -2321,6 +2321,17 @@ try {
     await np.goto(new URL('/economy/explore', URL_UNDER_TEST).href, { waitUntil: 'load' });
     const charts = await np.locator('figure.chart svg').count();
     check('economy: the explorer draws its charts with JavaScript off', charts >= 8, `${charts} charts`);
+    // The four groupings as bars (14 Nov 2026), on one shared scale: each bar's
+    // width must be its figure over the largest figure, whatever order they run.
+    const bars = await np.locator('ul.gbars li').evaluateAll((lis) => lis.map((li) => ({
+      w: parseFloat(li.querySelector('.gb').style.width),
+      v: parseFloat(li.querySelector('.gv b').textContent),
+    })));
+    const top = Math.max(...bars.map((b) => b.v));
+    const offScale = bars.filter((b) => Math.abs(b.w - (b.v / top) * 100) > 1.5);
+    check('economy: the groupings are drawn as bars on one shared scale',
+      (await np.locator('ul.gbars').count()) === 4 && bars.length === 9 && offScale.length === 0,
+      `${await np.locator('ul.gbars').count()} charts, ${bars.length} bars, ${offScale.length} off scale`);
     await nc.close();
   }
 

@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json. Party names as nouns (\"el Partido Demócrata\") or plural adjectives, never a singular adjective agreeing with a person.",
     "placeholders": "Every figure the site computes is a {placeholder} filled from public/data/econ_terms.json or data/fred/, so none is typed into the copy and none can drift from the data. Figures typed here are quotes of what the paper published (4.35%, 2.54%, about 1.8 points, 1949 to 2013), which do not change with the data.",
     "markup": "Inline <b> and <em> only. Links are added by the builder around the text given.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 12 November 2026, all 122 strings, no corrections, on PRs #12 and #13. The 15 round-of-five and explanation strings (bl.lede, bl.desc, bl.ratedSplit, bl.more, bl.rest, tip.*) approved by Marco on 14 November 2026, no corrections. The 4 Fed-grouping strings (ex.fedHead, g.fedD, g.fedR, ex.fedNote) approved by Marco the same day, no corrections. Kept as drafted: periodo for a presidential term, desfase for the measurement lag, and party labels as plural nouns."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 12 November 2026, all 122 strings, no corrections, on PRs #12 and #13. The 15 round-of-five and explanation strings (bl.lede, bl.desc, bl.ratedSplit, bl.more, bl.rest, tip.*) approved by Marco on 14 November 2026, no corrections. The 4 Fed-grouping strings (ex.fedHead, g.fedD, g.fedR, ex.fedNote) approved by Marco the same day, no corrections. ex.asTable (the groupings charts) approved the same day. Kept as drafted: periodo for a presidential term, desfase for the measurement lag, and party labels as plural nouns."
   },
 
   "kicker": { "en": "The economy · 1949 to now", "es": "La economía · de 1949 a hoy", "status": "ok" },
@@ -109,6 +109,7 @@
   "ex.colGroup": { "en": "Group", "es": "Grupo", "status": "ok" },
   "ex.colGrowth": { "en": "Average growth", "es": "Crecimiento promedio", "status": "ok" },
   "ex.colQuarters": { "en": "Quarters", "es": "Trimestres", "status": "ok" },
+  "ex.asTable": { "en": "The numbers as a table", "es": "Las cifras en una tabla", "status": "ok" },
   "ex.fedHead": { "en": "By the party of the president who appointed the Fed chair, all complete terms", "es": "Según el partido del presidente que nombró a la presidencia de la Reserva Federal, todos los periodos completos", "status": "ok" },
   "g.fedD": { "en": "Fed chair appointed by a Democratic president", "es": "Presidencia de la Reserva Federal nombrada por un presidente demócrata", "status": "ok" },
   "g.fedR": { "en": "Fed chair appointed by a Republican president", "es": "Presidencia de la Reserva Federal nombrada por un presidente republicano", "status": "ok" },
