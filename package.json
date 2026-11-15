@@ -36,6 +36,8 @@
     "data:faith:quotes": "tsx scripts/check_faith_quotes.ts",
     "data:faith": "tsx scripts/export_faith.ts",
     "data:faith:verses": "tsx scripts/extract_faith_verses.ts",
+    "data:faith:tccb": "tsx scripts/extract_tccb_positions.ts",
+    "data:faith:passage": "tsx scripts/fetch_house_passage.ts",
     "i18n:sidecar": "node scripts/check_sidecar.mjs",
     "stats": "node scripts/stats.mjs",
     "data:members": "node --max-old-space-size=4096 scripts/build_members.mjs",

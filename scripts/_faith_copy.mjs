@@ -102,3 +102,10 @@ export const TRADITION_SLUG = {
   ag: { en: 'assemblies-of-god', es: 'asambleas-de-dios' },
 };
 export const traditionPath = (id, lang) => `${FAITH_PATHS[lang].home}/${TRADITION_SLUG[id][lang]}`;
+
+/** The House-votes page of a tradition that published positions on Texas bills. */
+export const HOUSE_SLUG = { en: 'texas-house', es: 'camara-de-texas' };
+export const houseVotesPath = (id, lang) => `${traditionPath(id, lang)}/${HOUSE_SLUG[lang]}`;
+
+/** The bishops' eight priority areas, keyed for their Spanish. */
+export const areaKey = (area) => (area === null ? 'hv.area.none' : `hv.area.${slug(area)}`);

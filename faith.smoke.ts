@@ -11,6 +11,8 @@ import { readFileSync } from 'node:fs';
 import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue } from './faith_positions';
 import { buildFaithPayload, PLATFORMS } from './scripts/export_faith';
 import { findRefs, statementKey } from './scripts/extract_faith_verses';
+import { parsePage, parseSineDie, buildPositions, wordsOf } from './scripts/extract_tccb_positions';
+import { parseHistory, housePassage } from './scripts/fetch_house_passage';
 // @ts-expect-error: a plain .mjs module, shared with the page builder
 import { KEY } from './scripts/_faith_copy.mjs';
 
@@ -153,6 +155,59 @@ const blank = Object.entries(VJ.verses as Record<string, { web: string; rv1909: 
 check('every printed verse has its English and its Spanish text', blank.length === 0, blank.join(', ') || `${Object.keys(VJ.verses).length} verses`);
 const platformRefs = Object.values(VJ.platformReferenceCounts as Record<string, number>);
 check('the platforms were searched, all four', platformRefs.length === 4, platformRefs.join(', '));
+
+// --- the Texas House on the bishops' bills ----------------------------------
+
+// The parsers, on fixtures shaped like the bishops' pages and TLO's history.
+const ENTRY = (icon: string, inner: string) => `<p><img class="x" src="https://txcatholic.org/wp-content/uploads/2016/11/${icon}.png" alt="" /> ${inner}</p>`;
+const LINK = (href: string, text: string) => `<a href="http://www.capitol.state.tx.us/BillLookup/History.aspx?LegSess=89R&amp;Bill=${href}">${text}</a>`;
+const fx = parsePage([
+  ENTRY('approve-e1', `${LINK('HB00037', 'HB 37')} Plesa | ${LINK('sB02058', 'SB 2058')}Plesa — This bill creates a grant. The TCCB supports this bill to help.`),
+  ENTRY('reject-e1', `${LINK('HB00000', 'HB 2237')} Dutton — This bill repeals. The TCCB opposes this bill.`),
+  ENTRY('approve-e1', `${LINK('HB00004', 'HB 2816')} X — This bill. The TCCB prohibits this bill which infringes.`),
+].join('\n'), 'byNumber');
+check('TCCB pages: companions share the entry\'s position, lowercase links included', JSON.stringify(fx[0].bills) === '["HB 37","SB 2058"]' && fx[0].icon === 'supports');
+check('TCCB pages: a broken "HB 0" link is read by the number the bishops wrote', fx[1].bills[0] === 'HB 2237' && fx[1].icon === 'opposes');
+const fxPos = buildPositions(fx);
+check('TCCB pages: a link to a different bill, or words against the icon, make a conflict rather than a position',
+  fxPos.conflicts.some((c) => c.bill === 'HB 2816' && c.kind === 'link') && !fxPos.positions.some((p) => p.bill === 'HB 2816'));
+check('TCCB pages: "The TCCB prohibits this bill" is not read as support', wordsOf('The TCCB prohibits this bill which') === 'prohibits');
+const sd = parseSineDie(`Life and Family Life\n\n   Win: HB 37 (HB 2058): This bill creates a grant. This bill was passed.\n\n   Loss: SB 8: This bill mandates. We opposed this bill, and it passed.\n\n   Win: HB 965: This bill adds. We opposed this bill which died in committee.\n\n   Loss: HB 1: This bill was reported from committee.\n`);
+check('Sine Die Report: stances follow the report\'s own Win/Loss definitions, and an unclear entry yields none',
+  sd.length === 3 && sd[0].icon === 'supports' && sd[0].bills.length === 2 && sd[1].icon === 'opposes' && sd[2].icon === 'opposes' && sd[0].area === 'Life and Family Life');
+const ROW = (c: string, d: string, k: string, dt: string, pg: string) => `<tr><td>${c}</td><td>${d}</td><td>${k}</td><td>${dt}</td><td></td><td>${pg}</td></tr>`;
+const hist = parseHistory(`<table>${[
+  ROW('H', 'Record vote', 'RV#300', '04/17/2025', '1667'), ROW('H', 'Passed', '', '04/17/2025', '1667'), ROW('H', 'Read 3rd time', '', '04/17/2025', '1660'),
+  ROW('H', 'Record vote', 'RV#286', '04/17/2025', '1604'), ROW('H', 'Passed to 3rd reading as amended', '', '04/17/2025', '1604'),
+].join('')}</table>`);
+const hp = housePassage(hist);
+check('TLO history: the passage vote is the record vote beside "Passed", not the second-reading one', hp.status === 'record' && hp.rv === 300);
+check('TLO history: a bill the House never passed has no vote', housePassage(hist.slice(3)).status === 'not-passed');
+
+const HV = buildFaithPayload().houseVotes[0];
+// The bishops' entries run to 150 words; the record links to them instead.
+const hvJson = JSON.stringify(HV) + readFileSync('data/faith/tccb_89_positions.json', 'utf8');
+const leaked = ['The TCCB supports this', 'The TCCB opposes this', 'Win: ', 'Loss: ', 'This bill '].filter((s) => hvJson.includes(s));
+check('House votes: none of the bishops\' entry text is committed or shipped, only links', leaked.length === 0, leaked.join(', ') || 'none');
+check('(the leak check catches an entry\'s text)', ['The TCCB supports this'].some((s) => 'x The TCCB supports this bill y'.includes(s)));
+check('House votes: every counted bill has its official caption', HV.bills.every((b) => /^(Relating to|Proposing a constitutional amendment) /.test(b.caption)), HV.bills.filter((b) => !/^(Relating to|Proposing a constitutional amendment) /.test(b.caption)).map((b) => `${b.bill}: ${b.caption.slice(0, 30)}`).join(', ') || `${HV.bills.length} bills`);
+const TC = JSON.parse(readFileSync('data/faith/tccb_89_positions.json', 'utf8'));
+const conflictBills = new Set(TC.conflicts.map((c: { bill: string }) => c.bill));
+check('House votes: no bill the bishops\' documents disagree about is counted', HV.bills.every((b) => !conflictBills.has(b.bill)), `${conflictBills.size} left out`);
+const accounted = HV.bills.length + Object.values(HV.notVoted).reduce((s, l) => s + l.length, 0);
+check('House votes: every bill with a position is either counted or listed as not voted on', accounted === TC.positions.length, `${accounted} of ${TC.positions.length}`);
+// Against the member-level counts: the official totals also hold votes the
+// source could not attribute to a person (votes_89R.json _meta.shortRecords).
+const offBy = (b: (typeof HV.bills)[number]) => (b.house.yeas - b.house.R.yea - b.house.D.yea) + (b.house.nays - b.house.R.nay - b.house.D.nay);
+check('House votes: each party\'s tally adds up to the member-by-member yeas and nays', HV.bills.every((b) => b.house.R.yea + b.house.D.yea === b.house.memberYeas && b.house.R.nay + b.house.D.nay === b.house.memberNays),
+  HV.bills.filter((b) => b.house.R.yea + b.house.D.yea !== b.house.memberYeas || b.house.R.nay + b.house.D.nay !== b.house.memberNays).map((b) => b.bill).join(', ') || `${HV.bills.length} bills`);
+check('House votes: the official totals differ from the parties\' by at most one unattributed vote', HV.bills.every((b) => offBy(b) === 0 || offBy(b) === 1),
+  `${HV.bills.filter((b) => offBy(b) === 1).map((b) => b.bill).join(', ') || 'none'} off by one`);
+check('House votes: every counted vote passed', HV.bills.every((b) => b.house.yeas > b.house.nays));
+// An unattributed vote could belong to either party; it must not be able to
+// change which way a party's majority went.
+const fragile = HV.bills.filter((b) => offBy(b) > 0 && (['R', 'D'] as const).some((p) => Math.abs(b.house[p].yea - b.house[p].nay) <= offBy(b)));
+check('House votes: no party\'s result could flip on an unattributed vote', fragile.length === 0, fragile.map((b) => b.bill).join(', ') || 'none');
 
 // --- not yet reviewed -------------------------------------------------------
 

@@ -213,6 +213,14 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   details.earlier summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
   .jump{display:flex;flex-wrap:wrap;gap:2px 14px;list-style:none;padding:0;font-size:14.5px}
   .jump li{margin:0}.jump a{display:inline-block;min-height:32px;padding:4px 0}
+  .tablewrap{overflow-x:auto;margin:8px 0}
+  table.hv{border-collapse:collapse;font-size:15px;min-width:100%}
+  table.hv th,table.hv td{padding:6px 10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  table.hv td{font-variant-numeric:tabular-nums}
+  ul.tally{list-style:none;padding:0;margin:4px 0 6px;font-size:15px}
+  ul.tally li{margin:2px 0}
+  .way{font-weight:600}
+  p.caption{font-family:"Newsreader",Georgia,serif;font-size:1.02rem;color:var(--ink-2);margin:2px 0 6px}
   </style>
   <h1>Cómo se hicieron las páginas sobre la fe</h1>
   <p class="lede">Estas páginas informan lo que cinco tradiciones cristianas han dicho oficialmente y lo que dicen las plataformas de los partidos. Nunca deciden cuál es “la postura cristiana”.</p>
@@ -246,6 +254,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   <p>El mismo programa no encuentra ninguna referencia bíblica en ninguna de las cuatro plataformas.</p>
   <p class="small">Texto de los versículos: la World English Bible en inglés y la Reina-Valera 1909 en español, ambas de dominio público, de eBible.org.</p>
 
+  <h2>Votaciones sobre proyectos de ley en los que una iglesia tomó postura</h2>
+  <p>Donde una iglesia ha dicho por sí misma que apoya o rechaza un proyecto de ley específico de Texas, una página muestra cómo votó cada partido en la Cámara de Texas sobre ese proyecto cuando fue aprobado. El sitio nunca decide hacia dónde apunta la enseñanza de una iglesia sobre un proyecto. De las cinco iglesias, solo los obispos católicos de Texas publican una lista así, de modo que hay una sola página de este tipo: <a href="https://rightnleft.com/fe/catolica/camara-de-texas">La Cámara de Texas y los proyectos de ley de los obispos católicos, 2025</a>. Su conteo es de esa sola iglesia y no se suma a nada más.</p>
+
   <h2>Cómo se verifica cada cita</h2>
   <p>Cada fuente se descarga y se lee como texto. Un programa compara cada cita, las 63, palabra por palabra con ese texto, y comprueba que una cita con una palabra cambiada no se encuentra, para saber que la verificación puede fallar. Cada afirmación de que una plataforma no dice nada sobre un tema se verifica de la misma manera: ninguna de las palabras del tema puede aparecer en la plataforma. Esa verificación se agregó después de que un borrador de resumen dijo, por error, que la plataforma republicana nacional no trataba el medio ambiente en ningún otro punto.</p>
 
@@ -255,7 +266,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   <ul><li>Iglesia Metodista Unida: Los textos completos del Libro de Resoluciones 4273 (Global Migration and the Quest for Justice) y 4275 (Concerning Immigration); solo se han leído las citas que aparecen en umc.org.</li><li>Iglesia Metodista Unida: El texto mismo de los Principios Sociales (revisión de 2024), en lugar de la página de la iglesia que lo cita.</li><li>Iglesia católica en Estados Unidos: Otras declaraciones sobre la inmigración aprobadas por el pleno de los obispos (por ejemplo, Strangers No Longer, de 2003, con los obispos de México).</li><li>Iglesia Metodista Episcopal Africana: Las resoluciones de la Conferencia General de la Iglesia AME, que tienen más autoridad que el Consejo de Obispos; hasta ahora no se ha encontrado ninguna en internet.</li></ul>
 
   <h2>Lo que estas páginas no hacen</h2>
-  <p>No le dan puntaje a ningún partido ni a ninguna iglesia, ni en la página, ni en una tarjeta para compartir, ni en los datos. No dicen qué partido es “más cristiano” ni interpretan las Escrituras. Donde las tradiciones no están de acuerdo entre sí, las páginas muestran el desacuerdo. Y los miembros de cada tradición tienen opiniones diversas.</p>
+  <p>No le dan a ningún partido ni a ninguna iglesia un puntaje ni una clasificación, ni en la página, ni en una tarjeta para compartir, ni en los datos. El único conteo de estas páginas está en la página de la Cámara de Texas: en los proyectos de ley sobre los que los propios obispos católicos de Texas tomaron postura, cuántas veces la mayoría de cada partido votó como ellos pedían. Abarca esa sola iglesia, nunca se combina con otra y no es un veredicto sobre qué partido es “más cristiano”. Las páginas no interpretan las Escrituras. Donde las tradiciones no están de acuerdo entre sí, las páginas muestran el desacuerdo. Y los miembros de cada tradición tienen opiniones diversas.</p>
 
   <h2>Los datos</h2>
   <p>Todo lo que aparece en estas páginas está en un solo archivo, de uso libre (CC0). <a href="/data/faith.json">Descargue el registro completo (faith.json, CC0)</a></p>
