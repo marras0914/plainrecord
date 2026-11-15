@@ -34,6 +34,7 @@
     "data:econ:quotes": "tsx scripts/check_econ_quotes.ts",
     "data:econ": "tsx scripts/export_econ.ts",
     "data:faith:quotes": "tsx scripts/check_faith_quotes.ts",
+    "traffic": "node scripts/traffic_report.mjs",
     "data:faith": "tsx scripts/export_faith.ts",
     "data:faith:verses": "tsx scripts/extract_faith_verses.ts",
     "data:faith:tccb": "tsx scripts/extract_tccb_positions.ts",
