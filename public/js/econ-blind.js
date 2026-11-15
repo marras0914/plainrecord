@@ -14,6 +14,10 @@
  * Nothing is stored and nothing is sent. Ratings live in this page's memory
  * and are gone on reload.
  *
+ * A ROUND IS FIVE CARDS (C.roundSize, Marco 14 Nov 2026), the first five of
+ * this reader's shuffle; after the answers the reader may rate five more or
+ * all the rest. Cards are named by their place in the reader's order.
+ *
  * Text is set with textContent throughout; nothing here parses HTML.
  */
 (function () {
@@ -28,6 +32,15 @@
   var answers = {};   // key -> { rating, recognized }
   var prediction = null;
   var at = 0;
+  // A round is C.roundSize cards (Marco, 14 Nov 2026: 19 was too many). The
+  // shuffle picks them, so nobody chooses which terms a reader sees; after
+  // the answers the reader can rate more, or the rest.
+  var upTo = 0;       // index one past the last card of the current run
+
+  // The card's name is its place in this reader's order. It used to be the
+  // data file's opaque key, lettered A to S, which put a "Term D" and a
+  // "Term R" on a page whose point is hiding the party.
+  function cardName(c) { return fill(S['bl.cardHead'], { k: cards.indexOf(c) + 1 }); }
 
   function fill(s, vars) {
     return s.replace(/\{(\w+)\}/g, function (m, k) { return k in vars ? String(vars[k]) : m; });
@@ -46,6 +59,35 @@
     return b;
   }
   function num(v) { return v === null || v === undefined ? S.noData : fmt.format(v); }
+
+  // What a number means: a small (i) after each label. A phone cannot hover,
+  // so a tap pins the explanation under the table; on a computer, pointing at
+  // it or tabbing to it shows it too. One explanation at a time.
+  var pinned = null;
+  function withTip(cell, text) {
+    if (!text) return cell;
+    var b = el('button', 'tip', 'i');
+    b.type = 'button';
+    b.setAttribute('aria-label', fill(S['tip.label'], { what: cell.textContent }));
+    b.setAttribute('aria-expanded', 'false');
+    var out = function () { return cell.closest('section').querySelector('.tip-out'); };
+    var show = function () { var o = out(); o.textContent = cell.firstChild.textContent + ': ' + text; o.hidden = false; };
+    var hide = function () { if (pinned) { var o = out(); o.textContent = pinned.text; o.hidden = false; } else out().hidden = true; };
+    b.addEventListener('click', function () {
+      var on = pinned && pinned.b === b;
+      root.querySelectorAll('button.tip').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
+      pinned = on ? null : { b: b, text: cell.firstChild.textContent + ': ' + text };
+      if (!on) b.setAttribute('aria-expanded', 'true');
+      hide();
+    });
+    b.addEventListener('mouseenter', show);
+    b.addEventListener('focus', show);
+    b.addEventListener('mouseleave', hide);
+    b.addEventListener('blur', hide);
+    cell.appendChild(document.createTextNode(' '));
+    cell.appendChild(b);
+    return cell;
+  }
   function clear() { while (root.firstChild) root.removeChild(root.firstChild); }
   function focusFirst() {
     var h = root.querySelector('h2, p');
@@ -82,26 +124,31 @@
 
   function showCard() {
     clear();
+    pinned = null;
     var c = cards[at];
     var a = answers[c.key] || (answers[c.key] = { rating: null, recognized: false });
     var box = el('section', 'card');
-    box.appendChild(el('p', 'small', fill(S['bl.progress'], { i: at + 1, n: cards.length })));
-    box.appendChild(el('h2', null, fill(S['bl.cardHead'], { k: c.key.replace('term-', '').toUpperCase() })));
+    box.appendChild(el('p', 'small', fill(S['bl.progress'], { i: at + 1, n: upTo })));
+    box.appendChild(el('h2', null, cardName(c)));
 
     var table = el('table', 'chart-table');
     var head = el('tr');
     head.appendChild(el('th', null, ''));
-    head.appendChild(el('th', 'num', S['bl.colThis']));
-    head.appendChild(el('th', 'num', S['bl.colInherited']));
+    head.appendChild(withTip(el('th', 'num', S['bl.colThis']), S['tip.colThis']));
+    head.appendChild(withTip(el('th', 'num', S['bl.colInherited']), S['tip.colInherited']));
     table.appendChild(head);
     C.metrics.forEach(function (m) {
       var tr = el('tr');
-      tr.appendChild(el('td', null, S['m.' + m]));
+      tr.appendChild(withTip(el('td', null, S['m.' + m]), S['tip.' + m]));
       tr.appendChild(el('td', 'num', num(c.metrics[m])));
       tr.appendChild(el('td', 'num', num(c.baseline[m])));
       table.appendChild(tr);
     });
     box.appendChild(table);
+    var tipOut = el('p', 'tip-out small');
+    tipOut.setAttribute('aria-live', 'polite');
+    tipOut.hidden = true;
+    box.appendChild(tipOut);
 
     var fs = el('fieldset', 'rate');
     fs.appendChild(el('legend', 'label', S['bl.rateQ']));
@@ -134,13 +181,15 @@
     rec.appendChild(document.createTextNode(' ' + S['bl.recognize']));
     box.appendChild(el('p')).appendChild(rec);
 
-    var last = at === cards.length - 1;
+    var last = at === upTo - 1;
     var next = button(last ? S['bl.finish'] : S['bl.next'], 'cta', function () {
       if (last) reveal(); else { at++; showCard(); }
     });
     next.disabled = a.rating === null;
     box.appendChild(el('p')).appendChild(next);
-    box.appendChild(button(S['bl.stopEarly'], 'linkish', reveal));
+    // Stopping early ends the run at the cards actually rated, so "more"
+    // carries on from the first one not yet seen rather than skipping ahead.
+    box.appendChild(button(S['bl.stopEarly'], 'linkish', function () { upTo = a.rating === null ? at : at + 1; reveal(); }));
     root.appendChild(box);
     focusFirst();
   }
@@ -182,6 +231,10 @@
         all[t.party].push(a.rating);
         if (!a.recognized) unrec[t.party].push(a.rating);
       });
+      // A random draw can lean to one party, so say how it fell.
+      if (rated.length) root.appendChild(el('p', 'small', fill(S['bl.ratedSplit'], { d: all.D.length, r: all.R.length })));
+      var more = moreButtons();
+      if (more) root.appendChild(more);
       if (rated.length) {
         root.appendChild(el('p', null, fill(S['bl.avgAll'], { d: avg(all.D), r: avg(all.R) })));
         root.appendChild(el('p', null, fill(S['bl.avgUnrec'], { d: avg(unrec.D), r: avg(unrec.R) })));
@@ -198,7 +251,7 @@
         var a = answers[c.key];
         var li = el('li');
         var head = el('p');
-        head.appendChild(el('b', null, fill(S['bl.cardHead'], { k: c.key.replace('term-', '').toUpperCase() }) + ': ' + termLabel(t)));
+        head.appendChild(el('b', null, cardName(c) + ': ' + termLabel(t)));
         head.appendChild(document.createTextNode(' · ' + (t.party === 'D' ? S.D : S.R)));
         li.appendChild(head);
         li.appendChild(el('p', 'small', fill(S['bl.yourRating'], { v: a.rating }) + (a.recognized ? ' · ' + S['bl.recognizedTag'] : '')));
@@ -236,11 +289,29 @@
     });
   }
 
+  // --- more cards after the answers --------------------------------------------
+
+  // Rate the next round, or all the rest. The cards already rated keep their
+  // ratings and their numbers, and the next answers include them.
+  function moreButtons() {
+    var left = cards.length - upTo;
+    if (left <= 0) return null;
+    var p = el('p');
+    var go = function (n) { return function () { at = upTo; upTo = Math.min(cards.length, upTo + n); showCard(); }; };
+    if (left > C.roundSize) {
+      p.appendChild(button(fill(S['bl.more'], { n: C.roundSize }), 'cta', go(C.roundSize)));
+      p.appendChild(document.createTextNode(' '));
+    }
+    p.appendChild(button(fill(S['bl.rest'], { n: left }), left > C.roundSize ? 'linkish' : 'cta', go(left)));
+    return p;
+  }
+
   // --- start -----------------------------------------------------------------
 
   function start() {
     answers = {}; at = 0; prediction = null;
     cards = shuffle(cards.slice());
+    upTo = Math.min(C.roundSize, cards.length);
     showPrediction();
   }
 

@@ -2262,6 +2262,59 @@ try {
     check('economy: nothing is requested from another origin', foreign.length === 0, foreign[0] ?? 'none');
     await bc.close();
 
+    // Rounds of five, numbered cards, and an explanation for every number
+    // (Marco, 14 Nov 2026). The cards used to be lettered A to S, which put a
+    // "Term D" and a "Term R" on the page.
+    {
+      const rc = await browser.newContext();
+      const rp = await rc.newPage();
+      await rp.goto(new URL('/economy', URL_UNDER_TEST).href, { waitUntil: 'networkidle' });
+      const cfg = JSON.parse(await rp.locator('#econ-blind').getAttribute('data-config'));
+      const S = JSON.parse(await rp.locator('#econ-blind').getAttribute('data-strings'));
+      await rp.locator('#econ-blind button', { hasText: /skip|omitir/i }).click();
+      const heads = [];
+      const progress = [];
+      let tipsOk = null;
+      for (let i = 0; i < cfg.roundSize; i++) {
+        heads.push((await rp.locator('#econ-blind section.card h2').innerText()).trim());
+        progress.push((await rp.locator('#econ-blind section.card p.small').first().innerText()).trim());
+        if (i === 0) {
+          // Every row and both columns carry an (i); each one, tapped, shows its own words.
+          const tips = rp.locator('#econ-blind button.tip');
+          const n = await tips.count();
+          const want = cfg.metrics.map((m) => S[`tip.${m}`]).concat([S['tip.colThis'], S['tip.colInherited']]);
+          const shown = [];
+          for (let j = 0; j < n; j++) {
+            await tips.nth(j).click();
+            shown.push(await rp.locator('#econ-blind .tip-out').innerText());
+          }
+          tipsOk = { n, missing: want.filter((w) => !shown.some((s) => s.includes(w))) };
+        }
+        await rp.locator('#econ-blind input[name="rating"][value="3"]').check();
+        await rp.locator('#econ-blind button.cta').click();
+      }
+      check('economy: each card is named by a number in the reader\'s order, never a letter',
+        heads.every((h, i) => h === S['bl.cardHead'].replace('{k}', String(i + 1))), heads.join(', '));
+      check('economy: every measure and both columns explain themselves when tapped',
+        tipsOk.n === cfg.metrics.length + 2 && tipsOk.missing.length === 0, `${tipsOk.n} buttons, ${tipsOk.missing.length} explanation(s) missing`);
+      await rp.waitForSelector('#econ-blind h2', { timeout: 5000 });
+      await rp.waitForTimeout(300);
+      const after = await rp.locator('#econ-blind').innerText();
+      check(`economy: a round is ${cfg.roundSize} cards, then the answers`,
+        progress[progress.length - 1] === S['bl.progress'].replace('{i}', String(cfg.roundSize)).replace('{n}', String(cfg.roundSize)) && /on average|en promedio/i.test(after),
+        progress.join(' | '));
+      const more = rp.locator('#econ-blind button', { hasText: S['bl.more'].replace('{n}', String(cfg.roundSize)) });
+      const hasMore = await more.count();
+      let next = '';
+      if (hasMore) {
+        await more.first().click();
+        next = (await rp.locator('#econ-blind section.card h2').innerText()).trim();
+      }
+      check('economy: after the answers the reader can rate five more, numbered on from the first round',
+        hasMore === 1 && next === S['bl.cardHead'].replace('{k}', String(cfg.roundSize + 1)), `${hasMore} button(s), next card "${next}"`);
+      await rc.close();
+    }
+
     // The explorer is static: with scripts off it still has every chart.
     const nc = await browser.newContext({ javaScriptEnabled: false });
     const np = await nc.newPage();
