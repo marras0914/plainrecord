@@ -75,11 +75,14 @@ const dayStr = (d) => d.toISOString().slice(0, 10);
 const nextDay = (s) => dayStr(new Date(Date.parse(`${s}T00:00:00Z`) + 86400000));
 
 async function fetchDay(day) {
-  // `until` is inclusive, and the API stretches it: next-day 00:00 came back as
-  // next-day 01:00 (15 Nov 2026). The day's last millisecond keeps it in the day.
+  // The two endpoints round `until` differently (15 Nov 2026). aggregate rounds
+  // it up: next-day 00:00 came back as 01:00, so the day's last millisecond is
+  // used and comes back as next-day 00:00. count rounds it down: the last
+  // millisecond came back as same-day 00:00 and counted 0, so count gets
+  // next-day 00:00. Both then echo the same since/until.
   const range = { since: `${day}T00:00:00.000Z`, until: `${day}T23:59:59.999Z` };
   const [total, paths, referrers] = await Promise.all([
-    query('count', range),
+    query('count', { since: range.since, until: `${nextDay(day)}T00:00:00.000Z` }),
     query('aggregate', { ...range, by: 'requestPath', limit: '100' }),
     query('aggregate', { ...range, by: 'referrerHostname', limit: '25' }),
   ]);
