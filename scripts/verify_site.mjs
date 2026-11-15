@@ -2366,7 +2366,7 @@ try {
       const own = faith.statements.filter((s) => s.traditionId === id && hrefs.has(s.sourceUrl));
       if (own.length === 0) crossed.push(`${path}: not even its own statements found`);
       const issues = await fp.locator('main h2[id]').count();
-      const platformCards = await fp.locator('main h4 + .card, main h4 + .card + .card').count();
+      const platformCards = await fp.locator('main h4 + .duo > .card').count();
       if (issues !== faith.issues.length || platformCards !== faith.issues.length * 4) shape.push(`${path}: ${issues} issues, ${platformCards} platform cards`);
     }
     // The verses: each language shows its own Bible. Leviticus 19:34 is cited

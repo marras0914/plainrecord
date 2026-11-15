@@ -78,6 +78,18 @@ body{margin:0;background:var(--page);color:var(--ink);
   font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
   font-size:17px;-webkit-text-size-adjust:100%}
 main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
+/* Laptops and wider (Marco, 14 Nov 2026: "a lot of wasted space"). The column
+   grows to the quiz's width; running text keeps a readable line, and the room
+   goes to what can use it: side-by-side cards, tables and charts. */
+@media (min-width:1024px){
+  main{max-width:62rem;padding:48px 32px 80px}
+  main p,main li,main blockquote,main dd{max-width:72ch}
+  main .card p,main .card li,main .card blockquote{max-width:none}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:start}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px;align-items:start}
+  .duo>.hubcard{align-self:stretch}
+}
+.hubcard h2{margin:2px 0 8px}
 h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
   line-height:1.15;text-wrap:balance}
 h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}
@@ -254,7 +266,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
   <h2>Bill by bill</h2>
   <p class="small">In each area, the bills on which the two parties voted differently come first.</p>
   <h3 id="life-and-family-life">Life and family life</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB514"><b>HB 514</b></a> · The bishops supported it.</p>
       <p class="caption" lang="en">Relating to a maternal health care workforce campaign.</p>
       <p class="small">House final passage, May 6, 2025, record vote 1447: 85 yea, 57 nay.</p>
@@ -583,9 +595,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Democrats: 32 yea, 22 nay, <span class="way way-with">the bishops’ way</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">The bishops’ entry</a> · Listed by the bishops together with HJR 112.</p>
-    </div>
+    </div></div>
   <h3 id="immigration">Immigration</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=SB8"><b>SB 8</b></a> · The bishops opposed it.</p>
       <p class="caption" lang="en">Relating to agreements between certain sheriffs and the United States Immigration and Customs Enforcement to enforce federal immigration law and a grant program to cover the costs of implementing those agreements.</p>
       <p class="small">House final passage, May 25, 2025, record vote 3502: 86 yea, 47 nay.</p>
@@ -624,9 +636,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Democrats: 58 yea, 0 nay, <span class="way way-with">the bishops’ way</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">The bishops’ entry</a></p>
-    </div>
+    </div></div>
   <h3 id="restorative-justice">Restorative justice</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB200"><b>HB 200</b></a> · The bishops supported it.</p>
       <p class="caption" lang="en">Relating to jury instructions regarding parole eligibility and the release on parole of certain inmates convicted of an offense committed when younger than 18 years of age; changing parole eligibility.</p>
       <p class="small">House final passage, May 8, 2025, record vote 1787: 102 yea, 45 nay.</p>
@@ -785,9 +797,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Democrats: 58 yea, 0 nay, <span class="way way-with">the bishops’ way</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">The bishops’ entry</a></p>
-    </div>
+    </div></div>
   <h3 id="education">Education</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB2674"><b>HB 2674</b></a> · The bishops supported it.</p>
       <p class="caption" lang="en">Relating to prohibiting the regulation of home school programs.</p>
       <p class="small">House final passage, May 13, 2025, record vote 2314: 103 yea, 41 nay.</p>
@@ -916,9 +928,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Democrats: 57 yea, 0 nay, <span class="way way-with">the bishops’ way</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">The bishops’ entry</a> · Listed by the bishops together with HB 2283.</p>
-    </div>
+    </div></div>
   <h3 id="social-concerns">Social concerns</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB38"><b>HB 38</b></a> · The bishops supported it.</p>
       <p class="caption" lang="en">Relating to improvements to the Texas Information and Referral Network.</p>
       <p class="small">House final passage, May 5, 2025, record vote 1366: 96 yea, 42 nay.</p>
@@ -1167,9 +1179,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Democrats: 38 yea, 17 nay, <span class="way way-with">the bishops’ way</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">The bishops’ entry</a> · Listed by the bishops together with HB 5187.</p>
-    </div>
+    </div></div>
   <h3 id="religious-liberty">Religious liberty</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB2067"><b>HB 2067</b></a> · The bishops supported it.</p>
       <p class="caption" lang="en">Relating to declination, cancellation, or nonrenewal of insurance policies.</p>
       <p class="small">House final passage, April 25, 2025, record vote 569: 123 yea, 2 nay.</p>
@@ -1188,9 +1200,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Democrats: 56 yea, 0 nay, <span class="way way-with">the bishops’ way</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">The bishops’ entry</a></p>
-    </div>
+    </div></div>
   <h3 id="creation">Creation</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB3637"><b>HB 3637</b></a> · The bishops supported it.</p>
       <p class="caption" lang="en">Relating to the authority of a county commissioners court to adopt an exemption from ad valorem taxation by each taxing unit that taxes the property of the portion of the appraised value of a person's property that is attributable to the installation in or on the property of certain water conservation systems.</p>
       <p class="small">House final passage, May 14, 2025, record vote 2436: 95 yea, 43 nay.</p>
@@ -1249,9 +1261,9 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Democrats: 56 yea, 0 nay, <span class="way way-with">the bishops’ way</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">The bishops’ entry</a> · Listed by the bishops together with HB 5207.</p>
-    </div>
+    </div></div>
   <h3 id="none">Not placed in an area by the bishops</h3>
-    <div class="card">
+    <div class="duo"><div class="card">
       <p><a href="https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&amp;Bill=HB321"><b>HB 321</b></a> · The bishops supported it.</p>
       <p class="caption" lang="en">Relating to implementing an express lane option under Medicaid and the child health plan program.</p>
       <p class="small">House final passage, May 10, 2025, record vote 2022: 83 yea, 50 nay.</p>
@@ -1310,7 +1322,7 @@ details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
         <li>Democrats: 61 yea, 0 nay, <span class="way way-with">the bishops’ way</span></li>
       </ul>
       <p class="small"><a href="https://txcatholic.org/bill-positions-89th-legislature/">The bishops’ entry</a> · Listed by the bishops together with HB 1536.</p>
-    </div>
+    </div></div>
 
   <h2>Bills that did not pass the House by recorded vote</h2>
   <ul>

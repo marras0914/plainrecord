@@ -44,11 +44,11 @@ export function homePage(lang) {
   const body = `
   <h1>${ht(L, 'home.h1')}</h1>
   <p class="lede">${ht(L, 'home.lede')}</p>
-  ${doors.map((d) => `<div class="card door">
+  <div class="trio">${doors.map((d) => `<div class="card door">
     <h2><a href="${d.href}">${d.name}</a></h2>
     <p>${d.line}</p>
     <p><a class="cta" href="${d.href}">${ht(L, 'home.go', { space: d.name.replace(/&amp;/g, '&') })}</a></p>
-  </div>`).join('\n  ')}
+  </div>`).join('\n  ')}</div>
   <p><a href="${url(QUIZ_PATH[L])}">${ht(L, 'home.quiz')}</a></p>
   <hr>
   <p class="small"><span class="label">${ft(L, 'discloseLabel')}</span> ${ft(L, 'disclose')}</p>`;

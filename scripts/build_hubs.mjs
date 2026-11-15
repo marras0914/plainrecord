@@ -121,19 +121,19 @@ function page(lang, which, items) {
   // The Policy hub (14 Nov 2026) replaced Context: economy and faith became
   // their own spaces, and the legislature's pages gathered here.
   const go = (href, text) => `<p><a href="${href}">${text}</a></p>`;
+  // Four cards, two by two on a laptop (.duo in _page_shell.mjs), stacked on a phone.
+  const box = (h2, inner) => `<div class="card hubcard"><h2>${h2}</h2>${inner}</div>`;
   const policy = `
-  <h2>${ht(lang, 'policy.quizH2')}</h2>
-  <p>${ht(lang, 'policy.quiz')}</p>
-  <p><a class="cta" href="${c.quiz}">${esc(c.bills.cta)}</a></p>
-  <h2>${ht(lang, 'policy.repH2')}</h2>
-  <p>${ht(lang, 'policy.rep')}</p>
-  ${go(`${SITE}/${lang === 'es' ? 'distritos' : 'districts'}`, ht(lang, 'policy.repLink'))}
-  <h2>${esc(c.bills.h1)}</h2>
-  <p>${esc(c.bills.lede)}</p>
-  ${go(`${SITE}/${c.bills.slug}`, ht(lang, 'policy.billsLink'))}
-  <h2>${ht(lang, 'policy.chartsH2')}</h2>
-  <p>${ht(lang, 'policy.charts')}</p>
-  ${go(`${SITE}/${lang === 'es' ? 'graficas' : 'charts'}`, ht(lang, 'policy.chartsLink'))}
+  <div class="duo">
+  ${box(ht(lang, 'policy.quizH2'), `<p>${ht(lang, 'policy.quiz')}</p>
+  <p><a class="cta" href="${c.quiz}">${esc(c.bills.cta)}</a></p>`)}
+  ${box(ht(lang, 'policy.repH2'), `<p>${ht(lang, 'policy.rep')}</p>
+  ${go(`${SITE}/${lang === 'es' ? 'distritos' : 'districts'}`, ht(lang, 'policy.repLink'))}`)}
+  ${box(esc(c.bills.h1), `<p>${esc(c.bills.lede)}</p>
+  ${go(`${SITE}/${c.bills.slug}`, ht(lang, 'policy.billsLink'))}`)}
+  ${box(ht(lang, 'policy.chartsH2'), `<p>${ht(lang, 'policy.charts')}</p>
+  ${go(`${SITE}/${lang === 'es' ? 'graficas' : 'charts'}`, ht(lang, 'policy.chartsLink'))}`)}
+  </div>
   <h2>${esc(c.races.h1)}</h2>
   <p>${esc(c.races.lede)}</p>${section(c.races, items)}
   ${go(`${SITE}/open-data`, ht(lang, 'policy.dataLink'))}`;
