@@ -2466,6 +2466,19 @@ try {
       check(`spaces: the ${lang} quiz is at ${p}, in ${lang}, with that canonical`, l === lang && canon === `https://rightnleft.com${p}`, `${l} ${canon}`);
     }
 
+    // Search Console and Bing verified the site by meta tags on the HOME page,
+    // and re-check them there. When the quiz moved off / (14 Nov 2026) the
+    // tags went with it for a few hours; this keeps them on the front page.
+    const srcHtml = readFileSync(join(ROOT, 'src/index.html'), 'utf8');
+    const wantTags = ['google-site-verification', 'msvalidate.01']
+      .map((n) => (srcHtml.match(new RegExp(`<meta name="${n.replace('.', '\\.')}" content="([^"]+)">`)) ?? [])[1]);
+    const homeHtml = await (await fetch(at('/'))).text();
+    const tagOn = (html, name, value) => new RegExp(`<meta name="${name.replace('.', '\\.')}" content="${value}">`).test(html);
+    check('search: the front page carries the Google and Bing verification tags, as in src/index.html',
+      wantTags.every(Boolean) && tagOn(homeHtml, 'google-site-verification', wantTags[0]) && tagOn(homeHtml, 'msvalidate.01', wantTags[1]),
+      wantTags.every(Boolean) ? 'both present' : 'src/index.html lost a tag');
+    check('(search: the tag check fails on a page without them)', !tagOn(await (await fetch(at('/policy'))).text(), 'google-site-verification', wantTags[0]));
+
     // The retired Context hub sends readers to the front page.
     const ctx = await fetch(at('/context'), { redirect: 'manual' });
     const ctxEs = await fetch(at('/contexto'), { redirect: 'manual' });

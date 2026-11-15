@@ -18,6 +18,7 @@
  * (faith.json and economy.json hub.lede); everything else is in i18n/home.json.
  */
 
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { SITE, loadFaces, document_ } from './_page_shell.mjs';
@@ -31,6 +32,26 @@ requireApprovedEcon('build_home');
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
+
+/**
+ * THE SEARCH ENGINES' OWNERSHIP TAGS GO ON THE FRONT PAGE. Google Search
+ * Console (URL-prefix property for https://rightnleft.com, verified 22 Sep
+ * 2026) and Bing Webmaster Tools (5 Oct 2026) each verified the site by a meta
+ * tag on the home page, and each re-checks it there; losing it un-verifies the
+ * property and its history. The tags were written in src/index.html when the
+ * quiz WAS the home page. When the quiz moved to /quiz (14 Nov 2026) they went
+ * with it, so they are read from that file here, never typed twice, and the
+ * build fails if either is missing.
+ */
+export const VERIFICATION_TAGS = (() => {
+  const src = readFileSync(resolve(ROOT, 'src/index.html'), 'utf8');
+  const tags = ['google-site-verification', 'msvalidate.01'].map((name) => {
+    const m = src.match(new RegExp(`<meta name="${name.replace('.', '\\.')}" content="[^"]+">`));
+    if (!m) throw new Error(`build_home: src/index.html has no ${name} meta tag; the front page would lose its search-engine verification`);
+    return m[0];
+  });
+  return tags.join('\n');
+})();
 const url = (p) => `${SITE}${p === '/' ? '/' : p}`;
 
 export function homePage(lang) {
@@ -61,6 +82,7 @@ export function homePage(lang) {
     ogImage: `${SITE}/${L === 'es' ? 'og.es.png' : 'og.png'}`,
     body: `<style>.door h2{margin:4px 0 6px}.door h2 a{text-decoration:none}</style>${body}`,
     scripts: ['/js/home.js'],
+    head: VERIFICATION_TAGS,
     jsonld: {
       '@context': 'https://schema.org', '@type': 'WebPage', name: ht(L, 'home.h1'), description: ht(L, 'home.desc'),
       inLanguage: L === 'es' ? 'es-US' : 'en-US', url: url(HOME_PATH[L]),

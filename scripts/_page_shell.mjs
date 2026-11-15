@@ -248,7 +248,7 @@ export const sheetLine = (lang) => (lang === 'es'
  * results show about 60 characters, and a page whose h1 is already long lost
  * its tail to " | The Purple Strip". og:title keeps the h1 wording either way.
  */
-export function document_({ lang, title, docTitle, siteName, desc, canonical, altHref, altLabel, otherLang, ogImage, jsonld, faces, kicker, body, scripts = [] }) {
+export function document_({ lang, title, docTitle, siteName, desc, canonical, altHref, altLabel, otherLang, ogImage, jsonld, faces, kicker, body, scripts = [], head = '' }) {
   // A string here gets stringified again and ships as one quoted string, which
   // Google rejects as 'Invalid top level element'. /districts did exactly that.
   if (typeof jsonld !== 'object' || jsonld === null) throw new Error('document_: jsonld must be an object, got ' + typeof jsonld);
@@ -270,7 +270,7 @@ ${otherLang ? `<link rel="alternate" hreflang="${lang}" href="${canonical}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-${ICON_LINKS}
+${ICON_LINKS}${head ? `\n${head}` : ''}
 <script src="/js/theme.js"></script>
 ${ANALYTICS}
 <link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
