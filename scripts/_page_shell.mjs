@@ -19,7 +19,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { navHtml, footerHtml } from './_site_nav.mjs';
+import { navHtml, footerHtml, brandHtml, BRAND_CSS, ICON_LINKS } from './_site_nav.mjs';
 
 export const SITE = 'https://rightnleft.com';
 
@@ -128,8 +128,10 @@ a{color:var(--blue)}
 .cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
   background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
 hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;
-  font-size:13px;margin-bottom:22px}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;
+  font-size:13px;margin-bottom:14px}
+.kicker-line{margin:0 0 16px}
+${BRAND_CSS}
 /* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
    scrolling sideways on a phone; the current section is ink, not link blue. */
 .sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
@@ -256,6 +258,7 @@ ${otherLang ? `<link rel="alternate" hreflang="${lang}" href="${canonical}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+${ICON_LINKS}
 <script src="/js/theme.js"></script>
 ${ANALYTICS}
 <link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
@@ -266,9 +269,10 @@ ${scripts.map((s) => `<script src="${s}" defer></script>\n`).join('')}</head>
 <body>
 <main>
   <div class="top">
-    <span class="kicker">${esc(kicker)}</span>
+    ${brandHtml(lang)}
     <a href="${altHref}">${esc(altLabel)}</a>
   </div>
+  <p class="kicker kicker-line">${esc(kicker)}</p>
   ${navHtml(lang, canonical)}
 ${body}
   ${footerHtml(lang)}

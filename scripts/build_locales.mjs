@@ -34,7 +34,7 @@ import { readFile, writeFile, mkdir, access, readdir, copyFile, rm } from 'node:
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
-import { footerHtml } from './_site_nav.mjs';
+import { footerHtml, brandHtml, BRAND_CSS } from './_site_nav.mjs';
 import { QUIZ_PATH, HOME_PATH, POLICY_PATH } from './_home_copy.mjs';
 import { homePage } from './build_home.mjs';
 import { FAITH_PATHS, TRADITION_SLUG, traditionPath, houseVotesPath } from './_faith_copy.mjs';
@@ -364,6 +364,16 @@ function viteBuild(locale, outDir) {
   return size ? `${size[1]} kB raw, ${size[2]} kB gzip` : 'built (size not parsed)';
 }
 
+// The logo is drawn by the same CSS on the quiz and on every static page. The
+// quiz's copy lives in src/styles.css (vite bundles it), so it is held to the
+// constant here rather than trusted to have been kept in step by hand.
+{
+  const styles = await readFile(resolve(ROOT, 'src/styles.css'), 'utf8');
+  if (!styles.includes(BRAND_CSS)) {
+    throw new Error('build_locales: src/styles.css no longer carries BRAND_CSS from scripts/_site_nav.mjs word for word; copy the constant back in');
+  }
+}
+
 console.log(`  [PASS] built en  — ${viteBuild('en', '../dist')}`);
 if (emitSpanish) {
   console.log(`  [PASS] built es  — ${viteBuild('es', '../.locale-es')}`);
@@ -417,6 +427,7 @@ for (const locale of emitSpanish ? ['en', 'es'] : ['en']) {
     }
     html = html.replace(marker, content);
   };
+  fill('<!--BRAND-->', brandHtml(locale));
   fill('<!--LANG_SWITCH-->', langSwitch(locale));
   fill('<!--SITE_FOOTER-->', footerHtml(locale));
 
