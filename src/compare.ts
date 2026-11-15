@@ -36,7 +36,7 @@
  */
 
 import { HEADLINE_ITEMS, SHORT_ITEMS, type AnswerMap } from './quiz-data.js';
-import { LOCALE, ES_PREFIX } from './i18n.js';
+import { LOCALE, QUIZ_PATH } from './i18n.js';
 
 /** How many votes a compare covers. The seven everybody is asked. */
 export const COMPARE_N = 7;
@@ -153,7 +153,7 @@ export function decodeCompare(code: string, ids: readonly string[] = COMPARE_IDS
 /** Where an invite should point, honouring the language being read. */
 export function inviteUrl(answers: AnswerMap, origin: string, locale: string = LOCALE): string {
   const base = origin.replace(/\/$/, '');
-  const home = locale === 'es' ? `${base}${ES_PREFIX}/` : `${base}/`;
+  const home = `${base}${QUIZ_PATH[locale === 'es' ? 'es' : 'en']}`;
   return `${home}#d=${encodeCompare(answers)}`;
 }
 

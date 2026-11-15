@@ -8,19 +8,20 @@
  * found the race pages linked nothing but each other, the fact sheet linked
  * only home, and the bill pages sat three or four clicks from the homepage.
  *
- * FIVE ITEMS, one per kind of page a reader comes for: the quiz, their own
- * representative, the bills, context, the charts. Each points at a hub, and
- * /bills exists because the nav needed somewhere to point.
- *
- * "Context" replaced "Races" on 12 Nov 2026. The 2026 races were over, and the
- * economy and faith modules needed a home that would not grow the nav past
- * five (EXPANSION.md, option B). The race pages now sit inside /context, and
- * /races redirects there (vercel.json). "Contexto" approved by Marco the same day.
+ * THREE SPACES since 14 Nov 2026 (Marco): Policy, Religion, Economics. Policy
+ * (/policy, /politica) holds everything about the legislature: the quiz (now
+ * at /quiz and /es/cuestionario), representatives, bills, charts, races.
+ * Religion is the faith module under a new label; Economics is the economy
+ * module. The front page (/ and /es) is a door to each. The Context hub that
+ * held economy, faith and the races was retired, and redirects to the front
+ * page (vercel.json). Before that the nav was Quiz, Your rep, Bills, Context,
+ * Charts.
  *
  * This module imports nothing from the shell, so the shell can import it.
  */
 
 import { readFileSync } from 'node:fs';
+import { ht, HOME_COPY, POLICY_PATH, requireApprovedHome } from './_home_copy.mjs';
 
 const SITE = 'https://rightnleft.com';
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url), 'utf8'));
@@ -61,31 +62,23 @@ export const RACES = [...quiz.candidates].sort((a, b) => RACE_ORDER.indexOf(a.of
   };
 });
 
-const NAV = {
-  en: [
-    ['quiz', '/', 'Quiz'],
-    ['rep', '/districts', 'Your rep'],
-    ['bills', '/bills', 'Bills'],
-    ['context', '/context', 'Context'],
-    ['charts', '/charts', 'Charts'],
-  ],
-  es: [
-    ['quiz', '/es', 'Cuestionario'],
-    ['rep', '/distritos', 'Su representante'],
-    ['bills', '/proyectos', 'Proyectos'],
-    ['context', '/contexto', 'Contexto'],
-    ['charts', '/graficas', 'Gráficas'],
-  ],
-};
+requireApprovedHome('_site_nav');
 
-/** Which nav item a page belongs to, from its own URL. */
+// The three spaces (Marco, 14 Nov 2026). Religion is a label only: the faith
+// pages keep /faith and /fe so links already shared keep working.
+const NAV = Object.fromEntries(['en', 'es'].map((L) => [L, [
+  ['policy', POLICY_PATH[L], ht(L, 'nav.policy')],
+  ['religion', L === 'es' ? '/fe' : '/faith', ht(L, 'nav.religion')],
+  ['economics', L === 'es' ? '/economia' : '/economy', ht(L, 'nav.economics')],
+]]));
+
+/** Which space a page belongs to, from its own URL. The front page belongs to none. */
 export function sectionOf(canonical) {
   const path = canonical.replace(SITE, '') || '/';
-  if (path === '/' || path === '/es') return 'quiz';
-  if (/^\/(districts|distritos|district|distrito)(\/|$)/.test(path)) return 'rep';
-  if (/^\/(bills|proyectos|bill|proyecto)(\/|$)/.test(path)) return 'bills';
-  if (/^\/(context|contexto|race|contienda|economy|economia|faith|fe)(\/|$)/.test(path)) return 'context';
-  if (/^\/(charts|graficas)(\/|$)/.test(path)) return 'charts';
+  if (/^\/(policy|politica|quiz|districts|distritos|district|distrito|bills|proyectos|bill|proyecto|race|contienda|charts|graficas)(\/|$)/.test(path)) return 'policy';
+  if (/^\/es\/cuestionario(\/|$)/.test(path)) return 'policy';
+  if (/^\/(faith|fe)(\/|$)/.test(path)) return 'religion';
+  if (/^\/(economy|economia)(\/|$)/.test(path)) return 'economics';
   return null;
 }
 
@@ -97,27 +90,37 @@ export function navHtml(lang, canonical) {
   const label = lang === 'es' ? 'Secciones del sitio' : 'Site sections';
   return `<nav class="sitenav" aria-label="${label}">${NAV[lang === 'es' ? 'es' : 'en'].map(([key, href, text]) =>
     // aria-current="page" only on the hub itself; "true" on a page inside the section.
-    `<a href="${SITE}${href}"${key === here ? ` aria-current="${hub(href) ? 'page' : 'true'}"` : ''}>${esc(text)}</a>`).join('')}</nav>`;
+    // `text` is already escaped by ht().
+    `<a href="${SITE}${href}"${key === here ? ` aria-current="${hub(href) ? 'page' : 'true'}"` : ''}>${text}</a>`).join('')}</nav>`;
 }
 
 const FOOT = {
   en: {
     label: 'More on this site', site: 'The site', bills: 'The seven bills', races: 'The three races',
     links: [
-      ['/', 'The quiz'], ['/districts', 'Find your representative'], ['/bills', 'The bills'],
-      ['/context', 'Context'], ['/charts', 'Charts'], ['/fact-sheet', 'One-page fact sheet'],
+      ['/', 'Home'], ['/policy', 'Policy'], ['/faith', 'Religion'], ['/economy', 'Economics'],
+      ['/quiz', 'The quiz'], ['/districts', 'Find your representative'], ['/bills', 'The bills'],
+      ['/charts', 'Charts'], ['/fact-sheet', 'One-page fact sheet'],
       ['/open-data', 'Download the data'], ['/classroom', classroom['cls.footLink'].en],
     ],
   },
   es: {
     label: 'Más en este sitio', site: 'El sitio', bills: 'Los siete proyectos', races: 'Las tres contiendas',
     links: [
-      ['/es', 'El cuestionario'], ['/distritos', 'Encuentre a su representante'], ['/proyectos', 'Los proyectos'],
-      ['/contexto', 'Contexto'], ['/graficas', 'Gráficas'], ['/hoja', 'Hoja informativa de una página'],
+      ['/es', 'Inicio'], ['/politica', 'Política'], ['/fe', 'Religión'], ['/economia', 'Economía'],
+      ['/es/cuestionario', 'El cuestionario'], ['/distritos', 'Encuentre a su representante'], ['/proyectos', 'Los proyectos'],
+      ['/graficas', 'Gráficas'], ['/hoja', 'Hoja informativa de una página'],
       ['/open-data', 'Descargar los datos (en inglés)'], ['/maestros', classroom['cls.footLink'].es],
     ],
   },
 };
+// The new labels must be the approved ones in home.json, not a second copy.
+for (const L of ['en', 'es']) {
+  const want = { 0: 'foot.home', 1: 'nav.policy', 2: 'nav.religion', 3: 'nav.economics', 4: 'foot.quiz' };
+  for (const [i, key] of Object.entries(want)) {
+    if (FOOT[L].links[i][1] !== HOME_COPY[key][L]) throw new Error(`_site_nav: footer "${FOOT[L].links[i][1]}" is not home.json ${key}`);
+  }
+}
 
 export function footerHtml(lang) {
   const L = lang === 'es' ? 'es' : 'en';

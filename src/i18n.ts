@@ -68,17 +68,18 @@ function detectLocale(): Locale {
   return path === ES_PREFIX || path.startsWith(`${ES_PREFIX}/`) ? 'es' : 'en';
 }
 
-/** The same document in the other language, preserving the rest of the path. */
+/**
+ * Where the quiz lives in each language. It moved from / and /es on 14 Nov 2026,
+ * when the front page became a door to the site's three spaces. Kept in step
+ * with QUIZ_PATH in scripts/_home_copy.mjs (funnel.smoke.ts checks both).
+ */
+export const QUIZ_PATH: Record<Locale, string> = { en: '/quiz', es: `${ES_PREFIX}/cuestionario` };
+
+/** The quiz in the other language, keeping the query and fragment. */
 export function alternateHref(locale: Locale = LOCALE === 'en' ? 'es' : 'en'): string {
-  if (typeof document === 'undefined') return locale === 'es' ? `${ES_PREFIX}/` : '/';
-  const { pathname, search, hash } = document.location;
-  const bare = pathname.startsWith(`${ES_PREFIX}/`)
-    ? pathname.slice(ES_PREFIX.length)
-    : pathname === ES_PREFIX
-      ? '/'
-      : pathname;
-  const next = locale === 'es' ? `${ES_PREFIX}${bare === '/' ? '/' : bare}` : bare;
-  return `${next}${search}${hash}`;
+  if (typeof document === 'undefined') return QUIZ_PATH[locale];
+  const { search, hash } = document.location;
+  return `${QUIZ_PATH[locale]}${search}${hash}`;
 }
 
 /**

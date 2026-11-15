@@ -81,7 +81,7 @@ const BOXES = [
 
 const COPY = {
   en: {
-    other: 'es', slug: 'charts', siteName: 'The Purple Strip', target: `${SITE}/`,
+    other: 'es', slug: 'charts', siteName: 'The Purple Strip', target: `${SITE}/quiz`,
     kicker: 'Texas House · 2025 session', langSwitch: 'En español',
     docTitle: 'Texas House votes in charts: how often the parties agree',
     h1: `What ${n(total)} Texas House votes look like`,
@@ -139,7 +139,7 @@ const COPY = {
     source: 'Roll calls from the Texas House Journal and Open States. District boundaries from the Census Bureau.',
   },
   es: {
-    other: 'en', slug: 'graficas', siteName: 'La Franja Morada', target: `${SITE}/es`,
+    other: 'en', slug: 'graficas', siteName: 'La Franja Morada', target: `${SITE}/es/cuestionario`,
     kicker: 'Cámara de Texas · Sesión de 2025', langSwitch: 'In English',
     docTitle: 'Votos de la Cámara de Texas en gráficas',
     h1: `Cómo se ven ${n(total)} votos de la Cámara de Texas`,

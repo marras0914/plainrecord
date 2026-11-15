@@ -20,10 +20,11 @@ const check = (name: string, ok: boolean, detail = ''): void => {
 
 const ORIGIN = 'https://rightnleft.com';
 
-check('an English link points at the root', shareOrigin(ORIGIN, 'en') === 'https://rightnleft.com/');
-check('a Spanish link points at /es/', shareOrigin(ORIGIN, 'es') === 'https://rightnleft.com/es/');
+// The quiz moved off the front page on 14 Nov 2026, so shares point at it directly.
+check('an English link points at the quiz', shareOrigin(ORIGIN, 'en') === 'https://rightnleft.com/quiz', shareOrigin(ORIGIN, 'en'));
+check('a Spanish link points at the Spanish quiz', shareOrigin(ORIGIN, 'es') === 'https://rightnleft.com/es/cuestionario', shareOrigin(ORIGIN, 'es'));
 check('a trailing slash on the origin is not doubled',
-  shareOrigin('https://rightnleft.com/', 'en') === 'https://rightnleft.com/');
+  shareOrigin('https://rightnleft.com/', 'en') === 'https://rightnleft.com/quiz');
 
 const URL_ = 'https://rightnleft.com/#c=cn3';
 const TEXT = 'I took a blind quiz on 7 real Texas House votes. Answer the same 7, then see how we compare.';

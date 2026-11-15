@@ -114,7 +114,7 @@ const body = `
     <li><a href="${SITE}/districts">Every Texas House district</a>, with how its member voted</li>
     ${headline.map((it) => `<li><a href="${SITE}/${billPath(it.billId, 'en')}"><span class="bill">${esc(it.billId)}</span> ${esc(it.label)}</a>, every member's vote</li>`).join('')}
   </ul>
-  <p><a class="cta" href="${SITE}/">Take the quiz</a></p>
+  <p><a class="cta" href="${SITE}/quiz">Take the quiz</a></p>
   <hr>
   <p class="small"><span class="label">Who made this.</span> Marco Arras, a Texas resident. I donate to the Democratic Party, and I say so before anything else rather than in a footnote. The rule that picks which votes appear is published and runs identically on both caucuses, and every vote and count is in the files above.</p>`;
 
@@ -154,7 +154,7 @@ const dataset = {
 const html = document_({
   lang: 'en', otherLang: null, title, siteName: 'The Purple Strip',
   docTitle: 'Texas House roll call votes 2025: free data download',
-  desc, canonical, altHref: `${SITE}/`, altLabel: 'The quiz',
+  desc, canonical, altHref: `${SITE}/quiz`, altLabel: 'The quiz',
   ogImage: `${SITE}/og.png`, faces, kicker: 'Texas House · 2025 session', body,
   jsonld: {
     '@context': 'https://schema.org',

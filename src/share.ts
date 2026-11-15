@@ -15,12 +15,12 @@
  * "post my result" action is ever wanted as a separate, clearly-labelled thing.
  */
 
-import { LOCALE, ES_PREFIX } from './i18n.js';
+import { LOCALE, QUIZ_PATH } from './i18n.js';
 
 /** Where a shared link should point, honouring the language being read. */
 export function shareOrigin(origin: string, locale: string = LOCALE): string {
   const base = origin.replace(/\/$/, '');
-  return locale === 'es' ? `${base}${ES_PREFIX}/` : `${base}/`;
+  return `${base}${QUIZ_PATH[locale === 'es' ? 'es' : 'en']}`;
 }
 
 export interface ShareTarget {

@@ -314,7 +314,7 @@ function whereBlock(m, lang) {
 
 const COPY = {
   en: {
-    other: 'es', siteName: 'The Purple Strip', target: `${SITE}/`,
+    other: 'es', siteName: 'The Purple Strip', target: `${SITE}/quiz`,
     kicker: 'Texas House · 2025 session',
     title: (m) => `${m.n}, Texas House District ${m.d}`,
     // The search-result title. Until the election, the district and "candidates
@@ -389,7 +389,7 @@ const COPY = {
     langSwitch: 'En español',
   },
   es: {
-    other: 'en', siteName: 'La Franja Morada', target: `${SITE}/es`,
+    other: 'en', siteName: 'La Franja Morada', target: `${SITE}/es/cuestionario`,
     kicker: 'Cámara de Texas · Sesión de 2025',
     title: (m) => `${m.n}, Distrito ${m.d} de la Cámara de Texas`,
     // Approved 30 September 2026. "candidatos" rather than the page's

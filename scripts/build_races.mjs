@@ -218,7 +218,7 @@ const upper = (s) => String(s).charAt(0).toUpperCase() + String(s).slice(1);
 
 const COPY = {
   en: {
-    lang: 'en', other: 'es', target: `${SITE}/`, siteName: 'The Purple Strip',
+    lang: 'en', other: 'es', target: `${SITE}/quiz`, siteName: 'The Purple Strip',
     title: (r) => `${r.cand.name} and ${r.opp.name} on the 2025 Texas bills`,
     docTitle: (r) => `${r.cand.name} and ${r.opp.name}: ${RACE_EN[r.cand.office]}`,
     meta: (r) => `What the public record shows about both candidates for Texas ${r.cand.office}: `
@@ -256,7 +256,7 @@ const COPY = {
     langSwitch: 'En español',
   },
   es: {
-    lang: 'es', other: 'en', target: `${SITE}/es`, siteName: 'La Franja Morada',
+    lang: 'es', other: 'en', target: `${SITE}/es/cuestionario`, siteName: 'La Franja Morada',
     title: (r) => `${r.cand.name} y ${r.opp.name} ante los proyectos de ley de Texas de 2025`,
     docTitle: (r) => `${r.cand.name} y ${r.opp.name}: ${RACE_ES[r.cand.office]}`,
     meta: (r) => `Lo que muestra el registro público sobre ambos candidatos a ${OFFICE_ES[r.cand.office]} de Texas: `

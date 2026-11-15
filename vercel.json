@@ -12,8 +12,10 @@
       "destination": "https://rightnleft.com/$1",
       "permanent": true
     },
-    { "source": "/races", "destination": "/context", "permanent": true },
-    { "source": "/contiendas", "destination": "/contexto", "permanent": true }
+    { "source": "/races", "destination": "/", "permanent": true },
+    { "source": "/contiendas", "destination": "/es", "permanent": true },
+    { "source": "/context", "destination": "/", "permanent": true },
+    { "source": "/contexto", "destination": "/es", "permanent": true }
   ],
   "headers": [
     {
