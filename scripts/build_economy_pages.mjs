@@ -209,7 +209,7 @@ function explorePage(lang) {
     siteName: lang === 'es' ? 'La Franja Morada' : 'The Purple Strip',
     desc: et(lang, 'ex.desc'), canonical: `${SITE}/${P.explore}`, altHref: `${SITE}/${ECON_PATHS[other].explore}`,
     altLabel: et(lang, 'langSwitch'), kicker: et(lang, 'kicker'), faces, body,
-    ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
+    ogImage: `${SITE}/${lang === 'es' ? 'og-economics.es.png' : 'og-economics.png'}`,
     jsonld: {
       '@context': 'https://schema.org', '@type': 'WebPage', name: et(lang, 'ex.h1'), description: et(lang, 'ex.desc'),
       inLanguage: lang === 'es' ? 'es-US' : 'en-US', url: `${SITE}/${P.explore}`,
@@ -272,7 +272,7 @@ function methodPage(lang) {
     siteName: lang === 'es' ? 'La Franja Morada' : 'The Purple Strip',
     desc: et(lang, 'me.desc'), canonical: `${SITE}/${P.method}`, altHref: `${SITE}/${ECON_PATHS[other].method}`,
     altLabel: et(lang, 'langSwitch'), kicker: et(lang, 'kicker'), faces, body,
-    ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
+    ogImage: `${SITE}/${lang === 'es' ? 'og-economics.es.png' : 'og-economics.png'}`,
     jsonld: {
       '@context': 'https://schema.org', '@type': 'WebPage', name: et(lang, 'me.h1'), description: et(lang, 'me.desc'),
       inLanguage: lang === 'es' ? 'es-US' : 'en-US', url: `${SITE}/${P.method}`,
@@ -335,7 +335,7 @@ function blindPage(lang) {
     siteName: lang === 'es' ? 'La Franja Morada' : 'The Purple Strip',
     desc: et(lang, 'bl.desc'), canonical: `${SITE}/${P.blind}`, altHref: `${SITE}/${ECON_PATHS[other].blind}`,
     altLabel: et(lang, 'langSwitch'), kicker: et(lang, 'kicker'), faces, body,
-    ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
+    ogImage: `${SITE}/${lang === 'es' ? 'og-economics.es.png' : 'og-economics.png'}`,
     scripts: ['/js/econ-blind.js'],
     jsonld: {
       '@context': 'https://schema.org', '@type': 'WebPage', name: et(lang, 'bl.h1'), description: et(lang, 'bl.desc'),

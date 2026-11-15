@@ -124,6 +124,9 @@ export function actsLine(it, lang) {
     .join(' ');
 }
 
+/** The first form that fits 70 characters, else the shortest. */
+const fit70 = (forms) => forms.find((t) => [...t].length <= 70) ?? forms.at(-1);
+
 const COPY = {
   en: {
     other: 'es', siteName: 'The Purple Strip', target: `${SITE}/quiz`,
@@ -159,7 +162,14 @@ const COPY = {
   es: {
     other: 'en', siteName: 'La Franja Morada', target: `${SITE}/es/cuestionario`,
     kicker: 'Cámara de Texas · Sesión de 2025',
-    docTitle: (it) => `${it.billId}, ${es(it, 'label')}: votación en la Cámara de Texas`,
+    // Search engines cut titles past about 70 characters (Bing flags them), so
+    // a long label falls back to the same words with the end taken off, never
+    // anything new: three Spanish bill titles ran 73 to 79 on 14 Nov 2026.
+    docTitle: (it) => fit70([
+      `${it.billId}, ${es(it, 'label')}: votación en la Cámara de Texas`,
+      `${it.billId}, ${es(it, 'label')}: votación en la Cámara`,
+      `${it.billId}, ${es(it, 'label')}`,
+    ]),
     h1: (it) => `Cómo votó cada integrante de la Cámara de Texas sobre el proyecto ${it.billId}`,
     desc: (it) => `Cómo votaron los 150 integrantes de la Cámara de Texas sobre el proyecto ${it.billId} (${es(it, 'label')}) en 2025: `
       + `${it.yeas} a favor, ${it.nays} en contra, y quién votó en contra de la mayoría de su propio partido.`,

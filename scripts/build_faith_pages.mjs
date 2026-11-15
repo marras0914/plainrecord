@@ -98,7 +98,8 @@ function wrap(lang, { path, otherPath, title, docTitle, desc, body, type = 'WebP
     siteName: lang === 'es' ? 'La Franja Morada' : 'The Purple Strip',
     desc, canonical: `${SITE}/${path}`, altHref: `${SITE}/${otherPath}`,
     altLabel: ft(lang, 'langSwitch'), kicker: ft(lang, 'kicker'), faces, body: `${STYLE}${body}`,
-    ogImage: `${SITE}/${lang === 'es' ? 'og.es.png' : 'og.png'}`,
+    // The Religion space's own card (scripts/build_space_cards.mjs), not the quiz's.
+    ogImage: `${SITE}/${lang === 'es' ? 'og-religion.es.png' : 'og-religion.png'}`,
     jsonld: {
       '@context': 'https://schema.org', '@type': type, name: title, description: desc,
       inLanguage: lang === 'es' ? 'es-US' : 'en-US', url: `${SITE}/${path}`,
