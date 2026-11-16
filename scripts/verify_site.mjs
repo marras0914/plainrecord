@@ -2229,14 +2229,21 @@ try {
     const labeled = () => seen.filter((u) => /econ_terms\.json/.test(u)).length;
     check('economy: the blind round loads the unlabeled file', seen.some((u) => /econ_blind\.json/.test(u)));
 
+    // Rate every card of the round but the last: the round is still open, so the
+    // labeled file must still be off the wire. Read from the page's own config,
+    // so the check follows the round size (5 until 16 Nov 2026, then 3).
+    const blindCfg = JSON.parse(await bp.locator('#econ-blind').getAttribute('data-config'));
+    const midRound = blindCfg.roundSize - 1;
+    check('economy: a round has at least two cards, so it can be checked mid-round', midRound >= 1, `round of ${blindCfg.roundSize}`);
     await bp.locator('#econ-blind button', { hasText: /skip|omitir/i }).click();
     const cardText = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < midRound; i++) {
       cardText.push(await bp.locator('#econ-blind section.card').innerText());
       await bp.locator('#econ-blind input[name="rating"][value="3"]').check();
       await bp.locator('#econ-blind button.cta').click();
     }
-    check('economy: three cards rated and the labeled file still not requested', labeled() === 0, `${labeled()} request(s)`);
+    cardText.push(await bp.locator('#econ-blind section.card').innerText());
+    check(`economy: ${midRound} of ${blindCfg.roundSize} cards rated and the labeled file still not requested`, labeled() === 0, `${labeled()} request(s)`);
 
     // The cards themselves: no year and no president's name, whatever order they
     // came in. The row labels are set aside first: they are the same on every
@@ -2257,13 +2264,19 @@ try {
     const revealText = await bp.locator('#econ-blind').innerText();
     check('economy: the reveal names the terms it showed', YEAR.test(revealText) && NAMES.test(revealText));
     check('economy: the reveal reports the reader\'s ratings by party', /on average|en promedio/i.test(revealText));
+    // The way on to the labeled charts is a button after the answers, and a
+    // link above the round for a reader who wants to skip it (Marco, 16 Nov 2026).
+    const ctaHref = await bp.locator('#econ-blind a.cta').first().getAttribute('href').catch(() => null);
+    check('economy: after the answers, a button goes on to the labeled charts', /\/economy\/explore$/.test(ctaHref ?? ''), ctaHref ?? 'no button');
+    const skipHref = await bp.locator('main a.skip').first().getAttribute('href').catch(() => null);
+    check('economy: above the round, a link skips straight to the labeled charts', /\/economy\/explore$/.test(skipHref ?? ''), skipHref ?? 'no link');
 
     const foreign = seen.filter((u) => !u.startsWith(new URL(URL_UNDER_TEST).origin) && !u.startsWith('data:'));
     check('economy: nothing is requested from another origin', foreign.length === 0, foreign[0] ?? 'none');
     await bc.close();
 
-    // Rounds of five, numbered cards, and an explanation for every number
-    // (Marco, 14 Nov 2026). The cards used to be lettered A to S, which put a
+    // Rounds of a fixed size (five from 14 Nov 2026, three from 16 Nov),
+    // numbered cards, and an explanation for every number (Marco, 14 Nov 2026). The cards used to be lettered A to S, which put a
     // "Term D" and a "Term R" on the page.
     {
       const rc = await browser.newContext();
@@ -2310,7 +2323,7 @@ try {
         await more.first().click();
         next = (await rp.locator('#econ-blind section.card h2').innerText()).trim();
       }
-      check('economy: after the answers the reader can rate five more, numbered on from the first round',
+      check(`economy: after the answers the reader can rate ${cfg.roundSize} more, numbered on from the first round`,
         hasMore === 1 && next === S['bl.cardHead'].replace('{k}', String(cfg.roundSize + 1)), `${hasMore} button(s), next card "${next}"`);
       await rc.close();
     }

@@ -273,10 +273,15 @@
 
       root.appendChild(el('h2', null, S['bl.researchH']));
       root.appendChild(el('p', null, plain(S['me.research'])));
-      var links = el('p');
-      var ex = el('a', null, S.exploreLink); ex.href = C.exploreUrl;
+      // The charts of every term, labeled, are the next step: a button, not a
+      // footnote (Marco, 16 Nov 2026).
+      var cta = el('p');
+      var ex = el('a', 'cta', S.exploreLink); ex.href = C.exploreUrl;
+      cta.appendChild(ex);
+      root.appendChild(cta);
+      var links = el('p', 'small');
       var me = el('a', null, S.methodLink); me.href = C.methodUrl;
-      links.appendChild(ex); links.appendChild(document.createTextNode(' · ')); links.appendChild(me);
+      links.appendChild(me);
       root.appendChild(links);
       root.appendChild(button(S['bl.again'], 'linkish', start));
       focusFirst();
