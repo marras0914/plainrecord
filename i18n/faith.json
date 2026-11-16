@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
     "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
     "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause)."
   },
   "kicker": {
     "en": "Faith and the platforms",
@@ -58,18 +58,13 @@
     "status": "ok"
   },
   "home.lede": {
-    "en": "Pick a Christian tradition or a Jewish movement. For each of eight issues, you will see what its official bodies have said, beside what the Texas and national Republican and Democratic platforms say. The site computes no score and does not say which party is closer to any tradition.",
-    "es": "Escoja una tradición cristiana o un movimiento judío. En cada uno de ocho temas verá lo que han dicho sus órganos oficiales, junto a lo que dicen las plataformas republicanas y demócratas de Texas y nacionales. El sitio no calcula ningún puntaje ni dice qué partido está más cerca de cada tradición.",
+    "en": "Pick a Christian tradition or a Jewish movement. For each of eight issues, you will see what its official bodies have said, beside what the Texas and national Republican and Democratic platforms say. The site computes no score.",
+    "es": "Escoja una tradición cristiana o un movimiento judío. En cada uno de ocho temas verá lo que han dicho sus órganos oficiales, junto a lo que dicen las plataformas republicanas y demócratas de Texas y nacionales. El sitio no calcula ningún puntaje.",
     "status": "ok"
   },
   "home.h2pick": {
     "en": "Pick a tradition",
     "es": "Escoja una tradición",
-    "status": "ok"
-  },
-  "home.oneAtATime": {
-    "en": "One tradition at a time, on purpose: a grid of every church against every issue would read as a scoreboard.",
-    "es": "Una tradición a la vez, a propósito: una tabla de todas las iglesias contra todos los temas se leería como un marcador.",
     "status": "ok"
   },
   "home.range": {
@@ -313,8 +308,8 @@
     "status": "ok"
   },
   "me.not": {
-    "en": "They give no party and no church a score or a ranking, on the page, on a share card or in the data. The one count on these pages is on the Texas House page: on bills the Texas Catholic bishops themselves took a side on, how often each party’s majority voted their way. It covers that one church, is never combined with another, and is not a verdict on which party is “more Christian”. The pages do not interpret scripture. Where traditions disagree with each other, the pages show the disagreement. And members of every tradition hold a range of views.",
-    "es": "No le dan a ningún partido ni a ninguna iglesia un puntaje ni una clasificación, ni en la página, ni en una tarjeta para compartir, ni en los datos. El único conteo de estas páginas está en la página de la Cámara de Texas: en los proyectos de ley sobre los que los propios obispos católicos de Texas tomaron postura, cuántas veces la mayoría de cada partido votó como ellos pedían. Abarca esa sola iglesia, nunca se combina con otra y no es un veredicto sobre qué partido es “más cristiano”. Las páginas no interpretan las Escrituras. Donde las tradiciones no están de acuerdo entre sí, las páginas muestran el desacuerdo. Y los miembros de cada tradición tienen opiniones diversas.",
+    "en": "They give no party and no church a score or a ranking, on the page, on a share card or in the data. The sides page marks, issue by issue, which platform a church's own words line up with, and never totals the marks. The one count on these pages is on the Texas House page: on bills the Texas Catholic bishops themselves took a side on, how often each party’s majority voted their way. It covers that one church, is never combined with another, and is not a verdict on which party is “more Christian”. The pages do not interpret scripture. Where traditions disagree with each other, the pages show the disagreement. And members of every tradition hold a range of views.",
+    "es": "No le dan a ningún partido ni a ninguna iglesia un puntaje ni una clasificación, ni en la página, ni en una tarjeta para compartir, ni en los datos. La página de posturas marca, tema por tema, con qué plataforma coinciden las propias palabras de una iglesia, y nunca suma las marcas. El único conteo de estas páginas está en la página de la Cámara de Texas: en los proyectos de ley sobre los que los propios obispos católicos de Texas tomaron postura, cuántas veces la mayoría de cada partido votó como ellos pedían. Abarca esa sola iglesia, nunca se combina con otra y no es un veredicto sobre qué partido es “más cristiano”. Las páginas no interpretan las Escrituras. Donde las tradiciones no están de acuerdo entre sí, las páginas muestran el desacuerdo. Y los miembros de cada tradición tienen opiniones diversas.",
     "status": "ok"
   },
   "me.h2data": {
@@ -1570,6 +1565,311 @@
   "toread.ame.immigration.0": {
     "en": "AME General Conference resolutions, which outrank the Council of Bishops. None found online; the church paper's summary of the 2024 General Conference legislation names none on immigration.",
     "es": "Las resoluciones de la Conferencia General de la Iglesia AME, que tienen más autoridad que el Consejo de Obispos. No se ha encontrado ninguna en internet; el resumen que publicó el periódico de la iglesia sobre la legislación de la Conferencia General de 2024 no menciona ninguna sobre la inmigración.",
+    "status": "ok"
+  },
+  "sd.h1": {
+    "en": "Which side each church takes",
+    "es": "Qué postura toma cada iglesia",
+    "status": "ok"
+  },
+  "sd.docTitle": {
+    "en": "Which side each church takes, issue by issue",
+    "es": "Qué postura toma cada iglesia, tema por tema",
+    "status": "ok"
+  },
+  "sd.desc": {
+    "en": "For each issue the Republican and Democratic platforms split on, which side five churches' official statements take, in their own words. No score.",
+    "es": "En cada tema en que las plataformas republicana y demócrata toman posturas opuestas, qué postura toman las declaraciones oficiales de cinco iglesias, en sus propias palabras. Sin puntaje.",
+    "status": "ok"
+  },
+  "sd.lede": {
+    "en": "Where the Republican and Democratic platforms take opposite sides on a point, this page shows which side each church's official statements take, in the church's own words. The site picks neither the question nor the answers: the platforms set both.",
+    "es": "Donde las plataformas republicana y demócrata toman posturas opuestas sobre un punto, esta página muestra qué postura toman las declaraciones oficiales de cada iglesia, en sus propias palabras. El sitio no escoge ni la pregunta ni las respuestas: las fijan las plataformas.",
+    "status": "ok"
+  },
+  "sd.h2grid": {
+    "en": "At a glance",
+    "es": "De un vistazo",
+    "status": "ok"
+  },
+  "sd.legend": {
+    "en": "<b>D</b>: the church's words are on the same side as the Democratic platform. <b>R</b>: on the same side as the Republican platform. Each issue links to the quotes below.",
+    "es": "<b>D</b>: las palabras de la iglesia están del mismo lado que la plataforma demócrata. <b>R</b>: del mismo lado que la plataforma republicana. Cada tema enlaza con las citas que aparecen más abajo.",
+    "status": "ok"
+  },
+  "sd.th.issue": {
+    "en": "Issue",
+    "es": "Tema",
+    "status": "ok"
+  },
+  "sd.mark.D": {
+    "en": "D",
+    "es": "D",
+    "status": "ok"
+  },
+  "sd.mark.R": {
+    "en": "R",
+    "es": "R",
+    "status": "ok"
+  },
+  "sd.mark.doesntSay": {
+    "en": "Doesn't say",
+    "es": "No lo dice",
+    "status": "ok"
+  },
+  "sd.mark.noStatement": {
+    "en": "No statement",
+    "es": "Sin declaración",
+    "status": "ok"
+  },
+  "sd.mark.notCompared": {
+    "en": "Not compared",
+    "es": "No se compara",
+    "status": "ok"
+  },
+  "sd.same.D": {
+    "en": "On the same side as the Democratic platform",
+    "es": "Del mismo lado que la plataforma demócrata",
+    "status": "ok"
+  },
+  "sd.same.R": {
+    "en": "On the same side as the Republican platform",
+    "es": "Del mismo lado que la plataforma republicana",
+    "status": "ok"
+  },
+  "sd.doesntSay": {
+    "en": "Its statements shown in full take neither side on this point.",
+    "es": "Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.",
+    "status": "ok"
+  },
+  "sd.noStatement": {
+    "en": "No official statement on this issue.",
+    "es": "No hay declaración oficial sobre este tema.",
+    "status": "ok"
+  },
+  "sd.noTotal": {
+    "en": "There is no total, on purpose: which issues are on the list would decide it.",
+    "es": "No hay total, a propósito: el total dependería de qué temas están en la lista.",
+    "status": "ok"
+  },
+  "sd.levels.both": {
+    "en": "The Texas platforms and the national platforms both take opposite sides on this point.",
+    "es": "Tanto las plataformas de Texas como las nacionales toman posturas opuestas sobre este punto.",
+    "status": "ok"
+  },
+  "sd.levels.texas": {
+    "en": "Only the Texas platforms take opposite sides on this point, so only they are compared.",
+    "es": "Solo las plataformas de Texas toman posturas opuestas sobre este punto, así que solo esas se comparan.",
+    "status": "ok"
+  },
+  "sd.h3platforms": {
+    "en": "The platforms",
+    "es": "Las plataformas",
+    "status": "ok"
+  },
+  "sd.h3churches": {
+    "en": "The churches",
+    "es": "Las iglesias",
+    "status": "ok"
+  },
+  "sd.h2rules": {
+    "en": "How a church is placed",
+    "es": "Cómo se ubica a cada iglesia",
+    "status": "ok"
+  },
+  "sd.r1": {
+    "en": "The point on each issue is one where the Republican and Democratic platforms take opposite sides in their own words. An issue with no such point is not compared.",
+    "es": "El punto de cada tema es uno en que las plataformas republicana y demócrata toman posturas opuestas con sus propias palabras. Un tema sin un punto así no se compara.",
+    "status": "ok"
+  },
+  "sd.r2": {
+    "en": "A church is placed on a side only if one of the official statements on its page takes that side in its own words, and that quote is shown. Otherwise it is marked “Doesn't say”.",
+    "es": "Una iglesia se ubica de un lado solo si una de las declaraciones oficiales de su página toma esa postura con sus propias palabras, y se muestra esa cita. Si no, se marca «No lo dice».",
+    "status": "ok"
+  },
+  "sd.r3": {
+    "en": "Every quote is word for word, and a program checks each one against the downloaded source.",
+    "es": "Cada cita es textual, y un programa verifica cada una contra la fuente descargada.",
+    "status": "ok"
+  },
+  "sd.r4": {
+    "en": "No count across issues, here or in the data: which issues are on the list would decide any total.",
+    "es": "No hay conteo entre temas, ni aquí ni en los datos: cualquier total dependería de qué temas están en la lista.",
+    "status": "ok"
+  },
+  "sd.h2calls": {
+    "en": "Three judgment calls",
+    "es": "Tres decisiones de criterio",
+    "status": "ok"
+  },
+  "sd.callsNote": {
+    "en": "Three placements needed a judgment about what a statement's words cover. They are listed so you can disagree with them.",
+    "es": "Tres ubicaciones requirieron decidir qué abarcan las palabras de una declaración. Se enumeran para que usted pueda no estar de acuerdo.",
+    "status": "ok"
+  },
+  "sd.c1": {
+    "en": "<b>Southern Baptist, environment:</b> its resolution opposes “solutions based on questionable science” but never names climate, so it is marked “Doesn't say”.",
+    "es": "<b>Bautista del Sur, medio ambiente:</b> su resolución se opone a “solutions based on questionable science”, pero nunca menciona el clima, así que se marca «No lo dice».",
+    "status": "ok"
+  },
+  "sd.c2": {
+    "en": "<b>United Methodist, healthcare:</b> it calls on governments to ensure that every human being has access to medical services, but never names Medicaid. It is placed with widening public coverage.",
+    "es": "<b>Metodista Unida, atención médica:</b> pide a los gobiernos que garanticen que todo ser humano tenga acceso a servicios médicos, pero nunca menciona Medicaid. Se ubica con ampliar la cobertura pública.",
+    "status": "ok"
+  },
+  "sd.c3": {
+    "en": "<b>Catholic, environment:</b> the bishops call for responding to climate change “with actions”, in a document on Catholics' political responsibility. It is placed with government action.",
+    "es": "<b>Católica, medio ambiente:</b> los obispos piden responder al cambio climático “with actions”, en un documento sobre la responsabilidad política de los católicos. Se ubica con la acción del gobierno.",
+    "status": "ok"
+  },
+  "sd.short.catholic": {
+    "en": "Catholic",
+    "es": "Católica",
+    "status": "ok"
+  },
+  "sd.short.sbc": {
+    "en": "Southern Baptist",
+    "es": "Bautista del Sur",
+    "status": "ok"
+  },
+  "sd.short.umc": {
+    "en": "United Methodist",
+    "es": "Metodista Unida",
+    "status": "ok"
+  },
+  "sd.short.ame": {
+    "en": "AME",
+    "es": "AME",
+    "status": "ok"
+  },
+  "sd.short.ag": {
+    "en": "Assemblies of God",
+    "es": "Asambleas de Dios",
+    "status": "ok"
+  },
+  "home.sidesNote": {
+    "en": "For each issue the platforms split on, which side each church's own words take. No score.",
+    "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada iglesia. Sin puntaje.",
+    "status": "ok"
+  },
+  "me.h2sides": {
+    "en": "Which side each church takes",
+    "es": "Qué postura toma cada iglesia",
+    "status": "ok"
+  },
+  "me.sides": {
+    "en": "{linkHtml} places each church, issue by issue, on one side of a point the two platforms split on, only where the church's own words take a side, and shows the quote. It gives no total. Three placements were judgment calls, and the page lists them.",
+    "es": "{linkHtml} ubica a cada iglesia, tema por tema, de un lado de un punto en que las dos plataformas toman posturas opuestas, solo donde las propias palabras de la iglesia toman postura, y muestra la cita. No da ningún total. Tres ubicaciones fueron decisiones de criterio, y la página las enumera.",
+    "status": "ok"
+  },
+  "side.immigration.q": {
+    "en": "What should happen to people living in the United States without legal status?",
+    "es": "¿Qué debe pasar con las personas que viven en Estados Unidos sin estatus legal?",
+    "status": "ok"
+  },
+  "side.immigration.a": {
+    "en": "Offer a way to stay legally",
+    "es": "Ofrecerles una forma de quedarse legalmente",
+    "status": "ok"
+  },
+  "side.immigration.b": {
+    "en": "Deport them",
+    "es": "Deportarlas",
+    "status": "ok"
+  },
+  "side.abortion.q": {
+    "en": "Should the law protect access to abortion?",
+    "es": "¿Debe la ley proteger el acceso al aborto?",
+    "status": "ok"
+  },
+  "side.abortion.a": {
+    "en": "Protect access",
+    "es": "Proteger el acceso",
+    "status": "ok"
+  },
+  "side.abortion.b": {
+    "en": "Restrict or end it",
+    "es": "Restringirlo o ponerle fin",
+    "status": "ok"
+  },
+  "side.death-penalty.q": {
+    "en": "Should the death penalty be ended?",
+    "es": "¿Se debe poner fin a la pena de muerte?",
+    "status": "ok"
+  },
+  "side.death-penalty.a": {
+    "en": "End it",
+    "es": "Ponerle fin",
+    "status": "ok"
+  },
+  "side.death-penalty.b": {
+    "en": "Keep it",
+    "es": "Mantenerla",
+    "status": "ok"
+  },
+  "side.guns.q": {
+    "en": "Should the law limit how guns are bought and sold?",
+    "es": "¿Debe la ley limitar cómo se compran y se venden las armas de fuego?",
+    "status": "ok"
+  },
+  "side.guns.a": {
+    "en": "Add limits",
+    "es": "Agregar límites",
+    "status": "ok"
+  },
+  "side.guns.b": {
+    "en": "Repeal limits",
+    "es": "Derogar límites",
+    "status": "ok"
+  },
+  "side.poverty.q": {
+    "en": "Should the law set a minimum wage?",
+    "es": "¿Debe la ley fijar un salario mínimo?",
+    "status": "ok"
+  },
+  "side.poverty.a": {
+    "en": "Set or raise one",
+    "es": "Fijarlo o subirlo",
+    "status": "ok"
+  },
+  "side.poverty.b": {
+    "en": "Repeal it",
+    "es": "Derogarlo",
+    "status": "ok"
+  },
+  "side.environment.q": {
+    "en": "Should government act to reduce the emissions behind climate change?",
+    "es": "¿Debe el gobierno actuar para reducir las emisiones que causan el cambio climático?",
+    "status": "ok"
+  },
+  "side.environment.a": {
+    "en": "Act to reduce them",
+    "es": "Actuar para reducirlas",
+    "status": "ok"
+  },
+  "side.environment.b": {
+    "en": "Oppose climate measures",
+    "es": "Oponerse a las medidas climáticas",
+    "status": "ok"
+  },
+  "side.healthcare.q": {
+    "en": "Should government widen public health coverage such as Medicaid?",
+    "es": "¿Debe el gobierno ampliar la cobertura médica pública, como Medicaid?",
+    "status": "ok"
+  },
+  "side.healthcare.a": {
+    "en": "Widen it",
+    "es": "Ampliarla",
+    "status": "ok"
+  },
+  "side.healthcare.b": {
+    "en": "Pull back from it",
+    "es": "Reducirla",
+    "status": "ok"
+  },
+  "noside.criminal-justice": {
+    "en": "The platforms address different things: the Texas Republican platform bail and uniform enforcement, the Texas Democratic platform addiction, homelessness and bias, the national platforms police funding and private prisons. None takes the opposite side of another on one point, so no church is placed.",
+    "es": "Las plataformas tratan cosas distintas: la plataforma republicana de Texas, la fianza y la aplicación uniforme de la ley; la plataforma demócrata de Texas, la adicción, la falta de vivienda y los prejuicios; las plataformas nacionales, el financiamiento de la policía y las cárceles privadas. Ninguna toma la postura opuesta a otra sobre un mismo punto, así que no se ubica a ninguna iglesia.",
     "status": "ok"
   },
   "me.whyJewish": {

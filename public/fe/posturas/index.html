@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="es-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Qué postura toma cada iglesia, tema por tema</title>
+<meta name="description" content="En cada tema en que las plataformas republicana y demócrata toman posturas opuestas, qué postura toman las declaraciones oficiales de cinco iglesias, en sus propias palabras. Sin puntaje.">
+<link rel="canonical" href="https://rightnleft.com/fe/posturas">
+<link rel="alternate" hreflang="es" href="https://rightnleft.com/fe/posturas">
+<link rel="alternate" hreflang="en" href="https://rightnleft.com/faith/sides">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qué postura toma cada iglesia">
+<meta property="og:description" content="En cada tema en que las plataformas republicana y demócrata toman posturas opuestas, qué postura toman las declaraciones oficiales de cinco iglesias, en sus propias palabras. Sin puntaje.">
+<meta property="og:url" content="https://rightnleft.com/fe/posturas">
+<meta property="og:image" content="https://rightnleft.com/og-religion.es.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script src="/js/theme.js"></script>
+<script src="/_vercel/insights/script.js" defer></script>
+<link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/newsreader-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-ext-300-700.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-300-700.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-ext-400-600.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-400-600.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{--page:#faf7f1;--surface:#fffdf9;--ink:#1a1714;--ink-2:#57514a;--muted:#6f6a62;
+      --hair:#e6ded1;--rule:#cabfae;--blue:#1f66bd;--red:#c8352f;
+      /* Chart purples, one hue light to dark, validated --ordinal against both
+         the card and the page surface. --pbar is the single-series bar. */
+      --p1:#bda5da;--p2:#a583cc;--p3:#8e62bc;--p4:#7241a0;--p5:#54277c;--pbar:#8e62bc;}
+/* Dark by the quiz's rule, not the OS: light by default, dark only when the
+   reader chose it on the quiz. /js/theme.js sets data-theme before paint. These
+   pages used to follow prefers-color-scheme, which turned a light quiz into a
+   dark race page for anyone whose phone was set to dark. */
+:root[data-theme="dark"]{color-scheme:dark;
+  --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
+  --hair:#2c2c2a;--rule:#383835;--blue:#3987e5;--red:#e66767;
+  --p1:#684b88;--p2:#865eb1;--p3:#a377d3;--p4:#bc97e8;--p5:#d5b9f7;--pbar:#a377d3;}
+/* A crossfade between pages instead of a hard cut, using the browser's own
+   cross-document view transitions: CSS only, same-origin only, and ignored by
+   browsers without it. Off for anyone who asked for reduced motion. The quiz
+   carries the same rule in src/styles.css, so moving between them fades too. */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
+  font-size:17px;-webkit-text-size-adjust:100%}
+main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
+/* Laptops and wider (Marco, 14 Nov 2026: "a lot of wasted space"). The column
+   grows to the quiz's width; running text keeps a readable line, and the room
+   goes to what can use it: side-by-side cards, tables and charts. */
+@media (min-width:1024px){
+  main{max-width:62rem;padding:48px 32px 80px}
+  main p,main li,main blockquote,main dd{max-width:72ch}
+  main .card p,main .card li,main .card blockquote{max-width:none}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:start}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px;align-items:start}
+  .duo>.hubcard{align-self:stretch}
+}
+.hubcard h2{margin:2px 0 8px}
+h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
+  line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}
+h2{font-size:clamp(1.25rem,4.4vw,1.5rem);margin:40px 0 10px}
+.kicker{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lede{font-size:1.1rem;color:var(--ink-2);margin:0 0 8px;text-wrap:pretty}
+p{margin:0 0 14px}
+.label{font-weight:600}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
+  padding:18px 18px 6px;margin:14px 0}
+ul{margin:0 0 14px;padding-left:1.1rem}
+li{margin:0 0 8px}
+.bill{font-variant-numeric:tabular-nums;font-weight:600}
+.small{font-size:13.5px;color:var(--muted)}
+/* The check-it-yourself link beside a bill. Deliberately quieter than the
+   summary it follows: it is there for the reader who doubts the line, not a
+   thing every reader is being sent to. */
+.hist{font-size:12.5px;white-space:nowrap}
+/* How a member stood on a headline bill. A word, not a colour: the page is read
+   by people who cannot distinguish red from green, and printed in black. */
+.dindex{list-style:none;padding:0;margin:14px 0 18px;columns:2;column-gap:26px}
+.dindex li{break-inside:avoid;padding:3px 0;font-size:15.5px}
+.dindex a{text-decoration:none}
+.dindex a:hover{text-decoration:underline}
+@media (max-width:520px){.dindex{columns:1}}
+.stand{list-style:none;padding:0;margin:0}
+.stand li{padding:9px 0;border-top:1px solid var(--hair)}
+.stand li:first-child{border-top:0}
+.vm{font-size:12.5px;padding:1px 8px;border-radius:999px;white-space:nowrap;
+    border:1px solid var(--rule);color:var(--ink-2)}
+.vm-none{opacity:.75}
+a{color:var(--blue)}
+.cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
+  background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
+hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;
+  font-size:13px;margin-bottom:14px}
+.kicker-line{margin:0 0 16px}
+.brand{--b-r:#c8352f;--b-n:#7d5ba6;--b-l:#1f66bd;display:inline-flex;font-family:"Lexend",system-ui,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1.1;color:inherit;text-decoration:none;padding-bottom:7px}:root[data-theme="dark"] .brand{--b-r:#e66767;--b-n:#a377d3;--b-l:#3987e5}.brand span{background:no-repeat 0 100%/calc(100% - 2px) 5px;padding-bottom:5px;margin-bottom:-7px}.brand .b-r{background-image:linear-gradient(var(--b-r),var(--b-r))}.brand .b-n{color:var(--b-n);background-image:linear-gradient(var(--b-n),var(--b-n))}.brand .b-l{background-image:linear-gradient(var(--b-l),var(--b-l))}.brand:hover{text-decoration:none}.brand:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}@media print{.brand{--b-r:#000;--b-n:#000;--b-l:#000}}
+/* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
+   scrolling sideways on a phone; the current section is ink, not link blue. */
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sitenav a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}
+.sitenav a:hover{text-decoration:underline}
+.sitenav a[aria-current]{color:var(--ink);font-weight:600}
+.sitefoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px}
+.sitefoot ul{list-style:none;padding:0;margin:0}.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}.sitefoot a:hover{text-decoration:underline}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
+/* Charts, drawn by scripts/_charts.mjs. */
+.chart{margin:16px 0 10px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:inherit;fill:var(--ink-2);font-size:12px}
+.chart .tick{fill:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.chart .note{fill:var(--muted);font-size:11.5px}
+.chart .lab{fill:var(--ink);font-size:12.5px;font-weight:600}
+.chart .val{fill:var(--ink);font-size:12px;font-weight:600}
+.chart .grid,.chart .axis{stroke:var(--hair);stroke-width:1}
+.chart .axis{stroke:var(--rule)}
+.chart .med{stroke:var(--ink-2);stroke-width:1.5}
+.chart .lead{stroke:var(--muted);stroke-width:1}
+.chart .bar{fill:var(--pbar)}
+.chart .dot{stroke:var(--surface);stroke-width:2}
+.chart .D{fill:var(--blue)} .chart .R{fill:var(--red)}
+.chart .sq.none{opacity:.32}
+.chart .dist{stroke:var(--page);stroke-width:.6}
+.chart .p1{fill:var(--p1)} .chart .p2{fill:var(--p2)} .chart .p3{fill:var(--p3)}
+.chart .p4{fill:var(--p4)} .chart .p5{fill:var(--p5)} .chart .nodata{fill:var(--hair)}
+.chart .maplab{fill:var(--ink);font-size:11.5px;font-weight:600;paint-order:stroke;stroke:var(--page);stroke-width:3px;stroke-linejoin:round}
+.chart .inbox{fill:none;stroke:var(--ink-2);stroke-width:1}
+.chart a:hover .dist,.chart a:focus .dist{stroke:var(--ink);stroke-width:1.5}
+.chart a:hover .dot,.chart a:focus .dot{stroke:var(--ink)}
+/* A 608-wide viewBox drawn into a phone scales to about 0.56, which took 11px
+   labels to 6px. Larger type in viewBox units lands near 10px on screen. */
+@media (max-width:520px){.chart .tick,.chart .note,.chart .maplab{font-size:17px}.chart .lab,.chart .val{font-size:18px}}
+.legend{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;color:var(--ink-2)}
+.legend li{margin:0}.legend .sw{display:inline-block;width:14px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.legend .p1{background:var(--p1)}.legend .p2{background:var(--p2)}.legend .p3{background:var(--p3)}.legend .p4{background:var(--p4)}.legend .p5{background:var(--p5)}.legend .nodata{background:var(--hair)}.legend .D{background:var(--blue)}.legend .R{background:var(--red)}
+p.lab{font-weight:600;color:var(--ink);margin:14px 0 0}
+.insets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media (max-width:520px){.insets{grid-template-columns:1fr}}
+.inset{margin:0}.inset svg{border:1px solid var(--hair);border-radius:8px}
+details.table{margin:6px 0 18px}
+details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
+.chart-table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:8px}
+.chart-table th,.chart-table td{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--hair)}
+.chart-table td.num,.chart-table th.num{text-align:right;font-variant-numeric:tabular-nums}
+/* The ZIP box on /districts. 17px so iOS does not zoom the page on focus. */
+#ziplookup input{font:inherit;font-size:17px;padding:10px 12px;width:9.5rem;margin-top:6px;
+  border:1px solid var(--rule);border-radius:8px;background:var(--page);color:var(--ink)}
+#ziplookup .zipout p{margin:12px 0 6px}
+.zips{font-variant-numeric:tabular-nums;font-size:14px;color:var(--ink-2);
+  line-height:1.8;word-spacing:.15em}
+/* Printing. A district page is the thing someone takes to the kitchen table
+   before voting, so on paper it drops the navigation and the invitations, goes
+   black on white whatever theme was chosen, and ends with its own address so a
+   printed copy can be checked against the live one. */
+.printonly{display:none}
+@media print{
+  :root,:root[data-theme="dark"]{color-scheme:light;--page:#fff;--surface:#fff;--ink:#000;
+    --ink-2:#222;--muted:#444;--hair:#bbb;--rule:#888;--blue:#000;--red:#000}
+  body{font-size:11.5pt;line-height:1.4}
+  main{max-width:none;padding:0}
+  .top,.sitenav,.sitefoot,.noprint,.hist,.cta{display:none}
+  .printonly{display:block;font-size:10pt;color:var(--muted)}
+  h1{font-size:20pt;margin:0 0 10px}
+  h2{font-size:14pt;margin:18px 0 6px;break-after:avoid}
+  li,.stand li{break-inside:avoid}
+  .stand li{padding:5px 0}
+  a{color:inherit;text-decoration:none}
+  hr{margin:16px 0}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Qué postura toma cada iglesia","description":"En cada tema en que las plataformas republicana y demócrata toman posturas opuestas, qué postura toman las declaraciones oficiales de cinco iglesias, en sus propias palabras. Sin puntaje.","inLanguage":"es-US","url":"https://rightnleft.com/fe/posturas","isPartOf":{"@type":"WebSite","@id":"https://rightnleft.com/#website","url":"https://rightnleft.com/"}}</script>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a class="brand" href="https://rightnleft.com/es" aria-label="rightnleft, página de inicio"><span class="b-r">right</span><span class="b-n">n</span><span class="b-l">left</span></a>
+    <a href="https://rightnleft.com/faith/sides">In English</a>
+  </div>
+  <p class="kicker kicker-line">La fe y las plataformas</p>
+  <nav class="sitenav" aria-label="Secciones del sitio"><a href="https://rightnleft.com/politica">Política</a><a href="https://rightnleft.com/fe" aria-current="true">Religión</a><a href="https://rightnleft.com/economia">Economía</a></nav>
+<style>
+  .notice{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--ink-2);border-radius:8px;padding:12px 14px;margin:14px 0 18px;font-size:15.5px}
+  .notice p{margin:0 0 4px}
+  blockquote.q{margin:4px 0 12px;padding:2px 0 2px 12px;border-left:2px solid var(--hair);font-family:"Newsreader",Georgia,serif;font-size:1.05rem;color:var(--ink-2)}
+  h3{font-size:1rem;margin:22px 0 6px;letter-spacing:.02em}
+  h4{font-size:.95rem;margin:16px 0 4px;color:var(--ink-2);font-weight:600}
+  .card p.small{margin-bottom:6px}
+  .none{font-weight:600}
+  details.verses{margin:0 0 12px}
+  details.verses summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
+  .vtext{font-family:"Newsreader",Georgia,serif;font-size:1rem;margin:4px 0 0}
+  .vtext sup{font-family:"Lexend",system-ui,sans-serif;font-size:.65em;color:var(--muted);margin:0 2px 0 4px}
+  details.earlier{margin:6px 0 14px}
+  details.earlier summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
+  .jump{display:flex;flex-wrap:wrap;gap:2px 14px;list-style:none;padding:0;font-size:14.5px}
+  .jump li{margin:0}.jump a{display:inline-block;min-height:32px;padding:4px 0}
+  .tablewrap{overflow-x:auto;margin:8px 0}
+  table.hv{border-collapse:collapse;font-size:15px;min-width:100%}
+  table.hv th,table.hv td{padding:6px 10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  table.hv td{font-variant-numeric:tabular-nums}
+  ul.tally{list-style:none;padding:0;margin:4px 0 6px;font-size:15px}
+  ul.tally li{margin:2px 0}
+  .way{font-weight:600}
+  p.caption{font-family:"Newsreader",Georgia,serif;font-size:1.02rem;color:var(--ink-2);margin:2px 0 6px}
+  </style><style>
+  table.sides{border-collapse:collapse;font-size:14.5px;min-width:100%}
+  table.sides th,table.sides td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  table.sides thead th{font-size:13.5px;font-weight:600}
+  .mk{display:inline-block;min-width:26px;padding:1px 7px;border-radius:4px;font-weight:700;text-align:center;color:#fff}
+  .mk.D{background:var(--blue)} .mk.R{background:var(--red)}
+  .mk.none{color:var(--muted);font-weight:400;background:none;padding:1px 0;min-width:0;font-size:13.5px;text-align:left}
+  table.sides th[scope=row]{position:sticky;left:0;background:var(--page);z-index:1;min-width:7.5em}
+  @media print{.mk{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  .ans{font-weight:600}
+  </style>
+  <h1>Qué postura toma cada iglesia</h1>
+  <p class="lede">Donde las plataformas republicana y demócrata toman posturas opuestas sobre un punto, esta página muestra qué postura toman las declaraciones oficiales de cada iglesia, en sus propias palabras. El sitio no escoge ni la pregunta ni las respuestas: las fijan las plataformas.</p>
+  <div class="notice" role="note"><p><b>Todavía sin revisar.</b> Nadie de las tradiciones que aparecen en estas páginas ha revisado lo que dicen. Cada resumen es de este sitio, y cada uno lleva al texto completo para que usted lo verifique.</p><p class="small">Entradas revisadas hasta ahora: 0 de 83.</p></div>
+  <h2>De un vistazo</h2>
+  <p class="small"><b>D</b>: las palabras de la iglesia están del mismo lado que la plataforma demócrata. <b>R</b>: del mismo lado que la plataforma republicana. Cada tema enlaza con las citas que aparecen más abajo.</p>
+  <div class="tablewrap"><table class="sides"><thead><tr><th scope="col">Tema</th><th scope="col">Católica</th><th scope="col">Bautista del Sur</th><th scope="col">Metodista Unida</th><th scope="col">AME</th><th scope="col">Asambleas de Dios</th></tr></thead><tbody><tr><th scope="row"><a href="#immigration">Inmigración</a></th><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk none">No lo dice</span></td><td><span class="mk none">No lo dice</span></td><td><span class="mk none">No lo dice</span></td><td><span class="mk none">No lo dice</span></td></tr><tr><th scope="row"><a href="#abortion">Aborto</a></th><td><span class="mk R" title="Del mismo lado que la plataforma republicana">R</span></td><td><span class="mk R" title="Del mismo lado que la plataforma republicana">R</span></td><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk none">Sin declaración</span></td><td><span class="mk R" title="Del mismo lado que la plataforma republicana">R</span></td></tr><tr><th scope="row"><a href="#poverty">Pobreza y asistencia pública</a></th><td><span class="mk none">No lo dice</span></td><td><span class="mk none">No lo dice</span></td><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk none">Sin declaración</span></td><td><span class="mk none">Sin declaración</span></td></tr><tr><th scope="row"><a href="#death-penalty">La pena de muerte</a></th><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk R" title="Del mismo lado que la plataforma republicana">R</span></td><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk none">Sin declaración</span></td><td><span class="mk none">Sin declaración</span></td></tr><tr><th scope="row"><a href="#guns">Armas de fuego</a></th><td><span class="mk none">No lo dice</span></td><td><span class="mk none">No lo dice</span></td><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk none">Sin declaración</span></td><td><span class="mk none">Sin declaración</span></td></tr><tr><th scope="row"><a href="#environment">El cuidado de la creación y el medio ambiente</a></th><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk none">No lo dice</span></td><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk none">Sin declaración</span></td><td><span class="mk none">Sin declaración</span></td></tr><tr><th scope="row"><a href="#healthcare">Atención médica</a></th><td><span class="mk none">No lo dice</span></td><td><span class="mk none">No lo dice</span></td><td><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span></td><td><span class="mk none">Sin declaración</span></td><td><span class="mk none">Sin declaración</span></td></tr><tr><th scope="row"><a href="#criminal-justice">Justicia penal</a></th><td><span class="mk none">No se compara</span></td><td><span class="mk none">No se compara</span></td><td><span class="mk none">No se compara</span></td><td><span class="mk none">No se compara</span></td><td><span class="mk none">No se compara</span></td></tr></tbody></table></div>
+  <p class="small">No hay total, a propósito: el total dependería de qué temas están en la lista.</p>
+  <h2 id="immigration">Inmigración</h2>
+  <p><b>¿Qué debe pasar con las personas que viven en Estados Unidos sin estatus legal?</b></p>
+  <p class="small">Tanto las plataformas de Texas como las nacionales toman posturas opuestas sobre este punto.</p>
+  <h3>Las plataformas</h3>
+  <div class="duo"><div class="card"><p class="small">Partido Demócrata de Texas, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Ofrecerles una forma de quedarse legalmente</span></p>
+      <blockquote class="q" lang="en">“Enact comprehensive immigration reform, including an attainable path to citizenship”</blockquote>
+      <p class="small"><a href="https://txdem.co/24-Platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Partido Republicano de Texas, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Deportarlas</span></p>
+      <blockquote class="q" lang="en">“devote all available resources to deportations”</blockquote>
+      <p class="small"><a href="https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf">Texto completo</a></p></div>
+    <div class="card"><p class="small">Comité Nacional Demócrata, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Ofrecerles una forma de quedarse legalmente</span></p>
+      <blockquote class="q" lang="en">“supporting a pathway for long-term undocumented individuals”</blockquote>
+      <p class="small"><a href="https://www.presidency.ucsb.edu/documents/2024-democratic-party-platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Comité Nacional Republicano, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Deportarlas</span></p>
+      <blockquote class="q" lang="en">“Republicans will secure the Border, deport Illegal Aliens”</blockquote>
+      <p class="small"><a href="https://www.presidency.ucsb.edu/documents/2024-republican-party-platform">Texto completo</a></p></div></div>
+  <h3>Las iglesias</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#immigration"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Ofrecerles una forma de quedarse legalmente</span></p>
+      <blockquote class="q" lang="en">“comprehensive immigration reform that offers a path to citizenship”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.usccb.org/resources/2023-Nov-15%20FCFC%20action%20item%20text%20final.pdf">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#immigration"><b>Convención Bautista del Sur</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#immigration"><b>Iglesia Metodista Unida</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#immigration"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#immigration"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div></div>
+<h2 id="abortion">Aborto</h2>
+  <p><b>¿Debe la ley proteger el acceso al aborto?</b></p>
+  <p class="small">Tanto las plataformas de Texas como las nacionales toman posturas opuestas sobre este punto.</p>
+  <h3>Las plataformas</h3>
+  <div class="duo"><div class="card"><p class="small">Partido Demócrata de Texas, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Proteger el acceso</span></p>
+      <blockquote class="q" lang="en">“reinstate the right to an abortion”</blockquote>
+      <p class="small"><a href="https://txdem.co/24-Platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Partido Republicano de Texas, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Restringirlo o ponerle fin</span></p>
+      <blockquote class="q" lang="en">“We urge lawmakers to enact legislation to abolish abortion”</blockquote>
+      <p class="small"><a href="https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf">Texto completo</a></p></div>
+    <div class="card"><p class="small">Comité Nacional Demócrata, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Proteger el acceso</span></p>
+      <blockquote class="q" lang="en">“we will pass national legislation to make Roe the law of the land again”</blockquote>
+      <p class="small"><a href="https://www.presidency.ucsb.edu/documents/2024-democratic-party-platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Comité Nacional Republicano, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Restringirlo o ponerle fin</span></p>
+      <blockquote class="q" lang="en">“We will oppose Late Term Abortion”</blockquote>
+      <p class="small"><a href="https://www.presidency.ucsb.edu/documents/2024-republican-party-platform">Texto completo</a></p></div></div>
+  <h3>Las iglesias</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#abortion"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p><span class="mk R" title="Del mismo lado que la plataforma republicana">R</span> <span class="ans">Restringirlo o ponerle fin</span></p>
+      <blockquote class="q" lang="en">“seek full protection for all human life from the moment of conception”</blockquote><p class="small">Del mismo lado que la plataforma republicana. <a href="https://www.usccb.org/resources/forming-consciences-for-faithful-citizenship-2019.pdf">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#abortion"><b>Convención Bautista del Sur</b></a></p>
+      <p><span class="mk R" title="Del mismo lado que la plataforma republicana">R</span> <span class="ans">Restringirlo o ponerle fin</span></p>
+      <blockquote class="q" lang="en">“pray and labor for the abolition of all forms of abortion”</blockquote><p class="small">Del mismo lado que la plataforma republicana. <a href="https://www.sbc.net/resource-library/resolutions/on-standing-against-the-moral-evils-and-medical-dangers-of-chemical-abortion-pills/">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#abortion"><b>Iglesia Metodista Unida</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Proteger el acceso</span></p>
+      <blockquote class="q" lang="en">“United Methodists worldwide affirm and support the legal availability”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.umc.org/en/content/ask-the-umc-valuing-life-abortion-adoption">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#abortion"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#abortion"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p><span class="mk R" title="Del mismo lado que la plataforma republicana">R</span> <span class="ans">Restringirlo o ponerle fin</span></p>
+      <blockquote class="q" lang="en">“seek legislative and judicial redress”</blockquote><p class="small">Del mismo lado que la plataforma republicana. <a href="https://ag.org/Beliefs/Position-Papers/Sanctity-of-Human-Life-Abortion">Texto completo</a></p></div></div>
+<h2 id="poverty">Pobreza y asistencia pública</h2>
+  <p><b>¿Debe la ley fijar un salario mínimo?</b></p>
+  <p class="small">Solo las plataformas de Texas toman posturas opuestas sobre este punto, así que solo esas se comparan.</p>
+  <h3>Las plataformas</h3>
+  <div class="duo"><div class="card"><p class="small">Partido Demócrata de Texas, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Fijarlo o subirlo</span></p>
+      <blockquote class="q" lang="en">“All Texas workers should receive a living wage indexed to inflation”</blockquote>
+      <p class="small"><a href="https://txdem.co/24-Platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Partido Republicano de Texas, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Derogarlo</span></p>
+      <blockquote class="q" lang="en">“Repeal Minimum Wage Law and prevailing wage laws”</blockquote>
+      <p class="small"><a href="https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf">Texto completo</a></p></div></div>
+  <h3>Las iglesias</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#poverty"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#poverty"><b>Convención Bautista del Sur</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#poverty"><b>Iglesia Metodista Unida</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Fijarlo o subirlo</span></p>
+      <blockquote class="q" lang="en">“endorse the establishment and enforcement of policies that guarantee workers fair and equitable compensation”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.umc.org/en/content/social-principles-the-economic-community">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#poverty"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#poverty"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div></div>
+<h2 id="death-penalty">La pena de muerte</h2>
+  <p><b>¿Se debe poner fin a la pena de muerte?</b></p>
+  <p class="small">Solo las plataformas de Texas toman posturas opuestas sobre este punto, así que solo esas se comparan.</p>
+  <h3>Las plataformas</h3>
+  <div class="duo"><div class="card"><p class="small">Partido Demócrata de Texas, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Ponerle fin</span></p>
+      <blockquote class="q" lang="en">“Abolish the death penalty and declare a moratorium on executions”</blockquote>
+      <p class="small"><a href="https://txdem.co/24-Platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Partido Republicano de Texas, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Mantenerla</span></p>
+      <blockquote class="q" lang="en">“Properly applied capital punishment is legitimate and should be reasonably swift”</blockquote>
+      <p class="small"><a href="https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf">Texto completo</a></p></div></div>
+  <h3>Las iglesias</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#death-penalty"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Ponerle fin</span></p>
+      <blockquote class="q" lang="en">“our nation’s continued reliance on the death penalty cannot be justified”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.usccb.org/resources/forming-consciences-for-faithful-citizenship-2019.pdf">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#death-penalty"><b>Convención Bautista del Sur</b></a></p>
+      <p><span class="mk R" title="Del mismo lado que la plataforma republicana">R</span> <span class="ans">Mantenerla</span></p>
+      <blockquote class="q" lang="en">“support the fair and equitable use of capital punishment by civil magistrates”</blockquote><p class="small">Del mismo lado que la plataforma republicana. <a href="https://www.sbc.net/resource-library/resolutions/on-capital-punishment/">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#death-penalty"><b>Iglesia Metodista Unida</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Ponerle fin</span></p>
+      <blockquote class="q" lang="en">“compels us to oppose capital punishment and the imposition of the death penalty”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.umc.org/en/content/social-principles-the-political-community">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#death-penalty"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#death-penalty"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div></div>
+<h2 id="guns">Armas de fuego</h2>
+  <p><b>¿Debe la ley limitar cómo se compran y se venden las armas de fuego?</b></p>
+  <p class="small">Solo las plataformas de Texas toman posturas opuestas sobre este punto, así que solo esas se comparan.</p>
+  <h3>Las plataformas</h3>
+  <div class="duo"><div class="card"><p class="small">Partido Demócrata de Texas, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Agregar límites</span></p>
+      <blockquote class="q" lang="en">“Remove loopholes that exempt gun shows and private sales”</blockquote>
+      <p class="small"><a href="https://txdem.co/24-Platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Partido Republicano de Texas, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Derogar límites</span></p>
+      <blockquote class="q" lang="en">“Repeal and/or nullify the National Firearms Act of 1934”</blockquote>
+      <p class="small"><a href="https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf">Texto completo</a></p></div></div>
+  <h3>Las iglesias</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#guns"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#guns"><b>Convención Bautista del Sur</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#guns"><b>Iglesia Metodista Unida</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Agregar límites</span></p>
+      <blockquote class="q" lang="en">“Universal background checks on all gun purchases”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.umc.org/en/content/book-of-resolutions-our-call-to-end-gun-violence">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#guns"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#guns"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div></div>
+<h2 id="environment">El cuidado de la creación y el medio ambiente</h2>
+  <p><b>¿Debe el gobierno actuar para reducir las emisiones que causan el cambio climático?</b></p>
+  <p class="small">Tanto las plataformas de Texas como las nacionales toman posturas opuestas sobre este punto.</p>
+  <h3>Las plataformas</h3>
+  <div class="duo"><div class="card"><p class="small">Partido Demócrata de Texas, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Actuar para reducirlas</span></p>
+      <blockquote class="q" lang="en">“Reduce greenhouse gas emissions by supporting policies that develop clean energy resources”</blockquote>
+      <p class="small"><a href="https://txdem.co/24-Platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Partido Republicano de Texas, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Oponerse a las medidas climáticas</span></p>
+      <blockquote class="q" lang="en">“We oppose environmentalism, or “climate change” initiatives”</blockquote>
+      <p class="small"><a href="https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf">Texto completo</a></p></div>
+    <div class="card"><p class="small">Comité Nacional Demócrata, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Actuar para reducirlas</span></p>
+      <blockquote class="q" lang="en">“We'll keep pushing to reduce emissions from America's buildings and heavy industry”</blockquote>
+      <p class="small"><a href="https://www.presidency.ucsb.edu/documents/2024-democratic-party-platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Comité Nacional Republicano, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Oponerse a las medidas climáticas</span></p>
+      <blockquote class="q" lang="en">“terminating the Socialist Green New Deal”</blockquote>
+      <p class="small"><a href="https://www.presidency.ucsb.edu/documents/2024-republican-party-platform">Texto completo</a></p></div></div>
+  <h3>Las iglesias</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#environment"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Actuar para reducirlas</span></p>
+      <blockquote class="q" lang="en">“respond to climate change with actions to better protect creation”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.usccb.org/resources/2023-Nov-15%20FCFC%20action%20item%20text%20final.pdf">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#environment"><b>Convención Bautista del Sur</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#environment"><b>Iglesia Metodista Unida</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Actuar para reducirlas</span></p>
+      <blockquote class="q" lang="en">“To reverse the current trajectory of global climate change, increased investments are needed”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.umc.org/en/content/social-principles-the-natural-world">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#environment"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#environment"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div></div>
+<h2 id="healthcare">Atención médica</h2>
+  <p><b>¿Debe el gobierno ampliar la cobertura médica pública, como Medicaid?</b></p>
+  <p class="small">Solo las plataformas de Texas toman posturas opuestas sobre este punto, así que solo esas se comparan.</p>
+  <h3>Las plataformas</h3>
+  <div class="duo"><div class="card"><p class="small">Partido Demócrata de Texas, plataforma de 2024</p>
+      <p><span class="mk D">D</span> <span class="ans">Ampliarla</span></p>
+      <blockquote class="q" lang="en">“We must expand Medicaid”</blockquote>
+      <p class="small"><a href="https://txdem.co/24-Platform">Texto completo</a></p></div>
+    <div class="card"><p class="small">Partido Republicano de Texas, plataforma de 2024</p>
+      <p><span class="mk R">R</span> <span class="ans">Reducirla</span></p>
+      <blockquote class="q" lang="en">“enabling the state to develop reserves sufficient to exit the federal Medicaid program”</blockquote>
+      <p class="small"><a href="https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf">Texto completo</a></p></div></div>
+  <h3>Las iglesias</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#healthcare"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#healthcare"><b>Convención Bautista del Sur</b></a></p>
+      <p><span class="mk none">No lo dice</span> </p>
+      <p class="small">Sus declaraciones que se muestran completas no toman ninguna de las dos posturas sobre este punto.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#healthcare"><b>Iglesia Metodista Unida</b></a></p>
+      <p><span class="mk D" title="Del mismo lado que la plataforma demócrata">D</span> <span class="ans">Ampliarla</span></p>
+      <blockquote class="q" lang="en">“ensure that every human being has access to medical services and treatment”</blockquote><p class="small">Del mismo lado que la plataforma demócrata. <a href="https://www.umc.org/en/content/social-principles-the-political-community">Texto completo</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#healthcare"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#healthcare"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p><span class="mk none">Sin declaración</span> </p>
+      <p class="small">No hay declaración oficial sobre este tema.</p></div></div>
+<h2 id="criminal-justice">Justicia penal</h2>
+  <p>Las plataformas tratan cosas distintas: la plataforma republicana de Texas, la fianza y la aplicación uniforme de la ley; la plataforma demócrata de Texas, la adicción, la falta de vivienda y los prejuicios; las plataformas nacionales, el financiamiento de la policía y las cárceles privadas. Ninguna toma la postura opuesta a otra sobre un mismo punto, así que no se ubica a ninguna iglesia.</p>
+  <h2>Cómo se ubica a cada iglesia</h2>
+  <ol><li>El punto de cada tema es uno en que las plataformas republicana y demócrata toman posturas opuestas con sus propias palabras. Un tema sin un punto así no se compara.</li><li>Una iglesia se ubica de un lado solo si una de las declaraciones oficiales de su página toma esa postura con sus propias palabras, y se muestra esa cita. Si no, se marca «No lo dice».</li><li>Cada cita es textual, y un programa verifica cada una contra la fuente descargada.</li><li>No hay conteo entre temas, ni aquí ni en los datos: cualquier total dependería de qué temas están en la lista.</li></ol>
+  <h2>Tres decisiones de criterio</h2>
+  <p>Tres ubicaciones requirieron decidir qué abarcan las palabras de una declaración. Se enumeran para que usted pueda no estar de acuerdo.</p>
+  <ul><li><b>Bautista del Sur, medio ambiente:</b> su resolución se opone a “solutions based on questionable science”, pero nunca menciona el clima, así que se marca «No lo dice».</li><li><b>Metodista Unida, atención médica:</b> pide a los gobiernos que garanticen que todo ser humano tenga acceso a servicios médicos, pero nunca menciona Medicaid. Se ubica con ampliar la cobertura pública.</li><li><b>Católica, medio ambiente:</b> los obispos piden responder al cambio climático “with actions”, en un documento sobre la responsabilidad política de los católicos. Se ubica con la acción del gobierno.</li></ul>
+  <p><a href="https://rightnleft.com/fe">Las ocho tradiciones</a> · <a href="https://rightnleft.com/fe/metodologia">Cómo se hicieron estas páginas</a> · <a href="/data/faith.json">Descargue el registro completo (faith.json, CC0)</a></p>
+  <hr>
+  <p class="small"><span class="label">Quién lo hizo.</span> Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar. En estas páginas pasa lo mismo con las tradiciones religiosas: lo que cuenta como oficial es una regla escrita para cada tradición, que se aplica igual en todos los temas.</p>
+  <footer class="sitefoot" aria-label="Más en este sitio"><div><p class="foot-head">El sitio</p><ul><li><a href="https://rightnleft.com/es">Inicio</a></li><li><a href="https://rightnleft.com/politica">Política</a></li><li><a href="https://rightnleft.com/fe">Religión</a></li><li><a href="https://rightnleft.com/economia">Economía</a></li><li><a href="https://rightnleft.com/es/cuestionario">El cuestionario</a></li><li><a href="https://rightnleft.com/distritos">Encuentre a su representante</a></li><li><a href="https://rightnleft.com/proyectos">Los proyectos</a></li><li><a href="https://rightnleft.com/graficas">Gráficas</a></li><li><a href="https://rightnleft.com/hoja">Hoja informativa de una página</a></li><li><a href="https://rightnleft.com/open-data">Descargar los datos (en inglés)</a></li><li><a href="https://rightnleft.com/maestros">Para docentes: una hoja de trabajo gratis</a></li></ul></div><div><p class="foot-head">Los siete proyectos</p><ul><li><a href="https://rightnleft.com/proyecto/sb-2"><span class="bill">SB 2</span> Cuentas de ahorro educativo</a></li><li><a href="https://rightnleft.com/proyecto/sb-8"><span class="bill">SB 8</span> Aplicación de la ley migratoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-10"><span class="bill">SB 10</span> Los Diez Mandamientos en las aulas</a></li><li><a href="https://rightnleft.com/proyecto/sb-3"><span class="bill">SB 3</span> Prohibición del THC</a></li><li><a href="https://rightnleft.com/proyecto/sb-14"><span class="bill">SB 14</span> Revisión regulatoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-6"><span class="bill">SB 6</span> Red eléctrica y grandes consumidores</a></li><li><a href="https://rightnleft.com/proyecto/sb-5"><span class="bill">SB 5</span> Instituto de investigación sobre demencia</a></li></ul></div><div><p class="foot-head">Las tres contiendas</p><ul><li><a href="https://rightnleft.com/contienda/gobernador">Gobernador: Gina Hinojosa y Greg Abbott</a></li><li><a href="https://rightnleft.com/contienda/vicegobernador">Vicegobernador: Vikki Goodwin y Dan Patrick</a></li><li><a href="https://rightnleft.com/contienda/senado">Senado de Estados Unidos: James Talarico y Ken Paxton</a></li></ul></div></footer>
+</main>
+</body>
+</html>

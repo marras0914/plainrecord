@@ -8,7 +8,8 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue, isJewish, JEWISH_RESOLUTIONS, ISSUE_TITLE_TERMS } from './faith_positions';
+import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue, isJewish, JEWISH_RESOLUTIONS, ISSUE_TITLE_TERMS, SIDE_POINTS, NO_SIDE_POINT } from './faith_positions';
+import type { SidePoint, SideQuote } from './faith_positions';
 import { buildFaithPayload, PLATFORMS } from './scripts/export_faith';
 import { findRefs, statementKey } from './scripts/extract_faith_verses';
 import { parsePage, parseSineDie, buildPositions, wordsOf } from './scripts/extract_tccb_positions';
@@ -80,6 +81,58 @@ for (const issue of FILLED_ISSUES) {
 check('every filled issue is on the fixed list', FILLED_ISSUES.every((i) => ISSUES.some((x) => x.id === i)));
 check('nothing is filed under an issue that is not finished', all.every((e) => FILLED_ISSUES.includes(e.issueId)));
 
+// --- which side each church takes (decided 15 Nov 2026) ---------------------
+
+const pointIssues = SIDE_POINTS.map((p) => p.issueId);
+const noPointIssues = NO_SIDE_POINT.map((p) => p.issueId);
+check('sides: every issue has a point or a stated reason it has none, never both',
+  FILLED_ISSUES.every((i) => pointIssues.includes(i) !== noPointIssues.includes(i)) && new Set(pointIssues).size === pointIssues.length,
+  `${pointIssues.length} points, ${noPointIssues.length} without`);
+
+/** Rule 1: a level is compared exactly when both platforms there take opposite sides. */
+const levelProblems = (pt: SidePoint) => (['texas', 'national'] as const).flatMap((level) => {
+  const d = pt.platforms[`D-${level}`];
+  const r = pt.platforms[`R-${level}`];
+  const opposite = !!d && !!r && d.side !== r.side;
+  return opposite === pt.levels.includes(level) ? [] : [`${pt.issueId} ${level}`];
+});
+const badLevels = SIDE_POINTS.flatMap(levelProblems);
+check('sides: a level is compared exactly where the D and R platforms take opposite sides', badLevels.length === 0, badLevels.join(', ') || 'all levels');
+check('(the level check catches a level where both platforms take the same side)',
+  levelProblems({ ...SIDE_POINTS[0], platforms: { ...SIDE_POINTS[0].platforms, 'R-texas': { ...SIDE_POINTS[0].platforms['D-texas']!, url: 'x' } } }).length === 1);
+
+const platformUrl = (k: string) => PLATFORMS[k as keyof typeof PLATFORMS].url;
+check('sides: every platform quote is from that platform',
+  SIDE_POINTS.every((pt) => Object.entries(pt.platforms).every(([k, q]) => q!.url === platformUrl(k))));
+
+// Rule 3: a church is placed only from a statement shown in full, and every
+// tradition with one is placed or marked "doesn't say".
+// The churches only; the Jewish movements join the grid later.
+const churchProblemsOf = (points: SidePoint[]) => points.flatMap((pt) => TRADITIONS.filter((t) => !isJewish(t.id)).flatMap((t) => {
+  const has = STATEMENTS.filter((s) => s.traditionId === t.id && s.issueId === pt.issueId);
+  const placed = t.id in pt.churches;
+  if (!has.length) return placed ? [`${pt.issueId} ${t.id} placed with no statement`] : [];
+  if (!placed) return [`${pt.issueId} ${t.id} missing`];
+  const q = pt.churches[t.id];
+  return q && !has.some((s) => s.sourceUrl === q.url) ? [`${pt.issueId} ${t.id} quotes a statement not shown`] : [];
+}));
+const churchProblems = churchProblemsOf(SIDE_POINTS);
+check('sides: every church with a statement is placed or "doesn\'t say", from a statement shown in full', churchProblems.length === 0, churchProblems.join(', ') || 'all');
+const imm = SIDE_POINTS.find((p) => p.issueId === 'immigration')!;
+check('(the placement check catches a quote from a statement not shown, and a church left out)',
+  churchProblemsOf([{ ...imm, churches: { ...imm.churches, sbc: { side: 'b', quote: 'x', url: 'https://example.org/' }, umc: undefined } }]).length === 1
+  && churchProblemsOf([{ ...imm, churches: Object.fromEntries(Object.entries(imm.churches).filter(([k]) => k !== 'umc')) }]).length === 1);
+
+const sideQuotes = SIDE_POINTS.flatMap((pt) => [...Object.values(pt.platforms), ...Object.values(pt.churches)]).filter(Boolean) as SideQuote[];
+const longSide = sideQuotes.filter((q) => words(q.quote) >= 15);
+check('sides: every quote is under 15 words', longSide.length === 0, longSide.map((q) => q.quote.slice(0, 40)).join(' | ') || `${sideQuotes.length} quotes`);
+
+// Rule 5: no count across issues. The shipped points carry no number at all,
+// so nothing on a page can total them without computing it in the builder,
+// which verify_site.mjs checks.
+const numbers = JSON.stringify(SIDE_POINTS).match(/:\s*\d/g);
+check('sides: the shipped points carry no number', numbers === null, numbers?.join(' ') ?? 'none');
+
 // --- current in full, earlier listed (decided 13 Nov 2026) ------------------
 
 for (const issue of FILLED_ISSUES) {
@@ -117,6 +170,8 @@ const recordKeys: [string, string][] = [
   ...PLANKS.map((p) => [KEY.plank(p), p.summary] as [string, string]),
   ...NO_PLANK.map((n) => [KEY.noPlank(n), n.note] as [string, string]),
   ...TO_READ.map((r, i) => [KEY.toRead(r, i), r.what] as [string, string]),
+  ...SIDE_POINTS.flatMap((pt) => [[KEY.sideQ(pt), pt.question], [KEY.sideA(pt), pt.a], [KEY.sideB(pt), pt.b]] as [string, string][]),
+  ...NO_SIDE_POINT.map((n) => [KEY.noSide(n), n.note] as [string, string]),
   ...Object.entries(shipped.verses.books as Record<string, string>).map(([code, en]) => [KEY.book(code), en] as [string, string]),
 ];
 const untranslated = recordKeys.filter(([k]) => typeof COPY[k]?.es !== 'string').map(([k]) => k);

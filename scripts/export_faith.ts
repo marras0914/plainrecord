@@ -24,6 +24,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
   ISSUES, TRADITIONS, STATEMENTS, EARLIER, NO_STATEMENT, NO_PLANK, PLANKS, KNOWN_GAPS, TO_READ, ISSUE_TITLE_TERMS, SBC_RESOLUTIONS, JEWISH_RESOLUTIONS,
+  SIDE_POINTS, NO_SIDE_POINT,
 } from '../faith_positions';
 import { CITATIONS_FILE } from './extract_jewish_citations';
 import { SHIP_DIR } from './paths';
@@ -81,6 +82,13 @@ export function buildFaithPayload() {
     noPlank: NO_PLANK,
     knownGaps: KNOWN_GAPS,
     toRead: TO_READ,
+    /**
+     * Which side each church takes, issue by issue, on a point where the two
+     * platforms take opposite sides; each placement with the church's own
+     * words. No count across issues.
+     */
+    sidePoints: SIDE_POINTS,
+    noSidePoint: NO_SIDE_POINT,
     verses,
     citations,
     /**

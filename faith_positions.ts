@@ -1011,3 +1011,179 @@ export const TO_READ: { traditionId: TraditionId; issueId: IssueId; what: string
 
 /** Positions emphasized without a stated direction (rule 3). Empty so far. */
 export const KNOWN_GAPS: { who: string; issueId: IssueId; note: string }[] = [];
+
+// --- which side each church takes (decided 15 Nov 2026) ---------------------
+//
+// Marco asked for a grid showing which party each church actually lines up
+// with, issue by issue, with no total and no "should". The knob is the
+// question, so the PARTIES set it, not us:
+//
+//   1. For each issue, the point is one where both platforms at a level take
+//      opposite sides in their own words. A level where they don't is not
+//      compared. An issue with no such point is listed in NO_SIDE_POINT.
+//   2. The two answers are the platforms' own, reduced to a few plain words.
+//   3. A church is placed on a side only if one of its statements shown in
+//      full takes that side in its own words; the quote is shown with the mark.
+//      Otherwise it is null, "doesn't say", which is a fact about its text.
+//   4. Each quote is verbatim, under 15 words, and checked against the source
+//      by npm run data:faith:quotes.
+//   5. No count across issues, anywhere: which issues are on the list would
+//      decide any total.
+//
+// Three placements were judgment calls, decided by Marco on 15 Nov 2026: the
+// SBC on the environment (opposes "solutions based on questionable science",
+// never names climate: doesn't say), UMC on healthcare (calls on governments
+// to ensure access, never names Medicaid: widen) and the Catholic bishops on
+// the environment (call for "actions" in a document on political
+// responsibility: act).
+
+export type Level = 'texas' | 'national';
+export type PlatformKey = `${'D' | 'R'}-${Level}`;
+export interface SideQuote { side: 'a' | 'b'; quote: string; url: string }
+
+export interface SidePoint {
+  issueId: IssueId;
+  /** The point, in the site's words. */
+  question: string;
+  /** The two answers, in the platforms' terms. */
+  a: string;
+  b: string;
+  /** Levels where the D and R platforms take opposite sides. */
+  levels: Level[];
+  platforms: Partial<Record<PlatformKey, SideQuote>>;
+  /** Every tradition with a statement on the issue: its side, or null for "doesn't say". */
+  churches: Partial<Record<TraditionId, SideQuote | null>>;
+}
+
+export const SIDE_POINTS: SidePoint[] = [
+  {
+    issueId: 'immigration',
+    question: 'What should happen to people living in the United States without legal status?',
+    a: 'Offer a way to stay legally', b: 'Deport them',
+    levels: ['texas', 'national'],
+    platforms: {
+      'D-texas': { side: 'a', quote: 'Enact comprehensive immigration reform, including an attainable path to citizenship', url: SRC.tdp2024 },
+      'R-texas': { side: 'b', quote: 'devote all available resources to deportations', url: SRC.rpt2024 },
+      'D-national': { side: 'a', quote: 'supporting a pathway for long-term undocumented individuals', url: SRC.dnc2024 },
+      'R-national': { side: 'b', quote: 'Republicans will secure the Border, deport Illegal Aliens', url: SRC.rnc2024 },
+    },
+    churches: {
+      catholic: { side: 'a', quote: 'comprehensive immigration reform that offers a path to citizenship', url: SRC.usccb2023 },
+      // Rejects "amnesty, understood as forgiveness of legal violations without
+      // accountability" and backs removing people the government prioritizes:
+      // neither a way to stay nor deporting people as such.
+      sbc: null,
+      umc: null,
+      ame: null,
+      ag: null,
+    },
+  },
+  {
+    issueId: 'abortion',
+    question: 'Should the law protect access to abortion?',
+    a: 'Protect access', b: 'Restrict or end it',
+    levels: ['texas', 'national'],
+    platforms: {
+      'D-texas': { side: 'a', quote: 'reinstate the right to an abortion', url: SRC.tdp2024 },
+      'R-texas': { side: 'b', quote: 'We urge lawmakers to enact legislation to abolish abortion', url: SRC.rpt2024 },
+      'D-national': { side: 'a', quote: 'we will pass national legislation to make Roe the law of the land again', url: SRC.dnc2024 },
+      'R-national': { side: 'b', quote: 'We will oppose Late Term Abortion', url: SRC.rnc2024 },
+    },
+    churches: {
+      catholic: { side: 'b', quote: 'seek full protection for all human life from the moment of conception', url: SRC.usccb2019 },
+      sbc: { side: 'b', quote: 'pray and labor for the abolition of all forms of abortion', url: SRC.sbcAbortion2025 },
+      umc: { side: 'a', quote: 'United Methodists worldwide affirm and support the legal availability', url: SRC.umcAbortion },
+      ag: { side: 'b', quote: 'seek legislative and judicial redress', url: SRC.agAbortion2010 },
+    },
+  },
+  {
+    issueId: 'death-penalty',
+    question: 'Should the death penalty be ended?',
+    a: 'End it', b: 'Keep it',
+    levels: ['texas'],
+    platforms: {
+      'D-texas': { side: 'a', quote: 'Abolish the death penalty and declare a moratorium on executions', url: SRC.tdp2024 },
+      'R-texas': { side: 'b', quote: 'Properly applied capital punishment is legitimate and should be reasonably swift', url: SRC.rpt2024 },
+    },
+    churches: {
+      catholic: { side: 'a', quote: 'our nation’s continued reliance on the death penalty cannot be justified', url: SRC.usccb2019 },
+      sbc: { side: 'b', quote: 'support the fair and equitable use of capital punishment by civil magistrates', url: SRC.sbcDeath2000 },
+      umc: { side: 'a', quote: 'compels us to oppose capital punishment and the imposition of the death penalty', url: SRC.umcPolitical },
+    },
+  },
+  {
+    issueId: 'guns',
+    question: 'Should the law limit how guns are bought and sold?',
+    a: 'Add limits', b: 'Repeal limits',
+    // The RNC platform defends "the right to keep and bear arms" but takes no
+    // side on any limit, so the national level is not compared.
+    levels: ['texas'],
+    platforms: {
+      'D-texas': { side: 'a', quote: 'Remove loopholes that exempt gun shows and private sales', url: SRC.tdp2024 },
+      'R-texas': { side: 'b', quote: 'Repeal and/or nullify the National Firearms Act of 1934', url: SRC.rpt2024 },
+    },
+    churches: {
+      // "common sense measures to reduce gun violence": no limit named.
+      catholic: null,
+      // "preventative measures ... in accordance with the Second Amendment": no limit named.
+      sbc: null,
+      umc: { side: 'a', quote: 'Universal background checks on all gun purchases', url: SRC.umcGuns3428 },
+    },
+  },
+  {
+    issueId: 'poverty',
+    question: 'Should the law set a minimum wage?',
+    a: 'Set or raise one', b: 'Repeal it',
+    // The RNC platform has no plank on poverty (NO_PLANK).
+    levels: ['texas'],
+    platforms: {
+      'D-texas': { side: 'a', quote: 'All Texas workers should receive a living wage indexed to inflation', url: SRC.tdp2024 },
+      'R-texas': { side: 'b', quote: 'Repeal Minimum Wage Law and prevailing wage laws', url: SRC.rpt2024 },
+    },
+    churches: {
+      // "decent work at fair, living wages": no law named.
+      catholic: null,
+      sbc: null,
+      umc: { side: 'a', quote: 'endorse the establishment and enforcement of policies that guarantee workers fair and equitable compensation', url: SRC.umcEconomic },
+    },
+  },
+  {
+    issueId: 'environment',
+    question: 'Should government act to reduce the emissions behind climate change?',
+    a: 'Act to reduce them', b: 'Oppose climate measures',
+    levels: ['texas', 'national'],
+    platforms: {
+      'D-texas': { side: 'a', quote: 'Reduce greenhouse gas emissions by supporting policies that develop clean energy resources', url: SRC.tdp2024 },
+      'R-texas': { side: 'b', quote: 'We oppose environmentalism, or “climate change” initiatives', url: SRC.rpt2024 },
+      'D-national': { side: 'a', quote: 'We\'ll keep pushing to reduce emissions from America\'s buildings and heavy industry', url: SRC.dnc2024 },
+      'R-national': { side: 'b', quote: 'terminating the Socialist Green New Deal', url: SRC.rnc2024 },
+    },
+    churches: {
+      catholic: { side: 'a', quote: 'respond to climate change with actions to better protect creation', url: SRC.usccb2023 },
+      sbc: null,
+      umc: { side: 'a', quote: 'To reverse the current trajectory of global climate change, increased investments are needed', url: SRC.umcNatural },
+    },
+  },
+  {
+    issueId: 'healthcare',
+    question: 'Should government widen public health coverage such as Medicaid?',
+    a: 'Widen it', b: 'Pull back from it',
+    // The RNC platform also calls for expanded access, so the national
+    // platforms do not take opposite sides.
+    levels: ['texas'],
+    platforms: {
+      'D-texas': { side: 'a', quote: 'We must expand Medicaid', url: SRC.tdp2024 },
+      'R-texas': { side: 'b', quote: 'enabling the state to develop reserves sufficient to exit the federal Medicaid program', url: SRC.rpt2024 },
+    },
+    churches: {
+      catholic: null,
+      sbc: null,
+      umc: { side: 'a', quote: 'ensure that every human being has access to medical services and treatment', url: SRC.umcPolitical },
+    },
+  },
+];
+
+/** Issues where the platforms take no opposite sides on one point (rule 1). */
+export const NO_SIDE_POINT: { issueId: IssueId; note: string }[] = [
+  { issueId: 'criminal-justice', note: 'The platforms address different things: the Texas Republican platform bail and uniform enforcement, the Texas Democratic platform addiction, homelessness and bias, the national platforms police funding and private prisons. None takes the opposite side of another on one point, so no church is placed.' },
+];

@@ -12,9 +12,13 @@
  * READS ONLY WHAT SHIPS: public/data/faith.json (scripts/export_faith.ts), so a
  * page cannot say something the published record does not.
  *
- * ONE TRADITION AT A TIME, and no score anywhere. FAITH.md: a grid of every
- * church against every issue would read as a scoreboard, and the site never
- * says which party is closer to any church. Every page carries the "not yet
+ *   /faith/sides           /fe/posturas           which side each church takes
+ *
+ * NO SCORE ANYWHERE. Until 15 Nov 2026 there was no grid at all, because one
+ * would read as a scoreboard. Marco then asked for one: per issue, which
+ * party's platform each church's own words line up with, on a point the
+ * platforms themselves split on, with no total and no "should" (see
+ * SIDE_POINTS in faith_positions.ts). Every page carries the "not yet
  * reviewed" notice (decided 12 Nov 2026), and verify_site.mjs checks that.
  *
  * NO JAVASCRIPT. The words are in i18n/faith.json, and nothing is written while
@@ -361,6 +365,116 @@ function houseVotesPage(lang, t, hv) {
 }
 
 // ---------------------------------------------------------------------------
+// Which side each church takes (faith_positions.ts SIDE_POINTS)
+// ---------------------------------------------------------------------------
+//
+// Decided 15 Nov 2026: per issue, which party's platform each church's own
+// words line up with, on a point the platforms themselves split on. NO TOTAL,
+// here or anywhere: verify_site.mjs checks the page carries no count of marks.
+
+const SIDE_STYLE = `<style>
+  table.sides{border-collapse:collapse;font-size:14.5px;min-width:100%}
+  table.sides th,table.sides td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  table.sides thead th{font-size:13.5px;font-weight:600}
+  .mk{display:inline-block;min-width:26px;padding:1px 7px;border-radius:4px;font-weight:700;text-align:center;color:#fff}
+  .mk.D{background:var(--blue)} .mk.R{background:var(--red)}
+  .mk.none{color:var(--muted);font-weight:400;background:none;padding:1px 0;min-width:0;font-size:13.5px;text-align:left}
+  table.sides th[scope=row]{position:sticky;left:0;background:var(--page);z-index:1;min-width:7.5em}
+  @media print{.mk{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  .ans{font-weight:600}
+  </style>`;
+
+const P2 = ['D', 'R'];
+/** Which party's platform is on the church's side at each compared level. */
+function partiesWith(pt, q) {
+  return pt.levels.map((level) => ({ level, party: P2.find((p) => pt.platforms[`${p}-${level}`].side === q.side) }));
+}
+
+/** The grid cell, and the same mark in words for the issue section. */
+function sideMark(lang, issueId, tradId) {
+  const pt = data.sidePoints.find((p) => p.issueId === issueId);
+  if (!pt) return { cell: `<span class="mk none">${ft(lang, 'sd.mark.notCompared')}</span>`, words: '' };
+  if (!(tradId in pt.churches)) return { cell: `<span class="mk none">${ft(lang, 'sd.mark.noStatement')}</span>`, words: ft(lang, 'sd.noStatement') };
+  const q = pt.churches[tradId];
+  if (!q) return { cell: `<span class="mk none">${ft(lang, 'sd.mark.doesntSay')}</span>`, words: ft(lang, 'sd.doesntSay') };
+  const by = partiesWith(pt, q);
+  const parties = [...new Set(by.map((b) => b.party))];
+  // Every compared level puts the church beside the same party in the data so
+  // far; if that ever differs, the mark says so level by level.
+  const cell = parties.length === 1
+    ? `<span class="mk ${parties[0]}" title="${ft(lang, `sd.same.${parties[0]}`)}">${ft(lang, `sd.mark.${parties[0]}`)}</span>`
+    : by.map((b) => `${ft(lang, `tr.${b.level}`)} <span class="mk ${b.party}">${ft(lang, `sd.mark.${b.party}`)}</span>`).join(' ');
+  const words = parties.length === 1
+    ? ft(lang, `sd.same.${parties[0]}`)
+    : by.map((b) => `${ft(lang, `tr.${b.level}`)}: ${ft(lang, `sd.same.${b.party}`)}`).join('; ');
+  return { cell, words };
+}
+
+// The churches only. The Jewish movements (added 15 Nov 2026) join the grid
+// later, once Marco has made the placement calls for them.
+const SIDE_TRADITIONS = data.traditions.filter((t) => !JEWISH.has(t.id));
+
+function sidesPage(lang) {
+  const P = FAITH_PATHS[lang];
+  const short = (t) => ft(lang, `sd.short.${t.id}`);
+  const head = `<tr><th scope="col">${ft(lang, 'sd.th.issue')}</th>${SIDE_TRADITIONS.map((t) => `<th scope="col">${short(t)}</th>`).join('')}</tr>`;
+  const rows = data.issues.map((i) => `<tr><th scope="row"><a href="#${i.id}">${issueName(lang, i)}</a></th>${SIDE_TRADITIONS.map((t) => `<td>${sideMark(lang, i.id, t.id).cell}</td>`).join('')}</tr>`).join('');
+
+  const sections = data.issues.map((issue) => {
+    const pt = data.sidePoints.find((p) => p.issueId === issue.id);
+    if (!pt) {
+      const n = data.noSidePoint.find((x) => x.issueId === issue.id);
+      return `<h2 id="${issue.id}">${issueName(lang, issue)}</h2>
+  <p>${tx(lang, KEY.noSide(n), n.note)}</p>`;
+    }
+    const ans = (s) => (s === 'a' ? tx(lang, KEY.sideA(pt), pt.a) : tx(lang, KEY.sideB(pt), pt.b));
+    const plats = pt.levels.flatMap((level) => P2.map((party) => {
+      const k = `${party}-${level}`;
+      const q = pt.platforms[k];
+      return `<div class="card"><p class="small">${ft(lang, 'tr.platformLine', { name: tx(lang, KEY.platform(k), data.platforms[k].name), year: data.platforms[k].year })}</p>
+      <p><span class="mk ${party}">${ft(lang, `sd.mark.${party}`)}</span> <span class="ans">${ans(q.side)}</span></p>
+      ${quote(q.quote)}
+      <p class="small"><a href="${esc(q.url)}">${ft(lang, 'tr.fullText')}</a></p></div>`;
+    })).join('\n    ');
+    const churches = SIDE_TRADITIONS.map((t) => {
+      const m = sideMark(lang, issue.id, t.id);
+      const q = pt.churches[t.id];
+      return `<div class="card"><p><a href="${SITE}/${traditionPath(t.id, lang)}#${issue.id}"><b>${tradName(lang, t)}</b></a></p>
+      <p>${m.cell} ${q ? `<span class="ans">${ans(q.side)}</span>` : ''}</p>
+      ${q ? `${quote(q.quote)}<p class="small">${m.words}. <a href="${esc(q.url)}">${ft(lang, 'tr.fullText')}</a></p>` : `<p class="small">${m.words}</p>`}</div>`;
+    }).join('\n    ');
+    return `<h2 id="${issue.id}">${issueName(lang, issue)}</h2>
+  <p><b>${tx(lang, KEY.sideQ(pt), pt.question)}</b></p>
+  <p class="small">${ft(lang, pt.levels.length === 2 ? 'sd.levels.both' : 'sd.levels.texas')}</p>
+  <h3>${ft(lang, 'sd.h3platforms')}</h3>
+  <div class="duo">${plats}</div>
+  <h3>${ft(lang, 'sd.h3churches')}</h3>
+  <div class="duo">${churches}</div>`;
+  }).join('\n');
+
+  const body = `${SIDE_STYLE}
+  <h1>${ft(lang, 'sd.h1')}</h1>
+  <p class="lede">${ft(lang, 'sd.lede')}</p>
+  ${notice(lang)}
+  <h2>${ft(lang, 'sd.h2grid')}</h2>
+  <p class="small">${ft(lang, 'sd.legend')}</p>
+  <div class="tablewrap"><table class="sides"><thead>${head}</thead><tbody>${rows}</tbody></table></div>
+  <p class="small">${ft(lang, 'sd.noTotal')}</p>
+  ${sections}
+  <h2>${ft(lang, 'sd.h2rules')}</h2>
+  <ol>${['r1', 'r2', 'r3', 'r4'].map((r) => `<li>${ft(lang, `sd.${r}`)}</li>`).join('')}</ol>
+  <h2>${ft(lang, 'sd.h2calls')}</h2>
+  <p>${ft(lang, 'sd.callsNote')}</p>
+  <ul>${['c1', 'c2', 'c3'].map((c) => `<li>${ft(lang, `sd.${c}`)}</li>`).join('')}</ul>
+  <p><a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>
+  ${disclosure(lang)}`;
+  return wrap(lang, {
+    path: P.sides, otherPath: FAITH_PATHS[otherOf(lang)].sides,
+    title: ft(lang, 'sd.h1'), docTitle: ft(lang, 'sd.docTitle'), desc: ft(lang, 'sd.desc'), body,
+  });
+}
+
+// ---------------------------------------------------------------------------
 // The front page and the methodology
 // ---------------------------------------------------------------------------
 
@@ -374,7 +488,7 @@ function homePage(lang) {
   ${notice(lang)}
   <h2>${ft(lang, 'home.h2pick')}</h2>
   <ul class="stand">${picks}</ul>
-  <p class="small">${ft(lang, 'home.oneAtATime')}</p>
+  <div class="card"><p><a href="${SITE}/${P.sides}"><b>${ft(lang, 'sd.h1')}</b></a></p><p class="small">${ft(lang, 'home.sidesNote')}</p></div>
   <p>${ft(lang, 'home.range')}</p>
   <h2>${ft(lang, 'home.h2issues')}</h2>
   <ul>${issues}</ul>
@@ -431,6 +545,9 @@ function methodPage(lang) {
   <p>${ft(lang, 'me.cites')}</p>
   <p class="small" lang="en">${ft(lang, 'me.citesAliases', { list: C.aliases.map((a) => `${a.written} → ${a.sefaria} (${a.why})`).join('; ') })}</p>
 
+  <h2>${ft(lang, 'me.h2sides')}</h2>
+  <p>${ft(lang, 'me.sides', { linkHtml: `<a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a>` })}</p>
+
   <h2>${ft(lang, 'me.h2house')}</h2>
   <p>${ft(lang, 'me.house', { linkHtml: data.houseVotes.map((h) => `<a href="${SITE}/${houseVotesPath(h.traditionId, lang)}">${ft(lang, 'hv.h1')}</a>`).join(', ') })}</p>
 
@@ -457,7 +574,7 @@ function methodPage(lang) {
 
 const pages = [];
 for (const lang of ['en', 'es']) {
-  pages.push([FAITH_PATHS[lang].home, homePage(lang)], [FAITH_PATHS[lang].method, methodPage(lang)]);
+  pages.push([FAITH_PATHS[lang].home, homePage(lang)], [FAITH_PATHS[lang].method, methodPage(lang)], [FAITH_PATHS[lang].sides, sidesPage(lang)]);
   for (const t of data.traditions) pages.push([traditionPath(t.id, lang), traditionPage(lang, t)]);
   for (const hv of data.houseVotes) {
     const t = data.traditions.find((x) => x.id === hv.traditionId);

@@ -19,7 +19,7 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { STATEMENTS, PLANKS, NO_PLANK } from '../faith_positions';
+import { STATEMENTS, PLANKS, NO_PLANK, SIDE_POINTS } from '../faith_positions';
 import { FAITH_SOURCE_DIR as DIR, FAITH_SOURCE_FILES as FILES, normForMatch as norm } from './faith_sources';
 
 const texts = new Map<string, string>();
@@ -48,6 +48,11 @@ let fails = 0;
 const entries = [
   ...STATEMENTS.map((s) => ({ label: `${s.traditionId} ${s.issueId} ${s.sourceDate}`, url: s.sourceUrl, excerpt: s.excerpt })),
   ...PLANKS.map((p) => ({ label: `${p.party}-${p.level} ${p.issueId} ${p.platformYear}`, url: p.sourceUrl, excerpt: p.excerpt })),
+  // The quote behind every side placement (faith_positions.ts SIDE_POINTS).
+  ...SIDE_POINTS.flatMap((pt) => [
+    ...Object.entries(pt.platforms).map(([k, q]) => ({ label: `side ${pt.issueId} ${k}`, url: q!.url, excerpt: q!.quote })),
+    ...Object.entries(pt.churches).filter(([, q]) => q).map(([k, q]) => ({ label: `side ${pt.issueId} ${k}`, url: q!.url, excerpt: q!.quote })),
+  ]),
 ];
 for (const e of entries) {
   const t = load(e.url);
