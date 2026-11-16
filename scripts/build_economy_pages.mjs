@@ -31,9 +31,10 @@ const read = (p) => JSON.parse(readFileSync(resolve(ROOT, p), 'utf8'));
 requireApprovedEcon('build_economy_pages');
 
 const data = read('public/data/econ_terms.json');
-// The blind round's size (Marco, 14 Nov 2026): five cards, the first five of
-// each reader's shuffle, then more if the reader wants. Was all 19.
-const ROUND_SIZE = 5;
+// The blind round's size: three cards, the first three of each reader's
+// shuffle, then more if the reader wants (Marco, 16 Nov 2026). Was five from
+// 14 Nov, and all 19 before that.
+const ROUND_SIZE = 3;
 const PAPER_LAG = data.paperLagQuarters;
 const LAGS = data.lags;
 const METRICS = ['gdpGrowth', 'jobGrowth', 'unemploymentChange', 'inflation', 'deficit', 'income', 'recessionMonths'];
@@ -361,6 +362,7 @@ function blindPage(lang) {
   #econ-blind .scale{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
   #econ-blind .pick{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 6px;font-variant-numeric:tabular-nums;cursor:pointer}
   #econ-blind h2{margin-top:6px}
+  a.skip{display:inline-block;min-height:44px;padding:10px 0;font-weight:600}
   #econ-blind button.tip{font-family:inherit;font-size:13px;font-weight:600;line-height:1;width:28px;height:28px;border-radius:50%;border:1px solid var(--rule);background:var(--surface);color:var(--ink-2);cursor:pointer;vertical-align:1px;padding:0;margin-left:2px}
   #econ-blind button.tip[aria-expanded="true"]{background:var(--ink);color:var(--page);border-color:var(--ink)}
   #econ-blind .tip-out{background:var(--surface);border:1px solid var(--hair);border-radius:8px;padding:10px 12px;margin:8px 0 4px}
@@ -368,6 +370,7 @@ function blindPage(lang) {
   const body = `${style}
   <h1>${et(lang, 'bl.h1')}</h1>
   <p class="lede">${et(lang, 'bl.lede', { round: ROUND_SIZE, total: data.terms.length })}</p>
+  <p><a class="skip" href="${SITE}/${P.explore}">${et(lang, 'bl.skip')} &rarr;</a></p>
   <p class="small">${et(lang, 'bl.limits')} <a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></p>
   <noscript><p>${et(lang, 'bl.noscript')} <a href="${SITE}/${P.explore}">${et(lang, 'exploreLink')}</a></p></noscript>
   <div id="econ-blind" data-strings="${esc(JSON.stringify(strings))}" data-config="${esc(JSON.stringify(config))}"></div>
