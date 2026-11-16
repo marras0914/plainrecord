@@ -90,6 +90,7 @@ export const KEY = {
   sideA: (p) => `side.${p.issueId}.a`,
   sideB: (p) => `side.${p.issueId}.b`,
   noSide: (n) => `noside.${n.issueId}`,
+  citeKind: (kind) => `cite.kind.${slug(kind)}`,
 };
 
 export const FAITH_PATHS = {
@@ -104,6 +105,9 @@ export const TRADITION_SLUG = {
   umc: { en: 'united-methodist', es: 'metodista-unida' },
   ame: { en: 'ame', es: 'ame' },
   ag: { en: 'assemblies-of-god', es: 'asambleas-de-dios' },
+  reform: { en: 'reform-judaism', es: 'judaismo-reformista' },
+  conservative: { en: 'conservative-judaism', es: 'judaismo-conservador' },
+  orthodox: { en: 'orthodox-judaism', es: 'judaismo-ortodoxo' },
 };
 export const traditionPath = (id, lang) => `${FAITH_PATHS[lang].home}/${TRADITION_SLUG[id][lang]}`;
 

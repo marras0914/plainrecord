@@ -17,7 +17,7 @@ export const FAITH_SOURCE_DIR = join(WORK_DIR, 'faith_sources');
  * USCCB's 2023 PDF prints them mid-sentence), and for a page that covers
  * several issues, the saved HTML whose headings mark its sections.
  */
-export const FAITH_SOURCE_FILES: Record<string, { file: string; lineNumbers?: boolean; html?: string }> = {
+export const FAITH_SOURCE_FILES: Record<string, { file: string; lineNumbers?: boolean; html?: string; paragraphs?: boolean }> = {
   'https://www.usccb.org/resources/2023-Nov-15%20FCFC%20action%20item%20text%20final.pdf': { file: 'usccb_fcfc_2023_action.txt', lineNumbers: true },
   'https://www.usccb.org/resources/forming-consciences-for-faithful-citizenship-2019.pdf': { file: 'usccb_fcfc_2019.txt' },
   // The page links the PDF (USCCB%20Special%20Message%20on%20Immigration.pdf),
@@ -43,6 +43,28 @@ export const FAITH_SOURCE_FILES: Record<string, { file: string; lineNumbers?: bo
   'https://www.umc.org/en/content/social-principles-the-natural-world': { file: 'umc_sp_the-natural-world.txt', html: 'umc_sp_the-natural-world.html' },
   'https://www.sbc.net/resource-library/resolutions/on-the-danger-of-age-discrimination-in-healthcare-rationing/': { file: 'sbc_health_2013.txt' },
   'https://www.sbc.net/resource-library/resolutions/on-americas-growing-prison-population/': { file: 'sbc_prison_2013.txt' },
+  // Judaism (15 Nov 2026). npm run data:jewish saves the resolutions; the
+  // other two by hand: the OU booklet with `pdftotext -enc UTF-8`, and the
+  // Rabbinical Assembly's 1995 death-penalty resolution from the Death Penalty
+  // Information Center's page (the resolution's own lines only).
+  ...Object.fromEntries([
+    ['ccar', 'central-conference-of-american-rabbis-resolution-on-immigration-due-process'],
+    ['ccar', 'ccar-womens-rabbinic-network-resolution-affirming-our-commitment-to-broad-accessible-reproductive-sexual-health-care'],
+    ['ccar', 'ccar-resolution-hunger-america'],
+    ['ccar', 'capital-punishment-1979'],
+    ['ccar', 'ccar-resolution-gun-violence'],
+    ['ccar', 'central-conference-of-american-rabbis-resolution-on-the-climate-crisis'],
+    ['ccar', 'resolution-health-care'],
+    ['ccar', 'central-conference-of-american-rabbis-resolution-on-private-prisons'],
+  ].map(([body, slug]) => [`https://www.ccarnet.org/ccar-resolutions/${slug}/`, { file: `jewish/${body}/${slug}.txt` }])),
+  ...Object.fromEntries([
+    'resolution-immigration-united-states', 'resolution-supporting-freedom-access-reproductive-health-care',
+    'resolution-hunger-crisis-america', 'resolution-american-gun-violence',
+    'resolution-paris-united-nations-framework-convention-climate-change-unfccc',
+    'resolution-opposing-laws-limiting-essential-health-care', 'resolution-racial-injustice-and-police-brutality',
+  ].map((slug) => [`https://rabbinicalassembly.org/resolutions/${slug}`, { file: `jewish/ra/${slug}.txt` }])),
+  'https://deathpenaltyinfo.org/stories/rabbinical-assembly': { file: 'jewish/other/dpic_rabbinical_assembly.txt' },
+  'https://www.ou.org/assets/OU_2023_National_Convention_Resolutions_Final_dq4fkw.pdf': { file: 'jewish/ou/ou_2023.txt', paragraphs: true },
   'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf': { file: 'rpt_2024.txt' },
   'https://txdem.co/24-Platform': { file: 'tdp_2024.txt' },
   'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform': { file: 'rnc_2024.txt' },

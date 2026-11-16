@@ -8,7 +8,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue, SIDE_POINTS, NO_SIDE_POINT } from './faith_positions';
+import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue, isJewish, JEWISH_RESOLUTIONS, ISSUE_TITLE_TERMS, SIDE_POINTS, NO_SIDE_POINT } from './faith_positions';
 import type { SidePoint, SideQuote } from './faith_positions';
 import { buildFaithPayload, PLATFORMS } from './scripts/export_faith';
 import { findRefs, statementKey } from './scripts/extract_faith_verses';
@@ -107,7 +107,8 @@ check('sides: every platform quote is from that platform',
 
 // Rule 3: a church is placed only from a statement shown in full, and every
 // tradition with one is placed or marked "doesn't say".
-const churchProblemsOf = (points: SidePoint[]) => points.flatMap((pt) => TRADITIONS.flatMap((t) => {
+// The churches only; the Jewish movements join the grid later.
+const churchProblemsOf = (points: SidePoint[]) => points.flatMap((pt) => TRADITIONS.filter((t) => !isJewish(t.id)).flatMap((t) => {
   const has = STATEMENTS.filter((s) => s.traditionId === t.id && s.issueId === pt.issueId);
   const placed = t.id in pt.churches;
   if (!has.length) return placed ? [`${pt.issueId} ${t.id} placed with no statement`] : [];
@@ -200,8 +201,34 @@ const PARSE: [string, string][] = [
 for (const [text, want] of PARSE) check(`verses: "${text.slice(0, 40)}" reads as ${want || 'nothing'}`, refs(text) === want, refs(text) || 'nothing');
 
 const VJ = JSON.parse(readFileSync(new URL('./data/faith/verses.json', import.meta.url), 'utf8'));
-const noRecord = STATEMENTS.filter((s) => !VJ.citations.some((c: { statement: string }) => c.statement === statementKey(s)));
-check('every statement shown in full has a verse record (re-run npm run data:faith:verses if not)', noRecord.length === 0, noRecord.map(statementKey).join(', ') || `${STATEMENTS.length} statements`);
+const christian = STATEMENTS.filter((s) => !isJewish(s.traditionId));
+const noRecord = christian.filter((s) => !VJ.citations.some((c: { statement: string }) => c.statement === statementKey(s)));
+check('every Christian statement shown in full has a verse record (re-run npm run data:faith:verses if not)', noRecord.length === 0, noRecord.map(statementKey).join(', ') || `${christian.length} statements`);
+
+// The Jewish statements: citations listed, never verse text (15 Nov 2026).
+const JC = JSON.parse(readFileSync(new URL('./data/faith/jewish_citations.json', import.meta.url), 'utf8'));
+const jewish = STATEMENTS.filter((s) => isJewish(s.traditionId));
+check('there are Jewish statements to check', jewish.length >= 15, `${jewish.length}`);
+const noCites = jewish.filter((s) => !JC.byStatement[statementKey(s)]);
+check('every Jewish statement shown in full has a citation record (re-run npm run data:faith:citations if not)', noCites.length === 0, noCites.map(statementKey).join(', ') || `${jewish.length} statements`);
+const versed = jewish.filter((s) => VJ.citations.some((c: { statement: string }) => c.statement === statementKey(s)));
+check('no Jewish statement has verse text from a Christian translation', versed.length === 0, versed.map(statementKey).join(', ') || 'none');
+const cites = Object.values(JC.byStatement as Record<string, { citations: { written: string; ref: string; url: string; kind: string }[] }>).flatMap((b) => b.citations);
+const badCite = cites.filter((c) => !/^https:\/\/www\.sefaria\.org\/[^\s]+$/.test(c.url) || !c.written || !KEY.citeKind(c.kind));
+check('every citation is written out and links to Sefaria', cites.length > 0 && badCite.length === 0, badCite.map((c) => c.written).join(', ') || `${cites.length} citations`);
+const kindKeys = [...new Set(cites.map((c) => KEY.citeKind(c.kind)))];
+const unlabeled = kindKeys.filter((k) => !COPY[k]?.en || !COPY[k]?.es);
+check('every kind of source cited has a label in both languages', unlabeled.length === 0, unlabeled.join(', ') || kindKeys.join(', '));
+
+// The libraries the Jewish earlier lists are drawn from.
+const onSomeIssue = (title: string) => Object.values(ISSUE_TITLE_TERMS).some((re) => re.test(title));
+const libSize = (b: string) => JEWISH_RESOLUTIONS.filter((r) => r.body === b).length;
+check('the Jewish libraries are all there (URJ, CCAR, RA)', libSize('urj') > 400 && libSize('ccar') > 700 && libSize('ra') > 200,
+  ['urj', 'ccar', 'ra'].map((b) => `${b} ${libSize(b)}`).join(', '));
+check('every Jewish library entry is dated', JEWISH_RESOLUTIONS.filter((r) => onSomeIssue(r.title)).every((r) => /^\d{4}/.test(r.date)));
+// Orthodox is the Orthodox Union alone (Marco, 15 Nov 2026).
+const orthodoxUrls = [...STATEMENTS, ...EARLIER].filter((s) => s.traditionId === 'orthodox').map((s) => ('sourceUrl' in s ? s.sourceUrl : s.url));
+check('every Orthodox entry is an Orthodox Union document', orthodoxUrls.length > 0 && orthodoxUrls.every((u) => /^https:\/\/(www\.|advocacy\.)?ou\.org\//.test(u)), orthodoxUrls.join(', '));
 const allRefs = VJ.citations.flatMap((c: { refs: { verseKeys: string[]; verseCount: number; ranges: unknown[] }[] }) => c.refs);
 const textless = allRefs.filter((r: { verseKeys: string[]; verseCount: number; ranges: unknown[] }) => !r.verseKeys.length && r.ranges.length && r.verseCount <= VJ.maxVersesWithText);
 check('a passage is printed unless it is a whole chapter or longer than the limit', textless.length === 0, `${allRefs.length} references`);

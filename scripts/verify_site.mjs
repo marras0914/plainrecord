@@ -2408,7 +2408,8 @@ try {
       await fp.goto(new URL(path, URL_UNDER_TEST).href, { waitUntil: 'load' });
       const grid = fp.locator('table.sides');
       const cells = await grid.locator('tbody tr').evaluateAll((trs) => trs.map((tr) => [...tr.querySelectorAll('td')].map((td) => td.querySelector('.mk.D') ? 'D' : td.querySelector('.mk.R') ? 'R' : '')));
-      const want = faith.issues.map((i) => faith.traditions.map((t) => expectMark(i.id, t.id)));
+      // The grid covers the churches; the Jewish movements join it later.
+      const want = faith.issues.map((i) => faith.traditions.filter((t) => t.family !== 'Jewish').map((t) => expectMark(i.id, t.id)));
       if (JSON.stringify(cells) !== JSON.stringify(want)) sideProblems.push(`${path}: grid differs from the data`);
       if (!want.flat().includes('D') || !want.flat().includes('R')) sideProblems.push(`${path}: the data has no D or no R mark, so the comparison proves nothing`);
       const gridText = await grid.innerText();

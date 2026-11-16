@@ -35,7 +35,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
-import { STATEMENTS, PLANKS, type Statement } from '../faith_positions';
+import { STATEMENTS, PLANKS, isJewish, type Statement } from '../faith_positions';
 import { FAITH_SOURCE_DIR, FAITH_SOURCE_FILES, decodeEntities, normForMatch } from './faith_sources';
 import { WORK_DIR } from './paths';
 
@@ -224,7 +224,9 @@ export function extract() {
 
   const verses: Record<string, { web: string; rv1909: string }> = {};
   const problems: string[] = [];
-  const citations = STATEMENTS.map((s) => {
+  // Jewish statements' citations are listed, not printed from a Christian
+  // translation (decided 15 Nov 2026): scripts/extract_jewish_citations.ts.
+  const citations = STATEMENTS.filter((s) => !isJewish(s.traditionId)).map((s) => {
     const src = FAITH_SOURCE_FILES[s.sourceUrl];
     if (!src) throw new Error(`no downloaded source mapped for ${s.sourceUrl}`);
     let text: string;
