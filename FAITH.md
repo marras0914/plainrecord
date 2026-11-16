@@ -122,6 +122,48 @@ reorganized or revised their statements in recent years.
   2026: 126 references in 16 of 34 statements; none in any of the four
   platforms; no Catholic statement cites a verse in its section on an issue.
 
+### Judaism (decided 15 Nov 2026)
+
+Marco asked to add large faiths outside Christianity; Judaism's three U.S.
+movements came first. His decisions that day:
+
+- **Which bodies count: both, where two vote.** Reform = URJ (General
+  Assembly or North American Board) and CCAR. Conservative = Rabbinical
+  Assembly resolutions only (USCJ publishes none; RA "statements" and CJLS
+  teshuvot excluded).
+- **Orthodox = the Orthodox Union alone** (convention delegates or Board),
+  Marco's follow-up the same day; the Rabbinical Council of America, a
+  rabbis' association, was briefly included and dropped. Agudath Israel
+  issues no voted resolutions. The page says the OU does not speak for all
+  of Orthodoxy. Its standing positions cover the death penalty, guns and
+  energy only, so the other five issues show "no official statement".
+- **Citations listed, not printed.** WEB and RV1909 are Christian
+  translations, so a Jewish statement's citations are listed as written,
+  labeled by kind and linked to Sefaria (`npm run data:faith:citations`,
+  output `data/faith/jewish_citations.json`). Sefaria's name API decides what
+  is a reference; `ALIASES` holds the five spellings it does not know.
+
+How it is applied:
+
+- `npm run data:jewish` (`scripts/fetch_jewish_resolutions.ts`) lists every
+  resolution of the URJ, CCAR and RA into
+  `data/faith/jewish_resolutions.json` (committed) and saves the on-issue
+  texts to `data/faith_sources/jewish/` (gitignored). The OU's standing
+  positions are one PDF per convention, read by hand (2023 in full, 2017
+  listed). Earlier statements are title matches, as for the SBC.
+- **Current statement:** the newest on the issue that states a direction for
+  law or government. A resolution about a movement's own investments or
+  institutions is listed, not shown. Reproductive care is shown under
+  abortion; healthcare shows the newest on care in general.
+- Dates: CCAR from the text, its convention header or URL; RA from the
+  resolution's closing "Passed by..." line where there is one (the page's own
+  date is often the June 2011 posting date).
+- Known costs, for Marco: titles like "Immigration to Israel" are listed
+  under immigration; the issue name "Creation care and the environment" is
+  Christian wording; the environment rule has no "global warming", so the
+  SBC's 2007 "On Global Warming" is not listed (adding it would make it the
+  SBC's current environment statement).
+
 ---
 
 ## Data

@@ -23,8 +23,9 @@ import { BOOKS, VERSES_FILE } from './extract_faith_verses';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
-  ISSUES, TRADITIONS, STATEMENTS, EARLIER, NO_STATEMENT, NO_PLANK, PLANKS, KNOWN_GAPS, TO_READ, ISSUE_TITLE_TERMS, SBC_RESOLUTIONS,
+  ISSUES, TRADITIONS, STATEMENTS, EARLIER, NO_STATEMENT, NO_PLANK, PLANKS, KNOWN_GAPS, TO_READ, ISSUE_TITLE_TERMS, SBC_RESOLUTIONS, JEWISH_RESOLUTIONS,
 } from '../faith_positions';
+import { CITATIONS_FILE } from './extract_jewish_citations';
 import { SHIP_DIR } from './paths';
 import { buildHouseVotes } from './faith_house_votes';
 
@@ -57,13 +58,19 @@ export function buildFaithPayload() {
     text: v.verses,
     platformReferenceCounts: v.platformReferenceCounts,
   };
+  // What each Jewish statement cites, listed and linked, not printed
+  // (npm run data:faith:citations; committed for the same reason).
+  const c = JSON.parse(readFileSync(CITATIONS_FILE, 'utf8'));
+  const citations = { source: c.source, aliases: c.aliases, byStatement: c.byStatement };
   return {
-    about: 'What five Christian traditions officially say, and what the Texas and national party platforms say, on eight issues, with sources; and, where a church took a side on specific Texas bills, how each party in the Texas House voted on them. Not yet reviewed by members of the traditions described. CC0.',
+    about: 'What five Christian traditions and three Jewish movements officially say, and what the Texas and national party platforms say, on eight issues, with sources; and, where a church took a side on specific Texas bills, how each party in the Texas House voted on them. Not yet reviewed by members of the traditions described. CC0.',
     license: 'CC0-1.0',
     source: 'https://rightnleft.com/faith/methodology',
     reviewed: { entries: all.filter((e) => e.review.length > 0).length, of: all.length },
     /** The SBC's earlier statements are every title match among this many resolutions. */
     sbcResolutionsSearched: SBC_RESOLUTIONS.length,
+    /** The Jewish movements' earlier statements: title matches among these. */
+    jewishResolutionsSearched: Object.fromEntries((['urj', 'ccar', 'ra'] as const).map((b) => [b, JEWISH_RESOLUTIONS.filter((r) => r.body === b).length])),
     issues: ISSUES.map((i) => ({ ...i, titleTerms: ISSUE_TITLE_TERMS[i.id].source })),
     traditions: TRADITIONS,
     platforms: PLATFORMS,
@@ -75,6 +82,7 @@ export function buildFaithPayload() {
     knownGaps: KNOWN_GAPS,
     toRead: TO_READ,
     verses,
+    citations,
     /**
      * How each party in the Texas House voted on the bills a church itself
      * took a side on. Only the Catholic bishops publish such a list in Texas.
