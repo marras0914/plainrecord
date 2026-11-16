@@ -10,7 +10,8 @@
 import { readFileSync } from 'node:fs';
 import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue, isJewish, JEWISH_RESOLUTIONS, ISSUE_TITLE_TERMS, SIDE_POINTS, NO_SIDE_POINT } from './faith_positions';
 import type { SidePoint, SideQuote } from './faith_positions';
-import { buildFaithPayload, PLATFORMS } from './scripts/export_faith';
+import { buildFaithPayload, PLATFORMS, passagesOverlap, sefariaPassage, citedOnBothSides } from './scripts/export_faith';
+import type { CiteRef } from './scripts/export_faith';
 import { findRefs, statementKey } from './scripts/extract_faith_verses';
 import { parsePage, parseSineDie, buildPositions, wordsOf } from './scripts/extract_tccb_positions';
 import { parseHistory, housePassage } from './scripts/fetch_house_passage';
@@ -132,6 +133,33 @@ check('sides: every quote is under 15 words', longSide.length === 0, longSide.ma
 // which verify_site.mjs checks.
 const numbers = JSON.stringify(SIDE_POINTS).match(/:\s*\d/g);
 check('sides: the shipped points carry no number', numbers === null, numbers?.join(' ') ?? 'none');
+
+// --- passages cited on both sides (decided 16 Nov 2026) ---------------------
+
+check('scripture: a Sefaria ref reads as a Bible passage, and a Talmud ref does not',
+  JSON.stringify(sefariaPassage('Exodus 21:22-23')) === JSON.stringify({ code: 'EXO', chapter: 21, verses: [22, 23] })
+  && JSON.stringify(sefariaPassage('Psalms 118:17')) === JSON.stringify({ code: 'PSA', chapter: 118, verses: [17] })
+  && sefariaPassage('Yevamot 69b') === null);
+check('scripture: overlap needs a shared verse; a whole chapter shares them all',
+  passagesOverlap({ code: 'EXO', chapter: 21, verses: [22, 23] }, { code: 'EXO', chapter: 21, verses: [23, 24] })
+  && !passagesOverlap({ code: 'EXO', chapter: 21, verses: [22] }, { code: 'EXO', chapter: 21, verses: [13] })
+  && !passagesOverlap({ code: 'EXO', chapter: 21, verses: [22] }, { code: 'EXO', chapter: 22, verses: [22] })
+  && passagesOverlap({ code: 'GEN', chapter: 1, verses: null }, { code: 'GEN', chapter: 1, verses: [28] }));
+// Assert the precondition: the shipped data has a real overlap to find, so the
+// list below is not empty because the finder never matches anything.
+const shippedBoth = buildFaithPayload().citedOnBothSides;
+const exo = shippedBoth.find((g) => g.issueId === 'abortion')?.passages.find((p) => p.code === 'EXO' && p.chapter === 21);
+check('scripture: Exodus 21 is cited on both sides of abortion (Reform; Assemblies of God)',
+  !!exo && exo.a.some((x) => x.traditionId === 'reform') && exo.b.some((x) => x.traditionId === 'ag'));
+check('scripture: every both-sides passage has citations on each side',
+  shippedBoth.every((g) => g.passages.every((p) => p.a.length > 0 && p.b.length > 0)));
+const cite = (traditionId: string, verses: number[]): CiteRef => ({ traditionId, asWritten: 'x', url: null, chapterPage: null, code: 'GEN', chapter: 9, verses });
+const fakeCites: Record<string, CiteRef[]> = { p: [cite('p', [6])], q: [cite('q', [6])], r: [cite('r', [6])] };
+const fake = citedOnBothSides([{ issueId: 'x', churches: { p: { side: 'a' }, q: null, r: { side: 'b' } } }], (t) => fakeCites[t] ?? []);
+check('(the both-sides finder leaves out a tradition that doesn\'t say, and keeps the two that take sides)',
+  fake[0].passages.length === 1 && fake[0].passages[0].a.map((x) => x.traditionId).join() === 'p' && fake[0].passages[0].b.map((x) => x.traditionId).join() === 'r');
+const fakeSame = citedOnBothSides([{ issueId: 'x', churches: { p: { side: 'a' }, q: { side: 'a' } } }], (t) => fakeCites[t] ?? []);
+check('(the both-sides finder finds nothing when everyone citing it is on one side)', fakeSame[0].passages.length === 0);
 
 // --- current in full, earlier listed (decided 13 Nov 2026) ------------------
 

@@ -1767,6 +1767,51 @@
     "es": "Ortodoxo",
     "status": "ok"
   },
+  "sc.h1": {
+    "en": "What scripture each tradition cites",
+    "es": "Qué escrituras cita cada tradición",
+    "status": "draft"
+  },
+  "sc.docTitle": {
+    "en": "What scripture each tradition cites, issue by issue",
+    "es": "Qué escrituras cita cada tradición, tema por tema",
+    "status": "draft"
+  },
+  "sc.desc": {
+    "en": "For each issue, the Bible passages and Jewish texts each tradition's statement cites, grouped by the side its words take. The site does not say which reading is right.",
+    "es": "En cada tema, los pasajes bíblicos y textos judíos que cita la declaración de cada tradición, agrupados según la postura que toman sus palabras. El sitio no dice qué lectura es la correcta.",
+    "status": "draft"
+  },
+  "sc.lede": {
+    "en": "Traditions often cite scripture for their positions, and sometimes the same passage for opposite answers. This page lists what each tradition's statement on an issue cites, grouped by the side its words take on the platforms' question. The site does not say which reading is right.",
+    "es": "Las tradiciones suelen citar las escrituras para sus posturas, y a veces el mismo pasaje para respuestas opuestas. Esta página enumera lo que cita la declaración de cada tradición sobre un tema, agrupada según la postura que toman sus palabras ante la pregunta de las plataformas. El sitio no dice qué lectura es la correcta.",
+    "status": "draft"
+  },
+  "sc.scope": {
+    "en": "Each list is every passage a statement cites, not only those it gives for this point. Where a document covers several issues, only its section on this issue counts.",
+    "es": "Cada lista incluye todos los pasajes que cita una declaración, no solo los que da para este punto. Cuando un documento abarca varios temas, solo cuenta su sección sobre este tema.",
+    "status": "draft"
+  },
+  "sc.platforms": {
+    "en": "None of the four party platforms cites scripture.",
+    "es": "Ninguna de las cuatro plataformas de los partidos cita las escrituras.",
+    "status": "draft"
+  },
+  "sc.h3both": {
+    "en": "Cited on both sides: traditions on opposite sides of this point cite the same passage",
+    "es": "Citado por ambos lados: tradiciones de lados opuestos sobre este punto citan el mismo pasaje",
+    "status": "draft"
+  },
+  "sc.none": {
+    "en": "No scripture cited.",
+    "es": "No cita escrituras.",
+    "status": "draft"
+  },
+  "sc.noSides": {
+    "en": "The platforms take no opposite sides on this issue, so the traditions are listed without sides.",
+    "es": "Las plataformas no toman posturas opuestas sobre este tema, así que las tradiciones se enumeran sin agruparlas por postura.",
+    "status": "draft"
+  },
   "home.sidesNote": {
     "en": "For each issue the platforms split on, which side each tradition's own words take. No score.",
     "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada tradición. Sin puntaje.",
@@ -1781,6 +1826,16 @@
     "en": "{linkHtml} places each tradition, issue by issue, on one side of a point the two platforms split on, only where the tradition's own words take a side, and shows the quote. It gives no total. Three placements were judgment calls, and the page lists them.",
     "es": "{linkHtml} ubica a cada tradición, tema por tema, de un lado de un punto en que las dos plataformas toman posturas opuestas, solo donde las propias palabras de la tradición toman postura, y muestra la cita. No da ningún total. Tres ubicaciones fueron decisiones de criterio, y la página las enumera.",
     "status": "ok"
+  },
+  "me.h2scripture": {
+    "en": "What scripture each tradition cites",
+    "es": "Qué escrituras cita cada tradición",
+    "status": "draft"
+  },
+  "me.scripture": {
+    "en": "{linkHtml} lists the passages each tradition's statements cite, grouped by the side their words take, and the passages that traditions on opposite sides both cite. It does not say which reading is right.",
+    "es": "{linkHtml} enumera los pasajes que citan las declaraciones de cada tradición, agrupados según la postura que toman sus palabras, y los pasajes que citan tradiciones de lados opuestos. No dice qué lectura es la correcta.",
+    "status": "draft"
   },
   "side.immigration.q": {
     "en": "What should happen to people living in the United States without legal status?",
