@@ -94,8 +94,8 @@ export const KEY = {
 };
 
 export const FAITH_PATHS = {
-  en: { home: 'faith', method: 'faith/methodology', sides: 'faith/sides', scripture: 'faith/scripture' },
-  es: { home: 'fe', method: 'fe/metodologia', sides: 'fe/posturas', scripture: 'fe/escrituras' },
+  en: { home: 'faith', method: 'faith/methodology', sides: 'faith/sides', scripture: 'faith/scripture', members: 'faith/members' },
+  es: { home: 'fe', method: 'fe/metodologia', sides: 'fe/posturas', scripture: 'fe/escrituras', members: 'fe/miembros' },
 };
 
 /** One page per tradition. The ids are the record's; the slugs are the reader's. */

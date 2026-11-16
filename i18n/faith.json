@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
     "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
     "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause). The 14 strings that add the Jewish movements to the sides page (\"tradition\" for \"church\", and the short names Reformista, Conservador, Ortodoxo) approved by Marco on 16 November 2026, no corrections. The 4 strings for the SBC's 2007 \"On Global Warming\" (its summary, the reworded judgment call sd.c1, the San Antonio body line, and Ezequiel) approved by Marco on 16 November 2026, no corrections. The 11 strings of the scripture page (sc.*, me.h2scripture, me.scripture) approved by Marco on 16 November 2026, no corrections."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause). The 14 strings that add the Jewish movements to the sides page (\"tradition\" for \"church\", and the short names Reformista, Conservador, Ortodoxo) approved by Marco on 16 November 2026, no corrections. The 4 strings for the SBC's 2007 \"On Global Warming\" (its summary, the reworded judgment call sd.c1, the San Antonio body line, and Ezequiel) approved by Marco on 16 November 2026, no corrections. The 11 strings of the scripture page (sc.*, me.h2scripture, me.scripture) approved by Marco on 16 November 2026, no corrections. The 34 strings of the members page (mb.*, me.h2members, me.members), including the site's translation of Pew's four questions, approved by Marco on 16 November 2026, no corrections."
   },
   "kicker": {
     "en": "Faith and the platforms",
@@ -1812,6 +1812,166 @@
     "es": "Las plataformas no toman posturas opuestas sobre este tema, así que las tradiciones se enumeran sin agruparlas por postura.",
     "status": "ok"
   },
+  "mb.h1": {
+    "en": "What members say",
+    "es": "Lo que dicen los miembros",
+    "status": "ok"
+  },
+  "mb.docTitle": {
+    "en": "What members say, beside what their tradition says",
+    "es": "Lo que dicen los miembros, junto a lo que dice su tradición",
+    "status": "ok"
+  },
+  "mb.desc": {
+    "en": "How members of each tradition answered Pew Research Center on four issues, beside their tradition's official position. No score.",
+    "es": "Cómo respondieron a Pew Research Center los miembros de cada tradición sobre cuatro temas, junto a la postura oficial de su tradición. Sin puntaje.",
+    "status": "ok"
+  },
+  "mb.lede": {
+    "en": "Do members share their tradition's official positions? On the four issues Pew Research Center asked about, this page puts what members told Pew beside what their tradition's statements say. It computes no score and does not say whether members should agree.",
+    "es": "¿Comparten los miembros las posturas oficiales de su tradición? En los cuatro temas sobre los que preguntó Pew Research Center, esta página pone lo que los miembros le dijeron a Pew junto a lo que dicen las declaraciones de su tradición. No calcula ningún puntaje ni dice si los miembros deberían estar de acuerdo.",
+    "status": "ok"
+  },
+  "mb.source": {
+    "en": "Figures: {sourceHtml}, a survey of {n} U.S. adults from July 2023 to March 2024. Every figure is Pew's own, with Pew's sample size and margin of error.",
+    "es": "Cifras: {sourceHtml}, una encuesta a {n} adultos en EE. UU. de julio de 2023 a marzo de 2024. Cada cifra es de Pew, con el tamaño de muestra y el margen de error de Pew.",
+    "status": "ok"
+  },
+  "mb.check": {
+    "en": "For Catholics and Jews, the site recomputed every figure from Pew's public data file and got the same numbers, to rounding.",
+    "es": "Para católicos y judíos, el sitio volvió a calcular cada cifra con el archivo público de datos de Pew y obtuvo los mismos números, salvo redondeo.",
+    "status": "ok"
+  },
+  "mb.notAsked": {
+    "en": "Pew asked about none of the other issues ({issues}), so they are not on this page.",
+    "es": "Pew no preguntó sobre los demás temas ({issues}), así que no aparecen en esta página.",
+    "status": "ok"
+  },
+  "mb.pewAsked": {
+    "en": "Pew asked:",
+    "es": "Pregunta de Pew (traducida por este sitio):",
+    "status": "ok"
+  },
+  "mb.q.abortion": {
+    "en": "Do you think abortion should be legal in all cases, legal in most cases, illegal in most cases, or illegal in all cases?",
+    "es": "¿Cree usted que el aborto debería ser legal en todos los casos, legal en la mayoría de los casos, ilegal en la mayoría de los casos o ilegal en todos los casos?",
+    "status": "ok"
+  },
+  "mb.q.environment": {
+    "en": "Which comes closer to your view: stricter environmental laws and regulations cost too many jobs and hurt the economy, or stricter environmental laws and regulations are worth the cost?",
+    "es": "¿Qué se acerca más a su opinión: las leyes y regulaciones ambientales más estrictas cuestan demasiados empleos y perjudican la economía, o las leyes y regulaciones ambientales más estrictas valen lo que cuestan?",
+    "status": "ok"
+  },
+  "mb.q.poverty": {
+    "en": "Thinking about assistance the government provides to people in need, should the government provide more assistance, less assistance, or is it providing about the right amount?",
+    "es": "Pensando en la ayuda que el gobierno da a las personas necesitadas, ¿debería el gobierno dar más ayuda, menos ayuda, o está dando más o menos la cantidad adecuada?",
+    "status": "ok"
+  },
+  "mb.q.immigration": {
+    "en": "Thinking about changes in our society over the last 50 years, has a growing population of immigrants been a change for the better, a change for the worse, or hasn't it made much difference?",
+    "es": "Pensando en los cambios en nuestra sociedad en los últimos 50 años, ¿ha sido una creciente población de inmigrantes un cambio para mejor, un cambio para peor, o no ha hecho mucha diferencia?",
+    "status": "ok"
+  },
+  "mb.match.abortion": {
+    "en": "Close to the grid's question, whether the law should protect access to abortion.",
+    "es": "Cercana a la pregunta de la tabla de posturas: si la ley debe proteger el acceso al aborto.",
+    "status": "ok"
+  },
+  "mb.match.environment": {
+    "en": "Not the grid's question: Pew asks about environmental rules in general; the grid asks whether government should act to reduce the emissions behind climate change.",
+    "es": "No es la pregunta de la tabla de posturas: Pew pregunta por las normas ambientales en general; la tabla pregunta si el gobierno debe actuar para reducir las emisiones que causan el cambio climático.",
+    "status": "ok"
+  },
+  "mb.match.poverty": {
+    "en": "Not the grid's question: Pew asks about government assistance; the grid asks about a minimum wage.",
+    "es": "No es la pregunta de la tabla de posturas: Pew pregunta por la ayuda del gobierno; la tabla pregunta por el salario mínimo.",
+    "status": "ok"
+  },
+  "mb.match.immigration": {
+    "en": "Not the grid's question: Pew asks whether more immigrants has been a change for the better; the grid asks what should happen to people living here without legal status.",
+    "es": "No es la pregunta de la tabla de posturas: Pew pregunta si el aumento de inmigrantes ha sido un cambio para mejor; la tabla pregunta qué debe pasar con las personas que viven aquí sin estatus legal.",
+    "status": "ok"
+  },
+  "mb.th.tradition": {
+    "en": "Tradition",
+    "es": "Tradición",
+    "status": "ok"
+  },
+  "mb.th.position": {
+    "en": "Its official position (grid)",
+    "es": "Su postura oficial (tabla)",
+    "status": "ok"
+  },
+  "mb.th.sample": {
+    "en": "Sample (margin of error, points)",
+    "es": "Muestra (margen de error, puntos)",
+    "status": "ok"
+  },
+  "mb.col.legal": {
+    "en": "Legal in all or most cases",
+    "es": "Legal en todos o la mayoría de los casos",
+    "status": "ok"
+  },
+  "mb.col.illegal": {
+    "en": "Illegal in all or most cases",
+    "es": "Ilegal en todos o la mayoría de los casos",
+    "status": "ok"
+  },
+  "mb.col.noAnswer": {
+    "en": "No answer",
+    "es": "Sin respuesta",
+    "status": "ok"
+  },
+  "mb.col.costJobs": {
+    "en": "Cost too many jobs",
+    "es": "Cuestan demasiados empleos",
+    "status": "ok"
+  },
+  "mb.col.worthCost": {
+    "en": "Worth the cost",
+    "es": "Valen lo que cuestan",
+    "status": "ok"
+  },
+  "mb.col.more": {
+    "en": "More assistance",
+    "es": "Más ayuda",
+    "status": "ok"
+  },
+  "mb.col.less": {
+    "en": "Less assistance",
+    "es": "Menos ayuda",
+    "status": "ok"
+  },
+  "mb.col.right": {
+    "en": "About the right amount",
+    "es": "Más o menos la cantidad adecuada",
+    "status": "ok"
+  },
+  "mb.col.better": {
+    "en": "Change for the better",
+    "es": "Cambio para mejor",
+    "status": "ok"
+  },
+  "mb.col.worse": {
+    "en": "Change for the worse",
+    "es": "Cambio para peor",
+    "status": "ok"
+  },
+  "mb.col.noDifference": {
+    "en": "Not much difference",
+    "es": "No mucha diferencia",
+    "status": "ok"
+  },
+  "mb.allJews": {
+    "en": "Jews as a whole: Pew does not report Reform, Conservative and Orthodox Jews separately.",
+    "es": "Judíos en conjunto: Pew no da cifras por separado para judíos reformistas, conservadores y ortodoxos.",
+    "status": "ok"
+  },
+  "mb.noPew": {
+    "en": "Pew publishes no figures for this church's members.",
+    "es": "Pew no publica cifras para los miembros de esta iglesia.",
+    "status": "ok"
+  },
   "home.sidesNote": {
     "en": "For each issue the platforms split on, which side each tradition's own words take. No score.",
     "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada tradición. Sin puntaje.",
@@ -1835,6 +1995,16 @@
   "me.scripture": {
     "en": "{linkHtml} lists the passages each tradition's statements cite, grouped by the side their words take, and the passages that traditions on opposite sides both cite. It does not say which reading is right.",
     "es": "{linkHtml} enumera los pasajes que citan las declaraciones de cada tradición, agrupados según la postura que toman sus palabras, y los pasajes que citan tradiciones de lados opuestos. No dice qué lectura es la correcta.",
+    "status": "ok"
+  },
+  "me.h2members": {
+    "en": "What members say",
+    "es": "Lo que dicen los miembros",
+    "status": "ok"
+  },
+  "me.members": {
+    "en": "{linkHtml} puts Pew Research Center's own figures for each tradition's members beside the tradition's official position, on the four issues Pew asked about. The denominations' figures are Pew's published ones, because Pew's public data file leaves out which denomination each person belongs to; for Catholics and Jews the site recomputed them from that file. No score.",
+    "es": "{linkHtml} pone las cifras de Pew Research Center sobre los miembros de cada tradición junto a la postura oficial de la tradición, en los cuatro temas sobre los que preguntó Pew. Las cifras de las denominaciones son las que publica Pew, porque su archivo público de datos no incluye a qué denominación pertenece cada persona; para católicos y judíos el sitio las volvió a calcular con ese archivo. Sin puntaje.",
     "status": "ok"
   },
   "side.immigration.q": {
