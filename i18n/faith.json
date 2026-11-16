@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
     "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
     "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause)."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause). The 14 strings that add the Jewish movements to the sides page (\"tradition\" for \"church\", and the short names Reformista, Conservador, Ortodoxo) approved by Marco on 16 November 2026, no corrections."
   },
   "kicker": {
     "en": "Faith and the platforms",
@@ -1570,22 +1570,22 @@
   "sd.h1": {
     "en": "Which side each tradition takes",
     "es": "Qué postura toma cada tradición",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.docTitle": {
     "en": "Which side each tradition takes, issue by issue",
     "es": "Qué postura toma cada tradición, tema por tema",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.desc": {
     "en": "For each issue the Republican and Democratic platforms split on, which side the official statements of five churches and three Jewish movements take, in their own words. No score.",
     "es": "En cada tema en que las plataformas republicana y demócrata toman posturas opuestas, qué postura toman las declaraciones oficiales de cinco iglesias y tres movimientos judíos, en sus propias palabras. Sin puntaje.",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.lede": {
     "en": "Where the Republican and Democratic platforms take opposite sides on a point, this page shows which side each tradition's official statements take, in the tradition's own words. The site picks neither the question nor the answers: the platforms set both.",
     "es": "Donde las plataformas republicana y demócrata toman posturas opuestas sobre un punto, esta página muestra qué postura toman las declaraciones oficiales de cada tradición, en sus propias palabras. El sitio no escoge ni la pregunta ni las respuestas: las fijan las plataformas.",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.h2grid": {
     "en": "At a glance",
@@ -1595,7 +1595,7 @@
   "sd.legend": {
     "en": "<b>D</b>: the tradition's words are on the same side as the Democratic platform. <b>R</b>: on the same side as the Republican platform. Each issue links to the quotes below.",
     "es": "<b>D</b>: las palabras de la tradición están del mismo lado que la plataforma demócrata. <b>R</b>: del mismo lado que la plataforma republicana. Cada tema enlaza con las citas que aparecen más abajo.",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.th.issue": {
     "en": "Issue",
@@ -1670,12 +1670,12 @@
   "sd.h3churches": {
     "en": "The traditions",
     "es": "Las tradiciones",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.h2rules": {
     "en": "How a tradition is placed",
     "es": "Cómo se ubica a cada tradición",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.r1": {
     "en": "The point on each issue is one where the Republican and Democratic platforms take opposite sides in their own words. An issue with no such point is not compared.",
@@ -1685,7 +1685,7 @@
   "sd.r2": {
     "en": "A tradition is placed on a side only if one of the official statements on its page takes that side in its own words, and that quote is shown. Otherwise it is marked “Doesn't say”.",
     "es": "Una tradición se ubica de un lado solo si una de las declaraciones oficiales de su página toma esa postura con sus propias palabras, y se muestra esa cita. Si no, se marca «No lo dice».",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.r3": {
     "en": "Every quote is word for word, and a program checks each one against the downloaded source.",
@@ -1750,32 +1750,32 @@
   "sd.short.reform": {
     "en": "Reform",
     "es": "Reformista",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.short.conservative": {
     "en": "Conservative",
     "es": "Conservador",
-    "status": "draft"
+    "status": "ok"
   },
   "sd.short.orthodox": {
     "en": "Orthodox",
     "es": "Ortodoxo",
-    "status": "draft"
+    "status": "ok"
   },
   "home.sidesNote": {
     "en": "For each issue the platforms split on, which side each tradition's own words take. No score.",
     "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada tradición. Sin puntaje.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.h2sides": {
     "en": "Which side each tradition takes",
     "es": "Qué postura toma cada tradición",
-    "status": "draft"
+    "status": "ok"
   },
   "me.sides": {
     "en": "{linkHtml} places each tradition, issue by issue, on one side of a point the two platforms split on, only where the tradition's own words take a side, and shows the quote. It gives no total. Three placements were judgment calls, and the page lists them.",
     "es": "{linkHtml} ubica a cada tradición, tema por tema, de un lado de un punto en que las dos plataformas toman posturas opuestas, solo donde las propias palabras de la tradición toman postura, y muestra la cita. No da ningún total. Tres ubicaciones fueron decisiones de criterio, y la página las enumera.",
-    "status": "draft"
+    "status": "ok"
   },
   "side.immigration.q": {
     "en": "What should happen to people living in the United States without legal status?",
