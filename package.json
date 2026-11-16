@@ -36,6 +36,7 @@
     "data:faith:quotes": "tsx scripts/check_faith_quotes.ts",
     "traffic": "node scripts/traffic_report.mjs",
     "data:faith": "tsx scripts/export_faith.ts",
+    "data:faith:pew": "tsx scripts/compute_pew_rls.ts",
     "data:faith:verses": "tsx scripts/extract_faith_verses.ts",
     "data:faith:citations": "tsx scripts/extract_jewish_citations.ts",
     "data:jewish": "tsx scripts/fetch_jewish_resolutions.ts",

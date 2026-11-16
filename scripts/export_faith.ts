@@ -27,6 +27,7 @@ import {
   SIDE_POINTS, NO_SIDE_POINT,
 } from '../faith_positions';
 import { CITATIONS_FILE } from './extract_jewish_citations';
+import { PEW_PUBLISHED, PEW_COLUMNS, MEMBERS_OF, PEW_SOURCE } from '../faith_members';
 import { SHIP_DIR } from './paths';
 import { buildHouseVotes } from './faith_house_votes';
 
@@ -175,6 +176,17 @@ export function buildFaithPayload() {
      * (decided 16 Nov 2026). Who cites what; never which reading is right.
      */
     citedOnBothSides: both,
+    /**
+     * What each tradition's members say, from Pew (decided 16 Nov 2026):
+     * Pew's own published figures, beside the tradition's own words. No score.
+     * Evangelicals are left out: they are only a check (faith_members.ts).
+     */
+    members: {
+      source: PEW_SOURCE,
+      columns: Object.fromEntries(Object.entries(PEW_COLUMNS).map(([q, cs]) => [q, cs.map((c) => c.key)])),
+      published: Object.fromEntries(Object.entries(PEW_PUBLISHED).filter(([g]) => g !== 'evangelical')),
+      membersOf: MEMBERS_OF,
+    },
     /**
      * How each party in the Texas House voted on the bills a church itself
      * took a side on. Only the Catholic bishops publish such a list in Texas.

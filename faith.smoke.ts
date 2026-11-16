@@ -12,6 +12,8 @@ import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARL
 import type { SidePoint, SideQuote } from './faith_positions';
 import { buildFaithPayload, PLATFORMS, passagesOverlap, sefariaPassage, citedOnBothSides } from './scripts/export_faith';
 import type { CiteRef } from './scripts/export_faith';
+import { PEW_PUBLISHED, PEW_COLUMNS, MEMBERS_OF } from './faith_members';
+import type { PewGroup, PewFigures, PewQuestion, Pct } from './faith_members';
 import { findRefs, statementKey } from './scripts/extract_faith_verses';
 import { parsePage, parseSineDie, buildPositions, wordsOf } from './scripts/extract_tccb_positions';
 import { parseHistory, housePassage } from './scripts/fetch_house_passage';
@@ -160,6 +162,36 @@ check('(the both-sides finder leaves out a tradition that doesn\'t say, and keep
   fake[0].passages.length === 1 && fake[0].passages[0].a.map((x) => x.traditionId).join() === 'p' && fake[0].passages[0].b.map((x) => x.traditionId).join() === 'r');
 const fakeSame = citedOnBothSides([{ issueId: 'x', churches: { p: { side: 'a' }, q: { side: 'a' } } }], (t) => fakeCites[t] ?? []);
 check('(the both-sides finder finds nothing when everyone citing it is on one side)', fakeSame[0].passages.length === 0);
+
+// --- what members say, from Pew (decided 16 Nov 2026) ----------------------
+
+// Every published figure that the public file can also produce must match it
+// to rounding, so a misread Pew chart fails here. The file is recomputed by
+// npm run data:faith:pew; its output is committed.
+const pewFile = JSON.parse(readFileSync(new URL('./data/faith/pew_rls.json', import.meta.url), 'utf8'));
+type PewFileQ = { asked: number; answers: { code: number; pct: number }[] };
+function pewMismatches(group: PewGroup, figures: PewFigures): string[] {
+  const g = pewFile.groups[group] as Record<PewQuestion, PewFileQ>;
+  return (Object.keys(PEW_COLUMNS) as PewQuestion[]).flatMap((q) => PEW_COLUMNS[q].flatMap((col, i) => {
+    const fromFile = g[q].answers.filter((a) => col.codes.includes(a.code)).reduce((s, a) => s + a.pct, 0);
+    const pub = figures.answers[q][i];
+    const ok = pub === '<1' ? fromFile < 1 : Math.abs(pub - fromFile) <= 0.55;
+    return ok ? [] : [`${group} ${q} ${col.key}: Pew ${pub}, file ${fromFile.toFixed(1)}`];
+  }).concat(g[q].asked === figures.sample ? [] : [`${group} ${q}: sample ${figures.sample} vs ${g[q].asked} asked`]));
+}
+const checkable = ['catholic', 'jewish', 'evangelical'] as const;
+check('members: the public file has all 36,908 respondents', pewFile.groups.all.abortion.asked === 36908);
+const pewBad = checkable.flatMap((g) => pewMismatches(g, PEW_PUBLISHED[g]));
+check('members: Pew\'s published figures for Catholics, Jews and evangelicals match the public file to rounding', pewBad.length === 0, pewBad.join('; ') || `${checkable.length} groups x 4 questions`);
+const misread = { ...PEW_PUBLISHED.catholic, answers: { ...PEW_PUBLISHED.catholic.answers, abortion: [62, 36, 2] as Pct[] } };
+check('(the Pew check catches a figure misread by 3 points)', pewMismatches('catholic', misread).length === 2);
+const badSums = (Object.entries(PEW_PUBLISHED) as [PewGroup, PewFigures][]).flatMap(([g, f]) => (Object.keys(f.answers) as PewQuestion[]).flatMap((q) => {
+  const s = f.answers[q].reduce<number>((t, p) => t + (p === '<1' ? 0.5 : p), 0);
+  return f.answers[q].length === PEW_COLUMNS[q].length && s >= 97 && s <= 103 ? [] : [`${g} ${q} sums to ${s}`];
+}));
+check('members: every Pew row has one figure per column and sums to 100 within rounding', badSums.length === 0, badSums.join('; ') || 'all rows');
+check('members: every tradition has Pew figures or a recorded reason it has none',
+  TRADITIONS.every((t) => t.id in MEMBERS_OF) && Object.keys(MEMBERS_OF).length === TRADITIONS.length);
 
 // --- current in full, earlier listed (decided 13 Nov 2026) ------------------
 

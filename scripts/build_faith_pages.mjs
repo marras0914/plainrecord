@@ -465,7 +465,7 @@ function sidesPage(lang) {
   <h2>${ft(lang, 'sd.h2calls')}</h2>
   <p>${ft(lang, 'sd.callsNote')}</p>
   <ul>${['c1', 'c2', 'c3'].map((c) => `<li>${ft(lang, `sd.${c}`)}</li>`).join('')}</ul>
-  <p><a href="${SITE}/${P.scripture}"><b>${ft(lang, 'sc.h1')}</b></a></p>
+  <p><a href="${SITE}/${P.scripture}"><b>${ft(lang, 'sc.h1')}</b></a> · <a href="${SITE}/${P.members}"><b>${ft(lang, 'mb.h1')}</b></a></p>
   <p><a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>
   ${disclosure(lang)}`;
   return wrap(lang, {
@@ -552,6 +552,72 @@ function scripturePage(lang) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// What members say (decided 16 Nov 2026)
+// ---------------------------------------------------------------------------
+//
+// Marco asked whether each religion's members follow its teachings. Pew's own
+// figures (data.members) beside each tradition's position on the grid. No
+// score, and no "agrees with its church" share: on three of the four issues
+// Pew's question is not the grid's, and the page says so.
+
+const M = data.members;
+const NUM = { en: 'en-US', es: 'es-US' };
+const pctText = (p) => (p === '<1' ? '&lt;1%' : `${p}%`);
+
+/** The tradition's own position on an issue, in the grid's words. */
+function positionText(lang, tradId, issueId) {
+  const pt = data.sidePoints.find((p) => p.issueId === issueId);
+  if (!data.statements.some((s) => s.traditionId === tradId && s.issueId === issueId)) return ft(lang, 'sd.mark.noStatement');
+  const q = pt?.churches[tradId];
+  if (!q) return ft(lang, 'sd.mark.doesntSay');
+  return q.side === 'a' ? tx(lang, KEY.sideA(pt), pt.a) : tx(lang, KEY.sideB(pt), pt.b);
+}
+
+function membersTable(lang, issueId) {
+  const cols = M.columns[issueId];
+  const head = `<tr><th scope="col">${ft(lang, 'mb.th.tradition')}</th><th scope="col">${ft(lang, 'mb.th.position')}</th>${cols.map((c) => `<th scope="col">${ft(lang, `mb.col.${c}`)}</th>`).join('')}<th scope="col">${ft(lang, 'mb.th.sample')}</th></tr>`;
+  const jewishIds = data.traditions.filter((t) => M.membersOf[t.id].note === 'allJews').map((t) => t.id);
+  const rows = data.traditions.map((t) => {
+    const m = M.membersOf[t.id];
+    const name = `<th scope="row"><a href="${SITE}/${traditionPath(t.id, lang)}#${issueId}">${tradName(lang, t)}</a></th><td>${positionText(lang, t.id, issueId)}</td>`;
+    if (m.none) return `<tr>${name}<td colspan="${cols.length + 1}" class="small">${ft(lang, 'mb.noPew')}</td></tr>`;
+    // The Jewish movements share one set of figures, Jews as a whole: shown
+    // once, spanning their rows, so no movement looks as if it had its own.
+    if (m.note === 'allJews' && jewishIds[0] !== t.id) return `<tr>${name}</tr>`;
+    const f = M.published[m.group];
+    const span = m.note === 'allJews' ? ` rowspan="${jewishIds.length}"` : '';
+    const nums = f.answers[issueId].map((p) => `<td${span}>${pctText(p)}</td>`).join('');
+    const sample = `<td${span}>${new Intl.NumberFormat(NUM[lang]).format(f.sample)} (±${new Intl.NumberFormat(NUM[lang], { minimumFractionDigits: 1 }).format(f.moe)})${m.note === 'allJews' ? `<br><span class="small">${ft(lang, 'mb.allJews')}</span>` : ''}</td>`;
+    return `<tr>${name}${nums}${sample}</tr>`;
+  }).join('');
+  return `<div class="tablewrap"><table class="hv members"><thead>${head}</thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function membersPage(lang) {
+  const P = FAITH_PATHS[lang];
+  const issues = data.issues.filter((i) => i.id in M.columns);
+  const sections = issues.map((issue) => `<h2 id="${issue.id}">${issueName(lang, issue)}</h2>
+  <p><span class="small">${ft(lang, 'mb.pewAsked')}</span><br><b>${ft(lang, `mb.q.${issue.id}`)}</b></p>
+  <p class="small">${ft(lang, `mb.match.${issue.id}`)}</p>
+  ${membersTable(lang, issue.id)}`).join('\n');
+  const others = data.issues.filter((i) => !(i.id in M.columns)).map((i) => issueName(lang, i)).join(', ');
+  const body = `<style>table.members td,table.members th{font-size:14.5px}table.members td[rowspan]{vertical-align:middle}</style>
+  <h1>${ft(lang, 'mb.h1')}</h1>
+  <p class="lede">${ft(lang, 'mb.lede')}</p>
+  ${notice(lang)}
+  <p class="small">${ft(lang, 'mb.source', { sourceHtml: `<a href="${esc(M.source.url)}" lang="en">${esc(M.source.name)}</a>`, n: new Intl.NumberFormat(NUM[lang]).format(M.source.respondents) })} ${ft(lang, 'mb.check')} <span lang="en">${esc(M.source.disclaimer)}</span></p>
+  <p class="small">${ft(lang, 'mb.notAsked', { issues: others })}</p>
+  <ul class="jump">${issues.map((i) => `<li><a href="#${i.id}">${issueName(lang, i)}</a></li>`).join('')}</ul>
+  ${sections}
+  <p><a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a> · <a href="${SITE}/${P.scripture}">${ft(lang, 'sc.h1')}</a> · <a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>
+  ${disclosure(lang)}`;
+  return wrap(lang, {
+    path: P.members, otherPath: FAITH_PATHS[otherOf(lang)].members,
+    title: ft(lang, 'mb.h1'), docTitle: ft(lang, 'mb.docTitle'), desc: ft(lang, 'mb.desc'), body,
+  });
+}
+
 /** Which party's platform holds a side, at the point's first compared level. */
 const sideParty = (pt, side) => P2.find((p) => pt.platforms[`${p}-${pt.levels[0]}`].side === side);
 
@@ -633,6 +699,9 @@ function methodPage(lang) {
   <h2>${ft(lang, 'me.h2scripture')}</h2>
   <p>${ft(lang, 'me.scripture', { linkHtml: `<a href="${SITE}/${P.scripture}">${ft(lang, 'sc.h1')}</a>` })}</p>
 
+  <h2>${ft(lang, 'me.h2members')}</h2>
+  <p>${ft(lang, 'me.members', { linkHtml: `<a href="${SITE}/${P.members}">${ft(lang, 'mb.h1')}</a>` })}</p>
+
   <h2>${ft(lang, 'me.h2house')}</h2>
   <p>${ft(lang, 'me.house', { linkHtml: data.houseVotes.map((h) => `<a href="${SITE}/${houseVotesPath(h.traditionId, lang)}">${ft(lang, 'hv.h1')}</a>`).join(', ') })}</p>
 
@@ -659,7 +728,7 @@ function methodPage(lang) {
 
 const pages = [];
 for (const lang of ['en', 'es']) {
-  pages.push([FAITH_PATHS[lang].home, homePage(lang)], [FAITH_PATHS[lang].method, methodPage(lang)], [FAITH_PATHS[lang].sides, sidesPage(lang)], [FAITH_PATHS[lang].scripture, scripturePage(lang)]);
+  pages.push([FAITH_PATHS[lang].home, homePage(lang)], [FAITH_PATHS[lang].method, methodPage(lang)], [FAITH_PATHS[lang].sides, sidesPage(lang)], [FAITH_PATHS[lang].scripture, scripturePage(lang)], [FAITH_PATHS[lang].members, membersPage(lang)]);
   for (const t of data.traditions) pages.push([traditionPath(t.id, lang), traditionPage(lang, t)]);
   for (const hv of data.houseVotes) {
     const t = data.traditions.find((x) => x.id === hv.traditionId);

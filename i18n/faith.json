@@ -1812,6 +1812,166 @@
     "es": "Las plataformas no toman posturas opuestas sobre este tema, así que las tradiciones se enumeran sin agruparlas por postura.",
     "status": "ok"
   },
+  "mb.h1": {
+    "en": "What members say",
+    "es": "Lo que dicen los miembros",
+    "status": "draft"
+  },
+  "mb.docTitle": {
+    "en": "What members say, beside what their tradition says",
+    "es": "Lo que dicen los miembros, junto a lo que dice su tradición",
+    "status": "draft"
+  },
+  "mb.desc": {
+    "en": "How members of each tradition answered Pew Research Center on four issues, beside their tradition's official position. No score.",
+    "es": "Cómo respondieron a Pew Research Center los miembros de cada tradición sobre cuatro temas, junto a la postura oficial de su tradición. Sin puntaje.",
+    "status": "draft"
+  },
+  "mb.lede": {
+    "en": "Do members share their tradition's official positions? On the four issues Pew Research Center asked about, this page puts what members told Pew beside what their tradition's statements say. It computes no score and does not say whether members should agree.",
+    "es": "¿Comparten los miembros las posturas oficiales de su tradición? En los cuatro temas sobre los que preguntó Pew Research Center, esta página pone lo que los miembros le dijeron a Pew junto a lo que dicen las declaraciones de su tradición. No calcula ningún puntaje ni dice si los miembros deberían estar de acuerdo.",
+    "status": "draft"
+  },
+  "mb.source": {
+    "en": "Figures: {sourceHtml}, a survey of {n} U.S. adults from July 2023 to March 2024. Every figure is Pew's own, with Pew's sample size and margin of error.",
+    "es": "Cifras: {sourceHtml}, una encuesta a {n} adultos en EE. UU. de julio de 2023 a marzo de 2024. Cada cifra es de Pew, con el tamaño de muestra y el margen de error de Pew.",
+    "status": "draft"
+  },
+  "mb.check": {
+    "en": "For Catholics and Jews, the site recomputed every figure from Pew's public data file and got the same numbers, to rounding.",
+    "es": "Para católicos y judíos, el sitio volvió a calcular cada cifra con el archivo público de datos de Pew y obtuvo los mismos números, salvo redondeo.",
+    "status": "draft"
+  },
+  "mb.notAsked": {
+    "en": "Pew asked about none of the other issues ({issues}), so they are not on this page.",
+    "es": "Pew no preguntó sobre los demás temas ({issues}), así que no aparecen en esta página.",
+    "status": "draft"
+  },
+  "mb.pewAsked": {
+    "en": "Pew asked:",
+    "es": "Pregunta de Pew (traducida por este sitio):",
+    "status": "draft"
+  },
+  "mb.q.abortion": {
+    "en": "Do you think abortion should be legal in all cases, legal in most cases, illegal in most cases, or illegal in all cases?",
+    "es": "¿Cree usted que el aborto debería ser legal en todos los casos, legal en la mayoría de los casos, ilegal en la mayoría de los casos o ilegal en todos los casos?",
+    "status": "draft"
+  },
+  "mb.q.environment": {
+    "en": "Which comes closer to your view: stricter environmental laws and regulations cost too many jobs and hurt the economy, or stricter environmental laws and regulations are worth the cost?",
+    "es": "¿Qué se acerca más a su opinión: las leyes y regulaciones ambientales más estrictas cuestan demasiados empleos y perjudican la economía, o las leyes y regulaciones ambientales más estrictas valen lo que cuestan?",
+    "status": "draft"
+  },
+  "mb.q.poverty": {
+    "en": "Thinking about assistance the government provides to people in need, should the government provide more assistance, less assistance, or is it providing about the right amount?",
+    "es": "Pensando en la ayuda que el gobierno da a las personas necesitadas, ¿debería el gobierno dar más ayuda, menos ayuda, o está dando más o menos la cantidad adecuada?",
+    "status": "draft"
+  },
+  "mb.q.immigration": {
+    "en": "Thinking about changes in our society over the last 50 years, has a growing population of immigrants been a change for the better, a change for the worse, or hasn't it made much difference?",
+    "es": "Pensando en los cambios en nuestra sociedad en los últimos 50 años, ¿ha sido una creciente población de inmigrantes un cambio para mejor, un cambio para peor, o no ha hecho mucha diferencia?",
+    "status": "draft"
+  },
+  "mb.match.abortion": {
+    "en": "Close to the grid's question, whether the law should protect access to abortion.",
+    "es": "Cercana a la pregunta de la tabla de posturas: si la ley debe proteger el acceso al aborto.",
+    "status": "draft"
+  },
+  "mb.match.environment": {
+    "en": "Not the grid's question: Pew asks about environmental rules in general; the grid asks whether government should act to reduce the emissions behind climate change.",
+    "es": "No es la pregunta de la tabla de posturas: Pew pregunta por las normas ambientales en general; la tabla pregunta si el gobierno debe actuar para reducir las emisiones que causan el cambio climático.",
+    "status": "draft"
+  },
+  "mb.match.poverty": {
+    "en": "Not the grid's question: Pew asks about government assistance; the grid asks about a minimum wage.",
+    "es": "No es la pregunta de la tabla de posturas: Pew pregunta por la ayuda del gobierno; la tabla pregunta por el salario mínimo.",
+    "status": "draft"
+  },
+  "mb.match.immigration": {
+    "en": "Not the grid's question: Pew asks whether more immigrants has been a change for the better; the grid asks what should happen to people living here without legal status.",
+    "es": "No es la pregunta de la tabla de posturas: Pew pregunta si el aumento de inmigrantes ha sido un cambio para mejor; la tabla pregunta qué debe pasar con las personas que viven aquí sin estatus legal.",
+    "status": "draft"
+  },
+  "mb.th.tradition": {
+    "en": "Tradition",
+    "es": "Tradición",
+    "status": "draft"
+  },
+  "mb.th.position": {
+    "en": "Its official position (grid)",
+    "es": "Su postura oficial (tabla)",
+    "status": "draft"
+  },
+  "mb.th.sample": {
+    "en": "Sample (margin of error, points)",
+    "es": "Muestra (margen de error, puntos)",
+    "status": "draft"
+  },
+  "mb.col.legal": {
+    "en": "Legal in all or most cases",
+    "es": "Legal en todos o la mayoría de los casos",
+    "status": "draft"
+  },
+  "mb.col.illegal": {
+    "en": "Illegal in all or most cases",
+    "es": "Ilegal en todos o la mayoría de los casos",
+    "status": "draft"
+  },
+  "mb.col.noAnswer": {
+    "en": "No answer",
+    "es": "Sin respuesta",
+    "status": "draft"
+  },
+  "mb.col.costJobs": {
+    "en": "Cost too many jobs",
+    "es": "Cuestan demasiados empleos",
+    "status": "draft"
+  },
+  "mb.col.worthCost": {
+    "en": "Worth the cost",
+    "es": "Valen lo que cuestan",
+    "status": "draft"
+  },
+  "mb.col.more": {
+    "en": "More assistance",
+    "es": "Más ayuda",
+    "status": "draft"
+  },
+  "mb.col.less": {
+    "en": "Less assistance",
+    "es": "Menos ayuda",
+    "status": "draft"
+  },
+  "mb.col.right": {
+    "en": "About the right amount",
+    "es": "Más o menos la cantidad adecuada",
+    "status": "draft"
+  },
+  "mb.col.better": {
+    "en": "Change for the better",
+    "es": "Cambio para mejor",
+    "status": "draft"
+  },
+  "mb.col.worse": {
+    "en": "Change for the worse",
+    "es": "Cambio para peor",
+    "status": "draft"
+  },
+  "mb.col.noDifference": {
+    "en": "Not much difference",
+    "es": "No mucha diferencia",
+    "status": "draft"
+  },
+  "mb.allJews": {
+    "en": "Jews as a whole: Pew does not report Reform, Conservative and Orthodox Jews separately.",
+    "es": "Judíos en conjunto: Pew no da cifras por separado para judíos reformistas, conservadores y ortodoxos.",
+    "status": "draft"
+  },
+  "mb.noPew": {
+    "en": "Pew publishes no figures for this church's members.",
+    "es": "Pew no publica cifras para los miembros de esta iglesia.",
+    "status": "draft"
+  },
   "home.sidesNote": {
     "en": "For each issue the platforms split on, which side each tradition's own words take. No score.",
     "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada tradición. Sin puntaje.",
@@ -1836,6 +1996,16 @@
     "en": "{linkHtml} lists the passages each tradition's statements cite, grouped by the side their words take, and the passages that traditions on opposite sides both cite. It does not say which reading is right.",
     "es": "{linkHtml} enumera los pasajes que citan las declaraciones de cada tradición, agrupados según la postura que toman sus palabras, y los pasajes que citan tradiciones de lados opuestos. No dice qué lectura es la correcta.",
     "status": "ok"
+  },
+  "me.h2members": {
+    "en": "What members say",
+    "es": "Lo que dicen los miembros",
+    "status": "draft"
+  },
+  "me.members": {
+    "en": "{linkHtml} puts Pew Research Center's own figures for each tradition's members beside the tradition's official position, on the four issues Pew asked about. The denominations' figures are Pew's published ones, because Pew's public data file leaves out which denomination each person belongs to; for Catholics and Jews the site recomputed them from that file. No score.",
+    "es": "{linkHtml} pone las cifras de Pew Research Center sobre los miembros de cada tradición junto a la postura oficial de la tradición, en los cuatro temas sobre los que preguntó Pew. Las cifras de las denominaciones son las que publica Pew, porque su archivo público de datos no incluye a qué denominación pertenece cada persona; para católicos y judíos el sitio las volvió a calcular con ese archivo. Sin puntaje.",
+    "status": "draft"
   },
   "side.immigration.q": {
     "en": "What should happen to people living in the United States without legal status?",
