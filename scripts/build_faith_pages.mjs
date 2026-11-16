@@ -84,6 +84,7 @@ const STYLE = `<style>
   ul.tally li{margin:2px 0}
   .way{font-weight:600}
   p.caption{font-family:"Newsreader",Georgia,serif;font-size:1.02rem;color:var(--ink-2);margin:2px 0 6px}
+  ul.ad li{padding:8px 0}ul.ad blockquote.q{margin:4px 0 0}
   </style>`;
 
 function notice(lang) {
@@ -204,6 +205,31 @@ function plankCard(lang, party, level, issueId) {
     </div>`;
 }
 
+// ---------------------------------------------------------------------------
+// What a tradition's advocacy office backed or opposed in Congress (decided
+// 16 Nov 2026): its own documents, naming a bill and a side. No count.
+// ---------------------------------------------------------------------------
+
+const AD = data.advocacy;
+const advocacyFor = (tradId, issueId) => AD.items.filter((a) => a.traditionId === tradId && a.issueIds.includes(issueId));
+
+function advocacyItem(lang, a) {
+  const when = a.date ? esc(fmtDate(lang, a.date)) : ft(lang, 'ad.undated');
+  const host = a.host ? ` · ${ft(lang, 'ad.host', { host: a.host })}` : '';
+  return `<li><span class="way">${ft(lang, `ad.stance.${a.stance}`)}</span> <span lang="en">${esc(a.named.join('; '))}</span>${a.numbers ? ` <span class="small">(${esc(a.numbers)})</span>` : ''}
+        <br><span class="small">${ft(lang, `ad.kind.${a.kind}`)}, ${when}${host}: <a href="${esc(a.url)}" lang="en">${esc(a.docTitle)}</a></span>
+        <blockquote class="q" lang="en">“${esc(a.quote)}”</blockquote></li>`;
+}
+
+/** The block under a tradition's statement on one issue. */
+function advocacyBlock(lang, tradId, issueId) {
+  const items = advocacyFor(tradId, issueId);
+  const none = AD.none[tradId] ? tx(lang, KEY.advNone(tradId), AD.none[tradId]) : ft(lang, 'ad.noneIssue');
+  return items.length
+    ? `<ul class="stand ad">${items.map((a) => advocacyItem(lang, a)).join('')}</ul>`
+    : `<p class="small">${none}</p>`;
+}
+
 function issueSection(lang, t, issue) {
   const full = data.statements.filter((s) => s.traditionId === t.id && s.issueId === issue.id);
   const none = data.noStatement.find((n) => n.traditionId === t.id && n.issueId === issue.id);
@@ -225,6 +251,8 @@ function issueSection(lang, t, issue) {
   <h3>${ft(lang, 'tr.h3church')}</h3>
     ${church}
     ${earlierHtml}
+  <h4>${ft(lang, 'ad.h4')}</h4>
+    ${advocacyBlock(lang, t.id, issue.id)}
   <h3>${ft(lang, 'tr.h3platforms')}</h3>
     ${platforms}`;
 }
@@ -465,7 +493,7 @@ function sidesPage(lang) {
   <h2>${ft(lang, 'sd.h2calls')}</h2>
   <p>${ft(lang, 'sd.callsNote')}</p>
   <ul>${['c1', 'c2', 'c3'].map((c) => `<li>${ft(lang, `sd.${c}`)}</li>`).join('')}</ul>
-  <p><a href="${SITE}/${P.scripture}"><b>${ft(lang, 'sc.h1')}</b></a> · <a href="${SITE}/${P.members}"><b>${ft(lang, 'mb.h1')}</b></a></p>
+  <p><a href="${SITE}/${P.scripture}"><b>${ft(lang, 'sc.h1')}</b></a> · <a href="${SITE}/${P.members}"><b>${ft(lang, 'mb.h1')}</b></a> · <a href="${SITE}/${P.actions}"><b>${ft(lang, 'ac.h1')}</b></a></p>
   <p><a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>
   ${disclosure(lang)}`;
   return wrap(lang, {
@@ -618,6 +646,31 @@ function membersPage(lang) {
   });
 }
 
+// The summary: every issue, every tradition, its position beside its actions.
+function actionsPage(lang) {
+  const P = FAITH_PATHS[lang];
+  const sections = data.issues.map((issue) => {
+    const rows = data.traditions.map((t) => `<div class="card"><p><a href="${SITE}/${traditionPath(t.id, lang)}#${issue.id}"><b>${tradName(lang, t)}</b></a></p>
+      <p class="small">${ft(lang, 'ac.position')} ${positionText(lang, t.id, issue.id)}</p>
+      ${advocacyBlock(lang, t.id, issue.id)}</div>`).join('\n    ');
+    return `<h2 id="${issue.id}">${issueName(lang, issue)}</h2>
+  ${rows}`;
+  }).join('\n');
+  const body = `
+  <h1>${ft(lang, 'ac.h1')}</h1>
+  <p class="lede">${ft(lang, 'ac.lede')}</p>
+  ${notice(lang)}
+  <p class="small">${ft(lang, 'ac.rules')} ${ft(lang, 'ac.check')}</p>
+  <ul class="jump">${data.issues.map((i) => `<li><a href="#${i.id}">${issueName(lang, i)}</a></li>`).join('')}</ul>
+  ${sections}
+  <p><a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a> · <a href="${SITE}/${P.members}">${ft(lang, 'mb.h1')}</a> · <a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>
+  ${disclosure(lang)}`;
+  return wrap(lang, {
+    path: P.actions, otherPath: FAITH_PATHS[otherOf(lang)].actions,
+    title: ft(lang, 'ac.h1'), docTitle: ft(lang, 'ac.docTitle'), desc: ft(lang, 'ac.desc'), body,
+  });
+}
+
 /** Which party's platform holds a side, at the point's first compared level. */
 const sideParty = (pt, side) => P2.find((p) => pt.platforms[`${p}-${pt.levels[0]}`].side === side);
 
@@ -637,6 +690,7 @@ function homePage(lang) {
   <div class="card feature"><h2><a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a></h2><p>${ft(lang, 'home.sidesNote')}</p></div>
   <div class="card"><p><a href="${SITE}/${P.scripture}"><b>${ft(lang, 'sc.h1')}</b></a></p><p class="small">${ft(lang, 'sc.desc')}</p></div>
   <div class="card"><p><a href="${SITE}/${P.members}"><b>${ft(lang, 'mb.h1')}</b></a></p><p class="small">${ft(lang, 'mb.desc')}</p></div>
+  <div class="card"><p><a href="${SITE}/${P.actions}"><b>${ft(lang, 'ac.h1')}</b></a></p><p class="small">${ft(lang, 'ac.desc')}</p></div>
   <h2>${ft(lang, 'home.h2pick')}</h2>
   <ul class="stand">${picks}</ul>
   <p>${ft(lang, 'home.range')}</p>
@@ -704,6 +758,9 @@ function methodPage(lang) {
   <h2>${ft(lang, 'me.h2members')}</h2>
   <p>${ft(lang, 'me.members', { linkHtml: `<a href="${SITE}/${P.members}">${ft(lang, 'mb.h1')}</a>` })}</p>
 
+  <h2>${ft(lang, 'me.h2actions')}</h2>
+  <p>${ft(lang, 'me.actions', { linkHtml: `<a href="${SITE}/${P.actions}">${ft(lang, 'ac.h1')}</a>` })}</p>
+
   <h2>${ft(lang, 'me.h2house')}</h2>
   <p>${ft(lang, 'me.house', { linkHtml: data.houseVotes.map((h) => `<a href="${SITE}/${houseVotesPath(h.traditionId, lang)}">${ft(lang, 'hv.h1')}</a>`).join(', ') })}</p>
 
@@ -730,7 +787,7 @@ function methodPage(lang) {
 
 const pages = [];
 for (const lang of ['en', 'es']) {
-  pages.push([FAITH_PATHS[lang].home, homePage(lang)], [FAITH_PATHS[lang].method, methodPage(lang)], [FAITH_PATHS[lang].sides, sidesPage(lang)], [FAITH_PATHS[lang].scripture, scripturePage(lang)], [FAITH_PATHS[lang].members, membersPage(lang)]);
+  pages.push([FAITH_PATHS[lang].home, homePage(lang)], [FAITH_PATHS[lang].method, methodPage(lang)], [FAITH_PATHS[lang].sides, sidesPage(lang)], [FAITH_PATHS[lang].scripture, scripturePage(lang)], [FAITH_PATHS[lang].members, membersPage(lang)], [FAITH_PATHS[lang].actions, actionsPage(lang)]);
   for (const t of data.traditions) pages.push([traditionPath(t.id, lang), traditionPage(lang, t)]);
   for (const hv of data.houseVotes) {
     const t = data.traditions.find((x) => x.id === hv.traditionId);

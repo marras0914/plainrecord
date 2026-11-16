@@ -91,11 +91,12 @@ export const KEY = {
   sideB: (p) => `side.${p.issueId}.b`,
   noSide: (n) => `noside.${n.issueId}`,
   citeKind: (kind) => `cite.kind.${slug(kind)}`,
+  advNone: (tradId) => `adnone.${tradId}`,
 };
 
 export const FAITH_PATHS = {
-  en: { home: 'faith', method: 'faith/methodology', sides: 'faith/sides', scripture: 'faith/scripture', members: 'faith/members' },
-  es: { home: 'fe', method: 'fe/metodologia', sides: 'fe/posturas', scripture: 'fe/escrituras', members: 'fe/miembros' },
+  en: { home: 'faith', method: 'faith/methodology', sides: 'faith/sides', scripture: 'faith/scripture', members: 'faith/members', actions: 'faith/congress' },
+  es: { home: 'fe', method: 'fe/metodologia', sides: 'fe/posturas', scripture: 'fe/escrituras', members: 'fe/miembros', actions: 'fe/congreso' },
 };
 
 /** One page per tradition. The ids are the record's; the slugs are the reader's. */

@@ -28,6 +28,7 @@ import {
 } from '../faith_positions';
 import { CITATIONS_FILE } from './extract_jewish_citations';
 import { PEW_PUBLISHED, PEW_COLUMNS, MEMBERS_OF, PEW_SOURCE } from '../faith_members';
+import { ADVOCACY, ADVOCACY_NONE } from '../faith_advocacy';
 import { SHIP_DIR } from './paths';
 import { buildHouseVotes } from './faith_house_votes';
 
@@ -181,6 +182,16 @@ export function buildFaithPayload() {
      * Pew's own published figures, beside the tradition's own words. No score.
      * Evangelicals are left out: they are only a check (faith_members.ts).
      */
+    /**
+     * What each tradition's own advocacy office backed or opposed in Congress
+     * since January 2025, on these issues, naming a bill (decided 16 Nov 2026).
+     * Newest first; undated pages last. No count.
+     */
+    advocacy: {
+      since: '2025-01-03',
+      items: [...ADVOCACY].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')),
+      none: ADVOCACY_NONE,
+    },
     members: {
       source: PEW_SOURCE,
       columns: Object.fromEntries(Object.entries(PEW_COLUMNS).map(([q, cs]) => [q, cs.map((c) => c.key)])),
