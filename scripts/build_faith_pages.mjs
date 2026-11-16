@@ -410,9 +410,8 @@ function sideMark(lang, issueId, tradId) {
   return { cell, words };
 }
 
-// The churches only. The Jewish movements (added 15 Nov 2026) join the grid
-// later, once Marco has made the placement calls for them.
-const SIDE_TRADITIONS = data.traditions.filter((t) => !JEWISH.has(t.id));
+// Every tradition: the Jewish movements joined on 16 Nov 2026.
+const SIDE_TRADITIONS = data.traditions;
 
 function sidesPage(lang) {
   const P = FAITH_PATHS[lang];

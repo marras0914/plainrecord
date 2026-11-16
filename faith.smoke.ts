@@ -107,8 +107,8 @@ check('sides: every platform quote is from that platform',
 
 // Rule 3: a church is placed only from a statement shown in full, and every
 // tradition with one is placed or marked "doesn't say".
-// The churches only; the Jewish movements join the grid later.
-const churchProblemsOf = (points: SidePoint[]) => points.flatMap((pt) => TRADITIONS.filter((t) => !isJewish(t.id)).flatMap((t) => {
+// Every tradition, the Jewish movements included (16 Nov 2026).
+const churchProblemsOf = (points: SidePoint[]) => points.flatMap((pt) => TRADITIONS.flatMap((t) => {
   const has = STATEMENTS.filter((s) => s.traditionId === t.id && s.issueId === pt.issueId);
   const placed = t.id in pt.churches;
   if (!has.length) return placed ? [`${pt.issueId} ${t.id} placed with no statement`] : [];

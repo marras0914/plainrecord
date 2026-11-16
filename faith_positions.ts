@@ -1036,6 +1036,13 @@ export const KNOWN_GAPS: { who: string; issueId: IssueId; note: string }[] = [];
 // to ensure access, never names Medicaid: widen) and the Catholic bishops on
 // the environment (call for "actions" in a document on political
 // responsibility: act).
+//
+// The Jewish movements joined on 16 Nov 2026. Marco's rule for them: where
+// the text doesn't take the side, it is "doesn't say"; no lean is inferred.
+// So the OU's moratorium on executions (not an end to the death penalty), its
+// energy plank (CAFE standards and Alaskan oil, no mention of climate or
+// emissions) and the RA's 2026 healthcare resolution (laws limiting
+// reproductive and LGBTQ+ care, not public coverage) are all "doesn't say".
 
 export type Level = 'texas' | 'national';
 export type PlatformKey = `${'D' | 'R'}-${Level}`;
@@ -1076,6 +1083,8 @@ export const SIDE_POINTS: SidePoint[] = [
       umc: null,
       ame: null,
       ag: null,
+      reform: { side: 'a', quote: 'an equitable pathway to citizenship for those living in the country without legal documentation', url: SRC.ccarImmigration2026 },
+      conservative: { side: 'a', quote: 'allow the eleven million undocumented residents of the United States a path to citizenship', url: SRC.raImmigration2017 },
     },
   },
   {
@@ -1094,6 +1103,8 @@ export const SIDE_POINTS: SidePoint[] = [
       sbc: { side: 'b', quote: 'pray and labor for the abolition of all forms of abortion', url: SRC.sbcAbortion2025 },
       umc: { side: 'a', quote: 'United Methodists worldwide affirm and support the legal availability', url: SRC.umcAbortion },
       ag: { side: 'b', quote: 'seek legislative and judicial redress', url: SRC.agAbortion2010 },
+      reform: { side: 'a', quote: 'to carry or terminate a particular pregnancy, free from government interference', url: SRC.ccarAbortion2024 },
+      conservative: { side: 'a', quote: 'prohibiting governmental restrictions on the provision of, and access to, abortion services', url: SRC.raAbortion2024 },
     },
   },
   {
@@ -1109,6 +1120,10 @@ export const SIDE_POINTS: SidePoint[] = [
       catholic: { side: 'a', quote: 'our nation’s continued reliance on the death penalty cannot be justified', url: SRC.usccb2019 },
       sbc: { side: 'b', quote: 'support the fair and equitable use of capital punishment by civil magistrates', url: SRC.sbcDeath2000 },
       umc: { side: 'a', quote: 'compels us to oppose capital punishment and the imposition of the death penalty', url: SRC.umcPolitical },
+      reform: { side: 'a', quote: 'We oppose capital punishment under all circumstances.', url: SRC.ccarDeath1979 },
+      conservative: { side: 'a', quote: 'oppose the adoption of death penalty laws and urge their abolition', url: SRC.raDeath1995 },
+      // A moratorium on executions and a review commission: not an end to it.
+      orthodox: null,
     },
   },
   {
@@ -1128,6 +1143,10 @@ export const SIDE_POINTS: SidePoint[] = [
       // "preventative measures ... in accordance with the Second Amendment": no limit named.
       sbc: null,
       umc: { side: 'a', quote: 'Universal background checks on all gun purchases', url: SRC.umcGuns3428 },
+      // "effective gun violence prevention legislation": no limit named.
+      reform: null,
+      conservative: { side: 'a', quote: 'required background checks on all public and private gun sales', url: SRC.raGuns2016 },
+      orthodox: { side: 'a', quote: 'including banning of certain sophisticated attack weapons', url: SRC.ou2023 },
     },
   },
   {
@@ -1145,6 +1164,9 @@ export const SIDE_POINTS: SidePoint[] = [
       catholic: null,
       sbc: null,
       umc: { side: 'a', quote: 'endorse the establishment and enforcement of policies that guarantee workers fair and equitable compensation', url: SRC.umcEconomic },
+      // Both statements shown in full are about SNAP, not wages.
+      reform: null,
+      conservative: null,
     },
   },
   {
@@ -1162,6 +1184,10 @@ export const SIDE_POINTS: SidePoint[] = [
       catholic: { side: 'a', quote: 'respond to climate change with actions to better protect creation', url: SRC.usccb2023 },
       sbc: null,
       umc: { side: 'a', quote: 'To reverse the current trajectory of global climate change, increased investments are needed', url: SRC.umcNatural },
+      reform: { side: 'a', quote: 'designed to curb American greenhouse gas emissions and address the harms of climate change', url: SRC.ccarClimate2022 },
+      conservative: { side: 'a', quote: 'support and advocate with other faith-based communities for the Clean Power Plan', url: SRC.raParis2016 },
+      // CAFE standards and Alaskan oil; never names climate or emissions.
+      orthodox: null,
     },
   },
   {
@@ -1179,6 +1205,9 @@ export const SIDE_POINTS: SidePoint[] = [
       catholic: null,
       sbc: null,
       umc: { side: 'a', quote: 'ensure that every human being has access to medical services and treatment', url: SRC.umcPolitical },
+      reform: { side: 'a', quote: 'Expansion of Medicaid to cover all Americans living at or below 138%', url: SRC.ccarHealth2017 },
+      // About laws limiting reproductive and LGBTQ+ care, not public coverage.
+      conservative: null,
     },
   },
 ];
