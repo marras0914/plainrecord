@@ -2394,8 +2394,8 @@ try {
     check('faith: no tradition page carries another tradition\'s statements', crossed.length === 0, crossed.join(', ') || '10 tradition pages');
     check('faith: every tradition page has every issue, and all four platforms on each', shape.length === 0, shape.join(' | ') || `${faith.issues.length} issues x 4 platforms`);
 
-    // Which side each church takes (decided 15 Nov 2026). Every grid cell is
-    // the data's: the party whose platform is on the church's side, or no mark.
+    // Which side each tradition takes (decided 15 Nov 2026). Every grid cell is
+    // the data's: the party whose platform is on its side, or no mark.
     // And no total: the grid carries no number, and the page no count of marks.
     const expectMark = (issueId, tradId) => {
       const pt = faith.sidePoints.find((p) => p.issueId === issueId);
@@ -2408,8 +2408,8 @@ try {
       await fp.goto(new URL(path, URL_UNDER_TEST).href, { waitUntil: 'load' });
       const grid = fp.locator('table.sides');
       const cells = await grid.locator('tbody tr').evaluateAll((trs) => trs.map((tr) => [...tr.querySelectorAll('td')].map((td) => td.querySelector('.mk.D') ? 'D' : td.querySelector('.mk.R') ? 'R' : '')));
-      // The grid covers the churches; the Jewish movements join it later.
-      const want = faith.issues.map((i) => faith.traditions.filter((t) => t.family !== 'Jewish').map((t) => expectMark(i.id, t.id)));
+      // Every tradition, the Jewish movements included (16 Nov 2026).
+      const want = faith.issues.map((i) => faith.traditions.map((t) => expectMark(i.id, t.id)));
       if (JSON.stringify(cells) !== JSON.stringify(want)) sideProblems.push(`${path}: grid differs from the data`);
       if (!want.flat().includes('D') || !want.flat().includes('R')) sideProblems.push(`${path}: the data has no D or no R mark, so the comparison proves nothing`);
       const gridText = await grid.innerText();
