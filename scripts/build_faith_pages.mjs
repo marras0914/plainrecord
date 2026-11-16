@@ -485,9 +485,10 @@ function homePage(lang) {
   <h1>${ft(lang, 'home.h1')}</h1>
   <p class="lede">${ft(lang, 'home.lede')}</p>
   ${notice(lang)}
+  <style>.feature{border:2px solid var(--ink);padding-top:14px}.feature h2{margin:0 0 6px}.feature h2 a{text-decoration:none}</style>
+  <div class="card feature"><h2><a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a></h2><p>${ft(lang, 'home.sidesNote')}</p></div>
   <h2>${ft(lang, 'home.h2pick')}</h2>
   <ul class="stand">${picks}</ul>
-  <div class="card"><p><a href="${SITE}/${P.sides}"><b>${ft(lang, 'sd.h1')}</b></a></p><p class="small">${ft(lang, 'home.sidesNote')}</p></div>
   <p>${ft(lang, 'home.range')}</p>
   <h2>${ft(lang, 'home.h2issues')}</h2>
   <ul>${issues}</ul>
