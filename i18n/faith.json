@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
     "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
     "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause). The 14 strings that add the Jewish movements to the sides page (\"tradition\" for \"church\", and the short names Reformista, Conservador, Ortodoxo) approved by Marco on 16 November 2026, no corrections."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause). The 14 strings that add the Jewish movements to the sides page (\"tradition\" for \"church\", and the short names Reformista, Conservador, Ortodoxo) approved by Marco on 16 November 2026, no corrections. The 4 strings for the SBC's 2007 \"On Global Warming\" (its summary, the reworded judgment call sd.c1, the San Antonio body line, and Ezequiel) approved by Marco on 16 November 2026, no corrections."
   },
   "kicker": {
     "en": "Faith and the platforms",
@@ -932,9 +932,9 @@
     "es": "El Concilio General de las Asambleas de Dios",
     "status": "ok"
   },
-  "body.resolution-adopted-at-the-sbc-annual-meeting-greensboro": {
-    "en": "Resolution adopted at the SBC Annual Meeting, Greensboro",
-    "es": "Resolución adoptada en la Reunión Anual de la Convención Bautista del Sur, Greensboro",
+  "body.resolution-adopted-at-the-sbc-annual-meeting-san-antonio": {
+    "en": "Resolution adopted at the SBC Annual Meeting, San Antonio",
+    "es": "Resolución adoptada en la Reunión Anual de la Convención Bautista del Sur, San Antonio",
     "status": "ok"
   },
   "st.sbc.immigration.2026-06": {
@@ -1102,9 +1102,9 @@
     "es": "Dice que las fronteras deben ser seguras para que la inmigración se ajuste a la ley, apoya una reforma migratoria integral que refleje la dignidad humana, la compasión y la justicia, y dice que el ministerio a toda persona que vive o trabaja en el país es independiente de las cuestiones de jurisdicción.",
     "status": "ok"
   },
-  "st.sbc.environment.2006-06": {
-    "en": "Supports conserving natural resources while respecting property rights, and public policy and private efforts to improve the environment based on sound science; opposes alliances with environmental groups whose positions it considers contrary to biblical principles, and solutions it calls scientifically questionable that restrict access to natural resources and economic development.",
-    "es": "Apoya conservar los recursos naturales respetando los derechos de propiedad, y las políticas públicas y los esfuerzos privados que buscan mejorar el medio ambiente con base en ciencia sólida; se opone a alianzas con grupos ambientalistas cuyas posturas considera contrarias a los principios bíblicos, y a soluciones que llama científicamente dudosas que restringen el acceso a los recursos naturales y el desarrollo económico.",
+  "st.sbc.environment.2007-06": {
+    "en": "Urges Southern Baptists to proceed cautiously in the debate over human-caused global warming, given what it calls conflicting scientific research; urges Congress and the president to support only cost-effective measures to reduce greenhouse gas emissions and to reject government-mandated reductions; and calls for helping vulnerable communities and for individual and collective efforts to reduce pollution.",
+    "es": "Insta a los bautistas del sur a proceder con cautela en el debate sobre el calentamiento global causado por el ser humano, en vista de lo que llama investigación científica contradictoria; insta al Congreso y al presidente a apoyar solo medidas rentables para reducir las emisiones de gases de efecto invernadero y a rechazar las reducciones impuestas por el gobierno; y pide ayudar a las comunidades vulnerables y hacer esfuerzos individuales y colectivos para reducir la contaminación.",
     "status": "ok"
   },
   "st.sbc.death-penalty.2000-06": {
@@ -1562,6 +1562,11 @@
     "es": "Apocalipsis",
     "status": "ok"
   },
+  "book.EZE": {
+    "en": "Ezekiel",
+    "es": "Ezequiel",
+    "status": "ok"
+  },
   "toread.ame.immigration.0": {
     "en": "AME General Conference resolutions, which outrank the Council of Bishops. None found online; the church paper's summary of the 2024 General Conference legislation names none on immigration.",
     "es": "Las resoluciones de la Conferencia General de la Iglesia AME, que tienen más autoridad que el Consejo de Obispos. No se ha encontrado ninguna en internet; el resumen que publicó el periódico de la iglesia sobre la legislación de la Conferencia General de 2024 no menciona ninguna sobre la inmigración.",
@@ -1708,8 +1713,8 @@
     "status": "ok"
   },
   "sd.c1": {
-    "en": "<b>Southern Baptist, environment:</b> its resolution opposes “solutions based on questionable science” but never names climate, so it is marked “Doesn't say”.",
-    "es": "<b>Bautista del Sur, medio ambiente:</b> su resolución se opone a “solutions based on questionable science”, pero nunca menciona el clima, así que se marca «No lo dice».",
+    "en": "<b>Southern Baptist, environment:</b> its 2007 resolution supports only “cost-effective measures” to reduce emissions and asks Congress to “reject government-mandated reductions”. It is placed with opposing climate measures.",
+    "es": "<b>Bautista del Sur, medio ambiente:</b> su resolución de 2007 apoya solo “cost-effective measures” para reducir las emisiones y pide al Congreso “reject government-mandated reductions”. Se ubica con oponerse a las medidas climáticas.",
     "status": "ok"
   },
   "sd.c2": {

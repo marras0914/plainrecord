@@ -2147,106 +2147,60 @@
    "refs": []
   },
   {
-   "statement": "sbc.environment.2006-06",
+   "statement": "sbc.environment.2007-06",
    "scope": "whole document",
    "refs": [
     {
-     "asWritten": "Genesis 1:1",
-     "code": "GEN",
-     "chapter": 1,
+     "asWritten": "Psalm 24:1",
+     "code": "PSA",
+     "chapter": 24,
      "ranges": [
       [
        1,
        1
       ]
      ],
-     "chapterPage": "GEN01.htm",
+     "chapterPage": "PSA024.htm",
      "verseKeys": [
-      "GEN 1:1"
+      "PSA 24:1"
      ],
      "verseCount": 1,
      "notInBible": []
     },
     {
-     "asWritten": "Genesis 1:4, 10, 12, 18, 21, 32",
-     "code": "GEN",
-     "chapter": 1,
+     "asWritten": "Isaiah 45:5-8",
+     "code": "ISA",
+     "chapter": 45,
      "ranges": [
       [
-       4,
-       4
-      ],
-      [
-       10,
-       10
-      ],
-      [
-       12,
-       12
-      ],
-      [
-       18,
-       18
-      ],
-      [
-       21,
-       21
-      ],
-      [
-       32,
-       32
+       5,
+       8
       ]
      ],
-     "chapterPage": "GEN01.htm",
+     "chapterPage": "ISA45.htm",
      "verseKeys": [
-      "GEN 1:4",
-      "GEN 1:10",
-      "GEN 1:12",
-      "GEN 1:18",
-      "GEN 1:21"
+      "ISA 45:5",
+      "ISA 45:6",
+      "ISA 45:7",
+      "ISA 45:8"
      ],
-     "verseCount": 6,
-     "notInBible": [
-      "GEN 1:32"
-     ],
-     "chapterLength": 31
-    },
-    {
-     "asWritten": "Psalm 19:1-6",
-     "code": "PSA",
-     "chapter": 19,
-     "ranges": [
-      [
-       1,
-       6
-      ]
-     ],
-     "chapterPage": "PSA019.htm",
-     "verseKeys": [
-      "PSA 19:1",
-      "PSA 19:2",
-      "PSA 19:3",
-      "PSA 19:4",
-      "PSA 19:5",
-      "PSA 19:6"
-     ],
-     "verseCount": 6,
+     "verseCount": 4,
      "notInBible": []
     },
     {
-     "asWritten": "Genesis 1:26-27",
-     "code": "GEN",
-     "chapter": 1,
+     "asWritten": "Hebrews 4:12-13",
+     "code": "HEB",
+     "chapter": 4,
      "ranges": [
       [
-       26,
-       27
+       12,
+       13
       ]
      ],
-     "chapterPage": "GEN01.htm",
+     "chapterPage": "HEB04.htm",
      "verseKeys": [
-      "GEN 1:26",
-      "GEN 1:27"
+      "HEB 4:12",
+      "HEB 4:13"
      ],
      "verseCount": 2,
      "notInBible": []
@@ -2279,70 +2233,125 @@
      "notInBible": []
     },
     {
-     "asWritten": "Genesis 3:1-19",
-     "code": "GEN",
-     "chapter": 3,
+     "asWritten": "Psalm 140:12",
+     "code": "PSA",
+     "chapter": 140,
      "ranges": [
       [
-       1,
-       19
+       12,
+       12
       ]
      ],
-     "chapterPage": "GEN03.htm",
-     "verseKeys": [],
-     "verseCount": 19,
-     "notInBible": []
-    },
-    {
-     "asWritten": "Romans 8:19-22",
-     "code": "ROM",
-     "chapter": 8,
-     "ranges": [
-      [
-       19,
-       22
-      ]
-     ],
-     "chapterPage": "ROM08.htm",
+     "chapterPage": "PSA140.htm",
      "verseKeys": [
-      "ROM 8:19",
-      "ROM 8:20",
-      "ROM 8:21",
-      "ROM 8:22"
-     ],
-     "verseCount": 4,
-     "notInBible": []
-    },
-    {
-     "asWritten": "2 Chronicles 19:2",
-     "code": "2CH",
-     "chapter": 19,
-     "ranges": [
-      [
-       2,
-       2
-      ]
-     ],
-     "chapterPage": "2CH19.htm",
-     "verseKeys": [
-      "2CH 19:2"
+      "PSA 140:12"
      ],
      "verseCount": 1,
      "notInBible": []
     },
     {
-     "asWritten": "Revelation 21:1",
-     "code": "REV",
-     "chapter": 21,
+     "asWritten": "Proverbs 14:31",
+     "code": "PRO",
+     "chapter": 14,
      "ranges": [
       [
-       1,
-       1
+       31,
+       31
       ]
      ],
-     "chapterPage": "REV21.htm",
+     "chapterPage": "PRO14.htm",
      "verseKeys": [
-      "REV 21:1"
+      "PRO 14:31"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "Proverbs 29:7",
+     "code": "PRO",
+     "chapter": 29,
+     "ranges": [
+      [
+       7,
+       7
+      ]
+     ],
+     "chapterPage": "PRO29.htm",
+     "verseKeys": [
+      "PRO 29:7"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "Isaiah 25:4",
+     "code": "ISA",
+     "chapter": 25,
+     "ranges": [
+      [
+       4,
+       4
+      ]
+     ],
+     "chapterPage": "ISA25.htm",
+     "verseKeys": [
+      "ISA 25:4"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "Ezekiel 22:29, 31",
+     "code": "EZE",
+     "chapter": 22,
+     "ranges": [
+      [
+       29,
+       29
+      ],
+      [
+       31,
+       31
+      ]
+     ],
+     "chapterPage": "EZK22.htm",
+     "verseKeys": [
+      "EZE 22:29",
+      "EZE 22:31"
+     ],
+     "verseCount": 2,
+     "notInBible": []
+    },
+    {
+     "asWritten": "Matthew 25:40",
+     "code": "MAT",
+     "chapter": 25,
+     "ranges": [
+      [
+       40,
+       40
+      ]
+     ],
+     "chapterPage": "MAT25.htm",
+     "verseKeys": [
+      "MAT 25:40"
+     ],
+     "verseCount": 1,
+     "notInBible": []
+    },
+    {
+     "asWritten": "John 14:15",
+     "code": "JOH",
+     "chapter": 14,
+     "ranges": [
+      [
+       15,
+       15
+      ]
+     ],
+     "chapterPage": "JHN14.htm",
+     "verseKeys": [
+      "JOH 14:15"
      ],
      "verseCount": 1,
      "notInBible": []
@@ -3297,69 +3306,61 @@
    "web": "for in six days Yahweh made heaven and earth, the sea, and all that is in them, and rested the seventh day; therefore Yahweh blessed the Sabbath day, and made it holy.",
    "rv1909": "Porque en seis días hizo Jehová los cielos y la tierra, la mar y todas las cosas que en ellos hay, y reposó en el séptimo día: por tanto Jehová bendijo el día del reposo y lo santificó."
   },
-  "GEN 1:4": {
-   "web": "God saw the light, and saw that it was good. God divided the light from the darkness.",
-   "rv1909": "Y vió Dios que la luz era buena: y apartó Dios la luz de las tinieblas."
+  "PSA 24:1": {
+   "web": "A Psalm by David. The earth is Yahweh’s, with its fullness; the world, and those who dwell in it.",
+   "rv1909": "Salmo de David. DE Jehová es la tierra y su plenitud; el mundo, y los que en él habitan."
   },
-  "GEN 1:10": {
-   "web": "God called the dry land “earth”, and the gathering together of the waters he called “seas”. God saw that it was good.",
-   "rv1909": "Y llamó Dios á la seca Tierra, y á la reunión de las aguas llamó Mares: y vió Dios que era bueno."
+  "ISA 45:5": {
+   "web": "I am Yahweh, and there is no one else. Besides me, there is no God. I will strengthen you, though you have not known me,",
+   "rv1909": "Yo Jehová, y ninguno más hay: no hay Dios fuera de mí. Yo te ceñiré, aunque tú no me conociste;"
   },
-  "GEN 1:12": {
-   "web": "The earth yielded grass, herbs yielding seed after their kind, and trees bearing fruit, with their seeds in it, after their kind; and God saw that it was good.",
-   "rv1909": "Y produjo la tierra hierba verde, hierba que da simiente según su naturaleza, y árbol que da fruto, cuya simiente está en él, según su género: y vió Dios que era bueno."
+  "ISA 45:6": {
+   "web": "that they may know from the rising of the sun, and from the west, that there is no one besides me. I am Yahweh, and there is no one else.",
+   "rv1909": "Para que se sepa desde el nacimiento del sol, y desde donde se pone, que no hay más que yo; yo Jehová, y ninguno más que yo:"
   },
-  "GEN 1:18": {
-   "web": "and to rule over the day and over the night, and to divide the light from the darkness. God saw that it was good.",
-   "rv1909": "Y para señorear en el día y en la noche, y para apartar la luz y las tinieblas: y vió Dios que era bueno."
+  "ISA 45:7": {
+   "web": "I form the light and create darkness. I make peace and create calamity. I am Yahweh, who does all these things.",
+   "rv1909": "Que formo la luz y crío las tinieblas, que hago la paz y crío el mal. Yo Jehová que hago todo esto."
   },
-  "PSA 19:1": {
-   "web": "For the Chief Musician. A Psalm by David. The heavens declare the glory of God. The expanse shows his handiwork.",
-   "rv1909": "Al Músico principal: Salmo de David. LOS cielos cuentan la gloria de Dios, y la expansión denuncia la obra de sus manos."
+  "ISA 45:8": {
+   "web": "Rain, you heavens, from above, and let the skies pour down righteousness. Let the earth open, that it may produce salvation, and let it cause righteousness to spring up with it. I, Yahweh, have created it.",
+   "rv1909": "Rociad, cielos, de arriba, y las nubes destilen la justicia; ábrase la tierra, y prodúzcanse la salud y la justicia; háganse brotar juntamente. Yo Jehová lo crié."
   },
-  "PSA 19:2": {
-   "web": "Day after day they pour out speech, and night after night they display knowledge.",
-   "rv1909": "El un día emite palabra al [otro] día, y la [una] noche á la [otra] noche declara sabiduría."
+  "HEB 4:12": {
+   "web": "For the word of God is living and active, and sharper than any two-edged sword, piercing even to the dividing of soul and spirit, of both joints and marrow, and is able to discern the thoughts and intentions of the heart.",
+   "rv1909": "Porque la palabra de Dios [es] viva y eficaz, y más penetrante que toda espada de dos filos: y que alcanza hasta partir el alma, y aun el espíritu, y las coyunturas y tuétanos, y discierne los pensamientos y las intenciones del corazón."
   },
-  "PSA 19:3": {
-   "web": "There is no speech nor language where their voice is not heard.",
-   "rv1909": "No hay dicho, ni palabras, ni es oída su voz."
+  "HEB 4:13": {
+   "web": "There is no creature that is hidden from his sight, but all things are naked and laid open before the eyes of him to whom we must give an account.",
+   "rv1909": "Y no hay cosa criada que no sea manifiesta en su presencia; antes todas las cosas están desnudas y abiertas á los ojos de aquel á quien tenemos que dar cuenta."
   },
-  "PSA 19:4": {
-   "web": "Their voice has gone out through all the earth, their words to the end of the world. In them he has set a tent for the sun,",
-   "rv1909": "Por toda la tierra salió su hilo, y al cabo del mundo sus palabras. En ellos puso tabernáculo para el sol."
+  "PSA 140:12": {
+   "web": "I know that Yahweh will maintain the cause of the afflicted, and justice for the needy.",
+   "rv1909": "Yo sé que hará Jehová el juicio del afligido, el juicio de los menesterosos."
   },
-  "PSA 19:5": {
-   "web": "which is as a bridegroom coming out of his room, like a strong man rejoicing to run his course.",
-   "rv1909": "Y él, como un novio que sale de su tálamo, alégrase cual gigante para correr el camino."
+  "PRO 14:31": {
+   "web": "He who oppresses the poor shows contempt for his Maker, but he who is kind to the needy honors him.",
+   "rv1909": "El que oprime al pobre, afrenta á su Hacedor: mas el que tiene misericordia del pobre, lo honra."
   },
-  "PSA 19:6": {
-   "web": "His going out is from the end of the heavens, his circuit to its ends. There is nothing hidden from its heat.",
-   "rv1909": "Del un cabo de los cielos es su salida, y su giro hasta la extremidad de ellos: y no hay quien se esconda de su calor."
+  "PRO 29:7": {
+   "web": "The righteous care about justice for the poor. The wicked aren’t concerned about knowledge.",
+   "rv1909": "Conoce el justo la causa de los pobres: [mas] el impío no entiende sabiduría."
   },
-  "ROM 8:19": {
-   "web": "For the creation waits with eager expectation for the children of God to be revealed.",
-   "rv1909": "Porque el continuo anhelar de las criaturas espera la manifestación de los hijos de Dios."
+  "ISA 25:4": {
+   "web": "For you have been a stronghold to the poor, a stronghold to the needy in his distress, a refuge from the storm, a shade from the heat, when the blast of the dreaded ones is like a storm against the wall.",
+   "rv1909": "Porque fuiste fortaleza al pobre, fortaleza al menesteroso en su aflicción, amparo contra el turbión, sombra contra el calor: porque el ímpetu de los violentos es como turbión contra frontispicio."
   },
-  "ROM 8:20": {
-   "web": "For the creation was subjected to vanity, not of its own will, but because of him who subjected it, in hope",
-   "rv1909": "Porque las criaturas sujetas fueron á vanidad, no de grado, mas por causa del que las sujetó con esperanza,"
+  "EZE 22:29": {
+   "web": "The people of the land have used oppression and exercised robbery. Yes, they have troubled the poor and needy, and have oppressed the foreigner wrongfully.",
+   "rv1909": "El pueblo de la tierra usaba de opresión, y cometía robo, y al afligido y menesteroso hacían violencia, y al extranjero oprimían sin derecho."
   },
-  "ROM 8:21": {
-   "web": "that the creation itself also will be delivered from the bondage of decay into the liberty of the glory of the children of God.",
-   "rv1909": "Que también las mismas criaturas serán libradas de la servidumbre de corrupción en la libertad gloriosa de los hijos de Dios."
+  "EZE 22:31": {
+   "web": "Therefore I have poured out my indignation on them. I have consumed them with the fire of my wrath. I have brought their own way on their heads,” says the Lord Yahweh.",
+   "rv1909": "Por tanto derramé sobre ellos mi ira; con el fuego de mi ira los consumí: torné el camino de ellos sobre su cabeza, dice el Señor Jehová."
   },
-  "ROM 8:22": {
-   "web": "For we know that the whole creation groans and travails in pain together until now.",
-   "rv1909": "Porque sabemos que todas las criaturas gimen á una, y á una están de parto hasta ahora."
-  },
-  "2CH 19:2": {
-   "web": "Jehu the son of Hanani the seer went out to meet him, and said to King Jehoshaphat, “Should you help the wicked, and love those who hate Yahweh? Because of this, wrath is on you from before Yahweh.",
-   "rv1909": "Y salióle al encuentro Jehú el vidente, hijo de Hanani, y dijo al rey Josaphat: ¿Al impío das ayuda, y amas á los que aborrecen á Jehová? Pues la ira de la presencia de Jehová será sobre ti por ello."
-  },
-  "REV 21:1": {
-   "web": "I saw a new heaven and a new earth, for the first heaven and the first earth have passed away, and the sea is no more.",
-   "rv1909": "Y VI un cielo nuevo, y una tierra nueva: porque el primer cielo y la primera tierra se fueron, y el mar ya no es."
+  "JOH 14:15": {
+   "web": "If you love me, keep my commandments.",
+   "rv1909": "Si me amáis, guardad mis mandamientos;"
   },
   "GEN 1:29": {
    "web": "God said, “Behold, I have given you every herb yielding seed, which is on the surface of all the earth, and every tree, which bears fruit yielding seed. It will be your food.",
@@ -3393,6 +3394,10 @@
    "web": "But if God so clothes the grass of the field, which today exists and tomorrow is thrown into the oven, won’t he much more clothe you, you of little faith?",
    "rv1909": "Y si la hierba del campo que hoy es, y mañana es echada en el horno, Dios [la] viste así, ¿no [hará] mucho más á vosotros, [hombres] de poca fe?"
   },
+  "ROM 8:22": {
+   "web": "For we know that the whole creation groans and travails in pain together until now.",
+   "rv1909": "Porque sabemos que todas las criaturas gimen á una, y á una están de parto hasta ahora."
+  },
   "ROM 8:23": {
    "web": "Not only so, but ourselves also, who have the first fruits of the Spirit, even we ourselves groan within ourselves, waiting for adoption, the redemption of our body.",
    "rv1909": "Y no sólo ellas, mas también nosotros mismos, que tenemos las primicias del Espíritu, nosotros también gemimos dentro de nosotros mismos, esperando la adopción, [es á saber], la redención de nuestro cuerpo."
@@ -3400,6 +3405,22 @@
   "ROM 8:24": {
    "web": "For we were saved in hope, but hope that is seen is not hope. For who hopes for that which he sees?",
    "rv1909": "Porque en esperanza somos salvos; mas la esperanza que se ve, no es esperanza; porque lo que alguno ve, ¿á qué esperarlo?"
+  },
+  "GEN 1:4": {
+   "web": "God saw the light, and saw that it was good. God divided the light from the darkness.",
+   "rv1909": "Y vió Dios que la luz era buena: y apartó Dios la luz de las tinieblas."
+  },
+  "GEN 1:10": {
+   "web": "God called the dry land “earth”, and the gathering together of the waters he called “seas”. God saw that it was good.",
+   "rv1909": "Y llamó Dios á la seca Tierra, y á la reunión de las aguas llamó Mares: y vió Dios que era bueno."
+  },
+  "GEN 1:12": {
+   "web": "The earth yielded grass, herbs yielding seed after their kind, and trees bearing fruit, with their seeds in it, after their kind; and God saw that it was good.",
+   "rv1909": "Y produjo la tierra hierba verde, hierba que da simiente según su naturaleza, y árbol que da fruto, cuya simiente está en él, según su género: y vió Dios que era bueno."
+  },
+  "GEN 1:18": {
+   "web": "and to rule over the day and over the night, and to divide the light from the darkness. God saw that it was good.",
+   "rv1909": "Y para señorear en el día y en la noche, y para apartar la luz y las tinieblas: y vió Dios que era bueno."
   },
   "GEN 2:15": {
    "web": "Yahweh God took the man, and put him into the garden of Eden to cultivate and keep it.",
