@@ -2352,7 +2352,7 @@ try {
     };
     const HOUSE = { en: 'texas-house', es: 'camara-de-texas' };
     const housePages = faith.houseVotes.flatMap((h) => [[`/faith/${SLUG[h.traditionId][0]}/${HOUSE.en}`, h], [`/fe/${SLUG[h.traditionId][1]}/${HOUSE.es}`, h]]);
-    const pages = [['/faith', null], ['/fe', null], ['/faith/methodology', null], ['/fe/metodologia', null], ['/faith/sides', null], ['/fe/posturas', null],
+    const pages = [['/faith', null], ['/fe', null], ['/faith/methodology', null], ['/fe/metodologia', null], ['/faith/sides', null], ['/fe/posturas', null], ['/faith/scripture', null], ['/fe/escrituras', null],
       ...Object.entries(SLUG).flatMap(([id, [en, es]]) => [[`/faith/${en}`, id], [`/fe/${es}`, id]]),
       ...housePages.map(([p]) => [p, null])];
     const fc = await browser.newContext({ javaScriptEnabled: false });

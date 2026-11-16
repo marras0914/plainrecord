@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
     "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
     "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause). The 14 strings that add the Jewish movements to the sides page (\"tradition\" for \"church\", and the short names Reformista, Conservador, Ortodoxo) approved by Marco on 16 November 2026, no corrections. The 4 strings for the SBC's 2007 \"On Global Warming\" (its summary, the reworded judgment call sd.c1, the San Antonio body line, and Ezequiel) approved by Marco on 16 November 2026, no corrections."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections. The 62 strings of the sides page (sd.*, side.*, noside.*, home.sidesNote, me.h2sides, me.sides) and the rewritten me.not approved by Marco on 16 November 2026, no corrections; home.lede then carries both approved edits (the Jewish movements, and no \"which party is closer\" clause). The 14 strings that add the Jewish movements to the sides page (\"tradition\" for \"church\", and the short names Reformista, Conservador, Ortodoxo) approved by Marco on 16 November 2026, no corrections. The 4 strings for the SBC's 2007 \"On Global Warming\" (its summary, the reworded judgment call sd.c1, the San Antonio body line, and Ezequiel) approved by Marco on 16 November 2026, no corrections. The 11 strings of the scripture page (sc.*, me.h2scripture, me.scripture) approved by Marco on 16 November 2026, no corrections."
   },
   "kicker": {
     "en": "Faith and the platforms",
@@ -1767,6 +1767,51 @@
     "es": "Ortodoxo",
     "status": "ok"
   },
+  "sc.h1": {
+    "en": "What scripture each tradition cites",
+    "es": "Qué escrituras cita cada tradición",
+    "status": "ok"
+  },
+  "sc.docTitle": {
+    "en": "What scripture each tradition cites, issue by issue",
+    "es": "Qué escrituras cita cada tradición, tema por tema",
+    "status": "ok"
+  },
+  "sc.desc": {
+    "en": "For each issue, the Bible passages and Jewish texts each tradition's statement cites, grouped by the side its words take. The site does not say which reading is right.",
+    "es": "En cada tema, los pasajes bíblicos y textos judíos que cita la declaración de cada tradición, agrupados según la postura que toman sus palabras. El sitio no dice qué lectura es la correcta.",
+    "status": "ok"
+  },
+  "sc.lede": {
+    "en": "Traditions often cite scripture for their positions, and sometimes the same passage for opposite answers. This page lists what each tradition's statement on an issue cites, grouped by the side its words take on the platforms' question. The site does not say which reading is right.",
+    "es": "Las tradiciones suelen citar las escrituras para sus posturas, y a veces el mismo pasaje para respuestas opuestas. Esta página enumera lo que cita la declaración de cada tradición sobre un tema, agrupada según la postura que toman sus palabras ante la pregunta de las plataformas. El sitio no dice qué lectura es la correcta.",
+    "status": "ok"
+  },
+  "sc.scope": {
+    "en": "Each list is every passage a statement cites, not only those it gives for this point. Where a document covers several issues, only its section on this issue counts.",
+    "es": "Cada lista incluye todos los pasajes que cita una declaración, no solo los que da para este punto. Cuando un documento abarca varios temas, solo cuenta su sección sobre este tema.",
+    "status": "ok"
+  },
+  "sc.platforms": {
+    "en": "None of the four party platforms cites scripture.",
+    "es": "Ninguna de las cuatro plataformas de los partidos cita las escrituras.",
+    "status": "ok"
+  },
+  "sc.h3both": {
+    "en": "Cited on both sides: traditions on opposite sides of this point cite the same passage",
+    "es": "Citado por ambos lados: tradiciones de lados opuestos sobre este punto citan el mismo pasaje",
+    "status": "ok"
+  },
+  "sc.none": {
+    "en": "No scripture cited.",
+    "es": "No cita escrituras.",
+    "status": "ok"
+  },
+  "sc.noSides": {
+    "en": "The platforms take no opposite sides on this issue, so the traditions are listed without sides.",
+    "es": "Las plataformas no toman posturas opuestas sobre este tema, así que las tradiciones se enumeran sin agruparlas por postura.",
+    "status": "ok"
+  },
   "home.sidesNote": {
     "en": "For each issue the platforms split on, which side each tradition's own words take. No score.",
     "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada tradición. Sin puntaje.",
@@ -1780,6 +1825,16 @@
   "me.sides": {
     "en": "{linkHtml} places each tradition, issue by issue, on one side of a point the two platforms split on, only where the tradition's own words take a side, and shows the quote. It gives no total. Three placements were judgment calls, and the page lists them.",
     "es": "{linkHtml} ubica a cada tradición, tema por tema, de un lado de un punto en que las dos plataformas toman posturas opuestas, solo donde las propias palabras de la tradición toman postura, y muestra la cita. No da ningún total. Tres ubicaciones fueron decisiones de criterio, y la página las enumera.",
+    "status": "ok"
+  },
+  "me.h2scripture": {
+    "en": "What scripture each tradition cites",
+    "es": "Qué escrituras cita cada tradición",
+    "status": "ok"
+  },
+  "me.scripture": {
+    "en": "{linkHtml} lists the passages each tradition's statements cite, grouped by the side their words take, and the passages that traditions on opposite sides both cite. It does not say which reading is right.",
+    "es": "{linkHtml} enumera los pasajes que citan las declaraciones de cada tradición, agrupados según la postura que toman sus palabras, y los pasajes que citan tradiciones de lados opuestos. No dice qué lectura es la correcta.",
     "status": "ok"
   },
   "side.immigration.q": {

@@ -43,14 +43,20 @@ import { FAITH_PATHS, TRADITION_SLUG, traditionPath, houseVotesPath } from './_f
 const FAITH_TRADITION_EN = {
   catholic: 'the Catholic Church in the United States', sbc: 'the Southern Baptist Convention',
   umc: 'The United Methodist Church', ame: 'the African Methodist Episcopal Church', ag: 'the Assemblies of God',
+  // Missing until 16 Nov 2026, so llms.txt said "What undefined officially says".
+  reform: 'Reform Judaism (its rabbinical conference and congregational union)', conservative: 'Conservative Judaism (its Rabbinical Assembly)', orthodox: 'Orthodox Judaism (the Orthodox Union)',
 };
 const FAITH_LABELS = Object.fromEntries(['en', 'es'].flatMap((lang) => {
   const inLang = lang === 'es' ? 'in Spanish' : 'in English';
   return [
-    [`/${FAITH_PATHS[lang].home}`, `What five Christian traditions officially say on eight issues, beside the Texas and national party platforms, ${inLang}`],
+    [`/${FAITH_PATHS[lang].home}`, `What five Christian traditions and three Jewish movements officially say on eight issues, beside the Texas and national party platforms, ${inLang}`],
     [`/${FAITH_PATHS[lang].method}`, `How the faith pages were made, ${inLang}`],
-    [`/${FAITH_PATHS[lang].sides}`, `Which side five churches' official statements take on each issue the party platforms split on, with no total, ${inLang}`],
-    ...Object.keys(TRADITION_SLUG).map((id) => [`/${traditionPath(id, lang)}`, `What ${FAITH_TRADITION_EN[id]} officially says on eight issues, beside the party platforms, ${inLang}`]),
+    [`/${FAITH_PATHS[lang].sides}`, `Which side eight religious traditions' official statements take on each issue the party platforms split on, with no total, ${inLang}`],
+    [`/${FAITH_PATHS[lang].scripture}`, `The scripture each tradition's statements cite, grouped by the side they take, and the passages cited on both sides, ${inLang}`],
+    ...Object.keys(TRADITION_SLUG).map((id) => {
+      if (!FAITH_TRADITION_EN[id]) throw new Error(`build_locales: no llms.txt name for tradition ${id}`);
+      return [`/${traditionPath(id, lang)}`, `What ${FAITH_TRADITION_EN[id]} officially says on eight issues, beside the party platforms, ${inLang}`];
+    }),
     [`/${houseVotesPath('catholic', lang)}`, `How each party in the Texas House voted in 2025 on the bills the Texas Catholic bishops supported or opposed, ${inLang}`],
   ];
 }));

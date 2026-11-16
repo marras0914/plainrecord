@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="es-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Qué escrituras cita cada tradición, tema por tema</title>
+<meta name="description" content="En cada tema, los pasajes bíblicos y textos judíos que cita la declaración de cada tradición, agrupados según la postura que toman sus palabras. El sitio no dice qué lectura es la correcta.">
+<link rel="canonical" href="https://rightnleft.com/fe/escrituras">
+<link rel="alternate" hreflang="es" href="https://rightnleft.com/fe/escrituras">
+<link rel="alternate" hreflang="en" href="https://rightnleft.com/faith/scripture">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Qué escrituras cita cada tradición">
+<meta property="og:description" content="En cada tema, los pasajes bíblicos y textos judíos que cita la declaración de cada tradición, agrupados según la postura que toman sus palabras. El sitio no dice qué lectura es la correcta.">
+<meta property="og:url" content="https://rightnleft.com/fe/escrituras">
+<meta property="og:image" content="https://rightnleft.com/og-religion.es.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script src="/js/theme.js"></script>
+<script src="/_vercel/insights/script.js" defer></script>
+<link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/newsreader-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-ext-300-700.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-300-700.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-ext-400-600.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-400-600.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{--page:#faf7f1;--surface:#fffdf9;--ink:#1a1714;--ink-2:#57514a;--muted:#6f6a62;
+      --hair:#e6ded1;--rule:#cabfae;--blue:#1f66bd;--red:#c8352f;
+      /* Chart purples, one hue light to dark, validated --ordinal against both
+         the card and the page surface. --pbar is the single-series bar. */
+      --p1:#bda5da;--p2:#a583cc;--p3:#8e62bc;--p4:#7241a0;--p5:#54277c;--pbar:#8e62bc;}
+/* Dark by the quiz's rule, not the OS: light by default, dark only when the
+   reader chose it on the quiz. /js/theme.js sets data-theme before paint. These
+   pages used to follow prefers-color-scheme, which turned a light quiz into a
+   dark race page for anyone whose phone was set to dark. */
+:root[data-theme="dark"]{color-scheme:dark;
+  --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
+  --hair:#2c2c2a;--rule:#383835;--blue:#3987e5;--red:#e66767;
+  --p1:#684b88;--p2:#865eb1;--p3:#a377d3;--p4:#bc97e8;--p5:#d5b9f7;--pbar:#a377d3;}
+/* A crossfade between pages instead of a hard cut, using the browser's own
+   cross-document view transitions: CSS only, same-origin only, and ignored by
+   browsers without it. Off for anyone who asked for reduced motion. The quiz
+   carries the same rule in src/styles.css, so moving between them fades too. */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
+  font-size:17px;-webkit-text-size-adjust:100%}
+main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
+/* Laptops and wider (Marco, 14 Nov 2026: "a lot of wasted space"). The column
+   grows to the quiz's width; running text keeps a readable line, and the room
+   goes to what can use it: side-by-side cards, tables and charts. */
+@media (min-width:1024px){
+  main{max-width:62rem;padding:48px 32px 80px}
+  main p,main li,main blockquote,main dd{max-width:72ch}
+  main .card p,main .card li,main .card blockquote{max-width:none}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:start}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px;align-items:start}
+  .duo>.hubcard{align-self:stretch}
+}
+.hubcard h2{margin:2px 0 8px}
+h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
+  line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}
+h2{font-size:clamp(1.25rem,4.4vw,1.5rem);margin:40px 0 10px}
+.kicker{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lede{font-size:1.1rem;color:var(--ink-2);margin:0 0 8px;text-wrap:pretty}
+p{margin:0 0 14px}
+.label{font-weight:600}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
+  padding:18px 18px 6px;margin:14px 0}
+ul{margin:0 0 14px;padding-left:1.1rem}
+li{margin:0 0 8px}
+.bill{font-variant-numeric:tabular-nums;font-weight:600}
+.small{font-size:13.5px;color:var(--muted)}
+/* The check-it-yourself link beside a bill. Deliberately quieter than the
+   summary it follows: it is there for the reader who doubts the line, not a
+   thing every reader is being sent to. */
+.hist{font-size:12.5px;white-space:nowrap}
+/* How a member stood on a headline bill. A word, not a colour: the page is read
+   by people who cannot distinguish red from green, and printed in black. */
+.dindex{list-style:none;padding:0;margin:14px 0 18px;columns:2;column-gap:26px}
+.dindex li{break-inside:avoid;padding:3px 0;font-size:15.5px}
+.dindex a{text-decoration:none}
+.dindex a:hover{text-decoration:underline}
+@media (max-width:520px){.dindex{columns:1}}
+.stand{list-style:none;padding:0;margin:0}
+.stand li{padding:9px 0;border-top:1px solid var(--hair)}
+.stand li:first-child{border-top:0}
+.vm{font-size:12.5px;padding:1px 8px;border-radius:999px;white-space:nowrap;
+    border:1px solid var(--rule);color:var(--ink-2)}
+.vm-none{opacity:.75}
+a{color:var(--blue)}
+.cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
+  background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
+hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;
+  font-size:13px;margin-bottom:14px}
+.kicker-line{margin:0 0 16px}
+.brand{--b-r:#c8352f;--b-n:#7d5ba6;--b-l:#1f66bd;display:inline-flex;font-family:"Lexend",system-ui,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1.1;color:inherit;text-decoration:none;padding-bottom:7px}:root[data-theme="dark"] .brand{--b-r:#e66767;--b-n:#a377d3;--b-l:#3987e5}.brand span{background:no-repeat 0 100%/calc(100% - 2px) 5px;padding-bottom:5px;margin-bottom:-7px}.brand .b-r{background-image:linear-gradient(var(--b-r),var(--b-r))}.brand .b-n{color:var(--b-n);background-image:linear-gradient(var(--b-n),var(--b-n))}.brand .b-l{background-image:linear-gradient(var(--b-l),var(--b-l))}.brand:hover{text-decoration:none}.brand:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}@media print{.brand{--b-r:#000;--b-n:#000;--b-l:#000}}
+/* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
+   scrolling sideways on a phone; the current section is ink, not link blue. */
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sitenav a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}
+.sitenav a:hover{text-decoration:underline}
+.sitenav a[aria-current]{color:var(--ink);font-weight:600}
+.sitefoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px}
+.sitefoot ul{list-style:none;padding:0;margin:0}.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}.sitefoot a:hover{text-decoration:underline}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
+/* Charts, drawn by scripts/_charts.mjs. */
+.chart{margin:16px 0 10px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:inherit;fill:var(--ink-2);font-size:12px}
+.chart .tick{fill:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.chart .note{fill:var(--muted);font-size:11.5px}
+.chart .lab{fill:var(--ink);font-size:12.5px;font-weight:600}
+.chart .val{fill:var(--ink);font-size:12px;font-weight:600}
+.chart .grid,.chart .axis{stroke:var(--hair);stroke-width:1}
+.chart .axis{stroke:var(--rule)}
+.chart .med{stroke:var(--ink-2);stroke-width:1.5}
+.chart .lead{stroke:var(--muted);stroke-width:1}
+.chart .bar{fill:var(--pbar)}
+.chart .dot{stroke:var(--surface);stroke-width:2}
+.chart .D{fill:var(--blue)} .chart .R{fill:var(--red)}
+.chart .sq.none{opacity:.32}
+.chart .dist{stroke:var(--page);stroke-width:.6}
+.chart .p1{fill:var(--p1)} .chart .p2{fill:var(--p2)} .chart .p3{fill:var(--p3)}
+.chart .p4{fill:var(--p4)} .chart .p5{fill:var(--p5)} .chart .nodata{fill:var(--hair)}
+.chart .maplab{fill:var(--ink);font-size:11.5px;font-weight:600;paint-order:stroke;stroke:var(--page);stroke-width:3px;stroke-linejoin:round}
+.chart .inbox{fill:none;stroke:var(--ink-2);stroke-width:1}
+.chart a:hover .dist,.chart a:focus .dist{stroke:var(--ink);stroke-width:1.5}
+.chart a:hover .dot,.chart a:focus .dot{stroke:var(--ink)}
+/* A 608-wide viewBox drawn into a phone scales to about 0.56, which took 11px
+   labels to 6px. Larger type in viewBox units lands near 10px on screen. */
+@media (max-width:520px){.chart .tick,.chart .note,.chart .maplab{font-size:17px}.chart .lab,.chart .val{font-size:18px}}
+.legend{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;color:var(--ink-2)}
+.legend li{margin:0}.legend .sw{display:inline-block;width:14px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.legend .p1{background:var(--p1)}.legend .p2{background:var(--p2)}.legend .p3{background:var(--p3)}.legend .p4{background:var(--p4)}.legend .p5{background:var(--p5)}.legend .nodata{background:var(--hair)}.legend .D{background:var(--blue)}.legend .R{background:var(--red)}
+p.lab{font-weight:600;color:var(--ink);margin:14px 0 0}
+.insets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media (max-width:520px){.insets{grid-template-columns:1fr}}
+.inset{margin:0}.inset svg{border:1px solid var(--hair);border-radius:8px}
+details.table{margin:6px 0 18px}
+details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
+.chart-table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:8px}
+.chart-table th,.chart-table td{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--hair)}
+.chart-table td.num,.chart-table th.num{text-align:right;font-variant-numeric:tabular-nums}
+/* The ZIP box on /districts. 17px so iOS does not zoom the page on focus. */
+#ziplookup input{font:inherit;font-size:17px;padding:10px 12px;width:9.5rem;margin-top:6px;
+  border:1px solid var(--rule);border-radius:8px;background:var(--page);color:var(--ink)}
+#ziplookup .zipout p{margin:12px 0 6px}
+.zips{font-variant-numeric:tabular-nums;font-size:14px;color:var(--ink-2);
+  line-height:1.8;word-spacing:.15em}
+/* Printing. A district page is the thing someone takes to the kitchen table
+   before voting, so on paper it drops the navigation and the invitations, goes
+   black on white whatever theme was chosen, and ends with its own address so a
+   printed copy can be checked against the live one. */
+.printonly{display:none}
+@media print{
+  :root,:root[data-theme="dark"]{color-scheme:light;--page:#fff;--surface:#fff;--ink:#000;
+    --ink-2:#222;--muted:#444;--hair:#bbb;--rule:#888;--blue:#000;--red:#000}
+  body{font-size:11.5pt;line-height:1.4}
+  main{max-width:none;padding:0}
+  .top,.sitenav,.sitefoot,.noprint,.hist,.cta{display:none}
+  .printonly{display:block;font-size:10pt;color:var(--muted)}
+  h1{font-size:20pt;margin:0 0 10px}
+  h2{font-size:14pt;margin:18px 0 6px;break-after:avoid}
+  li,.stand li{break-inside:avoid}
+  .stand li{padding:5px 0}
+  a{color:inherit;text-decoration:none}
+  hr{margin:16px 0}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Qué escrituras cita cada tradición","description":"En cada tema, los pasajes bíblicos y textos judíos que cita la declaración de cada tradición, agrupados según la postura que toman sus palabras. El sitio no dice qué lectura es la correcta.","inLanguage":"es-US","url":"https://rightnleft.com/fe/escrituras","isPartOf":{"@type":"WebSite","@id":"https://rightnleft.com/#website","url":"https://rightnleft.com/"}}</script>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a class="brand" href="https://rightnleft.com/es" aria-label="rightnleft, página de inicio"><span class="b-r">right</span><span class="b-n">n</span><span class="b-l">left</span></a>
+    <a href="https://rightnleft.com/faith/scripture">In English</a>
+  </div>
+  <p class="kicker kicker-line">La fe y las plataformas</p>
+  <nav class="sitenav" aria-label="Secciones del sitio"><a href="https://rightnleft.com/politica">Política</a><a href="https://rightnleft.com/fe" aria-current="true">Religión</a><a href="https://rightnleft.com/economia">Economía</a></nav>
+<style>
+  .notice{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--ink-2);border-radius:8px;padding:12px 14px;margin:14px 0 18px;font-size:15.5px}
+  .notice p{margin:0 0 4px}
+  blockquote.q{margin:4px 0 12px;padding:2px 0 2px 12px;border-left:2px solid var(--hair);font-family:"Newsreader",Georgia,serif;font-size:1.05rem;color:var(--ink-2)}
+  h3{font-size:1rem;margin:22px 0 6px;letter-spacing:.02em}
+  h4{font-size:.95rem;margin:16px 0 4px;color:var(--ink-2);font-weight:600}
+  .card p.small{margin-bottom:6px}
+  .none{font-weight:600}
+  details.verses{margin:0 0 12px}
+  details.verses summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
+  .vtext{font-family:"Newsreader",Georgia,serif;font-size:1rem;margin:4px 0 0}
+  .vtext sup{font-family:"Lexend",system-ui,sans-serif;font-size:.65em;color:var(--muted);margin:0 2px 0 4px}
+  details.earlier{margin:6px 0 14px}
+  details.earlier summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
+  .jump{display:flex;flex-wrap:wrap;gap:2px 14px;list-style:none;padding:0;font-size:14.5px}
+  .jump li{margin:0}.jump a{display:inline-block;min-height:32px;padding:4px 0}
+  .tablewrap{overflow-x:auto;margin:8px 0}
+  table.hv{border-collapse:collapse;font-size:15px;min-width:100%}
+  table.hv th,table.hv td{padding:6px 10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  table.hv td{font-variant-numeric:tabular-nums}
+  ul.tally{list-style:none;padding:0;margin:4px 0 6px;font-size:15px}
+  ul.tally li{margin:2px 0}
+  .way{font-weight:600}
+  p.caption{font-family:"Newsreader",Georgia,serif;font-size:1.02rem;color:var(--ink-2);margin:2px 0 6px}
+  </style><style>
+  table.sides{border-collapse:collapse;font-size:14.5px;min-width:100%}
+  table.sides th,table.sides td{padding:6px 8px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  table.sides thead th{font-size:13.5px;font-weight:600}
+  .mk{display:inline-block;min-width:26px;padding:1px 7px;border-radius:4px;font-weight:700;text-align:center;color:#fff}
+  .mk.D{background:var(--blue)} .mk.R{background:var(--red)}
+  .mk.none{color:var(--muted);font-weight:400;background:none;padding:1px 0;min-width:0;font-size:13.5px;text-align:left}
+  table.sides th[scope=row]{position:sticky;left:0;background:var(--page);z-index:1;min-width:7.5em}
+  @media print{.mk{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  .ans{font-weight:600}
+  </style><style>.both{border:2px solid var(--ink)}.both ul{margin:0 0 8px}</style>
+  <h1>Qué escrituras cita cada tradición</h1>
+  <p class="lede">Las tradiciones suelen citar las escrituras para sus posturas, y a veces el mismo pasaje para respuestas opuestas. Esta página enumera lo que cita la declaración de cada tradición sobre un tema, agrupada según la postura que toman sus palabras ante la pregunta de las plataformas. El sitio no dice qué lectura es la correcta.</p>
+  <div class="notice" role="note"><p><b>Todavía sin revisar.</b> Nadie de las tradiciones que aparecen en estas páginas ha revisado lo que dicen. Cada resumen es de este sitio, y cada uno lleva al texto completo para que usted lo verifique.</p><p class="small">Entradas revisadas hasta ahora: 0 de 83.</p></div>
+  <p class="small">Cada lista incluye todos los pasajes que cita una declaración, no solo los que da para este punto. Cuando un documento abarca varios temas, solo cuenta su sección sobre este tema. Ninguna de las cuatro plataformas de los partidos cita las escrituras.</p>
+  <ul class="jump"><li><a href="#immigration">Inmigración</a></li><li><a href="#abortion">Aborto</a></li><li><a href="#poverty">Pobreza y asistencia pública</a></li><li><a href="#death-penalty">La pena de muerte</a></li><li><a href="#guns">Armas de fuego</a></li><li><a href="#environment">El cuidado de la creación y el medio ambiente</a></li><li><a href="#healthcare">Atención médica</a></li><li><a href="#criminal-justice">Justicia penal</a></li></ul>
+  <h2 id="immigration">Inmigración</h2>
+  <p><b>¿Qué debe pasar con las personas que viven en Estados Unidos sin estatus legal?</b></p>
+  
+  <h3><span class="mk D">D</span> Ofrecerles una forma de quedarse legalmente</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#immigration"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:27</a> · <a href="https://ebible.org/spaRV1909/ZEC07.htm">Zacarías 7:10</a> · <a href="https://ebible.org/spaRV1909/2CO08.htm">2 Corintios 8:9</a> · <a href="https://ebible.org/spaRV1909/LUK10.htm">Lucas 10:30–37</a> · <a href="https://ebible.org/spaRV1909/MAT25.htm">Mateo 25</a> · <a href="https://ebible.org/spaRV1909/JHN13.htm">Juan 13:34</a> · <a href="https://ebible.org/spaRV1909/1CO12.htm">1 Corintios 12:26</a> · <a href="https://ebible.org/spaRV1909/ROM05.htm">Romanos 5:5</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#immigration"><b>Judaísmo reformista</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Genesis.12.1" lang="en">Genesis 12:1</a> · <a href="https://www.sefaria.org/Leviticus.19.34" lang="en">Leviticus 19:34</a> · <a href="https://www.sefaria.org/Leviticus.24.22" lang="en">Leviticus 24:22</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#immigration"><b>Judaísmo conservador</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Deuteronomy.23.16" lang="en">Deut. 23:16</a></p></div></div>
+  <h3>No lo dice</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#immigration"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:26–27</a> · <a href="https://ebible.org/spaRV1909/DEU10.htm">Deuteronomio 10:18–19</a> · <a href="https://ebible.org/spaRV1909/LEV19.htm">Levítico 19:34</a> · <a href="https://ebible.org/spaRV1909/MAT25.htm">Mateo 25:35</a> · <a href="https://ebible.org/spaRV1909/EPH02.htm">Efesios 2:14–19</a> · <a href="https://ebible.org/spaRV1909/ISA01.htm">Isaías 1:17</a> · <a href="https://ebible.org/spaRV1909/MIC06.htm">Miqueas 6:8</a> · <a href="https://ebible.org/spaRV1909/ROM13.htm">Romanos 13:1–7</a> · <a href="https://ebible.org/spaRV1909/GAL03.htm">Gálatas 3:28</a> · <a href="https://ebible.org/spaRV1909/COL04.htm">Colosenses 4:6</a> · <a href="https://ebible.org/spaRV1909/JAS02.htm">Santiago 2:1–4</a> · <a href="https://ebible.org/spaRV1909/PRO31.htm">Proverbios 31:8–9</a> · <a href="https://ebible.org/spaRV1909/ZEC07.htm">Zacarías 7:9–10</a> · <a href="https://ebible.org/spaRV1909/JER29.htm">Jeremías 29:7</a> · <a href="https://ebible.org/spaRV1909/MAT28.htm">Mateo 28:18–20</a> · <a href="https://ebible.org/spaRV1909/HEB13.htm">Hebreos 13:2</a> · <a href="https://ebible.org/spaRV1909/REV07.htm">Apocalipsis 7:9</a> · <a href="https://ebible.org/spaRV1909/LUK10.htm">Lucas 10:25–37</a> · <a href="https://ebible.org/spaRV1909/1TI02.htm">1 Timoteo 2:1–2</a> · <a href="https://ebible.org/spaRV1909/MAT19.htm">Mateo 19:14</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#immigration"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#immigration"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/ROM13.htm">Romanos 13:1</a> · <a href="https://ebible.org/spaRV1909/LUK04.htm">Lucas 4</a> · <a href="https://ebible.org/spaRV1909/MAT24.htm">Mateo 24</a> · <a href="https://ebible.org/spaRV1909/PRO03.htm">Proverbios 3:31</a> · <a href="https://ebible.org/spaRV1909/ROM12.htm">Romanos 12:2</a> · <a href="https://ebible.org/spaRV1909/DEU10.htm">Deuteronomio 10:18–19</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#immigration"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">No cita escrituras.</p></div></div>
+<h2 id="abortion">Aborto</h2>
+  <p><b>¿Debe la ley proteger el acceso al aborto?</b></p>
+  <div class="card both"><p><b>Citado por ambos lados: tradiciones de lados opuestos sobre este punto citan el mismo pasaje</b></p>
+      <p class="small"><b>Éxodo 21</b></p>
+      <div class="duo"><div><p class="small">Proteger el acceso</p><ul><li>Judaísmo reformista: <a href="https://www.sefaria.org/Exodus.21.22-23" lang="en">Sh’mot (Exodus) 21:22–23</a></li></ul></div>
+      <div><p class="small">Restringirlo o ponerle fin</p><ul><li>Asambleas de Dios (EE. UU.): <a href="https://ebible.org/spaRV1909/EXO21.htm" lang="en">Exodus 21:22-24</a></li><li>Asambleas de Dios (EE. UU.): <a href="https://ebible.org/spaRV1909/EXO21.htm" lang="en">Exodus 21:22,23</a></li></ul></div></div></div>
+  <h3><span class="mk D">D</span> Proteger el acceso</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#abortion"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/JHN10.htm">Juan 10:10</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#abortion"><b>Judaísmo reformista</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Exodus.21.22-23" lang="en">Sh’mot (Exodus) 21:22–23</a> · <a href="https://www.sefaria.org/Mishnah_Arakhin.1.4" lang="en">Arachin 1:4</a> · <a href="https://www.sefaria.org/Mishnah_Oholot.7.6" lang="en">Mishnah Ohalot 7.6</a> · <a href="https://www.sefaria.org/Yevamot.69b" lang="en">Y’vamot 69b</a> · <a href="https://www.sefaria.org/Yevamot.12b" lang="en">Y’vamot 12b</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#abortion"><b>Judaísmo conservador</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Mishneh_Torah,_Murderer_and_the_Preservation_of_Life.1.9-14" lang="en">Mishneh Torah Hilkhot Rotzeah u’Shmirat HaNefesh 1.9-14</a></p></div></div>
+  <h3><span class="mk R">R</span> Restringirlo o ponerle fin</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#abortion"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#abortion"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:26–28</a> · <a href="https://ebible.org/spaRV1909/PSA139.htm">Salmo 139:13–16</a> · <a href="https://ebible.org/spaRV1909/JER01.htm">Jeremías 1:5</a> · <a href="https://ebible.org/spaRV1909/LUK01.htm">Lucas 1:41</a> · <a href="https://ebible.org/spaRV1909/PRO31.htm">Proverbios 31:8–9</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#abortion"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:1, 11, 21, 25</a> · <a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:26, 27</a> · <a href="https://ebible.org/spaRV1909/GEN02.htm">Génesis 2:7</a> · <a href="https://ebible.org/spaRV1909/GEN03.htm">Génesis 3</a> · <a href="https://ebible.org/spaRV1909/ROM05.htm">Romanos 5:12</a> · <a href="https://ebible.org/spaRV1909/GEN09.htm">Génesis 9:6</a> · <a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:28</a> · <a href="https://ebible.org/spaRV1909/2CO05.htm">2 Corintios 5:10</a> · <a href="https://ebible.org/spaRV1909/PSA127.htm">Salmo 127:3</a> · <a href="https://ebible.org/spaRV1909/EXO22.htm">Éxodo 22:16</a> · <a href="https://ebible.org/spaRV1909/ACT15.htm">Hechos 15:20</a> · <a href="https://ebible.org/spaRV1909/1CO06.htm">1 Corintios 6:9, 13, 18</a> · <a href="https://ebible.org/spaRV1909/GAL05.htm">Gálatas 5:19</a> · <a href="https://ebible.org/spaRV1909/LUK01.htm">Lucas 1:31</a> · <a href="https://ebible.org/spaRV1909/LUK01.htm">Lucas 1:36</a> · <a href="https://ebible.org/spaRV1909/LUK01.htm">Lucas 1:41, 44</a> · <a href="https://ebible.org/spaRV1909/ACT07.htm">Hechos 7:19</a> · <a href="https://ebible.org/spaRV1909/GEN19.htm">Génesis 19:36</a> · <a href="https://ebible.org/spaRV1909/2SA11.htm">2 Samuel 11:5</a> · <a href="https://ebible.org/spaRV1909/GEN29.htm">Génesis 29:31, 32</a> · <a href="https://ebible.org/spaRV1909/JOB31.htm">Job 31:15</a> · <a href="https://ebible.org/spaRV1909/JOB34.htm">Job 34:19</a> · <a href="https://ebible.org/spaRV1909/ISA44.htm">Isaías 44:2</a> · <a href="https://ebible.org/spaRV1909/PSA139.htm">Salmo 139:13–16</a> · <a href="https://ebible.org/spaRV1909/JER01.htm">Jeremías 1:5</a> · <a href="https://ebible.org/spaRV1909/LUK01.htm">Lucas 1:11–17</a> · <a href="https://ebible.org/spaRV1909/EXO20.htm">Éxodo 20:13</a> · <a href="https://ebible.org/spaRV1909/MAT19.htm">Mateo 19:18</a> · <a href="https://ebible.org/spaRV1909/ROM13.htm">Romanos 13:9</a> · <a href="https://ebible.org/spaRV1909/EXO21.htm">Éxodo 21:22–24</a> · <a href="https://ebible.org/spaRV1909/EXO21.htm">Éxodo 21:13</a> · <a href="https://ebible.org/spaRV1909/NUM35.htm">Números 35:22–25</a> · <a href="https://ebible.org/spaRV1909/NUM35.htm">Números 35:12</a> · <a href="https://ebible.org/spaRV1909/EXO22.htm">Éxodo 22:2</a> · <a href="https://ebible.org/spaRV1909/ROM13.htm">Romanos 13:4, 5</a> · <a href="https://ebible.org/spaRV1909/EXO21.htm">Éxodo 21:22, 23</a> · <a href="https://ebible.org/spaRV1909/1PE02.htm">1 Pedro 2:11, 12</a> · <a href="https://ebible.org/spaRV1909/JHN06.htm">Juan 6:37</a></p></div></div>
+<h2 id="poverty">Pobreza y asistencia pública</h2>
+  <p><b>¿Debe la ley fijar un salario mínimo?</b></p>
+  
+  <h3><span class="mk D">D</span> Fijarlo o subirlo</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#poverty"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/AMO05.htm">Amós 5:7–13</a> · <a href="https://ebible.org/spaRV1909/MAT25.htm">Mateo 25:3–46</a> · <a href="https://ebible.org/spaRV1909/JAS02.htm">Santiago 2:15–16</a> · <a href="https://ebible.org/spaRV1909/LUK06.htm">Lucas 6:20</a> · <a href="https://ebible.org/spaRV1909/MAT19.htm">Mateo 19:23–25</a> · <a href="https://ebible.org/spaRV1909/MAT05.htm">Mateo 5:42</a> · <a href="https://ebible.org/spaRV1909/MAT06.htm">Mateo 6:11</a> · <a href="https://ebible.org/spaRV1909/GEN02.htm">Génesis 2:2</a> · <a href="https://ebible.org/spaRV1909/EXO20.htm">Éxodo 20:8–11</a></p></div></div>
+  <h3>No lo dice</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#poverty"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#poverty"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/MAT04.htm">Mateo 4:23</a> · <a href="https://ebible.org/spaRV1909/MAT09.htm">Mateo 9:35–38</a> · <a href="https://ebible.org/spaRV1909/MAT14.htm">Mateo 14:14–21</a> · <a href="https://ebible.org/spaRV1909/DEU15.htm">Deuteronomio 15:11</a> · <a href="https://ebible.org/spaRV1909/MAT25.htm">Mateo 25:34–40</a> · <a href="https://ebible.org/spaRV1909/JAS02.htm">Santiago 2:14–17</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#poverty"><b>Judaísmo reformista</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Psalms.118.17" lang="en">Psalms 118:17</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#poverty"><b>Judaísmo conservador</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Deuteronomy.15.7-8" lang="en">Devarim 15:7-8</a> · <a href="https://www.sefaria.org/Deuteronomy.15.11" lang="en">Devarim 15:11</a> · <a href="https://www.sefaria.org/Leviticus.19.9-10" lang="en">Vayikra 19:9-10</a></p></div></div>
+<h2 id="death-penalty">La pena de muerte</h2>
+  <p><b>¿Se debe poner fin a la pena de muerte?</b></p>
+  
+  <h3><span class="mk D">D</span> Ponerle fin</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#death-penalty"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#death-penalty"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#death-penalty"><b>Judaísmo reformista</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#death-penalty"><b>Judaísmo conservador</b></a></p>
+      <p class="small">No cita escrituras.</p></div></div>
+  <h3><span class="mk R">R</span> Mantenerla</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#death-penalty"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:27</a> · <a href="https://ebible.org/spaRV1909/EXO20.htm">Éxodo 20:13</a> · <a href="https://ebible.org/spaRV1909/ROM13.htm">Romanos 13:1</a> · <a href="https://ebible.org/spaRV1909/GEN09.htm">Génesis 9:6</a> · <a href="https://ebible.org/spaRV1909/ROM12.htm">Romanos 12:19</a> · <a href="https://ebible.org/spaRV1909/ROM13.htm">Romanos 13:4</a> · <a href="https://ebible.org/spaRV1909/DEU19.htm">Deuteronomio 19:15</a> · <a href="https://ebible.org/spaRV1909/LEV19.htm">Levítico 19:15</a> · <a href="https://ebible.org/spaRV1909/DEU01.htm">Deuteronomio 1:17</a></p></div></div>
+  <h3>No lo dice</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#death-penalty"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">No cita escrituras.</p></div></div>
+<h2 id="guns">Armas de fuego</h2>
+  <p><b>¿Debe la ley limitar cómo se compran y se venden las armas de fuego?</b></p>
+  
+  <h3><span class="mk D">D</span> Agregar límites</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#guns"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/MAT05.htm">Mateo 5:9</a> · <a href="https://ebible.org/spaRV1909/MIC04.htm">Miqueas 4:1–4</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#guns"><b>Judaísmo conservador</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#guns"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">No cita escrituras.</p></div></div>
+  <h3>No lo dice</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#guns"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#guns"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/GEN09.htm">Génesis 9:5–6</a> · <a href="https://ebible.org/spaRV1909/PSA139.htm">Salmo 139:13–16</a> · <a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:26–27</a> · <a href="https://ebible.org/spaRV1909/EXO20.htm">Éxodo 20:13</a> · <a href="https://ebible.org/spaRV1909/ROM13.htm">Romanos 13:1–7</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#guns"><b>Judaísmo reformista</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Leviticus.19.16" lang="en">Leviticus 19:16</a></p></div></div>
+<h2 id="environment">El cuidado de la creación y el medio ambiente</h2>
+  <p><b>¿Debe el gobierno actuar para reducir las emisiones que causan el cambio climático?</b></p>
+  <div class="card both"><p><b>Citado por ambos lados: tradiciones de lados opuestos sobre este punto citan el mismo pasaje</b></p>
+      <p class="small"><b>Génesis 1</b></p>
+      <div class="duo"><div><p class="small">Actuar para reducirlas</p><ul><li>Iglesia Metodista Unida: <a href="https://ebible.org/spaRV1909/GEN01.htm" lang="en">Gen. 1:26-31</a></li><li>Iglesia Metodista Unida: <a href="https://ebible.org/spaRV1909/GEN01.htm" lang="en">Genesis 1</a></li></ul></div>
+      <div><p class="small">Oponerse a las medidas climáticas</p><ul><li>Convención Bautista del Sur: <a href="https://ebible.org/spaRV1909/GEN01.htm" lang="en">Genesis 1:28</a></li></ul></div></div></div>
+  <h3><span class="mk D">D</span> Actuar para reducirlas</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#environment"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#environment"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:26–31</a> · <a href="https://ebible.org/spaRV1909/MAT06.htm">Mateo 6:26–30</a> · <a href="https://ebible.org/spaRV1909/ROM08.htm">Romanos 8:22–24</a> · <a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1</a> · <a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:4, 10, 12, 18, 25, 31</a> · <a href="https://ebible.org/spaRV1909/GEN02.htm">Génesis 2</a> · <a href="https://ebible.org/spaRV1909/GEN02.htm">Génesis 2:15</a> · <a href="https://ebible.org/spaRV1909/ISA11.htm">Isaías 11:6</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#environment"><b>Judaísmo reformista</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Kohelet_Rabbah.7.13" lang="en">Ecclesiastes Rabbah 7:13</a> · <a href="https://www.sefaria.org/Taanit.23a" lang="en">Taanit 23a</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#environment"><b>Judaísmo conservador</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Genesis.2.15" lang="en">Genesis (Bereishit) 2:15</a> · <a href="https://www.sefaria.org/Kohelet_Rabbah.7.13" lang="en">Kohelet (Ecclesiastes) Rabbah 7:13</a></p></div></div>
+  <h3><span class="mk R">R</span> Oponerse a las medidas climáticas</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#environment"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/PSA024.htm">Salmo 24:1</a> · <a href="https://ebible.org/spaRV1909/ISA45.htm">Isaías 45:5–8</a> · <a href="https://ebible.org/spaRV1909/HEB04.htm">Hebreos 4:12–13</a> · <a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:28</a> · <a href="https://ebible.org/spaRV1909/PSA008.htm">Salmo 8</a> · <a href="https://ebible.org/spaRV1909/PSA140.htm">Salmo 140:12</a> · <a href="https://ebible.org/spaRV1909/PRO14.htm">Proverbios 14:31</a> · <a href="https://ebible.org/spaRV1909/PRO29.htm">Proverbios 29:7</a> · <a href="https://ebible.org/spaRV1909/ISA25.htm">Isaías 25:4</a> · <a href="https://ebible.org/spaRV1909/EZK22.htm">Ezequiel 22:29, 31</a> · <a href="https://ebible.org/spaRV1909/MAT25.htm">Mateo 25:40</a> · <a href="https://ebible.org/spaRV1909/JHN14.htm">Juan 14:15</a></p></div></div>
+  <h3>No lo dice</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#environment"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">No cita escrituras.</p></div></div>
+<h2 id="healthcare">Atención médica</h2>
+  <p><b>¿Debe el gobierno ampliar la cobertura médica pública, como Medicaid?</b></p>
+  
+  <h3><span class="mk D">D</span> Ampliarla</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#healthcare"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#healthcare"><b>Judaísmo reformista</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Leviticus.19.16" lang="en">Leviticus 19:16</a> · <a href="https://www.sefaria.org/Deuteronomy.22.1-3" lang="en">Deuteronomy 22:1-3</a> · <a href="https://www.sefaria.org/Exodus.21.19" lang="en">Exodus 21:19</a> · <a href="https://www.sefaria.org/Shulchan_Arukh,_Yoreh_De'ah.249.16" lang="en">Yoreh De’ah 249:16</a> · <a href="https://www.sefaria.org/Sanhedrin.73a" lang="en">Sanhedrin 73a</a></p></div></div>
+  <h3>No lo dice</h3>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#healthcare"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#healthcare"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/LEV19.htm">Levítico 19:32</a> · <a href="https://ebible.org/spaRV1909/PRO16.htm">Proverbios 16:31</a> · <a href="https://ebible.org/spaRV1909/GEN01.htm">Génesis 1:26–28</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#healthcare"><b>Judaísmo conservador</b></a></p>
+      <p class="small">No cita escrituras.</p></div></div>
+<h2 id="criminal-justice">Justicia penal</h2>
+  <p class="small">Las plataformas no toman posturas opuestas sobre este tema, así que las tradiciones se enumeran sin agruparlas por postura.</p>
+  <div class="duo"><div class="card"><p><a href="https://rightnleft.com/fe/catolica#criminal-justice"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">No cita escrituras.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#criminal-justice"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/MAT25.htm">Mateo 25:36</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#criminal-justice"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small"><a href="https://ebible.org/spaRV1909/MAT18.htm">Mateo 18:15–20</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#criminal-justice"><b>Judaísmo reformista</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Leviticus.19.15" lang="en">Leviticus 19:15</a> · <a href="https://www.sefaria.org/Exodus.23.5" lang="en">Exodus 23:5</a></p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#criminal-justice"><b>Judaísmo conservador</b></a></p>
+      <p class="small"><a href="https://www.sefaria.org/Genesis.1.27" lang="en">Gen. 1:27</a> · <a href="https://www.sefaria.org/Leviticus.19.16" lang="en">Lev. 19:16</a></p></div></div>
+  <p><a href="https://rightnleft.com/fe/posturas">Qué postura toma cada tradición</a> · <a href="https://rightnleft.com/fe">Las ocho tradiciones</a> · <a href="https://rightnleft.com/fe/metodologia">Cómo se hicieron estas páginas</a> · <a href="/data/faith.json">Descargue el registro completo (faith.json, CC0)</a></p>
+  <hr>
+  <p class="small"><span class="label">Quién lo hizo.</span> Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar. En estas páginas pasa lo mismo con las tradiciones religiosas: lo que cuenta como oficial es una regla escrita para cada tradición, que se aplica igual en todos los temas.</p>
+  <footer class="sitefoot" aria-label="Más en este sitio"><div><p class="foot-head">El sitio</p><ul><li><a href="https://rightnleft.com/es">Inicio</a></li><li><a href="https://rightnleft.com/politica">Política</a></li><li><a href="https://rightnleft.com/fe">Religión</a></li><li><a href="https://rightnleft.com/economia">Economía</a></li><li><a href="https://rightnleft.com/es/cuestionario">El cuestionario</a></li><li><a href="https://rightnleft.com/distritos">Encuentre a su representante</a></li><li><a href="https://rightnleft.com/proyectos">Los proyectos</a></li><li><a href="https://rightnleft.com/graficas">Gráficas</a></li><li><a href="https://rightnleft.com/hoja">Hoja informativa de una página</a></li><li><a href="https://rightnleft.com/open-data">Descargar los datos (en inglés)</a></li><li><a href="https://rightnleft.com/maestros">Para docentes: una hoja de trabajo gratis</a></li></ul></div><div><p class="foot-head">Los siete proyectos</p><ul><li><a href="https://rightnleft.com/proyecto/sb-2"><span class="bill">SB 2</span> Cuentas de ahorro educativo</a></li><li><a href="https://rightnleft.com/proyecto/sb-8"><span class="bill">SB 8</span> Aplicación de la ley migratoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-10"><span class="bill">SB 10</span> Los Diez Mandamientos en las aulas</a></li><li><a href="https://rightnleft.com/proyecto/sb-3"><span class="bill">SB 3</span> Prohibición del THC</a></li><li><a href="https://rightnleft.com/proyecto/sb-14"><span class="bill">SB 14</span> Revisión regulatoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-6"><span class="bill">SB 6</span> Red eléctrica y grandes consumidores</a></li><li><a href="https://rightnleft.com/proyecto/sb-5"><span class="bill">SB 5</span> Instituto de investigación sobre demencia</a></li></ul></div><div><p class="foot-head">Las tres contiendas</p><ul><li><a href="https://rightnleft.com/contienda/gobernador">Gobernador: Gina Hinojosa y Greg Abbott</a></li><li><a href="https://rightnleft.com/contienda/vicegobernador">Vicegobernador: Vikki Goodwin y Dan Patrick</a></li><li><a href="https://rightnleft.com/contienda/senado">Senado de Estados Unidos: James Talarico y Ken Paxton</a></li></ul></div></footer>
+</main>
+</body>
+</html>

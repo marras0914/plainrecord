@@ -465,6 +465,7 @@ function sidesPage(lang) {
   <h2>${ft(lang, 'sd.h2calls')}</h2>
   <p>${ft(lang, 'sd.callsNote')}</p>
   <ul>${['c1', 'c2', 'c3'].map((c) => `<li>${ft(lang, `sd.${c}`)}</li>`).join('')}</ul>
+  <p><a href="${SITE}/${P.scripture}"><b>${ft(lang, 'sc.h1')}</b></a></p>
   <p><a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>
   ${disclosure(lang)}`;
   return wrap(lang, {
@@ -472,6 +473,87 @@ function sidesPage(lang) {
     title: ft(lang, 'sd.h1'), docTitle: ft(lang, 'sd.docTitle'), desc: ft(lang, 'sd.desc'), body,
   });
 }
+
+// ---------------------------------------------------------------------------
+// What scripture each tradition cites (decided 16 Nov 2026)
+// ---------------------------------------------------------------------------
+//
+// Marco asked whether each tradition's positions match scripture. The site
+// does not rule on that: it would have to read scripture for one side. It
+// shows what each tradition's statements cite, grouped by the side its words
+// take on the grid, and the passages cited on both sides
+// (data.citedOnBothSides). Who cites what, never who reads it right.
+
+/** Every citation of one tradition's statements on an issue, as list items. */
+function citeItems(lang, tradId, issueId) {
+  return data.statements.filter((s) => s.traditionId === tradId && s.issueId === issueId).flatMap((s) => {
+    const key = `${s.traditionId}.${s.issueId}.${s.sourceDate}`;
+    if (JEWISH.has(tradId)) {
+      return (C.byStatement[key]?.citations ?? []).map((x) => `<a href="${esc(x.url)}" lang="en">${esc(x.written)}</a>`);
+    }
+    const T = V.translations[lang === 'es' ? 'rv1909' : 'web'];
+    return (V.byStatement[key]?.refs ?? []).map((r) => `<a href="${esc(`${T.chapterUrl}${r.chapterPage}`)}">${esc(refLabel(lang, r))}</a>`);
+  });
+}
+
+function scriptureTradCard(lang, t, issueId) {
+  const items = citeItems(lang, t.id, issueId);
+  return `<div class="card"><p><a href="${SITE}/${traditionPath(t.id, lang)}#${issueId}"><b>${tradName(lang, t)}</b></a></p>
+      <p class="small">${items.length ? items.join(' · ') : ft(lang, 'sc.none')}</p></div>`;
+}
+
+/** A cited passage in the both-sides list: the Bible's chapter link, or Sefaria's. */
+function bothItem(lang, x) {
+  const T = V.translations[lang === 'es' ? 'rv1909' : 'web'];
+  const href = x.url ?? `${T.chapterUrl}${x.chapterPage}`;
+  const t = data.traditions.find((d) => d.id === x.traditionId);
+  return `<li>${tradName(lang, t)}: <a href="${esc(href)}" lang="en">${esc(x.asWritten)}</a></li>`;
+}
+
+function scripturePage(lang) {
+  const P = FAITH_PATHS[lang];
+  const sections = data.issues.map((issue) => {
+    const pt = data.sidePoints.find((p) => p.issueId === issue.id);
+    const withStatement = data.traditions.filter((t) => data.statements.some((s) => s.traditionId === t.id && s.issueId === issue.id));
+    if (!pt) {
+      return `<h2 id="${issue.id}">${issueName(lang, issue)}</h2>
+  <p class="small">${ft(lang, 'sc.noSides')}</p>
+  <div class="duo">${withStatement.map((t) => scriptureTradCard(lang, t, issue.id)).join('\n    ')}</div>`;
+    }
+    const groups = [
+      ['a', tx(lang, KEY.sideA(pt), pt.a), withStatement.filter((t) => pt.churches[t.id]?.side === 'a')],
+      ['b', tx(lang, KEY.sideB(pt), pt.b), withStatement.filter((t) => pt.churches[t.id]?.side === 'b')],
+      ['none', ft(lang, 'sd.mark.doesntSay'), withStatement.filter((t) => !pt.churches[t.id])],
+    ].filter(([, , ts]) => ts.length);
+    const both = data.citedOnBothSides.find((g) => g.issueId === issue.id)?.passages ?? [];
+    const bothHtml = both.length ? `<div class="card both"><p><b>${ft(lang, 'sc.h3both')}</b></p>
+      ${both.map((p) => `<p class="small"><b>${esc(`${bookName(lang, p.code)} ${p.chapter}`)}</b></p>
+      <div class="duo"><div><p class="small">${tx(lang, KEY.sideA(pt), pt.a)}</p><ul>${p.a.map((x) => bothItem(lang, x)).join('')}</ul></div>
+      <div><p class="small">${tx(lang, KEY.sideB(pt), pt.b)}</p><ul>${p.b.map((x) => bothItem(lang, x)).join('')}</ul></div></div>`).join('\n      ')}</div>` : '';
+    return `<h2 id="${issue.id}">${issueName(lang, issue)}</h2>
+  <p><b>${tx(lang, KEY.sideQ(pt), pt.question)}</b></p>
+  ${bothHtml}
+  ${groups.map(([k, label, ts]) => `<h3>${k === 'none' ? label : `<span class="mk ${sideParty(pt, k)}">${ft(lang, `sd.mark.${sideParty(pt, k)}`)}</span> ${label}`}</h3>
+  <div class="duo">${ts.map((t) => scriptureTradCard(lang, t, issue.id)).join('\n    ')}</div>`).join('\n  ')}`;
+  }).join('\n');
+
+  const body = `${SIDE_STYLE}<style>.both{border:2px solid var(--ink)}.both ul{margin:0 0 8px}</style>
+  <h1>${ft(lang, 'sc.h1')}</h1>
+  <p class="lede">${ft(lang, 'sc.lede')}</p>
+  ${notice(lang)}
+  <p class="small">${ft(lang, 'sc.scope')}${platformsCiteNothing ? ` ${ft(lang, 'sc.platforms')}` : ''}</p>
+  <ul class="jump">${data.issues.map((i) => `<li><a href="#${i.id}">${issueName(lang, i)}</a></li>`).join('')}</ul>
+  ${sections}
+  <p><a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a> · <a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>
+  ${disclosure(lang)}`;
+  return wrap(lang, {
+    path: P.scripture, otherPath: FAITH_PATHS[otherOf(lang)].scripture,
+    title: ft(lang, 'sc.h1'), docTitle: ft(lang, 'sc.docTitle'), desc: ft(lang, 'sc.desc'), body,
+  });
+}
+
+/** Which party's platform holds a side, at the point's first compared level. */
+const sideParty = (pt, side) => P2.find((p) => pt.platforms[`${p}-${pt.levels[0]}`].side === side);
 
 // ---------------------------------------------------------------------------
 // The front page and the methodology
@@ -548,6 +630,9 @@ function methodPage(lang) {
   <h2>${ft(lang, 'me.h2sides')}</h2>
   <p>${ft(lang, 'me.sides', { linkHtml: `<a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a>` })}</p>
 
+  <h2>${ft(lang, 'me.h2scripture')}</h2>
+  <p>${ft(lang, 'me.scripture', { linkHtml: `<a href="${SITE}/${P.scripture}">${ft(lang, 'sc.h1')}</a>` })}</p>
+
   <h2>${ft(lang, 'me.h2house')}</h2>
   <p>${ft(lang, 'me.house', { linkHtml: data.houseVotes.map((h) => `<a href="${SITE}/${houseVotesPath(h.traditionId, lang)}">${ft(lang, 'hv.h1')}</a>`).join(', ') })}</p>
 
@@ -574,7 +659,7 @@ function methodPage(lang) {
 
 const pages = [];
 for (const lang of ['en', 'es']) {
-  pages.push([FAITH_PATHS[lang].home, homePage(lang)], [FAITH_PATHS[lang].method, methodPage(lang)], [FAITH_PATHS[lang].sides, sidesPage(lang)]);
+  pages.push([FAITH_PATHS[lang].home, homePage(lang)], [FAITH_PATHS[lang].method, methodPage(lang)], [FAITH_PATHS[lang].sides, sidesPage(lang)], [FAITH_PATHS[lang].scripture, scripturePage(lang)]);
   for (const t of data.traditions) pages.push([traditionPath(t.id, lang), traditionPage(lang, t)]);
   for (const hv of data.houseVotes) {
     const t = data.traditions.find((x) => x.id === hv.traditionId);
