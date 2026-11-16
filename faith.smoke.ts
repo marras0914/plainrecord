@@ -9,7 +9,6 @@
 
 import { readFileSync } from 'node:fs';
 import { ISSUES, TRADITIONS, STATEMENTS, PLANKS, FILLED_ISSUES, KNOWN_GAPS, EARLIER, NO_STATEMENT, NO_PLANK, TO_READ, sbcOnIssue, isJewish, JEWISH_RESOLUTIONS, ISSUE_TITLE_TERMS } from './faith_positions';
-import { RCA_ADOPTED, rcaResolutionForm } from './scripts/fetch_jewish_resolutions';
 import { buildFaithPayload, PLATFORMS } from './scripts/export_faith';
 import { findRefs, statementKey } from './scripts/extract_faith_verses';
 import { parsePage, parseSineDie, buildPositions, wordsOf } from './scripts/extract_tccb_positions';
@@ -154,7 +153,7 @@ check('every Christian statement shown in full has a verse record (re-run npm ru
 // The Jewish statements: citations listed, never verse text (15 Nov 2026).
 const JC = JSON.parse(readFileSync(new URL('./data/faith/jewish_citations.json', import.meta.url), 'utf8'));
 const jewish = STATEMENTS.filter((s) => isJewish(s.traditionId));
-check('there are Jewish statements to check', jewish.length >= 20, `${jewish.length}`);
+check('there are Jewish statements to check', jewish.length >= 15, `${jewish.length}`);
 const noCites = jewish.filter((s) => !JC.byStatement[statementKey(s)]);
 check('every Jewish statement shown in full has a citation record (re-run npm run data:faith:citations if not)', noCites.length === 0, noCites.map(statementKey).join(', ') || `${jewish.length} statements`);
 const versed = jewish.filter((s) => VJ.citations.some((c: { statement: string }) => c.statement === statementKey(s)));
@@ -169,11 +168,12 @@ check('every kind of source cited has a label in both languages', unlabeled.leng
 // The libraries the Jewish earlier lists are drawn from.
 const onSomeIssue = (title: string) => Object.values(ISSUE_TITLE_TERMS).some((re) => re.test(title));
 const libSize = (b: string) => JEWISH_RESOLUTIONS.filter((r) => r.body === b).length;
-check('the Jewish libraries are all there (URJ, CCAR, RA, RCA)', libSize('urj') > 400 && libSize('ccar') > 700 && libSize('ra') > 200 && libSize('rca') > 100,
-  ['urj', 'ccar', 'ra', 'rca'].map((b) => `${b} ${libSize(b)}`).join(', '));
+check('the Jewish libraries are all there (URJ, CCAR, RA)', libSize('urj') > 400 && libSize('ccar') > 700 && libSize('ra') > 200,
+  ['urj', 'ccar', 'ra'].map((b) => `${b} ${libSize(b)}`).join(', '));
 check('every Jewish library entry is dated', JEWISH_RESOLUTIONS.filter((r) => onSomeIssue(r.title)).every((r) => /^\d{4}/.test(r.date)));
-check('the RCA rule admits a convention resolution', !!'The Rabbinical Council of America in Convention assembled'.match(RCA_ADOPTED) && rcaResolutionForm('WHEREAS one; and WHEREAS two; THEREFORE'));
-check('(the RCA rule refuses a press release)', !'RCA Condemns Ben and Jerry\'s Policy. The RCA today condemned the decision.'.match(RCA_ADOPTED) && !rcaResolutionForm('The RCA today condemned the decision.'));
+// Orthodox is the Orthodox Union alone (Marco, 15 Nov 2026).
+const orthodoxUrls = [...STATEMENTS, ...EARLIER].filter((s) => s.traditionId === 'orthodox').map((s) => ('sourceUrl' in s ? s.sourceUrl : s.url));
+check('every Orthodox entry is an Orthodox Union document', orthodoxUrls.length > 0 && orthodoxUrls.every((u) => /^https:\/\/(www\.|advocacy\.)?ou\.org\//.test(u)), orthodoxUrls.join(', '));
 const allRefs = VJ.citations.flatMap((c: { refs: { verseKeys: string[]; verseCount: number; ranges: unknown[] }[] }) => c.refs);
 const textless = allRefs.filter((r: { verseKeys: string[]; verseCount: number; ranges: unknown[] }) => !r.verseKeys.length && r.ranges.length && r.verseCount <= VJ.maxVersesWithText);
 check('a passage is printed unless it is a whole chapter or longer than the limit', textless.length === 0, `${allRefs.length} references`);

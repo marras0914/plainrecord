@@ -277,14 +277,6 @@
     }
    ]
   },
-  "orthodox.abortion.1990": {
-   "scope": "whole document",
-   "citations": []
-  },
-  "orthodox.poverty.1998": {
-   "scope": "whole document",
-   "citations": []
-  },
   "orthodox.death-penalty.2023": {
    "scope": "paragraph",
    "citations": []
@@ -295,10 +287,6 @@
   },
   "orthodox.environment.2023": {
    "scope": "paragraph",
-   "citations": []
-  },
-  "orthodox.healthcare.1999": {
-   "scope": "whole document",
    "citations": []
   }
  }

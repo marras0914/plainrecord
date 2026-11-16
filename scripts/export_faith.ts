@@ -70,7 +70,7 @@ export function buildFaithPayload() {
     /** The SBC's earlier statements are every title match among this many resolutions. */
     sbcResolutionsSearched: SBC_RESOLUTIONS.length,
     /** The Jewish movements' earlier statements: title matches among these. */
-    jewishResolutionsSearched: Object.fromEntries((['urj', 'ccar', 'ra', 'rca'] as const).map((b) => [b, JEWISH_RESOLUTIONS.filter((r) => r.body === b).length])),
+    jewishResolutionsSearched: Object.fromEntries((['urj', 'ccar', 'ra'] as const).map((b) => [b, JEWISH_RESOLUTIONS.filter((r) => r.body === b).length])),
     issues: ISSUES.map((i) => ({ ...i, titleTerms: ISSUE_TITLE_TERMS[i.id].source })),
     traditions: TRADITIONS,
     platforms: PLATFORMS,

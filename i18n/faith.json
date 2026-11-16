@@ -1578,8 +1578,8 @@
     "status": "draft"
   },
   "me.earlierJewish": {
-    "en": "The Jewish movements' lists follow the same rule, over every resolution in each body's online library: {urj} of the Union for Reform Judaism, {ccar} of the Central Conference of American Rabbis, {ra} of the Rabbinical Assembly and {rca} of the Rabbinical Council of America. The Rabbinical Council's library also holds press releases and letters, so a post there counts only if it says a convention or a membership vote adopted it, or is written as a resolution. Dates are the ones each body gives; a few Rabbinical Assembly resolutions show only June 2011, when they were posted.",
-    "es": "Las listas de los movimientos judíos siguen la misma regla, sobre todas las resoluciones de la biblioteca en línea de cada órgano: {urj} de la Unión para el Judaísmo Reformista, {ccar} de la Conferencia Central de Rabinos Estadounidenses, {ra} de la Asamblea Rabínica y {rca} del Consejo Rabínico de América. La biblioteca del Consejo Rabínico también contiene comunicados de prensa y cartas, así que una publicación cuenta solo si dice que la adoptó una convención o una votación de los miembros, o si está redactada como resolución. Las fechas son las que da cada órgano; unas pocas resoluciones de la Asamblea Rabínica muestran solo junio de 2011, cuando se publicaron en línea.",
+    "en": "The Reform and Conservative lists follow the same rule, over every resolution in each body's online library: {urj} of the Union for Reform Judaism, {ccar} of the Central Conference of American Rabbis and {ra} of the Rabbinical Assembly. Dates are the ones each body gives; a few Rabbinical Assembly resolutions show only June 2011, when they were posted. The Orthodox Union's positions are one booklet per convention, and its 2017 booklet is listed under each issue it addresses.",
+    "es": "Las listas reformista y conservadora siguen la misma regla, sobre todas las resoluciones de la biblioteca en línea de cada órgano: {urj} de la Unión para el Judaísmo Reformista, {ccar} de la Conferencia Central de Rabinos Estadounidenses y {ra} de la Asamblea Rabínica. Las fechas son las que da cada órgano; unas pocas resoluciones de la Asamblea Rabínica muestran solo junio de 2011, cuando se publicaron en línea. Las posturas de la Unión Ortodoxa están en un folleto por convención, y su folleto de 2017 se anota bajo cada tema que trata.",
     "status": "draft"
   },
   "me.jewishCurrent": {
@@ -1603,8 +1603,8 @@
     "status": "draft"
   },
   "me.missingOrthodox": {
-    "en": "Orthodox Judaism: neither the Orthodox Union nor the Rabbinical Council of America has adopted a position on immigration or on criminal justice in general, and most of what they have adopted dates from the 1990s.",
-    "es": "El judaísmo ortodoxo: ni la Unión Ortodoxa ni el Consejo Rabínico de América han adoptado una postura sobre la inmigración ni sobre la justicia penal en general, y la mayor parte de lo que han adoptado es de la década de 1990.",
+    "en": "Orthodox Judaism: the Orthodox Union's standing positions address only the death penalty, guns and energy, so on the other five issues there is no official statement.",
+    "es": "El judaísmo ortodoxo: las posturas vigentes de la Unión Ortodoxa tratan solo la pena de muerte, las armas de fuego y la energía, así que en los otros cinco temas no hay ninguna declaración oficial.",
     "status": "draft"
   },
   "tr.citesSummary": {
@@ -1693,8 +1693,8 @@
     "status": "draft"
   },
   "trad.orthodox.official": {
-    "en": "Positions adopted by the Orthodox Union's convention delegates or its Board of Directors, and resolutions of the Rabbinical Council of America adopted at its convention or written as resolutions. Neither body speaks for all of Orthodox Judaism, and Haredi bodies such as Agudath Israel issue no voted resolutions. Not press releases, letters or joint statements.",
-    "es": "Las posturas adoptadas por los delegados de la convención de la Unión Ortodoxa o por su Junta Directiva, y las resoluciones del Consejo Rabínico de América adoptadas en su convención o redactadas como resoluciones. Ninguno de los dos órganos habla por todo el judaísmo ortodoxo, y los órganos jaredíes, como Agudath Israel, no emiten resoluciones votadas. No cuentan los comunicados de prensa, las cartas ni las declaraciones conjuntas.",
+    "en": "Positions adopted by the Orthodox Union's convention delegates or its Board of Directors, as listed in its convention resolutions. The Orthodox Union is the union of Orthodox synagogues, but it does not speak for all of Orthodox Judaism, and Haredi bodies such as Agudath Israel issue no voted resolutions. Not press releases, testimony or letters from its advocacy office.",
+    "es": "Las posturas adoptadas por los delegados de la convención de la Unión Ortodoxa o por su Junta Directiva, tal como aparecen en sus resoluciones de convención. La Unión Ortodoxa es la unión de las sinagogas ortodoxas, pero no habla por todo el judaísmo ortodoxo, y los órganos jaredíes, como Agudath Israel, no emiten resoluciones votadas. No cuentan los comunicados de prensa, los testimonios ni las cartas de su oficina de incidencia política.",
     "status": "draft"
   },
   "body.adopted-by-the-central-conference-of-american-rabbis": {
@@ -1802,21 +1802,6 @@
     "es": "Insta a los miembros de sus congregaciones y comunidades a exigir que el Congreso apruebe leyes para prevenir la violencia armada, y pide a los gobiernos que compran armas que usen ese poder de compra para presionar a los fabricantes a tener redes de distribuidores más seguras y armas con tecnología más segura.",
     "status": "draft"
   },
-  "body.resolution-of-the-rabbinical-council-of-america": {
-    "en": "Resolution of the Rabbinical Council of America",
-    "es": "Resolución del Consejo Rabínico de América",
-    "status": "draft"
-  },
-  "st.orthodox.healthcare.1999": {
-    "en": "Says health care reform legislation should provide access to universal coverage with realistic cost controls, long-term care for the elderly and choice of doctors, and should respect patients' ethical and religious beliefs in decisions about rationing treatment.",
-    "es": "Dice que las leyes de reforma de la atención médica deben dar acceso a una cobertura universal con controles de costos realistas, atención a largo plazo para las personas mayores y libertad para escoger médico, y deben respetar las creencias éticas y religiosas de los pacientes en las decisiones sobre el racionamiento de tratamientos.",
-    "status": "draft"
-  },
-  "st.orthodox.poverty.1998": {
-    "en": "Commends states that move people from welfare to work, and urges states, the federal government and the private sector to start programs, including training, child care, transportation and medical care, so that every citizen is able to work.",
-    "es": "Elogia a los estados que ayudan a las personas a pasar de la asistencia social al trabajo, e insta a los estados, al gobierno federal y al sector privado a crear programas, como capacitación, cuidado infantil, transporte y atención médica, para que todos los ciudadanos puedan trabajar.",
-    "status": "draft"
-  },
   "body.rabbinical-assembly-resolution-referred-from-its-1995-convention-published-by-the-death-penalty-information-center-not-on-the-rabbinical-assembly-s-own-site": {
     "en": "Rabbinical Assembly resolution referred from its 1995 convention. Published by the Death Penalty Information Center, not on the Rabbinical Assembly's own site",
     "es": "Resolución de la Asamblea Rabínica remitida desde su convención de 1995. La publica el Death Penalty Information Center, no el sitio de la propia Asamblea Rabínica",
@@ -1825,16 +1810,6 @@
   "st.conservative.death-penalty.1995": {
     "en": "Opposes the adoption of death penalty laws and urges their abolition in states that have them, and urges laws that make life imprisonment without parole the punishment for some capital crimes.",
     "es": "Se opone a que se adopten leyes de pena de muerte e insta a abolirlas en los estados que las tienen, e insta a aprobar leyes que castiguen algunos delitos capitales con cadena perpetua sin libertad condicional.",
-    "status": "draft"
-  },
-  "body.adopted-by-the-rabbinical-council-of-america-in-convention": {
-    "en": "Adopted by the Rabbinical Council of America in convention",
-    "es": "Adoptado por el Consejo Rabínico de América en su convención",
-    "status": "draft"
-  },
-  "st.orthodox.abortion.1990": {
-    "en": "Says neither the pro-life nor the pro-choice position is acceptable under Jewish law, opposes endorsing legislation that would keep Jewish law from being applied, and calls on Jews to accept abortion only in exceptional cases, decided with rabbinic authorities.",
-    "es": "Dice que ni la postura provida ni la postura proelección son aceptables según la ley judía, se opone a respaldar leyes que impidan aplicar la ley judía, y pide a los judíos que acepten el aborto solo en casos excepcionales, decididos con autoridades rabínicas.",
     "status": "draft"
   },
   "body.adopted-by-the-central-conference-of-american-rabbis-at-its-90th-annual-convention": {
@@ -1848,13 +1823,28 @@
     "status": "draft"
   },
   "none.orthodox.immigration": {
-    "en": "Neither the Orthodox Union's standing positions nor any Rabbinical Council of America resolution addresses immigration. The Rabbinical Council's statements on it (2015, 2018) are press releases and a joint letter, which do not qualify under the rule for this tradition.",
-    "es": "Ni las posturas vigentes de la Unión Ortodoxa ni ninguna resolución del Consejo Rabínico de América tratan la inmigración. Las declaraciones del Consejo Rabínico sobre el tema (2015, 2018) son comunicados de prensa y una carta conjunta, que no cuentan según la regla de esta tradición.",
+    "en": "The Orthodox Union's standing positions do not address immigration.",
+    "es": "Las posturas vigentes de la Unión Ortodoxa no tratan la inmigración.",
     "status": "draft"
   },
   "none.orthodox.criminal-justice": {
-    "en": "Neither the Orthodox Union's standing positions nor any Rabbinical Council of America resolution addresses policing, sentencing or prisons in general. The Orthodox Union's heading \"Criminal Justice Issues\" covers only the death penalty and guns.",
-    "es": "Ni las posturas vigentes de la Unión Ortodoxa ni ninguna resolución del Consejo Rabínico de América tratan la policía, las condenas o las cárceles en general. El apartado «Criminal Justice Issues» de la Unión Ortodoxa trata solo la pena de muerte y las armas de fuego.",
+    "en": "The Orthodox Union's standing positions do not address policing, sentencing or prisons in general. Its heading \"Criminal Justice Issues\" covers only the death penalty and guns.",
+    "es": "Las posturas vigentes de la Unión Ortodoxa no tratan la policía, las condenas ni las cárceles en general. Su apartado «Criminal Justice Issues» trata solo la pena de muerte y las armas de fuego.",
+    "status": "draft"
+  },
+  "none.orthodox.abortion": {
+    "en": "The Orthodox Union's standing positions do not address abortion.",
+    "es": "Las posturas vigentes de la Unión Ortodoxa no tratan el aborto.",
+    "status": "draft"
+  },
+  "none.orthodox.poverty": {
+    "en": "The Orthodox Union's standing positions do not address poverty or public assistance.",
+    "es": "Las posturas vigentes de la Unión Ortodoxa no tratan la pobreza ni la asistencia pública.",
+    "status": "draft"
+  },
+  "none.orthodox.healthcare": {
+    "en": "The Orthodox Union's standing positions do not address healthcare policy.",
+    "es": "Las posturas vigentes de la Unión Ortodoxa no tratan la política de atención médica.",
     "status": "draft"
   }
 }

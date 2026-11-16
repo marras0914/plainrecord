@@ -63,8 +63,6 @@ export const FAITH_SOURCE_FILES: Record<string, { file: string; lineNumbers?: bo
     'resolution-paris-united-nations-framework-convention-climate-change-unfccc',
     'resolution-opposing-laws-limiting-essential-health-care', 'resolution-racial-injustice-and-police-brutality',
   ].map((slug) => [`https://rabbinicalassembly.org/resolutions/${slug}`, { file: `jewish/ra/${slug}.txt` }])),
-  ...Object.fromEntries(['abortion-1990', 'poverty-1998', 'health-care-reform-1999']
-    .map((slug) => [`https://archive.rabbis.org/${slug}/`, { file: `jewish/rca/${slug}.txt` }])),
   'https://deathpenaltyinfo.org/stories/rabbinical-assembly': { file: 'jewish/other/dpic_rabbinical_assembly.txt' },
   'https://www.ou.org/assets/OU_2023_National_Convention_Resolutions_Final_dq4fkw.pdf': { file: 'jewish/ou/ou_2023.txt', paragraphs: true },
   'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf': { file: 'rpt_2024.txt' },

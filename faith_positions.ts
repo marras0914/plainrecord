@@ -85,8 +85,10 @@ export const TRADITIONS: { id: TraditionId; name: string; family: string; offici
     official: 'Resolutions adopted by the Rabbinical Assembly. Not its other statements, and not rulings on Jewish law (teshuvot) by its Committee on Jewish Law and Standards. The United Synagogue of Conservative Judaism publishes no resolutions online.',
     libraryUrl: 'https://rabbinicalassembly.org/about-us/search-past-resolutions' },
   { id: 'orthodox', name: 'Orthodox Judaism', family: 'Jewish',
-    official: 'Positions adopted by the Orthodox Union\'s convention delegates or its Board of Directors, and resolutions of the Rabbinical Council of America adopted at its convention or written as resolutions. Neither body speaks for all of Orthodox Judaism, and Haredi bodies such as Agudath Israel issue no voted resolutions. Not press releases, letters or joint statements.',
-    libraryUrl: 'https://archive.rabbis.org/category/policies-and-positions/' },
+    // The OU alone, Marco's call later on 15 Nov 2026 (the Rabbinical Council
+    // of America, a rabbis' association, was dropped).
+    official: 'Positions adopted by the Orthodox Union\'s convention delegates or its Board of Directors, as listed in its convention resolutions. The Orthodox Union is the union of Orthodox synagogues, but it does not speak for all of Orthodox Judaism, and Haredi bodies such as Agudath Israel issue no voted resolutions. Not press releases, testimony or letters from its advocacy office.',
+    libraryUrl: 'https://www.ou.org/assets/OU_2023_National_Convention_Resolutions_Final_dq4fkw.pdf' },
 ];
 
 /**
@@ -100,8 +102,9 @@ export const TRADITIONS: { id: TraditionId; name: string; family: string; offici
  */
 export const isJewish = (id: TraditionId) => TRADITIONS.find((t) => t.id === id)?.family === 'Jewish';
 
-export const JEWISH_BODIES: Record<'reform' | 'conservative' | 'orthodox', ('urj' | 'ccar' | 'ra' | 'rca')[]> = {
-  reform: ['urj', 'ccar'], conservative: ['ra'], orthodox: ['rca'],
+export const JEWISH_BODIES: Record<'reform' | 'conservative' | 'orthodox', ('urj' | 'ccar' | 'ra')[]> = {
+  // Orthodox: the OU's standing positions are one booklet, entered by hand.
+  reform: ['urj', 'ccar'], conservative: ['ra'], orthodox: [],
 };
 
 export interface Review { reviewerId: string; date: string }
@@ -167,8 +170,7 @@ export const ISSUE_TITLE_TERMS: Record<IssueId, RegExp> = {
   // SBC's current environment statement, which is Marco's call to make.
   environment: /environment|creation care|climate (?:change|crisis|justice|action|leadership)|pollution|stewardship of creation|ecolog/i,
   healthcare: /health ?care|health insurance|medicaid|medicare/i,
-  // Not "prisoners of war" (RCA 1993, Israeli soldiers held abroad).
-  'criminal-justice': /criminal justice|prison(?!ers? of war)|incarcerat|sentenc|policing|police/i,
+  'criminal-justice': /criminal justice|prison|incarcerat|sentenc|policing|police/i,
 };
 
 export interface Plank {
@@ -222,9 +224,6 @@ const SRC = {
   raParis2016: 'https://rabbinicalassembly.org/resolutions/resolution-paris-united-nations-framework-convention-climate-change-unfccc',
   raHealth2026: 'https://rabbinicalassembly.org/resolutions/resolution-opposing-laws-limiting-essential-health-care',
   raPolice2016: 'https://rabbinicalassembly.org/resolutions/resolution-racial-injustice-and-police-brutality',
-  rcaAbortion1990: 'https://archive.rabbis.org/abortion-1990/',
-  rcaPoverty1998: 'https://archive.rabbis.org/poverty-1998/',
-  rcaHealth1999: 'https://archive.rabbis.org/health-care-reform-1999/',
   ou2023: 'https://www.ou.org/assets/OU_2023_National_Convention_Resolutions_Final_dq4fkw.pdf',
   rpt2024: 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf',
   tdp2024: 'https://txdem.co/24-Platform',
@@ -681,22 +680,6 @@ STATEMENTS.push(
     sourceUrl: SRC.raPolice2016, review: [],
   },
   {
-    traditionId: 'orthodox', issueId: 'abortion',
-    title: 'Abortion 1990',
-    body: 'Adopted by the Rabbinical Council of America in convention', sourceDate: '1990',
-    summary: 'Says neither the pro-life nor the pro-choice position is acceptable under Jewish law, opposes endorsing legislation that would keep Jewish law from being applied, and calls on Jews to accept abortion only in exceptional cases, decided with rabbinic authorities.',
-    excerpt: 'Precludes the endorsement of legislative measures which would impede the appropriate application of Halacha',
-    sourceUrl: SRC.rcaAbortion1990, review: [],
-  },
-  {
-    traditionId: 'orthodox', issueId: 'poverty',
-    title: 'Poverty 1998',
-    body: 'Resolution of the Rabbinical Council of America', sourceDate: '1998',
-    summary: 'Commends states that move people from welfare to work, and urges states, the federal government and the private sector to start programs, including training, child care, transportation and medical care, so that every citizen is able to work.',
-    excerpt: 'urge states, the federal government, and the private sector to initiate programs',
-    sourceUrl: SRC.rcaPoverty1998, review: [],
-  },
-  {
     traditionId: 'orthodox', issueId: 'death-penalty',
     title: 'A Summary of Standing Policy Positions of the Orthodox Union: Death Penalty',
     body: OU, sourceDate: '2023',
@@ -720,14 +703,6 @@ STATEMENTS.push(
     excerpt: 'We support an increase of “CAFÉ” standards',
     sourceUrl: SRC.ou2023, review: [],
   },
-  {
-    traditionId: 'orthodox', issueId: 'healthcare',
-    title: 'Health Care Reform 1999',
-    body: 'Resolution of the Rabbinical Council of America', sourceDate: '1999',
-    summary: 'Says health care reform legislation should provide access to universal coverage with realistic cost controls, long-term care for the elderly and choice of doctors, and should respect patients\' ethical and religious beliefs in decisions about rationing treatment.',
-    excerpt: 'Access to universal coverage with realistic fiscal controls and tax policies',
-    sourceUrl: SRC.rcaHealth1999, review: [],
-  },
 );
 
 /**
@@ -748,8 +723,13 @@ export const NO_STATEMENT: { traditionId: TraditionId; issueId: IssueId; note: s
   { traditionId: 'ag', issueId: 'healthcare', note: 'There is no position paper or official statement on healthcare policy.' },
   { traditionId: 'ag', issueId: 'criminal-justice', note: 'There is no position paper or official statement on criminal justice.' },
   { traditionId: 'ag', issueId: 'environment', note: 'There is no position paper on the environment. The 2015 position paper Church Mission and Peacemaking refers to a "perspective paper" on environmental protection, but no such paper is published on ag.org.' },
-  { traditionId: 'orthodox', issueId: 'immigration', note: 'Neither the Orthodox Union\'s standing positions nor any Rabbinical Council of America resolution addresses immigration. The Rabbinical Council\'s statements on it (2015, 2018) are press releases and a joint letter, which do not qualify under the rule for this tradition.' },
-  { traditionId: 'orthodox', issueId: 'criminal-justice', note: 'Neither the Orthodox Union\'s standing positions nor any Rabbinical Council of America resolution addresses policing, sentencing or prisons in general. The Orthodox Union\'s heading "Criminal Justice Issues" covers only the death penalty and guns.' },
+  // The OU's standing positions (2023 and 2017 convention booklets) cover the
+  // death penalty, guns and energy, and none of these five.
+  { traditionId: 'orthodox', issueId: 'immigration', note: 'The Orthodox Union\'s standing positions do not address immigration.' },
+  { traditionId: 'orthodox', issueId: 'abortion', note: 'The Orthodox Union\'s standing positions do not address abortion.' },
+  { traditionId: 'orthodox', issueId: 'poverty', note: 'The Orthodox Union\'s standing positions do not address poverty or public assistance.' },
+  { traditionId: 'orthodox', issueId: 'healthcare', note: 'The Orthodox Union\'s standing positions do not address healthcare policy.' },
+  { traditionId: 'orthodox', issueId: 'criminal-justice', note: 'The Orthodox Union\'s standing positions do not address policing, sentencing or prisons in general. Its heading "Criminal Justice Issues" covers only the death penalty and guns.' },
 ];
 
 /** A platform that says nothing on an issue: stated on the page, not left blank. */
@@ -961,11 +941,11 @@ export const sbcOnIssue = (issue: IssueId) => SBC_RESOLUTIONS
   .sort((a, b) => b.date.localeCompare(a.date));
 
 /**
- * Every resolution of the URJ, CCAR, Rabbinical Assembly and Rabbinical
- * Council of America (scripts/fetch_jewish_resolutions.ts). The OU's standing
- * positions are one booklet, entered by hand above.
+ * Every resolution of the URJ, CCAR and Rabbinical Assembly
+ * (scripts/fetch_jewish_resolutions.ts). The OU's standing positions are one
+ * booklet, entered by hand above.
  */
-export const JEWISH_RESOLUTIONS: { body: 'urj' | 'ccar' | 'ra' | 'rca'; title: string; date: string; url: string; adoption?: string }[] =
+export const JEWISH_RESOLUTIONS: { body: 'urj' | 'ccar' | 'ra'; title: string; date: string; url: string }[] =
   JSON.parse(readFileSync(new URL('./data/faith/jewish_resolutions.json', import.meta.url), 'utf8')).resolutions;
 
 /** A Jewish movement's resolutions on an issue by title, newest first. */
@@ -988,6 +968,11 @@ const HAND_EARLIER: Earlier[] = [
   // general meeting".
   { traditionId: 'catholic', issueId: 'immigration', title: 'Strangers No Longer: Together on the Journey of Hope (with the Mexican bishops)', date: '2003-01-22', url: 'https://www.usccb.org/issues-and-action/human-life-and-dignity/immigration/strangers-no-longer-together-on-the-journey-of-hope' },
   { traditionId: 'catholic', issueId: 'immigration', title: 'Welcoming the Stranger Among Us: Unity in Diversity', date: '2000-11-15', url: 'https://www.usccb.org/committees/pastoral-care-migrants-refugees-travelers/welcoming-stranger-among-us-unity-diversity' },
+  // The OU's 2017 convention booklet states the same three positions.
+  ...(['death-penalty', 'guns', 'environment'] as const).map((issueId) => ({
+    traditionId: 'orthodox' as const, issueId, title: 'Orthodox Union 2017 Biennial Convention Resolutions: Standing Policy Positions', date: '2017',
+    url: 'https://advocacy.ou.org/content/uploads/Biennial-resolutions-2017.pdf',
+  })),
 ];
 
 /**

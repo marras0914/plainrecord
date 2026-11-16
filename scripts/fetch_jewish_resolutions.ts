@@ -5,9 +5,9 @@
  *
  * Which bodies count was decided 15 Nov 2026 (FAITH.md, "Judaism"): Reform =
  * URJ and CCAR; Conservative = the Rabbinical Assembly; Orthodox = the
- * Orthodox Union and the Rabbinical Council of America. This script lists the
- * resolutions of the four with an online library (the OU's standing positions
- * are one PDF, read by hand) and writes data/faith/jewish_resolutions.json:
+ * Orthodox Union. This script lists the resolutions of the three with an
+ * online library (the OU's standing positions are one PDF, read by hand) and
+ * writes data/faith/jewish_resolutions.json:
  * body, title, date and URL for each, nothing else. Committed, so the build
  * never calls these sites. faith_positions.ts lists a tradition's earlier
  * statements on an issue from it by title (ISSUE_TITLE_TERMS), as it does
@@ -24,13 +24,9 @@
  *         the title.
  *   RA    rabbinicalassembly.org/about-us/search-past-resolutions?page=N; the
  *         index has no dates, so each resolution's page is read for its date.
- *   RCA   archive.rabbis.org's WordPress API, category "Policies and
- *         Positions". That category also holds press releases, letters and
- *         joint statements, and most posts do not say which they are. So an
- *         RCA post counts only if its own title or text says a convention or
- *         a membership vote adopted it (RCA_ADOPTED below), or it is written
- *         as a resolution (rcaResolutionForm), and the reason is stored with
- *         it.
+ *
+ * The Rabbinical Council of America was counted for Orthodox Judaism for a
+ * few hours on 15 Nov 2026, then dropped: Marco chose the Orthodox Union alone.
  */
 
 import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
@@ -44,21 +40,8 @@ export const JEWISH_FILE = join(WORK_DIR, 'faith', 'jewish_resolutions.json');
 export const JEWISH_TEXT_DIR = join(FAITH_SOURCE_DIR, 'jewish');
 const UA = { 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' };
 
-export type JewishBody = 'urj' | 'ccar' | 'ra' | 'rca';
-export interface JewishResolution { body: JewishBody; title: string; date: string; url: string; adoption?: string }
-
-/** An RCA post counts only if it says it was adopted this way. */
-export const RCA_ADOPTED = /convention resolution|in convention assembled|adopted (?:by|at) the (?:\d{4} )?(?:rca )?(?:annual )?convention|(?:formally )?adopted by (?:a )?direct vote of the (?:rca )?membership|resolutions? (?:adopted|passed) (?:by|at) the (?:rca'?s? )?(?:\d{4} )?(?:annual )?convention|rca membership formally/i;
-
-/**
- * Or it is a resolution in form: two or more WHEREAS clauses, or resolving
- * words ("be it resolved", "we therefore resolve"). The RCA's 1980s-90s
- * convention resolutions ("Poverty 1998", "Health Care Reform 1999") are
- * posted this way on the convention date and mostly do not repeat "in
- * convention assembled"; its press releases and letters are not written so.
- */
-export const rcaResolutionForm = (text: string) => (text.match(/\bwhereas\b/gi) ?? []).length >= 2
-  || /\bbe it (?:further )?resolved\b|\bwe (?:therefore |hereby )?resolve\b/i.test(text);
+export type JewishBody = 'urj' | 'ccar' | 'ra';
+export interface JewishResolution { body: JewishBody; title: string; date: string; url: string }
 
 const MONTHS ='January|February|March|April|May|June|July|August|September|October|November|December';
 const DATE_RE = new RegExp(`\\b(${MONTHS}) (\\d{1,2}), (\\d{4})\\b`);
@@ -207,42 +190,15 @@ async function ra(): Promise<JewishResolution[]> {
   return out;
 }
 
-async function rca(): Promise<JewishResolution[]> {
-  const out: JewishResolution[] = [];
-  let skipped = 0;
-  for (let page = 1; ; page++) {
-    const r = await fetch(`https://archive.rabbis.org/wp-json/wp/v2/posts?categories=17&per_page=100&page=${page}&_fields=date,link,title,content`, { headers: UA });
-    if (r.status === 400) break;
-    if (!r.ok) throw new Error(`archive.rabbis.org page ${page}: HTTP ${r.status}`);
-    const posts = await r.json() as { date: string; link: string; title: { rendered: string }; content: { rendered: string } }[];
-    if (!posts.length) break;
-    for (const p of posts) {
-      const title = oneLine(p.title.rendered);
-      const text = textOf(p.content.rendered);
-      // An Executive Committee action is not the convention or the membership.
-      const byCommittee = /adopted by the executive committee/i.test(`${title}\n${text}`);
-      const hit = byCommittee ? null : `${title}\n${text}`.match(RCA_ADOPTED) ?? (rcaResolutionForm(text) ? ['resolution form (WHEREAS clauses)'] : null);
-      if (!hit) { skipped++; continue; }
-      // The post date is when it was posted; a year in the title is when it
-      // was adopted ("Abortion 1990", "2014 Resolution: ...").
-      const y = title.match(/\b(19[5-9]\d|20[0-2]\d)\b/);
-      out.push({ body: 'rca', title, date: y ? y[1] : p.date.slice(0, 10), url: p.link, adoption: hit[0] });
-      if (onAnIssue(title)) saveText('rca', p.link, `${title}\n${text}`);
-    }
-    process.stderr.write(`  rca page ${page}: ${out.length} adopted, ${skipped} not\n`);
-  }
-  return out;
-}
-
 async function main(): Promise<void> {
   const only = process.argv[2] as JewishBody | undefined;
   const prev: JewishResolution[] = existsSync(JEWISH_FILE) ? JSON.parse(readFileSync(JEWISH_FILE, 'utf8')).resolutions : [];
-  const run = { urj, ccar, ra, rca };
+  const run = { urj, ccar, ra };
   const bodies = (only ? [only] : Object.keys(run)) as JewishBody[];
-  let all = prev.filter((r) => !bodies.includes(r.body));
+  let all = prev.filter((r) => r.body in run && !bodies.includes(r.body));
   for (const b of bodies) {
     const got = await run[b]();
-    const floor = { urj: 500, ccar: 500, ra: 100, rca: 10 }[b];
+    const floor = { urj: 500, ccar: 500, ra: 100 }[b];
     if (got.length < floor) throw new Error(`${b}: only ${got.length} resolutions, expected at least ${floor}; something is wrong`);
     all = all.concat(got);
   }
@@ -250,7 +206,7 @@ async function main(): Promise<void> {
   mkdirSync(join(WORK_DIR, 'faith'), { recursive: true });
   writeFileSync(JEWISH_FILE, JSON.stringify({ fetched: new Date().toISOString().slice(0, 10), resolutions: all }, null, 1) + '\n');
   const n = (b: string) => all.filter((r) => r.body === b).length;
-  console.log(`\n  wrote ${all.length} resolutions to ${JEWISH_FILE}: urj ${n('urj')}, ccar ${n('ccar')}, ra ${n('ra')}, rca ${n('rca')}\n`);
+  console.log(`\n  wrote ${all.length} resolutions to ${JEWISH_FILE}: urj ${n('urj')}, ccar ${n('ccar')}, ra ${n('ra')}\n`);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
