@@ -39,6 +39,7 @@ export const FAITH_SOURCE_FILES: Record<string, { file: string; lineNumbers?: bo
   'https://www.umc.org/en/content/book-of-resolutions-our-call-to-end-gun-violence': { file: 'umc_bor_3428.txt' },
   'https://www.sbc.net/resource-library/resolutions/on-global-hunger-relief/': { file: 'sbc_poverty_2014.txt' },
   'https://www.sbc.net/resource-library/resolutions/on-environmentalism-and-evangelicals/': { file: 'sbc_environment_2006.txt' },
+  'https://www.sbc.net/resource-library/resolutions/on-global-warming/': { file: 'sbc_environment_2007.txt' },
   'https://www.umc.org/en/content/social-principles-the-economic-community': { file: 'umc_sp_the-economic-community.txt', html: 'umc_sp_the-economic-community.html' },
   'https://www.umc.org/en/content/social-principles-the-natural-world': { file: 'umc_sp_the-natural-world.txt', html: 'umc_sp_the-natural-world.html' },
   'https://www.sbc.net/resource-library/resolutions/on-the-danger-of-age-discrimination-in-healthcare-rationing/': { file: 'sbc_health_2013.txt' },

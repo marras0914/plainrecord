@@ -165,10 +165,9 @@ export const ISSUE_TITLE_TERMS: Record<IssueId, RegExp> = {
   // Not "weapon": it matches resolutions on nuclear and other weapons of war.
   guns: /\bgun|firearm/i,
   // Not bare "climate": it matched "School Discipline and Academic Climate"
-  // (URJ 2017). Known gap, 15 Nov 2026: no "global warming", so the SBC's
-  // 2007 "On Global Warming" is not listed. Adding it would make that the
-  // SBC's current environment statement, which is Marco's call to make.
-  environment: /environment|creation care|climate (?:change|crisis|justice|action|leadership)|pollution|stewardship of creation|ecolog/i,
+  // (URJ 2017). "global warming" added 16 Nov 2026 (Marco): it makes the
+  // SBC's 2007 "On Global Warming" its current environment statement.
+  environment: /environment|creation care|climate (?:change|crisis|justice|action|leadership)|global warming|pollution|stewardship of creation|ecolog/i,
   healthcare: /health ?care|health insurance|medicaid|medicare/i,
   'criminal-justice': /criminal justice|prison|incarcerat|sentenc|policing|police/i,
 };
@@ -204,6 +203,7 @@ const SRC = {
   umcGuns3428: 'https://www.umc.org/en/content/book-of-resolutions-our-call-to-end-gun-violence',
   sbcPoverty2014: 'https://www.sbc.net/resource-library/resolutions/on-global-hunger-relief/',
   sbcEnvironment2006: 'https://www.sbc.net/resource-library/resolutions/on-environmentalism-and-evangelicals/',
+  sbcEnvironment2007: 'https://www.sbc.net/resource-library/resolutions/on-global-warming/',
   umcEconomic: 'https://www.umc.org/en/content/social-principles-the-economic-community',
   umcNatural: 'https://www.umc.org/en/content/social-principles-the-natural-world',
   sbcHealth2013: 'https://www.sbc.net/resource-library/resolutions/on-the-danger-of-age-discrimination-in-healthcare-rationing/',
@@ -464,11 +464,13 @@ STATEMENTS.push(
   },
   {
     traditionId: 'sbc', issueId: 'environment',
-    title: 'On Environmentalism and Evangelicals',
-    body: 'Resolution adopted at the SBC Annual Meeting, Greensboro', sourceDate: '2006-06',
-    summary: 'Supports conserving natural resources while respecting property rights, and public policy and private efforts to improve the environment based on sound science; opposes alliances with environmental groups whose positions it considers contrary to biblical principles, and solutions it calls scientifically questionable that restrict access to natural resources and economic development.',
-    excerpt: 'encourage public policy and private enterprise efforts that seek to improve the environment',
-    sourceUrl: SRC.sbcEnvironment2006, review: [],
+    // The newest SBC resolution on the issue once "global warming" joined the
+    // title rule (Marco, 16 Nov 2026); the 2006 one is now in the earlier list.
+    title: 'On Global Warming',
+    body: 'Resolution adopted at the SBC Annual Meeting, San Antonio', sourceDate: '2007-06',
+    summary: 'Urges Southern Baptists to proceed cautiously in the debate over human-caused global warming, given what it calls conflicting scientific research; urges Congress and the president to support only cost-effective measures to reduce greenhouse gas emissions and to reject government-mandated reductions; and calls for helping vulnerable communities and for individual and collective efforts to reduce pollution.',
+    excerpt: 'reject government-mandated reductions in greenhouse gas emissions',
+    sourceUrl: SRC.sbcEnvironment2007, review: [],
   },
   {
     traditionId: 'umc', issueId: 'environment',
@@ -1031,8 +1033,10 @@ export const KNOWN_GAPS: { who: string; issueId: IssueId; note: string }[] = [];
 //      decide any total.
 //
 // Three placements were judgment calls, decided by Marco on 15 Nov 2026: the
-// SBC on the environment (opposes "solutions based on questionable science",
-// never names climate: doesn't say), UMC on healthcare (calls on governments
+// SBC on the environment (then its 2006 resolution, which never names
+// climate: doesn't say; on 16 Nov its 2007 "On Global Warming" became
+// current, and asks Congress to "reject government-mandated reductions":
+// oppose), UMC on healthcare (calls on governments
 // to ensure access, never names Medicaid: widen) and the Catholic bishops on
 // the environment (call for "actions" in a document on political
 // responsibility: act).
@@ -1182,7 +1186,9 @@ export const SIDE_POINTS: SidePoint[] = [
     },
     churches: {
       catholic: { side: 'a', quote: 'respond to climate change with actions to better protect creation', url: SRC.usccb2023 },
-      sbc: null,
+      // 2007: also urges "cost-effective measures" to cut emissions, but asks
+      // Congress to reject mandated cuts. Was "doesn't say" on the 2006 text.
+      sbc: { side: 'b', quote: 'reject government-mandated reductions in greenhouse gas emissions', url: SRC.sbcEnvironment2007 },
       umc: { side: 'a', quote: 'To reverse the current trajectory of global climate change, increased investments are needed', url: SRC.umcNatural },
       reform: { side: 'a', quote: 'designed to curb American greenhouse gas emissions and address the harms of climate change', url: SRC.ccarClimate2022 },
       conservative: { side: 'a', quote: 'support and advocate with other faith-based communities for the Clean Power Plan', url: SRC.raParis2016 },

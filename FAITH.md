@@ -160,9 +160,9 @@ How it is applied:
   date is often the June 2011 posting date).
 - Known costs, for Marco: titles like "Immigration to Israel" are listed
   under immigration; the issue name "Creation care and the environment" is
-  Christian wording; the environment rule has no "global warming", so the
-  SBC's 2007 "On Global Warming" is not listed (adding it would make it the
-  SBC's current environment statement).
+  Christian wording. "Global warming" was added to the environment rule on
+  16 Nov 2026 (Marco), which made the SBC's 2007 "On Global Warming" its
+  current environment statement.
 
 ---
 
@@ -367,7 +367,12 @@ from `SIDE_POINTS` in `faith_positions.ts`:
 - **No total**, on the page or in the data: which issues are listed would
   decide it. `faith.smoke.ts` and `verify_site.mjs` both check this.
 - Three judgment calls (SBC environment: doesn't say; UMC healthcare: widen;
-  Catholic environment: act) were Marco's, and the page lists them.
+  Catholic environment: act) were Marco's, and the page lists them. On
+  16 Nov 2026 the SBC's 2007 "On Global Warming" became current; it asks
+  Congress to "reject government-mandated reductions", so it is placed with
+  opposing climate measures.
+- For the Jewish movements (16 Nov 2026), Marco's rule: where the text
+  doesn't take the side, it is "doesn't say"; no lean is inferred.
 
 This replaces the earlier "one tradition at a time, no grid" rule. The
 guardrail below against a "which party is more Christian" score stands.
