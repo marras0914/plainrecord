@@ -5,7 +5,7 @@
     "register": "usted, plain rather than formal, as in copy.json and economy.json. Every plank summary starts \"Pide\", matching \"Calls for\". Document titles, the churches' quotes and the platforms' quotes stay in English with lang=\"en\", as the official bill captions do.",
     "terms": "plataforma (platform); apartado (plank, where \"plank\" is the word); declaración oficial; documento de posición (AG position paper); Principios Sociales and Libro de Resoluciones (UMC); Reunión Anual and mensajeros (SBC); Conferencia General and Consejo de Obispos (AME, UMC); Concilio General and Presbiterio (AG); armas de fuego; atención médica; justicia penal; pena de muerte / pena capital as the source has it.",
     "markup": "Inline <b> and <em> only, in the page strings. A {name} ending in Html is a link the builder makes.",
-    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections."
+    "status": "Spanish reviewed and approved by Marco Arras (fluent), 13 November 2026, all 200 strings, no corrections, on PR #21. Kept as drafted: masculine bodies agreeing with an implied texto, lowercase Iglesia católica, Protestante histórica for mainline, Pide for Calls for. The 45 verse strings and book names (PR #22) approved by Marco the same day, no corrections; kept Salmo (singular) and Santiago. The 72 House-votes strings (hv.*, tr.houseLink, tr.houseLinkNote, tr.noBillList, me.h2house, me.house) and the rewritten me.not and hub.lede approved by Marco on 14 November 2026, no corrections. The 4 to-read strings (new Catholic 2025 summary, revised UMC immigration summary, two to-read notes) approved by Marco on 14 November 2026, no corrections. tr.docTitle and hv.docTitle shortened for search results, approved by Marco on 14 November 2026, no corrections. The 68 Judaism strings (three Jewish movements, citation labels, methodology, and the page wording rewritten from five Christian traditions to eight traditions) approved by Marco on 15 November 2026, no corrections."
   },
   "kicker": {
     "en": "Faith and the platforms",
@@ -40,27 +40,27 @@
   "homeLink": {
     "en": "All eight traditions",
     "es": "Las ocho tradiciones",
-    "status": "draft"
+    "status": "ok"
   },
   "home.docTitle": {
     "en": "What eight religious traditions teach, beside the party platforms",
     "es": "Lo que enseñan ocho tradiciones religiosas, junto a las plataformas de los partidos",
-    "status": "draft"
+    "status": "ok"
   },
   "home.h1": {
     "en": "What the faiths say, and what the platforms say",
     "es": "Lo que dicen las religiones y lo que dicen las plataformas",
-    "status": "draft"
+    "status": "ok"
   },
   "home.desc": {
     "en": "Pick a Christian tradition or a Jewish movement and see what it has officially said on eight issues, beside the Texas and national Republican and Democratic platforms. Sourced, with no score.",
     "es": "Escoja una tradición cristiana o un movimiento judío y vea lo que ha dicho oficialmente sobre ocho temas, junto a las plataformas republicanas y demócratas de Texas y nacionales. Con fuentes y sin puntaje.",
-    "status": "draft"
+    "status": "ok"
   },
   "home.lede": {
     "en": "Pick a Christian tradition or a Jewish movement. For each of eight issues, you will see what its official bodies have said, beside what the Texas and national Republican and Democratic platforms say. The site computes no score and does not say which party is closer to any tradition.",
     "es": "Escoja una tradición cristiana o un movimiento judío. En cada uno de ocho temas verá lo que han dicho sus órganos oficiales, junto a lo que dicen las plataformas republicanas y demócratas de Texas y nacionales. El sitio no calcula ningún puntaje ni dice qué partido está más cerca de cada tradición.",
-    "status": "draft"
+    "status": "ok"
   },
   "home.h2pick": {
     "en": "Pick a tradition",
@@ -75,7 +75,7 @@
   "home.range": {
     "en": "Members of every tradition hold a range of views, and many disagree with their own tradition's official positions. These pages report what each tradition's official bodies have said, not what its members believe.",
     "es": "Los miembros de cada tradición tienen opiniones diversas, y muchos no están de acuerdo con las posturas oficiales de su propia tradición. Estas páginas informan lo que han dicho los órganos oficiales de cada tradición, no lo que creen sus miembros.",
-    "status": "draft"
+    "status": "ok"
   },
   "home.h2issues": {
     "en": "The eight issues",
@@ -175,12 +175,12 @@
   "me.desc": {
     "en": "The rules behind the faith pages: which statements count as official for each tradition, which platforms are quoted, how every quote is checked, and what is missing.",
     "es": "Las reglas detrás de las páginas sobre la fe: qué declaraciones cuentan como oficiales para cada tradición, qué plataformas se citan, cómo se verifica cada cita y qué falta.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.lede": {
     "en": "These pages report what five Christian traditions and three Jewish movements have officially said and what the parties' platforms say. They never decide what \"the Christian position\" or \"the Jewish position\" is.",
     "es": "Estas páginas informan lo que cinco tradiciones cristianas y tres movimientos judíos han dicho oficialmente y lo que dicen las plataformas de los partidos. Nunca deciden cuál es “la postura cristiana” ni “la postura judía”.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.h2review": {
     "en": "Not yet reviewed",
@@ -250,7 +250,7 @@
   "me.h2why": {
     "en": "Why these eight",
     "es": "Por qué estas ocho",
-    "status": "draft"
+    "status": "ok"
   },
   "me.why": {
     "en": "One from each of five large families of churches: Catholic, Baptist, mainline Protestant, historically Black and Pentecostal. The United Methodist Church was chosen over the Evangelical Lutheran Church in America because it is larger in Texas and revised its Social Principles in 2024; the African Methodist Episcopal Church over the National Baptist Convention because it publishes more formal positions.",
@@ -275,7 +275,7 @@
   "me.earlier": {
     "en": "For the Southern Baptist Convention, all {n} of its resolutions are downloaded from its own library, and a resolution is listed under an issue when its title contains one of a fixed set of words for that issue. The rule is mechanical, so the list is the same whoever builds it; its cost is that a resolution about an issue that does not name it in its title is not listed. The words for each issue are in the downloadable record. For the other Christian traditions, earlier statements are listed by hand.",
     "es": "Para la Convención Bautista del Sur, se descargan sus {n} resoluciones de su propia biblioteca, y una resolución aparece bajo un tema cuando su título contiene una de un conjunto fijo de palabras para ese tema. La regla es mecánica, así que la lista es la misma sin importar quién la haga; su costo es que no aparece una resolución sobre un tema que no lo nombra en su título. Las palabras de cada tema están en el registro descargable. Para las otras tradiciones cristianas, las declaraciones anteriores se anotan a mano.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.h2checks": {
     "en": "How every quote is checked",
@@ -340,7 +340,7 @@
   "discloseFaith": {
     "en": "On these pages the same holds for the religious traditions: what counts as official is a written rule for each tradition, applied the same way on every issue.",
     "es": "En estas páginas pasa lo mismo con las tradiciones religiosas: lo que cuenta como oficial es una regla escrita para cada tradición, que se aplica igual en todos los temas.",
-    "status": "draft"
+    "status": "ok"
   },
   "hub.h2": {
     "en": "Faith and the party platforms",
@@ -350,7 +350,7 @@
   "hub.lede": {
     "en": "What five Christian traditions and three Jewish movements have officially said on eight issues, beside what the Texas and national party platforms say, one tradition at a time and sourced. Where a church took a side on specific Texas bills, how each party in the Texas House voted on them.",
     "es": "Lo que cinco tradiciones cristianas y tres movimientos judíos han dicho oficialmente sobre ocho temas, junto a lo que dicen las plataformas de los partidos de Texas y nacionales, una tradición a la vez y con fuentes. Donde una iglesia tomó postura sobre proyectos de ley específicos de Texas, cómo votó cada partido en la Cámara de Texas.",
-    "status": "draft"
+    "status": "ok"
   },
   "hub.open": {
     "en": "Pick a tradition",
@@ -370,7 +370,7 @@
   "tr.noBillList": {
     "en": "We have not found a list of this tradition’s positions on specific Texas bills, so there is no comparison of Texas House votes for it. If you know of one, tell us.",
     "es": "No hemos encontrado una lista de las posturas de esta tradición sobre proyectos de ley específicos de Texas, así que no hay una comparación con los votos de la Cámara de Texas para ella. Si usted conoce una, avísenos.",
-    "status": "draft"
+    "status": "ok"
   },
   "hv.docTitle": {
     "en": "Texas House votes on the Catholic bishops’ bills, 2025",
@@ -1575,276 +1575,276 @@
   "me.whyJewish": {
     "en": "And the three largest movements of American Judaism: Reform, Conservative and Orthodox. Other faiths are not yet included.",
     "es": "Y los tres movimientos más grandes del judaísmo en Estados Unidos: reformista, conservador y ortodoxo. Otras religiones todavía no se incluyen.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.earlierJewish": {
     "en": "The Reform and Conservative lists follow the same rule, over every resolution in each body's online library: {urj} of the Union for Reform Judaism, {ccar} of the Central Conference of American Rabbis and {ra} of the Rabbinical Assembly. Dates are the ones each body gives; a few Rabbinical Assembly resolutions show only June 2011, when they were posted. The Orthodox Union's positions are one booklet per convention, and its 2017 booklet is listed under each issue it addresses.",
     "es": "Las listas reformista y conservadora siguen la misma regla, sobre todas las resoluciones de la biblioteca en línea de cada órgano: {urj} de la Unión para el Judaísmo Reformista, {ccar} de la Conferencia Central de Rabinos Estadounidenses y {ra} de la Asamblea Rabínica. Las fechas son las que da cada órgano; unas pocas resoluciones de la Asamblea Rabínica muestran solo junio de 2011, cuando se publicaron en línea. Las posturas de la Unión Ortodoxa están en un folleto por convención, y su folleto de 2017 se anota bajo cada tema que trata.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.jewishCurrent": {
     "en": "For the Jewish movements, the statement shown in full on an issue is the newest one that states a direction for law or government, since it is set beside the platforms. A resolution about a movement's own investments or institutions is listed, not shown. A resolution on reproductive care is shown under abortion; under healthcare, the newest one on care in general is shown.",
     "es": "Para los movimientos judíos, la declaración que se muestra completa sobre un tema es la más reciente que indica un rumbo para la ley o el gobierno, ya que se pone junto a las plataformas. Una resolución sobre las propias inversiones o instituciones de un movimiento se anota, pero no se muestra. Una resolución sobre la atención reproductiva se muestra bajo el aborto; bajo la atención médica se muestra la más reciente sobre la atención en general.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.h2cites": {
     "en": "What the Jewish statements cite",
     "es": "Lo que citan las declaraciones judías",
-    "status": "draft"
+    "status": "ok"
   },
   "me.cites": {
     "en": "The Jewish movements' statements cite the Hebrew Bible, the Mishnah, the Talmud, midrash and codes of Jewish law. The Bibles used for the Christian statements are Christian translations, so for these statements the site prints no text. It lists every source a statement cites, as the statement writes it, labeled by kind and linked to Sefaria, a free online library of Jewish texts. Which strings are sources is decided by Sefaria's own catalog, which a program asks about every reference-like phrase in the statement.",
     "es": "Las declaraciones de los movimientos judíos citan la Biblia hebrea, la Mishná, el Talmud, el midrash y los códigos de ley judía. Las Biblias que se usan para las declaraciones cristianas son traducciones cristianas, así que para estas declaraciones el sitio no imprime ningún texto. Anota cada fuente que cita una declaración, tal como la declaración la escribe, con su tipo y un enlace a Sefaria, una biblioteca gratuita de textos judíos en línea. Qué frases son fuentes lo decide el propio catálogo de Sefaria, al que un programa le pregunta por cada frase que parece una referencia.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.citesAliases": {
     "en": "Spellings Sefaria does not recognize are matched by hand, each with its reason: {list}.",
     "es": "Las grafías que Sefaria no reconoce se emparejan a mano, cada una con su motivo: {list}.",
-    "status": "draft"
+    "status": "ok"
   },
   "me.missingOrthodox": {
     "en": "Orthodox Judaism: the Orthodox Union's standing positions address only the death penalty, guns and energy, so on the other five issues there is no official statement.",
     "es": "El judaísmo ortodoxo: las posturas vigentes de la Unión Ortodoxa tratan solo la pena de muerte, las armas de fuego y la energía, así que en los otros cinco temas no hay ninguna declaración oficial.",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.citesSummary": {
     "en": "Sources this statement cites: {n}",
     "es": "Fuentes que cita esta declaración: {n}",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.citesNote": {
     "en": "As the statement writes them, in its order, each linked to Sefaria. The site prints no text from them.",
     "es": "Tal como la declaración las escribe, en su orden, cada una con un enlace a Sefaria. El sitio no imprime ningún texto de ellas.",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.noCitesWhole": {
     "en": "This statement cites no scripture or rabbinic text.",
     "es": "Esta declaración no cita ningún texto de las Escrituras ni rabínico.",
-    "status": "draft"
+    "status": "ok"
   },
   "tr.noCitesParagraph": {
     "en": "This position cites no scripture or rabbinic text.",
     "es": "Esta postura no cita ningún texto de las Escrituras ni rabínico.",
-    "status": "draft"
+    "status": "ok"
   },
   "cite.kind.tanakh": {
     "en": "Hebrew Bible",
     "es": "Biblia hebrea",
-    "status": "draft"
+    "status": "ok"
   },
   "cite.kind.mishnah": {
     "en": "Mishnah",
     "es": "Mishná",
-    "status": "draft"
+    "status": "ok"
   },
   "cite.kind.talmud": {
     "en": "Talmud",
     "es": "Talmud",
-    "status": "draft"
+    "status": "ok"
   },
   "cite.kind.midrash": {
     "en": "Midrash",
     "es": "Midrash",
-    "status": "draft"
+    "status": "ok"
   },
   "cite.kind.halakhah": {
     "en": "Code of Jewish law",
     "es": "Código de ley judía",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.reform.name": {
     "en": "Reform Judaism",
     "es": "Judaísmo reformista",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.reform.family": {
     "en": "Jewish",
     "es": "Judía",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.reform.official": {
     "en": "Resolutions adopted by the Union for Reform Judaism (by its General Assembly or North American Board of Trustees) or by the Central Conference of American Rabbis. Not statements by the Religious Action Center's staff, press releases or action alerts.",
     "es": "Las resoluciones adoptadas por la Unión para el Judaísmo Reformista (por su Asamblea General o su Junta Directiva de Norteamérica) o por la Conferencia Central de Rabinos Estadounidenses. No cuentan las declaraciones del personal del Centro de Acción Religiosa, los comunicados de prensa ni las alertas de acción.",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.conservative.name": {
     "en": "Conservative Judaism",
     "es": "Judaísmo conservador",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.conservative.family": {
     "en": "Jewish",
     "es": "Judía",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.conservative.official": {
     "en": "Resolutions adopted by the Rabbinical Assembly. Not its other statements, and not rulings on Jewish law (teshuvot) by its Committee on Jewish Law and Standards. The United Synagogue of Conservative Judaism publishes no resolutions online.",
     "es": "Las resoluciones adoptadas por la Asamblea Rabínica. No cuentan sus otras declaraciones, ni los dictámenes sobre la ley judía (teshuvot) de su Comité de Ley y Normas Judías. La Sinagoga Unida del Judaísmo Conservador no publica resoluciones en línea.",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.orthodox.name": {
     "en": "Orthodox Judaism",
     "es": "Judaísmo ortodoxo",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.orthodox.family": {
     "en": "Jewish",
     "es": "Judía",
-    "status": "draft"
+    "status": "ok"
   },
   "trad.orthodox.official": {
     "en": "Positions adopted by the Orthodox Union's convention delegates or its Board of Directors, as listed in its convention resolutions. The Orthodox Union is the union of Orthodox synagogues, but it does not speak for all of Orthodox Judaism, and Haredi bodies such as Agudath Israel issue no voted resolutions. Not press releases, testimony or letters from its advocacy office.",
     "es": "Las posturas adoptadas por los delegados de la convención de la Unión Ortodoxa o por su Junta Directiva, tal como aparecen en sus resoluciones de convención. La Unión Ortodoxa es la unión de las sinagogas ortodoxas, pero no habla por todo el judaísmo ortodoxo, y los órganos jaredíes, como Agudath Israel, no emiten resoluciones votadas. No cuentan los comunicados de prensa, los testimonios ni las cartas de su oficina de incidencia política.",
-    "status": "draft"
+    "status": "ok"
   },
   "body.adopted-by-the-central-conference-of-american-rabbis": {
     "en": "Adopted by the Central Conference of American Rabbis",
     "es": "Adoptado por la Conferencia Central de Rabinos Estadounidenses",
-    "status": "draft"
+    "status": "ok"
   },
   "st.reform.immigration.2026-04-22": {
     "en": "Opposes immigration enforcement at or near houses of worship, hospitals and schools except in urgent circumstances, denounces deportations without due process, condemns raids by masked immigration officers, and calls for legislation that balances security with a humane welcome.",
     "es": "Se opone a las operaciones migratorias en lugares de culto, hospitales y escuelas o cerca de ellos, salvo en circunstancias urgentes, denuncia las deportaciones sin debido proceso, condena las redadas de agentes de inmigración enmascarados y pide leyes que equilibren la seguridad con una acogida humana.",
-    "status": "draft"
+    "status": "ok"
   },
   "body.adopted-by-the-rabbinical-assembly": {
     "en": "Adopted by the Rabbinical Assembly",
     "es": "Adoptado por la Asamblea Rabínica",
-    "status": "draft"
+    "status": "ok"
   },
   "st.conservative.healthcare.2026-03-30": {
     "en": "Commits the Rabbinical Assembly to promote everyone's ability to get the medical care they need, condemns efforts to keep pregnant people from health care, and opposes policies that discriminate against LGBTQ+ people or limit access to reproductive health care.",
     "es": "Compromete a la Asamblea Rabínica a promover que todas las personas puedan recibir la atención médica que necesitan, condena los esfuerzos por impedir que las personas embarazadas reciban atención médica y se opone a las políticas que discriminan a las personas LGBTQ+ o limitan el acceso a la atención de la salud reproductiva.",
-    "status": "draft"
+    "status": "ok"
   },
   "body.adopted-by-the-central-conference-of-american-rabbis-with-the-women-s-rabbinic-network": {
     "en": "Adopted by the Central Conference of American Rabbis with the Women's Rabbinic Network",
     "es": "Adoptado por la Conferencia Central de Rabinos Estadounidenses junto con la Red Rabínica de Mujeres",
-    "status": "draft"
+    "status": "ok"
   },
   "st.reform.abortion.2024-04-18": {
     "en": "Calls on its members and communities to affirm the legal right of a pregnant person to choose to carry or end a pregnancy free from government interference, along with the right to birth control and to comprehensive sex education.",
     "es": "Pide a sus miembros y comunidades que afirmen el derecho legal de una persona embarazada a decidir si continúa o termina un embarazo sin interferencia del gobierno, junto con el derecho a los anticonceptivos y a una educación sexual integral.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.conservative.abortion.2024-04-16": {
     "en": "Supports the Women's Health Protection Act, which would bar government restrictions on abortion services, legislation protecting the transport of birth control and abortion medication across state lines, and the FDA's continued approval of mifepristone.",
     "es": "Apoya la Ley de Protección de la Salud de las Mujeres, que prohibiría las restricciones del gobierno a los servicios de aborto, las leyes que protegen el transporte de anticonceptivos y medicamentos abortivos entre estados, y que la FDA siga aprobando la mifepristona.",
-    "status": "draft"
+    "status": "ok"
   },
   "body.orthodox-union-standing-policy-position-passed-by-an-earlier-convention-and-restated-in-its-2023-convention-resolutions": {
     "en": "Orthodox Union standing policy position, passed by an earlier convention and restated in its 2023 convention resolutions",
     "es": "Postura vigente de la Unión Ortodoxa, aprobada por una convención anterior y reiterada en sus resoluciones de la convención de 2023",
-    "status": "draft"
+    "status": "ok"
   },
   "st.orthodox.death-penalty.2023": {
     "en": "Supports a moratorium on executions in the United States and a commission to review death penalty procedures.",
     "es": "Apoya una moratoria de las ejecuciones en Estados Unidos y una comisión que revise los procedimientos de la pena de muerte.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.orthodox.guns.2023": {
     "en": "Endorses gun regulation, including banning certain sophisticated attack weapons, and supports gun control efforts.",
     "es": "Respalda la regulación de las armas de fuego, que incluya prohibir ciertas armas de asalto sofisticadas, y apoya los esfuerzos por controlar las armas.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.orthodox.environment.2023": {
     "en": "Supports greater energy efficiency and higher federal fuel economy (CAFE) standards, and favors exploring Alaska's oil fields while keeping strict environmental standards.",
     "es": "Apoya una mayor eficiencia energética y normas federales de rendimiento de combustible (CAFE) más altas, y está a favor de explorar los yacimientos petroleros de Alaska manteniendo normas ambientales estrictas.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.reform.environment.2022-05-20": {
     "en": "Commits the conference to advocate, and urges its members to join in advocating, for local, state and federal policies to curb U.S. greenhouse gas emissions and address the harms of climate change.",
     "es": "Compromete a la conferencia a abogar, e insta a sus miembros a sumarse a esa labor, por políticas locales, estatales y federales que reduzcan las emisiones de gases de efecto invernadero de Estados Unidos y atiendan los daños del cambio climático.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.reform.criminal-justice.2021-05-06": {
     "en": "Supports legislation banning new private prisons and detention centers, and calls on states with private prison contracts to end them as soon as the law allows.",
     "es": "Apoya leyes que prohíban nuevas cárceles y centros de detención privados, y pide a los estados que tienen contratos con cárceles privadas que los terminen tan pronto como la ley lo permita.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.conservative.poverty.2020-03-24": {
     "en": "Denounces three federal rule changes to the Supplemental Nutrition Assistance Program (SNAP) that it says will weaken food support for people in need, and asks its members to advocate against them and support hunger relief.",
     "es": "Denuncia tres cambios a las reglas federales del Programa de Asistencia Nutricional Suplementaria (SNAP) que, según dice, debilitarán la ayuda alimentaria para las personas necesitadas, y pide a sus miembros que aboguen en contra de ellos y apoyen la lucha contra el hambre.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.reform.healthcare.2017-03-23": {
     "en": "Calls on the President, Congress and the states to preserve and expand access to health care, including keeping Medicare and Medicaid as public programs, expanding Medicaid in every state to people at or below 138% of the poverty level, and barring denial of coverage for pre-existing conditions.",
     "es": "Pide al Presidente, al Congreso y a los estados que mantengan y amplíen el acceso a la atención médica, incluido mantener Medicare y Medicaid como programas públicos, ampliar Medicaid en todos los estados a las personas que ganan hasta el 138% del nivel de pobreza y prohibir que se niegue la cobertura por condiciones preexistentes.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.conservative.immigration.2017-02-28": {
     "en": "Supports sanctuary cities, a path to citizenship for undocumented residents, the extension of DACA and the closing of immigrant detention centers, and opposes extra funding that would turn immigration agencies into a deportation force and the use of private prisons for undocumented immigrants.",
     "es": "Apoya las ciudades santuario, un camino a la ciudadanía para los residentes indocumentados, la extensión de DACA y el cierre de los centros de detención de inmigrantes, y se opone a dar más fondos que conviertan a las agencias de inmigración en una fuerza de deportación y al uso de cárceles privadas para los inmigrantes indocumentados.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.reform.poverty.2016-05-19": {
     "en": "Calls on federal, state and local policymakers to support the Supplemental Nutrition Assistance Program (SNAP) and to protect it from proposals such as turning it into a block grant, and calls on its members to advocate for policies to end hunger.",
     "es": "Pide a los responsables de las políticas federales, estatales y locales que apoyen el Programa de Asistencia Nutricional Suplementaria (SNAP) y lo protejan de propuestas como convertirlo en una subvención en bloque, y pide a sus miembros que aboguen por políticas para acabar con el hambre.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.conservative.guns.2016-04-06": {
     "en": "Encourages its members to lobby for background checks on all gun sales, bans on military-style assault weapons and high-capacity magazines, and making gun trafficking a federal crime, and urges communities to demand gun violence prevention legislation.",
     "es": "Anima a sus miembros a presionar por la verificación de antecedentes en todas las ventas de armas, la prohibición de las armas de asalto de estilo militar y de los cargadores de alta capacidad, y que el tráfico de armas sea un delito federal, e insta a las comunidades a exigir leyes para prevenir la violencia armada.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.conservative.environment.2016-04-06": {
     "en": "Supports the Clean Power Plan and other energy efficiency measures, urges the U.S. government to pay its share of the Green Climate Fund, and supports a loss and damage mechanism to help developing nations hurt by climate change.",
     "es": "Apoya el Plan de Energía Limpia y otras medidas de eficiencia energética, insta al gobierno de Estados Unidos a pagar su parte del Fondo Verde para el Clima y apoya un mecanismo de pérdidas y daños para ayudar a los países en desarrollo afectados por el cambio climático.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.conservative.criminal-justice.2016-04-06": {
     "en": "Calls on legislators to reduce the prison population through community-based policing, changes to sentencing and better programs after release, and calls on rabbis to work with local police to limit the use of force.",
     "es": "Pide a los legisladores que reduzcan la población carcelaria mediante una policía comunitaria, cambios en las condenas y mejores programas tras la salida de prisión, y pide a los rabinos que trabajen con la policía local para limitar el uso de la fuerza.",
-    "status": "draft"
+    "status": "ok"
   },
   "st.reform.guns.2015-08-11": {
     "en": "Urges members of its congregations and communities to demand that Congress enact gun violence prevention legislation, and calls on governments that buy guns to use that buying power to press manufacturers for safer dealer networks and safer gun technology.",
     "es": "Insta a los miembros de sus congregaciones y comunidades a exigir que el Congreso apruebe leyes para prevenir la violencia armada, y pide a los gobiernos que compran armas que usen ese poder de compra para presionar a los fabricantes a tener redes de distribuidores más seguras y armas con tecnología más segura.",
-    "status": "draft"
+    "status": "ok"
   },
   "body.rabbinical-assembly-resolution-referred-from-its-1995-convention-published-by-the-death-penalty-information-center-not-on-the-rabbinical-assembly-s-own-site": {
     "en": "Rabbinical Assembly resolution referred from its 1995 convention. Published by the Death Penalty Information Center, not on the Rabbinical Assembly's own site",
     "es": "Resolución de la Asamblea Rabínica remitida desde su convención de 1995. La publica el Death Penalty Information Center, no el sitio de la propia Asamblea Rabínica",
-    "status": "draft"
+    "status": "ok"
   },
   "st.conservative.death-penalty.1995": {
     "en": "Opposes the adoption of death penalty laws and urges their abolition in states that have them, and urges laws that make life imprisonment without parole the punishment for some capital crimes.",
     "es": "Se opone a que se adopten leyes de pena de muerte e insta a abolirlas en los estados que las tienen, e insta a aprobar leyes que castiguen algunos delitos capitales con cadena perpetua sin libertad condicional.",
-    "status": "draft"
+    "status": "ok"
   },
   "body.adopted-by-the-central-conference-of-american-rabbis-at-its-90th-annual-convention": {
     "en": "Adopted by the Central Conference of American Rabbis at its 90th Annual Convention",
     "es": "Adoptado por la Conferencia Central de Rabinos Estadounidenses en su 90.ª Convención Anual",
-    "status": "draft"
+    "status": "ok"
   },
   "st.reform.death-penalty.1979": {
     "en": "Restates the conference's opposition to the death penalty, first stated in 1958 and 1960, says no evidence shows that it deters crime, and opposes it under all circumstances.",
     "es": "Reitera la oposición de la conferencia a la pena de muerte, expresada por primera vez en 1958 y 1960, dice que no hay pruebas de que disuada el delito y se opone a ella en todas las circunstancias.",
-    "status": "draft"
+    "status": "ok"
   },
   "none.orthodox.immigration": {
     "en": "The Orthodox Union's standing positions do not address immigration.",
     "es": "Las posturas vigentes de la Unión Ortodoxa no tratan la inmigración.",
-    "status": "draft"
+    "status": "ok"
   },
   "none.orthodox.criminal-justice": {
     "en": "The Orthodox Union's standing positions do not address policing, sentencing or prisons in general. Its heading \"Criminal Justice Issues\" covers only the death penalty and guns.",
     "es": "Las posturas vigentes de la Unión Ortodoxa no tratan la policía, las condenas ni las cárceles en general. Su apartado «Criminal Justice Issues» trata solo la pena de muerte y las armas de fuego.",
-    "status": "draft"
+    "status": "ok"
   },
   "none.orthodox.abortion": {
     "en": "The Orthodox Union's standing positions do not address abortion.",
     "es": "Las posturas vigentes de la Unión Ortodoxa no tratan el aborto.",
-    "status": "draft"
+    "status": "ok"
   },
   "none.orthodox.poverty": {
     "en": "The Orthodox Union's standing positions do not address poverty or public assistance.",
     "es": "Las posturas vigentes de la Unión Ortodoxa no tratan la pobreza ni la asistencia pública.",
-    "status": "draft"
+    "status": "ok"
   },
   "none.orthodox.healthcare": {
     "en": "The Orthodox Union's standing positions do not address healthcare policy.",
     "es": "Las posturas vigentes de la Unión Ortodoxa no tratan la política de atención médica.",
-    "status": "draft"
+    "status": "ok"
   }
 }
