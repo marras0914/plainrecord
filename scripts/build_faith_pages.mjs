@@ -150,13 +150,33 @@ function versesBlock(lang, s) {
       </details>`;
 }
 
+// ---------------------------------------------------------------------------
+// What a Jewish statement cites (npm run data:faith:citations): listed as the
+// statement writes it and linked to Sefaria, never printed (decided 15 Nov
+// 2026: the verse text above is from Christian translations).
+// ---------------------------------------------------------------------------
+
+const JEWISH = new Set(data.traditions.filter((t) => t.family === 'Jewish').map((t) => t.id));
+const C = data.citations;
+
+function citesBlock(lang, s) {
+  const c = C.byStatement[`${s.traditionId}.${s.issueId}.${s.sourceDate}`];
+  if (!c) throw new Error(`build_faith_pages: no citation record for ${s.traditionId} ${s.issueId} ${s.sourceDate}; run npm run data:faith:citations`);
+  if (!c.citations.length) return `<p class="small">${ft(lang, c.scope === 'paragraph' ? 'tr.noCitesParagraph' : 'tr.noCitesWhole')}</p>`;
+  const items = c.citations.map((x) => `<li><a href="${esc(x.url)}" lang="en"><b>${esc(x.written)}</b></a> <span class="small">(${ft(lang, KEY.citeKind(x.kind))}${x.ref !== x.written ? ` · <span lang="en">${esc(x.ref)}</span>` : ''})</span></li>`).join('');
+  return `<details class="verses"><summary>${ft(lang, 'tr.citesSummary', { n: c.citations.length })}</summary>
+        <p class="small">${ft(lang, 'tr.citesNote')}</p>
+        <ul class="stand">${items}</ul>
+      </details>`;
+}
+
 function statementCard(lang, s) {
   return `<div class="card">
       <p class="small">${tx(lang, KEY.body(s), s.body)}, ${esc(fmtDate(lang, s.sourceDate))}</p>
       <p><a href="${esc(s.sourceUrl)}"><b lang="en">${esc(s.title)}</b></a></p>
       <p>${tx(lang, KEY.statement(s), s.summary)}</p>
       ${quote(s.excerpt)}
-      ${versesBlock(lang, s)}
+      ${JEWISH.has(s.traditionId) ? citesBlock(lang, s) : versesBlock(lang, s)}
     </div>`;
 }
 
@@ -386,9 +406,11 @@ function methodPage(lang) {
   <h2>${ft(lang, 'me.h2official')}</h2>
   <p>${ft(lang, 'me.officialNote')}</p>
   <ul>${officials}</ul>
+  <p>${ft(lang, 'me.jewishCurrent')}</p>
 
   <h2>${ft(lang, 'me.h2why')}</h2>
   <p>${ft(lang, 'me.why')}</p>
+  <p>${ft(lang, 'me.whyJewish')}</p>
 
   <h2>${ft(lang, 'me.h2platforms')}</h2>
   <p>${ft(lang, 'me.platforms')}</p>
@@ -396,6 +418,7 @@ function methodPage(lang) {
 
   <h2>${ft(lang, 'me.h2earlier')}</h2>
   <p>${ft(lang, 'me.earlier', { n: data.sbcResolutionsSearched.toLocaleString(MONTH[lang]) })}</p>
+  <p>${ft(lang, 'me.earlierJewish', Object.fromEntries(Object.entries(data.jewishResolutionsSearched).map(([b, n]) => [b, n.toLocaleString(MONTH[lang])])))}</p>
 
   <h2>${ft(lang, 'me.h2verses')}</h2>
   <p>${ft(lang, 'me.verses')}</p>
@@ -404,6 +427,10 @@ function methodPage(lang) {
   ${platformsCiteNothing ? `<p>${ft(lang, 'me.versesPlatforms')}</p>` : ''}
   <p class="small">${ft(lang, 'me.bibles')}</p>
 
+  <h2>${ft(lang, 'me.h2cites')}</h2>
+  <p>${ft(lang, 'me.cites')}</p>
+  <p class="small" lang="en">${ft(lang, 'me.citesAliases', { list: C.aliases.map((a) => `${a.written} → ${a.sefaria} (${a.why})`).join('; ') })}</p>
+
   <h2>${ft(lang, 'me.h2house')}</h2>
   <p>${ft(lang, 'me.house', { linkHtml: data.houseVotes.map((h) => `<a href="${SITE}/${houseVotesPath(h.traditionId, lang)}">${ft(lang, 'hv.h1')}</a>`).join(', ') })}</p>
 
@@ -411,7 +438,7 @@ function methodPage(lang) {
   <p>${ft(lang, 'me.checks', { n: data.statements.length + data.planks.length })}</p>
 
   <h2>${ft(lang, 'me.h2missing')}</h2>
-  <ul><li>${ft(lang, 'me.missingAme')}</li><li>${ft(lang, 'me.missingAg')}</li></ul>
+  <ul><li>${ft(lang, 'me.missingAme')}</li><li>${ft(lang, 'me.missingAg')}</li><li>${ft(lang, 'me.missingOrthodox')}</li></ul>
   <p>${ft(lang, 'me.toRead')}</p>
   <ul>${toRead}</ul>
 

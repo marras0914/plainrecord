@@ -1,6 +1,6 @@
 /**
- * PlainRecord: what Christian traditions officially say, and what the parties'
- * platforms say, issue by issue (the faith module)
+ * PlainRecord: what Christian traditions and Jewish movements officially say,
+ * and what the parties' platforms say, issue by issue (the faith module)
  *
  * THE SITE NEVER DECIDES WHAT "THE CHRISTIAN POSITION" IS. This file holds
  * reported positions only: each tradition's official statements and each
@@ -58,7 +58,7 @@ export const ISSUES: { id: IssueId; name: string; description: string }[] = [
 /** Every issue, as of 13 Nov 2026. */
 export const FILLED_ISSUES: IssueId[] = ['immigration', 'abortion', 'death-penalty', 'guns', 'poverty', 'environment', 'healthcare', 'criminal-justice'];
 
-export type TraditionId = 'catholic' | 'sbc' | 'umc' | 'ame' | 'ag';
+export type TraditionId = 'catholic' | 'sbc' | 'umc' | 'ame' | 'ag' | 'reform' | 'conservative' | 'orthodox';
 
 export const TRADITIONS: { id: TraditionId; name: string; family: string; official: string; libraryUrl: string }[] = [
   { id: 'catholic', name: 'Catholic Church in the United States', family: 'Catholic',
@@ -76,7 +76,33 @@ export const TRADITIONS: { id: TraditionId; name: string; family: string; offici
   { id: 'ag', name: 'Assemblies of God (USA)', family: 'Pentecostal',
     official: 'Position papers and official statements of the General Council or its Executive Presbytery. Not columns by its officers.',
     libraryUrl: 'https://ag.org/Beliefs/Position-Papers' },
+  // Judaism's three U.S. movements, added 15 Nov 2026. Which bodies count was
+  // Marco's call that day: both bodies where two vote (FAITH.md, "Judaism").
+  { id: 'reform', name: 'Reform Judaism', family: 'Jewish',
+    official: 'Resolutions adopted by the Union for Reform Judaism (by its General Assembly or North American Board of Trustees) or by the Central Conference of American Rabbis. Not statements by the Religious Action Center\'s staff, press releases or action alerts.',
+    libraryUrl: 'https://urj.org/what-we-believe/resolutions' },
+  { id: 'conservative', name: 'Conservative Judaism', family: 'Jewish',
+    official: 'Resolutions adopted by the Rabbinical Assembly. Not its other statements, and not rulings on Jewish law (teshuvot) by its Committee on Jewish Law and Standards. The United Synagogue of Conservative Judaism publishes no resolutions online.',
+    libraryUrl: 'https://rabbinicalassembly.org/about-us/search-past-resolutions' },
+  { id: 'orthodox', name: 'Orthodox Judaism', family: 'Jewish',
+    official: 'Positions adopted by the Orthodox Union\'s convention delegates or its Board of Directors, and resolutions of the Rabbinical Council of America adopted at its convention or written as resolutions. Neither body speaks for all of Orthodox Judaism, and Haredi bodies such as Agudath Israel issue no voted resolutions. Not press releases, letters or joint statements.',
+    libraryUrl: 'https://archive.rabbis.org/category/policies-and-positions/' },
 ];
+
+/**
+ * Which of a Jewish movement's statements is shown in full, decided 15 Nov
+ * 2026: the newest one on the issue that states a direction for law or
+ * government, since the page sets it beside the platforms. A resolution on a
+ * movement's own investments or members' institutions is listed, not shown
+ * (URJ 2024 on divesting its holdings; RA 2019 on its members'
+ * institutions). A resolution on reproductive care is shown under abortion;
+ * under healthcare the newest on care in general is shown.
+ */
+export const isJewish = (id: TraditionId) => TRADITIONS.find((t) => t.id === id)?.family === 'Jewish';
+
+export const JEWISH_BODIES: Record<'reform' | 'conservative' | 'orthodox', ('urj' | 'ccar' | 'ra' | 'rca')[]> = {
+  reform: ['urj', 'ccar'], conservative: ['ra'], orthodox: ['rca'],
+};
 
 export interface Review { reviewerId: string; date: string }
 
@@ -126,15 +152,23 @@ export const ISSUE_TITLE_TERMS: Record<IssueId, RegExp> = {
   // Not "sanctity of life": it made a 2026 resolution on assisted suicide the
   // SBC's latest abortion statement. The cost is that two resolutions titled
   // only "Sanctity of Human Life" (1991, 2015) are not listed.
-  abortion: /abortion|pro-?life|roe v|planned parenthood|hyde/i,
+  // "reproductive ..." added 15 Nov 2026 for the Jewish movements, whose
+  // resolutions say "Reproductive Rights" (URJ 1990) or "Reproductive
+  // Freedom" (RA). It matched no SBC title.
+  abortion: /abortion|pro-?life|roe v|planned parenthood|hyde|reproductive (?:rights|freedom|health|justice|choice|care)|reproductive & sexual health/i,
   // Not "spiritual welfare" (an SBC resolution on evangelism, 1978).
   poverty: /poverty|\bpoor\b|(?<!spiritual )welfare|hunger|minimum wage/i,
   'death-penalty': /death penalty|capital punishment|execution/i,
   // Not "weapon": it matches resolutions on nuclear and other weapons of war.
   guns: /\bgun|firearm/i,
-  environment: /environment|creation care|climate|pollution|stewardship of creation|ecolog/i,
+  // Not bare "climate": it matched "School Discipline and Academic Climate"
+  // (URJ 2017). Known gap, 15 Nov 2026: no "global warming", so the SBC's
+  // 2007 "On Global Warming" is not listed. Adding it would make that the
+  // SBC's current environment statement, which is Marco's call to make.
+  environment: /environment|creation care|climate (?:change|crisis|justice|action|leadership)|pollution|stewardship of creation|ecolog/i,
   healthcare: /health ?care|health insurance|medicaid|medicare/i,
-  'criminal-justice': /criminal justice|prison|incarcerat|sentenc|policing|police/i,
+  // Not "prisoners of war" (RCA 1993, Israeli soldiers held abroad).
+  'criminal-justice': /criminal justice|prison(?!ers? of war)|incarcerat|sentenc|policing|police/i,
 };
 
 export interface Plank {
@@ -172,6 +206,26 @@ const SRC = {
   umcNatural: 'https://www.umc.org/en/content/social-principles-the-natural-world',
   sbcHealth2013: 'https://www.sbc.net/resource-library/resolutions/on-the-danger-of-age-discrimination-in-healthcare-rationing/',
   sbcPrison2013: 'https://www.sbc.net/resource-library/resolutions/on-americas-growing-prison-population/',
+  ccarImmigration2026: 'https://www.ccarnet.org/ccar-resolutions/central-conference-of-american-rabbis-resolution-on-immigration-due-process/',
+  ccarAbortion2024: 'https://www.ccarnet.org/ccar-resolutions/ccar-womens-rabbinic-network-resolution-affirming-our-commitment-to-broad-accessible-reproductive-sexual-health-care/',
+  ccarHunger2016: 'https://www.ccarnet.org/ccar-resolutions/ccar-resolution-hunger-america/',
+  ccarDeath1979: 'https://www.ccarnet.org/ccar-resolutions/capital-punishment-1979/',
+  ccarGuns2015: 'https://www.ccarnet.org/ccar-resolutions/ccar-resolution-gun-violence/',
+  ccarClimate2022: 'https://www.ccarnet.org/ccar-resolutions/central-conference-of-american-rabbis-resolution-on-the-climate-crisis/',
+  ccarHealth2017: 'https://www.ccarnet.org/ccar-resolutions/resolution-health-care/',
+  ccarPrisons2021: 'https://www.ccarnet.org/ccar-resolutions/central-conference-of-american-rabbis-resolution-on-private-prisons/',
+  raImmigration2017: 'https://rabbinicalassembly.org/resolutions/resolution-immigration-united-states',
+  raAbortion2024: 'https://rabbinicalassembly.org/resolutions/resolution-supporting-freedom-access-reproductive-health-care',
+  raHunger2020: 'https://rabbinicalassembly.org/resolutions/resolution-hunger-crisis-america',
+  raDeath1995: 'https://deathpenaltyinfo.org/stories/rabbinical-assembly',
+  raGuns2016: 'https://rabbinicalassembly.org/resolutions/resolution-american-gun-violence',
+  raParis2016: 'https://rabbinicalassembly.org/resolutions/resolution-paris-united-nations-framework-convention-climate-change-unfccc',
+  raHealth2026: 'https://rabbinicalassembly.org/resolutions/resolution-opposing-laws-limiting-essential-health-care',
+  raPolice2016: 'https://rabbinicalassembly.org/resolutions/resolution-racial-injustice-and-police-brutality',
+  rcaAbortion1990: 'https://archive.rabbis.org/abortion-1990/',
+  rcaPoverty1998: 'https://archive.rabbis.org/poverty-1998/',
+  rcaHealth1999: 'https://archive.rabbis.org/health-care-reform-1999/',
+  ou2023: 'https://www.ou.org/assets/OU_2023_National_Convention_Resolutions_Final_dq4fkw.pdf',
   rpt2024: 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf',
   tdp2024: 'https://txdem.co/24-Platform',
   rnc2024: 'https://www.presidency.ucsb.edu/documents/2024-republican-party-platform',
@@ -488,6 +542,194 @@ STATEMENTS.push(
   },
 );
 
+// --- Judaism (15 Nov 2026) --------------------------------------------------
+// Read from the downloads in data/faith_sources/jewish/ (npm run data:jewish).
+// Which statement is current: JEWISH_BODIES above.
+const CCAR = 'Adopted by the Central Conference of American Rabbis';
+const RA = 'Adopted by the Rabbinical Assembly';
+const OU = 'Orthodox Union standing policy position, passed by an earlier convention and restated in its 2023 convention resolutions';
+STATEMENTS.push(
+  {
+    traditionId: 'reform', issueId: 'immigration',
+    title: 'Central Conference of American Rabbis Resolution on Immigration & Due Process',
+    body: CCAR, sourceDate: '2026-04-22',
+    summary: 'Opposes immigration enforcement at or near houses of worship, hospitals and schools except in urgent circumstances, denounces deportations without due process, condemns raids by masked immigration officers, and calls for legislation that balances security with a humane welcome.',
+    excerpt: 'Denounces deportations without due process procedures',
+    sourceUrl: SRC.ccarImmigration2026, review: [],
+  },
+  {
+    traditionId: 'reform', issueId: 'abortion',
+    title: 'Resolution Affirming Our Commitment to Broad, Accessible Reproductive & Sexual Health Care',
+    body: 'Adopted by the Central Conference of American Rabbis with the Women\'s Rabbinic Network', sourceDate: '2024-04-18',
+    summary: 'Calls on its members and communities to affirm the legal right of a pregnant person to choose to carry or end a pregnancy free from government interference, along with the right to birth control and to comprehensive sex education.',
+    excerpt: 'legal right of a pregnant person to make their own informed, medically guided choice',
+    sourceUrl: SRC.ccarAbortion2024, review: [],
+  },
+  {
+    traditionId: 'reform', issueId: 'poverty',
+    title: 'CCAR Resolution on Hunger in America',
+    body: CCAR, sourceDate: '2016-05-19',
+    summary: 'Calls on federal, state and local policymakers to support the Supplemental Nutrition Assistance Program (SNAP) and to protect it from proposals such as turning it into a block grant, and calls on its members to advocate for policies to end hunger.',
+    excerpt: 'protect SNAP from harmful policy proposals',
+    sourceUrl: SRC.ccarHunger2016, review: [],
+  },
+  {
+    traditionId: 'reform', issueId: 'death-penalty',
+    title: 'Capital Punishment',
+    body: 'Adopted by the Central Conference of American Rabbis at its 90th Annual Convention', sourceDate: '1979',
+    summary: 'Restates the conference\'s opposition to the death penalty, first stated in 1958 and 1960, says no evidence shows that it deters crime, and opposes it under all circumstances.',
+    excerpt: 'We oppose capital punishment under all circumstances.',
+    sourceUrl: SRC.ccarDeath1979, review: [],
+  },
+  {
+    traditionId: 'reform', issueId: 'guns',
+    title: 'CCAR Resolution on Gun Violence',
+    body: CCAR, sourceDate: '2015-08-11',
+    summary: 'Urges members of its congregations and communities to demand that Congress enact gun violence prevention legislation, and calls on governments that buy guns to use that buying power to press manufacturers for safer dealer networks and safer gun technology.',
+    excerpt: 'demand that their Representatives and Senators enact effective gun violence prevention legislation',
+    sourceUrl: SRC.ccarGuns2015, review: [],
+  },
+  {
+    traditionId: 'reform', issueId: 'environment',
+    title: 'Central Conference of American Rabbis Resolution on the Climate Crisis',
+    body: CCAR, sourceDate: '2022-05-20',
+    summary: 'Commits the conference to advocate, and urges its members to join in advocating, for local, state and federal policies to curb U.S. greenhouse gas emissions and address the harms of climate change.',
+    excerpt: 'designed to curb American greenhouse gas emissions and address the harms of climate change',
+    sourceUrl: SRC.ccarClimate2022, review: [],
+  },
+  {
+    traditionId: 'reform', issueId: 'healthcare',
+    title: 'Resolution on Health Care',
+    body: CCAR, sourceDate: '2017-03-23',
+    summary: 'Calls on the President, Congress and the states to preserve and expand access to health care, including keeping Medicare and Medicaid as public programs, expanding Medicaid in every state to people at or below 138% of the poverty level, and barring denial of coverage for pre-existing conditions.',
+    excerpt: 'preserve and expand access to health care',
+    sourceUrl: SRC.ccarHealth2017, review: [],
+  },
+  {
+    traditionId: 'reform', issueId: 'criminal-justice',
+    title: 'Central Conference of American Rabbis Resolution on Private Prisons',
+    body: CCAR, sourceDate: '2021-05-06',
+    summary: 'Supports legislation banning new private prisons and detention centers, and calls on states with private prison contracts to end them as soon as the law allows.',
+    excerpt: 'Support legislation banning construction or implementation of new private prisons and detention centers',
+    sourceUrl: SRC.ccarPrisons2021, review: [],
+  },
+  {
+    traditionId: 'conservative', issueId: 'immigration',
+    title: 'Resolution on Immigration to the United States',
+    body: RA, sourceDate: '2017-02-28',
+    summary: 'Supports sanctuary cities, a path to citizenship for undocumented residents, the extension of DACA and the closing of immigrant detention centers, and opposes extra funding that would turn immigration agencies into a deportation force and the use of private prisons for undocumented immigrants.',
+    excerpt: 'allow the eleven million undocumented residents of the United States a path to citizenship',
+    sourceUrl: SRC.raImmigration2017, review: [],
+  },
+  {
+    traditionId: 'conservative', issueId: 'abortion',
+    title: 'Resolution Supporting Freedom of Access to Reproductive Health Care',
+    body: RA, sourceDate: '2024-04-16',
+    summary: 'Supports the Women\'s Health Protection Act, which would bar government restrictions on abortion services, legislation protecting the transport of birth control and abortion medication across state lines, and the FDA\'s continued approval of mifepristone.',
+    excerpt: 'prohibiting governmental restrictions on the provision of, and access to, abortion services',
+    sourceUrl: SRC.raAbortion2024, review: [],
+  },
+  {
+    traditionId: 'conservative', issueId: 'poverty',
+    title: 'Resolution on the Hunger Crisis in America',
+    body: RA, sourceDate: '2020-03-24',
+    summary: 'Denounces three federal rule changes to the Supplemental Nutrition Assistance Program (SNAP) that it says will weaken food support for people in need, and asks its members to advocate against them and support hunger relief.',
+    excerpt: 'strongly denounce these changes which will weaken nutritional support for those in need',
+    sourceUrl: SRC.raHunger2020, review: [],
+  },
+  {
+    // Not in the Rabbinical Assembly's online archive; the Death Penalty
+    // Information Center publishes the text, marked "referred from 1995
+    // Convention Plenum". It is the RA's resolution, so it counts.
+    traditionId: 'conservative', issueId: 'death-penalty',
+    title: 'Resolution on Capital Punishment',
+    body: 'Rabbinical Assembly resolution referred from its 1995 convention. Published by the Death Penalty Information Center, not on the Rabbinical Assembly\'s own site', sourceDate: '1995',
+    summary: 'Opposes the adoption of death penalty laws and urges their abolition in states that have them, and urges laws that make life imprisonment without parole the punishment for some capital crimes.',
+    excerpt: 'oppose the adoption of death penalty laws and urge their abolition',
+    sourceUrl: SRC.raDeath1995, review: [],
+  },
+  {
+    traditionId: 'conservative', issueId: 'guns',
+    title: 'Resolution on American Gun Violence',
+    body: RA, sourceDate: '2016-04-06',
+    summary: 'Encourages its members to lobby for background checks on all gun sales, bans on military-style assault weapons and high-capacity magazines, and making gun trafficking a federal crime, and urges communities to demand gun violence prevention legislation.',
+    excerpt: 'required background checks on all public and private gun sales',
+    sourceUrl: SRC.raGuns2016, review: [],
+  },
+  {
+    traditionId: 'conservative', issueId: 'environment',
+    title: 'Resolution on Paris United Nations Framework Convention on Climate Change (UNFCCC)',
+    body: RA, sourceDate: '2016-04-06',
+    summary: 'Supports the Clean Power Plan and other energy efficiency measures, urges the U.S. government to pay its share of the Green Climate Fund, and supports a loss and damage mechanism to help developing nations hurt by climate change.',
+    excerpt: 'support and advocate with other faith-based communities for the Clean Power Plan',
+    sourceUrl: SRC.raParis2016, review: [],
+  },
+  {
+    traditionId: 'conservative', issueId: 'healthcare',
+    title: 'Resolution on Opposing Laws Limiting Essential Health Care',
+    body: RA, sourceDate: '2026-03-30',
+    summary: 'Commits the Rabbinical Assembly to promote everyone\'s ability to get the medical care they need, condemns efforts to keep pregnant people from health care, and opposes policies that discriminate against LGBTQ+ people or limit access to reproductive health care.',
+    excerpt: 'promote the ability for all people to access the medical care they may need',
+    sourceUrl: SRC.raHealth2026, review: [],
+  },
+  {
+    traditionId: 'conservative', issueId: 'criminal-justice',
+    title: 'Resolution on Racial Injustice and Police Brutality',
+    body: RA, sourceDate: '2016-04-06',
+    summary: 'Calls on legislators to reduce the prison population through community-based policing, changes to sentencing and better programs after release, and calls on rabbis to work with local police to limit the use of force.',
+    excerpt: 'reducing the historically high levels of our prison population',
+    sourceUrl: SRC.raPolice2016, review: [],
+  },
+  {
+    traditionId: 'orthodox', issueId: 'abortion',
+    title: 'Abortion 1990',
+    body: 'Adopted by the Rabbinical Council of America in convention', sourceDate: '1990',
+    summary: 'Says neither the pro-life nor the pro-choice position is acceptable under Jewish law, opposes endorsing legislation that would keep Jewish law from being applied, and calls on Jews to accept abortion only in exceptional cases, decided with rabbinic authorities.',
+    excerpt: 'Precludes the endorsement of legislative measures which would impede the appropriate application of Halacha',
+    sourceUrl: SRC.rcaAbortion1990, review: [],
+  },
+  {
+    traditionId: 'orthodox', issueId: 'poverty',
+    title: 'Poverty 1998',
+    body: 'Resolution of the Rabbinical Council of America', sourceDate: '1998',
+    summary: 'Commends states that move people from welfare to work, and urges states, the federal government and the private sector to start programs, including training, child care, transportation and medical care, so that every citizen is able to work.',
+    excerpt: 'urge states, the federal government, and the private sector to initiate programs',
+    sourceUrl: SRC.rcaPoverty1998, review: [],
+  },
+  {
+    traditionId: 'orthodox', issueId: 'death-penalty',
+    title: 'A Summary of Standing Policy Positions of the Orthodox Union: Death Penalty',
+    body: OU, sourceDate: '2023',
+    summary: 'Supports a moratorium on executions in the United States and a commission to review death penalty procedures.',
+    excerpt: 'supports efforts to place a moratorium on executions in the United States',
+    sourceUrl: SRC.ou2023, review: [],
+  },
+  {
+    traditionId: 'orthodox', issueId: 'guns',
+    title: 'A Summary of Standing Policy Positions of the Orthodox Union: Gun Regulation',
+    body: OU, sourceDate: '2023',
+    summary: 'Endorses gun regulation, including banning certain sophisticated attack weapons, and supports gun control efforts.',
+    excerpt: 'endorse common sense gun regulation including banning of certain sophisticated attack weapons',
+    sourceUrl: SRC.ou2023, review: [],
+  },
+  {
+    traditionId: 'orthodox', issueId: 'environment',
+    title: 'A Summary of Standing Policy Positions of the Orthodox Union: Energy Policy',
+    body: OU, sourceDate: '2023',
+    summary: 'Supports greater energy efficiency and higher federal fuel economy (CAFE) standards, and favors exploring Alaska\'s oil fields while keeping strict environmental standards.',
+    excerpt: 'We support an increase of “CAFÉ” standards',
+    sourceUrl: SRC.ou2023, review: [],
+  },
+  {
+    traditionId: 'orthodox', issueId: 'healthcare',
+    title: 'Health Care Reform 1999',
+    body: 'Resolution of the Rabbinical Council of America', sourceDate: '1999',
+    summary: 'Says health care reform legislation should provide access to universal coverage with realistic cost controls, long-term care for the elderly and choice of doctors, and should respect patients\' ethical and religious beliefs in decisions about rationing treatment.',
+    excerpt: 'Access to universal coverage with realistic fiscal controls and tax policies',
+    sourceUrl: SRC.rcaHealth1999, review: [],
+  },
+);
+
 /**
  * "No official statement" (rule 4): a tradition with no qualifying statement
  * on an issue, shown on the page as such rather than left blank.
@@ -506,6 +748,8 @@ export const NO_STATEMENT: { traditionId: TraditionId; issueId: IssueId; note: s
   { traditionId: 'ag', issueId: 'healthcare', note: 'There is no position paper or official statement on healthcare policy.' },
   { traditionId: 'ag', issueId: 'criminal-justice', note: 'There is no position paper or official statement on criminal justice.' },
   { traditionId: 'ag', issueId: 'environment', note: 'There is no position paper on the environment. The 2015 position paper Church Mission and Peacemaking refers to a "perspective paper" on environmental protection, but no such paper is published on ag.org.' },
+  { traditionId: 'orthodox', issueId: 'immigration', note: 'Neither the Orthodox Union\'s standing positions nor any Rabbinical Council of America resolution addresses immigration. The Rabbinical Council\'s statements on it (2015, 2018) are press releases and a joint letter, which do not qualify under the rule for this tradition.' },
+  { traditionId: 'orthodox', issueId: 'criminal-justice', note: 'Neither the Orthodox Union\'s standing positions nor any Rabbinical Council of America resolution addresses policing, sentencing or prisons in general. The Orthodox Union\'s heading "Criminal Justice Issues" covers only the death penalty and guns.' },
 ];
 
 /** A platform that says nothing on an issue: stated on the page, not left blank. */
@@ -716,6 +960,19 @@ export const sbcOnIssue = (issue: IssueId) => SBC_RESOLUTIONS
   .filter((r) => ISSUE_TITLE_TERMS[issue].test(r.title))
   .sort((a, b) => b.date.localeCompare(a.date));
 
+/**
+ * Every resolution of the URJ, CCAR, Rabbinical Assembly and Rabbinical
+ * Council of America (scripts/fetch_jewish_resolutions.ts). The OU's standing
+ * positions are one booklet, entered by hand above.
+ */
+export const JEWISH_RESOLUTIONS: { body: 'urj' | 'ccar' | 'ra' | 'rca'; title: string; date: string; url: string; adoption?: string }[] =
+  JSON.parse(readFileSync(new URL('./data/faith/jewish_resolutions.json', import.meta.url), 'utf8')).resolutions;
+
+/** A Jewish movement's resolutions on an issue by title, newest first. */
+export const jewishOnIssue = (t: keyof typeof JEWISH_BODIES, issue: IssueId) => JEWISH_RESOLUTIONS
+  .filter((r) => JEWISH_BODIES[t].includes(r.body) && ISSUE_TITLE_TERMS[issue].test(r.title))
+  .sort((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
+
 /** Listed by hand where a tradition has no machine-readable library. */
 const HAND_EARLIER: Earlier[] = [
   { traditionId: 'umc', issueId: 'immigration', title: 'Welcoming the Migrant to the U.S. (Book of Resolutions 4271)', date: '2024', url: 'https://www.umc.org/en/content/book-of-resolutions-welcoming-the-migrant-to-the-us' },
@@ -735,8 +992,8 @@ const HAND_EARLIER: Earlier[] = [
 
 /**
  * Every other qualifying statement, listed under the current one: for the SBC
- * every title match except the current resolution, computed; for the others
- * the hand list above.
+ * and the Jewish movements every title match except the current statement,
+ * computed; for the others the hand list above.
  */
 export const EARLIER: Earlier[] = [
   ...FILLED_ISSUES.flatMap((issue) => {
@@ -744,6 +1001,14 @@ export const EARLIER: Earlier[] = [
     return sbcOnIssue(issue).filter((r) => !current.has(r.url))
       .map((r) => ({ traditionId: 'sbc' as const, issueId: issue, title: r.title, date: r.date, url: r.url }));
   }),
+  ...(Object.keys(JEWISH_BODIES) as (keyof typeof JEWISH_BODIES)[]).flatMap((t) => FILLED_ISSUES.flatMap((issue) => {
+    // Every statement of the movement shown in full, on any issue: one on
+    // reproductive care is shown under abortion and not also listed under
+    // healthcare (JEWISH_BODIES above).
+    const current = new Set(STATEMENTS.filter((s) => s.traditionId === t).map((s) => s.sourceUrl));
+    return jewishOnIssue(t, issue).filter((r) => !current.has(r.url))
+      .map((r) => ({ traditionId: t, issueId: issue, title: r.title, date: r.date, url: r.url }));
+  })),
   ...HAND_EARLIER,
 ];
 
