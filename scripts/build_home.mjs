@@ -59,7 +59,8 @@ export function homePage(lang) {
   const other = L === 'es' ? 'en' : 'es';
   const doors = [
     { name: ht(L, 'nav.policy'), line: ht(L, 'home.policy'), href: url(POLICY_PATH[L]) },
-    { name: ht(L, 'nav.religion'), line: ft(L, 'hub.lede'), href: url(`/${FAITH_PATHS[L].home}`) },
+    // The sides grid gets its own link from the door (Marco, 16 Nov 2026).
+    { name: ht(L, 'nav.religion'), line: ft(L, 'hub.lede'), href: url(`/${FAITH_PATHS[L].home}`), also: { text: ft(L, 'sd.h1'), href: url(`/${FAITH_PATHS[L].sides}`) } },
     { name: ht(L, 'nav.economics'), line: et(L, 'hub.lede'), href: url(`/${ECON_PATHS[L].blind}`) },
   ];
   const body = `
@@ -68,6 +69,7 @@ export function homePage(lang) {
   <div class="trio">${doors.map((d) => `<div class="card door">
     <h2><a href="${d.href}">${d.name}</a></h2>
     <p>${d.line}</p>
+    ${d.also ? `<p><a href="${d.also.href}"><b>${d.also.text}</b></a></p>` : ''}
     <p><a class="cta" href="${d.href}">${ht(L, 'home.go', { space: d.name.replace(/&amp;/g, '&') })}</a></p>
   </div>`).join('\n  ')}</div>
   <p><a href="${url(QUIZ_PATH[L])}">${ht(L, 'home.quiz')}</a></p>
