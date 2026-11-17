@@ -1368,8 +1368,13 @@ try {
           /district/i.test(repLabels[1] ?? ''),
         repLabels.join('  ·  '));
 
-      check('rep: it says who it excludes',
-        /not in this lookup/.test(await page.$eval('#rep-card', (e) => e.textContent)));
+      // Since 17 Nov 2026 the lookup has all 150 members of the 89th, so nobody
+      // is excluded and the footnote must be absent; it must reappear if the
+      // data ever excludes someone again.
+      const repExcluded = JSON.parse(readFileSync('public/data/members_89R.json', 'utf8')).provenance?.unnamedVoters ?? 0;
+      const saysExcluded = /not in this lookup/.test(await page.$eval('#rep-card', (e) => e.textContent));
+      check('rep: it says who it excludes exactly when someone is excluded',
+        saysExcluded === (repExcluded > 0),`${repExcluded} excluded, footnote ${saysExcluded ? 'shown' : 'absent'}`);
 
       // ---------------------------------------------------------------------
       // The ZIP path

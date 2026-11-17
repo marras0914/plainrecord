@@ -44,13 +44,15 @@ export interface Member {
   /** One character per item in `itemOrder`: y, n, or . for no vote recorded. */
   v: string;
   voted: number;
+  /** ISO date the member left the House, for a member of the 89th who no longer holds the seat. */
+  left?: string;
 }
 
 interface MemberFile {
   session: string;
   itemOrder: string[];
   members: Member[];
-  provenance: { sittingHouseMembers: number; unnamedVoters: number };
+  provenance: { sessionHouseMembers: number; unnamedVoters: number };
   /**
    * Former members who voted this session and hold no current district.
    *
@@ -106,7 +108,7 @@ export async function loadMembers(): Promise<MemberFile | null> {
   return inFlight;
 }
 
-/** The member for a district, or undefined. 149 of 150 seats are filled. */
+/** The 89th's member for a district, or undefined. All 150 are in the file since 17 Nov 2026. */
 export function memberForDistrict(file: MemberFile, district: number): Member | undefined {
   return file.members.find((m) => m.d === district);
 }

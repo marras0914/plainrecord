@@ -36,7 +36,11 @@ const nfmt = (x, lang) => x.toLocaleString(lang === 'es' ? 'en-US' : 'en-US');
 // contested votes they actually cast, so a member who missed votes is not
 // counted as loyal on them.
 export function crossingRates(bulk, roster) {
-  const retired = new Map((roster.retired ?? []).map((r) => [r.id, r]));
+  // Members who have left since carry `left` in members_89R.json (17 Nov 2026).
+  const retired = new Map([
+    ...(roster.retired ?? []).map((r) => [r.id, r]),
+    ...roster.members.filter((m) => m.left).map((m) => [m.id, { name: m.n, district: m.d, until: m.left }]),
+  ]);
   const contested = bulk.items.filter((it) => (it.dYea > 0.5) !== (it.rYea > 0.5));
   const rows = bulk.memberOrder.map((id, k) => {
     const m = bulk.members[id];

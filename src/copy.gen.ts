@@ -639,7 +639,7 @@ export const EN: Record<CopyKey, string> = {
   "rep.districtPlaceholder": "1 to 150",
   "rep.findDistrict": "If you do not know your district, it is on your voter registration card, or search your address at {link}.",
   "rep.findDistrictLinkText": "the state's own lookup",
-  "rep.noSuchDistrict": "District {d} has no member in this record. 149 of the 150 seats were filled when it was built.",
+  "rep.noSuchDistrict": "District {d} has no member in this record.",
   "rep.outOfRange": "The Texas House has districts 1 to 150.",
   "rep.noVotes": "{name} cast none of the {items} votes you were asked about, so there is no alignment to report. That is an absence, not a middling result.",
   "rep.answerFirst": "Answer a few votes first, then come back and look your representative up.",
@@ -975,7 +975,7 @@ export const ES: Record<CopyKey, string> = {
   "rep.districtPlaceholder": "1 a 150",
   "rep.findDistrict": "Si no sabe su distrito, está en su tarjeta de registro de votante, o busque su domicilio en {link}.",
   "rep.findDistrictLinkText": "la herramienta del estado",
-  "rep.noSuchDistrict": "El distrito {d} no tiene miembro en este registro. 149 de los 150 escaños estaban ocupados cuando se preparó.",
+  "rep.noSuchDistrict": "El distrito {d} no tiene miembro en este registro.",
   "rep.outOfRange": "La Cámara de Texas tiene distritos del 1 al 150.",
   "rep.noVotes": "{name} no emitió ninguno de los {items} votos sobre los que se le preguntó, así que no hay coincidencia que informar. Es una ausencia, no un resultado intermedio.",
   "rep.answerFirst": "Responda algunos votos primero y luego vuelva a buscar a su representante.",
@@ -1040,5 +1040,5 @@ export const ES: Record<CopyKey, string> = {
  * rather than presenting a machine draft as a translation.
  */
 export const ES_UNAPPROVED: readonly CopyKey[] = [
-
+  "rep.noSuchDistrict",
 ];

@@ -110,10 +110,10 @@ const stat = new Map(members.members.map((m) => [m.d, recordOf(m)]));
 // crossing list, the median member crossed four times, and pages ran as short
 // as 319 words. The headline block fixed that, taking the minimum to 625.
 //
-// 149 and not 150. HD-93 has had no sitting member since 29 July 2026, and it
-// drops out naturally because this reads the roster rather than counting to 150.
-// The assertion below is what turns that from a silent omission into a stated
-// fact if the roster ever changes shape.
+// All 150 since 17 Nov 2026: members_89R.json is the 89th's House, one member
+// per district, including members who have left since (HD-93, which had no
+// page from July to November 2026, and HD-1). The assertion below catches a
+// roster that changes shape.
 const chosen = [...members.members]
   .sort((a, b) => a.d - b.d)
   .map((m) => ({ d: m.d }));
@@ -347,6 +347,9 @@ const COPY = {
     // "Represented ... in the 89th Legislature" since 12 Nov 2026, so the page
     // stays true after the 90th is sworn in on 12 Jan 2027. The record is that
     // session's, whoever holds the seat next. Spanish approved 12 Nov 2026.
+    // A member of the 89th who has left the House since (17 Nov 2026, Marco:
+    // the pages are the 89th's record, so the district keeps its page).
+    left: (m, date) => `${m.n} left the House on ${date}. The votes on this page are the ones ${m.n} cast in the 89th Legislature.`,
     lede: (m, r) => `${m.n} represented Texas House District ${m.d} in the 89th Legislature (the 2025 session) and is a ${PARTY.en[m.p]}. This page is the record: of the ${r.total} votes this site publishes, ${m.n} cast ${r.cast}, and on the ${r.divisive} of those where the two parties took opposite sides, ${r.crossed === 0 ? 'they never voted against their own party' : `they voted against their own party ${r.crossed} ${r.crossed === 1 ? 'time' : 'times'}`}.`,
     // The index answers "who is my state rep", the question people actually type,
     // so the title, h1 and description say that and the ZIP box sits first.
@@ -416,6 +419,7 @@ const COPY = {
     whereCdp: 'comunidad no incorporada',
     whereOutside: (share) => `El ${share} restante del distrito vive fuera de cualquier ciudad o comunidad con nombre.`,
     whereNote: 'Contado a partir de los bloques del censo de 2020. Una ciudad repartida entre distritos aparece en la página de cada uno, y su calle decide cuál le corresponde.',
+    left: (m, date) => `${m.n} dejó la Cámara el ${date}. Los votos de esta página son los que ${m.n} emitió en la 89.ª Legislatura.`,
     lede: (m, r) => `${m.n} representó al Distrito ${m.d} de la Cámara de Texas en la 89.ª Legislatura (la sesión de 2025) y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
     indexDocTitle: '¿Quién es mi representante estatal en Texas? Búsqueda por código postal',
     indexTitle: 'Encuentre a su representante en la Cámara de Texas',
@@ -536,6 +540,7 @@ function render(m, lang) {
   const body = `
   <h1>${esc(c.title(m))}</h1>
   <p class="lede">${esc(c.lede(m, r))}</p>
+  ${m.left ? `<p>${esc(c.left(m, new Date(`${m.left}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })))}</p>` : ''}
   ${ballotBlock(m, lang)}
   ${whereBlock(m, lang)}
   ${crossBlock}
@@ -584,7 +589,7 @@ function render(m, lang) {
 let n = 0;
 for (const { d } of chosen) {
   const m = members.members.find((x) => x.d === d);
-  if (!m) throw new Error(`district ${d} has no sitting member in members_89R.json`);
+  if (!m) throw new Error(`district ${d} has no member in members_89R.json`);
   for (const lang of ['en', 'es']) {
     const slug = slugFor(d, lang);
     const dir = resolve(ROOT, 'public', slug);
@@ -664,5 +669,5 @@ for (const lang of ['en', 'es']) {
 }
 console.log(`  /districts and /distritos written, linking all ${members.members.length} members`);
 
-console.log(`\n  ${n} district pages written (${chosen.length} sitting members x 2 languages, plus 2 index pages)\n`);
+console.log(`\n  ${n} district pages written (${chosen.length} members of the 89th x 2 languages, plus 2 index pages)\n`);
 

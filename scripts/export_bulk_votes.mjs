@@ -229,12 +229,14 @@ const doc = {
       'reported 587,927 individual votes and 2,259 eligible items. Those figures are ' +
       'not comparable with this file: different extract, and no House filter or ' +
       'same-bill collapsing in common. Use the numbers in this file for this file.',
-    unnamed:
-      unnamed.length +
-      ' member(s) here cast votes but hold no current district, so their name and ' +
-      'district are null. data.openstates.org publishes no retired roster for Texas ' +
-      '(403), and the project will not guess a name. Their votes are kept because ' +
-      'dropping them would silently shrink the record.',
+    // Since 17 Nov 2026 members_89R.json names everyone who voted in the 89th,
+    // including members who have left since, so this is normally zero.
+    unnamed: unnamed.length === 0
+      ? 'Every member here is named, with the district they held in the 89th, including members who have left the House since (see members_89R.json, `left`).'
+      : unnamed.length +
+        ' member(s) here cast votes but are not in members_89R.json, so their name and ' +
+        'district are null. The project will not guess a name. Their votes are kept ' +
+        'because dropping them would silently shrink the record.',
     shortRecords:
       short.length + ' items have fewer named positions than the chamber recorded, ' +
       'always short and never over. ' + shortScrape + ' of them are scrape-sourced, ' +

@@ -58,7 +58,8 @@ const url = (f) => `${SITE}/data/${f}`;
 
 const c = bulk.counts;
 if (c.items !== bulk.items.length) throw new Error('votes_89R.json counts.items disagrees with its items');
-const retired = roster.retired ?? [];
+// Members of the 89th who have left the House since (members_89R.json `left`).
+const retired = roster.members.filter((m) => m.left);
 const headline = quiz.items.filter((i) => i.headline);
 
 const FILES = [
@@ -97,7 +98,7 @@ const body = `
   <ul>
     <li>${esc(bulk._meta.noCaptions)}</li>
     <li>${esc(bulk._meta.shortRecords)}</li>
-    ${retired.map((r) => `<li>${esc(`${r.name} (District ${r.district}) left the House on ${longDate(r.until)}. The ${n(r.voted)} votes cast in that seat are kept in votes_89R.json with a null name and district, and members_89R.json names the member under "retired".`)}</li>`).join('')}
+    ${retired.length ? `<li>${esc(`Who holds each seat now. The files are the 89th Legislature's House, one member per district, including ${retired.map((r) => `${r.n} (District ${r.d}, left the House on ${longDate(r.left)})`).join(' and ')}. Members who have left carry a "left" date in members_89R.json.`)}</li>` : ''}
   </ul>
 
   <h2>Where it comes from</h2>
