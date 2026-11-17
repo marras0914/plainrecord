@@ -213,21 +213,41 @@ function plankCard(lang, party, level, issueId) {
 const AD = data.advocacy;
 const advocacyFor = (tradId, issueId) => AD.items.filter((a) => a.traditionId === tradId && a.issueIds.includes(issueId));
 
-function advocacyItem(lang, a) {
-  const when = a.date ? esc(fmtDate(lang, a.date)) : ft(lang, 'ad.undated');
-  const host = a.host ? ` · ${ft(lang, 'ad.host', { host: a.host })}` : '';
-  return `<li><span class="way">${ft(lang, `ad.stance.${a.stance}`)}</span> <span lang="en">${esc(a.named.join('; '))}</span>${a.numbers ? ` <span class="small">(${esc(a.numbers)})</span>` : ''}
-        <br><span class="small">${ft(lang, `ad.kind.${a.kind}`)}, ${when}${host}: <a href="${esc(a.url)}" lang="en">${esc(a.docTitle)}</a></span>
-        <blockquote class="q" lang="en">“${esc(a.quote)}”</blockquote></li>`;
+// How each party voted on the bill (decided 17 Nov 2026; faith_floor_votes.ts):
+// each chamber's final vote, [yes, no] by party. No total, and no mark of a
+// party voting "with" or "against" the tradition.
+const PARTY_ORDER = ['R', 'D', 'I'];
+function floorVoteLine(lang, v) {
+  const splits = PARTY_ORDER.filter((p) => v.parties[p])
+    .map((p) => `${ft(lang, `vt.${p}`)} ${v.parties[p][0]}–${v.parties[p][1]}`).join(' · ');
+  const tie = v.tieBroken ? `, ${ft(lang, 'vt.tie')}` : '';
+  return `<li>${ft(lang, `vt.${v.chamber}.${v.kind}`)} (<span lang="en">${esc(v.measure)}</span>), <a href="${esc(v.url)}">${esc(fmtDate(lang, v.date))}</a>: ${ft(lang, `vt.${v.result}`)}${tie}. ${splits}${v.kind === 'cloture-proceed' ? `. ${ft(lang, 'vt.noPassage')}` : ''}</li>`;
 }
 
-/** The block under a tradition's statement on one issue. */
-function advocacyBlock(lang, tradId, issueId) {
+function advocacyItem(lang, a, withVotes) {
+  const when = a.date ? esc(fmtDate(lang, a.date)) : ft(lang, 'ad.undated');
+  const host = a.host ? ` · ${ft(lang, 'ad.host', { host: a.host })}` : '';
+  const votes = withVotes && a.floorVotes
+    ? `<p class="small"><b>${ft(lang, 'vt.h')}</b></p><ul class="votes small">${a.floorVotes.map((v) => floorVoteLine(lang, v)).join('')}</ul>`
+    : '';
+  return `<li><span class="way">${ft(lang, `ad.stance.${a.stance}`)}</span> <span lang="en">${esc(a.named.join('; '))}</span>${a.numbers ? ` <span class="small">(${esc(a.numbers)})</span>` : ''}
+        <br><span class="small">${ft(lang, `ad.kind.${a.kind}`)}, ${when}${host}: <a href="${esc(a.url)}" lang="en">${esc(a.docTitle)}</a></span>
+        <blockquote class="q" lang="en">“${esc(a.quote)}”</blockquote>${votes}</li>`;
+}
+
+/** The block under a tradition's statement on one issue; votes only on /faith/congress. */
+function advocacyBlock(lang, tradId, issueId, withVotes = false) {
   const items = advocacyFor(tradId, issueId);
   const none = AD.none[tradId] ? tx(lang, KEY.advNone(tradId), AD.none[tradId]) : ft(lang, 'ad.noneIssue');
   return items.length
-    ? `<ul class="stand ad">${items.map((a) => advocacyItem(lang, a)).join('')}</ul>`
+    ? `<ul class="stand ad">${items.map((a) => advocacyItem(lang, a, withVotes)).join('')}</ul>`
     : `<p class="small">${none}</p>`;
+}
+
+/** "A, B and C" with the bill names in English. */
+function billList(lang, names) {
+  const s = names.map((n) => `<span lang="en">${esc(n)}</span>`);
+  return s.length < 2 ? s.join('') : `${s.slice(0, -1).join(', ')} ${ft(lang, 'vt.and')} ${s.at(-1)}`;
 }
 
 function issueSection(lang, t, issue) {
@@ -652,7 +672,7 @@ function actionsPage(lang) {
   const sections = data.issues.map((issue) => {
     const rows = data.traditions.map((t) => `<div class="card"><p><a href="${SITE}/${traditionPath(t.id, lang)}#${issue.id}"><b>${tradName(lang, t)}</b></a></p>
       <p class="small">${ft(lang, 'ac.position')} ${positionText(lang, t.id, issue.id)}</p>
-      ${advocacyBlock(lang, t.id, issue.id)}</div>`).join('\n    ');
+      ${advocacyBlock(lang, t.id, issue.id, true)}</div>`).join('\n    ');
     return `<h2 id="${issue.id}">${issueName(lang, issue)}</h2>
   ${rows}`;
   }).join('\n');
@@ -661,6 +681,7 @@ function actionsPage(lang) {
   <p class="lede">${ft(lang, 'ac.lede')}</p>
   ${notice(lang)}
   <p class="small">${ft(lang, 'ac.rules')} ${ft(lang, 'ac.check')}</p>
+  <p class="small">${ft(lang, 'vt.rule', { n: (AD.floor.houseRollCalls + AD.floor.senateRollCalls).toLocaleString(MONTH[lang]), billsHtml: billList(lang, AD.floor.bills) })}</p>
   <ul class="jump">${data.issues.map((i) => `<li><a href="#${i.id}">${issueName(lang, i)}</a></li>`).join('')}</ul>
   ${sections}
   <p><a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a> · <a href="${SITE}/${P.members}">${ft(lang, 'mb.h1')}</a> · <a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>
@@ -760,6 +781,7 @@ function methodPage(lang) {
 
   <h2>${ft(lang, 'me.h2actions')}</h2>
   <p>${ft(lang, 'me.actions', { linkHtml: `<a href="${SITE}/${P.actions}">${ft(lang, 'ac.h1')}</a>` })}</p>
+  <p>${ft(lang, 'me.votes')}</p>
 
   <h2>${ft(lang, 'me.h2house')}</h2>
   <p>${ft(lang, 'me.house', { linkHtml: data.houseVotes.map((h) => `<a href="${SITE}/${houseVotesPath(h.traditionId, lang)}">${ft(lang, 'hv.h1')}</a>`).join(', ') })}</p>

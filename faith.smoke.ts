@@ -14,6 +14,7 @@ import { buildFaithPayload, PLATFORMS, passagesOverlap, sefariaPassage, citedOnB
 import type { CiteRef } from './scripts/export_faith';
 import { PEW_PUBLISHED, PEW_COLUMNS, MEMBERS_OF } from './faith_members';
 import { ADVOCACY, ADVOCACY_NONE, ADVOCACY_FILES } from './faith_advocacy';
+import { FLOOR_BILLS, floorBillsFor, loadFloorVotes } from './faith_floor_votes';
 import type { PewGroup, PewFigures, PewQuestion, Pct } from './faith_members';
 import { findRefs, statementKey } from './scripts/extract_faith_verses';
 import { parsePage, parseSineDie, buildPositions, wordsOf } from './scripts/extract_tccb_positions';
@@ -213,6 +214,37 @@ const noneButItems = Object.keys(ADVOCACY_NONE).filter((t) => ADVOCACY.some((a) 
 check('advocacy: a body recorded as naming no bill has no items', noneButItems.length === 0, noneButItems.join(', ') || 'none');
 check('(the advocacy check catches a quote of 25 words or more)',
   words('one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twenty-one twenty-two twenty-three twenty-four twenty-five') >= 25);
+
+// --- floor votes on the named bills (decided 17 Nov 2026) ---------------------
+
+const FV = loadFloorVotes();
+const refKey = (r: { chamber: string; year?: number; roll?: number; session?: number; vote?: number }) =>
+  r.chamber === 'house' ? `https://clerk.house.gov/Votes/${r.year}${r.roll}` : `vote119${r.session}/vote_119_${r.session}_${String(r.vote).padStart(5, '0')}.htm`;
+check('floor votes: every listed vote is in the saved file, and nothing else is',
+  FV.votes.length === FLOOR_BILLS.reduce((n, b) => n + b.votes.length, 0)
+  && FLOOR_BILLS.every((b) => b.votes.every((r) => FV.votes.some((v) => v.billId === b.id && v.url.endsWith(refKey(r))))),
+  `${FV.votes.length} votes`);
+const fvBad = FV.votes.flatMap((v) => {
+  const why: string[] = [];
+  const cap = v.chamber === 'house' ? 435 : 100;
+  const total = Object.values(v.parties).reduce((n, s) => n + (s ? s[0] + s[1] : 0), 0);
+  if (total < cap / 2 || total > cap) why.push(`${total} yes+no votes`);
+  if (v.kind === 'concur' && v.chamber !== 'house') why.push('concurrence outside the House');
+  if (v.kind === 'cloture-proceed' && FV.votes.some((w) => w.billId === v.billId && w.chamber === v.chamber && w.kind === 'passage')) why.push('a vote to proceed beside a passage vote');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(v.date) || v.date < '2025-01-03') why.push(`date ${v.date}`);
+  return why.length ? [`${v.billId} ${v.measure} ${v.date}: ${why.join(', ')}`] : [];
+});
+check('floor votes: plausible totals, the rule\'s kinds only, 119th-Congress dates', fvBad.length === 0, fvBad.join('; ') || 'ok');
+// Who gets lines: by number or by the name the document uses.
+const withVotes = ADVOCACY.filter((a) => floorBillsFor(a).length).map((a) => `${a.traditionId}:${a.named[0]}`);
+check('floor votes: the entries naming H.R. 1, Laken Riley or Born-Alive get them, and only those',
+  withVotes.length === 10 && withVotes.includes('sbc:Born Alive Abortion Survivor Protection Act') && withVotes.includes('umc:Laken Riley Act')
+  && withVotes.filter((w) => /Big Beautiful/.test(w)).length === 7, withVotes.join(' | '));
+check('(floor votes: a bill number inside a list like "H.R. 1564 / S. 726" is not read as H.R. 1)',
+  floorBillsFor({ numbers: 'H.R. 1564 / S. 726', named: ['Ethan’s Law'] }).length === 0 && floorBillsFor({ numbers: 'S. 6 / H.R. 21', named: [] })[0]?.id === 'born-alive');
+const shippedFaith = JSON.parse(readFileSync(new URL('./public/data/faith.json', import.meta.url), 'utf8'));
+check('floor votes: the shipped file carries them on the same 10 entries',
+  shippedFaith.advocacy.items.filter((a: any) => a.floorVotes?.length).length === 10);
 
 // --- current in full, earlier listed (decided 13 Nov 2026) ------------------
 

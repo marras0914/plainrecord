@@ -1,0 +1,174 @@
+{
+  "_meta": "Written by scripts/fetch_floor_votes.ts from congress.gov, the House Clerk and senate.gov. Party splits are [yes, no]; members not voting or voting present are not counted.",
+  "fetched": "2026-11-17",
+  "houseRollCalls": 685,
+  "senateRollCalls": 923,
+  "measuresWithRollCall": 537,
+  "votes": [
+    {
+      "billId": "hr1",
+      "chamber": "house",
+      "kind": "passage",
+      "measure": "H.R. 1",
+      "date": "2025-05-22",
+      "result": "passed",
+      "parties": {
+        "R": [
+          215,
+          2
+        ],
+        "D": [
+          0,
+          212
+        ]
+      },
+      "url": "https://clerk.house.gov/Votes/2025145"
+    },
+    {
+      "billId": "hr1",
+      "chamber": "senate",
+      "kind": "passage",
+      "measure": "H.R. 1",
+      "date": "2025-07-01",
+      "result": "passed",
+      "tieBroken": true,
+      "parties": {
+        "R": [
+          50,
+          3
+        ],
+        "D": [
+          0,
+          45
+        ],
+        "I": [
+          0,
+          2
+        ]
+      },
+      "url": "https://www.senate.gov/legislative/LIS/roll_call_votes/vote1191/vote_119_1_00372.htm"
+    },
+    {
+      "billId": "hr1",
+      "chamber": "house",
+      "kind": "concur",
+      "measure": "H.R. 1",
+      "date": "2025-07-03",
+      "result": "passed",
+      "parties": {
+        "R": [
+          218,
+          2
+        ],
+        "D": [
+          0,
+          212
+        ]
+      },
+      "url": "https://clerk.house.gov/Votes/2025190"
+    },
+    {
+      "billId": "laken-riley",
+      "chamber": "house",
+      "kind": "passage",
+      "measure": "H.R. 29",
+      "date": "2025-01-07",
+      "result": "passed",
+      "parties": {
+        "R": [
+          216,
+          0
+        ],
+        "D": [
+          48,
+          159
+        ]
+      },
+      "url": "https://clerk.house.gov/Votes/20256"
+    },
+    {
+      "billId": "laken-riley",
+      "chamber": "senate",
+      "kind": "passage",
+      "measure": "S. 5",
+      "date": "2025-01-20",
+      "result": "passed",
+      "parties": {
+        "R": [
+          52,
+          0
+        ],
+        "D": [
+          12,
+          33
+        ],
+        "I": [
+          0,
+          2
+        ]
+      },
+      "url": "https://www.senate.gov/legislative/LIS/roll_call_votes/vote1191/vote_119_1_00007.htm"
+    },
+    {
+      "billId": "laken-riley",
+      "chamber": "house",
+      "kind": "passage",
+      "measure": "S. 5",
+      "date": "2025-01-22",
+      "result": "passed",
+      "parties": {
+        "R": [
+          217,
+          0
+        ],
+        "D": [
+          46,
+          156
+        ]
+      },
+      "url": "https://clerk.house.gov/Votes/202523"
+    },
+    {
+      "billId": "born-alive",
+      "chamber": "house",
+      "kind": "passage",
+      "measure": "H.R. 21",
+      "date": "2025-01-23",
+      "result": "passed",
+      "parties": {
+        "R": [
+          216,
+          0
+        ],
+        "D": [
+          1,
+          204
+        ]
+      },
+      "url": "https://clerk.house.gov/Votes/202527"
+    },
+    {
+      "billId": "born-alive",
+      "chamber": "senate",
+      "kind": "cloture-proceed",
+      "measure": "S. 6",
+      "date": "2025-01-22",
+      "result": "failed",
+      "parties": {
+        "R": [
+          52,
+          0
+        ],
+        "D": [
+          0,
+          45
+        ],
+        "I": [
+          0,
+          2
+        ]
+      },
+      "url": "https://www.senate.gov/legislative/LIS/roll_call_votes/vote1191/vote_119_1_00011.htm"
+    }
+  ]
+}

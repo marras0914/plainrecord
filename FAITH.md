@@ -170,6 +170,13 @@ How it is applied:
 - "Global warming" was added to the environment rule on
   16 Nov 2026 (Marco), which made the SBC's 2007 "On Global Warming" its
   current environment statement.
+- Floor votes on the named bills (Marco, 17 Nov 2026; `faith_floor_votes.ts`,
+  `npm run data:faith:votes`): lines on /faith/congress only, each chamber's
+  final vote (passage or House concurrence) with each party's yes and no, or,
+  where a chamber never voted on passage, the vote that stopped the bill. No
+  total and no "with/against" mark. Of the 1,608 roll calls through 17 Nov
+  2026, only H.R. 1, the Laken Riley Act and Born-Alive were on a named bill;
+  the script refuses to write if that stops being true.
 
 ---
 

@@ -2087,6 +2087,76 @@
     "es": "Su postura oficial:",
     "status": "ok"
   },
+  "vt.h": {
+    "en": "How each party voted (yes–no):",
+    "es": "Cómo votó cada partido (sí–no):",
+    "status": "draft"
+  },
+  "vt.house.passage": {
+    "en": "House vote on passage",
+    "es": "Votación de aprobación en la Cámara de Representantes",
+    "status": "draft"
+  },
+  "vt.senate.passage": {
+    "en": "Senate vote on passage",
+    "es": "Votación de aprobación en el Senado",
+    "status": "draft"
+  },
+  "vt.house.concur": {
+    "en": "House vote to accept the Senate’s changes",
+    "es": "Votación en la Cámara de Representantes para aceptar los cambios del Senado",
+    "status": "draft"
+  },
+  "vt.senate.cloture-proceed": {
+    "en": "Senate vote to begin debate (60 votes needed)",
+    "es": "Votación en el Senado para iniciar el debate (se necesitaban 60 votos)",
+    "status": "draft"
+  },
+  "vt.noPassage": {
+    "en": "The Senate never voted on passage.",
+    "es": "El Senado nunca votó su aprobación.",
+    "status": "draft"
+  },
+  "vt.passed": {
+    "en": "passed",
+    "es": "aprobada",
+    "status": "draft"
+  },
+  "vt.failed": {
+    "en": "failed",
+    "es": "rechazada",
+    "status": "draft"
+  },
+  "vt.tie": {
+    "en": "the Vice President broke a tie",
+    "es": "el vicepresidente desempató",
+    "status": "draft"
+  },
+  "vt.R": {
+    "en": "Republicans",
+    "es": "Republicanos",
+    "status": "draft"
+  },
+  "vt.D": {
+    "en": "Democrats",
+    "es": "Demócratas",
+    "status": "draft"
+  },
+  "vt.I": {
+    "en": "Independents",
+    "es": "Independientes",
+    "status": "draft"
+  },
+  "vt.and": {
+    "en": "and",
+    "es": "y",
+    "status": "draft"
+  },
+  "vt.rule": {
+    "en": "Floor votes: under each bill that reached a recorded vote in this Congress, each chamber’s final vote, with how each party voted, from the House Clerk’s and the Senate’s roll calls. A vote to begin debate is shown only where it stopped a bill before any vote on passage. Of the {n} recorded floor votes so far, only those on the {billsHtml} were on a bill named here. Nothing marks a party as voting with or against a tradition.",
+    "es": "Votaciones en el pleno: debajo de cada proyecto de ley que llegó a una votación nominal en este Congreso, aparece la votación final de cada cámara, con cómo votó cada partido, según los registros de votación de la Secretaría de la Cámara de Representantes y del Senado. Una votación para iniciar el debate aparece solo cuando detuvo un proyecto de ley antes de cualquier votación de aprobación. De las {n} votaciones nominales en el pleno hasta ahora, solo las del {billsHtml} fueron sobre un proyecto de ley nombrado aquí. Nada indica que un partido votó a favor o en contra de una tradición.",
+    "status": "draft"
+  },
   "home.sidesNote": {
     "en": "For each issue the platforms split on, which side each tradition's own words take. No score.",
     "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada tradición. Sin puntaje.",
@@ -2131,6 +2201,11 @@
     "en": "{linkHtml} lists, for each issue, the bills each tradition's own advocacy office backed or opposed since January 2025, from its own letters, alerts, statements and agendas, with every quote and bill name checked against a saved copy. Federal lobbying reports were not used: the law does not require churches to file them. No count.",
     "es": "{linkHtml} enumera, en cada tema, los proyectos de ley que la propia oficina de incidencia de cada tradición apoyó o rechazó desde enero de 2025, según sus propias cartas, alertas, declaraciones y agendas, con cada cita y nombre de proyecto de ley verificados contra una copia guardada. No se usaron los informes federales de cabildeo: la ley no obliga a las iglesias a presentarlos. Sin conteo.",
     "status": "ok"
+  },
+  "me.votes": {
+    "en": "Under each bill that reached a recorded floor vote, that page shows each chamber’s final vote (passage, or the House vote to accept the Senate’s changes) with each party’s yes and no votes, from the House Clerk’s and the Senate’s roll-call records. Where a chamber never voted on passage, the vote that stopped the bill is shown instead and labeled. Motions to send a bill back to committee, amendments, and votes on other bills with similar provisions are not shown, and members who did not vote are not counted. A script lists every recorded floor vote of this Congress and refuses to publish if a bill named here had one that is not shown. No total.",
+    "es": "Debajo de cada proyecto de ley que llegó a una votación nominal en el pleno, esa página muestra la votación final de cada cámara (la aprobación, o la votación de la Cámara de Representantes para aceptar los cambios del Senado) con los votos a favor y en contra de cada partido, según los registros de votación de la Secretaría de la Cámara de Representantes y del Senado. Cuando una cámara nunca votó la aprobación, aparece en su lugar la votación que detuvo el proyecto de ley, señalada como tal. No se muestran las mociones para devolver un proyecto de ley a comisión, las enmiendas ni las votaciones sobre otros proyectos de ley con disposiciones parecidas, y no se cuentan los legisladores que no votaron. Un programa enumera todas las votaciones nominales en el pleno de este Congreso y se niega a publicar si un proyecto de ley nombrado aquí tuvo una que no aparece. Sin conteo.",
+    "status": "draft"
   },
   "side.immigration.q": {
     "en": "What should happen to people living in the United States without legal status?",
