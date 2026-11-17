@@ -48,6 +48,7 @@ import { createServer } from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join, extname } from 'node:path';
 import { existsSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://rightnleft.com';
@@ -90,8 +91,8 @@ if (faces.length < 2) {
 // what made a row tall, and every one of these six is legible from its value and
 // its rank alone. The full comparison, its sources and its caveats are on the
 // site, which the line under the block says.
-const payload = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
-const sidecar = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.json'), 'utf8'));
+const payload = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
+const sidecar = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.es.json`), 'utf8'));
 const PICK = [
   'Per-student school funding',
   'Job growth',

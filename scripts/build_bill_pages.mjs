@@ -59,10 +59,10 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
 const read = (p) => JSON.parse(readFileSync(resolve(ROOT, p), 'utf8'));
 
-const payload = read('public/data/quiz_89R.json');
-const sidecar = read('public/data/quiz_89R.es.json');
-const roster = read('public/data/members_89R.json');
-const bulk = read('public/data/votes_89R.json');
+const payload = read(`public/data/quiz_${SESSION}.json`);
+const sidecar = read(`public/data/quiz_${SESSION}.es.json`);
+const roster = read(`public/data/members_${SESSION}.json`);
+const bulk = read(`public/data/votes_${SESSION}.json`);
 
 const HEADLINE = payload.items.filter((i) => i.headline);
 if (HEADLINE.length !== 7) throw new Error(`expected 7 headline bills, found ${HEADLINE.length}`);
@@ -80,6 +80,7 @@ const bulkOf = new Map(bulk.items.map((i) => [i.id, i]));
 // Defined once in _site_nav.mjs, which the footer also uses; re-exported so the
 // district, data and chart builders keep importing it from here.
 import { billSlug, billPath } from './_site_nav.mjs';
+import { SESSION } from './session.mjs';
 export { billSlug, billPath };
 const districtPath = (d, lang) => (lang === 'es' ? `distrito/${d}` : `district/${d}`);
 
@@ -93,7 +94,7 @@ for (const it of payload.items) {
   }
 }
 const billUrl = (billId) => CURATED.get(billId)
-  ?? `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=${billId.replace(/\s+/g, '')}`;
+  ?? `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=${SESSION}&Bill=${billId.replace(/\s+/g, '')}`;
 
 function es(it, field) {
   const v = sidecar.items?.[it.billId]?.[field];
@@ -217,7 +218,7 @@ function gapCount(it, t, lang) {
 /** Every member's position on one item, from the bulk corpus. */
 function rollOf(it) {
   const b = bulkOf.get(it.id);
-  if (!b) throw new Error(`${it.billId}: roll call ${it.id} is not in votes_89R.json`);
+  if (!b) throw new Error(`${it.billId}: roll call ${it.id} is not in votes_${SESSION}.json`);
   const rows = bulk.memberOrder.map((id, i) => {
     const m = bulk.members[id];
     const mark = b.v[i];

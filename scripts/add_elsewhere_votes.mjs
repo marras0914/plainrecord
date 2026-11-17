@@ -48,10 +48,11 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const QUIZ = resolve(ROOT, 'public/data/quiz_89R.json');
-const CORPUS = resolve(ROOT, 'public/data/votes_89R.json');
+const QUIZ = resolve(ROOT, `public/data/quiz_${SESSION}.json`);
+const CORPUS = resolve(ROOT, `public/data/votes_${SESSION}.json`);
 const checkOnly = process.argv.includes('--check');
 
 const quiz = JSON.parse(readFileSync(QUIZ, 'utf8'));

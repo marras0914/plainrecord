@@ -28,9 +28,10 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const PAYLOAD = join(ROOT, 'public', 'data', 'quiz_89R.json');
+const PAYLOAD = join(ROOT, 'public', 'data', `quiz_${SESSION}.json`);
 const RULE_SRC = join(ROOT, 'selection.ts');
 const write = process.argv.includes('--write');
 

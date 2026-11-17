@@ -25,14 +25,15 @@ import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { HEADLINE_BILLS, RACES, billPath } from './_site_nav.mjs';
 import { actsLine } from './build_bill_pages.mjs';
 import { ht, HOME_COPY, requireApprovedHome, QUIZ_PATH, POLICY_PATH } from './_home_copy.mjs';
+import { SESSION } from './session.mjs';
 
 requireApprovedHome('build_hubs');
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
 const read = (p) => JSON.parse(readFileSync(resolve(ROOT, p), 'utf8'));
-const quiz = read('public/data/quiz_89R.json');
-const sidecar = read('public/data/quiz_89R.es.json');
+const quiz = read(`public/data/quiz_${SESSION}.json`);
+const sidecar = read(`public/data/quiz_${SESSION}.es.json`);
 const itemOf = new Map(quiz.items.map((i) => [i.billId, i]));
 
 const summary = (it, lang) => {

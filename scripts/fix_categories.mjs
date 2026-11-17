@@ -38,10 +38,11 @@
  */
 
 import { readFileSync, writeFileSync, copyFileSync, existsSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
-const OVERRIDES = 'i18n/categories_89R.json';
-const SUBJECTS = 'data/bill_subjects_89R.json';
-const PAYLOAD = 'public/data/quiz_89R.json';
+const OVERRIDES = `i18n/categories_${SESSION}.json`;
+const SUBJECTS = `data/bill_subjects_${SESSION}.json`;
+const PAYLOAD = `public/data/quiz_${SESSION}.json`;
 const write = process.argv.includes('--write');
 
 const ov = JSON.parse(readFileSync(OVERRIDES, 'utf8'));

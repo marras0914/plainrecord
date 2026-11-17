@@ -1,0 +1,4 @@
+{
+  "_meta": "The legislative session the site's quiz, member, vote and ZIP files are built for. Every build script reads it through scripts/session.mjs, and the browser bundle gets it as __SESSION__ (vite.config.ts). Changing it points the whole build at another session's files (quiz_<session>.json and so on); it does not create them. Decided 17 Nov 2026 (Marco): the 89th stays the site's session through the 90th's 2027 regular session, and the 90th is added alongside after it ends.",
+  "session": "89R"
+}

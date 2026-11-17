@@ -25,13 +25,14 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
+import { SESSION as BUILD_SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const PAYLOAD = join(ROOT, 'public', 'data', 'quiz_89R.json');
+const PAYLOAD = join(ROOT, 'public', 'data', `quiz_${BUILD_SESSION}.json`);
 const all = process.argv.includes('--all');
 
 const data = JSON.parse(readFileSync(PAYLOAD, 'utf8'));
-const SESSION = data.session ?? '89R';
+const SESSION = data.session ?? BUILD_SESSION;
 
 let pass = 0;
 let fail = 0;

@@ -28,16 +28,17 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_ } from './_page_shell.mjs';
 import { billPath } from './build_bill_pages.mjs';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
 const path = (f) => resolve(ROOT, 'public/data', f);
 const read = (f) => JSON.parse(readFileSync(path(f), 'utf8'));
 
-const bulk = read('votes_89R.json');
-const roster = read('members_89R.json');
-const quiz = read('quiz_89R.json');
-const zips = read('zips_89R.json');
+const bulk = read(`votes_${SESSION}.json`);
+const roster = read(`members_${SESSION}.json`);
+const quiz = read(`quiz_${SESSION}.json`);
+const zips = read(`zips_${SESSION}.json`);
 
 const n = (x) => x.toLocaleString('en-US');
 const size = (f) => {
@@ -57,26 +58,26 @@ const KAGGLE = 'https://www.kaggle.com/datasets/babas03/texas-house-roll-call-vo
 const url = (f) => `${SITE}/data/${f}`;
 
 const c = bulk.counts;
-if (c.items !== bulk.items.length) throw new Error('votes_89R.json counts.items disagrees with its items');
+if (c.items !== bulk.items.length) throw new Error(`votes_${SESSION}.json counts.items disagrees with its items`);
 // Members of the 89th who have left the House since (members_89R.json `left`).
 const retired = roster.members.filter((m) => m.left);
 const headline = quiz.items.filter((i) => i.headline);
 
 const FILES = [
   {
-    f: 'votes_89R.json', name: `All ${n(c.items)} recorded House votes`,
+    f: `votes_${SESSION}.json`, name: `All ${n(c.items)} recorded House votes`,
     what: `Every recorded floor vote of the Texas House in the 2025 regular session: ${n(c.items)} roll calls and ${n(c.votesCast)} individual positions across ${c.members} members. ${n(c.journalSourced)} are reconciled against the House Journal and ${c.scrapeSourced} come from the Open States scrape, and each roll call says which.`,
   },
   {
-    f: 'members_89R.json', name: 'Members and their votes on the 67 selected items',
+    f: `members_${SESSION}.json`, name: 'Members and their votes on the 67 selected items',
     what: `The ${roster.members.length} members of the 89th Legislature in this record, with district and party, and how each voted on the ${roster.itemOrder.length} items the site asks about.`,
   },
   {
-    f: 'quiz_89R.json', name: `The ${quiz.items.length} items the site asks about`,
-    what: `The selected roll calls with the published selection rule, plain-language summaries, partisan valences, and Governor and Lieutenant Governor actions. Spanish summaries are in quiz_89R.es.json (${size('quiz_89R.es.json')}).`,
+    f: `quiz_${SESSION}.json`, name: `The ${quiz.items.length} items the site asks about`,
+    what: `The selected roll calls with the published selection rule, plain-language summaries, partisan valences, and Governor and Lieutenant Governor actions. Spanish summaries are in quiz_${SESSION}.es.json (${size(`quiz_${SESSION}.es.json`)}).`,
   },
   {
-    f: 'zips_89R.json', name: 'ZIP code to Texas House district crosswalk',
+    f: `zips_${SESSION}.json`, name: 'ZIP code to Texas House district crosswalk',
     what: `${n(Object.keys(zips.zips).length)} Texas ZIP codes mapped to House districts through 2020 Census blocks, with the share of each ZIP's people in every district it touches.`,
   },
 ];
@@ -98,7 +99,7 @@ const body = `
   <ul>
     <li>${esc(bulk._meta.noCaptions)}</li>
     <li>${esc(bulk._meta.shortRecords)}</li>
-    ${retired.length ? `<li>${esc(`Who holds each seat now. The files are the 89th Legislature's House, one member per district, including ${retired.map((r) => `${r.n} (District ${r.d}, left the House on ${longDate(r.left)})`).join(' and ')}. Members who have left carry a "left" date in members_89R.json.`)}</li>` : ''}
+    ${retired.length ? `<li>${esc(`Who holds each seat now. The files are the 89th Legislature's House, one member per district, including ${retired.map((r) => `${r.n} (District ${r.d}, left the House on ${longDate(r.left)})`).join(' and ')}. Members who have left carry a "left" date in members_${SESSION}.json.`)}</li>` : ''}
   </ul>
 
   <h2>Where it comes from</h2>

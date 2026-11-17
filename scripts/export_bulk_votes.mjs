@@ -42,12 +42,13 @@
  */
 
 import { readFileSync, writeFileSync, copyFileSync, existsSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
-const BILLS = 'data/tx_bills_89R.json';
-const ROSTER = 'data/tx_roster_89R.json';
-const MEMBERS = 'public/data/members_89R.json';
-const PAYLOAD = 'public/data/quiz_89R.json';
-const OUT = 'public/data/votes_89R.json';
+const BILLS = `data/tx_bills_${SESSION}.json`;
+const ROSTER = `data/tx_roster_${SESSION}.json`;
+const MEMBERS = `public/data/members_${SESSION}.json`;
+const PAYLOAD = `public/data/quiz_${SESSION}.json`;
+const OUT = `public/data/votes_${SESSION}.json`;
 const write = process.argv.includes('--write');
 
 const die = (msg) => { console.error(`\n  REFUSED: ${msg}\n`); process.exit(1); };
@@ -217,7 +218,7 @@ const doc = {
       'at least one yea and one nay, a minority bloc of at least 10 members, and a ' +
       'minority share of at least 5%. Shipped as a flag rather than applied, because ' +
       'a bulk file should hand over everything. Note this is NOT the 992 reported in ' +
-      "quiz_89R.json's provenance: that number is reached after also dropping " +
+      `quiz_${SESSION}.json's provenance: that number is reached after also dropping ` +
       'uncategorised items and collapsing repeat votes on the same bill, neither of ' +
       'which this file does.',
     noCaptions:
@@ -232,9 +233,9 @@ const doc = {
     // Since 17 Nov 2026 members_89R.json names everyone who voted in the 89th,
     // including members who have left since, so this is normally zero.
     unnamed: unnamed.length === 0
-      ? 'Every member here is named, with the district they held in the 89th, including members who have left the House since (see members_89R.json, `left`).'
+      ? 'Every member here is named, with the district they held in the 89th, including members who have left the House since (see members_' + SESSION + '.json, `left`).'
       : unnamed.length +
-        ' member(s) here cast votes but are not in members_89R.json, so their name and ' +
+        ` member(s) here cast votes but are not in members_${SESSION}.json, so their name and ` +
         'district are null. The project will not guess a name. Their votes are kept ' +
         'because dropping them would silently shrink the record.',
     shortRecords:

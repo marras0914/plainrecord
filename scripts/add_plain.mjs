@@ -19,10 +19,11 @@
  */
 
 import { readFileSync, writeFileSync, copyFileSync, existsSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
-const SRC = 'i18n/plain_89R.json';
-const PAYLOAD = 'public/data/quiz_89R.json';
-const SIDECAR = 'public/data/quiz_89R.es.json';
+const SRC = `i18n/plain_${SESSION}.json`;
+const PAYLOAD = `public/data/quiz_${SESSION}.json`;
+const SIDECAR = `public/data/quiz_${SESSION}.es.json`;
 const write = process.argv.includes('--write');
 
 const src = JSON.parse(readFileSync(SRC, 'utf8'));

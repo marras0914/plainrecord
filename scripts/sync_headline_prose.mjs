@@ -35,11 +35,12 @@ import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { HEADLINE_SET } from './export_quiz_data.ts';
+import { SESSION } from './session.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
-const PAYLOAD = join(ROOT, 'public/data/quiz_89R.json');
-const SIDECAR = join(ROOT, 'public/data/quiz_89R.es.json');
+const PAYLOAD = join(ROOT, `public/data/quiz_${SESSION}.json`);
+const SIDECAR = join(ROOT, `public/data/quiz_${SESSION}.es.json`);
 
 const write = process.argv.includes('--write');
 const spanishReviewed = process.argv.includes('--spanish-reviewed');
@@ -84,12 +85,12 @@ if (needReview.length) {
   console.error('\n  REFUSING TO WRITE. These sentences changed in English and nothing here');
   console.error('  can tell whether the Spanish still matches:');
   for (const r of needReview) console.error(`    ${r}`);
-  console.error('\n  Check public/data/quiz_89R.es.json, then re-run with --spanish-reviewed.\n');
+  console.error(`\n  Check public/data/quiz_${SESSION}.es.json, then re-run with --spanish-reviewed.\n`);
   process.exitCode = 1;
 } else if (orphaned.length) {
   console.error('\n  REFUSING TO WRITE. The Spanish would be left behind:');
   for (const o of orphaned) console.error(`    ${o}`);
-  console.error('\n  Edit public/data/quiz_89R.es.json, then run this again.\n');
+  console.error(`\n  Edit public/data/quiz_${SESSION}.es.json, then run this again.\n`);
   process.exitCode = 1;
 } else if (!write) {
   console.log('\n  dry run - nothing written. Add --write to apply.\n');

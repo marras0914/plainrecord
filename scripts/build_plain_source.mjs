@@ -22,11 +22,12 @@
  */
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
-const OUT = 'i18n/plain_89R.json';
-const ANALYSES = 'data/bill_analyses_89R.json';
-const PAYLOAD = 'public/data/quiz_89R.json';
-const SIDECAR = 'public/data/quiz_89R.es.json';
+const OUT = `i18n/plain_${SESSION}.json`;
+const ANALYSES = `data/bill_analyses_${SESSION}.json`;
+const PAYLOAD = `public/data/quiz_${SESSION}.json`;
+const SIDECAR = `public/data/quiz_${SESSION}.es.json`;
 
 const analyses = JSON.parse(readFileSync(ANALYSES, 'utf8'));
 const payload = JSON.parse(readFileSync(PAYLOAD, 'utf8'));
@@ -88,7 +89,7 @@ writeFileSync(OUT, JSON.stringify({
     rule: 'Written from the operative section of the official bill analysis, never from the ' +
       'caption alone and never from the sponsor\'s statement of intent. status must be "ok" ' +
       'before an entry ships; scripts/add_plain.mjs refuses drafts.',
-    source: 'https://capitol.texas.gov/tlodocs/89R/analysis/html/',
+    source: `https://capitol.texas.gov/tlodocs/${SESSION}/analysis/html/`,
   },
   session: payload.session,
   items,

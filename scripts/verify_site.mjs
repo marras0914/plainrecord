@@ -28,6 +28,7 @@ import { readFileSync, existsSync, statSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join, extname, sep } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -1088,7 +1089,7 @@ try {
     // not the category the outcomes are keyed by. Reading the question text and
     // looking it up is observation; re-implementing buildQueue's sort here
     // would be duplication that could drift and still agree with itself.
-    const qp = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+    const qp = JSON.parse(readFileSync(join(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
     const norm = (s) => s.replace(/\s+/g, ' ').trim().toLowerCase();
     const catOf = new Map();
     for (const it of qp.items) {
@@ -1206,7 +1207,7 @@ try {
         types.includes('Dataset'), types.join(' + ') || 'unparseable');
       const ds = graph.find((g) => g['@type'] === 'Dataset');
       check('the Dataset points at the real payload',
-        ds?.distribution?.[0]?.contentUrl?.endsWith('/data/quiz_89R.json'),
+        ds?.distribution?.[0]?.contentUrl?.endsWith(`/data/quiz_${SESSION}.json`),
         ds?.distribution?.[0]?.contentUrl ?? '(none)');
       // The structured-data licence must MATCH a licence the project actually
       // grants. This check was previously the inverse — asserting the field was
@@ -1240,11 +1241,11 @@ try {
 
     // Nothing fetched before it is asked for. The record is 10.7 KB gzipped and
     // most visitors never open the panel.
-    const earlyFetch = await page.evaluate(() =>
-      performance.getEntriesByType('resource').some((r) => /members_89R/.test(r.name)));
+    const earlyFetch = await page.evaluate((s) =>
+      performance.getEntriesByType('resource').some((r) => r.name.includes(`members_${s}`)), SESSION);
     check('rep: the member record is not fetched on load', !earlyFetch);
-    const earlyZips = await page.evaluate(() =>
-      performance.getEntriesByType('resource').some((r) => /zips_89R/.test(r.name)));
+    const earlyZips = await page.evaluate((s) =>
+      performance.getEntriesByType('resource').some((r) => r.name.includes(`zips_${s}`)), SESSION);
     check('rep: the ZIP crosswalk is not fetched on load', !earlyZips);
 
     await toResult(page, QUIZ_URL);
@@ -1371,7 +1372,7 @@ try {
       // Since 17 Nov 2026 the lookup has all 150 members of the 89th, so nobody
       // is excluded and the footnote must be absent; it must reappear if the
       // data ever excludes someone again.
-      const repExcluded = JSON.parse(readFileSync('public/data/members_89R.json', 'utf8')).provenance?.unnamedVoters ?? 0;
+      const repExcluded = JSON.parse(readFileSync(`public/data/members_${SESSION}.json`, 'utf8')).provenance?.unnamedVoters ?? 0;
       const saysExcluded = /not in this lookup/.test(await page.$eval('#rep-card', (e) => e.textContent));
       check('rep: it says who it excludes exactly when someone is excluded',
         saysExcluded === (repExcluded > 0),`${repExcluded} excluded, footnote ${saysExcluded ? 'shown' : 'absent'}`);
@@ -1537,7 +1538,7 @@ try {
   // ---------------------------------------------------------------------------
 
   {
-    const payload = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+    const payload = JSON.parse(readFileSync(join(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
     // Needles drawn from the real data, so this cannot pass by testing nothing.
     const NEEDLES = [
       ...payload.items.slice(0, 8).map((i) => i.id),
@@ -1762,7 +1763,7 @@ try {
 
       // The half that matters. A funnel beacon may carry a path and nothing
       // whatever about what was answered.
-      const payload = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+      const payload = JSON.parse(readFileSync(join(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
       const NEEDLES = [
         ...payload.items.slice(0, 10).map((i) => i.id),
         ...payload.items.slice(0, 10).map((i) => i.billId.replace(' ', '')),
@@ -2097,7 +2098,7 @@ try {
   // ---------------------------------------------------------------------------
 
   {
-    const payload = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+    const payload = JSON.parse(readFileSync(join(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
     const itemIds = payload.items.map((i) => i.id);
 
     const FONT_HOSTS = /^https:\/\/fonts\.(googleapis|gstatic)\.com\//;

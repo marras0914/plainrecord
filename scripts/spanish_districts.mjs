@@ -37,10 +37,11 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ENV = resolve(ROOT, 'private/.env');
-const MEMBERS = resolve(ROOT, 'public/data/members_89R.json');
+const MEMBERS = resolve(ROOT, `public/data/members_${SESSION}.json`);
 
 const jsonArg = process.argv.indexOf('--json');
 const jsonOut = jsonArg > 0 ? process.argv[jsonArg + 1] : null;

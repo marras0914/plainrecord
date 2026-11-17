@@ -27,12 +27,13 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
 
-const en = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
-const es = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.json'), 'utf8'));
+const en = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
+const es = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.es.json`), 'utf8'));
 
 let failures = 0;
 const missing = [];

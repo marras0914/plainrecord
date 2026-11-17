@@ -22,11 +22,12 @@
 
 import { readFileSync } from 'node:fs';
 import { ht, HOME_COPY, POLICY_PATH, requireApprovedHome } from './_home_copy.mjs';
+import { SESSION } from './session.mjs';
 
 const SITE = 'https://rightnleft.com';
 const read = (p) => JSON.parse(readFileSync(new URL(`../${p}`, import.meta.url), 'utf8'));
-const quiz = read('public/data/quiz_89R.json');
-const sidecar = read('public/data/quiz_89R.es.json');
+const quiz = read(`public/data/quiz_${SESSION}.json`);
+const sidecar = read(`public/data/quiz_${SESSION}.es.json`);
 // The classroom link text lives with the rest of the classroom copy, under the
 // same approval rule (build_classroom_page.mjs refuses unapproved Spanish).
 const classroom = read('i18n/classroom.json');

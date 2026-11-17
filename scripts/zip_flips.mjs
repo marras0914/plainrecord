@@ -29,6 +29,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, createReadStream } from 'node:fs';
 import { createInterface } from 'node:readline';
 import { openZip } from './lib/zipfile.mjs';
+import { SESSION } from './session.mjs';
 
 const CACHE = 'data/cache';
 const ZCTA_SLICE = `${CACHE}/tx_block_zcta.psv`;   // block | ZCTA | land area
@@ -41,7 +42,7 @@ const SLDL = `${CACHE}/48_TX_SLDL22.txt`;          // GEOID,SLDLST
 // so picking the wrong vintage again fails the build rather than thinning the map.
 const GAZ_ZIP = `${CACHE}/gaz_zcta_2024.zip`;
 const GAZ_ENTRY = '2024_Gaz_zcta_national.txt';
-const PAYLOAD = 'public/data/zips_89R.json';
+const PAYLOAD = `public/data/zips_${SESSION}.json`;
 const OUT = 'private/zip_flips.json';
 
 /** Texas, wide enough for every Texas ZCTA and nothing else. */

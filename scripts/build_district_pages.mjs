@@ -48,14 +48,15 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, RESULTS_URL, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { billPath } from './build_bill_pages.mjs';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
 
-const payload = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
-const sidecar = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.json'), 'utf8'));
-const members = JSON.parse(readFileSync(resolve(ROOT, 'public/data/members_89R.json'), 'utf8'));
-const zipFile = JSON.parse(readFileSync(resolve(ROOT, 'public/data/zips_89R.json'), 'utf8'));
+const payload = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
+const sidecar = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.es.json`), 'utf8'));
+const members = JSON.parse(readFileSync(resolve(ROOT, `public/data/members_${SESSION}.json`), 'utf8'));
+const zipFile = JSON.parse(readFileSync(resolve(ROOT, `public/data/zips_${SESSION}.json`), 'utf8'));
 // From the Secretary of State, via scripts/fetch_ballot.mjs. Re-run that before
 // a build if the state's certified list may have changed.
 const ballot = JSON.parse(readFileSync(resolve(ROOT, 'data/ballot_2026_house.json'), 'utf8'));
@@ -165,7 +166,7 @@ for (const it of payload.items) {
   }
 }
 const billUrl = (billId) => CURATED.get(billId)
-  ?? `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=${billId.replace(/\s+/g, '')}`;
+  ?? `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=${SESSION}&Bill=${billId.replace(/\s+/g, '')}`;
 
 /** The short approved name for a headline bill, in the reader's language. */
 function labelFor(it, lang) {
@@ -589,7 +590,7 @@ function render(m, lang) {
 let n = 0;
 for (const { d } of chosen) {
   const m = members.members.find((x) => x.d === d);
-  if (!m) throw new Error(`district ${d} has no member in members_89R.json`);
+  if (!m) throw new Error(`district ${d} has no member in members_${SESSION}.json`);
   for (const lang of ['en', 'es']) {
     const slug = slugFor(d, lang);
     const dir = resolve(ROOT, 'public', slug);

@@ -21,8 +21,9 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
-const SRC = 'i18n/plain_89R.json';
+const SRC = `i18n/plain_${SESSION}.json`;
 const OUT = 'i18n/plain_review.html';
 const checkOnly = process.argv.includes('--check');
 
@@ -121,7 +122,7 @@ say(approvedNoSource.length === 0, 'nothing is approved without a source to chec
   approvedNoSource.map(([k]) => k).join(', '));
 
 // The seven that were already live must not have been quietly rewritten.
-const payload = JSON.parse(readFileSync('public/data/quiz_89R.json', 'utf8'));
+const payload = JSON.parse(readFileSync(`public/data/quiz_${SESSION}.json`, 'utf8'));
 const shipped = new Map(payload.items.filter((i) => i.plain).map((i) => [i.billId, i.plain]));
 const drifted = [...shipped].filter(([k, v]) => d.items[k] && d.items[k].en !== v);
 say(drifted.length === 0, 'the summaries already live are unchanged',
