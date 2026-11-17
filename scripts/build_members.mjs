@@ -80,6 +80,29 @@ function parseCsv(text) {
   return rows;
 }
 
+// The live roster is whoever sits NOW, not who sat in the 89th. It has already
+// drifted (Open States lists HD-1's member as leaving on 21 Sep 2026, so a
+// rebuild would drop that district's page), and from 12 Jan 2027 it is the
+// 90th Legislature: a rebuild would seat freshmen with empty 89th records.
+// So the 89th's file is frozen as published (17 Nov 2026, Marco): a rebuild
+// needs --roster <file> or an explicit --live, and --live is refused once the
+// 90th is sworn in. The 90th gets its own roster and file.
+const SWORN_IN_90TH = '2027-01-12';
+if (!rosterFile) {
+  if (!argv.includes('--live')) {
+    console.error(
+      '\n  members_89R.json is frozen: the live Open States roster is no longer the 89th Legislature\'s.\n' +
+        '  Rebuild from a saved roster:  npm run data:members -- --roster path/to/tx.csv\n' +
+        '  or, before 12 Jan 2027 and knowing it changes who has a page:  npm run data:members -- --live\n',
+    );
+    process.exit(1);
+  }
+  if (new Date().toISOString().slice(0, 10) >= SWORN_IN_90TH) {
+    console.error(`\n  --live refused: since ${SWORN_IN_90TH} the live roster is the 90th Legislature's, not the 89th's.\n`);
+    process.exit(1);
+  }
+}
+
 const rosterText = rosterFile
   ? readFileSync(resolve(ROOT, rosterFile), 'utf8')
   : await (async () => {

@@ -590,7 +590,7 @@ npm run data:elsewhere   # mark absences that hide a vote on another roll call
 npm run data:headlines   # apply headline label/why to a built payload (--write --spanish-reviewed)
 npm run fonts:vendor     # pull the webfonts local; fonts:check verifies them
 npm run data:report      # coverage + provenance summary
-npm run data:members     # -> public/data/members_89R.json  (the district lookup)
+npm run data:members     # -> public/data/members_89R.json  (the district lookup; frozen: needs --roster <file>, or --live before 12 Jan 2027)
 npm run data:zips        # -> public/data/zips_89R.json     (ZIP -> districts)
 npm run data:analyses    # official bill analyses -> data/bill_analyses_89R.json
 npm run data:plain:seed  # seed i18n/plain_89R.json from those analyses
