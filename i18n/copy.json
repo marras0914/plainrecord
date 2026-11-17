@@ -2278,8 +2278,8 @@
     "vars": [
       "d"
     ],
-    "status": "draft",
-    "note": "17 Nov 2026: the count dropped; the record now has all 150 members of the 89th, including members who left since."
+    "status": "ok",
+    "note": "17 Nov 2026: the count dropped; the record now has all 150 members of the 89th, including members who left since. Spanish approved by Marco Arras the same day."
   },
   "rep.outOfRange": {
     "en": "The Texas House has districts 1 to 150.",
