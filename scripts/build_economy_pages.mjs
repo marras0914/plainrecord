@@ -333,6 +333,32 @@ function methodPage(lang) {
  * written into data-strings here, from the same gated i18n/economy.json, so the
  * script holds no copy in either language.
  */
+/**
+ * An example card with every value blank (Marco, 17 Nov 2026), so the page
+ * shows what the reader is about to rate before the round starts. It is built
+ * from the round's own labels and shows no number, so it gives nothing away.
+ * econ-blind.js hides it once the first real card is on screen.
+ */
+function exampleCard(lang) {
+  const blank = '<span class="blank">?</span>';
+  const rows = METRICS.map((m) => `<tr><td>${et(lang, `m.${m}`)}</td><td class="num">${blank}</td><td class="num">${blank}</td></tr>`).join('');
+  const dots = [1, 2, 3, 4, 5].map((v) => `<span class="exdot">${v}</span>`).join('');
+  return `<style>
+  #econ-example{margin:18px 0 8px;max-width:560px}
+  #econ-example .exa{border:1px dashed var(--rule);border-radius:12px;background:var(--surface);padding:14px 16px 10px}
+  #econ-example h2{margin:0 0 4px}
+  #econ-example .blank{display:inline-block;min-width:2.6em;padding:0 6px;border-radius:4px;background:var(--hair);color:var(--muted);text-align:center;font-size:12.5px}
+  #econ-example .exscale{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:10px 0 2px;font-size:13.5px;color:var(--muted)}
+  #econ-example .exdot{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--rule);color:var(--ink-2);font-size:13px}
+  #econ-example figcaption{margin-top:6px}
+  </style>
+  <figure id="econ-example" role="img" aria-label="${esc(et(lang, 'bl.exAlt'))}"><div class="exa" aria-hidden="true">
+  <h2>${et(lang, 'bl.cardHead', { k: '?' })}</h2>
+  <table class="chart-table"><tr><th></th><th class="num">${et(lang, 'bl.colThis')}</th><th class="num">${et(lang, 'bl.colInherited')}</th></tr>${rows}</table>
+  <p class="exscale"><span>${et(lang, 'bl.rate1')}</span>${dots}<span>${et(lang, 'bl.rate5')}</span></p>
+  </div><figcaption class="small">${et(lang, 'bl.exCaption')}</figcaption></figure>`;
+}
+
 function blindPage(lang) {
   const P = ECON_PATHS[lang];
   const other = lang === 'es' ? 'en' : 'es';
@@ -372,6 +398,7 @@ function blindPage(lang) {
   <p class="lede">${et(lang, 'bl.lede', { round: ROUND_SIZE, total: data.terms.length })}</p>
   <p><a class="skip" href="${SITE}/${P.explore}">${et(lang, 'bl.skip')} &rarr;</a></p>
   <p class="small">${et(lang, 'bl.limits')} <a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></p>
+  ${exampleCard(lang)}
   <noscript><p>${et(lang, 'bl.noscript')} <a href="${SITE}/${P.explore}">${et(lang, 'exploreLink')}</a></p></noscript>
   <div id="econ-blind" data-strings="${esc(JSON.stringify(strings))}" data-config="${esc(JSON.stringify(config))}"></div>
   <p class="small"><a href="${SITE}/${P.explore}">${et(lang, 'exploreLink')}</a> · <a href="${SITE}/${P.method}">${et(lang, 'methodLink')}</a></p>`;

@@ -24,6 +24,7 @@ import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { HEADLINE_BILLS, RACES, billPath } from './_site_nav.mjs';
 import { actsLine } from './build_bill_pages.mjs';
+import { agreeTeaser } from './build_charts.mjs';
 import { ht, HOME_COPY, requireApprovedHome, QUIZ_PATH, POLICY_PATH } from './_home_copy.mjs';
 import { SESSION } from './session.mjs';
 
@@ -124,6 +125,9 @@ function page(lang, which, items) {
   const go = (href, text) => `<p><a href="${href}">${text}</a></p>`;
   // Four cards, two by two on a laptop (.duo in _page_shell.mjs), stacked on a phone.
   const box = (h2, inner) => `<div class="card hubcard"><h2>${h2}</h2>${inner}</div>`;
+  // The first chart from /charts (17 Nov 2026), so the Policy space opens on the
+  // whole session and not only on links. Its words are the /charts page's own.
+  const agree = agreeTeaser(lang);
   const policy = `
   <div class="duo">
   ${box(ht(lang, 'policy.quizH2'), `<p>${ht(lang, 'policy.quiz')}</p>
@@ -135,6 +139,11 @@ function page(lang, which, items) {
   ${box(ht(lang, 'policy.chartsH2'), `<p>${ht(lang, 'policy.charts')}</p>
   ${go(`${SITE}/${lang === 'es' ? 'graficas' : 'charts'}`, ht(lang, 'policy.chartsLink'))}`)}
   </div>
+  <h2>${esc(agree.heading)}</h2>
+  <style>.hubchart{max-width:640px}</style>
+  <div class="hubchart">${agree.figure}</div>
+  <p>${esc(agree.caption)}</p>
+  ${go(agree.href, ht(lang, 'policy.chartsLink'))}
   <h2>${esc(c.races.h1)}</h2>
   <p>${esc(c.races.lede)}</p>${section(c.races, items)}
   ${go(`${SITE}/open-data`, ht(lang, 'policy.dataLink'))}`;

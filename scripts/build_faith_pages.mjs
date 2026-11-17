@@ -703,6 +703,42 @@ const sideParty = (pt, side) => P2.find((p) => pt.platforms[`${p}-${pt.levels[0]
 // The front page and the methodology
 // ---------------------------------------------------------------------------
 
+/**
+ * Who has spoken on what (Marco, 17 Nov 2026): one dot per tradition and issue,
+ * filled where its official bodies have a statement the site quotes. It carries
+ * no side and no count. The D/R grid stays on the sides page, one tap away,
+ * because shown first on the front page its pattern would read as the site's
+ * verdict on the traditions.
+ */
+const COV_STYLE = `<style>
+  table.cov{border-collapse:collapse;font-size:14px;min-width:100%}
+  table.cov th,table.cov td{padding:5px 6px;border-bottom:1px solid var(--hair);text-align:center;vertical-align:middle}
+  table.cov thead th{font-size:12.5px;font-weight:600;vertical-align:bottom;line-height:1.25}
+  table.cov thead th:first-child{text-align:left}
+  table.cov th[scope=row]{text-align:left;font-weight:400;position:sticky;left:0;background:var(--page);z-index:1;min-width:7.5em}
+  .dot{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle}
+  .dot.on{background:var(--p3)} .dot.off{border:1.5px solid var(--rule)}
+  a.dotlink{display:inline-flex;align-items:center;justify-content:center;min-width:24px;min-height:24px}
+  a.dotlink:hover .dot,a.dotlink:focus .dot{outline:2px solid var(--ink);outline-offset:2px}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  @media print{.dot{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  </style>`;
+
+function coverageGrid(lang) {
+  const has = new Set(data.statements.map((s) => `${s.traditionId}|${s.issueId}`));
+  const head = `<tr><th scope="col">${ft(lang, 'sd.th.issue')}</th>${data.traditions.map((t) => `<th scope="col">${ft(lang, `sd.short.${t.id}`)}</th>`).join('')}</tr>`;
+  const rows = data.issues.map((i) => `<tr><th scope="row">${issueName(lang, i)}</th>${data.traditions.map((t) => {
+    const label = `${ft(lang, `sd.short.${t.id}`)}, ${issueName(lang, i)}: `;
+    return has.has(`${t.id}|${i.id}`)
+      ? `<td><a class="dotlink" href="${SITE}/${traditionPath(t.id, lang)}#${i.id}"><span class="dot on" aria-hidden="true"></span><span class="vh">${label}${ft(lang, 'home.cov.has')}</span></a></td>`
+      : `<td><span class="dot off" aria-hidden="true"></span><span class="vh">${label}${ft(lang, 'sd.mark.noStatement')}</span></td>`;
+  }).join('')}</tr>`).join('');
+  return `${COV_STYLE}
+  <h2>${ft(lang, 'home.cov.h2')}</h2>
+  <div class="tablewrap"><table class="cov"><thead>${head}</thead><tbody>${rows}</tbody></table></div>
+  <p class="small">${ft(lang, 'home.cov.note')}</p>`;
+}
+
 function homePage(lang) {
   const P = FAITH_PATHS[lang];
   const picks = data.traditions.map((t) => `<li><a href="${SITE}/${traditionPath(t.id, lang)}"><b>${tradName(lang, t)}</b></a><br><span class="small">${tx(lang, KEY.tradFamily(t), t.family)}</span></li>`).join('');
@@ -711,6 +747,7 @@ function homePage(lang) {
   <h1>${ft(lang, 'home.h1')}</h1>
   <p class="lede">${ft(lang, 'home.lede')}</p>
   ${notice(lang)}
+  ${coverageGrid(lang)}
   <style>.feature{border:2px solid var(--ink);padding-top:14px}.feature h2{margin:0 0 6px}.feature h2 a{text-decoration:none}</style>
   <div class="card feature"><h2><a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a></h2><p>${ft(lang, 'home.sidesNote')}</p></div>
   <div class="card"><p><a href="${SITE}/${P.scripture}"><b>${ft(lang, 'sc.h1')}</b></a></p><p class="small">${ft(lang, 'sc.desc')}</p></div>

@@ -24,6 +24,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SUITES = [
   'session.smoke.ts',
   'maps.smoke.ts',
+  'front_visuals.smoke.ts',
   'valence.smoke.ts',
   'econ_control.smoke.ts',
   'econ_context.smoke.ts',

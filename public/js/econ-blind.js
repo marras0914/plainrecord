@@ -125,6 +125,9 @@
   function showCard() {
     clear();
     pinned = null;
+    // The blank example above the round has done its job once a real card is here.
+    var example = document.getElementById('econ-example');
+    if (example) example.hidden = true;
     var c = cards[at];
     var a = answers[c.key] || (answers[c.key] = { rating: null, recognized: false });
     var box = el('section', 'card');
