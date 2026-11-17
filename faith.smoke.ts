@@ -13,6 +13,7 @@ import type { SidePoint, SideQuote } from './faith_positions';
 import { buildFaithPayload, PLATFORMS, passagesOverlap, sefariaPassage, citedOnBothSides } from './scripts/export_faith';
 import type { CiteRef } from './scripts/export_faith';
 import { PEW_PUBLISHED, PEW_COLUMNS, MEMBERS_OF } from './faith_members';
+import { ADVOCACY, ADVOCACY_NONE, ADVOCACY_FILES } from './faith_advocacy';
 import type { PewGroup, PewFigures, PewQuestion, Pct } from './faith_members';
 import { findRefs, statementKey } from './scripts/extract_faith_verses';
 import { parsePage, parseSineDie, buildPositions, wordsOf } from './scripts/extract_tccb_positions';
@@ -192,6 +193,26 @@ const badSums = (Object.entries(PEW_PUBLISHED) as [PewGroup, PewFigures][]).flat
 check('members: every Pew row has one figure per column and sums to 100 within rounding', badSums.length === 0, badSums.join('; ') || 'all rows');
 check('members: every tradition has Pew figures or a recorded reason it has none',
   TRADITIONS.every((t) => t.id in MEMBERS_OF) && Object.keys(MEMBERS_OF).length === TRADITIONS.length);
+
+// --- what each body backed or opposed in Congress (decided 16 Nov 2026) ------
+
+const ISSUE_IDS = new Set(ISSUES.map((i) => i.id as string));
+const TRAD_IDS = new Set(TRADITIONS.map((t) => t.id as string));
+const advBad = ADVOCACY.flatMap((a, i) => {
+  const why: string[] = [];
+  if (!TRAD_IDS.has(a.traditionId)) why.push('unknown tradition');
+  if (!a.issueIds.length || a.issueIds.some((x) => !ISSUE_IDS.has(x))) why.push('unknown issue');
+  if (!a.named.length) why.push('names no bill');
+  if (words(a.quote) >= 25) why.push(`quote is ${words(a.quote)} words`);
+  if (a.date !== null && (a.date < '2025-01' || a.date > new Date().toISOString().slice(0, 10))) why.push(`date ${a.date} outside the 119th Congress`);
+  if (!(a.url in ADVOCACY_FILES)) why.push('no saved source mapped, so the quote is never checked');
+  return why.length ? [`#${i} ${a.traditionId}: ${why.join(', ')}`] : [];
+});
+check('advocacy: every item has a known tradition and issue, a bill, a short quote, a 119th-Congress date and a checked source', advBad.length === 0, advBad.join('; ') || `${ADVOCACY.length} items`);
+const noneButItems = Object.keys(ADVOCACY_NONE).filter((t) => ADVOCACY.some((a) => a.traditionId === t));
+check('advocacy: a body recorded as naming no bill has no items', noneButItems.length === 0, noneButItems.join(', ') || 'none');
+check('(the advocacy check catches a quote of 25 words or more)',
+  words('one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twenty-one twenty-two twenty-three twenty-four twenty-five') >= 25);
 
 // --- current in full, earlier listed (decided 13 Nov 2026) ------------------
 

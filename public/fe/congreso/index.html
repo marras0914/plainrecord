@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="es-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lo que cada tradición apoyó o rechazó en el Congreso, tema por tema</title>
+<meta name="description" content="Los proyectos de ley que la propia oficina de incidencia de cada tradición apoyó o rechazó públicamente en el Congreso desde enero de 2025, junto a su postura oficial. Sin conteo.">
+<link rel="canonical" href="https://rightnleft.com/fe/congreso">
+<link rel="alternate" hreflang="es" href="https://rightnleft.com/fe/congreso">
+<link rel="alternate" hreflang="en" href="https://rightnleft.com/faith/congress">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lo que apoyaron en el Congreso">
+<meta property="og:description" content="Los proyectos de ley que la propia oficina de incidencia de cada tradición apoyó o rechazó públicamente en el Congreso desde enero de 2025, junto a su postura oficial. Sin conteo.">
+<meta property="og:url" content="https://rightnleft.com/fe/congreso">
+<meta property="og:image" content="https://rightnleft.com/og-religion.es.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script src="/js/theme.js"></script>
+<script src="/_vercel/insights/script.js" defer></script>
+<link rel="preload" href="/fonts/lexend-latin-300-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/newsreader-latin-400-600.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-ext-300-700.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lexend';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/fonts/lexend-latin-300-700.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-ext-400-600.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url(/fonts/newsreader-latin-400-600.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{--page:#faf7f1;--surface:#fffdf9;--ink:#1a1714;--ink-2:#57514a;--muted:#6f6a62;
+      --hair:#e6ded1;--rule:#cabfae;--blue:#1f66bd;--red:#c8352f;
+      /* Chart purples, one hue light to dark, validated --ordinal against both
+         the card and the page surface. --pbar is the single-series bar. */
+      --p1:#bda5da;--p2:#a583cc;--p3:#8e62bc;--p4:#7241a0;--p5:#54277c;--pbar:#8e62bc;}
+/* Dark by the quiz's rule, not the OS: light by default, dark only when the
+   reader chose it on the quiz. /js/theme.js sets data-theme before paint. These
+   pages used to follow prefers-color-scheme, which turned a light quiz into a
+   dark race page for anyone whose phone was set to dark. */
+:root[data-theme="dark"]{color-scheme:dark;
+  --page:#0d0d0d;--surface:#1a1a19;--ink:#fff;--ink-2:#c3c2b7;--muted:#898781;
+  --hair:#2c2c2a;--rule:#383835;--blue:#3987e5;--red:#e66767;
+  --p1:#684b88;--p2:#865eb1;--p3:#a377d3;--p4:#bc97e8;--p5:#d5b9f7;--pbar:#a377d3;}
+/* A crossfade between pages instead of a hard cut, using the browser's own
+   cross-document view transitions: CSS only, same-origin only, and ignored by
+   browsers without it. Off for anyone who asked for reduced motion. The quiz
+   carries the same rule in src/styles.css, so moving between them fades too. */
+@media (prefers-reduced-motion:no-preference){@view-transition{navigation:auto}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);
+  font-family:"Lexend",system-ui,-apple-system,sans-serif;line-height:1.55;
+  font-size:17px;-webkit-text-size-adjust:100%}
+main{max-width:38rem;margin:0 auto;padding:40px 16px 72px}
+/* Laptops and wider (Marco, 14 Nov 2026: "a lot of wasted space"). The column
+   grows to the quiz's width; running text keeps a readable line, and the room
+   goes to what can use it: side-by-side cards, tables and charts. */
+@media (min-width:1024px){
+  main{max-width:62rem;padding:48px 32px 80px}
+  main p,main li,main blockquote,main dd{max-width:72ch}
+  main .card p,main .card li,main .card blockquote{max-width:none}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:0 18px;align-items:start}
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:0 18px;align-items:start}
+  .duo>.hubcard{align-self:stretch}
+}
+.hubcard h2{margin:2px 0 8px}
+h1,h2{font-family:"Newsreader",Georgia,serif;font-weight:500;letter-spacing:-.006em;
+  line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(1.9rem,6.5vw,2.6rem);margin:6px 0 18px}
+h2{font-size:clamp(1.25rem,4.4vw,1.5rem);margin:40px 0 10px}
+.kicker{font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.lede{font-size:1.1rem;color:var(--ink-2);margin:0 0 8px;text-wrap:pretty}
+p{margin:0 0 14px}
+.label{font-weight:600}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;
+  padding:18px 18px 6px;margin:14px 0}
+ul{margin:0 0 14px;padding-left:1.1rem}
+li{margin:0 0 8px}
+.bill{font-variant-numeric:tabular-nums;font-weight:600}
+.small{font-size:13.5px;color:var(--muted)}
+/* The check-it-yourself link beside a bill. Deliberately quieter than the
+   summary it follows: it is there for the reader who doubts the line, not a
+   thing every reader is being sent to. */
+.hist{font-size:12.5px;white-space:nowrap}
+/* How a member stood on a headline bill. A word, not a colour: the page is read
+   by people who cannot distinguish red from green, and printed in black. */
+.dindex{list-style:none;padding:0;margin:14px 0 18px;columns:2;column-gap:26px}
+.dindex li{break-inside:avoid;padding:3px 0;font-size:15.5px}
+.dindex a{text-decoration:none}
+.dindex a:hover{text-decoration:underline}
+@media (max-width:520px){.dindex{columns:1}}
+.stand{list-style:none;padding:0;margin:0}
+.stand li{padding:9px 0;border-top:1px solid var(--hair)}
+.stand li:first-child{border-top:0}
+.vm{font-size:12.5px;padding:1px 8px;border-radius:999px;white-space:nowrap;
+    border:1px solid var(--rule);color:var(--ink-2)}
+.vm-none{opacity:.75}
+a{color:var(--blue)}
+.cta{display:inline-block;margin:6px 0 2px;padding:13px 26px;border-radius:999px;
+  background:var(--ink);color:var(--page);text-decoration:none;font-weight:600}
+hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;
+  font-size:13px;margin-bottom:14px}
+.kicker-line{margin:0 0 16px}
+.brand{--b-r:#c8352f;--b-n:#7d5ba6;--b-l:#1f66bd;display:inline-flex;font-family:"Lexend",system-ui,sans-serif;font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1.1;color:inherit;text-decoration:none;padding-bottom:7px}:root[data-theme="dark"] .brand{--b-r:#e66767;--b-n:#a377d3;--b-l:#3987e5}.brand span{background:no-repeat 0 100%/calc(100% - 2px) 5px;padding-bottom:5px;margin-bottom:-7px}.brand .b-r{background-image:linear-gradient(var(--b-r),var(--b-r))}.brand .b-n{color:var(--b-n);background-image:linear-gradient(var(--b-n),var(--b-n))}.brand .b-l{background-image:linear-gradient(var(--b-l),var(--b-l))}.brand:hover{text-decoration:none}.brand:focus-visible{outline:2px solid currentColor;outline-offset:4px;border-radius:2px}@media print{.brand{--b-r:#000;--b-n:#000;--b-l:#000}}
+/* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
+   scrolling sideways on a phone; the current section is ink, not link blue. */
+.sitenav{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14.5px;margin:-10px 0 26px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.sitenav a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}
+.sitenav a:hover{text-decoration:underline}
+.sitenav a[aria-current]{color:var(--ink);font-weight:600}
+.sitefoot{margin-top:44px;padding-top:18px;border-top:1px solid var(--hair);display:grid;grid-template-columns:1fr 1.3fr 1.3fr;gap:18px;font-size:13.5px}
+.sitefoot ul{list-style:none;padding:0;margin:0}.sitefoot li{margin:0}
+.sitefoot a{text-decoration:none;display:inline-block;min-height:24px;padding:3px 0}.sitefoot a:hover{text-decoration:underline}
+.foot-head{font-weight:600;color:var(--ink);margin:0 0 8px}
+@media (max-width:620px){.sitefoot{grid-template-columns:1fr}}
+/* Charts, drawn by scripts/_charts.mjs. */
+.chart{margin:16px 0 10px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart text{font-family:inherit;fill:var(--ink-2);font-size:12px}
+.chart .tick{fill:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+.chart .note{fill:var(--muted);font-size:11.5px}
+.chart .lab{fill:var(--ink);font-size:12.5px;font-weight:600}
+.chart .val{fill:var(--ink);font-size:12px;font-weight:600}
+.chart .grid,.chart .axis{stroke:var(--hair);stroke-width:1}
+.chart .axis{stroke:var(--rule)}
+.chart .med{stroke:var(--ink-2);stroke-width:1.5}
+.chart .lead{stroke:var(--muted);stroke-width:1}
+.chart .bar{fill:var(--pbar)}
+.chart .dot{stroke:var(--surface);stroke-width:2}
+.chart .D{fill:var(--blue)} .chart .R{fill:var(--red)}
+.chart .sq.none{opacity:.32}
+.chart .dist{stroke:var(--page);stroke-width:.6}
+.chart .p1{fill:var(--p1)} .chart .p2{fill:var(--p2)} .chart .p3{fill:var(--p3)}
+.chart .p4{fill:var(--p4)} .chart .p5{fill:var(--p5)} .chart .nodata{fill:var(--hair)}
+.chart .maplab{fill:var(--ink);font-size:11.5px;font-weight:600;paint-order:stroke;stroke:var(--page);stroke-width:3px;stroke-linejoin:round}
+.chart .inbox{fill:none;stroke:var(--ink-2);stroke-width:1}
+.chart a:hover .dist,.chart a:focus .dist{stroke:var(--ink);stroke-width:1.5}
+.chart a:hover .dot,.chart a:focus .dot{stroke:var(--ink)}
+/* A 608-wide viewBox drawn into a phone scales to about 0.56, which took 11px
+   labels to 6px. Larger type in viewBox units lands near 10px on screen. */
+@media (max-width:520px){.chart .tick,.chart .note,.chart .maplab{font-size:17px}.chart .lab,.chart .val{font-size:18px}}
+.legend{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;color:var(--ink-2)}
+.legend li{margin:0}.legend .sw{display:inline-block;width:14px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.legend .p1{background:var(--p1)}.legend .p2{background:var(--p2)}.legend .p3{background:var(--p3)}.legend .p4{background:var(--p4)}.legend .p5{background:var(--p5)}.legend .nodata{background:var(--hair)}.legend .D{background:var(--blue)}.legend .R{background:var(--red)}
+p.lab{font-weight:600;color:var(--ink);margin:14px 0 0}
+.insets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media (max-width:520px){.insets{grid-template-columns:1fr}}
+.inset{margin:0}.inset svg{border:1px solid var(--hair);border-radius:8px}
+details.table{margin:6px 0 18px}
+details.table summary{cursor:pointer;font-size:14px;color:var(--blue)}
+.chart-table{border-collapse:collapse;width:100%;font-size:13.5px;margin-top:8px}
+.chart-table th,.chart-table td{text-align:left;padding:4px 8px 4px 0;border-bottom:1px solid var(--hair)}
+.chart-table td.num,.chart-table th.num{text-align:right;font-variant-numeric:tabular-nums}
+/* The ZIP box on /districts. 17px so iOS does not zoom the page on focus. */
+#ziplookup input{font:inherit;font-size:17px;padding:10px 12px;width:9.5rem;margin-top:6px;
+  border:1px solid var(--rule);border-radius:8px;background:var(--page);color:var(--ink)}
+#ziplookup .zipout p{margin:12px 0 6px}
+.zips{font-variant-numeric:tabular-nums;font-size:14px;color:var(--ink-2);
+  line-height:1.8;word-spacing:.15em}
+/* Printing. A district page is the thing someone takes to the kitchen table
+   before voting, so on paper it drops the navigation and the invitations, goes
+   black on white whatever theme was chosen, and ends with its own address so a
+   printed copy can be checked against the live one. */
+.printonly{display:none}
+@media print{
+  :root,:root[data-theme="dark"]{color-scheme:light;--page:#fff;--surface:#fff;--ink:#000;
+    --ink-2:#222;--muted:#444;--hair:#bbb;--rule:#888;--blue:#000;--red:#000}
+  body{font-size:11.5pt;line-height:1.4}
+  main{max-width:none;padding:0}
+  .top,.sitenav,.sitefoot,.noprint,.hist,.cta{display:none}
+  .printonly{display:block;font-size:10pt;color:var(--muted)}
+  h1{font-size:20pt;margin:0 0 10px}
+  h2{font-size:14pt;margin:18px 0 6px;break-after:avoid}
+  li,.stand li{break-inside:avoid}
+  .stand li{padding:5px 0}
+  a{color:inherit;text-decoration:none}
+  hr{margin:16px 0}
+}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Lo que apoyaron en el Congreso","description":"Los proyectos de ley que la propia oficina de incidencia de cada tradición apoyó o rechazó públicamente en el Congreso desde enero de 2025, junto a su postura oficial. Sin conteo.","inLanguage":"es-US","url":"https://rightnleft.com/fe/congreso","isPartOf":{"@type":"WebSite","@id":"https://rightnleft.com/#website","url":"https://rightnleft.com/"}}</script>
+</head>
+<body>
+<main>
+  <div class="top">
+    <a class="brand" href="https://rightnleft.com/es" aria-label="rightnleft, página de inicio"><span class="b-r">right</span><span class="b-n">n</span><span class="b-l">left</span></a>
+    <a href="https://rightnleft.com/faith/congress">In English</a>
+  </div>
+  <p class="kicker kicker-line">La fe y las plataformas</p>
+  <nav class="sitenav" aria-label="Secciones del sitio"><a href="https://rightnleft.com/politica">Política</a><a href="https://rightnleft.com/fe" aria-current="true">Religión</a><a href="https://rightnleft.com/economia">Economía</a></nav>
+<style>
+  .notice{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--ink-2);border-radius:8px;padding:12px 14px;margin:14px 0 18px;font-size:15.5px}
+  .notice p{margin:0 0 4px}
+  blockquote.q{margin:4px 0 12px;padding:2px 0 2px 12px;border-left:2px solid var(--hair);font-family:"Newsreader",Georgia,serif;font-size:1.05rem;color:var(--ink-2)}
+  h3{font-size:1rem;margin:22px 0 6px;letter-spacing:.02em}
+  h4{font-size:.95rem;margin:16px 0 4px;color:var(--ink-2);font-weight:600}
+  .card p.small{margin-bottom:6px}
+  .none{font-weight:600}
+  details.verses{margin:0 0 12px}
+  details.verses summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
+  .vtext{font-family:"Newsreader",Georgia,serif;font-size:1rem;margin:4px 0 0}
+  .vtext sup{font-family:"Lexend",system-ui,sans-serif;font-size:.65em;color:var(--muted);margin:0 2px 0 4px}
+  details.earlier{margin:6px 0 14px}
+  details.earlier summary{cursor:pointer;font-size:14.5px;color:var(--blue);min-height:44px;display:flex;align-items:center}
+  .jump{display:flex;flex-wrap:wrap;gap:2px 14px;list-style:none;padding:0;font-size:14.5px}
+  .jump li{margin:0}.jump a{display:inline-block;min-height:32px;padding:4px 0}
+  .tablewrap{overflow-x:auto;margin:8px 0}
+  table.hv{border-collapse:collapse;font-size:15px;min-width:100%}
+  table.hv th,table.hv td{padding:6px 10px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+  table.hv td{font-variant-numeric:tabular-nums}
+  ul.tally{list-style:none;padding:0;margin:4px 0 6px;font-size:15px}
+  ul.tally li{margin:2px 0}
+  .way{font-weight:600}
+  p.caption{font-family:"Newsreader",Georgia,serif;font-size:1.02rem;color:var(--ink-2);margin:2px 0 6px}
+  ul.ad li{padding:8px 0}ul.ad blockquote.q{margin:4px 0 0}
+  </style>
+  <h1>Lo que apoyaron en el Congreso</h1>
+  <p class="lede">Una cosa son las palabras y otra lo que la oficina de incidencia de una tradición le pide al Congreso. En cada tema, esta página enumera los proyectos de ley que la propia oficina de cada tradición apoyó o rechazó públicamente desde enero de 2025, junto a la postura oficial de la tradición. No cuenta nada ni califica a nadie.</p>
+  <div class="notice" role="note"><p><b>Todavía sin revisar.</b> Nadie de las tradiciones que aparecen en estas páginas ha revisado lo que dicen. Cada resumen es de este sitio, y cada uno lleva al texto completo para que usted lo verifique.</p><p class="small">Entradas revisadas hasta ahora: 0 de 83.</p></div>
+  <p class="small">Solo cuentan las cartas al Congreso, alertas de acción, declaraciones, agenda legislativa o lista de respaldos del propio organismo, y solo cuando nombra un proyecto de ley y toma postura. Los informes federales de cabildeo no sirven para esto: la ley no cuenta como cabildeo los contactos de una iglesia con el Congreso, así que la mayoría de estos organismos nunca los presentan. Cada cita y cada nombre de proyecto de ley se verificó contra una copia guardada del documento.</p>
+  <ul class="jump"><li><a href="#immigration">Inmigración</a></li><li><a href="#abortion">Aborto</a></li><li><a href="#poverty">Pobreza y asistencia pública</a></li><li><a href="#death-penalty">La pena de muerte</a></li><li><a href="#guns">Armas de fuego</a></li><li><a href="#environment">El cuidado de la creación y el medio ambiente</a></li><li><a href="#healthcare">Atención médica</a></li><li><a href="#criminal-justice">Justicia penal</a></li></ul>
+  <h2 id="immigration">Inmigración</h2>
+  <div class="card"><p><a href="https://rightnleft.com/fe/catolica#immigration"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">Su postura oficial: Ofrecerles una forma de quedarse legalmente</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">S. 4814</span> <span class="small">(S. 4814)</span>
+        <br><span class="small">Carta al Congreso, 10 de noviembre de 2026: <a href="https://www.usccb.org/resources/USCCB%20Letter%20on%20S.%204814%20and%20Related%20Matters.pdf" lang="en">Letter to the U.S. Senate on S. 4814 and Related Matters</a></span>
+        <blockquote class="q" lang="en">“We urge you to work with Senate leadership toward the passage of S. 4814”</blockquote></li><li><span class="way">Pidió cambios a</span> <span lang="en">One Big Beautiful Bill Act</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Carta al Congreso, 20 de mayo de 2025: <a href="https://www.usccb.org/resources/letter-congress-regarding-one-big-beautiful-bill-act-may-20-2025" lang="en">Letter to Congress Regarding One Big Beautiful Bill Act, May 20, 2025</a></span>
+        <blockquote class="q" lang="en">“double down on an unsustainable enforcement-only approach to immigration”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#immigration"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#immigration"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Sensitive Locations Act</span> <span class="small">(H.R. 1061)</span>
+        <br><span class="small">Alerta de acción, 7 de marzo de 2025: <a href="https://www.umcjustice.org/latest/take-action-protect-immigrant-families-communities-support-the-sensitive-locations-act-h-r-1061-4465" lang="en">Support the Sensitive Locations Act (H.R. 1061)</a></span>
+        <blockquote class="q" lang="en">“H.R. 1061 upholds the moral and biblical call to protect the vulnerable and welcome the stranger.”</blockquote></li><li><span class="way">Se opuso a</span> <span lang="en">Laken Riley Act</span> <span class="small">(S. 5 / H.R. 29)</span>
+        <br><span class="small">Alerta de acción, 15 de enero de 2025: <a href="https://www.umcjustice.org/articles/action-alert-oppose-the-laken-riley-act-stand-for-justice-and-compassion-3805" lang="en">Oppose the Laken Riley Act</a></span>
+        <blockquote class="q" lang="en">“to oppose the Laken Riley Act.”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#immigration"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#immigration"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#immigration"><b>Judaísmo reformista</b></a></p>
+      <p class="small">Su postura oficial: Ofrecerles una forma de quedarse legalmente</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#immigration"><b>Judaísmo conservador</b></a></p>
+      <p class="small">Su postura oficial: Ofrecerles una forma de quedarse legalmente</p>
+      <p class="small">Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#immigration"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.</p></div>
+<h2 id="abortion">Aborto</h2>
+  <div class="card"><p><a href="https://rightnleft.com/fe/catolica#abortion"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">Su postura oficial: Restringirlo o ponerle fin</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Safeguarding Women from Chemical Abortion Act</span> <span class="small">(S. 4066 / H.R. 7902)</span>
+        <br><span class="small">Carta al Congreso, 1 de abril de 2026: <a href="https://www.usccb.org/resources/Letter%20to%20Congress%20on%20the%20Safeguarding%20Women%20from%20Chemical%20Abortions%20Act.pdf" lang="en">Letter to Congress on the Safeguarding Women from Chemical Abortions Act</a></span>
+        <blockquote class="q" lang="en">“I write to express our support for the Safeguarding Women from Chemical Abortion Act”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">FACE Act Repeal Act of 2025</span> <span class="small">(H.R. 589)</span>
+        <br><span class="small">Carta al Congreso, 23 de julio de 2025: <a href="https://www.usccb.org/resources/FACE_Repeal_of_2025_Letter.pdf" lang="en">Letter on the FACE Act Repeal Act of 2025</a></span>
+        <blockquote class="q" lang="en">“we write in support of the FACE Act Repeal Act of 2025”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">One Big Beautiful Bill Act</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Carta al Congreso, 20 de mayo de 2025: <a href="https://www.usccb.org/resources/letter-congress-regarding-one-big-beautiful-bill-act-may-20-2025" lang="en">Letter to Congress Regarding One Big Beautiful Bill Act, May 20, 2025</a></span>
+        <blockquote class="q" lang="en">“We strongly support the provision in the House reconciliation legislation that would prevent major elective abortion providers”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">Born-Alive Abortion Survivors Protection Act</span> <span class="small">(S. 6 / H.R. 21)</span>
+        <br><span class="small">Carta al Congreso, 21 de enero de 2025: <a href="https://www.usccb.org/resources/born_alive_letter_2025.pdf" lang="en">Letter to Congress supporting the Born-Alive Abortion Survivors Protection Act</a></span>
+        <blockquote class="q" lang="en">“I urge you and your colleagues to vote in favor of the Born-Alive Abortion Survivors Protection Act”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#abortion"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small">Su postura oficial: Restringirlo o ponerle fin</p>
+      <ul class="stand ad"><li><span class="way">Se opuso a</span> <span lang="en">Women’s Health Protection Act</span>
+        <br><span class="small">Agenda legislativa, enero de 2025: <a href="https://erlc.com/wp-content/uploads/2025/01/ERL4240_LegisAgenda_build_011625.pdf" lang="en">2025 Public Policy Agenda</a></span>
+        <blockquote class="q" lang="en">“Oppose the Women’s Health Protection Act and Any Pro-Abortion Legislation”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">Born Alive Abortion Survivor Protection Act; Conscience Protection for Medical Residents Act; Dismemberment Abortion Ban Act of 2025; Heartbeat Protection Act of 2025; No Taxpayer Funding for Abortion and Abortion Insurance Full Disclosure Act of 2025; Pregnant Woman Health and Safety Act; Protect Funding for Women’s Healthcare Act; Protecting Individuals with Down Syndrome Act; Restoring Safeguards for Dangerous Abortion Drugs Act; Safeguarding Women from Chemical Abortion Act; SAVE Moms and Babies Act; Title X Abortion Provider Prohibition Act</span>
+        <br><span class="small">Lista de respaldos, sin fecha: <a href="https://erlc.com/policy-content/bill-endorsements-2025-2026/" lang="en">Bill Endorsements, 119th Congressional Term (2025-2026)</a></span>
+        <blockquote class="q" lang="en">“the ERLC has championed legislation containing policy solutions that are rooted in Scripture”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#abortion"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">Su postura oficial: Proteger el acceso</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#abortion"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#abortion"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">Su postura oficial: Restringirlo o ponerle fin</p>
+      <p class="small">Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#abortion"><b>Judaísmo reformista</b></a></p>
+      <p class="small">Su postura oficial: Proteger el acceso</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Women’s Health Protection Act; Equal Access to Abortion Coverage in Health Insurance Act; Abortion is Health Care Everywhere Act</span>
+        <br><span class="small">Agenda legislativa, 3 de enero de 2025: <a href="https://rac.org/sites/default/files/2025-01/religious_action_center_of_reform_judaism_letter_to_the_119th_congress.pdf" lang="en">Letter to the 119th Congress</a></span>
+        <blockquote class="q" lang="en">“We urge Congress to expand federal access to abortion and comprehensive reproductive health care”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">Equal Access to Abortion Coverage in Health Insurance Act of 2025</span> <span class="small">(H.R. 4611 / S. 2377)</span>
+        <br><span class="small">Alerta de acción, sin fecha · publicada en VoterVoice: <a href="https://www.votervoice.net/URJ/Campaigns/97789/Respond" lang="en">the EACH Act</a></span>
+        <blockquote class="q" lang="en">“Urge Congress to pass the Equal Access to Abortion Coverage in Health Insurance Act of 2025”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#abortion"><b>Judaísmo conservador</b></a></p>
+      <p class="small">Su postura oficial: Proteger el acceso</p>
+      <p class="small">Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#abortion"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.</p></div>
+<h2 id="poverty">Pobreza y asistencia pública</h2>
+  <div class="card"><p><a href="https://rightnleft.com/fe/catolica#poverty"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">RESTORE</span> <span class="small">(H.R. 5223)</span>
+        <br><span class="small">Carta al Congreso, 23 de septiembre de 2025: <a href="https://www.usccb.org/resources/joint-catholic-letter-congress-restore-act-september-23-2025" lang="en">Joint Catholic Letter to Congress on the RESTORE Act</a></span>
+        <blockquote class="q" lang="en">“we encourage you to include the Re-Entry Support Through Opportunities for Resources and Essentials (RESTORE) Act”</blockquote></li><li><span class="way">Pidió cambios a</span> <span lang="en">One Big Beautiful Bill Act</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Carta al Congreso, 20 de mayo de 2025: <a href="https://www.usccb.org/resources/letter-congress-regarding-one-big-beautiful-bill-act-may-20-2025" lang="en">Letter to Congress Regarding One Big Beautiful Bill Act, May 20, 2025</a></span>
+        <blockquote class="q" lang="en">“Congress must reject the SNAP provisions in the House reconciliation bill.”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#poverty"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#poverty"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">Su postura oficial: Fijarlo o subirlo</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#poverty"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <ul class="stand ad"><li><span class="way">Criticó</span> <span lang="en">Big Beautiful Bill</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Declaración, 1 de julio de 2025: <a href="https://www.ame-church.com/news/statement-council-of-bishops/" lang="en">Statement Council of Bishops</a></span>
+        <blockquote class="q" lang="en">“causing hurt, pain and devastation for millions of people”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#poverty"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#poverty"><b>Judaísmo reformista</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Criticó</span> <span lang="en">One Big Beautiful Bill</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Declaración, 7 de julio de 2025: <a href="https://www.ccarnet.org/statement-on-economic-injustice-legislation/" lang="en">Statement on Economic Injustice Legislation</a></span>
+        <blockquote class="q" lang="en">“is dismayed by recently adopted legislation being referred to as”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">Raise the Wage Act</span>
+        <br><span class="small">Agenda legislativa, 3 de enero de 2025: <a href="https://rac.org/sites/default/files/2025-01/religious_action_center_of_reform_judaism_letter_to_the_119th_congress.pdf" lang="en">Letter to the 119th Congress</a></span>
+        <blockquote class="q" lang="en">“the Raise the Wage Act to restore the value of the federal minimum wage”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#poverty"><b>Judaísmo conservador</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#poverty"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.</p></div>
+<h2 id="death-penalty">La pena de muerte</h2>
+  <div class="card"><p><a href="https://rightnleft.com/fe/catolica#death-penalty"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">Su postura oficial: Ponerle fin</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#death-penalty"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small">Su postura oficial: Mantenerla</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#death-penalty"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">Su postura oficial: Ponerle fin</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#death-penalty"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#death-penalty"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#death-penalty"><b>Judaísmo reformista</b></a></p>
+      <p class="small">Su postura oficial: Ponerle fin</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Federal Death Penalty Prohibition Act</span>
+        <br><span class="small">Agenda legislativa, 3 de enero de 2025: <a href="https://rac.org/sites/default/files/2025-01/religious_action_center_of_reform_judaism_letter_to_the_119th_congress.pdf" lang="en">Letter to the 119th Congress</a></span>
+        <blockquote class="q" lang="en">“other bills to eliminate disparities in sentencing and drug policy, and the Federal Death Penalty Prohibition Act”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#death-penalty"><b>Judaísmo conservador</b></a></p>
+      <p class="small">Su postura oficial: Ponerle fin</p>
+      <p class="small">Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#death-penalty"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.</p></div>
+<h2 id="guns">Armas de fuego</h2>
+  <div class="card"><p><a href="https://rightnleft.com/fe/catolica#guns"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#guns"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#guns"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">Su postura oficial: Agregar límites</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Stop Arming Cartels Act</span> <span class="small">(H.R. 923 / S. 367)</span>
+        <br><span class="small">Alerta de acción, 30 de septiembre de 2026: <a href="https://www.umcjustice.org/latest/action-alert-stop-gun-trafficking-to-latin-america-and-the-caribbean-10867" lang="en">Stop Gun Trafficking to Latin America and the Caribbean</a></span>
+        <blockquote class="q" lang="en">“Ask your Representatives and Senators to cosponsor the ARMAS Act and the Stop Arming Cartels Act.”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">Assault Weapons Ban; Ethan’s Law</span> <span class="small">(H.R. 3115 / S. 1531; H.R. 1564 / S. 726)</span>
+        <br><span class="small">Alerta de acción, 4 de junio de 2025: <a href="https://www.umcjustice.org/latest/action-alert-take-a-stand-against-gun-violence-6544" lang="en">Take a Stand Against Gun Violence</a></span>
+        <blockquote class="q" lang="en">“below is a list of legislation to support in this Congress:”</blockquote></li><li><span class="way">Se opuso a</span> <span lang="en">Constitutional Concealed Carry Reciprocity Act; Hearing Protection Act</span> <span class="small">(H.R. 38 / S. 65; H.R. 404 / S. 364)</span>
+        <br><span class="small">Alerta de acción, 4 de junio de 2025: <a href="https://www.umcjustice.org/latest/action-alert-take-a-stand-against-gun-violence-6544" lang="en">Take a Stand Against Gun Violence</a></span>
+        <blockquote class="q" lang="en">“And legislation to oppose:”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#guns"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#guns"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#guns"><b>Judaísmo reformista</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Bipartisan Background Checks Act; Background Checks Expansion Act; Assault Weapons Ban; Ethan’s Law</span>
+        <br><span class="small">Agenda legislativa, 3 de enero de 2025: <a href="https://rac.org/sites/default/files/2025-01/religious_action_center_of_reform_judaism_letter_to_the_119th_congress.pdf" lang="en">Letter to the 119th Congress</a></span>
+        <blockquote class="q" lang="en">“We urge Congress to prevent gun violence by supporting the Bipartisan Background Checks Act”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">universal background checks; Ethan’s Law</span> <span class="small">(H.R. 18; H.R. 1564 / S. 726)</span>
+        <br><span class="small">Alerta de acción, sin fecha · publicada en VoterVoice: <a href="https://www.votervoice.net/URJ/Campaigns/97975/Respond" lang="en">Urge Congress to take immediate action to stop gun violence</a></span>
+        <blockquote class="q" lang="en">“Establishing universal background checks (H.R. 18 in 119th congress”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#guns"><b>Judaísmo conservador</b></a></p>
+      <p class="small">Su postura oficial: Agregar límites</p>
+      <p class="small">Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#guns"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">Su postura oficial: Agregar límites</p>
+      <p class="small">El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.</p></div>
+<h2 id="environment">El cuidado de la creación y el medio ambiente</h2>
+  <div class="card"><p><a href="https://rightnleft.com/fe/catolica#environment"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">Su postura oficial: Actuar para reducirlas</p>
+      <ul class="stand ad"><li><span class="way">Pidió cambios a</span> <span lang="en">One Big Beautiful Bill Act</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Carta al Congreso, 20 de mayo de 2025: <a href="https://www.usccb.org/resources/letter-congress-regarding-one-big-beautiful-bill-act-may-20-2025" lang="en">Letter to Congress Regarding One Big Beautiful Bill Act, May 20, 2025</a></span>
+        <blockquote class="q" lang="en">“Abdication of these responsibilities is not acceptable.”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#environment"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small">Su postura oficial: Oponerse a las medidas climáticas</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#environment"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">Su postura oficial: Actuar para reducirlas</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#environment"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#environment"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#environment"><b>Judaísmo reformista</b></a></p>
+      <p class="small">Su postura oficial: Actuar para reducirlas</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Environmental Justice for All Act; Recovering America’s Wildlife Act; Arctic Refuge Protection Act</span>
+        <br><span class="small">Agenda legislativa, 3 de enero de 2025: <a href="https://rac.org/sites/default/files/2025-01/religious_action_center_of_reform_judaism_letter_to_the_119th_congress.pdf" lang="en">Letter to the 119th Congress</a></span>
+        <blockquote class="q" lang="en">“advancing the Environmental Justice for All Act, the Recovering America’s Wildlife Act and Arctic Refuge Protection Act”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#environment"><b>Judaísmo conservador</b></a></p>
+      <p class="small">Su postura oficial: Actuar para reducirlas</p>
+      <p class="small">Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#environment"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.</p></div>
+<h2 id="healthcare">Atención médica</h2>
+  <div class="card"><p><a href="https://rightnleft.com/fe/catolica#healthcare"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Pidió cambios a</span> <span lang="en">One Big Beautiful Bill Act</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Carta al Congreso, 20 de mayo de 2025: <a href="https://www.usccb.org/resources/letter-congress-regarding-one-big-beautiful-bill-act-may-20-2025" lang="en">Letter to Congress Regarding One Big Beautiful Bill Act, May 20, 2025</a></span>
+        <blockquote class="q" lang="en">“This bill undertakes the largest Medicaid cut in history”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#healthcare"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#healthcare"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">Su postura oficial: Ampliarla</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Tech to Save Moms Act</span> <span class="small">(H.R. 8317 / S. 958)</span>
+        <br><span class="small">Alerta de acción, 26 de mayo de 2026: <a href="https://www.umcjustice.org/latest/action-alert-tell-congress-to-support-the-tech-to-save-moms-act-9481" lang="en">Support the Tech to Save Moms Act</a></span>
+        <blockquote class="q" lang="en">“the General Board of Church and Society has endorsed the Tech to Save Moms Act”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">Momnibus Act</span> <span class="small">(H.R. 7973)</span>
+        <br><span class="small">Alerta de acción, 4 de mayo de 2026: <a href="https://www.umcjustice.org/latest/action-alert-urge-your-representative-to-pass-the-momnibus-act-to-protect-maternal-health-9448" lang="en">Pass the Momnibus Act to Protect Maternal Health</a></span>
+        <blockquote class="q" lang="en">“Act now to advocate that the Momnibus Act becomes law.”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#healthcare"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <ul class="stand ad"><li><span class="way">Criticó</span> <span lang="en">Big Beautiful Bill</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Declaración, 1 de julio de 2025: <a href="https://www.ame-church.com/news/statement-council-of-bishops/" lang="en">Statement Council of Bishops</a></span>
+        <blockquote class="q" lang="en">“causing hurt, pain and devastation for millions of people”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#healthcare"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#healthcare"><b>Judaísmo reformista</b></a></p>
+      <p class="small">Su postura oficial: Ampliarla</p>
+      <ul class="stand ad"><li><span class="way">Criticó</span> <span lang="en">One Big Beautiful Bill</span> <span class="small">(H.R. 1)</span>
+        <br><span class="small">Declaración, 7 de julio de 2025: <a href="https://www.ccarnet.org/statement-on-economic-injustice-legislation/" lang="en">Statement on Economic Injustice Legislation</a></span>
+        <blockquote class="q" lang="en">“is dismayed by recently adopted legislation being referred to as”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">Health Equity and Accountability Act</span>
+        <br><span class="small">Agenda legislativa, 3 de enero de 2025: <a href="https://rac.org/sites/default/files/2025-01/religious_action_center_of_reform_judaism_letter_to_the_119th_congress.pdf" lang="en">Letter to the 119th Congress</a></span>
+        <blockquote class="q" lang="en">“We urge Congress to protect and expand Medicaid and CHIP”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#healthcare"><b>Judaísmo conservador</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#healthcare"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.</p></div>
+<h2 id="criminal-justice">Justicia penal</h2>
+  <div class="card"><p><a href="https://rightnleft.com/fe/catolica#criminal-justice"><b>Iglesia católica en Estados Unidos</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">RESTORE</span> <span class="small">(H.R. 5223)</span>
+        <br><span class="small">Carta al Congreso, 23 de septiembre de 2025: <a href="https://www.usccb.org/resources/joint-catholic-letter-congress-restore-act-september-23-2025" lang="en">Joint Catholic Letter to Congress on the RESTORE Act</a></span>
+        <blockquote class="q" lang="en">“we encourage you to include the Re-Entry Support Through Opportunities for Resources and Essentials (RESTORE) Act”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/bautista-del-sur#criminal-justice"><b>Convención Bautista del Sur</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Recognizing Education, Employment, New Skills, and Treatment to Enable Reintegration Act; EQUAL Act</span>
+        <br><span class="small">Agenda legislativa, enero de 2025: <a href="https://erlc.com/wp-content/uploads/2025/01/ERL4240_LegisAgenda_build_011625.pdf" lang="en">2025 Public Policy Agenda</a></span>
+        <blockquote class="q" lang="en">“the ERLC supports additional bipartisan legislation such as the”</blockquote></li><li><span class="way">Apoyó</span> <span lang="en">Preventing Violence against Female Inmates Act</span>
+        <br><span class="small">Lista de respaldos, sin fecha: <a href="https://erlc.com/policy-content/bill-endorsements-2025-2026/" lang="en">Bill Endorsements, 119th Congressional Term (2025-2026)</a></span>
+        <blockquote class="q" lang="en">“the ERLC has championed legislation containing policy solutions that are rooted in Scripture”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/metodista-unida#criminal-justice"><b>Iglesia Metodista Unida</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">Smarter Pretrial Detention for Drug Charges Act of 2026; First Step Implementation Act of 2025</span>
+        <br><span class="small">Declaración, 24 de abril de 2026: <a href="https://www.umcjustice.org/latest/second-chance-awareness-month-a-call-for-restorative-justice-9382" lang="en">Second Chance Awareness Month: A Call for Restorative Justice</a></span>
+        <blockquote class="q" lang="en">“Congregations and annual conferences should urge their members of Congress to co-sponsor legislation such as the”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/ame#criminal-justice"><b>Iglesia Metodista Episcopal Africana</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/asambleas-de-dios#criminal-justice"><b>Asambleas de Dios (EE. UU.)</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-reformista#criminal-justice"><b>Judaísmo reformista</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <ul class="stand ad"><li><span class="way">Apoyó</span> <span lang="en">George Floyd Justice in Policing Act; End Racial and Religious Profiling Act; EQUAL Act</span>
+        <br><span class="small">Agenda legislativa, 3 de enero de 2025: <a href="https://rac.org/sites/default/files/2025-01/religious_action_center_of_reform_judaism_letter_to_the_119th_congress.pdf" lang="en">Letter to the 119th Congress</a></span>
+        <blockquote class="q" lang="en">“comprehensive police reform (including the George Floyd Justice in Policing Act and End Racial and Religious Profiling Act)”</blockquote></li></ul></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-conservador#criminal-justice"><b>Judaísmo conservador</b></a></p>
+      <p class="small">Su postura oficial: No lo dice</p>
+      <p class="small">Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.</p></div>
+    <div class="card"><p><a href="https://rightnleft.com/fe/judaismo-ortodoxo#criminal-justice"><b>Judaísmo ortodoxo</b></a></p>
+      <p class="small">Su postura oficial: Sin declaración</p>
+      <p class="small">El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.</p></div>
+  <p><a href="https://rightnleft.com/fe/posturas">Qué postura toma cada tradición</a> · <a href="https://rightnleft.com/fe/miembros">Lo que dicen los miembros</a> · <a href="https://rightnleft.com/fe">Las ocho tradiciones</a> · <a href="https://rightnleft.com/fe/metodologia">Cómo se hicieron estas páginas</a> · <a href="/data/faith.json">Descargue el registro completo (faith.json, CC0)</a></p>
+  <hr>
+  <p class="small"><span class="label">Quién lo hizo.</span> Marco Arras, residente de Texas. Yo dono al Partido Demócrata, y lo digo antes que cualquier otra cosa, no en una nota al pie. La regla que escoge cuáles votos aparecen está publicada y se aplica igual a las dos bancadas, y cada voto y cada conteo están en un archivo que usted puede descargar y verificar. En estas páginas pasa lo mismo con las tradiciones religiosas: lo que cuenta como oficial es una regla escrita para cada tradición, que se aplica igual en todos los temas.</p>
+  <footer class="sitefoot" aria-label="Más en este sitio"><div><p class="foot-head">El sitio</p><ul><li><a href="https://rightnleft.com/es">Inicio</a></li><li><a href="https://rightnleft.com/politica">Política</a></li><li><a href="https://rightnleft.com/fe">Religión</a></li><li><a href="https://rightnleft.com/economia">Economía</a></li><li><a href="https://rightnleft.com/es/cuestionario">El cuestionario</a></li><li><a href="https://rightnleft.com/distritos">Encuentre a su representante</a></li><li><a href="https://rightnleft.com/proyectos">Los proyectos</a></li><li><a href="https://rightnleft.com/graficas">Gráficas</a></li><li><a href="https://rightnleft.com/hoja">Hoja informativa de una página</a></li><li><a href="https://rightnleft.com/open-data">Descargar los datos (en inglés)</a></li><li><a href="https://rightnleft.com/maestros">Para docentes: una hoja de trabajo gratis</a></li></ul></div><div><p class="foot-head">Los siete proyectos</p><ul><li><a href="https://rightnleft.com/proyecto/sb-2"><span class="bill">SB 2</span> Cuentas de ahorro educativo</a></li><li><a href="https://rightnleft.com/proyecto/sb-8"><span class="bill">SB 8</span> Aplicación de la ley migratoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-10"><span class="bill">SB 10</span> Los Diez Mandamientos en las aulas</a></li><li><a href="https://rightnleft.com/proyecto/sb-3"><span class="bill">SB 3</span> Prohibición del THC</a></li><li><a href="https://rightnleft.com/proyecto/sb-14"><span class="bill">SB 14</span> Revisión regulatoria</a></li><li><a href="https://rightnleft.com/proyecto/sb-6"><span class="bill">SB 6</span> Red eléctrica y grandes consumidores</a></li><li><a href="https://rightnleft.com/proyecto/sb-5"><span class="bill">SB 5</span> Instituto de investigación sobre demencia</a></li></ul></div><div><p class="foot-head">Las tres contiendas</p><ul><li><a href="https://rightnleft.com/contienda/gobernador">Gobernador: Gina Hinojosa y Greg Abbott</a></li><li><a href="https://rightnleft.com/contienda/vicegobernador">Vicegobernador: Vikki Goodwin y Dan Patrick</a></li><li><a href="https://rightnleft.com/contienda/senado">Senado de Estados Unidos: James Talarico y Ken Paxton</a></li></ul></div></footer>
+</main>
+</body>
+</html>

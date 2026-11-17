@@ -52,7 +52,8 @@ const FAITH_LABELS = Object.fromEntries(['en', 'es'].flatMap((lang) => {
     [`/${FAITH_PATHS[lang].home}`, `What five Christian traditions and three Jewish movements officially say on eight issues, beside the Texas and national party platforms, ${inLang}`],
     [`/${FAITH_PATHS[lang].method}`, `How the faith pages were made, ${inLang}`],
     [`/${FAITH_PATHS[lang].sides}`, `Which side eight religious traditions' official statements take on each issue the party platforms split on, with no total, ${inLang}`],
-    [`/${FAITH_PATHS[lang].members}`, `What members of each tradition told Pew Research Center on four issues, beside their tradition's official position, with no score, ${inLang}`],
+    [`/${FAITH_PATHS[lang].actions}`, `The bills each tradition's own advocacy office backed or opposed in Congress since 2025, beside its official position, with no count, ${inLang}`],
+    [`/${FAITH_PATHS[lang].members}`,`What members of each tradition told Pew Research Center on four issues, beside their tradition's official position, with no score, ${inLang}`],
     [`/${FAITH_PATHS[lang].scripture}`,`The scripture each tradition's statements cite, grouped by the side they take, and the passages cited on both sides, ${inLang}`],
     ...Object.keys(TRADITION_SLUG).map((id) => {
       if (!FAITH_TRADITION_EN[id]) throw new Error(`build_locales: no llms.txt name for tradition ${id}`);

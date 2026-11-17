@@ -1972,6 +1972,121 @@
     "es": "Pew no publica cifras para los miembros de esta iglesia.",
     "status": "ok"
   },
+  "ad.h4": {
+    "en": "In Congress, 2025–26: bills it backed or opposed",
+    "es": "En el Congreso, 2025–26: proyectos de ley que apoyó o a los que se opuso",
+    "status": "ok"
+  },
+  "ad.stance.backs": {
+    "en": "Backed",
+    "es": "Apoyó",
+    "status": "ok"
+  },
+  "ad.stance.opposes": {
+    "en": "Opposed",
+    "es": "Se opuso a",
+    "status": "ok"
+  },
+  "ad.stance.changes": {
+    "en": "Asked for changes to",
+    "es": "Pidió cambios a",
+    "status": "ok"
+  },
+  "ad.stance.criticizes": {
+    "en": "Criticized",
+    "es": "Criticó",
+    "status": "ok"
+  },
+  "ad.kind.letter": {
+    "en": "Letter to Congress",
+    "es": "Carta al Congreso",
+    "status": "ok"
+  },
+  "ad.kind.agenda": {
+    "en": "Legislative agenda",
+    "es": "Agenda legislativa",
+    "status": "ok"
+  },
+  "ad.kind.list": {
+    "en": "Endorsement list",
+    "es": "Lista de respaldos",
+    "status": "ok"
+  },
+  "ad.kind.alert": {
+    "en": "Action alert",
+    "es": "Alerta de acción",
+    "status": "ok"
+  },
+  "ad.kind.statement": {
+    "en": "Statement",
+    "es": "Declaración",
+    "status": "ok"
+  },
+  "ad.undated": {
+    "en": "undated",
+    "es": "sin fecha",
+    "status": "ok"
+  },
+  "ad.host": {
+    "en": "hosted on {host}",
+    "es": "publicada en {host}",
+    "status": "ok"
+  },
+  "ad.noneIssue": {
+    "en": "Its advocacy office named no bill on this issue in what it published since January 2025.",
+    "es": "Su oficina de incidencia no nombró ningún proyecto de ley sobre este tema en lo que publicó desde enero de 2025.",
+    "status": "ok"
+  },
+  "adnone.ag": {
+    "en": "The Assemblies of God (USA) has no Washington policy office, and ag.org posted no position on a bill in 2025-26.",
+    "es": "Las Asambleas de Dios (EE. UU.) no tienen una oficina de políticas públicas en Washington, y ag.org no publicó ninguna postura sobre un proyecto de ley en 2025-26.",
+    "status": "ok"
+  },
+  "adnone.conservative": {
+    "en": "The Rabbinical Assembly's 2025-26 resolutions and statements on these issues name no bill.",
+    "es": "Las resoluciones y declaraciones de 2025-26 de la Asamblea Rabínica sobre estos temas no nombran ningún proyecto de ley.",
+    "status": "ok"
+  },
+  "adnone.orthodox": {
+    "en": "The Orthodox Union's advocacy center names bills only on school choice, antisemitism and security funding.",
+    "es": "El centro de incidencia de la Unión Ortodoxa nombra proyectos de ley solo sobre la libre elección de escuela, el antisemitismo y los fondos de seguridad.",
+    "status": "ok"
+  },
+  "ac.h1": {
+    "en": "What they backed in Congress",
+    "es": "Lo que apoyaron en el Congreso",
+    "status": "ok"
+  },
+  "ac.docTitle": {
+    "en": "What each tradition backed or opposed in Congress, issue by issue",
+    "es": "Lo que cada tradición apoyó o rechazó en el Congreso, tema por tema",
+    "status": "ok"
+  },
+  "ac.desc": {
+    "en": "The bills each tradition's own advocacy office publicly backed or opposed in Congress since January 2025, beside its official position. No count.",
+    "es": "Los proyectos de ley que la propia oficina de incidencia de cada tradición apoyó o rechazó públicamente en el Congreso desde enero de 2025, junto a su postura oficial. Sin conteo.",
+    "status": "ok"
+  },
+  "ac.lede": {
+    "en": "Words are one thing; what a tradition's advocacy office asks of Congress is another. For each issue, this page lists the bills each tradition's own office publicly backed or opposed since January 2025, beside the tradition's official position. It counts nothing and grades no one.",
+    "es": "Una cosa son las palabras y otra lo que la oficina de incidencia de una tradición le pide al Congreso. En cada tema, esta página enumera los proyectos de ley que la propia oficina de cada tradición apoyó o rechazó públicamente desde enero de 2025, junto a la postura oficial de la tradición. No cuenta nada ni califica a nadie.",
+    "status": "ok"
+  },
+  "ac.rules": {
+    "en": "Only the body's own letters to Congress, action alerts, statements, legislative agenda or endorsement list count, and only where it names a bill and takes a side. Federal lobbying reports cannot answer this: the law does not count a church's contacts with Congress as lobbying, so most of these bodies never file them.",
+    "es": "Solo cuentan las cartas al Congreso, alertas de acción, declaraciones, agenda legislativa o lista de respaldos del propio organismo, y solo cuando nombra un proyecto de ley y toma postura. Los informes federales de cabildeo no sirven para esto: la ley no cuenta como cabildeo los contactos de una iglesia con el Congreso, así que la mayoría de estos organismos nunca los presentan.",
+    "status": "ok"
+  },
+  "ac.check": {
+    "en": "Every quote and every bill name was checked against a saved copy of the document.",
+    "es": "Cada cita y cada nombre de proyecto de ley se verificó contra una copia guardada del documento.",
+    "status": "ok"
+  },
+  "ac.position": {
+    "en": "Its official position:",
+    "es": "Su postura oficial:",
+    "status": "ok"
+  },
   "home.sidesNote": {
     "en": "For each issue the platforms split on, which side each tradition's own words take. No score.",
     "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada tradición. Sin puntaje.",
@@ -2005,6 +2120,16 @@
   "me.members": {
     "en": "{linkHtml} puts Pew Research Center's own figures for each tradition's members beside the tradition's official position, on the four issues Pew asked about. The denominations' figures are Pew's published ones, because Pew's public data file leaves out which denomination each person belongs to; for Catholics and Jews the site recomputed them from that file. No score.",
     "es": "{linkHtml} pone las cifras de Pew Research Center sobre los miembros de cada tradición junto a la postura oficial de la tradición, en los cuatro temas sobre los que preguntó Pew. Las cifras de las denominaciones son las que publica Pew, porque su archivo público de datos no incluye a qué denominación pertenece cada persona; para católicos y judíos el sitio las volvió a calcular con ese archivo. Sin puntaje.",
+    "status": "ok"
+  },
+  "me.h2actions": {
+    "en": "What they backed in Congress",
+    "es": "Lo que apoyaron en el Congreso",
+    "status": "ok"
+  },
+  "me.actions": {
+    "en": "{linkHtml} lists, for each issue, the bills each tradition's own advocacy office backed or opposed since January 2025, from its own letters, alerts, statements and agendas, with every quote and bill name checked against a saved copy. Federal lobbying reports were not used: the law does not require churches to file them. No count.",
+    "es": "{linkHtml} enumera, en cada tema, los proyectos de ley que la propia oficina de incidencia de cada tradición apoyó o rechazó desde enero de 2025, según sus propias cartas, alertas, declaraciones y agendas, con cada cita y nombre de proyecto de ley verificados contra una copia guardada. No se usaron los informes federales de cabildeo: la ley no obliga a las iglesias a presentarlos. Sin conteo.",
     "status": "ok"
   },
   "side.immigration.q": {

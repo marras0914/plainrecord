@@ -20,7 +20,14 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { STATEMENTS, PLANKS, NO_PLANK, SIDE_POINTS } from '../faith_positions';
-import { FAITH_SOURCE_DIR as DIR, FAITH_SOURCE_FILES as FILES, normForMatch as norm } from './faith_sources';
+import { FAITH_SOURCE_DIR as DIR, FAITH_SOURCE_FILES as SOURCE_FILES, normForMatch as norm } from './faith_sources';
+import { ADVOCACY, ADVOCACY_FILES } from '../faith_advocacy';
+
+// The advocacy sources (faith_advocacy.ts) live beside the statements' sources.
+const FILES: Record<string, { file: string; lineNumbers?: boolean }> = {
+  ...SOURCE_FILES,
+  ...Object.fromEntries(Object.entries(ADVOCACY_FILES).map(([u, file]) => [u, { file }])),
+};
 
 const texts = new Map<string, string>();
 const load = (url: string) => {
@@ -52,6 +59,12 @@ const entries = [
   ...SIDE_POINTS.flatMap((pt) => [
     ...Object.entries(pt.platforms).map(([k, q]) => ({ label: `side ${pt.issueId} ${k}`, url: q!.url, excerpt: q!.quote })),
     ...Object.entries(pt.churches).filter(([, q]) => q).map(([k, q]) => ({ label: `side ${pt.issueId} ${k}`, url: q!.url, excerpt: q!.quote })),
+  ]),
+  // What each body's advocacy office backed or opposed (faith_advocacy.ts):
+  // the quote, and every bill name as the document writes it.
+  ...ADVOCACY.flatMap((a) => [
+    { label: `advocacy ${a.traditionId} ${a.issueIds.join('+')} quote`, url: a.url, excerpt: a.quote },
+    ...a.named.map((n) => ({ label: `advocacy ${a.traditionId} names "${n}"`, url: a.url, excerpt: n })),
   ]),
 ];
 for (const e of entries) {
