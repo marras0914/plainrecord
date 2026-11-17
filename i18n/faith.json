@@ -2162,6 +2162,21 @@
     "es": "En cada tema en que las plataformas toman posturas opuestas, qué postura toman las propias palabras de cada tradición. Sin puntaje.",
     "status": "ok"
   },
+  "home.cov.h2": {
+    "en": "Who has spoken on what",
+    "es": "Quién se ha pronunciado sobre qué",
+    "status": "draft"
+  },
+  "home.cov.note": {
+    "en": "A filled dot means the tradition's official bodies have a statement on the issue, quoted and linked on its page. An empty one means none was found. The dots do not say which side a statement takes.",
+    "es": "Un punto relleno significa que los órganos oficiales de la tradición tienen una declaración sobre el tema, citada y enlazada en su página. Uno vacío significa que no se encontró ninguna. Los puntos no dicen qué postura toma una declaración.",
+    "status": "draft"
+  },
+  "home.cov.has": {
+    "en": "Statement",
+    "es": "Declaración",
+    "status": "draft"
+  },
   "me.h2sides": {
     "en": "Which side each tradition takes",
     "es": "Qué postura toma cada tradición",

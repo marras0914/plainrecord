@@ -275,10 +275,26 @@ function render(lang) {
   });
 }
 
-for (const lang of ['en', 'es']) {
-  const dir = resolve(ROOT, 'public', COPY[lang].slug);
-  mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), render(lang), 'utf8');
+/**
+ * The first chart, for the Policy front page (17 Nov 2026): the same figure,
+ * heading and caption as /charts, in the same approved words, linking to it.
+ */
+export function agreeTeaser(lang) {
+  const c = COPY[lang];
+  return {
+    heading: c.h2a,
+    figure: `<figure class="chart">${histogramSvg(bins, c.hist)}<figcaption class="small">${esc(c.hist.xTitle)}</figcaption></figure>`,
+    caption: c.capA,
+    href: `${SITE}/${c.slug}#agree`,
+  };
 }
-console.log(`  /charts and /graficas written: ${n(total)} votes, ${n(alike)} within 10 points, ${n(partyLine)} at 80+,`
-  + ` ${contested} contested; median D ${P(median('D'))}, R ${P(median('R'))}; top D ${topD.map((r) => r.d).join('/')}`);
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  for (const lang of ['en', 'es']) {
+    const dir = resolve(ROOT, 'public', COPY[lang].slug);
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, 'index.html'), render(lang), 'utf8');
+  }
+  console.log(`  /charts and /graficas written: ${n(total)} votes, ${n(alike)} within 10 points, ${n(partyLine)} at 80+,`
+    + ` ${contested} contested; median D ${P(median('D'))}, R ${P(median('R'))}; top D ${topD.map((r) => r.d).join('/')}`);
+}
