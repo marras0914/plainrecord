@@ -39,6 +39,7 @@ import { QUIZ_PATH, HOME_PATH, POLICY_PATH } from './_home_copy.mjs';
 import { homePage } from './build_home.mjs';
 import { FAITH_PATHS, TRADITION_SLUG, traditionPath, houseVotesPath } from './_faith_copy.mjs';
 import { SESSION } from './session.mjs';
+import { datesFor } from './_page_dates.mjs';
 
 // The faith pages, with what each is, for the sitemap and llms.txt.
 const FAITH_TRADITION_EN = {
@@ -552,12 +553,8 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // again for the other 140, and the sitemap would silently omit them if it
   // were not. Numeric sort so the sitemap reads 31, 49, 95 rather than 108, 112.
   //
-  // They carry a <lastmod>, and it is the day the ballot list was pulled, because
-  // that is what changes on them now. Nothing else here gets one: a build date on
-  // every URL would claim the whole site changed on every deploy, and an engine
-  // that catches a sitemap's lastmod being wrong stops reading it.
-  const ballotDate = await readFile(resolve(ROOT, 'data/ballot_2026_house.json'), 'utf8')
-    .then((s) => JSON.parse(s)._meta.fetched, () => null);
+  // Every static page's <lastmod> is the day its HTML last changed, from
+  // data/page_dates.json (scripts/_page_dates.mjs), set below.
   for (const [parent, lang] of [['district', 'en'], ['distrito', 'es']]) {
     let entries = [];
     try {
@@ -568,7 +565,7 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
     } catch { entries = []; }
     for (const n of entries) {
       const shipped = await access(resolve(DIST, `${parent}/${n}/index.html`)).then(() => true, () => false);
-      if (shipped) docs.push({ loc: `${SITE}/${parent}/${n}`, priority: '0.9', lastmod: ballotDate });
+      if (shipped) docs.push({ loc: `${SITE}/${parent}/${n}`, priority: '0.9' });
     }
   }
 
@@ -587,6 +584,14 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
       if (shipped) docs.push({ loc: `${SITE}/${parent}/${slug}`, priority: '0.9' });
     }
   }
+
+  // The day each page's HTML last changed (17 Nov 2026). Until then only the
+  // district pages had a date, the ballot fetch of 30 Sep, seven weeks behind.
+  const { dates, changed } = datesFor(docs.map((d) => d.loc.slice(SITE.length)));
+  for (const d of docs) d.lastmod = dates[d.loc.slice(SITE.length)];
+  const undated = docs.filter((d) => !d.lastmod).map((d) => d.loc);
+  if (undated.length) throw new Error(`sitemap: no page file to date for ${undated.slice(0, 3).join(', ')}`);
+  say(true, 'dated every static page for the sitemap', `${changed} changed since the record`);
 
   const xml =
     '<?xml version="1.0" encoding="UTF-8"?>\n' +

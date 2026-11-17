@@ -57,6 +57,11 @@ dist/
 # statements from. Committed so the build never calls sbc.net.
 !/data/faith/
 
+# ...and the day each static page last changed, for the sitemap's lastmod
+# (scripts/_page_dates.mjs). Vercel only reads it, so uncommitted it would date
+# every page to the deploy.
+!/data/page_dates.json
+
 # Belt and braces: these used to live in the ship dir before the WORK_DIR split,
 # so a stale script or an old checkout can still drop them there.
 public/data/tx_bills_*.json
