@@ -161,10 +161,22 @@ How it is applied:
 - Titles about another country's immigration ("Immigration to Israel",
   "Absorption of Ethiopian Immigrants", "Immigration to Canada") are not
   listed under immigration (Marco, 17 Nov 2026).
-- Known costs, for Marco: the issue name "Creation care and the environment" is
-  Christian wording. "Global warming" was added to the environment rule on
+- The issue name "Creation care and the environment" is Christian wording;
+  Marco chose to keep it (17 Nov 2026) over "Environment" and other options.
+- Advocacy does not move the grid (Marco, 17 Nov 2026): Reform stays "Doesn't
+  say" on guns, from its 2015 CCAR statement, even though the RAC backs gun
+  bills. The grid places only from statements shown in full; the bills sit
+  beside them on /faith/congress.
+- "Global warming" was added to the environment rule on
   16 Nov 2026 (Marco), which made the SBC's 2007 "On Global Warming" its
   current environment statement.
+- Floor votes on the named bills (Marco, 17 Nov 2026; `faith_floor_votes.ts`,
+  `npm run data:faith:votes`): lines on /faith/congress only, each chamber's
+  final vote (passage or House concurrence) with each party's yes and no, or,
+  where a chamber never voted on passage, the vote that stopped the bill. No
+  total and no "with/against" mark. Of the 1,608 roll calls through 17 Nov
+  2026, only H.R. 1, the Laken Riley Act and Born-Alive were on a named bill;
+  the script refuses to write if that stops being true.
 
 ---
 

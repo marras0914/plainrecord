@@ -2392,6 +2392,19 @@ try {
       const issues = await fp.locator('main h2[id]').count();
       const platformCards = await fp.locator('main h4 + .duo > .card').count();
       if (issues !== faith.issues.length || platformCards !== faith.issues.length * 4) shape.push(`${path}: ${issues} issues, ${platformCards} platform cards`);
+      // Floor votes appear on /faith/congress only (decided 17 Nov 2026).
+      if (await fp.locator('ul.votes').count()) shape.push(`${path}: carries floor votes`);
+    }
+    // On /faith/congress: one vote list per entry and issue that has votes, and
+    // each line's Republican split is the data's.
+    const fvExpected = faith.advocacy.items.filter((a) => a.floorVotes?.length).reduce((n, a) => n + a.issueIds.length, 0);
+    const fvLines = new Set(faith.advocacy.items.flatMap((a) => a.floorVotes ?? []).map((v) => `${v.parties.R[0]}–${v.parties.R[1]}`));
+    for (const path of ['/faith/congress', '/fe/congreso']) {
+      await fp.goto(new URL(path, URL_UNDER_TEST).href, { waitUntil: 'load' });
+      const lists = await fp.locator('ul.votes').count();
+      const lines = await fp.locator('ul.votes li').allInnerTexts();
+      const off = lines.filter((t) => ![...fvLines].some((s) => t.includes(`${path.startsWith('/fe') ? 'Republicanos' : 'Republicans'} ${s}`)));
+      check(`faith: ${path} shows the floor votes from the data`, fvExpected > 0 && lists === fvExpected && off.length === 0, `${lists} of ${fvExpected} lists${off.length ? `; off: ${off[0]}` : ''}`);
     }
     // The verses: each language shows its own Bible. Leviticus 19:34 is cited
     // by the SBC's immigration resolution.

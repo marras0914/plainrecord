@@ -29,8 +29,11 @@ import {
 import { CITATIONS_FILE } from './extract_jewish_citations';
 import { PEW_PUBLISHED, PEW_COLUMNS, MEMBERS_OF, PEW_SOURCE } from '../faith_members';
 import { ADVOCACY, ADVOCACY_NONE } from '../faith_advocacy';
+import { FLOOR_BILLS, floorBillsFor, loadFloorVotes } from '../faith_floor_votes';
 import { SHIP_DIR } from './paths';
 import { buildHouseVotes } from './faith_house_votes';
+
+const FLOOR = loadFloorVotes();
 
 export const PLATFORMS = {
   'R-texas': { name: 'Republican Party of Texas', year: 2024, url: 'https://texasgop.org/wp-content/uploads/2024/06/2024-RPT-Platform.pdf' },
@@ -189,8 +192,20 @@ export function buildFaithPayload() {
      */
     advocacy: {
       since: '2025-01-03',
-      items: [...ADVOCACY].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')),
+      // Each entry carries the floor votes on the bills it names, by Marco's
+      // rule of 17 Nov 2026 (faith_floor_votes.ts), oldest first.
+      items: [...ADVOCACY].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')).map((a) => {
+        const ids = floorBillsFor(a).map((b) => b.id);
+        const votes = FLOOR.votes.filter((v) => ids.includes(v.billId)).sort((x, y) => x.date.localeCompare(y.date));
+        return votes.length ? { ...a, floorVotes: votes } : a;
+      }),
       none: ADVOCACY_NONE,
+      floor: {
+        fetched: FLOOR.fetched, houseRollCalls: FLOOR.houseRollCalls, senateRollCalls: FLOOR.senateRollCalls,
+        measuresWithRollCall: FLOOR.measuresWithRollCall,
+        // The name each voted bill goes by, for the page's one sentence.
+        bills: FLOOR_BILLS.map((b) => b.names[0]),
+      },
     },
     members: {
       source: PEW_SOURCE,
