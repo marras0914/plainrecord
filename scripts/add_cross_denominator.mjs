@@ -49,8 +49,9 @@
  */
 
 import { readFileSync, writeFileSync, copyFileSync, existsSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
-const PAYLOAD = 'public/data/quiz_89R.json';
+const PAYLOAD = `public/data/quiz_${SESSION}.json`;
 const write = process.argv.includes('--write');
 
 const payload = JSON.parse(readFileSync(PAYLOAD, 'utf8'));

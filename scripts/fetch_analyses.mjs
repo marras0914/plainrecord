@@ -32,11 +32,11 @@
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
 const CACHE = 'data/cache/analyses';
-const OUT = 'data/bill_analyses_89R.json';
-const PAYLOAD = 'public/data/quiz_89R.json';
-const SESSION = '89R';
+const OUT = `data/bill_analyses_${SESSION}.json`;
+const PAYLOAD = `public/data/quiz_${SESSION}.json`;
 
 const refresh = process.argv.includes('--refresh');
 

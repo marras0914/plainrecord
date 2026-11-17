@@ -32,6 +32,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const arg = process.argv[2];
@@ -45,15 +46,15 @@ const say = (ok, label, detail = '') => {
 const load = (p) => JSON.parse(readFileSync(resolve(ROOT, p), 'utf8'));
 let file, members;
 try {
-  file = load(arg ?? 'public/data/zips_89R.json');
+  file = load(arg ?? `public/data/zips_${SESSION}.json`);
 } catch {
-  console.error('\n  public/data/zips_89R.json not found — run `npm run data:zips`.\n');
+  console.error('\n  public/data/zips_' + SESSION + '.json not found — run `npm run data:zips`.\n');
   process.exit(1);
 }
 try {
-  members = load('public/data/members_89R.json');
+  members = load(`public/data/members_${SESSION}.json`);
 } catch {
-  console.error('\n  public/data/members_89R.json not found — run `npm run data:members`.\n');
+  console.error('\n  public/data/members_' + SESSION + '.json not found — run `npm run data:members`.\n');
   process.exit(1);
 }
 
@@ -160,9 +161,12 @@ say(missing.length === 0, 'all 150 districts are reachable by ZIP',
 
 const seated = new Set(members.members.map((m) => m.d));
 const seatless = [...reached].filter((d) => !seated.has(d));
-say(seatless.length === 1 && seatless[0] === 93,
-  'exactly one reachable district has no sitting member',
-  seatless.length ? `HD-${seatless.join(', HD-')}` : 'none — expected HD-93');
+// Since 17 Nov 2026 the members file is the 89th's House, all 150 seats
+// (HD-93, vacant since July 2026, included), so every district a ZIP reaches
+// has a member. Before that, HD-93 was expected here.
+say(seatless.length === 0,
+  'every reachable district has a member',
+  seatless.length ? `no member: HD-${seatless.join(', HD-')}` : `${seated.size} of 150`);
 
 const single = entries.filter(([, v]) => typeof v === 'number').length;
 say(single > 900,

@@ -25,12 +25,13 @@
 import { readFileSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { SESSION } from './session.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
 
-const payload = JSON.parse(readFileSync(join(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
-const corpusFile = JSON.parse(readFileSync(join(ROOT, 'public/data/votes_89R.json'), 'utf8'));
+const payload = JSON.parse(readFileSync(join(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
+const corpusFile = JSON.parse(readFileSync(join(ROOT, `public/data/votes_${SESSION}.json`), 'utf8'));
 const corpus = Array.isArray(corpusFile) ? corpusFile
   : (corpusFile.votes ?? corpusFile.items ?? Object.values(corpusFile));
 

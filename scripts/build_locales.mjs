@@ -38,6 +38,7 @@ import { footerHtml, brandHtml, BRAND_CSS } from './_site_nav.mjs';
 import { QUIZ_PATH, HOME_PATH, POLICY_PATH } from './_home_copy.mjs';
 import { homePage } from './build_home.mjs';
 import { FAITH_PATHS, TRADITION_SLUG, traditionPath, houseVotesPath } from './_faith_copy.mjs';
+import { SESSION } from './session.mjs';
 
 // The faith pages, with what each is, for the sitemap and llms.txt.
 const FAITH_TRADITION_EN = {
@@ -101,10 +102,10 @@ say(unapproved.length === 0, 'every string approved by a reviewer',
 // Reported, NOT a failure. A missing sidecar blocks the Spanish page; it does
 // not make the English build wrong, and failing here would break `npm run
 // build` for everyone until the sidecar lands.
-const SIDECAR = resolve(ROOT, 'public/data/quiz_89R.es.json');
+const SIDECAR = resolve(ROOT, `public/data/quiz_${SESSION}.es.json`);
 const haveSidecar = await exists(SIDECAR);
 console.log(`  [${haveSidecar ? 'PASS' : ' -- '}] payload prose sidecar` +
-  `  — ${haveSidecar ? 'public/data/quiz_89R.es.json' : 'absent, so es/ is held back'}`);
+  `  — ${haveSidecar ? `public/data/quiz_${SESSION}.es.json` : 'absent, so es/ is held back'}`);
 
 const emitSpanish = unapproved.length === 0 && (haveSidecar || force);
 
@@ -122,7 +123,7 @@ const missingKeys = new Set();
  * introduces {n} into a slot that did not have it needs no change here.
  */
 const payload = JSON.parse(
-  await readFile(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'),
+  await readFile(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'),
 );
 const VARS = {
   n: payload.items.length,
@@ -262,11 +263,11 @@ function structuredData(locale) {
       '@type': 'Dataset',
       '@id': `${SITE}/#dataset`,
       name: locale === 'es'
-        ? 'Votaciones nominales de la Cámara de Representantes de Texas, 89.ª Legislatura (89R)'
-        : 'Texas House of Representatives roll-call votes, 89th Legislature (89R)',
+        ? `Votaciones nominales de la Cámara de Representantes de Texas, 89.ª Legislatura (${SESSION})`
+        : `Texas House of Representatives roll-call votes, 89th Legislature (${SESSION})`,
       description: locale === 'es'
-        ? `${payload.provenance.houseItemsTotal} votaciones nominales de la Cámara de Texas de la sesión 89R, con ${payload.provenance.journalSourced} conciliadas con el Diario oficial de la Cámara y la fuente indicada en cada voto. Incluye los votos individuales de los tres candidatos, las valencias partidistas calculadas y la regla de selección publicada.`
-        : `${payload.provenance.houseItemsTotal} Texas House roll-call votes from the 89R session, ${payload.provenance.journalSourced} of them reconciled against the official House Journal with the source recorded per vote. Includes individual member votes for the three candidates, computed partisan valences, and the published selection rule.`,
+        ? `${payload.provenance.houseItemsTotal} votaciones nominales de la Cámara de Texas de la sesión ${SESSION}, con ${payload.provenance.journalSourced} conciliadas con el Diario oficial de la Cámara y la fuente indicada en cada voto. Incluye los votos individuales de los tres candidatos, las valencias partidistas calculadas y la regla de selección publicada.`
+        : `${payload.provenance.houseItemsTotal} Texas House roll-call votes from the ${SESSION} session, ${payload.provenance.journalSourced} of them reconciled against the official House Journal with the source recorded per vote. Includes individual member votes for the three candidates, computed partisan valences, and the published selection rule.`,
       url: `${SITE}/`,
       // CC0, and now it is actually granted rather than assumed.
       //
@@ -292,7 +293,7 @@ function structuredData(locale) {
       distribution: [{
         '@type': 'DataDownload',
         encodingFormat: 'application/json',
-        contentUrl: `${SITE}/data/quiz_89R.json`,
+        contentUrl: `${SITE}/data/quiz_${SESSION}.json`,
       }],
     },
   ];
@@ -619,9 +620,9 @@ say(missingKeys.size === 0, 'every data-i18n key exists in copy.json',
   // The district lines carry the member's name. That is the whole finding behind
   // these pages existing: people search a person, not a district number, and
   // before the race pages no name on this site appeared anywhere crawlable.
-  const members = JSON.parse(await readFile(resolve(ROOT, 'public/data/members_89R.json'), 'utf8'));
+  const members = JSON.parse(await readFile(resolve(ROOT, `public/data/members_${SESSION}.json`), 'utf8'));
   const nameOf = new Map(Object.values(members.members).map((m) => [m.d, m.n]));
-  const quiz = JSON.parse(await readFile(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+  const quiz = JSON.parse(await readFile(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
   const billOf = new Map(quiz.items.filter((i) => i.headline)
     .map((i) => [i.billId.toLowerCase().replace(/\s+/g, '-'), i]));
 
@@ -740,7 +741,7 @@ if (!emitSpanish) {
   console.log(
     '\n  Spanish page NOT emitted.\n' +
     (unapproved.length ? '    · strings still unapproved\n' : '') +
-    (!haveSidecar ? '    · public/data/quiz_89R.es.json is missing, so payload prose\n' +
+    (!haveSidecar ? `    · public/data/quiz_${SESSION}.es.json is missing, so payload prose\n` +
                     '      (comparatorRule, candidateProvenance, outcome caveats, the 67\n' +
                     '      official captions) would render in English under Spanish headings\n' : '') +
     // --force overrides the SIDECAR check only (see emitSpanish above); it has

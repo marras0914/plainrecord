@@ -36,11 +36,12 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const q = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
-const M = JSON.parse(readFileSync(resolve(ROOT, 'public/data/members_89R.json'), 'utf8'));
-const Z = JSON.parse(readFileSync(resolve(ROOT, 'public/data/zips_89R.json'), 'utf8'));
+const q = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
+const M = JSON.parse(readFileSync(resolve(ROOT, `public/data/members_${SESSION}.json`), 'utf8'));
+const Z = JSON.parse(readFileSync(resolve(ROOT, `public/data/zips_${SESSION}.json`), 'utf8'));
 
 const at = {};
 M.itemOrder.forEach((id, i) => { at[id] = i; });

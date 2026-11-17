@@ -30,6 +30,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, esc, loadFaces, document_ } from './_page_shell.mjs';
 import { ft, tx, KEY, requireApprovedFaith, FAITH_PATHS, TRADITION_SLUG, traditionPath, houseVotesPath, areaKey } from './_faith_copy.mjs';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -314,7 +315,7 @@ function traditionPage(lang, t) {
 // ---------------------------------------------------------------------------
 
 const HV = new Map(data.houseVotes.map((h) => [h.traditionId, h]));
-const VOTES_URL = '/data/votes_89R.json';
+const VOTES_URL = `/data/votes_${SESSION}.json`;
 const listBills = (bills) => bills.join(', ');
 const pct = (a, n) => (n ? Math.round((100 * a) / n) : 0);
 

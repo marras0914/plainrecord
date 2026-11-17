@@ -46,7 +46,8 @@ import { ELECTION, readable, readableRange, stillCurrent } from './election';
  * moment it ships; scripts/build_artifact.mjs rewrites it to the absolute
  * rightnleft.com URL for the single-file share build, which has no /data/ dir.
  */
-const PAYLOAD_URL = '/data/quiz_89R.json';
+// The payload names its own session, so this link follows session.json.
+const PAYLOAD_URL = `/data/quiz_${DATA.session}.json`;
 
 // ---------------------------------------------------------------------------
 // Diverging ramp, in OKLab so blue→grey→red does not pass through mud

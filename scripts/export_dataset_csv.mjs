@@ -29,6 +29,7 @@
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = process.argv[2];
@@ -36,8 +37,8 @@ if (!out) { console.error('usage: node scripts/export_dataset_csv.mjs <out-dir>'
 mkdirSync(out, { recursive: true });
 
 const load = (p) => JSON.parse(readFileSync(resolve(ROOT, p), 'utf8'));
-const votes = load('public/data/votes_89R.json');
-const zips = load('public/data/zips_89R.json');
+const votes = load(`public/data/votes_${SESSION}.json`);
+const zips = load(`public/data/zips_${SESSION}.json`);
 const places = load('data/district_places_2020.json');
 
 const fail = (msg) => { console.error(`\n  REFUSED: ${msg}\n`); process.exit(1); };
@@ -97,5 +98,5 @@ for (const [d, p] of Object.entries(places.districts)) {
 csv('district_places.csv', ['district', 'place', 'place_type', 'residents_2020', 'share_of_district', 'share_of_place'], prows);
 csv('district_counties.csv', ['district', 'county', 'county_fips', 'residents_2020', 'share_of_district'], crows);
 
-copyFileSync(resolve(ROOT, 'public/data/votes_89R.json'), resolve(out, 'votes_89R.json'));
-console.log(`  votes_89R.json           copied unchanged\n\n  wrote ${out}`);
+copyFileSync(resolve(ROOT, `public/data/votes_${SESSION}.json`), resolve(out, `votes_${SESSION}.json`));
+console.log(`  votes_${SESSION}.json           copied unchanged\n\n  wrote ${out}`);

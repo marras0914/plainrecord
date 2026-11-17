@@ -52,11 +52,12 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
 import { SITE, RESULTS_URL, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
-const payload = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
-const sidecar = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.es.json'), 'utf8'));
+const payload = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
+const sidecar = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.es.json`), 'utf8'));
 
 const faces = loadFaces(ROOT);
 

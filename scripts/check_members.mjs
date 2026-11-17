@@ -16,6 +16,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -25,12 +26,12 @@ const say = (ok, label, detail = '') => {
   console.log(`  [${ok ? 'PASS' : 'FAIL'}] ${label}${detail ? '  — ' + detail : ''}`);
 };
 
-const payload = JSON.parse(readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'));
+const payload = JSON.parse(readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'));
 let members;
 try {
-  members = JSON.parse(readFileSync(resolve(ROOT, 'public/data/members_89R.json'), 'utf8'));
+  members = JSON.parse(readFileSync(resolve(ROOT, `public/data/members_${SESSION}.json`), 'utf8'));
 } catch {
-  console.error('\n  public/data/members_89R.json not found — run `npm run data:members`.\n');
+  console.error('\n  public/data/members_' + SESSION + '.json not found — run `npm run data:members`.\n');
   process.exit(1);
 }
 

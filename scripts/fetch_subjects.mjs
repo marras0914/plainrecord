@@ -25,10 +25,11 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { SUBJECT_ROOT_MAP, subjectRoot } from '../categorize.ts';
+import { SESSION } from './session.mjs';
 
 const CACHE = 'data/cache/subjects';
-const OUT = 'data/bill_subjects_89R.json';
-const PAYLOAD = 'public/data/quiz_89R.json';
+const OUT = `data/bill_subjects_${SESSION}.json`;
+const PAYLOAD = `public/data/quiz_${SESSION}.json`;
 const refresh = process.argv.includes('--refresh');
 
 const slug = (billId) => {
@@ -70,7 +71,7 @@ for (const [n, it] of payload.items.entries()) {
 
   if (existsSync(file) && !refresh) { raw = readFileSync(file, 'utf8'); cached++; }
   else {
-    const url = `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=${s}`;
+    const url = `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=${SESSION}&Bill=${s}`;
     try {
       const res = await fetch(url);
       if (res.ok) { raw = await res.text(); writeFileSync(file, raw, 'utf8'); fetched++; }

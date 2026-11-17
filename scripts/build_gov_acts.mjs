@@ -39,10 +39,11 @@
  */
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { SESSION } from './session.mjs';
 
 const CACHE = 'data/cache/subjects';
-const PAYLOAD = 'public/data/quiz_89R.json';
-const OUT = 'data/gov_acts_89R.json';
+const PAYLOAD = `public/data/quiz_${SESSION}.json`;
+const OUT = `data/gov_acts_${SESSION}.json`;
 
 const slug = (billId) => {
   const m = /^([A-Z]+)\s*(\d+)$/.exec(billId.trim());
@@ -74,7 +75,7 @@ for (const it of payload.items) {
   const f = `${CACHE}/${slug(it.billId)}.html`;
   if (!existsSync(f)) { tally.noPage++; continue; }
   const t = text(readFileSync(f, 'utf8'));
-  const url = `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=${slug(it.billId)}`;
+  const url = `https://capitol.texas.gov/BillLookup/History.aspx?LegSess=${SESSION}&Bill=${slug(it.billId)}`;
 
   let kind = null, when = null;
   if (/Vetoed by the Governor/i.test(t)) {

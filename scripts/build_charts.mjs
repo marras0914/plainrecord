@@ -24,14 +24,15 @@ import { SITE, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { crossingRates, gapBins, histogramSvg, dotPlotSvg, loadTopo, mapSvg } from './_charts.mjs';
 import { billPath } from './build_bill_pages.mjs';
 import { cardsFresh, chartsCard, chartDownload } from './_share_cards.mjs';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
 const read = (p) => JSON.parse(readFileSync(resolve(ROOT, p), 'utf8'));
 
-const bulk = read('public/data/votes_89R.json');
-const roster = read('public/data/members_89R.json');
-const quiz = read('public/data/quiz_89R.json');
+const bulk = read(`public/data/votes_${SESSION}.json`);
+const roster = read(`public/data/members_${SESSION}.json`);
+const quiz = read(`public/data/quiz_${SESSION}.json`);
 const topo = loadTopo(resolve(ROOT, 'public/data/boundaries_tx.topo.json'));
 
 // --- the numbers every caption quotes ---------------------------------------
@@ -188,7 +189,7 @@ const COPY = {
     more: [
       [`${SITE}/distritos`, 'Encuentre a su representante por código postal'],
       ...quiz.items.filter((i) => i.headline).map((it) => {
-        const es = read('public/data/quiz_89R.es.json').items[it.billId].label;
+        const es = read(`public/data/quiz_${SESSION}.es.json`).items[it.billId].label;
         return [`${SITE}/${billPath(it.billId, 'es')}`, `${it.billId}, ${es}: el voto de cada integrante`];
       }),
     ],

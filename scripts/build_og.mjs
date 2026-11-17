@@ -33,6 +33,7 @@
 import { readFile, writeFile, unlink, stat } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(HERE, '..');
@@ -62,7 +63,7 @@ try {
 // ---------------------------------------------------------------------------
 
 const payload = JSON.parse(
-  await readFile(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'),
+  await readFile(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'),
 );
 const copy = JSON.parse(await readFile(resolve(ROOT, 'i18n/copy.json'), 'utf8'));
 

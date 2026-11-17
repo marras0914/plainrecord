@@ -21,7 +21,7 @@
 
 import { scoreLegislator, scoreBand, type VoteItem, type Answer } from '../scoring';
 import { renderScoreBand } from './verdict';
-import type { Adapted } from './quiz-data';
+import { DATA, type Adapted } from './quiz-data';
 
 /**
  * Where the member record lives. Same shape as PAYLOAD_URL in main.ts: relative
@@ -32,7 +32,7 @@ import type { Adapted } from './quiz-data';
  * an absolute rightnleft.com URL. This constant needs the same treatment or the
  * lookup silently does nothing in the artifact.
  */
-export const MEMBERS_URL = '/data/members_89R.json';
+export const MEMBERS_URL = `/data/members_${DATA.session}.json`;
 
 export interface Member {
   /** District number, 1 to 150. */
@@ -258,7 +258,7 @@ export function crossings(
 // name.
 
 /** Same build_artifact.mjs caveat as MEMBERS_URL — it must be made absolute. */
-export const ZIPS_URL = '/data/zips_89R.json';
+export const ZIPS_URL = `/data/zips_${DATA.session}.json`;
 
 /**
  * A ZIP maps either to one district, stored as a bare number, or to several,

@@ -19,16 +19,17 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { SESSION } from './session.mjs';
 
 const ROOT = new URL('..', import.meta.url);
 const at = (p) => new URL(p, ROOT);
 
 /** Everything whose change could change a pixel of a card or a download. */
 export const CARD_INPUTS = [
-  'public/data/votes_89R.json',
-  'public/data/quiz_89R.json',
-  'public/data/quiz_89R.es.json',
-  'public/data/members_89R.json',
+  `public/data/votes_${SESSION}.json`,
+  `public/data/quiz_${SESSION}.json`,
+  `public/data/quiz_${SESSION}.es.json`,
+  `public/data/members_${SESSION}.json`,
   'public/data/boundaries_tx.topo.json',
   'scripts/_charts.mjs',
   'scripts/_page_shell.mjs',

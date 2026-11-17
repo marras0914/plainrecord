@@ -10,7 +10,7 @@ dist/
 
 # Working data (scripts/paths.ts WORK_DIR). Build inputs, not deliverables:
 # tx_bills_89R.json is 35 MB and tx_reconcile_89R.json is 16 MB, against a 53 KB
-# quiz payload. Only public/data/quiz_89R.json is committed, because only it ships.
+# quiz payload. What ships is in public/data/ and listed in scripts/paths.ts.
 #
 # Two details are load-bearing here:
 #   - the leading slash: a bare `data/` matches at ANY depth, which would also

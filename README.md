@@ -633,7 +633,7 @@ vite so the pages cannot drift from the payload they quote:
 | --- | --- | --- |
 | `build_factsheet.mjs` | `/hoja`, `/fact-sheet` | plus a PDF printed from the page itself, so the handout cannot say something the page does not |
 | `build_races.mjs` | `/race/*`, `/contienda/*` | one page per RACE, not per candidate |
-| `build_district_pages.mjs` | `/district/{n}`, `/distrito/{n}` | ten districts, a pilot |
+| `build_district_pages.mjs` | `/district/{n}`, `/distrito/{n}` | all 150 districts, the 89th's members |
 
 They share `scripts/_page_shell.mjs`, which exists because the second generator
 would otherwise have begun as a copy of the first and two copies of a stylesheet
@@ -648,14 +648,14 @@ be three rich pages for Democrats and three empty ones for Republicans. A race
 page carries both names in its title, so it is findable either way, and the
 asymmetry becomes the thing the page explains.
 
-**The ten districts were chosen by a party-blind rule**, not by hand: the
-district holding most people in the downtown ZIP of the five largest Texas
-cities, plus the five members who most often voted against their own party. It
-came out 4 Democrats and 6 Republicans on its own.
+**Every district has a page** (150 since 17 Nov 2026, one per member of the
+89th, including members who have left the House since). The pages began as a
+ten-district pilot chosen by a party-blind rule: the district holding most
+people in the downtown ZIP of the five largest Texas cities, plus the five
+members who most often voted against their own party.
 
 `build_locales.mjs` finds the district pages by reading the directory rather
-than from a list, so growing the pilot needs no edit there. The sitemap went
-from 4 URLs to 30.
+than from a list, so the set of pages needs no edit there.
 
 **These three carry Spanish that `i18n:check` cannot see**, because their copy
 is inline rather than in `i18n/copy.json`. Each says so in its own header. An
@@ -683,9 +683,11 @@ is also one of the three candidates, `verify_site.mjs` scores her through both
 code paths and asserts the same number comes out — the district panel and the
 candidate cards make the same claim or the build fails.
 
-Four members who cast votes in 89R are **excluded**: they are in the roll calls
-but not in Open States' *current* roster, and the retired roster 403s. The panel
-says so on screen rather than quietly rounding 149 up to 150.
+**Nobody is excluded** since 17 Nov 2026: the lookup is the 89th's House, all
+150 members, named from Open States' current roster or, for members who have
+left since, its retired records (openstates/people). Earlier builds excluded
+first four voters (three were senators counted by mistake), then one, and the
+panel said so on screen; it still does if the data ever excludes someone.
 
 A member with zero of the 67 votes reports an absence, not a band. Without that,
 the estimator files them under "no clearer than chance", which reads as a

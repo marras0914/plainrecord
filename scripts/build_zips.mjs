@@ -87,6 +87,7 @@ import { createInterface } from 'node:readline';
 import { inflateRawSync, createInflateRaw } from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { Readable } from 'node:stream';
+import { SESSION } from './session.mjs';
 
 const CACHE = 'data/cache';
 const ZCTA_SLICE = `${CACHE}/tx_block_zcta.psv`;
@@ -103,9 +104,9 @@ const flag = (name, fallback) => {
   const i = process.argv.indexOf('--' + name);
   return i > 0 && process.argv[i + 1] ? process.argv[i + 1] : fallback;
 };
-const OUT = flag('out', 'public/data/zips_89R.json');
+const OUT = flag('out', `public/data/zips_${SESSION}.json`);
 const BEF_TXT = flag('bef', BEF_TXT_DEFAULT);
-const MEMBERS = 'public/data/members_89R.json';
+const MEMBERS = `public/data/members_${SESSION}.json`;
 
 const ZCTA_URL =
   'https://www2.census.gov/geo/docs/maps-data/data/rel2020/zcta520/tab20_zcta520_tabblock20_natl.txt';

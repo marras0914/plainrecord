@@ -25,6 +25,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const ROSTER_URL = 'https://data.openstates.org/people/current/tx.csv';
@@ -45,10 +46,10 @@ console.log('');
 // ---------------------------------------------------------------------------
 
 const ingest = JSON.parse(
-  readFileSync(resolve(ROOT, 'data/tx_bills_89R.json'), 'utf8'),
+  readFileSync(resolve(ROOT, `data/tx_bills_${SESSION}.json`), 'utf8'),
 );
 const payload = JSON.parse(
-  readFileSync(resolve(ROOT, 'public/data/quiz_89R.json'), 'utf8'),
+  readFileSync(resolve(ROOT, `public/data/quiz_${SESSION}.json`), 'utf8'),
 );
 say(Array.isArray(ingest) && ingest.length > 0, 'read the session ingest',
   `${ingest.length} items`);
@@ -169,13 +170,13 @@ const notSitting = [...voteCount.keys()].filter((id) => !currentLower.has(id));
 
 // Party as recorded for the session (data/tx_roster_89R.json), not today's:
 // a member who switched parties since is shown with the party they voted as.
-const sessionParty = JSON.parse(readFileSync(resolve(ROOT, 'data/tx_roster_89R.json'), 'utf8')).party;
+const sessionParty = JSON.parse(readFileSync(resolve(ROOT, `data/tx_roster_${SESSION}.json`), 'utf8')).party;
 
 // The last published file, as a fallback for a voter neither roster names (a
 // House member who moved to the Senate is current, but not in the House and
 // not retired). Used only by id, and said when used.
 const previous = (() => {
-  try { return JSON.parse(readFileSync(resolve(ROOT, 'public/data/members_89R.json'), 'utf8')); } catch { return null; }
+  try { return JSON.parse(readFileSync(resolve(ROOT, `public/data/members_${SESSION}.json`), 'utf8')); } catch { return null; }
 })();
 const previousById = new Map([
   ...(previous?.members ?? []).map((m) => [m.id, { name: m.n, district: m.d, until: m.left ?? null }]),
@@ -404,11 +405,11 @@ const out = {
   members,
 };
 
-const target = resolve(ROOT, 'public/data/members_89R.json');
+const target = resolve(ROOT, `public/data/members_${SESSION}.json`);
 const json = JSON.stringify(out);
 writeFileSync(target, json + '\n', 'utf8');
 
-say(true, 'wrote public/data/members_89R.json', `${(json.length / 1024).toFixed(1)} KB raw`);
+say(true, `wrote public/data/members_${SESSION}.json`, `${(json.length / 1024).toFixed(1)} KB raw`);
 console.log('');
 console.log(`  ${members.length} members · ${districts.size} districts · ` +
   `${full} with all ${itemOrder.length} votes · median ${median}`);

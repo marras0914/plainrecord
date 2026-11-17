@@ -29,11 +29,12 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve, join } from 'node:path';
+import { SESSION } from './session.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
 const CANONICAL_ORIGIN = 'https://rightnleft.com';
-const CANONICAL_PAYLOAD = `${CANONICAL_ORIGIN}/data/quiz_89R.json`;
+const CANONICAL_PAYLOAD = `${CANONICAL_ORIGIN}/data/quiz_${SESSION}.json`;
 
 if (!existsSync(join(DIST, 'index.html'))) {
   console.error('\n  dist/index.html not found — run `npm run build` first.\n');
