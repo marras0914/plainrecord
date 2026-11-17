@@ -148,7 +148,7 @@ export function buildFaithPayload() {
     (verses.books as Record<string, string>)[code] ??= BOOKS.find((b) => b.code === code)!.en;
   }
   return {
-    about: 'What five Christian traditions and three Jewish movements officially say, and what the Texas and national party platforms say, on eight issues, with sources; and, where a church took a side on specific Texas bills, how each party in the Texas House voted on them. Not yet reviewed by members of the traditions described. CC0.',
+    about: 'What five Christian traditions and three Jewish movements officially say, and what the Texas and national party platforms say, on eight issues, with sources; and, where a church took a side on specific Texas bills, how each party in the Texas House voted on them. Not reviewed by members of the traditions described; every quote is checked by a program against a saved copy of its source. CC0.',
     license: 'CC0-1.0',
     source: 'https://rightnleft.com/faith/methodology',
     reviewed: { entries: all.filter((e) => e.review.length > 0).length, of: all.length },

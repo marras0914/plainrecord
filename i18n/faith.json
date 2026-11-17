@@ -18,13 +18,13 @@
     "status": "ok"
   },
   "notice": {
-    "en": "<b>Not yet reviewed.</b> No one from the traditions on these pages has reviewed what they say. Every summary is this site's own, and each one links to the full text so you can check it.",
-    "es": "<b>Todavía sin revisar.</b> Nadie de las tradiciones que aparecen en estas páginas ha revisado lo que dicen. Cada resumen es de este sitio, y cada uno lleva al texto completo para que usted lo verifique.",
+    "en": "<b>How these pages are checked.</b> Every summary is this site’s own; no one from the traditions reviews them. A program checks every quote against a saved copy of its source, every summary links to the full text, and every placement follows the rules on the {methodHtml}. A better source corrects anything here.",
+    "es": "<b>Cómo se verifican estas páginas.</b> Cada resumen es de este sitio; nadie de las tradiciones los revisa. Un programa verifica cada cita contra una copia guardada de su fuente, cada resumen lleva al texto completo y cada postura asignada sigue las reglas de la {methodHtml}. Una mejor fuente corrige cualquier cosa de aquí.",
     "status": "ok"
   },
-  "reviewedCount": {
-    "en": "Entries reviewed so far: {n} of {of}.",
-    "es": "Entradas revisadas hasta ahora: {n} de {of}.",
+  "notice.method": {
+    "en": "methodology page",
+    "es": "página de metodología",
     "status": "ok"
   },
   "methodLink": {
@@ -178,13 +178,13 @@
     "status": "ok"
   },
   "me.h2review": {
-    "en": "Not yet reviewed",
-    "es": "Todavía sin revisar",
+    "en": "How it is checked",
+    "es": "Cómo se verifica",
     "status": "ok"
   },
   "me.review": {
-    "en": "The plan was to publish only after people from several traditions, from conservative and progressive congregations, had checked that their own tradition is described fairly. Reviewers have not been found yet, and the pages are published without them, saying so on every page. Reviewers will be named here as they sign off, unless they ask not to be.",
-    "es": "El plan era publicar solo después de que personas de varias tradiciones, de congregaciones conservadoras y progresistas, verificaran que su propia tradición está descrita con justicia. Todavía no se han encontrado revisores, y las páginas se publican sin ellos, y lo dicen en cada página. Los revisores aparecerán aquí a medida que den su visto bueno, salvo que pidan no aparecer.",
+    "en": "No one from the traditions reviews these pages. Outside reviewers were planned and then dropped in November 2026. Instead, every check is one a reader can repeat: a program matches each quote and each bill name against a saved copy of its source, each summary links to the full text, each placement follows a rule written on this page, and the data and the code are public.",
+    "es": "Nadie de las tradiciones revisa estas páginas. Se habían previsto revisores externos, pero se descartaron en noviembre de 2026. En su lugar, cada verificación es una que cualquier lector puede repetir: un programa compara cada cita y cada nombre de proyecto de ley con una copia guardada de su fuente, cada resumen lleva al texto completo, cada postura asignada sigue una regla escrita en esta página, y los datos y el código son públicos.",
     "status": "ok"
   },
   "me.corrections": {
