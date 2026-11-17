@@ -158,8 +158,10 @@ How it is applied:
 - Dates: CCAR from the text, its convention header or URL; RA from the
   resolution's closing "Passed by..." line where there is one (the page's own
   date is often the June 2011 posting date).
-- Known costs, for Marco: titles like "Immigration to Israel" are listed
-  under immigration; the issue name "Creation care and the environment" is
+- Titles about another country's immigration ("Immigration to Israel",
+  "Absorption of Ethiopian Immigrants", "Immigration to Canada") are not
+  listed under immigration (Marco, 17 Nov 2026).
+- Known costs, for Marco: the issue name "Creation care and the environment" is
   Christian wording. "Global warming" was added to the environment rule on
   16 Nov 2026 (Marco), which made the SBC's 2007 "On Global Warming" its
   current environment statement.
