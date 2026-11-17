@@ -1,0 +1,81 @@
+# Weekly check of the floor votes on bills the faith traditions named
+# (faith_floor_votes.ts, decided 17 Nov 2026). It changes nothing in the repo:
+# when the votes change, or the script refuses to run (a named bill got a roll
+# call that FLOOR_BILLS does not list), it opens an issue, or comments on the
+# open one, and the refresh is done by hand: `npm run data:faith:votes`, then
+# `npm run data:faith`, review, PR.
+#
+# Needs the repository secret DATA_GOV_API_KEY (an api.data.gov key).
+# Watches the 119th Congress only; it ends 3 Jan 2027.
+
+name: Floor votes check
+
+on:
+  schedule:
+    - cron: '0 14 * * 1' # Mondays, 14:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    # The public mirror carries this file too; it has no key and should not run it.
+    if: github.repository == 'marras0914/rightnleft'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Fetch the floor votes
+        id: fetch
+        continue-on-error: true
+        env:
+          DATA_GOV_API_KEY: ${{ secrets.DATA_GOV_API_KEY }}
+        run: |
+          set -o pipefail
+          npm run data:faith:votes 2>&1 | tee fetch.log
+
+      - name: Compare with the committed votes
+        id: diff
+        if: steps.fetch.outcome == 'success'
+        run: node scripts/floor_votes_diff.mjs | tee diff.md
+
+      - name: Open or update the issue
+        if: steps.fetch.outcome != 'success' || steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FAILED: ${{ steps.fetch.outcome != 'success' }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Floor votes need a refresh"
+          {
+            if [ "$FAILED" = "true" ]; then
+              echo "The weekly floor-votes check failed. If a bill a tradition named got a roll call, add it to FLOOR_BILLS in faith_floor_votes.ts by the rule there; if the key or an API failed, rerun the workflow."
+              echo
+              echo '```'
+              grep -E 'fetch_floor_votes:|Error' fetch.log | head -n 20
+              echo '```'
+            else
+              echo "The floor votes changed since the last commit:"
+              echo
+              cat diff.md
+              echo
+              echo "Refresh: \`npm run data:faith:votes\`, then \`npm run data:faith\`, review, PR."
+            fi
+            echo
+            echo "Run: $RUN_URL"
+          } > body.md
+          open=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number')
+          if [ -n "$open" ]; then
+            gh issue comment "$open" --body-file body.md
+          else
+            gh issue create --title "$title" --body-file body.md
+          fi
