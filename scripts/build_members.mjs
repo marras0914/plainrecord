@@ -80,29 +80,14 @@ function parseCsv(text) {
   return rows;
 }
 
-// The live roster is whoever sits NOW, not who sat in the 89th. It has already
-// drifted (Open States lists HD-1's member as leaving on 21 Sep 2026, so a
-// rebuild would drop that district's page), and from 12 Jan 2027 it is the
-// 90th Legislature: a rebuild would seat freshmen with empty 89th records.
-// So the 89th's file is frozen as published (17 Nov 2026, Marco): a rebuild
-// needs --roster <file> or an explicit --live, and --live is refused once the
-// 90th is sworn in. The 90th gets its own roster and file.
-const SWORN_IN_90TH = '2027-01-12';
-if (!rosterFile) {
-  if (!argv.includes('--live')) {
-    console.error(
-      '\n  members_89R.json is frozen: the live Open States roster is no longer the 89th Legislature\'s.\n' +
-        '  Rebuild from a saved roster:  npm run data:members -- --roster path/to/tx.csv\n' +
-        '  or, before 12 Jan 2027 and knowing it changes who has a page:  npm run data:members -- --live\n',
-    );
-    process.exit(1);
-  }
-  if (new Date().toISOString().slice(0, 10) >= SWORN_IN_90TH) {
-    console.error(`\n  --live refused: since ${SWORN_IN_90TH} the live roster is the 90th Legislature's, not the 89th's.\n`);
-    process.exit(1);
-  }
-}
-
+// WHO IS IN THIS FILE: everyone who cast House votes in the 89th, one per
+// district, whoever holds the seat now (Marco, 17 Nov 2026). The live roster
+// alone is whoever sits NOW: it had already dropped HD-93 (left 29 Jul 2026)
+// and HD-1 (left 21 Sep 2026), and from 12 Jan 2027 it is the 90th
+// Legislature's. So a member is taken from the current roster if still there
+// and from Open States' retired records otherwise, and only if they voted in
+// this session. That makes the result the same whenever it is built: a
+// freshman of the 90th cast no 89th vote and is never in it.
 const rosterText = rosterFile
   ? readFileSync(resolve(ROOT, rosterFile), 'utf8')
   : await (async () => {
@@ -175,7 +160,27 @@ for (const it of houseItems) {
   }
 }
 
-const unnamed = [...voteCount.keys()].filter((id) => !named.has(id));
+// The House as it is now. A session voter missing from it has left the House
+// (or moved to the Senate) and is named from the retired records below.
+const currentLower = new Map(roster
+  .filter((r) => r[ix.current_chamber] === 'lower' && Number.isFinite(Number(r[ix.current_district])))
+  .map((r) => [r[ix.id], { name: r[ix.name], district: Number(r[ix.current_district]) }]));
+const notSitting = [...voteCount.keys()].filter((id) => !currentLower.has(id));
+
+// Party as recorded for the session (data/tx_roster_89R.json), not today's:
+// a member who switched parties since is shown with the party they voted as.
+const sessionParty = JSON.parse(readFileSync(resolve(ROOT, 'data/tx_roster_89R.json'), 'utf8')).party;
+
+// The last published file, as a fallback for a voter neither roster names (a
+// House member who moved to the Senate is current, but not in the House and
+// not retired). Used only by id, and said when used.
+const previous = (() => {
+  try { return JSON.parse(readFileSync(resolve(ROOT, 'public/data/members_89R.json'), 'utf8')); } catch { return null; }
+})();
+const previousById = new Map([
+  ...(previous?.members ?? []).map((m) => [m.id, { name: m.n, district: m.d, until: m.left ?? null }]),
+  ...(previous?.retired ?? []).map((r) => [r.id, { name: r.name, district: r.district, until: r.until }]),
+]);
 
 /**
  * Name the former members, from the retired roster in openstates/people.
@@ -225,7 +230,13 @@ async function nameRetired(ids) {
     const uuid = id.replace('ocd-person/', '');
     const file = files.get(uuid);
     if (!file) {
-      say(false, `no retired record for ${uuid}`);
+      const prev = previousById.get(id);
+      if (prev) {
+        say(true, `${prev.name} has no retired record; named from the last published file`);
+        out.push({ id, name: prev.name, district: prev.district, until: prev.until, voted: voteCount.get(id) ?? 0 });
+      } else {
+        say(false, `no retired record for ${uuid}`);
+      }
       continue;
     }
     let text;
@@ -262,10 +273,11 @@ async function nameRetired(ids) {
   return out;
 }
 
-const retired = await nameRetired(unnamed);
+const retired = await nameRetired(notSitting);
 for (const r of retired) {
   console.log(`  ${r.name} · HD ${r.district} · ${r.voted} votes · left ${r.until}`);
 }
+const unnamed = notSitting.filter((id) => !retired.some((r) => r.id === id));
 
 // The check that would have caught this. A House chamber is 150 seats, so the
 // number of distinct people casting House votes in one session cannot be far
@@ -273,18 +285,32 @@ for (const r of retired) {
 say(voteCount.size <= 165, 'session voters are a House-sized group',
   `${voteCount.size} distinct voters, chamber is ${roster.filter((r) => r[ix.district]).length ? '150 seats' : '150 seats'}`);
 
-const house = roster
-  .filter((r) => r[ix.current_chamber] === 'lower')
-  .map((r) => ({
-    id: r[ix.id],
-    name: r[ix.name],
-    district: Number(r[ix.current_district]),
-    party: (r[ix.current_party] || '?').charAt(0).toUpperCase(),
-  }))
-  .filter((m) => Number.isFinite(m.district))
+const currentParty = new Map(roster.map((r) => [r[ix.id], (r[ix.current_party] || '?').charAt(0).toUpperCase()]));
+const house = [...voteCount.keys()]
+  .map((id) => {
+    const cur = currentLower.get(id);
+    const gone = retired.find((r) => r.id === id);
+    const who = cur ?? gone;
+    if (!who) return null;
+    // The name already published for the session wins over today's roster: a
+    // member who changed names since (HD-87, "Caroline Fairly" in the 89th,
+    // "Caroline Dunmoyer" in Open States by Nov 2026) keeps the name they
+    // served and voted under, matching the bill pages and votes_89R.json.
+    const publishedName = previousById.get(id)?.name;
+    if (publishedName && publishedName !== who.name) console.log(`  name kept as published: ${publishedName} (roster now says ${who.name})`);
+    return {
+      id,
+      name: publishedName ?? who.name,
+      district: who.district,
+      party: sessionParty[id] ?? currentParty.get(id) ?? '?',
+      left: cur ? null : gone.until,
+    };
+  })
+  .filter(Boolean)
   .sort((a, b) => a.district - b.district);
 
-say(house.length > 100, 'found the sitting House', `${house.length} members`);
+say(unnamed.length === 0, 'named every member who voted in the session', `${house.length} of ${voteCount.size}`);
+say(house.length === 150, 'one member for each of the 150 districts', `${house.length} members`);
 
 // One character per vote. `.` is "no vote recorded", which is a real and common
 // state: only 13 of 149 members voted on all 67. The estimator already drops a
@@ -302,6 +328,8 @@ const members = house.map((m) => {
     id: m.id,
     v,
     voted: [...v].filter((c) => c !== '.').length,
+    // The date they left the House, for a member who no longer holds the seat.
+    ...(m.left ? { left: m.left } : {}),
   };
 });
 
@@ -320,9 +348,9 @@ const median = coverage[Math.floor(coverage.length / 2)];
 const out = {
   _meta: {
     purpose:
-      'How each sitting Texas House member voted on the same 67 items the quiz ' +
-      'at rightnleft.com asks about. Built by scripts/build_members.mjs; do not ' +
-      'hand-edit.',
+      'How each member of the Texas House in the 89th Legislature (2025) voted on ' +
+      `the same ${itemOrder.length} items the quiz at rightnleft.com asks about, one per district. ` +
+      'Built by scripts/build_members.mjs; do not hand-edit.',
     votes:
       'Each member\'s `v` is one character per item, in `itemOrder`: y = voted ' +
       'Yea, n = voted Nay, . = no vote recorded. `voted` counts the non-dot ' +
@@ -331,19 +359,13 @@ const out = {
     // Written for one or for many, because the count is data rather than a
     // constant and a note reading "1 person ... are absent" is the kind of
     // seam that tells a reader the file was generated and not checked.
-    unnamed: (() => {
-      const n = unnamed.length;
-      const most = Math.max(...unnamed.map((id) => voteCount.get(id)), 0);
-      const who = n === 1
-        ? '1 person cast House votes in this session but is absent from the current roster, having left the House since. They are NOT in this file because they hold no current district.'
-        : `${n} people cast House votes in this session but are absent from the current roster, having left the House since. They are NOT in this file because they hold no current district.`;
-      const scale = n === 1
-        ? `That person cast ${most} votes, so their district will show its current member with a partial record.`
-        : `The largest cast ${most} votes, so a district whose seat changed hands will show its current member with a partial record.`;
-      const named = retired.length
-        ? ` They are named in \`retired\`: ${retired.map((r) => `${r.name} (HD ${r.district}, left ${r.until})`).join('; ')}.`
-        : ' Names come from the retired roster in the openstates/people repository; this build could not reach it.';
-      return `${who} ${scale}${named} That is accurate rather than missing data.`;
+    // Since 17 Nov 2026 (Marco) this is the 89th's House, not today's: a member
+    // who has left since is still the one who cast that district's votes.
+    left: (() => {
+      const gone = members.filter((m) => m.left);
+      return gone.length
+        ? `${gone.length === 1 ? '1 member has' : `${gone.length} members have`} left the House since the session and carry a \`left\` date: ${gone.map((m) => `${m.n} (HD ${m.d}, left ${m.left})`).join('; ')}. They are still the members who cast that district's votes in the 89th.`
+        : 'Every member still holds the seat.';
     })(),
     unnamedCorrection:
       'An earlier build of this file reported four such people and described all ' +
@@ -355,7 +377,8 @@ const out = {
     license: 'CC0-1.0',
     licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
     licenseNote:
-      'Names, districts and parties come from the Open States current roster. ' +
+      'Names and districts come from the Open States current roster, or its retired ' +
+      'records for members who have left; parties are as recorded for the session. ' +
       'The votes are Texas public record. CC0 covers this compilation.',
   },
   session: payload.session,
@@ -372,21 +395,13 @@ const out = {
     namedFromRoster: voteCount.size - unnamed.length,
     unnamedVoters: unnamed.length,
     unnamedVoteCounts: unnamed.map((id) => voteCount.get(id)).sort((a, b) => b - a),
-    sittingHouseMembers: members.length,
+    sessionHouseMembers: members.length,
+    leftSince: members.filter((m) => m.left).length,
     membersVotingOnAllItems: full,
     medianItemsVoted: median,
   },
   itemOrder,
   members,
-  /**
-   * Former House members who voted this session and hold no current district.
-   *
-   * Deliberately NOT in `members`: the lookup answers "who represents this
-   * district now", and a district whose seat changed hands has a current
-   * holder. This block is what lets the page say who cast the rest of that
-   * district's votes instead of only that somebody did.
-   */
-  retired,
 };
 
 const target = resolve(ROOT, 'public/data/members_89R.json');

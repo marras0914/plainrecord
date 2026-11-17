@@ -44,13 +44,13 @@ const SEAT = {
   en: (it, c) => ({
     yea: c.yea, nay: c.nay, noVote: c.noVote, dem: 'Democrats', rep: 'Republicans',
     split: (d, r) => `${d} D · ${r} R`,
-    tip: (m) => `${m.n} (${m.p}, District ${m.d})${m.retired ? ', left the House on 29 July 2026' : ''}`,
+    tip: (m) => `${m.n} (${m.p}, District ${m.d})${m.retired ? `, left the House on ${leftDate(m.retired.until, 'en')}` : ''}`,
     alt: `How all 150 members voted on ${it.billId}, grouped by vote and coloured by party`,
   }),
   es: (it, c) => ({
     yea: c.yea, nay: c.nay, noVote: c.noVote, dem: 'Bancada demócrata', rep: 'Bancada republicana',
     split: (d, r) => `${d} D · ${r} R`,
-    tip: (m) => `${m.n} (${m.p}, Distrito ${m.d})${m.retired ? ', se fue de la Cámara el 29 de julio de 2026' : ''}`,
+    tip: (m) => `${m.n} (${m.p}, Distrito ${m.d})${m.retired ? `, se fue de la Cámara el ${leftDate(m.retired.until, 'es')}` : ''}`,
     alt: `Cómo votaron los 150 integrantes sobre el proyecto ${it.billId}, agrupados por voto y con el color de su partido`,
   }),
 };
@@ -68,7 +68,13 @@ const HEADLINE = payload.items.filter((i) => i.headline);
 if (HEADLINE.length !== 7) throw new Error(`expected 7 headline bills, found ${HEADLINE.length}`);
 
 const sitting = new Set(roster.members.map((m) => m.id));
-const retired = new Map((roster.retired ?? []).map((r) => [r.id, r]));
+// Members of the 89th who have left the House since carry a `left` date in
+// members_89R.json (17 Nov 2026); an older file listed them under `retired`.
+const retired = new Map([
+  ...(roster.retired ?? []).map((r) => [r.id, r]),
+  ...roster.members.filter((m) => m.left).map((m) => [m.id, { name: m.n, district: m.d, until: m.left }]),
+]);
+const leftDate = (iso, lang) => new Date(`${iso}T12:00:00Z`).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const bulkOf = new Map(bulk.items.map((i) => [i.id, i]));
 
 // Defined once in _site_nav.mjs, which the footer also uses; re-exported so the
@@ -147,7 +153,7 @@ const COPY = {
     h2all: 'Every member',
     yea: 'Voted for', nay: 'Voted against', noVote: 'No recorded vote',
     elsewhere: (v) => `${v}, on another vote on this bill`,
-    leftHouse: 'left the House on 29 July 2026',
+    leftHouse: (date) => `left the House on ${date}`,
     h2others: 'The other six bills that drew the most attention',
     h2try: 'See how your own answers compare',
     tryBody: 'The site asks you about these same votes with the party labels hidden, then shows you where you landed next to the members who actually voted.',
@@ -187,7 +193,7 @@ const COPY = {
     h2all: 'Cada integrante',
     yea: 'Votó a favor', nay: 'Votó en contra', noVote: 'Sin voto registrado',
     elsewhere: (v) => `${v}, en otra votación sobre este mismo proyecto`,
-    leftHouse: 'se fue de la Cámara el 29 de julio de 2026',
+    leftHouse: (date) => `se fue de la Cámara el ${date}`,
     h2others: 'Los otros seis proyectos que más atención recibieron',
     h2try: 'Vea cómo se comparan sus propias respuestas',
     tryBody: 'El sitio le pregunta sobre estos mismos votos con las etiquetas de partido ocultas, y después le muestra dónde quedó usted junto a quienes votaron de verdad.',
@@ -257,7 +263,7 @@ function memberItem(r, lang, c, extra = '') {
   const name = r.sitting
     ? `<a href="${SITE}/${districtPath(r.d, lang)}">${esc(r.n)}</a>`
     : `${esc(r.n)}`;
-  const note = r.retired ? `, ${esc(c.leftHouse)}` : '';
+  const note = r.retired ? `, ${esc(c.leftHouse(leftDate(r.retired.until, lang)))}` : '';
   return `<li>${name} <span class="small">${esc(tag)}${note}${extra}</span></li>`;
 }
 
