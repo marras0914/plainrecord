@@ -31,10 +31,13 @@ dns.setDefaultResultOrder('ipv4first');
 const ROOT = new URL('../', import.meta.url);
 const RAW = new URL('data/faith_sources/votes/', ROOT);
 mkdirSync(RAW, { recursive: true });
-const env = Object.fromEntries(readFileSync(new URL('.env.local', ROOT), 'utf8').split(/\r?\n/)
-  .filter((l) => /^[A-Z_]+=/.test(l)).map((l) => { const i = l.indexOf('='); return [l.slice(0, i), l.slice(i + 1).trim().replace(/^"|"$/g, '')]; }));
-const KEY = env.DATA_GOV_API_KEY;
-if (!KEY) throw new Error('fetch_floor_votes: DATA_GOV_API_KEY is not in .env.local');
+// The key comes from the environment (the weekly GitHub workflow's secret) or
+// from .env.local (a local run).
+const envFile = new URL('.env.local', ROOT);
+const env: Record<string, string> = existsSync(envFile) ? Object.fromEntries(readFileSync(envFile, 'utf8').split(/\r?\n/)
+  .filter((l) => /^[A-Z_]+=/.test(l)).map((l) => { const i = l.indexOf('='); return [l.slice(0, i), l.slice(i + 1).trim().replace(/^"|"$/g, '')]; })) : {};
+const KEY = (process.env.DATA_GOV_API_KEY || env.DATA_GOV_API_KEY || '').trim();
+if (!KEY) throw new Error('fetch_floor_votes: DATA_GOV_API_KEY is not set (environment or .env.local)');
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 async function api(path: string): Promise<any> {
