@@ -255,10 +255,17 @@ function rdp(pts, tol) {
   while (stack.length) {
     const [a, b] = stack.pop();
     const [ax, ay] = pts[a], [bx, by] = pts[b];
-    const dx = bx - ax, dy = by - ay, len = Math.hypot(dx, dy) || 1;
+    const dx = bx - ax, dy = by - ay, len = Math.hypot(dx, dy);
     let best = -1, bi = -1;
     for (let i = a + 1; i < b; i++) {
-      const dist = Math.abs(dy * pts[i][0] - dx * pts[i][1] + bx * ay - by * ax) / len;
+      // A closed arc (an island district such as HD-55 inside HD-54) starts and
+      // ends on the same point, so there is no line to measure from: use the
+      // distance to that point. Measuring from a zero-length line gave every
+      // point a distance of 0, kept only the two ends, and the district and the
+      // hole around it vanished from every map.
+      const dist = len === 0
+        ? Math.hypot(pts[i][0] - ax, pts[i][1] - ay)
+        : Math.abs(dy * pts[i][0] - dx * pts[i][1] + bx * ay - by * ax) / len;
       if (dist > best) { best = dist; bi = i; }
     }
     if (best > tol) { keep[bi] = 1; stack.push([a, bi], [bi, b]); }
@@ -282,7 +289,7 @@ export function loadTopo(path) {
 }
 
 /** One view: a projection fitted to a lon/lat box, drawn into a w x h frame. */
-function view(topo, box, w, h) {
+function view(topo, box, w, h, tol = 0.35) {
   const [lon0, lat0, lon1, lat1] = box;
   const corners = [[lon0, lat0], [lon1, lat0], [lon0, lat1], [lon1, lat1], [(lon0 + lon1) / 2, lat1], [(lon0 + lon1) / 2, lat0]]
     .map(([a, b]) => albers(a, b));
@@ -296,12 +303,12 @@ function view(topo, box, w, h) {
   const cache = new Map();
   const arcPts = (i) => {
     const j = i >= 0 ? i : ~i;
-    if (!cache.has(j)) cache.set(j, rdp(topo.arcs[j].map(([a, b]) => project(a, b)), 0.35));
+    if (!cache.has(j)) cache.set(j, rdp(topo.arcs[j].map(([a, b]) => project(a, b)), tol));
     const pts = cache.get(j);
     return i >= 0 ? pts : [...pts].reverse();
   };
-  const pathOf = (polys) => {
-    let d = '';
+  const ringsOf = (polys) => {
+    const rings = [];
     for (const poly of polys) {
       for (const ring of poly) {
         const pts = [];
@@ -310,12 +317,14 @@ function view(topo, box, w, h) {
         let a = Infinity, b = Infinity, c = -Infinity, e = -Infinity;
         for (const [px, py] of pts) { if (px < a) a = px; if (px > c) c = px; if (py < b) b = py; if (py > e) e = py; }
         if (c - a < 0.6 && e - b < 0.6) continue; // a coastal speck below a pixel
-        d += 'M' + pts.map(([px, py]) => `${f1(px)},${f1(py)}`).join('L') + 'Z';
+        rings.push(pts);
       }
     }
-    return d;
+    return rings;
   };
-  return { project, pathOf };
+  const ringPath = (rings) => rings.map((pts) => 'M' + pts.map(([px, py]) => `${f1(px)},${f1(py)}`).join('L') + 'Z').join('');
+  const pathOf = (polys) => ringPath(ringsOf(polys));
+  return { project, pathOf, ringsOf, ringPath, arcPts };
 }
 
 export const RATE_BINS = [0.1, 0.2, 0.3, 0.4]; // edges; five classes
@@ -374,4 +383,164 @@ export function mapSvg(topo, rates, L, districtHref, insets) {
       + `<figcaption class="small">${esc(ins.name)}</figcaption></figure>`;
   });
   return { mainSvg, insetSvgs, legendHtml };
+}
+
+// ---------------------------------------------------------------------------
+// 5. The locator on each district page
+// ---------------------------------------------------------------------------
+//
+// Two small panels: Texas with the district marked, and a close-up of the
+// district with its neighbours outlined and numbered. Neither carries any vote
+// data, and the district is one neutral purple whatever its member's party,
+// because a map that coloured the page's own member red or blue would be the
+// first thing a reader saw and the least informative.
+//
+// Small on purpose. The state panel draws only the state's outer edge (arcs
+// that belong to exactly one district), not 150 shapes, and the close-up draws
+// only districts near the one shown, so a page gains a few KB, not the 120 KB
+// boundary file.
+
+const STATE_BOX = [-106.65, 25.84, -93.51, 36.5];
+const LW = 296, LH = 272;
+
+function lonLatBoxes(topo) {
+  if (topo._boxes) return topo._boxes;
+  topo._boxes = new Map(topo.geoms.map((g) => {
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    for (const poly of g.polys) for (const i of poly[0]) {
+      for (const [lon, lat] of topo.arcs[i >= 0 ? i : ~i]) {
+        if (lon < x0) x0 = lon; if (lon > x1) x1 = lon; if (lat < y0) y0 = lat; if (lat > y1) y1 = lat;
+      }
+    }
+    return [g.d, [x0, y0, x1, y1]];
+  }));
+  return topo._boxes;
+}
+
+function outerArcs(topo) {
+  if (topo._outer) return topo._outer;
+  const uses = new Map();
+  for (const g of topo.geoms) for (const poly of g.polys) for (const ring of poly) {
+    for (const i of ring) { const j = i >= 0 ? i : ~i; uses.set(j, (uses.get(j) ?? 0) + 1); }
+  }
+  topo._outer = [...uses].filter(([, n]) => n === 1).map(([j]) => j);
+  return topo._outer;
+}
+
+const inRings = (x, y, rings) => {
+  let inside = false;
+  for (const r of rings) {
+    for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+      const [xi, yi] = r[i], [xj, yj] = r[j];
+      if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+    }
+  }
+  return inside;
+};
+const edgeDist = (x, y, rings) => {
+  let best = Infinity;
+  for (const r of rings) {
+    for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+      const [ax, ay] = r[j], [bx, by] = r[i];
+      const dx = bx - ax, dy = by - ay, l2 = dx * dx + dy * dy || 1;
+      const t = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / l2));
+      best = Math.min(best, Math.hypot(x - (ax + t * dx), y - (ay + t * dy)));
+    }
+  }
+  return best;
+};
+/**
+ * A ring clipped to a rectangle (Sutherland-Hodgman). Two neighbours clipped
+ * the same way keep the same shared edge inside the frame, so no gap opens, and
+ * nothing outside the frame is written into the page.
+ */
+function clipRing(pts, x0, y0, x1, y1) {
+  const edges = [
+    [(p) => p[0] >= x0, (a, b) => [x0, a[1] + ((b[1] - a[1]) * (x0 - a[0])) / (b[0] - a[0])]],
+    [(p) => p[0] <= x1, (a, b) => [x1, a[1] + ((b[1] - a[1]) * (x1 - a[0])) / (b[0] - a[0])]],
+    [(p) => p[1] >= y0, (a, b) => [a[0] + ((b[0] - a[0]) * (y0 - a[1])) / (b[1] - a[1]), y0]],
+    [(p) => p[1] <= y1, (a, b) => [a[0] + ((b[0] - a[0]) * (y1 - a[1])) / (b[1] - a[1]), y1]],
+  ];
+  let out = pts;
+  for (const [inside, cut] of edges) {
+    const src = out; out = [];
+    for (let i = 0; i < src.length; i++) {
+      const cur = src[i], prev = src[(i + src.length - 1) % src.length];
+      if (inside(cur)) { if (!inside(prev)) out.push(cut(prev, cur)); out.push(cur); }
+      else if (inside(prev)) out.push(cut(prev, cur));
+    }
+    if (!out.length) break;
+  }
+  return out;
+}
+
+/** The point of a shape, inside the frame, farthest from its edge (a grid search). */
+function labelPoint(rings, w, h, margin) {
+  let best = null;
+  for (let y = margin; y <= h - margin; y += 6) {
+    for (let x = margin; x <= w - margin; x += 6) {
+      if (!inRings(x, y, rings)) continue;
+      const r = Math.min(edgeDist(x, y, rings), x, y, w - x, h - y);
+      if (!best || r > best.r) best = { x, y, r };
+    }
+  }
+  return best;
+}
+
+/**
+ * `L`: { stateAlt, closeAlt, tip(n) }; `hrefOf(n)`: the URL of district n's page.
+ */
+export function locatorSvg(topo, d, L, hrefOf) {
+  const boxes = lonLatBoxes(topo);
+  const target = topo.geoms.find((g) => g.d === d);
+  if (!target) throw new Error(`no boundary for district ${d}`);
+  const [x0, y0, x1, y1] = boxes.get(d);
+
+  // The state, with the close-up's frame drawn on it.
+  const s = view(topo, STATE_BOX, LW, LH, 0.8);
+  const outline = outerArcs(topo).map((j) => 'M' + s.arcPts(j).map(([px, py]) => `${f1(px)},${f1(py)}`).join('L')).join('');
+  const hereRings = s.ringsOf(target.polys);
+  const [ax, ay] = s.project(x0, y1), [bx, by] = s.project(x1, y0);
+  // The close-up: the district plus a margin, never tighter than about 12 km,
+  // so a two-mile-wide city district still shows its surroundings.
+  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  const hx = Math.max((x1 - x0) / 2 * 1.35, 0.065), hy = Math.max((y1 - y0) / 2 * 1.35, 0.055);
+  const box = [cx - hx, cy - hy, cx + hx, cy + hy];
+  const [fx0, fy0] = s.project(box[0], box[3]), [fx1, fy1] = s.project(box[2], box[1]);
+  const small = Math.max(bx - ax, by - ay) < 9;
+  const stateSvg = `<svg viewBox="0 0 ${LW} ${LH}" role="img" aria-labelledby="loc-s"><title id="loc-s">${esc(L.stateAlt)}</title>`
+    + `<path class="loc-out" d="${outline}"/>`
+    + `<path class="here" d="${s.ringPath(hereRings)}"/>`
+    + (small
+      ? `<circle class="loc-ring" cx="${f1((ax + bx) / 2)}" cy="${f1((ay + by) / 2)}" r="9"/>`
+      : `<rect class="inbox" x="${f1(Math.min(fx0, fx1))}" y="${f1(Math.min(fy0, fy1))}" width="${f1(Math.abs(fx1 - fx0))}" height="${f1(Math.abs(fy1 - fy0))}"/>`)
+    + '</svg>';
+
+  // The close-up. The frame's aspect is fixed, so it shows more than `box` in one
+  // direction; districts are picked against a box twice as large and clipped.
+  const c = view(topo, box, LW, LH, 0.9);
+  const near = [box[0] - hx, box[1] - hy, box[2] + hx, box[3] + hy];
+  const drawn = topo.geoms.filter((g) => {
+    const [a, b, e, f] = boxes.get(g.d);
+    return a <= near[2] && e >= near[0] && b <= near[3] && f >= near[1];
+  });
+  const clipped = (polys) => c.ringsOf(polys).map((r) => clipRing(r, -2, -2, LW + 2, LH + 2)).filter((r) => r.length >= 3);
+  let shapes = '', labels = '';
+  for (const g of drawn) {
+    const rings = clipped(g.polys);
+    if (!rings.length) continue;
+    const here = g.d === d;
+    const path = `<path class="${here ? 'here' : 'dist nodata'}" d="${c.ringPath(rings)}"><title>${esc(L.tip(g.d))}</title></path>`;
+    // The district itself is drawn last, below, so its neighbours' strokes do not cross it.
+    if (!here) shapes += `<a href="${esc(hrefOf(g.d))}">${path}</a>`;
+    const p = labelPoint(rings, LW, LH, 10);
+    if (p && p.r >= (here ? 0 : 9)) {
+      labels += `<text class="maplab${here ? ' herelab' : ''}" x="${p.x}" y="${p.y + 4}" text-anchor="middle">${g.d}</text>`;
+    }
+  }
+  const herePath = `<path class="here" d="${c.ringPath(clipped(target.polys))}"><title>${esc(L.tip(d))}</title></path>`;
+  const closeSvg = `<svg viewBox="0 0 ${LW} ${LH}" role="img" aria-labelledby="loc-c"><title id="loc-c">${esc(L.closeAlt)}</title>`
+    + `<defs><clipPath id="loc-clip"><rect width="${LW}" height="${LH}" rx="8"/></clipPath></defs>`
+    + `<g clip-path="url(#loc-clip)">${shapes}${herePath}${labels}</g></svg>`;
+  return { stateSvg, closeSvg };
 }

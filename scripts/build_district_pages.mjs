@@ -49,6 +49,7 @@ import { dirname, resolve, join } from 'node:path';
 import { SITE, RESULTS_URL, esc, loadFaces, document_, sheetLine } from './_page_shell.mjs';
 import { billPath } from './build_bill_pages.mjs';
 import { SESSION } from './session.mjs';
+import { loadTopo, locatorSvg } from './_charts.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const faces = loadFaces(ROOT);
@@ -60,6 +61,8 @@ const zipFile = JSON.parse(readFileSync(resolve(ROOT, `public/data/zips_${SESSIO
 // From the Secretary of State, via scripts/fetch_ballot.mjs. Re-run that before
 // a build if the state's certified list may have changed.
 const ballot = JSON.parse(readFileSync(resolve(ROOT, 'data/ballot_2026_house.json'), 'utf8'));
+// The same boundaries the /charts map and the locate-me lookup use.
+const topo = loadTopo(resolve(ROOT, 'public/data/boundaries_tx.topo.json'));
 
 // The ZIP box on the index reuses the quiz lookup's approved strings, read from
 // the same copy.json the Spanish gate checks, so it adds no unreviewed Spanish.
@@ -303,7 +306,11 @@ function whereBlock(m, lang) {
     return `<li><b>${esc(x.name)}</b> <span class="small">${esc(c.whereOfDistrict(pct(x.shareOfDistrict)))} · ${esc(ofPlace)}${x.cdp ? ` · ${esc(c.whereCdp)}` : ''}</span></li>`;
   }).join('');
   const outside = pct(p.outsideAnyPlace);
+  const loc = locatorSvg(topo, m.d, { stateAlt: c.locStateAlt(m), closeAlt: c.locCloseAlt(m), tip: c.locTip },
+    (n) => `${SITE}/${slugFor(n, lang)}`);
   return `<h2 id="where">${esc(c.h2where(m))}</h2>
+  <figure class="chart loc"><div class="locpair"><div>${loc.stateSvg}</div><div class="locclose">${loc.closeSvg}</div></div>
+  <figcaption class="small">${esc(c.locCaption(m))}</figcaption></figure>
   <p>${esc(c.whereCounties(m, counties, fmtN(p.pop)))}</p>
   ${mostlyUnincorporated(p) ? `<p>${esc(c.whereMostlyOutside(m, outside, counties))}</p>` : ''}
   ${items ? `<ul class="stand">${items}</ul>` : ''}
@@ -345,6 +352,10 @@ const COPY = {
     whereCdp: 'unincorporated community',
     whereOutside: (share) => `The other ${share} of the district lives outside any city or named community.`,
     whereNote: 'Counted from 2020 Census blocks. A city split between districts appears on each of their pages, and your street decides which one is yours.',
+    locStateAlt: (m) => `Map of Texas with District ${m.d} shaded`,
+    locCloseAlt: (m) => `District ${m.d} and the districts around it, each numbered`,
+    locTip: (n) => `District ${n}`,
+    locCaption: (m) => `District ${m.d} is shaded. Each district around it is numbered and links to its own page. Boundaries from the Census Bureau.`,
     // "Represented ... in the 89th Legislature" since 12 Nov 2026, so the page
     // stays true after the 90th is sworn in on 12 Jan 2027. The record is that
     // session's, whoever holds the seat next. Spanish approved 12 Nov 2026.
@@ -420,6 +431,10 @@ const COPY = {
     whereCdp: 'comunidad no incorporada',
     whereOutside: (share) => `El ${share} restante del distrito vive fuera de cualquier ciudad o comunidad con nombre.`,
     whereNote: 'Contado a partir de los bloques del censo de 2020. Una ciudad repartida entre distritos aparece en la página de cada uno, y su calle decide cuál le corresponde.',
+    locStateAlt: (m) => `Mapa de Texas con el Distrito ${m.d} sombreado`,
+    locCloseAlt: (m) => `El Distrito ${m.d} y los distritos que lo rodean, cada uno con su número`,
+    locTip: (n) => `Distrito ${n}`,
+    locCaption: (m) => `El Distrito ${m.d} aparece sombreado. Cada distrito a su alrededor lleva su número y enlaza a su propia página. Límites de la Oficina del Censo.`,
     left: (m, date) => `${m.n} dejó la Cámara el ${date}. Los votos de esta página son los que ${m.n} emitió en la 89.ª Legislatura.`,
     lede: (m, r) => `${m.n} representó al Distrito ${m.d} de la Cámara de Texas en la 89.ª Legislatura (la sesión de 2025) y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
     indexDocTitle: '¿Quién es mi representante estatal en Texas? Búsqueda por código postal',

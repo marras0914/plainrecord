@@ -181,6 +181,15 @@ ${BRAND_CSS}
 /* A 608-wide viewBox drawn into a phone scales to about 0.56, which took 11px
    labels to 6px. Larger type in viewBox units lands near 10px on screen. */
 @media (max-width:520px){.chart .tick,.chart .note,.chart .maplab{font-size:17px}.chart .lab,.chart .val{font-size:18px}}
+/* The locator on each district page (locatorSvg). Side by side from 521px,
+   stacked on a phone, where its own type size beats the 608-wide rule above. */
+.loc .locpair{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.loc .locclose svg{border:1px solid var(--hair);border-radius:8px}
+.chart .loc-out{fill:none;stroke:var(--rule);stroke-width:1;stroke-linejoin:round}
+.chart .here{fill:var(--p3);stroke:var(--page);stroke-width:.6}
+.chart .loc-ring{fill:none;stroke:var(--ink);stroke-width:1.5}
+.loc figcaption{margin-top:8px}
+@media (max-width:520px){.loc .locpair{grid-template-columns:1fr}.loc .locpair>div:first-child{width:62%;margin:0 auto}.loc .maplab{font-size:12px}}
 .legend{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13.5px;color:var(--ink-2)}
 .legend li{margin:0}.legend .sw{display:inline-block;width:14px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
 .legend .p1{background:var(--p1)}.legend .p2{background:var(--p2)}.legend .p3{background:var(--p3)}.legend .p4{background:var(--p4)}.legend .p5{background:var(--p5)}.legend .nodata{background:var(--hair)}.legend .D{background:var(--blue)}.legend .R{background:var(--red)}
