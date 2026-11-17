@@ -245,6 +245,21 @@ check('(floor votes: a bill number inside a list like "H.R. 1564 / S. 726" is no
 const shippedFaith = JSON.parse(readFileSync(new URL('./public/data/faith.json', import.meta.url), 'utf8'));
 check('floor votes: the shipped file carries them on the same 10 entries',
   shippedFaith.advocacy.items.filter((a: any) => a.floorVotes?.length).length === 10);
+const byBill = shippedFaith.advocacy.floor.byBill ?? [];
+const chartVotes = byBill.flatMap((b: any) => b.votes);
+check('floor votes: the chart\'s by-bill list holds every vote once, under its own bill',
+  chartVotes.length === FV.votes.length && byBill.every((b: any) => b.votes.every((v: any) => v.billId === b.id)),
+  `${chartVotes.length} vs ${FV.votes.length}`);
+for (const [p, h] of [['faith/congress', 'How each party voted'], ['fe/congreso', 'Cómo votó cada partido']]) {
+  const html = readFileSync(new URL(`./public/${p}/index.html`, import.meta.url), 'utf8');
+  const i = html.indexOf('<h2 id="floor">');
+  const chart = i < 0 ? '' : html.slice(i, html.indexOf('<ul class="jump">', i));
+  const bars = (chart.match(/class="fvbar"/g) ?? []).length;
+  const want = chartVotes.reduce((s: number, v: any) => s + Object.keys(v.parties).length, 0);
+  check(`/${p}: the chart draws one bar per party per vote`, chart.includes(h) && bars === want, `${bars} of ${want}`);
+  check(`/${p}: the chart names no tradition`, chart.length > 0
+    && !shippedFaith.traditions.some((t: any) => chart.includes(t.name)));
+}
 
 // --- current in full, earlier listed (decided 13 Nov 2026) ------------------
 

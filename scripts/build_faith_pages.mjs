@@ -671,6 +671,49 @@ function membersPage(lang) {
 }
 
 // The summary: every issue, every tradition, its position beside its actions.
+/**
+ * The floor votes at a glance (Marco, 17 Nov 2026): one bar per party per
+ * vote, its length the party's share of the members who voted, solid for yes
+ * and light for no. The same votes, with sources, sit under each bill below.
+ * Like the lines, it names no tradition and marks no party as with or against
+ * one.
+ */
+const FV_STYLE = `<style>
+  .fvbill{margin:18px 0 4px;font-size:1.02rem}
+  .fv{margin:0 0 12px}
+  .fv .fvlab{margin:0 0 4px}
+  .fvrow{display:grid;grid-template-columns:8.5em 1fr 4.2em;gap:8px;align-items:center;font-size:13.5px;margin:2px 0}
+  .fvbar{display:flex;height:14px;background:var(--hair);border-radius:3px;overflow:hidden}
+  .fvbar span{display:block;height:100%}
+  .fy.R{background:var(--red)} .fy.D{background:var(--blue)} .fy.I{background:var(--ink-2)}
+  .fn{opacity:.32} .fn.R{background:var(--red)} .fn.D{background:var(--blue)} .fn.I{background:var(--ink-2)}
+  .fvn{font-variant-numeric:tabular-nums;text-align:right}
+  @media print{.fvbar span{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  </style>`;
+
+function floorChart(lang) {
+  const pctOf = (x, n) => `${((100 * x) / n).toFixed(2)}%`;
+  const bills = AD.floor.byBill.filter((b) => b.votes.length).map((b) => {
+    const votes = b.votes.map((v) => {
+      const parties = PARTY_ORDER.filter((p) => v.parties[p]);
+      const cast = parties.reduce((s, p) => s + v.parties[p][0] + v.parties[p][1], 0);
+      const tie = v.tieBroken ? `, ${ft(lang, 'vt.tie')}` : '';
+      const rows = parties.map((p) => {
+        const [y, n] = v.parties[p];
+        return `<div class="fvrow"><span>${ft(lang, `vt.${p}`)}</span>`
+          + `<span class="fvbar" aria-hidden="true"><span class="fy ${p}" style="width:${pctOf(y, cast)}"></span><span class="fn ${p}" style="width:${pctOf(n, cast)}"></span></span>`
+          + `<span class="fvn">${y}–${n}</span></div>`;
+      }).join('');
+      return `<div class="fv"><p class="small fvlab">${ft(lang, `vt.${v.chamber}.${v.kind}`)}, <a href="${esc(v.url)}">${esc(fmtDate(lang, v.date))}</a>: ${ft(lang, `vt.${v.result}`)}${tie}</p>${rows}</div>`;
+    }).join('');
+    return `<p class="fvbill"><b lang="en">${esc(b.name)}</b></p>${votes}`;
+  }).join('');
+  return `${FV_STYLE}
+  <h2 id="floor">${ft(lang, 'vt.chart.h2')}</h2>
+  ${bills}
+  <p class="small">${ft(lang, 'vt.chart.note')}</p>`;
+}
+
 function actionsPage(lang) {
   const P = FAITH_PATHS[lang];
   const sections = data.issues.map((issue) => {
@@ -686,6 +729,7 @@ function actionsPage(lang) {
   ${notice(lang)}
   <p class="small">${ft(lang, 'ac.rules')} ${ft(lang, 'ac.check')}</p>
   <p class="small">${ft(lang, 'vt.rule', { n: (AD.floor.houseRollCalls + AD.floor.senateRollCalls).toLocaleString(MONTH[lang]), billsHtml: billList(lang, AD.floor.bills) })}</p>
+  ${floorChart(lang)}
   <ul class="jump">${data.issues.map((i) => `<li><a href="#${i.id}">${issueName(lang, i)}</a></li>`).join('')}</ul>
   ${sections}
   <p><a href="${SITE}/${P.sides}">${ft(lang, 'sd.h1')}</a> · <a href="${SITE}/${P.members}">${ft(lang, 'mb.h1')}</a> · <a href="${SITE}/${P.home}">${ft(lang, 'homeLink')}</a> · <a href="${SITE}/${P.method}">${ft(lang, 'methodLink')}</a> · <a href="${DATA_URL}">${ft(lang, 'dataLink')}</a></p>

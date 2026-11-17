@@ -2152,6 +2152,16 @@
     "es": "y",
     "status": "ok"
   },
+  "vt.chart.h2": {
+    "en": "How each party voted, at a glance",
+    "es": "Cómo votó cada partido, de un vistazo",
+    "status": "ok"
+  },
+  "vt.chart.note": {
+    "en": "Each bar is one party in one vote, its length that party's share of the members who voted: the solid part voted yes, the light part no, and the figures are yes–no. Members who did not vote are left out. The same votes appear, with their sources, under each bill below.",
+    "es": "Cada barra es un partido en una votación, y su largo es la parte de los miembros que votaron que pertenece a ese partido: la parte sólida votó sí y la parte clara, no, y las cifras son sí–no. No se cuentan quienes no votaron. Las mismas votaciones aparecen, con sus fuentes, debajo de cada proyecto de ley más abajo.",
+    "status": "ok"
+  },
   "vt.rule": {
     "en": "Floor votes: under each bill that reached a recorded vote in this Congress, each chamber’s final vote, with how each party voted, from the House Clerk’s and the Senate’s roll calls. A vote to begin debate is shown only where it stopped a bill before any vote on passage. Of the {n} recorded floor votes so far, only those on the {billsHtml} were on a bill named here. Nothing marks a party as voting with or against a tradition.",
     "es": "Votaciones en el pleno: debajo de cada proyecto de ley que llegó a una votación nominal en este Congreso, aparece la votación final de cada cámara, con cómo votó cada partido, según los registros de votación de la Secretaría de la Cámara de Representantes y del Senado. Una votación para iniciar el debate aparece solo cuando detuvo un proyecto de ley antes de cualquier votación de aprobación. De las {n} votaciones nominales en el pleno hasta ahora, solo las del {billsHtml} fueron sobre un proyecto de ley nombrado aquí. Nada indica que un partido votó a favor o en contra de una tradición.",

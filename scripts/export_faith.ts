@@ -205,6 +205,12 @@ export function buildFaithPayload() {
         measuresWithRollCall: FLOOR.measuresWithRollCall,
         // The name each voted bill goes by, for the page's one sentence.
         bills: FLOOR_BILLS.map((b) => b.names[0]),
+        // The same votes grouped by bill, oldest first, for the chart at the
+        // top of /faith/congress (17 Nov 2026).
+        byBill: FLOOR_BILLS.map((b) => ({
+          id: b.id, name: b.names[0],
+          votes: FLOOR.votes.filter((v) => v.billId === b.id).sort((x, y) => x.date.localeCompare(y.date)),
+        })),
       },
     },
     members: {
