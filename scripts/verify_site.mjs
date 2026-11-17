@@ -2351,8 +2351,9 @@ try {
   // ---------------------------------------------------------------------------
   // The faith pages
   //
-  // Decided 12 Nov 2026: published before reviewers from the traditions were
-  // found, so every page must say so, with the count from the data. And one
+  // Decided 12 Nov 2026: published without reviewers from the traditions, so
+  // every page must say so. Reviewers were dropped 15 Nov; since 17 Nov the
+  // notice says how the pages are checked, and links the methodology. And one
   // tradition at a time: a tradition's page must carry no other tradition's
   // statements, or it starts to become the scoreboard FAITH.md forbids.
   // Checked with JavaScript off, because the pages have none.
@@ -2373,7 +2374,8 @@ try {
     const noticeOn = async (path) => {
       const res = await fp.goto(new URL(path, URL_UNDER_TEST).href, { waitUntil: 'load' });
       const note = await fp.locator('[role="note"]').allInnerTexts();
-      return res.ok() && note.some((t) => /Not yet reviewed|Todavía sin revisar/.test(t) && t.includes(`${faith.reviewed.entries} `) && t.includes(` ${faith.reviewed.of}`));
+      const method = await fp.locator('[role="note"] a[href$="/faith/methodology"], [role="note"] a[href$="/fe/metodologia"]').count();
+      return res.ok() && method === 1 && note.some((t) => /How these pages are checked|Cómo se verifican estas páginas/.test(t) && /no one from the traditions|nadie de las tradiciones/i.test(t));
     };
     check('(faith: the notice check fails on a page without the notice)', !(await noticeOn('/economy/explore')));
     const missing = [];
@@ -2416,7 +2418,7 @@ try {
       enV.includes(lev.web.slice(0, 40)) && !enV.includes(lev.rv1909.slice(0, 40)));
     check('faith: the Spanish page prints the Reina-Valera and not the World English Bible',
       esV.includes(lev.rv1909.slice(0, 40)) && !esV.includes(lev.web.slice(0, 40)));
-    check('faith: every page says it is not yet reviewed, with the count from the data', missing.length === 0, missing.join(', ') || `${pages.length} pages`);
+    check('faith: every page says how it is checked, that no one from the traditions reviews it, and links the methodology', missing.length === 0, missing.join(', ') || `${pages.length} pages`);
     check('faith: no tradition page carries another tradition\'s statements', crossed.length === 0, crossed.join(', ') || '10 tradition pages');
     check('faith: every tradition page has every issue, and all four platforms on each', shape.length === 0, shape.join(' | ') || `${faith.issues.length} issues x 4 platforms`);
 

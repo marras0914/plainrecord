@@ -1,6 +1,6 @@
 # Faith module
 
-**Status: live since 13 Nov 2026** (PR #21): `/faith`, `/fe`, a page per tradition and the methodology, labeled not yet reviewed. **Verses** (13 Nov, `npm run data:faith:verses`): every Bible reference in each statement shown in full, found by a program, never picked; see "Scripture" below. See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
+**Status: live since 13 Nov 2026** (PR #21): `/faith`, `/fe`, a page per tradition and the methodology. Reviewers were dropped 15 Nov 2026; since 17 Nov every page's notice says how it is checked (quotes against saved sources, written rules) and that no one from the traditions reviews it. **Verses** (13 Nov, `npm run data:faith:verses`): every Bible reference in each statement shown in full, found by a program, never picked; see "Scripture" below. See [EXPANSION.md](EXPANSION.md) for how this fits the repo.
 
 ## Decisions made 12 November 2026
 

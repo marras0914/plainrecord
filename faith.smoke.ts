@@ -413,11 +413,11 @@ check('House votes: every counted vote passed', HV.bills.every((b) => b.house.ye
 const fragile = HV.bills.filter((b) => offBy(b) > 0 && (['R', 'D'] as const).some((p) => Math.abs(b.house[p].yea - b.house[p].nay) <= offBy(b)));
 check('House votes: no party\'s result could flip on an unattributed vote', fragile.length === 0, fragile.map((b) => b.bill).join(', ') || 'none');
 
-// --- not yet reviewed -------------------------------------------------------
+// --- review -------------------------------------------------------------------
 
-// Shipping before review was decided on 12 Nov 2026. This records the state
-// rather than gating on it, so the pages' "not yet reviewed" notice can be
-// checked against the data once they exist.
+// Shipping without review was decided on 12 Nov 2026 and reviewers were dropped
+// on 15 Nov. This only records the state; the pages' notice says how they are
+// checked instead (17 Nov 2026).
 const reviewed = all.filter((e) => e.review.length > 0).length;
 console.log(`[ -- ] ${reviewed} of ${all.length} entries reviewed by a member of the tradition or party described`);
 

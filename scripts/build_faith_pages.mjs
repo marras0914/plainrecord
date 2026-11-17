@@ -87,8 +87,11 @@ const STYLE = `<style>
   ul.ad li{padding:8px 0}ul.ad blockquote.q{margin:4px 0 0}
   </style>`;
 
+// How the pages are checked. Outside reviewers were dropped (15 Nov 2026), so
+// the notice no longer promises a review; it says what is checked instead
+// (Marco, 17 Nov 2026).
 function notice(lang) {
-  return `<div class="notice" role="note"><p>${ft(lang, 'notice')}</p><p class="small">${ft(lang, 'reviewedCount', { n: data.reviewed.entries, of: data.reviewed.of })}</p></div>`;
+  return `<div class="notice" role="note"><p>${ft(lang, 'notice', { methodHtml: `<a href="${SITE}/${FAITH_PATHS[lang].method}">${ft(lang, 'notice.method')}</a>` })}</p></div>`;
 }
 
 function disclosure(lang) {
