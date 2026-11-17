@@ -229,6 +229,16 @@ check('every earlier entry has a link and a date', EARLIER.every((e) => /^https:
 const sbcImm = EARLIER.filter((e) => e.traditionId === 'sbc' && e.issueId === 'immigration').map((e) => e.date.slice(0, 4));
 check('immigration: the SBC\'s earlier resolutions are listed, newest first',
   sbcImm.join(',') === '2023,2018,2011,2006,1979', sbcImm.join(','));
+// Precondition first: the three foreign titles are in the library, so their
+// absence from the earlier list is the rule at work, not a missing file.
+const FOREIGN_IMM = ['Immigration to Israel', 'Absorption of Ethiopian Immigrants', 'Resolution On Immigration to Canada'];
+check('immigration: the foreign-immigration titles exist in the Jewish library',
+  FOREIGN_IMM.every((t) => JEWISH_RESOLUTIONS.some((r) => r.title === t)));
+const immTitles = EARLIER.filter((e) => e.issueId === 'immigration').map((e) => e.title);
+check('immigration: titles about another country\'s immigration are not listed',
+  FOREIGN_IMM.every((t) => !immTitles.includes(t)) && FOREIGN_IMM.every((t) => !ISSUE_TITLE_TERMS.immigration.test(t)));
+check('immigration: U.S. titles still match (Stranded Russian Jews, Immigration to the United States)',
+  immTitles.includes('Immigration for Stranded Russian Jews') && immTitles.includes('Resolution On Immigration to the United States'),immTitles.join(' | '));
 
 // --- the shipped file and its Spanish -----------------------------------------
 

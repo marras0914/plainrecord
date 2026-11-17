@@ -151,7 +151,12 @@ export interface Earlier {
 export const ISSUE_TITLE_TERMS: Record<IssueId, RegExp> = {
   // Not "refugee" or "border": those titles include persecution abroad (North
   // Korean refugees in China), which is not U.S. immigration policy.
-  immigration: /immigra|migrant|sojourner/i,
+  // Not titles about another country's immigration (Marco, 17 Nov 2026: "not
+  // really the same thing"): CCAR "Immigration to Israel" (1991) and
+  // "Absorption of Ethiopian Immigrants" (1993, into Israel), RA "Immigration
+  // to Canada" (2003). URJ 1978 "Stranded Russian Jews" stays: it asks the
+  // U.S. to admit them.
+  immigration: /^(?!.*(?:immigration to (?:israel|canada)|absorption of)).*(?:immigra|migrant|sojourner)/i,
   // Not "sanctity of life": it made a 2026 resolution on assisted suicide the
   // SBC's latest abortion statement. The cost is that two resolutions titled
   // only "Sanctity of Human Life" (1991, 2015) are not listed.
