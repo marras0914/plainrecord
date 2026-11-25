@@ -2557,6 +2557,20 @@ try {
       ctx.status === 308 && ctx.headers.get('location') === '/' && ctxEs.status === 308 && ctxEs.headers.get('location') === '/es',
       `${ctx.status} ${ctx.headers.get('location')} / ${ctxEs.status} ${ctxEs.headers.get('location')}`);
 
+    // The data files stay out of search results (25 Nov 2026): Google had
+    // crawled /data/quiz_89R.json and listed it among pages it declined, and a
+    // JSON file is not an answer to anyone's search. The pages that describe
+    // the data, /open-data and its Dataset markup, stay indexable. Only checked
+    // where vercel.json's headers are applied: --with-headers or a deploy.
+    if (withHeaders || urlArg) {
+      const dataRobots = (await fetch(at(`/data/quiz_${SESSION}.json`))).headers.get('x-robots-tag') ?? '';
+      const pageRobots = [];
+      for (const p of ['/', '/open-data', '/district/31']) pageRobots.push((await fetch(at(p))).headers.get('x-robots-tag') ?? '');
+      check('search: the data files carry noindex, and the pages that describe them do not',
+        dataRobots.includes('noindex') && pageRobots.every((r) => !r.includes('noindex')),
+        `data "${dataRobots}", pages ${JSON.stringify(pageRobots)}`);
+    }
+
     // The Policy hub reaches everything the old nav did.
     await sp.goto(at('/policy'), { waitUntil: 'load' });
     const ph = new Set(await sp.locator('main a[href]').evaluateAll((as) => as.map((a) => new URL(a.href).pathname)));
