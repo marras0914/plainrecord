@@ -144,7 +144,7 @@ const COPY = {
     kicker: 'Cámara de Texas · Sesión de 2025', langSwitch: 'In English',
     docTitle: 'Votos de la Cámara de Texas en gráficas',
     h1: `Cómo se ven ${n(total)} votos de la Cámara de Texas`,
-    desc: 'Cada voto registrado de la Cámara de Texas en 2025, en tres gráficas: qué tan seguido coincidieron los partidos, quién se apartó del suyo y dónde están esas personas.',
+    desc: 'Cada voto registrado de la Cámara de Texas en 2025, en tres gráficas: qué tan seguido coincidieron los partidos, quién se apartó del suyo y dónde viven.',
     lede: 'Cada votación registrada de la sesión de 2025, vista de tres maneras: qué tan lejos estuvieron los dos partidos, quiénes se apartaron de su propio partido y dónde están esas personas.',
     h2a: 'La mayoría de los votos no fueron de línea partidista',
     capA: `Cada columna cuenta las votaciones nominales según la diferencia entre la proporción de la bancada republicana y la de la bancada demócrata que votó a favor. En ${n(alike)} de las ${n(total)} (${P(alike / total)}), los dos partidos quedaron a menos de 10 puntos, y ${n(unanimous)} fueron unánimes. En ${n(partyLine)} (${P(partyLine / total)}), quedaron a 80 puntos o más.`,

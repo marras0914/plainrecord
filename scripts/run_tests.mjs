@@ -27,6 +27,7 @@ const SUITES = [
   'front_visuals.smoke.ts',
   'page_dates.smoke.ts',
   'theme_toggle.smoke.ts',
+  'descriptions.smoke.ts',
   'valence.smoke.ts',
   'econ_control.smoke.ts',
   'econ_context.smoke.ts',

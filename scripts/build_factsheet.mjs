@@ -194,7 +194,7 @@ const LOCALES = [
     canonical: `${SITE}/hoja`,
     title: '¿Cómo votó su representante en la Cámara de Texas?',
     docTitle: 'Cómo votó su representante en la Cámara de Texas | La Franja Morada',
-    meta: 'Hoja informativa: 67 votos reales de la Cámara de Representantes de Texas de 2025, en español. Escriba su código postal y vea cómo votó su propio representante. Sin registro, sin anuncios, gratis.',
+    meta: 'Hoja informativa: 67 votos reales de la Cámara de Texas de 2025, en español. Escriba su código postal y vea cómo votó su representante. Gratis, sin anuncios.',
     lede: 'En 2025, la Cámara de Representantes de Texas votó cientos de proyectos de ley. Este sitio toma <b>67 de esos votos reales</b> y le pregunta qué habría votado usted, sin decirle antes qué partido tomó qué lado.',
     kicker: 'Cámara de Representantes de Texas · Sesión de 2025',
     h2out: 'Cómo se ve Texas hoy',

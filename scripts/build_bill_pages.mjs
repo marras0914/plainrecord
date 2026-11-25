@@ -178,8 +178,8 @@ const COPY = {
       `${it.billId}, ${es(it, 'label')}`,
     ]),
     h1: (it) => `Cómo votó cada integrante de la Cámara de Texas sobre el proyecto ${it.billId}`,
-    desc: (it) => `Cómo votaron los 150 integrantes de la Cámara de Texas sobre el proyecto ${it.billId} (${es(it, 'label')}) en 2025: `
-      + `${it.yeas} a favor, ${it.nays} en contra, y quién votó en contra de la mayoría de su propio partido.`,
+    desc: (it) => `Cómo votó la Cámara de Texas sobre ${it.billId} (${es(it, 'label')}) en 2025: `
+      + `${it.yeas} a favor, ${it.nays} en contra, y quién se apartó de su partido.`,
     tally: (it) => `La Cámara votó ${it.yeas} a ${it.nays}. Es la votación nominal ${it.rec} del Diario de la Cámara.`,
     // "este sitio" is the subject, so the verb does not agree with the count and
     // the sentence reads the same for 1 vote or 5.
