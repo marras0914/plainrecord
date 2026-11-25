@@ -1894,7 +1894,7 @@
   },
   "page.description": {
     "en": "A blind quiz on real Texas House votes. Answer without knowing which party took which side, then see where you land and where Texas actually stands.",
-    "es": "Un cuestionario a ciegas sobre votos reales de la Cámara de Texas. Responda sin saber qué partido tomó qué lado, y después vea dónde queda usted y cómo está Texas en realidad.",
+    "es": "Un cuestionario a ciegas sobre votos reales de la Cámara de Texas. Responda sin saber qué partido votó qué, y vea dónde queda usted y dónde está Texas.",
     "where": "meta description and og:description.",
     "vars": [],
     "status": "ok"

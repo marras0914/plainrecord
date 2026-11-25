@@ -53,8 +53,8 @@
     "status": "ok"
   },
   "home.desc": {
-    "en": "Pick a Christian tradition or a Jewish movement and see what it has officially said on eight issues, beside the Texas and national Republican and Democratic platforms. Sourced, with no score.",
-    "es": "Escoja una tradición cristiana o un movimiento judío y vea lo que ha dicho oficialmente sobre ocho temas, junto a las plataformas republicanas y demócratas de Texas y nacionales. Con fuentes y sin puntaje.",
+    "en": "Pick a Christian tradition or Jewish movement and see what it has officially said on eight issues, beside both parties' platforms. Sourced, no score.",
+    "es": "Escoja una tradición cristiana o un movimiento judío y vea lo que ha dicho oficialmente sobre ocho temas, junto a las plataformas de los partidos. Sin puntaje.",
     "status": "ok"
   },
   "home.lede": {
@@ -83,8 +83,8 @@
     "status": "ok"
   },
   "tr.desc": {
-    "en": "{name}: what its official bodies have said on immigration, abortion, poverty, the death penalty, guns, the environment, healthcare and criminal justice, beside the Texas and national party platforms.",
-    "es": "{name}: lo que han dicho sus órganos oficiales sobre inmigración, aborto, pobreza, pena de muerte, armas de fuego, medio ambiente, atención médica y justicia penal, junto a las plataformas de los partidos de Texas y nacionales.",
+    "en": "{name}: its official word on immigration, abortion, guns and five more issues, beside the Texas and national party platforms.",
+    "es": "{name}: su postura oficial sobre inmigración, aborto, armas y otros cinco temas, junto a las plataformas de los partidos.",
     "status": "ok"
   },
   "tr.official": {
@@ -168,8 +168,8 @@
     "status": "ok"
   },
   "me.desc": {
-    "en": "The rules behind the faith pages: which statements count as official for each tradition, which platforms are quoted, how every quote is checked, and what is missing.",
-    "es": "Las reglas detrás de las páginas sobre la fe: qué declaraciones cuentan como oficiales para cada tradición, qué plataformas se citan, cómo se verifica cada cita y qué falta.",
+    "en": "The rules behind the faith pages: which statements count as official, which platforms are quoted, how every quote is checked, and what is missing.",
+    "es": "Las reglas de las páginas sobre la fe: qué declaraciones cuentan como oficiales, qué plataformas se citan, cómo se verifica cada cita y qué falta.",
     "status": "ok"
   },
   "me.lede": {
@@ -379,7 +379,7 @@
   },
   "hv.desc": {
     "en": "Every bill the Texas Catholic bishops supported or opposed in 2025 that passed the Texas House by recorded vote, and how Republicans and Democrats voted on it.",
-    "es": "Cada proyecto de ley que los obispos católicos de Texas apoyaron o rechazaron en 2025 y que la Cámara de Texas aprobó en votación nominal, y cómo votaron los republicanos y los demócratas.",
+    "es": "Cada proyecto que los obispos católicos de Texas apoyaron o rechazaron en 2025 y que la Cámara aprobó en votación nominal, y cómo votó cada partido.",
     "status": "ok"
   },
   "hv.lede": {
@@ -1583,8 +1583,8 @@
     "status": "ok"
   },
   "sd.desc": {
-    "en": "For each issue the Republican and Democratic platforms split on, which side the official statements of five churches and three Jewish movements take, in their own words. No score.",
-    "es": "En cada tema en que las plataformas republicana y demócrata toman posturas opuestas, qué postura toman las declaraciones oficiales de cinco iglesias y tres movimientos judíos, en sus propias palabras. Sin puntaje.",
+    "en": "On each issue the two parties' platforms split on, which side five churches and three Jewish movements take, in their own words. No score.",
+    "es": "En cada tema que divide a las plataformas de los partidos, qué lado toman cinco iglesias y tres movimientos judíos, en sus propias palabras. Sin puntaje.",
     "status": "ok"
   },
   "sd.lede": {
@@ -1778,8 +1778,8 @@
     "status": "ok"
   },
   "sc.desc": {
-    "en": "For each issue, the Bible passages and Jewish texts each tradition's statement cites, grouped by the side its words take. The site does not say which reading is right.",
-    "es": "En cada tema, los pasajes bíblicos y textos judíos que cita la declaración de cada tradición, agrupados según la postura que toman sus palabras. El sitio no dice qué lectura es la correcta.",
+    "en": "For each issue, the Bible passages and Jewish texts each tradition cites, grouped by the side its words take. The site does not say which reading is right.",
+    "es": "En cada tema, los pasajes bíblicos y textos judíos que cita cada tradición, según el lado que toman sus palabras. El sitio no dice qué lectura es correcta.",
     "status": "ok"
   },
   "sc.lede": {
@@ -2064,7 +2064,7 @@
   },
   "ac.desc": {
     "en": "The bills each tradition's own advocacy office publicly backed or opposed in Congress since January 2025, beside its official position. No count.",
-    "es": "Los proyectos de ley que la propia oficina de incidencia de cada tradición apoyó o rechazó públicamente en el Congreso desde enero de 2025, junto a su postura oficial. Sin conteo.",
+    "es": "Los proyectos que la oficina de incidencia de cada tradición apoyó o rechazó en el Congreso desde enero de 2025, junto a su postura oficial. Sin conteo.",
     "status": "ok"
   },
   "ac.lede": {

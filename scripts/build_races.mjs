@@ -222,9 +222,11 @@ const COPY = {
     lang: 'en', other: 'es', target: `${SITE}/quiz`, siteName: 'The Purple Strip',
     title: (r) => `${r.cand.name} and ${r.opp.name} on the 2025 Texas bills`,
     docTitle: (r) => `${r.cand.name} and ${r.opp.name}: ${RACE_EN[r.cand.office]}`,
-    meta: (r) => `What the public record shows about both candidates for Texas ${r.cand.office}: `
-      + `${r.rec.cast} recorded Texas House votes for ${r.cand.name}, and ${r.opp.evidence} for ${r.opp.name}. `
-      + `Free, no sign-up, no cookies.`,
+    // Under 160 characters, so search results show it whole. It used to append
+    // the payload's evidence fragment for the second candidate, which ran to 306
+    // characters and put a pronoun before the name it stood for (25 Nov 2026).
+    meta: (r) => `The ${RACE_EN[r.cand.office]}: ${r.cand.name}'s ${r.rec.cast} recorded Texas House votes from 2025, `
+      + `and what the public record shows for ${r.opp.name}. Free, no cookies.`,
     kicker: 'Texas House · 2025 session',
     // Past tense since 12 Nov 2026, with results and resultsLink. The Spanish
     // below was approved by Marco the same day; nothing but a person checks it
@@ -260,9 +262,8 @@ const COPY = {
     lang: 'es', other: 'en', target: `${SITE}/es/cuestionario`, siteName: 'La Franja Morada',
     title: (r) => `${r.cand.name} y ${r.opp.name} ante los proyectos de ley de Texas de 2025`,
     docTitle: (r) => `${r.cand.name} y ${r.opp.name}: ${RACE_ES[r.cand.office]}`,
-    meta: (r) => `Lo que muestra el registro público sobre ambos candidatos a ${OFFICE_ES[r.cand.office]} de Texas: `
-      + `${r.rec.cast} votos registrados en la Cámara de Texas para ${r.cand.name}, y ${r.esOpp.evidence} para ${r.opp.name}. `
-      + `Gratis, sin registro y sin cookies.`,
+    meta: (r) => `La ${RACE_ES[r.cand.office]}: los ${r.rec.cast} votos registrados de ${r.cand.name} en la Cámara en 2025, `
+      + `y lo que muestra el registro de ${r.opp.name}.`,
     kicker: 'Cámara de Texas · Sesión de 2025',
     lede: (r) => `Compitieron por ${RUNNING_FOR_ES[r.cand.office]} en la elección del 3 de noviembre de 2026. Solo una de las dos personas ha emitido votos sobre los proyectos de ley que este sitio consulta, y eso es un hecho sobre los cargos que han ocupado, no un juicio sobre ninguna de ellas. Esta página dice exactamente qué muestra el registro de cada una, y dónde los dos tipos de registro dejan de ser comparables.`,
     h2dem: (r) => `Qué muestra el historial de ${r.cand.name}`,

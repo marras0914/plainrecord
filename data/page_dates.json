@@ -30,7 +30,7 @@
       "date": "2026-11-25"
     },
     "/bills": {
-      "sha": "c8f6aa8e2940b51e93e4c53e75b6cf492bba2a49008c71f9d0c65aaf8a6a5cca",
+      "sha": "06d01004edcf9e7845d58ff20acdb0b5359ae36b458dbef7c4ddb4bd2edd4d83",
       "date": "2026-11-25"
     },
     "/charts": {
@@ -38,19 +38,19 @@
       "date": "2026-11-25"
     },
     "/classroom": {
-      "sha": "12d809918a15330784f29abafa9a10a03790b77a902c9bbe1a5dd5c9ebd95bf4",
+      "sha": "2c7e2b46a269a343edef2159aeb2ae7ea1214b0a81bea9b01b0e79f9b3110be5",
       "date": "2026-11-25"
     },
     "/contienda/gobernador": {
-      "sha": "1accb9da9cae649a89993f39cfd3e8e3793b9f5a6cc567839e12cc3652956737",
+      "sha": "7b351a06eac5e205285f281cdaae29ac8527f4588ab258730bacc7bc94aaadde",
       "date": "2026-11-25"
     },
     "/contienda/senado": {
-      "sha": "29d22f9d5ec35d96220ae5dc3a171253a3173bfb9299d96290d807624886d872",
+      "sha": "c2e9d43b266df6b4e71335c70c517990f91f9e25a04865fb2914664f60280e03",
       "date": "2026-11-25"
     },
     "/contienda/vicegobernador": {
-      "sha": "a7b9077946accc7f62ededc751b7829a1615c37e312c6ee176dd91c79ce1149d",
+      "sha": "d762da5eb73663e5ef9257a01d896d220bb584cada010daac68cf42a8afe9388",
       "date": "2026-11-25"
     },
     "/district/1": {
@@ -654,7 +654,7 @@
       "date": "2026-11-25"
     },
     "/districts": {
-      "sha": "edf3280564ad0843b6ad261b6f08874a6952d7f2db960d2d56b09bdebdc935b0",
+      "sha": "9e5212f7ef364cd0f5b3428e674b7747b2ce4c5a1903cf4ad04fb2233fe09ea4",
       "date": "2026-11-25"
     },
     "/distrito/1": {
@@ -1258,31 +1258,31 @@
       "date": "2026-11-25"
     },
     "/distritos": {
-      "sha": "48717be7435dcbf354c0aeebfdeb8d80cb9e48705ea8adac0001b503c260d0f7",
+      "sha": "adf68153c2042e33a3b032f8c1e61eb3b6071c9688680859ceb9406679b68f68",
       "date": "2026-11-25"
     },
     "/economia": {
-      "sha": "dbf52f693a8334a6afe199fdebbabeadbfc9f8429b703b3b61f111e9e5e5286d",
+      "sha": "55f95ad015b6a1a2df5f20aa77e43ce1c9d0db32c2ddd25349cd4a38c38013c0",
       "date": "2026-11-25"
     },
     "/economia/explorar": {
-      "sha": "95d1da28c528a7974713ceb48fb1af95d717a76fce1351348b08552a7e7449e5",
+      "sha": "9c90d175fba685d6d40fea23207abadb477b0099bce1befc1cb25f1c97a6a6d7",
       "date": "2026-11-25"
     },
     "/economia/metodologia": {
-      "sha": "6c2d919cf9ee9344c878586d5efda0db837a70e3494a964470ebf17e248b6ab8",
+      "sha": "c19b10917a1a6b9241b0b5777f950ace02acb72c64f0f962113df2e70399b4c6",
       "date": "2026-11-25"
     },
     "/economy": {
-      "sha": "828eb436d0e2445909c80ec15375191bb6961630a6507c66ed433459e62ca122",
+      "sha": "0dc3d5991b93931af5948ddb24660cc2dc40d788b8d65803d384853052580298",
       "date": "2026-11-25"
     },
     "/economy/explore": {
-      "sha": "c72b3d1ec5a0c69bb8e060b8b6f0d31f21b0d84fc1bc2db0349021a6ff3a2ef3",
+      "sha": "40f92748971554598a92251e8000cd92c5a622646d978543e68279a38a95c169",
       "date": "2026-11-25"
     },
     "/economy/methodology": {
-      "sha": "67f990f8388a3cd81cba67c82ef8dc4ef4ccae292b55fe9e31be647b1734bf8d",
+      "sha": "ecaedf6053aa70331d8c751908630b18311830d5e5debadc587d003177d19930",
       "date": "2026-11-25"
     },
     "/fact-sheet": {
@@ -1290,19 +1290,19 @@
       "date": "2026-11-12"
     },
     "/faith": {
-      "sha": "09cfe62bd77eff704146702e8c7736dd2c6aa260126c174a6b59c0ef944b7724",
+      "sha": "645fd0d3fdf5e0ff3116c772d8c9fda93b6a561f21bc7aa69f98631ccdd6a463",
       "date": "2026-11-25"
     },
     "/faith/ame": {
-      "sha": "6d7dc071a8ad30826b00b163884439b80907c7d6c4fcb747e50d5fd17d06e736",
+      "sha": "c7de948f6e217a395d47893edc45baae69f1642def7c3acb1e25024c72de66b0",
       "date": "2026-11-25"
     },
     "/faith/assemblies-of-god": {
-      "sha": "0add8d3609409e507d9c0cebf7acdaa8c01c459f4ad9affc41a92a0b843e9b4a",
+      "sha": "893e97ae43ba2770ea8f9b24c5965dc5de3f0dd62af15037519e56ef85e88290",
       "date": "2026-11-25"
     },
     "/faith/catholic": {
-      "sha": "0128ddf9e30b8b133ddfe1eb992049c1479ec4a0871d839e432ff12c71549cdc",
+      "sha": "0556ed1e35de9a45b614c0f2a5d7b6509eb231f972654819b0af144c4e1883ff",
       "date": "2026-11-25"
     },
     "/faith/catholic/texas-house": {
@@ -1314,7 +1314,7 @@
       "date": "2026-11-25"
     },
     "/faith/conservative-judaism": {
-      "sha": "bcbdb30787e2563fd4185eb8a8320aa8270a844164e28445bf518943939d9896",
+      "sha": "2ee65b1c811bd392e52e857fe755cec376ea0a0855b362b0688ac92354938466",
       "date": "2026-11-25"
     },
     "/faith/members": {
@@ -1322,83 +1322,83 @@
       "date": "2026-11-25"
     },
     "/faith/methodology": {
-      "sha": "421e466a064d598bd30f41a19dc104c681d76e98783b44d30f960d673a43c794",
+      "sha": "a4c27255333e97cd87757ed8fd03f9ad9e917dad0025133fc7e22d67777aa345",
       "date": "2026-11-25"
     },
     "/faith/orthodox-judaism": {
-      "sha": "d378c979cf87e5f37260b667387d6a83917defe9aeb21212cdd8067083bdc7ec",
+      "sha": "bc706b8a019ec6cc3b686eb33d0de564fb40e2ddb7d9f38f7124179e406f2c19",
       "date": "2026-11-25"
     },
     "/faith/reform-judaism": {
-      "sha": "1392fe33263003e487d84695d05cf231fe43113bb8942469b5a4462778cdd332",
+      "sha": "1c26361d5bb3c695c1784ba7e673d4672f06429aeb962b804fe23178d4aa40e4",
       "date": "2026-11-25"
     },
     "/faith/scripture": {
-      "sha": "cfc8f567aed864694ed109a04834126b24426ad8c9032194151f533531a9182d",
+      "sha": "51f75dbcff0720903df4aadca52609daaaf17a22d2902faddbccf3e12d32e33b",
       "date": "2026-11-25"
     },
     "/faith/sides": {
-      "sha": "f234759620b2d00f7683e0f9ae85a27c2733280fd5670eeb000af40a5f7a7f1b",
+      "sha": "524642d0aaf87c48b12b882161e9a1adafe0c27f03f5aef0411f6cdbd8d2af0d",
       "date": "2026-11-25"
     },
     "/faith/southern-baptist": {
-      "sha": "074f7dd51d7c60b33683a41e41ff821cbabadcb10eaf8722af37b8802587900f",
+      "sha": "f7b8a54b7d49bcea154c1e10bd0d108605e84cdde040b5117d90e692a4d67be7",
       "date": "2026-11-25"
     },
     "/faith/united-methodist": {
-      "sha": "c09df8edc4c9f5a710892a26678b7a0eb0b2a7967eff31dc3392ac5a4645bd4f",
+      "sha": "81d31b99fcba64b891e2a04473be6631ca527d9e55f0a75c1b93b3a6191ee9d6",
       "date": "2026-11-25"
     },
     "/fe": {
-      "sha": "81f67138f991ec830cadf0cc2e7edad16963b7fe638c8873edd0e0f2a39baf02",
+      "sha": "3e2e0cbed565b22656ce0bd3bc47c3913872dd2e6e5952518b74d905bd2abf3f",
       "date": "2026-11-25"
     },
     "/fe/ame": {
-      "sha": "06f02877e8c2b4a62451255c0ceb1063162237b4f8d31caab59d6fcc805dbea1",
+      "sha": "bb8f55ce1e808a6549d359093e1e29e784c1dd6fe1e566d15afcd2a223fb1d91",
       "date": "2026-11-25"
     },
     "/fe/asambleas-de-dios": {
-      "sha": "23951084cac5b963cae6ccdd00ee03df3e354984acb7c2b065c6df5d3e359110",
+      "sha": "5cc85b44fae2ab7d86846709898d422347851876140059e990be2cd2577a6488",
       "date": "2026-11-25"
     },
     "/fe/bautista-del-sur": {
-      "sha": "863fd7cf6f090e5ceaf3d62511ff482be1fb912f7ccfaee5cfa1d29b509a82b5",
+      "sha": "51c61446c8aea6b34789979918c713235321a7da3f0359311e1a688df5d27d83",
       "date": "2026-11-25"
     },
     "/fe/catolica": {
-      "sha": "b309bde5232c84d054ba56a88a6e86d434462f758a101de2e33d6b0f7822aa8f",
+      "sha": "84e43e4a391509b850cd3a6c807209978c0c02b52c4b8e41b080a704e552c3f7",
       "date": "2026-11-25"
     },
     "/fe/catolica/camara-de-texas": {
-      "sha": "d0b3c321825b6f5ab889d2ff2fc1a131d021288c4eb1a44b05a0b12fdea59038",
+      "sha": "521cff03dd8848cb2202343b6bc92ba21d0c8b1917289bc55dd3c9bafea98d0b",
       "date": "2026-11-25"
     },
     "/fe/congreso": {
-      "sha": "662d589a314431a0ab966d2f5d5cce30b91fd744c3f2a03edaa6c3ca188fb41f",
+      "sha": "d5f97c0bcc90416032d45f87a931ebca2e7274dcb5f2a682594969e7dd9edffc",
       "date": "2026-11-25"
     },
     "/fe/escrituras": {
-      "sha": "ff871ec3cd21a7497a5bee7ad099166f1b8cac850eb2b9b7560e5cc1d9804c48",
+      "sha": "00d823e8fbecd89a03edc13fc0748a3de53ebf578bf46f988d85109b5948b4c8",
       "date": "2026-11-25"
     },
     "/fe/judaismo-conservador": {
-      "sha": "f9def9dc097caa36a15633d430972a14072ecf2a61b3819d664b1fa79bbea256",
+      "sha": "baa6563c759f339e4ca861818fa52f752d232405c27b27720f64a165e2cda55c",
       "date": "2026-11-25"
     },
     "/fe/judaismo-ortodoxo": {
-      "sha": "33ed96bae39f401c6a0750651a90c2023dd1a40d1cc86e4cbdf4d411e9949c5d",
+      "sha": "d92aaacfa09df8d31cce3aed3e8d0bb885026e3d658c3cea8932bf55f9bcd225",
       "date": "2026-11-25"
     },
     "/fe/judaismo-reformista": {
-      "sha": "467a8d1fe321a01617c2ec78675e3f3276fe2d9617c8032946c272b8a6901d1a",
+      "sha": "73e8e98ba90d9bd9932b106c722f685c493840cd6860763eb99cdea63c043253",
       "date": "2026-11-25"
     },
     "/fe/metodista-unida": {
-      "sha": "356a40793333afa9ed53a441236a018350a0d442dee7216775faccb99a15d36c",
+      "sha": "7889011c95bf765eb5b98b1ca4a92ff39ad9a9bab04ae19e37054d2c9d047849",
       "date": "2026-11-25"
     },
     "/fe/metodologia": {
-      "sha": "e7f71b72bc41b4951a40d07176aef65611fd5ac07b189e58452d9ba0f374974f",
+      "sha": "df78c28c56f1bf75537578ae24a3c8379bd9d8631dd905d1ff056cb407e9bab7",
       "date": "2026-11-25"
     },
     "/fe/miembros": {
@@ -1406,19 +1406,19 @@
       "date": "2026-11-25"
     },
     "/fe/posturas": {
-      "sha": "7cf9bd79e10b574c2814d19a92f4903ed73a5ffb933719659c8067dc29cf6176",
+      "sha": "7822352c617172abb3da0970f64e135a6d472c302680ed842cef6cf5f5c9fa1c",
       "date": "2026-11-25"
     },
     "/graficas": {
-      "sha": "33edc2aa3efdd41b99f43ed14e5627271293a0dd35943ceebda31cfeff00f3be",
+      "sha": "456c8fe612e327c760445025bea23899c1682f726ace9f2bb960f76985cb2041",
       "date": "2026-11-25"
     },
     "/hoja": {
-      "sha": "fb7cdce720e6aad8ff5daa5803b1e692be51b7a75531387f54d7e2038fa4d631",
-      "date": "2026-11-12"
+      "sha": "67ae8b2d1419469fb1282cf4b80e2b4204dfe3d4faef0dce7fb8a987091d2aa6",
+      "date": "2026-11-25"
     },
     "/maestros": {
-      "sha": "34848bd23a055fc124aa4cfd4a82bae0e01f1a54c76b6ae24b4775e82e79c52f",
+      "sha": "374b0a940e1b18cb194f1bbad25d6fe9e3436528002bd30613e956cb0b8eb56b",
       "date": "2026-11-25"
     },
     "/open-data": {
@@ -1426,55 +1426,55 @@
       "date": "2026-11-25"
     },
     "/policy": {
-      "sha": "152faefff054e3fc9c7e889a846782f7a2cba80f4e27507afdf237831cb46e7e",
+      "sha": "2415527da156d216cfac482581181b6fd9f7e358ab25a2e3cd7d7f6c021c9c65",
       "date": "2026-11-25"
     },
     "/politica": {
-      "sha": "bb66691e86ce9734ce97fd1fb6148d242d506cae1f14d5ce957df52f07e64d32",
+      "sha": "7da1d758f87bce3738eb9026d1bc9acfaf990a5684d0b11241bb41082dbac6f4",
       "date": "2026-11-25"
     },
     "/proyecto/sb-2": {
-      "sha": "32a64ff77bc3ecae4fbb6f16d4c2769a6207dde5eafac231f08e77699c04f535",
+      "sha": "db4daaf6faf222c1228bfa423fc26ad794ac2e86093aee8729890f6314ca1fe1",
       "date": "2026-11-25"
     },
     "/proyecto/sb-3": {
-      "sha": "6a10f69c2bdd5dacd1ae17075d7f9dfdc7a244647a71539addfe4b5edfe0d329",
+      "sha": "49e7bd11f634769de4b0a124d890e43f4c0411fffc4cf75e3a009d9960f53fdd",
       "date": "2026-11-25"
     },
     "/proyecto/sb-5": {
-      "sha": "8deea0f5a45327703ab58973dd86209f314454f4bbd68db15c92dc84b1f6ba7c",
+      "sha": "e7351f3237dc024c66da7bf6c22a93cb8621abd189d3e3c638629233b39bdbd7",
       "date": "2026-11-25"
     },
     "/proyecto/sb-6": {
-      "sha": "bccfc30899d3ddcc4a1c8636a0b5d8cf18074f7a6177f6b16e91b832d175d031",
+      "sha": "00d57aa83d8374d25845bdb20e68f509763c65a62aaab83a1643fc9b68e1bdb9",
       "date": "2026-11-25"
     },
     "/proyecto/sb-8": {
-      "sha": "9b5dcff440eb17a71fd028f3391a71584bd53208eb86c3b667468d7ecad9ec2b",
+      "sha": "aeadba0160a454ad58cc523360cff2569f41fd1438071ad17f5456d8c44f47da",
       "date": "2026-11-25"
     },
     "/proyecto/sb-10": {
-      "sha": "05798ae6ddddedcf481858fe86c126ade9fbe3798d4b47898ad7e5919be614e7",
+      "sha": "8f7bee13ab948e656771b41a26afcf2bddef3877ed7de91834acc37cb5abef01",
       "date": "2026-11-25"
     },
     "/proyecto/sb-14": {
-      "sha": "6e5843ba681d789e58c8b728618885d576b2a1d2606bd8ad9c3c91407ab169a7",
+      "sha": "86b71d1ffcdd305ceb7770161b45ecf422216aaa07bd3f48568a042a61c14149",
       "date": "2026-11-25"
     },
     "/proyectos": {
-      "sha": "f69bad68d8d98b130fe25a5e7f1b3b0cc80e500b0be83ea06b7dec37d30c9868",
+      "sha": "8817a7ee01c5e2a61ebb2a4ee7f981c1cd1a4dcf60705e7fdc92814461346a8b",
       "date": "2026-11-25"
     },
     "/race/governor": {
-      "sha": "c1012c37f7cd2610bc61baa6e5e555df1b55409b11530365276d29d9e850cf5a",
+      "sha": "1a7ac60ffe078094d56dd49da674fcab8c67d5ee25e7f136897b10d158a2b53f",
       "date": "2026-11-25"
     },
     "/race/lieutenant-governor": {
-      "sha": "cc0dc177fb60ae5cc2a65db9a20ae286bc9d4b9ac53a1a6e932376807b8bc8a6",
+      "sha": "508a650627d30c1e59462a00378303089bf2de2f2e219f463bc28864d99aa137",
       "date": "2026-11-25"
     },
     "/race/us-senate": {
-      "sha": "0090018ff13ec3a5b21abffd297f83b61274e2c301da2382cf8c12f974e51a85",
+      "sha": "55021d0bb882a5b2a68e2283246611ac012c65788f4b798b06fce2f92e8ca645",
       "date": "2026-11-25"
     }
   }

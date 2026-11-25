@@ -75,6 +75,9 @@ export function themeToggleHtml(lang) {
     + `<span class="t-dark">${word('theme.toDark')}</span><span class="t-light">${word('theme.toLight')}</span></button>`;
 }
 
+/** The longest meta description a page may carry. See document_(). */
+export const DESC_MAX = 160;
+
 export const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
@@ -293,6 +296,9 @@ export function document_({ lang, title, docTitle, siteName, desc, canonical, al
   // A string here gets stringified again and ships as one quoted string, which
   // Google rejects as 'Invalid top level element'. /districts did exactly that.
   if (typeof jsonld !== 'object' || jsonld === null) throw new Error('document_: jsonld must be an object, got ' + typeof jsonld);
+  // Search results show about 160 characters of a description and cut the
+  // rest. On 25 Nov 2026, 56 pages ran past it, the longest to 306.
+  if ([...desc].length > DESC_MAX) throw new Error(`document_: description for ${canonical} is ${[...desc].length} characters, over ${DESC_MAX}: ${desc}`);
   return `<!doctype html>
 <html lang="${lang === 'es' ? 'es-US' : 'en-US'}">
 <head>

@@ -367,7 +367,7 @@ const COPY = {
     // so the title, h1 and description say that and the ZIP box sits first.
     indexDocTitle: 'Who is my Texas state representative? Find yours by ZIP code',
     indexTitle: 'Find your Texas House representative',
-    indexDesc: 'Type a ZIP code to see which Texas House district you are in, who represented it in the 89th Legislature, and how they voted in 2025. All 150 districts, free, no cookies.',
+    indexDesc: 'Type a ZIP code to see your Texas House district, who represented it in the 89th Legislature, and how they voted in 2025. All 150 districts, no cookies.',
     indexListHead: 'All 150 districts',
     indexCharts: 'See every House vote in three charts',
     indexLede: 'One page per member of the 89th Legislature, showing how they voted on the bills that drew the most attention and where they broke with their own party.',
@@ -439,7 +439,7 @@ const COPY = {
     lede: (m, r) => `${m.n} representó al Distrito ${m.d} de la Cámara de Texas en la 89.ª Legislatura (la sesión de 2025) y es ${PARTY.es[m.p]}. Esta página es el registro: de los ${r.total} votos que publica este sitio, ${m.n} emitió ${r.cast}, y en los ${r.divisive} en los que los dos partidos tomaron lados opuestos, ${r.crossed === 0 ? 'nunca votó en contra de su propio partido' : `votó en contra de su propio partido ${r.crossed} ${r.crossed === 1 ? 'vez' : 'veces'}`}.`,
     indexDocTitle: '¿Quién es mi representante estatal en Texas? Búsqueda por código postal',
     indexTitle: 'Encuentre a su representante en la Cámara de Texas',
-    indexDesc: 'Escriba su código postal para ver qué distrito de la Cámara de Texas le corresponde, quién representó a ese distrito en la 89.ª Legislatura y cómo votó en 2025. Los 150 distritos, gratis y sin cookies.',
+    indexDesc: 'Escriba su código postal y vea su distrito de la Cámara de Texas, quién lo representó en la 89.ª Legislatura y cómo votó en 2025. Gratis y sin cookies.',
     indexListHead: 'Los 150 distritos',
     indexCharts: 'Vea todos los votos de la Cámara en tres gráficas',
     indexLede: 'Una página por cada miembro de la 89.ª Legislatura, con cómo votó en los proyectos de ley que más atención recibieron y dónde se apartó de su propio partido.',

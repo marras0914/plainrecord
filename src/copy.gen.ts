@@ -930,7 +930,7 @@ export const ES: Record<CopyKey, string> = {
   "tip.position": "su posición",
   "tip.chamber": "cámara",
   "page.title": "Votos en la Cámara de Texas: Goodwin, Hinojosa, Talarico | rightnleft",
-  "page.description": "Un cuestionario a ciegas sobre votos reales de la Cámara de Texas. Responda sin saber qué partido tomó qué lado, y después vea dónde queda usted y cómo está Texas en realidad.",
+  "page.description": "Un cuestionario a ciegas sobre votos reales de la Cámara de Texas. Responda sin saber qué partido votó qué, y vea dónde queda usted y dónde está Texas.",
   "page.langSwitch": "In English",
   "page.translationNotice": "Todo lo que escribimos nosotros está en español. Los títulos oficiales de los proyectos de ley se quedan en inglés, tal como constan en el registro: traducirlos los convertiría en otra cosa.",
   "strip.legendRamp": "Codificado demócrata ← posición → codificado republicano",
