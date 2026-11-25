@@ -2,1480 +2,1480 @@
   "_meta": "The day each static page last changed, keyed by path, with the SHA-256 of its committed HTML. Written by the build (scripts/_page_dates.mjs) and read for the sitemap lastmod. Do not edit by hand.",
   "pages": {
     "/bill/sb-2": {
-      "sha": "c38dd6870585f029385e3b8ae3471496090fa214f0b4177dc617f5b71e8e1fba",
-      "date": "2026-11-17"
+      "sha": "4ea932b4b8afd414ec1a798e003d87d50a4f82a990d745024c41993d46e9ad03",
+      "date": "2026-11-25"
     },
     "/bill/sb-3": {
-      "sha": "65291358eafeb3fc69fde667f1a2f2153353374f518656efa126a0e6a9b286e2",
-      "date": "2026-11-17"
+      "sha": "8f891e4eaaf1215942af2a728d4e1831236a3abc07f5f4e03cbe1d201406134f",
+      "date": "2026-11-25"
     },
     "/bill/sb-5": {
-      "sha": "2845dcbac565b428bd82dffacd98fa7ba1806d5985cf8b7be0a85ecd9fe4f43d",
-      "date": "2026-11-17"
+      "sha": "b61d9328d86841f64196690d8d2dbbfd1b37d049f1c9673a81a9e45a087968c4",
+      "date": "2026-11-25"
     },
     "/bill/sb-6": {
-      "sha": "656d199ffcd48c5ddd6801c406443383826af443917d746b2a39b862306ef52b",
-      "date": "2026-11-17"
+      "sha": "d0886833c71320abfeff88b6e408b76fc05128132078bcca0f8605c62cdb6451",
+      "date": "2026-11-25"
     },
     "/bill/sb-8": {
-      "sha": "8def018bd6a219ea542a816d1109e39861a3ac028c79dad54f8c693230178a3f",
-      "date": "2026-11-17"
+      "sha": "61c488ed4d4c918f112dc626d4628db7d370b65967700c4c7fbb3a0262935c4c",
+      "date": "2026-11-25"
     },
     "/bill/sb-10": {
-      "sha": "e39c14ba1cd06a399330f0e87120b55c8f1165d5574797e4372ad573e04ea670",
-      "date": "2026-11-17"
+      "sha": "105825aab1f860cf36dc8ff708d1db3fc9ec41f0538731e2f76270e36219c1d6",
+      "date": "2026-11-25"
     },
     "/bill/sb-14": {
-      "sha": "5940cf2fcad1d3f3631946efade228a1616ac3f6882a4dfe9050985496145ee8",
-      "date": "2026-11-17"
+      "sha": "446385e81c36693a6abe5f781e5f719e264ebae1cbeaeb748d868a5c26ea8afb",
+      "date": "2026-11-25"
     },
     "/bills": {
-      "sha": "03c6503d1301eabc19067a4b1c8758771fffda66a7c0651655ef356fee7ff3c8",
-      "date": "2026-11-17"
+      "sha": "c8f6aa8e2940b51e93e4c53e75b6cf492bba2a49008c71f9d0c65aaf8a6a5cca",
+      "date": "2026-11-25"
     },
     "/charts": {
-      "sha": "9304e4aaedea5b3c570d41fce0edf68aeae78093146248da5deddc570fb6b2bf",
-      "date": "2026-11-17"
+      "sha": "cc6efdc361b48fdc8b9530153ce8e6ccff7449076447850877380874a331106b",
+      "date": "2026-11-25"
     },
     "/classroom": {
-      "sha": "03ca8b92bf10ecbc999436cf157a883925c2676f22c19d7f0be0eab23da88382",
-      "date": "2026-11-17"
+      "sha": "12d809918a15330784f29abafa9a10a03790b77a902c9bbe1a5dd5c9ebd95bf4",
+      "date": "2026-11-25"
     },
     "/contienda/gobernador": {
-      "sha": "8b1825866858d1ce0cb1775ab4e0215fe4e2dc4f9da89c24e5328948feb53056",
-      "date": "2026-11-17"
+      "sha": "1accb9da9cae649a89993f39cfd3e8e3793b9f5a6cc567839e12cc3652956737",
+      "date": "2026-11-25"
     },
     "/contienda/senado": {
-      "sha": "8a7b6634c07883e58c20d4187c34fe73e7718f43ed9d2e362d224f75ba665efa",
-      "date": "2026-11-17"
+      "sha": "29d22f9d5ec35d96220ae5dc3a171253a3173bfb9299d96290d807624886d872",
+      "date": "2026-11-25"
     },
     "/contienda/vicegobernador": {
-      "sha": "32bef6e6f34dc3a6150365ebbcf4d36771f68bf21df43131815459adc1bfbfb5",
-      "date": "2026-11-17"
+      "sha": "a7b9077946accc7f62ededc751b7829a1615c37e312c6ee176dd91c79ce1149d",
+      "date": "2026-11-25"
     },
     "/district/1": {
-      "sha": "ee8530143773a55c6679dbc737e606d91d179f45fbc7c377ef068a465c77ec7a",
-      "date": "2026-11-17"
+      "sha": "31b15bd1cc4acb914f9fb40353e71ba8f14dbdefa98afc1b5a724720bc7dad7d",
+      "date": "2026-11-25"
     },
     "/district/2": {
-      "sha": "98292422599a593b12ce5f9d677f7daa4b9789f2e17089127304cadace08c58b",
-      "date": "2026-11-17"
+      "sha": "5059259c7a128eb5a8bea1bb86a16bffad10e5fba8425726bb1b93e3a4bea8bb",
+      "date": "2026-11-25"
     },
     "/district/3": {
-      "sha": "4a64bae8dddcf9ec6bf3253b32e526e2933e9c099cc169ab28725c0746f836df",
-      "date": "2026-11-17"
+      "sha": "f4fb12fc5c4ef5c2824ffab2efc6d8ee548e5ea4841b7a3b112242e52b003143",
+      "date": "2026-11-25"
     },
     "/district/4": {
-      "sha": "81436d6aeeb708679cf7125b6d1a24284656ac98e483f72036a66e1a9dbe3f34",
-      "date": "2026-11-17"
+      "sha": "3b8eeed5aa2450b071fb3de0af1ecb7195cd630eb9ba5c803f8f591ba69efa25",
+      "date": "2026-11-25"
     },
     "/district/5": {
-      "sha": "efeb8a6f95dd3fb6c31c75541969cfee23e2ad2c491dd8260cee87eaada630d9",
-      "date": "2026-11-17"
+      "sha": "0441a3142eef51d4ea979d15311932439614ff4e50ecea1bcdc3b097e961064a",
+      "date": "2026-11-25"
     },
     "/district/6": {
-      "sha": "27bbd02b00a3e60f853ecaf5454bebd012094cf2254d5868268e6c7b877e38cc",
-      "date": "2026-11-17"
+      "sha": "ef961d34a7f594008d32d0d4dc9ab6a2becfe21d8b41192c11181aeac35197fc",
+      "date": "2026-11-25"
     },
     "/district/7": {
-      "sha": "81ce7ca500c3b504cb36ef2ed8e695ab3b8336f566932f1dd4dda96beed03c93",
-      "date": "2026-11-17"
+      "sha": "26c96dae2947a878d07bbe97b4d24ab9f37759edd98d15e095f2abdb6c3255c3",
+      "date": "2026-11-25"
     },
     "/district/8": {
-      "sha": "63471c2d20f51be7a1df60bbe829a681b9714c73fa5d7654933944748c19d59d",
-      "date": "2026-11-17"
+      "sha": "e718bb99b5365ff4299aef285b570ff79b8831ca93f970509249c942a024e01b",
+      "date": "2026-11-25"
     },
     "/district/9": {
-      "sha": "b4e91b1b92e93e140f91bf9d144a427ca63ad38235eefe5d0243cb38f0d647aa",
-      "date": "2026-11-17"
+      "sha": "ab818e2ad574ad3e29289bb1b43f60459acc99e3a5cc07f0a7cb3d3585da4d56",
+      "date": "2026-11-25"
     },
     "/district/10": {
-      "sha": "9a155b0f34e128ba94522279c59c4e3060e7380eda3393ebb40229413944c4a0",
-      "date": "2026-11-17"
+      "sha": "da73f04ef51f0ceccbe05290d5978253b703e3f8cc665da34325766236f192ca",
+      "date": "2026-11-25"
     },
     "/district/11": {
-      "sha": "a2b12574188da6090c1a98c33d972ef3c58c290d38046b387f6f160f989544e5",
-      "date": "2026-11-17"
+      "sha": "724db9d30fea9498868e5c89fc197b821e8efacafeb22a3126e66b4930a28419",
+      "date": "2026-11-25"
     },
     "/district/12": {
-      "sha": "664c216384997e8ae17e8c34ce3376819c69defa912349d14f990a12f4e82244",
-      "date": "2026-11-17"
+      "sha": "4f0f9088c177bf303614a24a4fe023bb1ff39421772a30f3ac6d27120a6250a3",
+      "date": "2026-11-25"
     },
     "/district/13": {
-      "sha": "8862192732269eac1bfaae1c7800996230f735b3e375645b4cf4651296a7f951",
-      "date": "2026-11-17"
+      "sha": "fd3617ac41e97560909a43886d7dcdbdfbfaa750bb321df7a98e2be5db5096b8",
+      "date": "2026-11-25"
     },
     "/district/14": {
-      "sha": "cdf8c102137c4b1f66e74dbd554ca1e1b4879695be93a52a755cd8e5329bef48",
-      "date": "2026-11-17"
+      "sha": "8dbe6afc14d2001a3b5ace005b7b9b3eaf83b05c5eb74098a5445d6785d77cdb",
+      "date": "2026-11-25"
     },
     "/district/15": {
-      "sha": "b4289801c85c84b60210eab8881cf8f49824de06845894992d965c418e14543b",
-      "date": "2026-11-17"
+      "sha": "8aff0c527f4a30cecef74acc4de717d8352db0a902b180611f5d63d90011a131",
+      "date": "2026-11-25"
     },
     "/district/16": {
-      "sha": "c85a54895b9f837ed446b63c8d75ccd8dff111403e75ab6e28193e9717d5e96f",
-      "date": "2026-11-17"
+      "sha": "37331efea8176648d9e2a0ae7423ac462ba0f933c884de81906721b30d23d323",
+      "date": "2026-11-25"
     },
     "/district/17": {
-      "sha": "7b2e24a5c64355050e688d314e6e9edb3f09ec48d17fee6b19bc66233ae569c6",
-      "date": "2026-11-17"
+      "sha": "6bccb4a98c4998fc18aec2201d4b012787d046c7cac4483dcfc41b028265e21b",
+      "date": "2026-11-25"
     },
     "/district/18": {
-      "sha": "405cd3985531331852aa5becfab9b4c1b6e28fdd34f56136b535b962ba5b1d4b",
-      "date": "2026-11-17"
+      "sha": "75c3e6d2f93fd5c9e45e084ce8d4148a519438bd40a2924966be4dd324a84f98",
+      "date": "2026-11-25"
     },
     "/district/19": {
-      "sha": "b5181c27ce9d6e5cc700736abb493c16d7322f0d1ebfac0c76aab9744a8e00ec",
-      "date": "2026-11-17"
+      "sha": "234e9553f1630c5a4902bd39ccd71788c06df0b72baeccec80711f20bf6f85b5",
+      "date": "2026-11-25"
     },
     "/district/20": {
-      "sha": "0478e950182f669da5d4de4e5a6038a5d0558ef94b6a6c0e31ca70acc3b09488",
-      "date": "2026-11-17"
+      "sha": "bc86698ca17d5ea2993355466c297231d8db176a9a614f13d3b69e96128eb2db",
+      "date": "2026-11-25"
     },
     "/district/21": {
-      "sha": "88107d7745ec3bd42becea4083f3732633de4a1231e6e5ab68768c97a3e975f8",
-      "date": "2026-11-17"
+      "sha": "6aec0c81e538678120d08fdd4ce1e26458d86c1eb08939339d0c12edcf845b3d",
+      "date": "2026-11-25"
     },
     "/district/22": {
-      "sha": "8342a51f6fa427070e4ba77cf2479d6b9342388a028b349f8e6123f09456f2f9",
-      "date": "2026-11-17"
+      "sha": "3cd4f2021dc1566a44f17aa40b9729a029972c1462f201d612126e0e37311ece",
+      "date": "2026-11-25"
     },
     "/district/23": {
-      "sha": "bd199b16a004b1139c0c2205e58eed37082292e09782b551b5deff8e45138111",
-      "date": "2026-11-17"
+      "sha": "75497cae65478de53a3484fa1dc9372989d9cd107a9dd12743f522d51c9b6ca6",
+      "date": "2026-11-25"
     },
     "/district/24": {
-      "sha": "3de200900d9f8ba8ea2498a27f0f4e59e5792b58dde48362f4f62e4274681af5",
-      "date": "2026-11-17"
+      "sha": "74cb0cadc26320adbf6c914bd211f0372a69cae3c1e9bcb9d6f59918fbe626b0",
+      "date": "2026-11-25"
     },
     "/district/25": {
-      "sha": "66302a9f3dc1658638b61eb2308ff514999a395cabce3d6cb60d72f85d3ff69e",
-      "date": "2026-11-17"
+      "sha": "caabd9e1b511ce3075a72ccb77049698ba4777cd4c3da442fd0a6ead23d5809d",
+      "date": "2026-11-25"
     },
     "/district/26": {
-      "sha": "142ed5b25343d645b4e9c8a10340ef33c1ba065590a2311971cbdd618a839609",
-      "date": "2026-11-17"
+      "sha": "53e0208bbda3671d430a4b3806dce192db26e0cdec7f0b4acb02c62ff581558a",
+      "date": "2026-11-25"
     },
     "/district/27": {
-      "sha": "2026fe9f22777b1d31938faef761be2cb9a98bee1e35a80b542d70ee1348ddd6",
-      "date": "2026-11-17"
+      "sha": "0c1378723584d03db2493d9cf6ef767fea0193fe9db69daba6fdcfba849f06cb",
+      "date": "2026-11-25"
     },
     "/district/28": {
-      "sha": "e3c8ef8cd6042b0895f5d80069d696100099bcee7e1cde60a1d6f0283cc213f1",
-      "date": "2026-11-17"
+      "sha": "f1006626be0e0da9159c53f049006eb6544fc9efecae8ea7f943705899016159",
+      "date": "2026-11-25"
     },
     "/district/29": {
-      "sha": "82d3c35e809e4783fb58be9908d0e06c32bd3a3f89fcc7d336448aca53f95280",
-      "date": "2026-11-17"
+      "sha": "4e51b00a88dbd6f027781ea06e48a2465b1a061674a598c0e2d1016ce42190fb",
+      "date": "2026-11-25"
     },
     "/district/30": {
-      "sha": "451f500aff1ee685102d5f0f1617d2bbf3cfdd84c4e97c0d449253eea21d72f4",
-      "date": "2026-11-17"
+      "sha": "cee3c939c919b07711214b877dc96814063a750f51cbb4693b886c279832b2ff",
+      "date": "2026-11-25"
     },
     "/district/31": {
-      "sha": "78cd65b85b2de1bed59ff792141f28662defe8dfe99741a94b85abccaa8bf4b7",
-      "date": "2026-11-17"
+      "sha": "af7018c59e233398eec23c097f81c339baec8283dc7f2f66524dd840e88e28da",
+      "date": "2026-11-25"
     },
     "/district/32": {
-      "sha": "2e0b99575c2dffc93a845c44c07abd652e5fff003d47a36fd03dca60612d395a",
-      "date": "2026-11-17"
+      "sha": "d027c62a58c88f4e953406e927b7b62315e5e361456a53c58f5ae09f41800ce3",
+      "date": "2026-11-25"
     },
     "/district/33": {
-      "sha": "9f878b09b6c0ca72e0362cd40ae28b39997f8b1485d1ecf4fe5487003be95cdd",
-      "date": "2026-11-17"
+      "sha": "0974ab6475fb562303404fd7b1f9acce41759332ba769f4d750e313efcdeee82",
+      "date": "2026-11-25"
     },
     "/district/34": {
-      "sha": "473ad0c90a8af5c85d07ab79301a9682c14cf1187244a9b55fbc47dd78195b45",
-      "date": "2026-11-17"
+      "sha": "6d934ffdd88dceac2b31abd81acecba9e5fc3f15aadf064633676d91b2b5e6cf",
+      "date": "2026-11-25"
     },
     "/district/35": {
-      "sha": "65972fd6db5679407d37e431c7f5b6d547d0068932b6a0b1665ecbb7aefb5403",
-      "date": "2026-11-17"
+      "sha": "4f1166a2e294e8f2d83bf9f335a838558c97fc6730aeec2ff8ad3a6f3868b7e6",
+      "date": "2026-11-25"
     },
     "/district/36": {
-      "sha": "86b87cedbc4720f3c3ffaf337a11c292c6c4afa6970a59a58e4774460aa429ec",
-      "date": "2026-11-17"
+      "sha": "3724d6d9f7f3feaf97cbf4c337d0100b6ec3e8ba0ea6d75da7a66a45d5579102",
+      "date": "2026-11-25"
     },
     "/district/37": {
-      "sha": "df4688a2e5184569cac6ffbff98dbd6f11a88a3b708ff2c83c0fb8835b64896e",
-      "date": "2026-11-17"
+      "sha": "02bdebd247b606d7c5afff406162b413a9a865068944fca6c172b0e34c98b164",
+      "date": "2026-11-25"
     },
     "/district/38": {
-      "sha": "c9ab42d95f8dec8826676ecd6606bb020a7685c4b457bf44ca2b848648f97f2b",
-      "date": "2026-11-17"
+      "sha": "0f52a02c47ca67f457427c1373c05befcb88a94ce70962888f1d8dc2e46e0ec7",
+      "date": "2026-11-25"
     },
     "/district/39": {
-      "sha": "ef2dfc1bb60a12d34805799a4a009577110a394dce907623415128778963fdee",
-      "date": "2026-11-17"
+      "sha": "4863bcf566bfaf562e2b2c942cc275ebb4050bbf1ab336b7c297495785c568ba",
+      "date": "2026-11-25"
     },
     "/district/40": {
-      "sha": "72b9f8d0cb7066c409fedf2861079ea5dfb861997f2dd803d9d299af43ee88ce",
-      "date": "2026-11-17"
+      "sha": "a8951c9eae1cd2194dd1ef1a1a8073b04e50562d806e8127fdc793817df166e1",
+      "date": "2026-11-25"
     },
     "/district/41": {
-      "sha": "9bb757b986c68e0610a6030650ae87cecb7982a35a3ce360014afeff199e0bfc",
-      "date": "2026-11-17"
+      "sha": "301e1b22a9718c81b8ea1f45253408954a3a9a685a2247bce56c25fc6c77e5fa",
+      "date": "2026-11-25"
     },
     "/district/42": {
-      "sha": "d8b6efe32ad7567458a21fdc5096af636a7a04deccc391bdf769d7f1bce2e04b",
-      "date": "2026-11-17"
+      "sha": "c020510e6c03906e18e1e1aec92b1cb2b8da0372473b141d4c35801918fef247",
+      "date": "2026-11-25"
     },
     "/district/43": {
-      "sha": "08aefddd69139c606cf9724bf29f78142516c140b3a890064e8302518477d99a",
-      "date": "2026-11-17"
+      "sha": "1ce65134d93ce51f41aeddc5bc00afce310e9ccbef6e74617a20f724c745ca45",
+      "date": "2026-11-25"
     },
     "/district/44": {
-      "sha": "a07badc12066c94a3d1fc0d2b4a7957c16fd3f9492ee73b80eca4b28c50b01ea",
-      "date": "2026-11-17"
+      "sha": "2e8c81c12898000d69323d04c447e07de3ee0962c7a3feaacf4efe3255d10088",
+      "date": "2026-11-25"
     },
     "/district/45": {
-      "sha": "3b4cbe153b9566a12de68c922619a9653521a2b152f787e2f18fe1a6f4acb295",
-      "date": "2026-11-17"
+      "sha": "80e420d87263fcd3df155b2284e0e871d08e7884ece16703e2cc6c367732473e",
+      "date": "2026-11-25"
     },
     "/district/46": {
-      "sha": "cb6ef66e24462b13f901cdeb321b947c1e6369333b0b1c43160c5c50508d0ccf",
-      "date": "2026-11-17"
+      "sha": "8260966a09a74110231bdf72d0eb4dd0e144b02af813772b1f6e69abe1fee162",
+      "date": "2026-11-25"
     },
     "/district/47": {
-      "sha": "f9ed202bbcbe22246cdffa455c75a03d15f5241ca44cd9b2e49036a485a0c42c",
-      "date": "2026-11-17"
+      "sha": "b479afe88ecc73f872e6191a325a849487b96ddf07cde6b51c69eb82cc5f1989",
+      "date": "2026-11-25"
     },
     "/district/48": {
-      "sha": "6e7d9c47f98f8eec6890ee5895166eb7a0fb4fac55ee89cfe80a9217dea8c2c2",
-      "date": "2026-11-17"
+      "sha": "dcc432d7ce4eeb4f30256d5600bf6495e74a20880ad1f9f741f063192202c218",
+      "date": "2026-11-25"
     },
     "/district/49": {
-      "sha": "a71710fda7f0071548aa42a77f781aa908de61c47a4addd99f73f4d1c24d0b9c",
-      "date": "2026-11-17"
+      "sha": "04a1491b5963fada4387275aa1c3c48460e7580bea4e22cb39dc5d4e60087826",
+      "date": "2026-11-25"
     },
     "/district/50": {
-      "sha": "9d34dd765df0290f973f067445f22f4992939023506b9c2f6f0d17734e03cbe7",
-      "date": "2026-11-17"
+      "sha": "f79a96eabf668bb310797e59090d23de32683cefe12e55be13ffd72380fad205",
+      "date": "2026-11-25"
     },
     "/district/51": {
-      "sha": "eb011421c5c9bd60a50e9cd43c88f5f983eb3224ffe2521e38b1e2692e6f1a36",
-      "date": "2026-11-17"
+      "sha": "8f35d77eb8c199b2ae91ff74ae5cab9c29ea18442b86ace131b896e574e28748",
+      "date": "2026-11-25"
     },
     "/district/52": {
-      "sha": "cb174926484444e2f20e53ff1dc10c74bace91ce0f9f32dfc2705fa61c8c3b6e",
-      "date": "2026-11-17"
+      "sha": "14be9dd6f559a31c27a918f73271a041b8450bc89b0a2cd60b6c8c4c24cb0e8d",
+      "date": "2026-11-25"
     },
     "/district/53": {
-      "sha": "d395c8cf1ebf5f76dc9d2b0b33076fe402a414c42bb50a93afc3b03f43ad667f",
-      "date": "2026-11-17"
+      "sha": "7d387cda9776d1f7f2a19083e622f27c969bcd1a5bd68e9c3f3113f45404db37",
+      "date": "2026-11-25"
     },
     "/district/54": {
-      "sha": "45bf17f6b4b4192786b2799859466410d414bd940b09a187635820aec5763e5a",
-      "date": "2026-11-17"
+      "sha": "afb135ade317b48217fb7fb425bfa8d24be29bb6a5b1b2cb222915c8bb5f4aae",
+      "date": "2026-11-25"
     },
     "/district/55": {
-      "sha": "13e777280251628014fde22ab73e7e03d68da3f4f5308af576fcc7c56813170f",
-      "date": "2026-11-17"
+      "sha": "f91cd25c8e2e5b13b26845db1cd530d1e0fa7edb85eda88f9113c58a7e457fc8",
+      "date": "2026-11-25"
     },
     "/district/56": {
-      "sha": "a2c5d540404ee89d30ed0627077e407b9d66b4ecea12e068afec6f95e4cfa3ae",
-      "date": "2026-11-17"
+      "sha": "abd89b5eea05e4e020a323b7ee06c94954ca5a36efd19cc11ca3c74e8129c5f8",
+      "date": "2026-11-25"
     },
     "/district/57": {
-      "sha": "b2cae68d481ae043373dd5458a1628750674e59f4aa1366ef80a5efd5ebd7295",
-      "date": "2026-11-17"
+      "sha": "96bb86cb236eed9d80fb5816c310b9cce36a7cc89d3b1157dff02621510ae232",
+      "date": "2026-11-25"
     },
     "/district/58": {
-      "sha": "72726ef56bc30810705b84b695a7aaa6b168fd5bf2ae444f3e1b89c026e713a3",
-      "date": "2026-11-17"
+      "sha": "49083170ea8d77799f59d7d9274bbe4eee51db2fb5ee5e39c864659abde5752d",
+      "date": "2026-11-25"
     },
     "/district/59": {
-      "sha": "3f63f84cce24a68fca4fa57636660b31ca0fb46b208ba62d9b3c5095755b7a69",
-      "date": "2026-11-17"
+      "sha": "663f9aa704880a892b565634b3c61b1fcab095e33f32f0d4a0b064538ac47bbd",
+      "date": "2026-11-25"
     },
     "/district/60": {
-      "sha": "db078d48ce6882c74018a68ac7c745eb7649f9f0d6b5f72182e7b6eeea3f64aa",
-      "date": "2026-11-17"
+      "sha": "ad2ecdafb79f0db68e72f17dd1d61c932bdd559a584071baaaa5ddb7ed71352c",
+      "date": "2026-11-25"
     },
     "/district/61": {
-      "sha": "06562ffc5d83502b593961d9c63705215cbecd3ae2e9a8fa235779839ff7bfee",
-      "date": "2026-11-17"
+      "sha": "e26998dfc7f17f777c973bc38ccd86dd4df3400d7d7c5c9a00fbc6b68ea5266e",
+      "date": "2026-11-25"
     },
     "/district/62": {
-      "sha": "491392541c41216f034eb919406d097fa3bc37a4f550f81aa05407d1ce383928",
-      "date": "2026-11-17"
+      "sha": "e5aa27e8cdea654ace9152267872e6fb5fda7016a5ee115f4f5f30d1ffa0f320",
+      "date": "2026-11-25"
     },
     "/district/63": {
-      "sha": "7bcc5ea327d1f992d9a9584c0d241a155ecdc2bfc04e1b283f4e350d4225b823",
-      "date": "2026-11-17"
+      "sha": "2cafc596a4c99da7c8290e15efb0d3e76442add94c7e837faabb5723677c0f51",
+      "date": "2026-11-25"
     },
     "/district/64": {
-      "sha": "6d6b666fbe6bd683cc69f0990274fd62ac2ec5e0bc8e716e446d5f7743ef1029",
-      "date": "2026-11-17"
+      "sha": "4a7619eba96dfe919bf882752ebd781e699b2cad1f48fa355fa69a3fb479806c",
+      "date": "2026-11-25"
     },
     "/district/65": {
-      "sha": "3d2fb1c575ef1c863068a3c6641b91104eac99fec2ac8c1381de006ca70bff04",
-      "date": "2026-11-17"
+      "sha": "42c214b9ecebe925142eb1efa2e967af7963bc678f0d821e12920a18c599fa84",
+      "date": "2026-11-25"
     },
     "/district/66": {
-      "sha": "9a9ba7fe3d9c16362aadd3dc5b1f8554855774713f41eb18a239118dcabcd24c",
-      "date": "2026-11-17"
+      "sha": "78415656fb0630efdf5fddccf65f267ebd4bded768cd9bd2e89bf358bfabbe57",
+      "date": "2026-11-25"
     },
     "/district/67": {
-      "sha": "24c23872ccfec96fd71bf832d777ad20ee9896278b19560e15f464b2a11eb14d",
-      "date": "2026-11-17"
+      "sha": "c9c6b487f6236b1c9bc48fbb818d7bdd43fd07780b581584d1cfeaf561c23b41",
+      "date": "2026-11-25"
     },
     "/district/68": {
-      "sha": "8357addfbe5eed2e22ae0482dc79315110019a80ff494876a291e23f10c49270",
-      "date": "2026-11-17"
+      "sha": "c5d849cafe7eb135e1199b325f1541bddc9083e23c2b548d193321d066b4fd07",
+      "date": "2026-11-25"
     },
     "/district/69": {
-      "sha": "29536f8a4a1fea43684a146eeefd254f847fee61ef2a040d08a80e7f3b27dcd2",
-      "date": "2026-11-17"
+      "sha": "0b56909e2219436650ecf462c6bb5d498adbcf8614389aa5046cb6f241a69c04",
+      "date": "2026-11-25"
     },
     "/district/70": {
-      "sha": "cba7460de4f2342bd6ecdc6b44ad9001bb609643994307a803651815dec2399f",
-      "date": "2026-11-17"
+      "sha": "110bc8cf595c5ce8113783e606544b8abd2d5549a670a48016cba72ce9a3bccf",
+      "date": "2026-11-25"
     },
     "/district/71": {
-      "sha": "ef12fe156c88674bfa6de26ebd02931bfb896fe851de42c50bcaf22ed266c72f",
-      "date": "2026-11-17"
+      "sha": "ef14743da6a7c7d63ac5b2362ced2f1dcf9ebdcbe576dab0d9c43cf8d5b30e9e",
+      "date": "2026-11-25"
     },
     "/district/72": {
-      "sha": "025ef713acf46bf15c86f086f78265f8b81801b4e1831c310918bfd04b87e4ae",
-      "date": "2026-11-17"
+      "sha": "586f30d0e1f7bf674253099d3abc003b6d1d8a7dfd8b8f8bb1221b147b7fd424",
+      "date": "2026-11-25"
     },
     "/district/73": {
-      "sha": "c5f6086632cfe753f5f2e0396c7559b3a82eec089af404d88648bd5a80e1e1cb",
-      "date": "2026-11-17"
+      "sha": "01d26f5188a1577937fa9c0755dc493dd335effadab63d80b95a6fc62e6f6602",
+      "date": "2026-11-25"
     },
     "/district/74": {
-      "sha": "4830193dae6cb27f41212d4fe148aacd1ddfc1e00ad82901c859c5e82dda2da0",
-      "date": "2026-11-17"
+      "sha": "bdc8f25eb1dbf293947fd7f1a05f964ad0c19eb1059e27371f0bc4790e5f800e",
+      "date": "2026-11-25"
     },
     "/district/75": {
-      "sha": "2bad469f6c0593e12695927b49bd63df331b7f15817567d07e6e3d8e0e24cc40",
-      "date": "2026-11-17"
+      "sha": "b46346cfb1037bef0383fa4cc39dc76a5960609fa84847689c10647ecb50f18b",
+      "date": "2026-11-25"
     },
     "/district/76": {
-      "sha": "65981293225ddaffe79dfb783ea0578b20e86f5724add49f2de864deb8f257f3",
-      "date": "2026-11-17"
+      "sha": "90dbe780a2385aeb045b7876656361f48c07bc64235fb34e7a0d747b607512b7",
+      "date": "2026-11-25"
     },
     "/district/77": {
-      "sha": "df8612c2e2e9cba886d56d182c0689a684371dafc6a7a6e4805b5dfb562c7f9d",
-      "date": "2026-11-17"
+      "sha": "d964eab2b45a840c88c7242fd1bc8cc5a1dab746dc5e890f4fe8409840e0c925",
+      "date": "2026-11-25"
     },
     "/district/78": {
-      "sha": "df43438f1fb3f1aa189548b6e7973d818ea0fd1617ff54492549a0b583a2c531",
-      "date": "2026-11-17"
+      "sha": "9869ede3dcf186c5b02eefa831df9daae73924f053c80d91573be72785936751",
+      "date": "2026-11-25"
     },
     "/district/79": {
-      "sha": "1b2eba8582b2d722480ec988a9ac423f1dee39dde5d9fce0a93b7ddd046f765f",
-      "date": "2026-11-17"
+      "sha": "e9e1f25dad6aabf2c0ea039a91525b125e705e08bbed1167060634cd619714e3",
+      "date": "2026-11-25"
     },
     "/district/80": {
-      "sha": "d1f067b14caba6c5fd900d32e783ebc1468e82cd310a43127be6cfd675686d84",
-      "date": "2026-11-17"
+      "sha": "a58eda93e67be046190e1d0f8f4ee5e1eaaecb8b6b9c104f3f379919b9946b81",
+      "date": "2026-11-25"
     },
     "/district/81": {
-      "sha": "40e390434d71bead0505f4a23508e0503a73199c1f3c6bfe03c50eb5b274867b",
-      "date": "2026-11-17"
+      "sha": "361b86fa36e4cf582e9aca840c9fedc7e59ca0bc1092a9784c367afd1bb66edd",
+      "date": "2026-11-25"
     },
     "/district/82": {
-      "sha": "59dd736b336fd0ba2dc68e70bd8ac402ab6710fc13d7039c3eae4cb8961c829b",
-      "date": "2026-11-17"
+      "sha": "b7f1811eac15ce5b83339c3ebce66a6127e1c585f31d295c62cebff1e7f56b85",
+      "date": "2026-11-25"
     },
     "/district/83": {
-      "sha": "82dd6212bd6278a5c87029dde63d0348efcdbd29b3108a65ec22ff6b8f458384",
-      "date": "2026-11-17"
+      "sha": "c385242868344c6179779fb9687972a2b3880b4cdc7c717377eccb406dfdb457",
+      "date": "2026-11-25"
     },
     "/district/84": {
-      "sha": "57012de2942ff9f7c9c543b94635395583e8ef07f2df16a4921fd907dc5502cf",
-      "date": "2026-11-17"
+      "sha": "3426dee15e14ba81f375f5aaf0e4b5c1d5641f61401e3db90ce67230021c71b6",
+      "date": "2026-11-25"
     },
     "/district/85": {
-      "sha": "07d1a84860b8f6d8faaf81a2f5391518e133985a4f729d24f82d95d4b5f360a9",
-      "date": "2026-11-17"
+      "sha": "d8f9e63cd013c32b6fe7606d013336b074131d355c280bd4783cf0d16be401d4",
+      "date": "2026-11-25"
     },
     "/district/86": {
-      "sha": "0312eeec9f7454deb910d296d434e27cf140634e130daa6256498c0709bec0da",
-      "date": "2026-11-17"
+      "sha": "2a61736704ed930d5b4c5af312291e7c8b81b0df902470a777e60f514ce2414d",
+      "date": "2026-11-25"
     },
     "/district/87": {
-      "sha": "44c5a904bdf9ee4bbe4135c375762b613f149e814a2de4e9b8e7bc2fd0061b86",
-      "date": "2026-11-17"
+      "sha": "2c97753c6731375b1a9c87a03f8b89271b60f487d3c56a9a968d100d88bb2f6c",
+      "date": "2026-11-25"
     },
     "/district/88": {
-      "sha": "bc2840a11eefd5978b64fb2b6e046a00802ce62ac189778d2cd2b2f0bf2f3ac7",
-      "date": "2026-11-17"
+      "sha": "d9e4c873d17c447945146ad955a6f33afb4d0b3bf80e4248dc795a447108919b",
+      "date": "2026-11-25"
     },
     "/district/89": {
-      "sha": "848981f947cfe8c90ca1fa83cfdd14aacb8f2123407296ceea9b2afa0bb442a3",
-      "date": "2026-11-17"
+      "sha": "6c4db1e9f4c0309ca0d024bede72a8f519cd665392c9f1f7d49e92ea93cd300b",
+      "date": "2026-11-25"
     },
     "/district/90": {
-      "sha": "fdb0f25273d2897eb3a57a53d037fb03153de83f2f3cd4ed034ab4affa59ca39",
-      "date": "2026-11-17"
+      "sha": "828538f092737ca6ab1846dabd26835ee37098eeb76ecd1721ce2b36d6c2afa1",
+      "date": "2026-11-25"
     },
     "/district/91": {
-      "sha": "4a980df688ff26903df5c23824673afae22bb89788fef0a885c3274666744615",
-      "date": "2026-11-17"
+      "sha": "33b40a1e50fead8b45b74dfe638012e2963a710e428c6effb5875d5297d66760",
+      "date": "2026-11-25"
     },
     "/district/92": {
-      "sha": "8e3a23459a97be75318b63c4428b1bea3e258cd9307861faa2906ce89d0d811f",
-      "date": "2026-11-17"
+      "sha": "50b7106fe17f1c6194c3eaef5e7b24f42b653647b86f014097b7ec2a48a93435",
+      "date": "2026-11-25"
     },
     "/district/93": {
-      "sha": "25ca367f845155030c3c2663351d3a2802a9ac179cef5f10722a1de3e4865a71",
-      "date": "2026-11-17"
+      "sha": "5052ad138cdf4efb0a93318e7a1944423dfaae1dca0810b61fd97a9b1c6ff755",
+      "date": "2026-11-25"
     },
     "/district/94": {
-      "sha": "fd3fe56f521653f8dbf98edd3b27bf0d3e2dc001bab32173b644eb37bd63bd41",
-      "date": "2026-11-17"
+      "sha": "a5ca75ba96a1c2c056aaeafbaab514a66ba4aafb24bcdac915c73584fe04eee7",
+      "date": "2026-11-25"
     },
     "/district/95": {
-      "sha": "3275880b5570750b29b0111b3b4e4716e99dc4d1a8cc357c8f01def783b44eca",
-      "date": "2026-11-17"
+      "sha": "5f1c583b9a670d26fce862cb656c0a908f4d4e5806b2925b6c49c9fa64f93e71",
+      "date": "2026-11-25"
     },
     "/district/96": {
-      "sha": "276e17889bd7545fbd33478d2664254ede6c08828eb599f4a32d36ffebaa9569",
-      "date": "2026-11-17"
+      "sha": "6e5e654d49ca33780af55c5d083f28d7ae958a6154656ecdc012c020f84ad991",
+      "date": "2026-11-25"
     },
     "/district/97": {
-      "sha": "982f61331deaa90b3fe13ff5088c325fc5b35fe493e37ca58f93d73ed75be20a",
-      "date": "2026-11-17"
+      "sha": "03f46b4742c2d3212f8925d611fda5733ab11ac8da84bd7db17b9bc5a8983f1c",
+      "date": "2026-11-25"
     },
     "/district/98": {
-      "sha": "b999e4317d1fb942b83d3ad8ac1d62ce322dc2ae8451ea6ac38c566d283ee384",
-      "date": "2026-11-17"
+      "sha": "902720957ad9a42ef77a2886fad69b908bb780c38b44f9a1c53548e2ad6faa4c",
+      "date": "2026-11-25"
     },
     "/district/99": {
-      "sha": "6f9985c90cbf3f36af5faae50669abbff84031d847a42a5bcff3890203846f23",
-      "date": "2026-11-17"
+      "sha": "e676ab2b0e34fe413af74938e65f888d83628c28ad68f0d5594e1a1fb4dd7e02",
+      "date": "2026-11-25"
     },
     "/district/100": {
-      "sha": "f9211f5a5f87305a6a1f20c1186b5f2b7ba507ec512cbf45c10bceb02588ec07",
-      "date": "2026-11-17"
+      "sha": "8659cf2c085531960837a89ef3b89e000e1ea3397c9d2d533f6bd1c6ee159053",
+      "date": "2026-11-25"
     },
     "/district/101": {
-      "sha": "67b094c31ecb22c8742bcdb8b4c13e942c7d9f4c79f831de1f1a4277c2d3c6a7",
-      "date": "2026-11-17"
+      "sha": "ea32ed0e9742b21e3a59fb1bc3587d49e21e206bf022a482974b3a47aacc5ac5",
+      "date": "2026-11-25"
     },
     "/district/102": {
-      "sha": "6e8a24e47c2ca4b12c862a1aaa2e9dcdbf26fcaf767fb0c66e45723fb279f750",
-      "date": "2026-11-17"
+      "sha": "d157d3ac799d86f8d4536be3992e7db6457bf3f66251848733322b853c8613d6",
+      "date": "2026-11-25"
     },
     "/district/103": {
-      "sha": "0488cecb409bcfef0cf610a652eb26765b4d4f629785e7e98c33cc2e86f96cb6",
-      "date": "2026-11-17"
+      "sha": "4dd746b19c082b5aa1bd35de534032afcf335a94697fce736024cade25973738",
+      "date": "2026-11-25"
     },
     "/district/104": {
-      "sha": "d37aa1fdeb97b93f4d3f701b383588502429825d7fa9d79cab998be785e0be81",
-      "date": "2026-11-17"
+      "sha": "9be83b56daf6f88177374f8ce1b22ed6bb3ecadb4390eece97fbf9f18ff02885",
+      "date": "2026-11-25"
     },
     "/district/105": {
-      "sha": "95b672478cbff7c6b38cdc067fede9dc1b89f4be046cd3f2a4d75f578597f4f7",
-      "date": "2026-11-17"
+      "sha": "29d3b76c92eef58349483601aa4f843ef04585b4f9dc57a807b0f56c5f191560",
+      "date": "2026-11-25"
     },
     "/district/106": {
-      "sha": "afe90137b48993f91d73586a11cd2129fb15afbef7086f71a30a43d3480ff05d",
-      "date": "2026-11-17"
+      "sha": "aac3aae2cc087c2eac5c13894d30b1b534579c05fe5ca72d1973d65864e0ab62",
+      "date": "2026-11-25"
     },
     "/district/107": {
-      "sha": "618f749dc7f643c0154594b367317f22c3df653dce8836cd5751b7f1a72286a2",
-      "date": "2026-11-17"
+      "sha": "0b9df5f1b50343ff34e6591fd78ac5f9b557c050752519362b47f78cd8797d99",
+      "date": "2026-11-25"
     },
     "/district/108": {
-      "sha": "11186bc28525040ad7239faacbca6376660f1e494df7bbae24953d60739b3cf2",
-      "date": "2026-11-17"
+      "sha": "e4482ff08820aeb91900d5545bab21ba2f7aa7260fcd2fd8891a55da07b5bb46",
+      "date": "2026-11-25"
     },
     "/district/109": {
-      "sha": "28211768c421f6a16c104b0eeba571ba246e74856c4153f4c621cb4bfa5dd24e",
-      "date": "2026-11-17"
+      "sha": "46e73cf2c9d1f23abb18ec95a9e9166c20152028becc32241a96e618903911a5",
+      "date": "2026-11-25"
     },
     "/district/110": {
-      "sha": "cd844202cd2010107fb82357270a047539b80c163670c275b8d0eabd1553cbe7",
-      "date": "2026-11-17"
+      "sha": "ae57f065d81a05f4a23290c1875e1e841c4d6fef147dc4056b20789de26c4bd5",
+      "date": "2026-11-25"
     },
     "/district/111": {
-      "sha": "66310506f49d8a79ea49538c48de9bb89eba3138fb056ea03971df5ba77a100f",
-      "date": "2026-11-17"
+      "sha": "b8b9fcc348b99308f1c0a506f1dc4a10a8a6c390745fe5a2f4cf32543463fd32",
+      "date": "2026-11-25"
     },
     "/district/112": {
-      "sha": "b7295ca2dfb720a5c7b181cd21d03533000660fdbe1b6330f57f3ff7f95392e6",
-      "date": "2026-11-17"
+      "sha": "1efcd911354d5c6703b4af69c8da458614d246c681f789f2ce99e7ff53f6f55b",
+      "date": "2026-11-25"
     },
     "/district/113": {
-      "sha": "f309c2433a9b7c037ae2a9d6052c3b14297a439191bbd4a198d361ae512d73cc",
-      "date": "2026-11-17"
+      "sha": "faab80c57606d03db64143dcbb539c0f8741ae2d24a27e12b5384eb54653fdcc",
+      "date": "2026-11-25"
     },
     "/district/114": {
-      "sha": "73aabc130c030e763f79b96c0befa6612afbe02aafea318f555c98c9bb200d9c",
-      "date": "2026-11-17"
+      "sha": "1b68a5bdaf384dd6915efb7c339f767c1419f41ada6166649511398563167a71",
+      "date": "2026-11-25"
     },
     "/district/115": {
-      "sha": "7fa849901068f2c48c99bb55c40ec403c2d4c44cc2127f4b3ac6d69f2d9caad9",
-      "date": "2026-11-17"
+      "sha": "81f1070bd4cb98475ed1927074a266274d3ec942c0f18b623f8a843a84e397ea",
+      "date": "2026-11-25"
     },
     "/district/116": {
-      "sha": "21b1bbdcd82c526af65eb5d12b90522192d05cc11782e5e70e8ec205c2fddd7b",
-      "date": "2026-11-17"
+      "sha": "a24f66ff7ba8847098fbf95deb4bca0724358ecab5af42ad3a0ca6f50e3d192c",
+      "date": "2026-11-25"
     },
     "/district/117": {
-      "sha": "917cf01ddf8ea87252e109efd662fc23097027ff7e7ce4b3aeaf21c735b96581",
-      "date": "2026-11-17"
+      "sha": "f982576bbc7bc9f4692930bf1a9a3b6702b4cd0315d4bcd0d9b717e333360f32",
+      "date": "2026-11-25"
     },
     "/district/118": {
-      "sha": "9f205575eaf3a839d1845322c46598bf88106062c9e094c6e2c78137b57764f2",
-      "date": "2026-11-17"
+      "sha": "c6c858c20ef6b8e6131d6a4f6754c6040d71672cf0bc85007173b283ac7586db",
+      "date": "2026-11-25"
     },
     "/district/119": {
-      "sha": "0202ac2c67aad5de817736228c0fd1e5705b22b1cfaad314046908fd470d7780",
-      "date": "2026-11-17"
+      "sha": "5f2e1783c522db83b9b26a0153958483edab39dd4743a12d1f4f362a707ba71c",
+      "date": "2026-11-25"
     },
     "/district/120": {
-      "sha": "8fa47ede4dedf7797867dd3d3b28e22dbd505e3d5df1082296b86a959e2484b5",
-      "date": "2026-11-17"
+      "sha": "27adc25f914db46f8e0ad3f5635552367389cc368d726f0822550890e520e8b4",
+      "date": "2026-11-25"
     },
     "/district/121": {
-      "sha": "00ac7d806ae5c7e8c95c57806fb0986b246334efe6a17cbc4faafef460a53b17",
-      "date": "2026-11-17"
+      "sha": "99d7dd2e289431a9f3068ee39fd15f6206181380fc7f897d453baaf3258d76f2",
+      "date": "2026-11-25"
     },
     "/district/122": {
-      "sha": "e89466c55eed6f4f38d60bcce68bae8e5dd31d02183b211ce7c99d5af13b6c20",
-      "date": "2026-11-17"
+      "sha": "7acdd7a827749c3cab924d2559de363cf72826e4bb458216f3d189bd3a8123a3",
+      "date": "2026-11-25"
     },
     "/district/123": {
-      "sha": "9ce707d40df7c54e50fc339123b0d92ce274ca69b58a55545c0f3ace4d475fc1",
-      "date": "2026-11-17"
+      "sha": "4acb7ae4cf3a3c06b402b0435b500564225ab275711731fbef07b3ce72dcf8a0",
+      "date": "2026-11-25"
     },
     "/district/124": {
-      "sha": "a6b516469e4566fca98b410d269c410224b3cdfd861c9307a730a10f8a8f0808",
-      "date": "2026-11-17"
+      "sha": "19bd9266c56117199b00feb1aa263059d18a5ebf9a93c1bca882dbc04a5b9b25",
+      "date": "2026-11-25"
     },
     "/district/125": {
-      "sha": "2965cbbce557168720a274e144b6dc92cc67be916298f150b27f73594229c6e0",
-      "date": "2026-11-17"
+      "sha": "6c44e4a4b9586b9bd6c35d0a86a3fcfba9584b3fbdd07032aaafc9a3d9b2a236",
+      "date": "2026-11-25"
     },
     "/district/126": {
-      "sha": "75bbc2b1297749f2e035684cbe5a7d5cf5ddd8aac7fda86900f15e752b01b45e",
-      "date": "2026-11-17"
+      "sha": "6760ec70ba44a353eed19815eb9a09b2a6fdbf7249ec31080b553966f3e55db5",
+      "date": "2026-11-25"
     },
     "/district/127": {
-      "sha": "d7e28262e503d5ff006a70c25f9159874668827a4763451f47a0e6d04f9261e4",
-      "date": "2026-11-17"
+      "sha": "e1355f261bf8d3c4d1646ed77b98449df540296bd9c9b0b80c97815a69d0b925",
+      "date": "2026-11-25"
     },
     "/district/128": {
-      "sha": "30bb109fc27f2861246069a9de4dda480f22a7bd98a79cf86fa4b0f709491747",
-      "date": "2026-11-17"
+      "sha": "9494a53f45396f302d7d76a366f0328049dfd09e81f47a2d9304ae03a623228c",
+      "date": "2026-11-25"
     },
     "/district/129": {
-      "sha": "86616d432b98e674500ebcdf946409ec33953fb64097378a7586389568ee7c35",
-      "date": "2026-11-17"
+      "sha": "01dc00b660c9a3dc12679306046302952d7c3127f83e00f9ddb18fe2507c7505",
+      "date": "2026-11-25"
     },
     "/district/130": {
-      "sha": "26cd726275008838df1250030ab29f2ae03d00a57ffee933026b49c89cffa6c7",
-      "date": "2026-11-17"
+      "sha": "1f611d1813ed4b9b87b141c8c1e1d98fe591cd78a0bc63424f141ab15ae5d420",
+      "date": "2026-11-25"
     },
     "/district/131": {
-      "sha": "b4880e86f23bce1db6f4f8277a4f3eb16c2da7194b7a6ee7f98dd68c89dc64f1",
-      "date": "2026-11-17"
+      "sha": "aae6ff6de9ce56056f7a6dda73a60a22e025eb1c2ec693587f21e07a5194706e",
+      "date": "2026-11-25"
     },
     "/district/132": {
-      "sha": "c1a57e3454fd9c46c796954cb5fd8e4c77f0ee94d497ae5d3633cbad3213e5b9",
-      "date": "2026-11-17"
+      "sha": "3740043f3cdc73f5cd0e8fc2dc96dd3c00f0517520e3d53e1536faaa41ad5f38",
+      "date": "2026-11-25"
     },
     "/district/133": {
-      "sha": "2499629176fb4d8fab03ac531cbbecef5fb3618f537a948d7865df0250658515",
-      "date": "2026-11-17"
+      "sha": "0455b4f91c43447e2f3c5214e23ee70ac23635eb042c7f177bf3d932cf05cb7f",
+      "date": "2026-11-25"
     },
     "/district/134": {
-      "sha": "8d6eb535d8d1aa4bd76f4290920309aed53d17f9eff68d46c86e95ed5ca693b9",
-      "date": "2026-11-17"
+      "sha": "d6baff1aca09bc44ed865caab01ec8f091cbeaecc3c2a5a9df0bb9adf693dfc0",
+      "date": "2026-11-25"
     },
     "/district/135": {
-      "sha": "c0db54cffe1561dd857a7aa4cdcacbe62ec481afbd0ef37a2ea1d39456a41be2",
-      "date": "2026-11-17"
+      "sha": "3cd3f7268fa9cbf47c644de342ad49bdc5417bd8b46a7520ee3b79f6b20eae22",
+      "date": "2026-11-25"
     },
     "/district/136": {
-      "sha": "868cdc56d310f4edd1500227924fa8d58ac0be8c1fe585d18869de3661524cad",
-      "date": "2026-11-17"
+      "sha": "078b4c33cd6f9d13172ef47c71f69f93e4c704ba0389fefe0d17ed6b6f6f592c",
+      "date": "2026-11-25"
     },
     "/district/137": {
-      "sha": "a896b49f9922321f65a4733736a6cc922383004ffb2fea978c59a6397770db69",
-      "date": "2026-11-17"
+      "sha": "84d47fe8c1ee387d2905a535302ed9aacc2918a72c02e75ef045c6c28661c2d0",
+      "date": "2026-11-25"
     },
     "/district/138": {
-      "sha": "ce35b5997d4721b227cbb2461bba4a557a4dd19fa7123b8f98f83ba59e81fdd8",
-      "date": "2026-11-17"
+      "sha": "d1c7f51fe6b5913db798b7d8cbec8468c3f2ebcbc329b51c6bcff4bacb3b889e",
+      "date": "2026-11-25"
     },
     "/district/139": {
-      "sha": "a8900a5d94bbc3c449c8df51bc678bc0e6dec8d4b56c3dce91e992ae14276aea",
-      "date": "2026-11-17"
+      "sha": "f4b571f2cb05ecdc7bd665cb6bae31c6691bbc41d418f6189de4f31767c7a6be",
+      "date": "2026-11-25"
     },
     "/district/140": {
-      "sha": "c7648898f4316e8f14d2fd2426389bf1449fdb5377fb224ca8efb55136afd266",
-      "date": "2026-11-17"
+      "sha": "f3478b1d20985024884bfc303a88209edeae29879826a158253d9c28acce96a8",
+      "date": "2026-11-25"
     },
     "/district/141": {
-      "sha": "380a79d372a3444370effb42a5e2031cea296c8512f17341b6e6dd3e0fe08b3e",
-      "date": "2026-11-17"
+      "sha": "36fc9bad5ce2aa5c7f39c03913b58ff53662dc8bfd4e821860ba3efed7c14c2d",
+      "date": "2026-11-25"
     },
     "/district/142": {
-      "sha": "e8a9d57df73236f0902515ea34a48ac810e0d4e6e3e4024e2fdf1dc6a6390e42",
-      "date": "2026-11-17"
+      "sha": "d2b63fa77bb17799e1b7663fba9cc57f00d8f79907d1d536ec4e146416b81586",
+      "date": "2026-11-25"
     },
     "/district/143": {
-      "sha": "6dd8a365c6cda804f7d5fa3052d6b766eb824281f66af2b94c305d35598f4da7",
-      "date": "2026-11-17"
+      "sha": "042386e2045c342b008572d48f3c15200cc31afc88c92eea1a2f6976b4ea7dad",
+      "date": "2026-11-25"
     },
     "/district/144": {
-      "sha": "21bf8ab8c230489ff9d8bb2028b9100cad6d8bd08d790c6a43f372ef83b6ad54",
-      "date": "2026-11-17"
+      "sha": "3777effcd5c900d5c98718a859ec7a3ca769d84263762b46215d3933e7f6085c",
+      "date": "2026-11-25"
     },
     "/district/145": {
-      "sha": "8d57cf9b4adefbf74bcbb9110cdb26aa41e27d709617c3178bbefa86fa126380",
-      "date": "2026-11-17"
+      "sha": "32a4b64b0b8cf3771a0eb9514bbd2e0121c579e410bf4b19beab951f433b0362",
+      "date": "2026-11-25"
     },
     "/district/146": {
-      "sha": "fb08132c94659d2b373cf46bda7170466f9b52d9d10439017d6b7f86b61dfd4d",
-      "date": "2026-11-17"
+      "sha": "c4a6a85acb743ae2a012b1edc57105acbe7b55be36b163d3087464ade7d779ee",
+      "date": "2026-11-25"
     },
     "/district/147": {
-      "sha": "66748f8662103c240e115339505cefa746636a2bc29cfe4318c0250980693a27",
-      "date": "2026-11-17"
+      "sha": "6fb001e08093f0c0de0c52033680bb76399d2a934ebdf48e54ef13c183f6b005",
+      "date": "2026-11-25"
     },
     "/district/148": {
-      "sha": "c02e0334a393f206794fbe8b9cc83d2646e66797bd7d2ce031c6cc5ae348fd89",
-      "date": "2026-11-17"
+      "sha": "5fd26454cdc1e5558061b8b34c8fec72e2d69215bc73dce386c49c148139c9aa",
+      "date": "2026-11-25"
     },
     "/district/149": {
-      "sha": "ad4a3a621802212f7f9bf87332500addd61d5eacf6ee2386fcfc63d02f048b01",
-      "date": "2026-11-17"
+      "sha": "17aef415b0352f06a640c60536faeae42995c9ca069f55307fe77db36305645b",
+      "date": "2026-11-25"
     },
     "/district/150": {
-      "sha": "60a117cc6827247195ae5c3743079d848525586bbe77e1a4b93cb3da3f96c753",
-      "date": "2026-11-17"
+      "sha": "60b7bac42b6feea61eeea04cff8928ab43fcac8dfe4c5ce47415692106c07d7e",
+      "date": "2026-11-25"
     },
     "/districts": {
-      "sha": "0538e8762ff2bf256c4df5b0ee303e385e8f1b1872a7588284327b67f93f8e6d",
-      "date": "2026-11-17"
+      "sha": "edf3280564ad0843b6ad261b6f08874a6952d7f2db960d2d56b09bdebdc935b0",
+      "date": "2026-11-25"
     },
     "/distrito/1": {
-      "sha": "7fea49d73ddcacb16b1d746c40526bbac5161ae07e6d6f1d9967a4de51cdf12e",
-      "date": "2026-11-17"
+      "sha": "f101d73602926c265e82e629b2b0fe5006ba83203a5d649e5d6cb9ab8272897d",
+      "date": "2026-11-25"
     },
     "/distrito/2": {
-      "sha": "9967a4298fc85cb7d7ab6adf644d62479cb6fc7ca5316b9a933f89cf39e58f63",
-      "date": "2026-11-17"
+      "sha": "cb3a034b3ae6d70eae49b9c7c4a6478fa493bb375dc98448f719d6e5f60d3729",
+      "date": "2026-11-25"
     },
     "/distrito/3": {
-      "sha": "fbe092faff76097b7ba370cddef9923317b9c6797afc8724e48a3fe4a1f880d3",
-      "date": "2026-11-17"
+      "sha": "458c9316ab525020638b7c5367b2960439917004bed7a0111d459a3296c37728",
+      "date": "2026-11-25"
     },
     "/distrito/4": {
-      "sha": "af89c1d34f7502be4be886f0bfd2cf21b3ecd5a3bacae36c9bc27b07e62ede91",
-      "date": "2026-11-17"
+      "sha": "d58ee1719dc8422c101994314cc44cc83d8aa9cf84816974c9336a54b52438e9",
+      "date": "2026-11-25"
     },
     "/distrito/5": {
-      "sha": "e472d122edd9d29d96f12445896b2dab009bea154f5b15237f9aef65f7adb7b9",
-      "date": "2026-11-17"
+      "sha": "282925f63cb0ae35004684b235f0ac33ec11c2bca041c779207d42be0f09d80b",
+      "date": "2026-11-25"
     },
     "/distrito/6": {
-      "sha": "2932ad6fec42287cbddf177de61148b18689b8221b6d99716e210319f53e64dd",
-      "date": "2026-11-17"
+      "sha": "cfb008411584b59c013da1515f7049d1bf1979defeb0b3ed236a0fb32c5dfd6c",
+      "date": "2026-11-25"
     },
     "/distrito/7": {
-      "sha": "77955c3589d27e1bb2efc6f77fdd1e81f38ea850691ac672919acad2fdc9516c",
-      "date": "2026-11-17"
+      "sha": "318c103d9ef762896d48e6d0c899d37b95be7a49908e73f3ddc6f0fda61f391f",
+      "date": "2026-11-25"
     },
     "/distrito/8": {
-      "sha": "0b881399426e81aff49b2aa45462abfe9522c8a210e991d8bb171bccc6d4b5ca",
-      "date": "2026-11-17"
+      "sha": "96f078a62a1a2f2efb4fc90a7e4d206412abce42378b6237a6e6df21b4568dd9",
+      "date": "2026-11-25"
     },
     "/distrito/9": {
-      "sha": "1d88ff34d4a9f04858e9d8788c76584e1cad1d4c6c8c3fc8c396c75f14fcc1a6",
-      "date": "2026-11-17"
+      "sha": "4a3f53e899610305cf1eb4a60967d04b23e49d1d70bb07e06bef6a53d2a95ffb",
+      "date": "2026-11-25"
     },
     "/distrito/10": {
-      "sha": "f2c280814e6c39eca058a663a1f07f7a4b260edb94e01f1ce11a1ba2cdd6710a",
-      "date": "2026-11-17"
+      "sha": "f03a9cbb6628dddc71d09b5d9e58ad30e2e267a00726a304a691289973bfa8a9",
+      "date": "2026-11-25"
     },
     "/distrito/11": {
-      "sha": "5544d1104ce8d4e645267c15faf7cf2352bea13d04d022b4c5e98e55edc886d7",
-      "date": "2026-11-17"
+      "sha": "c6b1d009b2a9c1d4094a72ff2fec44a113e38a02835353b20e41fa3ae1360816",
+      "date": "2026-11-25"
     },
     "/distrito/12": {
-      "sha": "df38cd5a7c50ac50fba22485d571db8c581020829f232d9874ead938fec5f085",
-      "date": "2026-11-17"
+      "sha": "4d9e5761e086924f1874d9ed20ed6fa981525817913f79dddc845a4bca21dcc5",
+      "date": "2026-11-25"
     },
     "/distrito/13": {
-      "sha": "683c32b33844ae2c74da15dfbcf4254d6f013e764116e811368d68a6b7f8e346",
-      "date": "2026-11-17"
+      "sha": "a3ff04572fdb17a86f6964a19ddad907fd5398508394d427659a9d81f684a903",
+      "date": "2026-11-25"
     },
     "/distrito/14": {
-      "sha": "c0e21a265315f32e6b6e2df6a89c7b5a883cd72302532c68735b4f83dd4dcd0a",
-      "date": "2026-11-17"
+      "sha": "c68cbedd27bd34ae059d325b2ed9b96175035f8c26354ef50e77d103e1866ae9",
+      "date": "2026-11-25"
     },
     "/distrito/15": {
-      "sha": "d8af0e29b280d8787d4359836d18bb9cb71856f3b1696c53ba533e869cff3517",
-      "date": "2026-11-17"
+      "sha": "d68be0306d8dfae4928c3d921249de8127ac8b2f432de3fd24e078cf99151da9",
+      "date": "2026-11-25"
     },
     "/distrito/16": {
-      "sha": "4919dcd028012e36094cc58563f451dfe910f22771d8b24d080f099f06fc15aa",
-      "date": "2026-11-17"
+      "sha": "eba95b761835a2cabb67dfba4d1a480dbc404cea8ed65d0ba239db8b2269f116",
+      "date": "2026-11-25"
     },
     "/distrito/17": {
-      "sha": "8c7b1c6649b31993b4bfe6733730c0d3d1e0f0a1429c8f2c50b7e341188b3c68",
-      "date": "2026-11-17"
+      "sha": "7b24c6884f93b3c4746734149c62beef9a39e524c21036b4724547c923c61ef8",
+      "date": "2026-11-25"
     },
     "/distrito/18": {
-      "sha": "97a9b91588a18bf60c58b6a755742fa2ea67f682f91bdfd2fda9b7f0a9bf2339",
-      "date": "2026-11-17"
+      "sha": "b995724f96395883f579fcd773b2da704a7c5702a4c7c653b0e9e8205dc7a47a",
+      "date": "2026-11-25"
     },
     "/distrito/19": {
-      "sha": "f23ec89e7729364faf8583d208453443db2a685dd103be67a21c3df140a6d844",
-      "date": "2026-11-17"
+      "sha": "3ca7950dce137bb5b1dce759124e25d1da3338bed99155e324a7b9077fe09335",
+      "date": "2026-11-25"
     },
     "/distrito/20": {
-      "sha": "82b3cad170f613c2f66b441a01466b7492b443f4bf7cc2d51a780cfd1321d692",
-      "date": "2026-11-17"
+      "sha": "8985b23b38d9047ebe8eaf3593d0070394df84a400569e748fe2d15e0ed1c787",
+      "date": "2026-11-25"
     },
     "/distrito/21": {
-      "sha": "18d24c049e0b9fc4b4d44fac4218e6080c9ddd4ffd0362df387594a585849a3f",
-      "date": "2026-11-17"
+      "sha": "dd845e98666428e4e82b9370470aef5042c54c18e56322beaab75636e7966c44",
+      "date": "2026-11-25"
     },
     "/distrito/22": {
-      "sha": "2b5003825cc62ccffc0a3f132fcfd7b9e43bc6bfc9e934dcedecc8b2fb60f94a",
-      "date": "2026-11-17"
+      "sha": "c7ff9e197b58b6d031e526bfd872c49e9b08ccf5466b787f8b4c90b42222dde1",
+      "date": "2026-11-25"
     },
     "/distrito/23": {
-      "sha": "8550a313433d64d628e1d04acfdc44d3e4b0b36ca7548ae04dbbe9fafe590969",
-      "date": "2026-11-17"
+      "sha": "a465055042686d673f73ab8d31d0c40f80865ffc11705281fabf8c6ec03e95d4",
+      "date": "2026-11-25"
     },
     "/distrito/24": {
-      "sha": "36cec2714542bd953e1af548f3bc8d06072c75e729dee665eb0d680c49afab49",
-      "date": "2026-11-17"
+      "sha": "dee8afa32451bea59846725d5f4024c0a120cd0d84706a4f8f31fcdc3992219c",
+      "date": "2026-11-25"
     },
     "/distrito/25": {
-      "sha": "1279f0bd96a0b9b48ec5f3526c91dd9e7fb09b3feaab88d81160ba618c3e0665",
-      "date": "2026-11-17"
+      "sha": "0d72a322a71fbc446270e71dcde5b390110420d0f091a52bd83db3aca4b48fec",
+      "date": "2026-11-25"
     },
     "/distrito/26": {
-      "sha": "aa5083a6ef4e5fca0b5d91e9222d7708a65b1524e18cd9caf8f356df72f1f13a",
-      "date": "2026-11-17"
+      "sha": "11a78e45bfb0b6b4bfccc291e6ce189c8ec57c575308bd80950ee35bdf3e538a",
+      "date": "2026-11-25"
     },
     "/distrito/27": {
-      "sha": "232e9d59adaf25dd80e1d728151890f9aa4362b042dbb8caadf1a75833add270",
-      "date": "2026-11-17"
+      "sha": "db8368536d4f3efd1d28da6a1ed3d7a3386f069ac1835900390ba83fdafe4aad",
+      "date": "2026-11-25"
     },
     "/distrito/28": {
-      "sha": "bb68d130c57e33a93671a87f1533c2ee59a4ddc8fa0ebcc17d6351c2820f07ff",
-      "date": "2026-11-17"
+      "sha": "a09bfb908aef15530ad4a354bccfa4510e83a89f7618704619555c32c5bf23df",
+      "date": "2026-11-25"
     },
     "/distrito/29": {
-      "sha": "32ce1d1f5acacc25cd08240cbb268d6eca42a509f586cee4f30c8eb03d0017d6",
-      "date": "2026-11-17"
+      "sha": "369924a099dd2bfaa520d1ff253891644c0ddee6a64473b7171c5cced8f65579",
+      "date": "2026-11-25"
     },
     "/distrito/30": {
-      "sha": "38beddc8e47745a6d9ef766e5a77923c7f9590956bea3c81e7dd946b60990cb9",
-      "date": "2026-11-17"
+      "sha": "ff897f2947e542be415405f5cfc33769b627e5550754d252dae6bd954973c6ac",
+      "date": "2026-11-25"
     },
     "/distrito/31": {
-      "sha": "390be17d00d62d9bf81e10b61a5664a2387b21d9569c4dc8a6dd260f9eaef331",
-      "date": "2026-11-17"
+      "sha": "e99539bd6b5a75fe41b465909f5a7a1a48c2cc5f7114821d5e4e78d4a5661673",
+      "date": "2026-11-25"
     },
     "/distrito/32": {
-      "sha": "1e727f69e304693b5b322d8112aa1590d4f4dd77bef2ef2dff86a32bfe778705",
-      "date": "2026-11-17"
+      "sha": "aa740115926efd96c41a32d48f6131874875374f405506092fde035c5d5bca90",
+      "date": "2026-11-25"
     },
     "/distrito/33": {
-      "sha": "27fbdef55148aebd4133d78a67a3e4e56fc0b0ec886a9f6866a35a2989120ae7",
-      "date": "2026-11-17"
+      "sha": "2a50b0b6082084b59a0204545ee3d486cf9079d7b4013e3be95803b15931d818",
+      "date": "2026-11-25"
     },
     "/distrito/34": {
-      "sha": "8d627a2093d859885fdbee5b774061f26ed1781de4b3b915262a80e5d5e7a815",
-      "date": "2026-11-17"
+      "sha": "3dc5448ed7794e2b33cc1413e1c9b8f6b8723e449b4336ec50266228a1c6c35a",
+      "date": "2026-11-25"
     },
     "/distrito/35": {
-      "sha": "38bd06c35d0feae37718c4abfa9acc9b26e1fa9631ebe27a9ef66cbe1659fbdc",
-      "date": "2026-11-17"
+      "sha": "e34195c1c7189867a18cf0f56342341b4005a69e09e7e0514cb9312bc0ee0fcd",
+      "date": "2026-11-25"
     },
     "/distrito/36": {
-      "sha": "68c00f9e700089ac64b2c506ab8b141ec6fddcd6f53cfd10a1581dc82e65cfc5",
-      "date": "2026-11-17"
+      "sha": "b3c2fcbd7ce89826bb37331042e91244b42ea4f77c740e953a42162c4ea06b19",
+      "date": "2026-11-25"
     },
     "/distrito/37": {
-      "sha": "5035a346bc3c3f62836ecba5c043fb9b677f585bd1b437afb5ccacb9a59afe65",
-      "date": "2026-11-17"
+      "sha": "3fc8dcddef55aacad14e03f69db34ca2fb79b571431877cb26e1964e73f29a7d",
+      "date": "2026-11-25"
     },
     "/distrito/38": {
-      "sha": "7017724b0470feca8cdff4932aea850b7f942b0034ab072de6082385feaa7ef2",
-      "date": "2026-11-17"
+      "sha": "55922ffe1abedf13406131fe1992156d4a097e7f72f23ea9b7293f135ca181f6",
+      "date": "2026-11-25"
     },
     "/distrito/39": {
-      "sha": "40efb816354878936fc1bf3174eca3357ce00346ddbda2c86e05f494adf14a82",
-      "date": "2026-11-17"
+      "sha": "58e398b89114eda5865c184b598bc28773c8f4cc63d483283164618de43dd562",
+      "date": "2026-11-25"
     },
     "/distrito/40": {
-      "sha": "54d8ae4bbf737c8315ac50333d6191f145c0206347bc28c326ef25d13673ed3b",
-      "date": "2026-11-17"
+      "sha": "c9bc5b2aaa6d08c5aae13956f53165bf4da371bb4cd860dbfdfbb9c98c8212d3",
+      "date": "2026-11-25"
     },
     "/distrito/41": {
-      "sha": "f92fa403ddd194d8cdd8bda8ffac285d096d0999c65fed0c55f61ed890d30a27",
-      "date": "2026-11-17"
+      "sha": "e432ab16067cdafee76c6e7c6f939b17072439dae5ef87e05696f07165886e7d",
+      "date": "2026-11-25"
     },
     "/distrito/42": {
-      "sha": "3abe434eb96dba144ed55ece3f702e51a134a3859f28c02cf1be43459401c6f7",
-      "date": "2026-11-17"
+      "sha": "36097cd298204cdd555ab6c9807b4409f0dd7efd09401cc9ac2ed300ce058e84",
+      "date": "2026-11-25"
     },
     "/distrito/43": {
-      "sha": "f9e944edd1d9a47bc7198d1103eef17b85feb32e827f2555f76519589ed9a0d9",
-      "date": "2026-11-17"
+      "sha": "64a8f1d03e736df2f9d5bfaf3d414064dfa70127fd4d5d0ba90b5f053ba096fc",
+      "date": "2026-11-25"
     },
     "/distrito/44": {
-      "sha": "46e8b0005375d7c6d9dd0bd02c67af3746d0c46882bf85188b10b682aae3de5a",
-      "date": "2026-11-17"
+      "sha": "fcf76a34f0f92bc5f210ec7ddd444221f27b9eb52c6be20ab3ac96615f1f2317",
+      "date": "2026-11-25"
     },
     "/distrito/45": {
-      "sha": "317410c3658ffc8c74493acd80e0e87cc0095c8d3acefecaa50e0a24acba541a",
-      "date": "2026-11-17"
+      "sha": "6a9d959af64310693da1e07037ac3653aa489670888dd71415ba03c63c3eb63e",
+      "date": "2026-11-25"
     },
     "/distrito/46": {
-      "sha": "bc8e5db7b753461619770fc10733378e0d9b03eb2f5576b0b95d0a741e3a4de3",
-      "date": "2026-11-17"
+      "sha": "e7b537372079a08a5fad62a18b554e48507888f6059afa7b5aa7f8cf807b6845",
+      "date": "2026-11-25"
     },
     "/distrito/47": {
-      "sha": "4cee3aaf2b9d570826120f24f114162c5a7b425ce04d2588e92d2d3b7ec5c2d7",
-      "date": "2026-11-17"
+      "sha": "4610e97f6cf3970b5a973783d57c90a9c8865171970088a35d1733b94016b592",
+      "date": "2026-11-25"
     },
     "/distrito/48": {
-      "sha": "762a4a977473d2460ba3ed178332e6adabee81d4f2dfecf41b1e98e50659efdc",
-      "date": "2026-11-17"
+      "sha": "0a140d1d83ffe14da637922faf268e58c5c04ac12b9f2e456dcacd272b33dda5",
+      "date": "2026-11-25"
     },
     "/distrito/49": {
-      "sha": "eb86879f7a963dc86610bce67d6030c71f8765eafa0181035636980987fec0c8",
-      "date": "2026-11-17"
+      "sha": "1f2a185ab2e1390dc65c02eb531bd848c8b5226824d3265b3b98bd6a1a28fb71",
+      "date": "2026-11-25"
     },
     "/distrito/50": {
-      "sha": "4155fc23764650bf1f8449cba3d362cb3d6872ba2176c74e3e227e2723d89106",
-      "date": "2026-11-17"
+      "sha": "9a465b950a57728d411aed64cfa38b04102a8de39b7d0f821113b1b21a0c01f4",
+      "date": "2026-11-25"
     },
     "/distrito/51": {
-      "sha": "3155dd1202d1061ef37894e5bfb9e61ed3e80b6e5f57eee02cd21c4ec980c3e0",
-      "date": "2026-11-17"
+      "sha": "2c2a48d4a6115876436a3d8bb550dfa0523bcb37c9e1a8cfe06e777602dca3e1",
+      "date": "2026-11-25"
     },
     "/distrito/52": {
-      "sha": "16680111b08c2026ba274cc25006201010a83ae1d2bf4ac0db120c293eb5dde2",
-      "date": "2026-11-17"
+      "sha": "5b57f18a62453c9dad5bafbd7aab2f92f9d983671b770a7f3a58be3f80dd086a",
+      "date": "2026-11-25"
     },
     "/distrito/53": {
-      "sha": "89a987258003ab83e65079ee2fcd8911c16266b7a42ad44ee75a3e9ba0a356b5",
-      "date": "2026-11-17"
+      "sha": "448fe131b88363f7f3c5c20d21f52a9fe24c95c449facaa387e1dc7b73eecb85",
+      "date": "2026-11-25"
     },
     "/distrito/54": {
-      "sha": "749c0d3866ce3ce464c3ec15160ef732a4aa95e4702734947ee7d40531e84d12",
-      "date": "2026-11-17"
+      "sha": "e702c5f2984ca49b8dfd22e4d45cad37b6e4588e088dbd5495a82fe50a057005",
+      "date": "2026-11-25"
     },
     "/distrito/55": {
-      "sha": "0644267a147f00c04ff6563e4f2cdbfac96a2c20e6a40636204ab5e8340afeb6",
-      "date": "2026-11-17"
+      "sha": "36ac992db9a97ebada259820470232691b1c9823f21e1adeea673a557d4260fd",
+      "date": "2026-11-25"
     },
     "/distrito/56": {
-      "sha": "78c20c917664548cee39886f8f2a25318d24750c06c9e9dc729ef25ee1998411",
-      "date": "2026-11-17"
+      "sha": "a4901b27ad5439bdf6f7078b44571daf86d5c1e2f255b2100a3258a006f74933",
+      "date": "2026-11-25"
     },
     "/distrito/57": {
-      "sha": "673cc5ad8b9eaa3f33a0b50d0601589050a4e84bc8d0f20f464f11c620a7b52f",
-      "date": "2026-11-17"
+      "sha": "662ecb65e79b36d66c6cd364ab1c4634bee3d12a92b2bafd00e4979d9b3fbc2d",
+      "date": "2026-11-25"
     },
     "/distrito/58": {
-      "sha": "de2866cd8731121abbfb35a68317b6a42524cc6a62b2e1632ac136b3a8f734ca",
-      "date": "2026-11-17"
+      "sha": "f69bedf63f99c0eaec10647b0b032c1e7381be3ba086c2b632f8ee51518bca4d",
+      "date": "2026-11-25"
     },
     "/distrito/59": {
-      "sha": "19973a8076dd92a394ba6b440cffe8945d4fedff22d6cb734d22c06d289806b7",
-      "date": "2026-11-17"
+      "sha": "506955dbb1cb3cd93dbaaa6579c26dc4f864fdd5abd0ce932015e5f54b630c69",
+      "date": "2026-11-25"
     },
     "/distrito/60": {
-      "sha": "709162119926aa9bc933df2c3eb71c1851fe72685ada90d013efed1390137c5c",
-      "date": "2026-11-17"
+      "sha": "d1622673fae2e99a3a8aac07adda32f43ab2b51fb5c27d0239d7544c02d1617a",
+      "date": "2026-11-25"
     },
     "/distrito/61": {
-      "sha": "b0cb57155d0866b4f49be722e90f71ac0151e75a25bc98564e492c6f02cdeb90",
-      "date": "2026-11-17"
+      "sha": "bf4099fab1ea9b6b469e3ddb8f7ddf7d01fa7c12e4150357e6ee8824bf2dd793",
+      "date": "2026-11-25"
     },
     "/distrito/62": {
-      "sha": "517c8a542b854ad985292ff2291376ccce564cf7fe16dd1639e8987e6d3cdfb3",
-      "date": "2026-11-17"
+      "sha": "075abd523e616e2a67b3b5556100031063e9b22da1c43a3dac5d0c6de8fffd04",
+      "date": "2026-11-25"
     },
     "/distrito/63": {
-      "sha": "5fe315f292ada42bcbb85961b781b73f420a243869d07c0e1dcebe344f7949f3",
-      "date": "2026-11-17"
+      "sha": "4bd9a2261313aec0d8fbeea43574a44548fddb4d7040f4d4597992de709635e9",
+      "date": "2026-11-25"
     },
     "/distrito/64": {
-      "sha": "8f1fa94c0342ff7981b2446a10689b7109470fcf908282925570914bb90c6202",
-      "date": "2026-11-17"
+      "sha": "2dc32836ddc9166fb46181d6312354a635e6b31439b919c1c557d7f625ee14f1",
+      "date": "2026-11-25"
     },
     "/distrito/65": {
-      "sha": "eafdf5ed8f8a45b803d692f53e02fd948921594399f37586e4b96d8a9faff24b",
-      "date": "2026-11-17"
+      "sha": "8698fb909089ceb38b5f21dd581ba7cd2524dc2a5ee68de38551c389d3c41738",
+      "date": "2026-11-25"
     },
     "/distrito/66": {
-      "sha": "6c957c4c1172e1728d080b74bb15ef560a3827a9d335cf3b60d738039f8d451d",
-      "date": "2026-11-17"
+      "sha": "bb0041637a19f3a872b6557d21472c8fe0315a65c56ab37efa529c76fd7434f7",
+      "date": "2026-11-25"
     },
     "/distrito/67": {
-      "sha": "f0f84c426d1418a3d2e695c54e632b6494119bf257ada2c873c209d105a23fa2",
-      "date": "2026-11-17"
+      "sha": "971a6d0efcbae23d7c61eec7c958887dd51e702d45dada935adfe44391904be6",
+      "date": "2026-11-25"
     },
     "/distrito/68": {
-      "sha": "9f2de98e33b05895003cb4db124c236f07595217b75e2dee96575d5e78ac4526",
-      "date": "2026-11-17"
+      "sha": "933a128686462b0bbf0ebc57ca8f17daa796d15d88bf74ef1bdcf9ee520df79d",
+      "date": "2026-11-25"
     },
     "/distrito/69": {
-      "sha": "4dd9226d0df15b88fafa7f680c5994cb8b3f3781b2b21d25b4cf144088c6d7ff",
-      "date": "2026-11-17"
+      "sha": "0b64b4c2b7ac07daa67dd6169276888d32b1823adedb5d6a0021cb2301f121df",
+      "date": "2026-11-25"
     },
     "/distrito/70": {
-      "sha": "e381cc3c9ed6bba8feaca80d01c1bd933b19063164dbcc471bf68bc890195f4a",
-      "date": "2026-11-17"
+      "sha": "3d902ca43ac9c854ee03c161860b324ce4565a1022514567e1188c9a63e0f198",
+      "date": "2026-11-25"
     },
     "/distrito/71": {
-      "sha": "eb554a4eecb638f1fe275fee871df92d3755c72b65db09e250e7d6f58d0ee09b",
-      "date": "2026-11-17"
+      "sha": "911b062be3f21452162f9a5e048e2916cbf9e75c85d619a7769eae08b6ffc60e",
+      "date": "2026-11-25"
     },
     "/distrito/72": {
-      "sha": "3b085913f898fb261df607793d89b48add7783a097aa6dd5ce091eeb88686e65",
-      "date": "2026-11-17"
+      "sha": "c03cdc15b3f82ca4641c82225e5ec6cbb23c30e9124d410abfe9812921c7cd42",
+      "date": "2026-11-25"
     },
     "/distrito/73": {
-      "sha": "e2d06a537c0560d3596111f333d472647efe59cf491fa07908ed84becfabd3c9",
-      "date": "2026-11-17"
+      "sha": "441b65bd3ac2e43fb48483720cc7abb40e0ae8b60f30bf0dacfde98cca99f7cf",
+      "date": "2026-11-25"
     },
     "/distrito/74": {
-      "sha": "c3ee9ec9332262007da3840b4fb1ad416ce3e71609223b022e1e5cea3fb2c87f",
-      "date": "2026-11-17"
+      "sha": "e483a45d5f2b2e780212bd60b326989fe22f6cb69827dea3d536980c9b8c8b16",
+      "date": "2026-11-25"
     },
     "/distrito/75": {
-      "sha": "ad5b139c32fd330e17c6594a57564055fb067bb7cca8e3cf50f301f5904dd522",
-      "date": "2026-11-17"
+      "sha": "aced1852d12123f90e7a2117d2cb64bed6cdb7a4ece103334129f94e0466a426",
+      "date": "2026-11-25"
     },
     "/distrito/76": {
-      "sha": "0bbcaaa7861fbcc3190a3a0130738c47a1e8534bee791f957d0ab1256c14ac93",
-      "date": "2026-11-17"
+      "sha": "62dfe572fbc79620a1fdc3a552754a7a041564ec68240fa68e3d0f5e948fa3e7",
+      "date": "2026-11-25"
     },
     "/distrito/77": {
-      "sha": "44ae6d4b4a4da21425927519b15cae0d84bd1b9765119d04256ec30814a72e42",
-      "date": "2026-11-17"
+      "sha": "1cd591c564fe8c4b9fe479f1b042861dc63ba1459c352f7e8ed3ee0bc684ef61",
+      "date": "2026-11-25"
     },
     "/distrito/78": {
-      "sha": "32255aaa962005093fa34fed2c82b0a2c3b9cceb5488ebf2bb2cbc899f0ece3c",
-      "date": "2026-11-17"
+      "sha": "da3c6cfba19d34e4576b92ef6adf4c23908770f98b3b75805132ed9d81f6d0b4",
+      "date": "2026-11-25"
     },
     "/distrito/79": {
-      "sha": "4fa5185f577a91fbb57333952c470af26d18ddcc377f7edad44f7327b82d2ec4",
-      "date": "2026-11-17"
+      "sha": "af86748f8f176fce2f09b3ca7b5e8da7e605db640c29cf881453771ee399959b",
+      "date": "2026-11-25"
     },
     "/distrito/80": {
-      "sha": "9a8504be55e392945d3acbcfce99cd8413e9674cdccccbd1932e5621b5f6dc4f",
-      "date": "2026-11-17"
+      "sha": "e7b18711733b273fb78f523f26e87b8832ec71ff54034f49e2c612d7dc4d8b05",
+      "date": "2026-11-25"
     },
     "/distrito/81": {
-      "sha": "fd74eabe9e3c7f3ee324e7c5f0c53ff60e93ea1fc946e0916a4e72c01a6c007b",
-      "date": "2026-11-17"
+      "sha": "a8c165f98a5682862dbb961112f7219e23b17fc6a43c50f04efc433a38431793",
+      "date": "2026-11-25"
     },
     "/distrito/82": {
-      "sha": "c5342771af4b5a8dd8b46f5d8cc09652b95a5bab489580e733627d157f8e1c7a",
-      "date": "2026-11-17"
+      "sha": "517bfe88c5a36da78687cda21ae9be3b0f200b0fc1e6599bcad1e65a0895e7ba",
+      "date": "2026-11-25"
     },
     "/distrito/83": {
-      "sha": "93806935447b390465a5f752dcadaf531c2af1f36aa39fe112d368736cd74b66",
-      "date": "2026-11-17"
+      "sha": "a2c1b762a5d89a2ded769bef98b0d4c1919efc1f2f1facdbb96c83b14b5d228f",
+      "date": "2026-11-25"
     },
     "/distrito/84": {
-      "sha": "0927eb2c77b8a24b7a0198e68f295d57a85ddaa0e45978109284a2aca192b86d",
-      "date": "2026-11-17"
+      "sha": "b1667d932a6e7e8de20a5075448d1ba870d1fc5a772228d3708d58a7d41db70e",
+      "date": "2026-11-25"
     },
     "/distrito/85": {
-      "sha": "0d5a92b44fa75a6b3b4c0bb192bc1f9e0fa9463f41f38579a794bcc49851c8b0",
-      "date": "2026-11-17"
+      "sha": "56c04206659ba5ffc52a510aed455587bf09099abefb02401ac5f2a688e7188d",
+      "date": "2026-11-25"
     },
     "/distrito/86": {
-      "sha": "56203a1a6c04552a5b8cd861081b1518ef35df58a7cd2a92edb6c7dc29ba3b1d",
-      "date": "2026-11-17"
+      "sha": "3e3988848e5b9ecf257e42da4d94b5ee2c06808f2253af2367390543af220a93",
+      "date": "2026-11-25"
     },
     "/distrito/87": {
-      "sha": "b0a5bfa7792323c7bdfe53ec91897c06770c446846b32ba6e3331d24fbf3c059",
-      "date": "2026-11-17"
+      "sha": "2b58a940c3cce118071384ee63ec6368298a5ac9f2f98dcbc9007e47469b1d6c",
+      "date": "2026-11-25"
     },
     "/distrito/88": {
-      "sha": "85fc9ca3902960e75bca32274750e8a6db429ac7f88b49d9210158bf12e86bb6",
-      "date": "2026-11-17"
+      "sha": "77c9a762c3dbe0a6b9ddc04c7b2e793f3488ae0946cd59ef3d1821482fc7f35b",
+      "date": "2026-11-25"
     },
     "/distrito/89": {
-      "sha": "24838cda539f6dafe87f52e04aacc79081a317f91ae81737c4eca6b7e59ec2b4",
-      "date": "2026-11-17"
+      "sha": "7d1fe79b7de6e62ed27b611b0cce759990ab69b05ed89e1e69ef64b1da65bd64",
+      "date": "2026-11-25"
     },
     "/distrito/90": {
-      "sha": "662404cfba71c2f49b2f4c2fc01e1f77cccd991a5d9cf8536d6fbc6db8cd4da8",
-      "date": "2026-11-17"
+      "sha": "34322923d33564bde8e75cf8637027caccf88b022d406ee623d5ab061b4b409a",
+      "date": "2026-11-25"
     },
     "/distrito/91": {
-      "sha": "cb18ef62c64b1c90f48ed6a6f4b639c8325f76f8fcb9f74a22097767baec0d09",
-      "date": "2026-11-17"
+      "sha": "98d902e5db5226656c72c6d058297da70de7c29a41dbb7f04477e6b943ea8421",
+      "date": "2026-11-25"
     },
     "/distrito/92": {
-      "sha": "995ddedd79c1084307aeb4c7c235350ebab95215d9c8616677f2af8e547aecb8",
-      "date": "2026-11-17"
+      "sha": "e116678fff641e49d4240f1f92d148dcbad85c56287216d1354b8e7add2bec65",
+      "date": "2026-11-25"
     },
     "/distrito/93": {
-      "sha": "084714786390687ac09d4a2afb721dc2adc140d2dd159720829db444369a514c",
-      "date": "2026-11-17"
+      "sha": "70618071b6f89acb5565d3788c850b4100639e649234fb8af67b3a03214c16bd",
+      "date": "2026-11-25"
     },
     "/distrito/94": {
-      "sha": "0c1d3595ae0dd76812b374e1d1ec9c3b258d6ffe2f1acc88b8de09e2059175ad",
-      "date": "2026-11-17"
+      "sha": "c07fd60f0fbfbaad8c9356a4bdec061edd1911b84f873ba947ddcd3f5da92592",
+      "date": "2026-11-25"
     },
     "/distrito/95": {
-      "sha": "524805857e194ad2203b450deba0138a0aa55d5dc01a61d239116194032c4e71",
-      "date": "2026-11-17"
+      "sha": "f19d9ec87e3439d1c83aa042c972619b0aac2b9b153681f01f033aa7ddcc73e8",
+      "date": "2026-11-25"
     },
     "/distrito/96": {
-      "sha": "355ac405ca87c9909398a65151ab0c51e5ea74df2cc13134880e679396044992",
-      "date": "2026-11-17"
+      "sha": "8c24d26247545f4f8704a54dfa892ab4f37206b34cdeebd901f9fb520c56017a",
+      "date": "2026-11-25"
     },
     "/distrito/97": {
-      "sha": "b9800634ad263688269363f58c7d2a285280b604897b3c50aa1c1d7a9dc55703",
-      "date": "2026-11-17"
+      "sha": "4b0e7a78ba22c223f6e7c2c01d2e0bb13ac45a7603ac04cb722b956fb62e75e5",
+      "date": "2026-11-25"
     },
     "/distrito/98": {
-      "sha": "dbfd3b477fc5198ddabc8ffef26fa3df830be876402a286477ae6a4d6e2df088",
-      "date": "2026-11-17"
+      "sha": "034893b3bfb1f38b399e274908887368980e76d663c75035f31706762f6660bd",
+      "date": "2026-11-25"
     },
     "/distrito/99": {
-      "sha": "a8dbe4291e1ef75012f6fa7038b60285f1ce65fdd53ec2f46415f73f9988a5cc",
-      "date": "2026-11-17"
+      "sha": "bfb451bc08d735b07afe37256f06599eadd333488ed26a5f9d7ee512eff41739",
+      "date": "2026-11-25"
     },
     "/distrito/100": {
-      "sha": "ad95bb80e618617bcbdf1cf30bb7880270f15f72504bfe243e96d98b0fa599c1",
-      "date": "2026-11-17"
+      "sha": "811eb0d27ae0d1dbe5d09cd3b65ceb8ffa6a7c242ce0c955f1e844e738049003",
+      "date": "2026-11-25"
     },
     "/distrito/101": {
-      "sha": "1a59d9ea5485f732a49b1827981b243251a088bb83afe2108f013b62d1255d8f",
-      "date": "2026-11-17"
+      "sha": "887fbc58c67f2b573afc86a8cd4f55f71f969614413305e93c81cdb0db3ce7fa",
+      "date": "2026-11-25"
     },
     "/distrito/102": {
-      "sha": "c27610a9951d0c0ff05ead109714a98fd230bf4b34f6813aa083bf59eb57deee",
-      "date": "2026-11-17"
+      "sha": "11fc8b5910be44ba856f268fe4475961b176143cb788a4849ff81bd92dab687d",
+      "date": "2026-11-25"
     },
     "/distrito/103": {
-      "sha": "a6697f34118e13ea853181e04b52b09115cf5419bd8a3919f6c5261ac7659e35",
-      "date": "2026-11-17"
+      "sha": "caea7c5e6ec09c179510ab1546aa9f0926a2ff33151a1a2dcdecda1141f0e811",
+      "date": "2026-11-25"
     },
     "/distrito/104": {
-      "sha": "f6c2745a29df67548ee9fbb22b0fa1b908e48373cbb454e0d39fcff7eb26d57e",
-      "date": "2026-11-17"
+      "sha": "c55cd303799d659f503f18662715b0b3fe736472fe431481a245ac022b793638",
+      "date": "2026-11-25"
     },
     "/distrito/105": {
-      "sha": "a48a1f6ba2c84e87c516e1ff40f32ea3e81374d4d9e8848ac76ed1f5ea93fb85",
-      "date": "2026-11-17"
+      "sha": "4e3561b2863860adc4ee69b28d6b5fed59c1fb91ede97c4ab499c1f5794d4775",
+      "date": "2026-11-25"
     },
     "/distrito/106": {
-      "sha": "896a782b20c26310ee7c145fb4c60d4deee3df71ae551716f7b61892747a6079",
-      "date": "2026-11-17"
+      "sha": "4a1880f789446fa157a6683e73358b444c8557c08a74c4e956fe0bdc9a392c5c",
+      "date": "2026-11-25"
     },
     "/distrito/107": {
-      "sha": "584c2c2f0c5f65403ea73321708ead245ef620d96901b626092cfb3293b7cc25",
-      "date": "2026-11-17"
+      "sha": "adb190574f2060eea69633425220b2c6440d8be38717efcd288c74a139634f37",
+      "date": "2026-11-25"
     },
     "/distrito/108": {
-      "sha": "bf2c3d723d4203b3097b67eaf507c9939d82aed1ccd53854d1a9e841b3418d3f",
-      "date": "2026-11-17"
+      "sha": "4ed58043d03c0930b49032609fe8b2526d033ec69f0a695413b9898d68bd7633",
+      "date": "2026-11-25"
     },
     "/distrito/109": {
-      "sha": "6c6700fa356802615a26843e36efe6e7b72d4792438354aa51cab4c92b9a6600",
-      "date": "2026-11-17"
+      "sha": "b78744dfbaa76d1f3b4e8241e39622cf8be0909e24a2ae83da55bb3066d8b0f7",
+      "date": "2026-11-25"
     },
     "/distrito/110": {
-      "sha": "17ef8efb95d3b9821733ef751dcde26b6c110a3b2ec32ff946bbd75d41bd2b79",
-      "date": "2026-11-17"
+      "sha": "640825ac8ce848c602d49f566906f84678e88f01a00b3db490e3cf2068a49c63",
+      "date": "2026-11-25"
     },
     "/distrito/111": {
-      "sha": "be2014c63fc94b665150c50d739a7e07197aa1524fac842283a0b02fd44d6ac6",
-      "date": "2026-11-17"
+      "sha": "9134061a66506500cf43030ac8a7bcaba8fbbfd6663dbe11e2629320b33484b7",
+      "date": "2026-11-25"
     },
     "/distrito/112": {
-      "sha": "262f6f19fe76bc79c032645f44f0bed342d98a0f799d92faf13bab1dcca185dc",
-      "date": "2026-11-17"
+      "sha": "94ac896021190136ee74b316548c5827dfb3d4502648a5b27d15c882b5ef2a66",
+      "date": "2026-11-25"
     },
     "/distrito/113": {
-      "sha": "ef62f5e0e249c8008f1f580349847e658ed360701058e408642d3bdba79a64af",
-      "date": "2026-11-17"
+      "sha": "146fc4b2b57ca1f0ada42cf1a373a7b44bc903e111735c6670bebfe236d06dff",
+      "date": "2026-11-25"
     },
     "/distrito/114": {
-      "sha": "33352798d1e0d487e5856181b76f262cb853afdb24fa97472415976f835e08f5",
-      "date": "2026-11-17"
+      "sha": "774c798e95c00caa5c8f35079e48314d2f22e6402b567ce79528798c4a54f4ae",
+      "date": "2026-11-25"
     },
     "/distrito/115": {
-      "sha": "1415373514c0eb609451071959489e71dd2803af586bea5df02fb71dc6c4a4a0",
-      "date": "2026-11-17"
+      "sha": "5aea4a12cca1eadeae5902e101111460e91064ce4343544e81dcfd4ee51c05ca",
+      "date": "2026-11-25"
     },
     "/distrito/116": {
-      "sha": "77fa25e8ad3ff92a9c6d6a0255de6be137c850c8de71601cb8ccf0068bd2c9cd",
-      "date": "2026-11-17"
+      "sha": "b3c1ec25c56781abc274220c2ad29ce81024d67a81813150b791233b2a0fccaa",
+      "date": "2026-11-25"
     },
     "/distrito/117": {
-      "sha": "d7be9a5842dba3dfc5585baad719be5cef86fae172330c37969ad2a144af27c5",
-      "date": "2026-11-17"
+      "sha": "f435667d1d8a61ea6661533732e27eaa2f4e0c888121d233b00f65d5e36774dd",
+      "date": "2026-11-25"
     },
     "/distrito/118": {
-      "sha": "8040b57e916bb802e73bc074c26ddbd7abee349d90560e403c000d596ab38a57",
-      "date": "2026-11-17"
+      "sha": "038efab8cf4ba38ff747ac8e136796d1fcde805c983638dc08fbd6be6022d97f",
+      "date": "2026-11-25"
     },
     "/distrito/119": {
-      "sha": "3cce259d24000ec722d0cc4cf7bf3a42a308f77d2fe9cea51b883a554e556342",
-      "date": "2026-11-17"
+      "sha": "ab37672bc24b391e6c3b6575c9b1532e75ab6d2c33e753b67219053c05a6585e",
+      "date": "2026-11-25"
     },
     "/distrito/120": {
-      "sha": "47644bb1ed0192b2ed1f00cd3d5ef391cfb63c9fd16a563f932c102180c67447",
-      "date": "2026-11-17"
+      "sha": "224a1443fe3beb9a6fd8e07f9817b65a68e46333dc308b8d626d0d4177b83ead",
+      "date": "2026-11-25"
     },
     "/distrito/121": {
-      "sha": "274b83a79db8c5cf19bbf7bdf703015e94ea6360ec49d868ea6723f65dc3ffbd",
-      "date": "2026-11-17"
+      "sha": "13c22b8b87224218cc41b44d48d94ffaca47b2218b661925a7ad83b093cc980d",
+      "date": "2026-11-25"
     },
     "/distrito/122": {
-      "sha": "71e9a207ec6bd87b8cc482bae6cf7c948aa57b08214e802cb08711d365ced8fa",
-      "date": "2026-11-17"
+      "sha": "0c6336cd0154c6d593583696c62e0ad858f97a3854d9b22fda07ead8cf70d3b8",
+      "date": "2026-11-25"
     },
     "/distrito/123": {
-      "sha": "314bce43fedcdbccf665f8ef7b0e78bb4cd74a95f9150c7af2fc8d02783f22c6",
-      "date": "2026-11-17"
+      "sha": "44626128f46f67e54c400760d889a2aec6f49c047ba82fb660d5efc6cec2be99",
+      "date": "2026-11-25"
     },
     "/distrito/124": {
-      "sha": "c376d04136365c95680f336aeeecac7bcc629d44943d8d51e6333b66ddc16b5b",
-      "date": "2026-11-17"
+      "sha": "034c148c3bd7a000472884f058564ab08761e8e8eb28a359ef7d6d727e263553",
+      "date": "2026-11-25"
     },
     "/distrito/125": {
-      "sha": "1831e770dee10be23551bbf431622bb28a3a43e1da48c9d0775d2b317a79f01b",
-      "date": "2026-11-17"
+      "sha": "2dd690c2943bb47e08b51e23b8cfaf88d1ac0119ccfc7e369b90fc56a234956f",
+      "date": "2026-11-25"
     },
     "/distrito/126": {
-      "sha": "169aa1f022a87724e395646e1dba79385d3da6b7a514adc3eebd44acf880bd46",
-      "date": "2026-11-17"
+      "sha": "37e783c2b88ba98ccc73027bb3533084b1f1898990acb9fad7f42acb8394d5c7",
+      "date": "2026-11-25"
     },
     "/distrito/127": {
-      "sha": "13b19ce1ec8e34d6e4019e5e44d0043e7aa1c3c0bda8c5ece269e7fa70191077",
-      "date": "2026-11-17"
+      "sha": "f97774d29d03234d12e83884542cc420cae99e3e3df28b14053093e13d33f1cb",
+      "date": "2026-11-25"
     },
     "/distrito/128": {
-      "sha": "e887cdebfd126a620dad142fc4b2bb7c7b62694f5e9261276652908e8bea35a3",
-      "date": "2026-11-17"
+      "sha": "067f7c13ff4e6284038d28459d45b79c0c322b36b35aa0ed23baa204b2614220",
+      "date": "2026-11-25"
     },
     "/distrito/129": {
-      "sha": "1a054992c194f3fdbe5154d90f2504bf3edfddd64fcc6a7ce8f575b59c981232",
-      "date": "2026-11-17"
+      "sha": "64010c45fbc8f28713eb775720fe4da16c4b7f84b41b5f755cbf99fc5bc6bafe",
+      "date": "2026-11-25"
     },
     "/distrito/130": {
-      "sha": "83e9bfb7e95da8df77a8143cd452c97fedb9fcdc4750427625e958419d0e67df",
-      "date": "2026-11-17"
+      "sha": "ca9c44484a042f52966660a79292ba11d9ff079d120ce9fa22b928e8ba26302d",
+      "date": "2026-11-25"
     },
     "/distrito/131": {
-      "sha": "f1af0e316d3963d8172f0e79b0ab801bcfe4eadfeff0b76d127194bf2c845f63",
-      "date": "2026-11-17"
+      "sha": "940f94fc09b2f80967998643df9fcf0d68b0d89534005846293c6ccbee679882",
+      "date": "2026-11-25"
     },
     "/distrito/132": {
-      "sha": "85ff5b7af06cf210b1719d6d17c22d8ca3457e2019cc19f80fe0566fcd1ab3b2",
-      "date": "2026-11-17"
+      "sha": "9e2f6bf4196d609e79d2d52a7764bd5d21a8c8d119285534746e4e197f53464d",
+      "date": "2026-11-25"
     },
     "/distrito/133": {
-      "sha": "d2e4cc2dea2876a1f0192d5d06555ef0dd15b698d373191012471dfee88376cd",
-      "date": "2026-11-17"
+      "sha": "0cd2a77286403eed1f7ec773ccfafda2c9eed7472deebb63c4c8173831bc7c37",
+      "date": "2026-11-25"
     },
     "/distrito/134": {
-      "sha": "b5a9601e6b1b54f79a6f4b6967419599996ae5c94ec687b63c24f5ac9780c3e3",
-      "date": "2026-11-17"
+      "sha": "25a58bf0f55babaaadfa463759fc69a6ed7bafba0d7bda2831fe33b1cfd4a211",
+      "date": "2026-11-25"
     },
     "/distrito/135": {
-      "sha": "f41fb11ce7fc0e89e65eaf097d789b6e7ab1fe1cd829a55857b635757e1d5311",
-      "date": "2026-11-17"
+      "sha": "6823133dce22c613f7acb5215c83cfc3a629b781c27616fef35209dd21c93a08",
+      "date": "2026-11-25"
     },
     "/distrito/136": {
-      "sha": "c6731630827ea56d0f8608f589b302eb715f8b56aed481fa04c8194300e6b545",
-      "date": "2026-11-17"
+      "sha": "34ebed6aeec18b05880af6e57e3fe50da97db36d94e85c8303aa3cc2ba454825",
+      "date": "2026-11-25"
     },
     "/distrito/137": {
-      "sha": "07d2ded99c980aa7908d3552d8e461177f95b007a56418f3549d0ac7b45eacc3",
-      "date": "2026-11-17"
+      "sha": "d9793d59a3486cd37ab15e3c7349fed33f293a5d0955ab93ce3abffa527344fa",
+      "date": "2026-11-25"
     },
     "/distrito/138": {
-      "sha": "369705fe6da791576b2265f6e5731e6a46913b878d04d15f073aaf68a9f9471c",
-      "date": "2026-11-17"
+      "sha": "fa5c8a63f03b5d3faef9549d622948396af5b9f001afef804a980fb49d7f78fa",
+      "date": "2026-11-25"
     },
     "/distrito/139": {
-      "sha": "b7660276e7299ef388ae8954b318cee0b688d7d73b2e6772131a243847569a47",
-      "date": "2026-11-17"
+      "sha": "828ff93b006ee1a6ab74eeb4c7bd4ba7f77b59265f3e35ea3307da208b115109",
+      "date": "2026-11-25"
     },
     "/distrito/140": {
-      "sha": "edd8393a63d55e96995436abaa53bfeb5125c85187dd22efea3562ccb4355f94",
-      "date": "2026-11-17"
+      "sha": "859773e801f53f2025cb3fa733554865db015d4fd24afb5e2cb9b610541cfe40",
+      "date": "2026-11-25"
     },
     "/distrito/141": {
-      "sha": "b518107bf43edb4f73d370adaf2baef6931e43c8b65447d70f1db916202759c6",
-      "date": "2026-11-17"
+      "sha": "ac5e4262cb778e930c44db1e3eba484754871611773cdb2fb460060d31737fba",
+      "date": "2026-11-25"
     },
     "/distrito/142": {
-      "sha": "b6122606b03ef9acdd072924771409fbc974ef92c48ccec328353f5429b3ae0a",
-      "date": "2026-11-17"
+      "sha": "03c97f335bbcc479df2115274ddfc07d283e4aee1542e287d39fc6447cb51b4b",
+      "date": "2026-11-25"
     },
     "/distrito/143": {
-      "sha": "5f45455dbe7ea1ca5b9193ea0e056fdf3e1fd2ef7ca267b7c33455606844d11a",
-      "date": "2026-11-17"
+      "sha": "7731d9ab3377ee4db8115d77d56f686d53f82ed4e4e5e3088303c043140982de",
+      "date": "2026-11-25"
     },
     "/distrito/144": {
-      "sha": "d0ba82ede63f53f93c5fe620fe0bb6b2cae014c406808e9b576b5eda69ed4b60",
-      "date": "2026-11-17"
+      "sha": "b1257fd3b6d96b46a6cde8569ef7061c126a1ae8a434671477f762750dffbaf3",
+      "date": "2026-11-25"
     },
     "/distrito/145": {
-      "sha": "5970b0417cdbc51543f136fb4cf2387e3f7553e89caa02a0816e250f71a474cd",
-      "date": "2026-11-17"
+      "sha": "738fd6306c3dd05f3c8007e055ed74747cd2e8ae0159031a8752d033e367c51f",
+      "date": "2026-11-25"
     },
     "/distrito/146": {
-      "sha": "706c171d08b6942f07db928333f1cdcabcbbb42c3d8c652cf1f3854cc53dab11",
-      "date": "2026-11-17"
+      "sha": "950611d177cdcb32c7aa828c9fd9f5151fae04e61442a4ddc22fd4074ae9898e",
+      "date": "2026-11-25"
     },
     "/distrito/147": {
-      "sha": "350c8e9c4870eebd9941d74d6a4f824fe659e230bd4d3f2424f92ad7e6e7b423",
-      "date": "2026-11-17"
+      "sha": "6bda41c06a045e0fb65747ee2a625f7930f43549b3608abe76afee3eac124407",
+      "date": "2026-11-25"
     },
     "/distrito/148": {
-      "sha": "4ee8d49a9afb2b3ce785fb5364ecb8f659e3b5e20f5978d92ecf6944a3708a6d",
-      "date": "2026-11-17"
+      "sha": "f650f85610b8e03a62f210a88d28391f52eaf74c5c9946829b1d98b264154bb7",
+      "date": "2026-11-25"
     },
     "/distrito/149": {
-      "sha": "4f42c87f211371e11ee9abc527df745952cad39cfb30f200bfc88dc3f8de97ce",
-      "date": "2026-11-17"
+      "sha": "834211510fb2de2ba45cfd4257073641f6aa1f6ccbfab7487c65d89fa41788f0",
+      "date": "2026-11-25"
     },
     "/distrito/150": {
-      "sha": "64e411d07e799ca45cc784efff1c470128de82d98ab50f2a4a0f29bd51cf43da",
-      "date": "2026-11-17"
+      "sha": "7b1ef27e88d4d74b5dd74463f48f9b44f20afefa7b7c2e2730299121b868a76e",
+      "date": "2026-11-25"
     },
     "/distritos": {
-      "sha": "cf9e862378e7c88e2544b5ddc0241cfc10647dd4b750c1ca32575a4668710218",
-      "date": "2026-11-17"
+      "sha": "48717be7435dcbf354c0aeebfdeb8d80cb9e48705ea8adac0001b503c260d0f7",
+      "date": "2026-11-25"
     },
     "/economia": {
-      "sha": "e10cac9e7d1cf81c35d0ba844e5b36ce65dcb8948f5c08fb18dd5a19effdc8bb",
-      "date": "2026-11-17"
+      "sha": "dbf52f693a8334a6afe199fdebbabeadbfc9f8429b703b3b61f111e9e5e5286d",
+      "date": "2026-11-25"
     },
     "/economia/explorar": {
-      "sha": "2430cb937b0b597a16674a49dd31abf9e514d8be12fb89983c38be20d1f0d804",
-      "date": "2026-11-17"
+      "sha": "95d1da28c528a7974713ceb48fb1af95d717a76fce1351348b08552a7e7449e5",
+      "date": "2026-11-25"
     },
     "/economia/metodologia": {
-      "sha": "a73c68e83b75c57387daf2f23700051af2ca48255e7d45bf8d8f8323db6fc6c0",
-      "date": "2026-11-17"
+      "sha": "6c2d919cf9ee9344c878586d5efda0db837a70e3494a964470ebf17e248b6ab8",
+      "date": "2026-11-25"
     },
     "/economy": {
-      "sha": "20f4ef9ec614a297444b40af2b654257d73c9140ba5a62c6539660632639f033",
-      "date": "2026-11-17"
+      "sha": "828eb436d0e2445909c80ec15375191bb6961630a6507c66ed433459e62ca122",
+      "date": "2026-11-25"
     },
     "/economy/explore": {
-      "sha": "5a71b5210f5c35335aae91b3a11dda19be20df0259043947757ec25462e72d81",
-      "date": "2026-11-17"
+      "sha": "c72b3d1ec5a0c69bb8e060b8b6f0d31f21b0d84fc1bc2db0349021a6ff3a2ef3",
+      "date": "2026-11-25"
     },
     "/economy/methodology": {
-      "sha": "0b784e7a4760f0c198ff728dc072b30aea7567247adb857a2dc8529ce03a7ada",
-      "date": "2026-11-17"
+      "sha": "67f990f8388a3cd81cba67c82ef8dc4ef4ccae292b55fe9e31be647b1734bf8d",
+      "date": "2026-11-25"
     },
     "/fact-sheet": {
       "sha": "c3bd6d6c42d4e5be8c3712292b308eea27a153e3a1a7878166b6100a105561c1",
       "date": "2026-11-12"
     },
     "/faith": {
-      "sha": "3b3a256e9615c821c737bba6eca7529ce196a8ac1b46288f8911e107b727492c",
-      "date": "2026-11-17"
+      "sha": "09cfe62bd77eff704146702e8c7736dd2c6aa260126c174a6b59c0ef944b7724",
+      "date": "2026-11-25"
     },
     "/faith/ame": {
-      "sha": "6cfa30f0eca447ef079f284ae51ba312d58e94dd8f4d754401551ed17be77235",
-      "date": "2026-11-17"
+      "sha": "6d7dc071a8ad30826b00b163884439b80907c7d6c4fcb747e50d5fd17d06e736",
+      "date": "2026-11-25"
     },
     "/faith/assemblies-of-god": {
-      "sha": "6225783386a275ebeb37b20bbb92d805bf1e666010477c00529677b9cfb7fe87",
-      "date": "2026-11-17"
+      "sha": "0add8d3609409e507d9c0cebf7acdaa8c01c459f4ad9affc41a92a0b843e9b4a",
+      "date": "2026-11-25"
     },
     "/faith/catholic": {
-      "sha": "11f836a5dc2dea055498fd17ef6ea8d4cbea5cf9db9b45631f82bd734d662714",
-      "date": "2026-11-17"
+      "sha": "0128ddf9e30b8b133ddfe1eb992049c1479ec4a0871d839e432ff12c71549cdc",
+      "date": "2026-11-25"
     },
     "/faith/catholic/texas-house": {
-      "sha": "b64fde623a3ec492cae270b1ff26c7e43055ec1b898f927e5176a02931299017",
-      "date": "2026-11-17"
+      "sha": "62248b901234a3786e1cc8dbd8b9f81ed3a278b6df0a0df672f1c95102a1181a",
+      "date": "2026-11-25"
     },
     "/faith/congress": {
-      "sha": "5be33ea0be92253fe143ff22968c039488a58c4ed0cc64fa4a1cd980c4afd653",
-      "date": "2026-11-17"
+      "sha": "64614e1d85e262cbdc90e0e8bea346c9e3e1df8af6f652d94d7f0c9f186b77bf",
+      "date": "2026-11-25"
     },
     "/faith/conservative-judaism": {
-      "sha": "3b0618b75184ed32ebf1f78cc2a2672a85e9f4ebf811aacdc3e4fb7da4b7bd04",
-      "date": "2026-11-17"
+      "sha": "bcbdb30787e2563fd4185eb8a8320aa8270a844164e28445bf518943939d9896",
+      "date": "2026-11-25"
     },
     "/faith/members": {
-      "sha": "e7d0e6007eb42eec66bacd9d8741095f31b7c557d4b66db0cda46b057e04c5a0",
-      "date": "2026-11-17"
+      "sha": "3bd208debd7683aff4673f018509bcbc60c2cf11cd512992d34cd61ad2bd57e5",
+      "date": "2026-11-25"
     },
     "/faith/methodology": {
-      "sha": "1ab846a4f9faff74282a420fcc1e814dc12e2df4039af246ba0e52d24389e41d",
-      "date": "2026-11-17"
+      "sha": "421e466a064d598bd30f41a19dc104c681d76e98783b44d30f960d673a43c794",
+      "date": "2026-11-25"
     },
     "/faith/orthodox-judaism": {
-      "sha": "dd76c91bfb0739b823b34b23fb5b9b1c53842ca8bfd6fb043471b86b7d3b54b7",
-      "date": "2026-11-17"
+      "sha": "d378c979cf87e5f37260b667387d6a83917defe9aeb21212cdd8067083bdc7ec",
+      "date": "2026-11-25"
     },
     "/faith/reform-judaism": {
-      "sha": "bbecb844e7df8b10e31b3d836a1535e44786f8ecb85f7b82582aa67b3999c0df",
-      "date": "2026-11-17"
+      "sha": "1392fe33263003e487d84695d05cf231fe43113bb8942469b5a4462778cdd332",
+      "date": "2026-11-25"
     },
     "/faith/scripture": {
-      "sha": "d24b96c1cf982d55c291f40288320d05834d4dab194e5a3a0d8e346302e60513",
-      "date": "2026-11-17"
+      "sha": "cfc8f567aed864694ed109a04834126b24426ad8c9032194151f533531a9182d",
+      "date": "2026-11-25"
     },
     "/faith/sides": {
-      "sha": "8e9dc7d0f39022ec055236b1c97932c3ff4ac23f0a89d77fdd8874532a1aba9e",
-      "date": "2026-11-17"
+      "sha": "f234759620b2d00f7683e0f9ae85a27c2733280fd5670eeb000af40a5f7a7f1b",
+      "date": "2026-11-25"
     },
     "/faith/southern-baptist": {
-      "sha": "156c8cea6ffd7bdcac9312e25412c3d57546eb85cb65e5fd3b8c4da9db3ccfc2",
-      "date": "2026-11-17"
+      "sha": "074f7dd51d7c60b33683a41e41ff821cbabadcb10eaf8722af37b8802587900f",
+      "date": "2026-11-25"
     },
     "/faith/united-methodist": {
-      "sha": "64ddcfde1aa77b4792dc0a5769dcf12d89c49ec87c9a4b1c4d2f1b1074a318f6",
-      "date": "2026-11-17"
+      "sha": "c09df8edc4c9f5a710892a26678b7a0eb0b2a7967eff31dc3392ac5a4645bd4f",
+      "date": "2026-11-25"
     },
     "/fe": {
-      "sha": "ebdf76bc1130d90778516dbe8711f8431c0e69f3a8248b56460baf74c64376e7",
-      "date": "2026-11-17"
+      "sha": "81f67138f991ec830cadf0cc2e7edad16963b7fe638c8873edd0e0f2a39baf02",
+      "date": "2026-11-25"
     },
     "/fe/ame": {
-      "sha": "cc3731171e07f58d194d05692077c616732dd542cfa36e756fc188987902ee6d",
-      "date": "2026-11-17"
+      "sha": "06f02877e8c2b4a62451255c0ceb1063162237b4f8d31caab59d6fcc805dbea1",
+      "date": "2026-11-25"
     },
     "/fe/asambleas-de-dios": {
-      "sha": "3f63e4b3793d419a2481c9329a02d8ad50e414b8c94bb159d4ecf7c6ada369d3",
-      "date": "2026-11-17"
+      "sha": "23951084cac5b963cae6ccdd00ee03df3e354984acb7c2b065c6df5d3e359110",
+      "date": "2026-11-25"
     },
     "/fe/bautista-del-sur": {
-      "sha": "4e69b6edd6086e6f05b676765fc39a1f375cbe45940d49d0df9b9a2b28ce83f0",
-      "date": "2026-11-17"
+      "sha": "863fd7cf6f090e5ceaf3d62511ff482be1fb912f7ccfaee5cfa1d29b509a82b5",
+      "date": "2026-11-25"
     },
     "/fe/catolica": {
-      "sha": "0e81a05a8cca6c1d69152dd473cfa92c2141f893803f36baaed15e1954d1353f",
-      "date": "2026-11-17"
+      "sha": "b309bde5232c84d054ba56a88a6e86d434462f758a101de2e33d6b0f7822aa8f",
+      "date": "2026-11-25"
     },
     "/fe/catolica/camara-de-texas": {
-      "sha": "62f08aba12917ca5e4690c681e24f2a9802e3d5bbee71b71d8f52ea3be38d57c",
-      "date": "2026-11-17"
+      "sha": "d0b3c321825b6f5ab889d2ff2fc1a131d021288c4eb1a44b05a0b12fdea59038",
+      "date": "2026-11-25"
     },
     "/fe/congreso": {
-      "sha": "efa0e706cad7a597c6f1e60be623f1a6048fc42bb6eb88361ffbadd47f9c4ffe",
-      "date": "2026-11-17"
+      "sha": "662d589a314431a0ab966d2f5d5cce30b91fd744c3f2a03edaa6c3ca188fb41f",
+      "date": "2026-11-25"
     },
     "/fe/escrituras": {
-      "sha": "778f11cafe99945239c828f39a3e2fe524f27c8422fc93d0dc3a495402851504",
-      "date": "2026-11-17"
+      "sha": "ff871ec3cd21a7497a5bee7ad099166f1b8cac850eb2b9b7560e5cc1d9804c48",
+      "date": "2026-11-25"
     },
     "/fe/judaismo-conservador": {
-      "sha": "627fa5ae72ea1655359b3c5e71f399ffd1c8a43b257c1ae1326f73f7e0f280ad",
-      "date": "2026-11-17"
+      "sha": "f9def9dc097caa36a15633d430972a14072ecf2a61b3819d664b1fa79bbea256",
+      "date": "2026-11-25"
     },
     "/fe/judaismo-ortodoxo": {
-      "sha": "6148b8a9aeb852f14ee62cfd9a4e9cf8142d4d86872d72b4335017757b8be5e3",
-      "date": "2026-11-17"
+      "sha": "33ed96bae39f401c6a0750651a90c2023dd1a40d1cc86e4cbdf4d411e9949c5d",
+      "date": "2026-11-25"
     },
     "/fe/judaismo-reformista": {
-      "sha": "b3f1f3e01e4e0e5c9b708b54d4412cccbcc50e28addb2a28b0c932a0996981b4",
-      "date": "2026-11-17"
+      "sha": "467a8d1fe321a01617c2ec78675e3f3276fe2d9617c8032946c272b8a6901d1a",
+      "date": "2026-11-25"
     },
     "/fe/metodista-unida": {
-      "sha": "10e4819ebd497d38f6810e4d4c5ad501b69cd986619595d84bb2bdec3a23ca4a",
-      "date": "2026-11-17"
+      "sha": "356a40793333afa9ed53a441236a018350a0d442dee7216775faccb99a15d36c",
+      "date": "2026-11-25"
     },
     "/fe/metodologia": {
-      "sha": "527a98eaa2b45c51a493b6d01aa55fa599ce9596bfb4e91fff4b0a0abbd56b63",
-      "date": "2026-11-17"
+      "sha": "e7f71b72bc41b4951a40d07176aef65611fd5ac07b189e58452d9ba0f374974f",
+      "date": "2026-11-25"
     },
     "/fe/miembros": {
-      "sha": "17b8128105d00a15557fecc691d867ad0ee9842cc938379362e5f1c9c4cfaf9b",
-      "date": "2026-11-17"
+      "sha": "a69c5dea91cd24dfd30de37dc42f3902d218d65b203c328c39b6082e44dfa844",
+      "date": "2026-11-25"
     },
     "/fe/posturas": {
-      "sha": "a0e4382d63f196873d9ead26862dd302ea398b0f2fb6c9a20099bf1691662bc6",
-      "date": "2026-11-17"
+      "sha": "7cf9bd79e10b574c2814d19a92f4903ed73a5ffb933719659c8067dc29cf6176",
+      "date": "2026-11-25"
     },
     "/graficas": {
-      "sha": "c17f53eea9b56cdfb05e84b99066ffca1144a9d94679e7daa28422869eea854e",
-      "date": "2026-11-17"
+      "sha": "33edc2aa3efdd41b99f43ed14e5627271293a0dd35943ceebda31cfeff00f3be",
+      "date": "2026-11-25"
     },
     "/hoja": {
       "sha": "fb7cdce720e6aad8ff5daa5803b1e692be51b7a75531387f54d7e2038fa4d631",
       "date": "2026-11-12"
     },
     "/maestros": {
-      "sha": "a379ef1abebe5a522b774b0d173bd115d164bd497a337bafb1daf2d01ac87f1f",
-      "date": "2026-11-17"
+      "sha": "34848bd23a055fc124aa4cfd4a82bae0e01f1a54c76b6ae24b4775e82e79c52f",
+      "date": "2026-11-25"
     },
     "/open-data": {
-      "sha": "f424e8c5075818ee6ef28e3fd354a02bd2f374a83bc46ae3ab97ced15e495b1e",
-      "date": "2026-11-17"
+      "sha": "5d31a044082cf65922939be8c11568356a28ddbd54557a204937ebe9199c214f",
+      "date": "2026-11-25"
     },
     "/policy": {
-      "sha": "e3f9da392ae89ba9ad8b6d60e57c4193bdfc5c1313d98016c5d9c322fba988ab",
-      "date": "2026-11-17"
+      "sha": "152faefff054e3fc9c7e889a846782f7a2cba80f4e27507afdf237831cb46e7e",
+      "date": "2026-11-25"
     },
     "/politica": {
-      "sha": "fe6805a6cdfe1a6e1d0380358cbb071719b1e832aba01ecfa033430ec54074d8",
-      "date": "2026-11-17"
+      "sha": "bb66691e86ce9734ce97fd1fb6148d242d506cae1f14d5ce957df52f07e64d32",
+      "date": "2026-11-25"
     },
     "/proyecto/sb-2": {
-      "sha": "9278e9eba558c7b44ecb4c5c8f9a509a8b70f7831022b955eb137719d9f41e95",
-      "date": "2026-11-17"
+      "sha": "32a64ff77bc3ecae4fbb6f16d4c2769a6207dde5eafac231f08e77699c04f535",
+      "date": "2026-11-25"
     },
     "/proyecto/sb-3": {
-      "sha": "4cbad567dae9a13373cce988c67c41b6c31183eac849355c4f6f3ba324efe0d1",
-      "date": "2026-11-17"
+      "sha": "6a10f69c2bdd5dacd1ae17075d7f9dfdc7a244647a71539addfe4b5edfe0d329",
+      "date": "2026-11-25"
     },
     "/proyecto/sb-5": {
-      "sha": "63c6f831fe1db93b8c32ba6fc85f3e4c47d7b4f37255d1bcb35039667de51cec",
-      "date": "2026-11-17"
+      "sha": "8deea0f5a45327703ab58973dd86209f314454f4bbd68db15c92dc84b1f6ba7c",
+      "date": "2026-11-25"
     },
     "/proyecto/sb-6": {
-      "sha": "5d514a89a58740cf490e68a03db2893b87622e859cdd3af53f5857fea9e6d195",
-      "date": "2026-11-17"
+      "sha": "bccfc30899d3ddcc4a1c8636a0b5d8cf18074f7a6177f6b16e91b832d175d031",
+      "date": "2026-11-25"
     },
     "/proyecto/sb-8": {
-      "sha": "cf8b67fd332618ca92692addd63e2e47db9cdaf8b3af759908f26f4c4f0088a4",
-      "date": "2026-11-17"
+      "sha": "9b5dcff440eb17a71fd028f3391a71584bd53208eb86c3b667468d7ecad9ec2b",
+      "date": "2026-11-25"
     },
     "/proyecto/sb-10": {
-      "sha": "f184cf0c787954d1874cafa00b2681740cdec5899c82603cb46201db29271350",
-      "date": "2026-11-17"
+      "sha": "05798ae6ddddedcf481858fe86c126ade9fbe3798d4b47898ad7e5919be614e7",
+      "date": "2026-11-25"
     },
     "/proyecto/sb-14": {
-      "sha": "ca0664a6f186542cec62bfe969bd4c3669c8d9fed1779d9b1b2bcb3f158e1349",
-      "date": "2026-11-17"
+      "sha": "6e5843ba681d789e58c8b728618885d576b2a1d2606bd8ad9c3c91407ab169a7",
+      "date": "2026-11-25"
     },
     "/proyectos": {
-      "sha": "7bbda12bb23a93f8c953a33c80560d796d480e9776b01869cc1332be3abdc715",
-      "date": "2026-11-17"
+      "sha": "f69bad68d8d98b130fe25a5e7f1b3b0cc80e500b0be83ea06b7dec37d30c9868",
+      "date": "2026-11-25"
     },
     "/race/governor": {
-      "sha": "68c52c368b385e1ce4b6e4fef9d7edcce322bc153b52c043db0a3b3a35ecb0d9",
-      "date": "2026-11-17"
+      "sha": "c1012c37f7cd2610bc61baa6e5e555df1b55409b11530365276d29d9e850cf5a",
+      "date": "2026-11-25"
     },
     "/race/lieutenant-governor": {
-      "sha": "c98ccb6a78ea25b405b55ad6bf11b9a0cb5f283329ed3e9586cbf1e7f93dd96f",
-      "date": "2026-11-17"
+      "sha": "cc0dc177fb60ae5cc2a65db9a20ae286bc9d4b9ac53a1a6e932376807b8bc8a6",
+      "date": "2026-11-25"
     },
     "/race/us-senate": {
-      "sha": "dc67396049cf0a4dca2a39c5dc7f9b90761b852e2e5725a4ea8cf0a0c7910b89",
-      "date": "2026-11-17"
+      "sha": "0090018ff13ec3a5b21abffd297f83b61274e2c301da2382cf8c12f974e51a85",
+      "date": "2026-11-25"
     }
   }
 }

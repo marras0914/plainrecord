@@ -52,6 +52,29 @@ export const RESULTS_URL = 'https://www.sos.state.tx.us/elections/historical/ind
  */
 export const ANALYTICS = '<script src="/_vercel/insights/script.js" defer></script>';
 
+/**
+ * The light/dark switch in every static page's header. The quiz built the only
+ * one, in main.ts, so when the front page stopped being the quiz (14 Nov 2026)
+ * the site's front door lost its switch, and no static page ever had one: they
+ * honoured the choice but offered no way to make it (found 25 Nov 2026).
+ *
+ * Both labels are in the markup and CSS shows the one that fits, so the right
+ * word is there before any script runs, with no flash. /js/theme.js wires the
+ * click and aria-pressed. The words are the quiz's own approved theme.toDark
+ * and theme.toLight, read from i18n/copy.json rather than copied.
+ */
+const COPY = JSON.parse(readFileSync(new URL('../i18n/copy.json', import.meta.url), 'utf8'));
+export function themeToggleHtml(lang) {
+  const L = lang === 'es' ? 'es' : 'en';
+  const word = (k) => {
+    const v = COPY[k]?.[L];
+    if (!v) throw new Error(`_page_shell: no ${L} text for ${k} in i18n/copy.json`);
+    return v;
+  };
+  return `<button type="button" class="themetoggle" aria-pressed="false">`
+    + `<span class="t-dark">${word('theme.toDark')}</span><span class="t-light">${word('theme.toLight')}</span></button>`;
+}
+
 export const esc = (s) => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
@@ -143,6 +166,15 @@ hr{border:none;border-top:1px solid var(--hair);margin:36px 0}
 .top{display:flex;justify-content:space-between;gap:12px;align-items:center;
   font-size:13px;margin-bottom:14px}
 .kicker-line{margin:0 0 16px}
+.topctl{display:flex;gap:14px;align-items:center}
+/* Drawn like the quiz's .topbar-btn in src/styles.css, so the switch looks the
+   same on every page. 34px tall: a thumb's target, not a link's. */
+.themetoggle{font:inherit;font-size:12.5px;color:var(--ink-2);background:none;
+  border:1px solid var(--hair);border-radius:2px;padding:0 10px;min-height:34px;cursor:pointer}
+.themetoggle:hover{color:var(--ink);border-color:var(--ink-2)}
+.themetoggle:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.themetoggle .t-light,:root[data-theme="dark"] .themetoggle .t-dark{display:none}
+:root[data-theme="dark"] .themetoggle .t-light{display:inline}
 ${BRAND_CSS}
 /* Site nav and footer, from scripts/_site_nav.mjs. The nav wraps rather than
    scrolling sideways on a phone; the current section is ink, not link blue. */
@@ -291,7 +323,7 @@ ${scripts.map((s) => `<script src="${s}" defer></script>\n`).join('')}</head>
 <main>
   <div class="top">
     ${brandHtml(lang)}
-    <a href="${altHref}">${esc(altLabel)}</a>
+    <span class="topctl">${themeToggleHtml(lang)}<a href="${altHref}">${esc(altLabel)}</a></span>
   </div>
   <p class="kicker kicker-line">${esc(kicker)}</p>
   ${navHtml(lang, canonical)}
